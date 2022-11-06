@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Hexo &amp; github">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Hexo &amp; github">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -43,9 +43,9 @@
     <h2 class="author">John Doe</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>13</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>2</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>2</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>7</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>4</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -75,6 +75,102 @@
 
         <section id="main">
   
+    <article id="post-SpringSecurity零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T08:24:46.282Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">SpringSecurity零碎笔记</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>,<a class="article-category-link" href="/categories/SpringSecurity/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-基本原理"><a class="markdownIt-Anchor" href="#1-基本原理"></a> 1. 基本原理：</h1>
+<ol>
+<li>
+<p><img src="../images/image-20221106162517079.png" alt="image-20221106162517079" /></p>
+</li>
+<li>
+<p><img src="../images/image-20221106163157990.png" alt="image-20221106163157990" /></p>
+</li>
+<li>
+<p><img src="../images/image-20221106163919356.png" alt="image-20221106163919356" /></p>
+</li>
+</ol>
+<h1 id="2-web权限方案-用户认证设置用户名密码"><a class="markdownIt-Anchor" href="#2-web权限方案-用户认证设置用户名密码"></a> 2 .web权限方案-用户认证（设置用户名密码）</h1>
+<ol>
+<li>
+<p>设置登录用户名和密码</p>
+<ol>
+<li>方式一：通过配置文件</li>
+</ol>
+<p>properties为例</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.port=<span class="number">8111</span></span><br><span class="line">spring.security.user.name=atguigu</span><br><span class="line">spring.security.user.password=atguigu</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p>方式二：通过配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfig</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">BCryptPasswordEncoder</span> <span class="variable">passwordEncoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">        <span class="comment">// 加密</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> passwordEncoder.encode(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">        auth.inMemoryAuthentication().withUser(<span class="string">&quot;lucy&quot;</span>).password(password).roles(<span class="string">&quot;admin&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    PasswordEncoder <span class="title function_">password</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>方式三：自定义编写实体类</p>
+<p>在验证过程中，它会首先去找你的配置文件、配置类，如果发现其中有用户名和密码，那么它就会去找这个用户名和密码。但如果没有设置，它就会去找一个接口<strong>UserDetailsService</strong>，到这个接口你可以找通过表单提交或是查数据库或是其它方式设置的密码，然后去验证</p>
+<p>到UserDetailsService中找到你返回的用户名和密码和权限</p>
+<p>第一步：创建配置类，设置使用哪个userDetailsService实现类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.springsecurity.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfigTest</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDetailsService userDetailsService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        auth.userDetailsService(userDetailsService).passwordEncoder(password());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    PasswordEncoder <span class="title function_">password</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二步：编写实现类，返回User对象，User对象有用户名、密码和操作权限</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.springsecurity.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.AuthorityUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UsernameNotFoundException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyUserDetailsService</span> <span class="keyword">implements</span> <span class="title class_">UserDetailsService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDetails <span class="title function_">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException &#123;</span><br><span class="line">        List&lt;GrantedAuthority&gt; auths = AuthorityUtils.commaSeparatedStringToAuthorityList(<span class="string">&quot;role&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;mary&quot;</span>, <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>().encode(<span class="string">&quot;123&quot;</span>), auths);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>引用场景：</strong></p>
+<p>一般实际开发中用的比较多的是第三种方式</p>
+<p>第一、二种方式：比如要超级管理员的时候，就只能用admin这个用户来登录，这个时候就而已用第一或第二种方式来配置。</p>
+<p>第三种方式：主要需求用于查数据库的时候</p>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cla58cs580003j4v6bsex5qxy" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-线程池应用_定时执行任务" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/11/06/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" class="article-date">
@@ -99,7 +195,7 @@
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/juc/">juc</a>,<a class="article-category-link" href="/categories/juc/jus/">jus</a>
+    <a class="article-category-link" href="/categories/juc/">juc</a>,<a class="article-category-link" href="/categories/juc/%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81/">应用代码</a>
   </div>
 
           
@@ -118,10 +214,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="cla52xhjp0005b8v6bph26p45" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="cla58cs5h000cj4v63x823obc" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jcs/" rel="tag">jcs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
 
     </footer>
   </div>
@@ -155,6 +251,10 @@
 
         <div>
           
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
           
               
 
@@ -168,18 +268,18 @@
 <p>桶（Bucket）聚合：用来对文档做分组</p>
 <p>​    •TermAggregation：按照文档字段值分组</p>
 <p>​    •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组</p>
-<h1 id="1-dsl实现bucket聚合"><a class="markdownIt-Anchor" href="#1-dsl实现bucket聚合"></a> <strong>1、DSL<strong><strong>实现</strong></strong>Bucket****聚合</strong></h1>
+<h1 id="1-dsl实现bucket聚合"><a class="markdownIt-Anchor" href="#1-dsl实现bucket聚合"></a> <strong>1、DSL</strong>实现Bucket聚合</h1>
 <p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
 <p>类型为term类型，DSL示例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;: 0,  // 设置size为0，结果中不包含文档，只包含聚合结果</span><br><span class="line">  &quot;aggs&quot;: &#123; // 定义聚合</span><br><span class="line">    &quot;brandAgg&quot;: &#123; //给聚合起个名字</span><br><span class="line">      &quot;terms&quot;: &#123; // 聚合的类型，按照品牌值聚合，所以选择term</span><br><span class="line">        &quot;field&quot;: &quot;brand&quot;, // 参与聚合的字段</span><br><span class="line">        &quot;size&quot;: 20 // 希望获取的聚合结果数量</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" /></p>
-<h1 id="2-bucket聚合-聚合结果排序"><a class="markdownIt-Anchor" href="#2-bucket聚合-聚合结果排序"></a> <strong>2、</strong> **Bucket<strong><strong>聚合</strong></strong>-**<strong>聚合结果排序</strong></h1>
+<h1 id="2-bucket聚合聚合结果排序"><a class="markdownIt-Anchor" href="#2-bucket聚合聚合结果排序"></a> <strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1>
 <p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为**_count**，并且按照_count降序排序。</p>
 <p>我们可以修改结果排序方式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能,自定义排序规则</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20,</span><br><span class="line">        &quot;order&quot;: &#123;</span><br><span class="line">          &quot;_count&quot;: &quot;asc&quot;  // 按照_count升序排列</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" /></p>
 <p><img src="../images/5df4e85a91f642a1a96818925a2dbc23-1667698999716-11.png" alt="img" /></p>
-<h1 id="3-bucket聚合-限定聚合范围"><a class="markdownIt-Anchor" href="#3-bucket聚合-限定聚合范围"></a> **3、Bucket<strong><strong>聚合</strong></strong>-**<strong>限定聚合范围</strong></h1>
+<h1 id="3-bucket聚合限定聚合范围"><a class="markdownIt-Anchor" href="#3-bucket聚合限定聚合范围"></a> <strong>3、Bucket</strong>聚合限定聚合范围</h1>
 <p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能，限定聚合范围</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;range&quot;: &#123;</span><br><span class="line">      &quot;price&quot;: &#123;</span><br><span class="line">        &quot;lte&quot;: 200   // 只对200元以下的文档聚合</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, </span><br><span class="line">  </span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动" /></p>
@@ -189,9 +289,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="cla52xhjh0001b8v68vjf8y0z" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="cla58cs540001j4v65c403wx1" class="article-share-link">分享</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
     </footer>
   </div>
   
@@ -238,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cla52xhk4000mb8v68uq6h44r" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cla58cs5v0011j4v648ml1d55" class="article-share-link">分享</a>
       
       
     </footer>
@@ -290,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cla52xhk2000kb8v68zq2ad5a" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cla58cs5u0010j4v68lbt3ox8" class="article-share-link">分享</a>
       
       
     </footer>
@@ -340,7 +442,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="cla52xhjy000db8v651fldp3g" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="cla58cs5e0008j4v61j0ifetg" class="article-share-link">分享</a>
       
       
     </footer>
@@ -410,7 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/" data-id="cla52xhk3000lb8v65njygcly" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/" data-id="cla58cs5i000dj4v67rrxcgx8" class="article-share-link">分享</a>
       
       
     </footer>
@@ -470,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="cla52xhk1000jb8v6cu4016zv" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="cla58cs5t000zj4v61sky0mfr" class="article-share-link">分享</a>
       
       
     </footer>
@@ -532,7 +634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="cla52xhju0008b8v611bjgto4" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="cla58cs5k000gj4v6h59l67ew" class="article-share-link">分享</a>
       
       
     </footer>
@@ -607,62 +709,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="cla52xhjw000ab8v60mhzeec1" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-elasticsearch/ES聚合分析报错：“reason“ " class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.229Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/">ES聚合分析报错：“reason“</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为<code>brand</code>的<code>type</code>是<code>text，``text</code>或<code>annotated_text</code>字段<code>doc_values</code>默认为<code>false</code>。</p>
-<p>简单理解，就是<code>text</code>字段作为一个整体，默认没有索引。</p>
-<p><img src="https://img-blog.csdnimg.cn/7167950f76224359bedc252c4fb816da.png" alt="img" /></p>
-<p>解释：</p>
-<p>​    因为brand的type是<strong>text</strong>，<strong>text</strong>或<strong>annotated_text</strong>字段doc_values默认为false。简单理解，就是text字段作为一个整体，默认没有索引。</p>
-<p>​    不过text分词之后的keyword是有索引的，因而可以对brand.keyword进行聚合。如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/642629de221a4b4abbc09b979c654f63.png" alt="img" /></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="cla52xhjq0006b8v6buawc07g" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="cla58cs5p000nj4v69lpz9mt3" class="article-share-link">分享</a>
       
       
     </footer>
@@ -686,7 +733,7 @@
     <div class="widget-wrap">
   <h3 class="widget-title"></h3>
   <div class="widget">
-    <h1 class="blog-title">Hexo</h1>
+    <h1 class="blog-title">Hexo &amp; github</h1>
     <h2 class="blog-subtitle"></h2>
     <ul class="blog-link">
      
@@ -722,9 +769,9 @@
     <h2 class="author">John Doe</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>13</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>2</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>2</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>7</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>4</strong><br>标签</div></a>
     </div>
 
 
