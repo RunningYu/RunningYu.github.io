@@ -43,9 +43,9 @@
     <h2 class="author">John Doe</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>23</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>8</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>4</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>24</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>10</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>5</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,89 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-博客相关/hexo上图片路径显示问题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T10:21:28.782Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/">hexo博客上的图片路径问题解决方法</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2/">hexo博客</a>,<a class="article-category-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/">解决问题</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>通过下面命令下载插件:</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-marked</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/../../images/image-20221107182147634.png" alt="image-20221107182147634"></p>
+<ol start="2">
+<li>在自己的博客的source路劲下新建一个images文件夹</li>
+</ol>
+<p><img src="/../../images/image-20221107182334417.png" alt="image-20221107182334417"></p>
+<ol start="3">
+<li>在typora，进入到 文件–&gt;偏好设置–&gt;图像，然后选择复制到指定路径，选到上面新建的images文件夹路径，勾选下面红框的选项</li>
+</ol>
+<p><img src="/../../images/image-20221107182509496.png" alt="image-20221107182509496"></p>
+<ol start="4">
+<li><p>修改你博客的配置文件**_config.yml**</p>
+<ol>
+<li><p>修改配置：<img src="/../../images/image-20221107183227789.png" alt="image-20221107183227789"></p>
+</li>
+<li><p>添加上下面语句：<img src="/../../images/image-20221107183236670.png" alt="image-20221107183236670"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>之后，你每次复制图片过来，图片路径就是相对路径了<img src="/../../images/image-20221107182744468.png" alt="image-20221107182744468"></p>
+<p>当然，对于网络位置的图片回自动是网络上的图片链接，这种图片在博客上是完全没问题的，比如：</p>
+<p><img src="/../../images/image-20221107182938178.png" alt="image-20221107182938178"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" data-id="cla6ng29v002vowv6341j0fg7" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2/" rel="tag">hexo博客</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-elasticsearch/mapping索引属性 &amp; 创建索的操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -135,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="cla6mrkm4000vlov62v36gja5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="cla6ng296000uowv6fk3s7r63" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -202,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="cla6mrklz000nlov69y4w5t81" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="cla6ng291000kowv66c8na6d7" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -280,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" data-id="cla6mrklv000hlov6fqe37vzk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" data-id="cla6ng28w000eowv603mhhww8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -342,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="cla6mrkm90014lov61aiv2jmz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="cla6ng298000zowv65ogv7n0w" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -406,7 +489,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="cla6mrklp0009lov6axf808z7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="cla6ng28r0008owv6gddje2zh" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -498,7 +581,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="cla6mrkm70011lov60qn6a2ue" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="cla6ng2990011owv63ehj3czz" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -557,7 +640,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" data-id="cla6mrklx000jlov6e0xu80b9" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" data-id="cla6ng28z000iowv60jn50sf0" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -620,7 +703,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="cla6mrklt000dlov6dg3m41tl" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="cla6ng28v000dowv6gi9s3mer" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -682,103 +765,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="cla6mrklm0006lov6dwux068b" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="cla6ng28q0006owv6em0p0dwt" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringSecurity/SpringSecurity零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/SpringSecurity/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T08:24:46.282Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/SpringSecurity/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">SpringSecurity零碎笔记</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>,<a class="article-category-link" href="/categories/SpringSecurity/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-基本原理："><a href="#1-基本原理：" class="headerlink" title="1. 基本原理："></a>1. 基本原理：</h1><ol>
-<li><p><img src="/../../images/image-20221106162517079.png" alt="image-20221106162517079"></p>
-</li>
-<li><p><img src="/../../images/image-20221106163157990.png" alt="image-20221106163157990"></p>
-</li>
-<li><p><img src="/../../images/image-20221106163919356.png" alt="image-20221106163919356"></p>
-</li>
-</ol>
-<h1 id="2-web权限方案-用户认证（设置用户名密码）"><a href="#2-web权限方案-用户认证（设置用户名密码）" class="headerlink" title="2 .web权限方案-用户认证（设置用户名密码）"></a>2 .web权限方案-用户认证（设置用户名密码）</h1><ol>
-<li><p>设置登录用户名和密码</p>
-<ol>
-<li>方式一：通过配置文件</li>
-</ol>
-<p>   properties为例<br>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.port=<span class="number">8111</span></span><br><span class="line">spring.security.user.name=atguigu</span><br><span class="line">spring.security.user.password=atguigu</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
-<li><p>方式二：通过配置类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfig</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">BCryptPasswordEncoder</span> <span class="variable">passwordEncoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">        <span class="comment">// 加密</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> passwordEncoder.encode(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">        auth.inMemoryAuthentication().withUser(<span class="string">&quot;lucy&quot;</span>).password(password).roles(<span class="string">&quot;admin&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    PasswordEncoder <span class="title function_">password</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>方式三：自定义编写实体类</p>
-<p>在验证过程中，它会首先去找你的配置文件、配置类，如果发现其中有用户名和密码，那么它就会去找这个用户名和密码。但如果没有设置，它就会去找一个接口<strong>UserDetailsService</strong>，到这个接口你可以找通过表单提交或是查数据库或是其它方式设置的密码，然后去验证</p>
-<p>到UserDetailsService中找到你返回的用户名和密码和权限</p>
-<p>第一步：创建配置类，设置使用哪个userDetailsService实现类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.springsecurity.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfigTest</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDetailsService userDetailsService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        auth.userDetailsService(userDetailsService).passwordEncoder(password());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    PasswordEncoder <span class="title function_">password</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>第二步：编写实现类，返回User对象，User对象有用户名、密码和操作权限</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.springsecurity.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.AuthorityUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UsernameNotFoundException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyUserDetailsService</span> <span class="keyword">implements</span> <span class="title class_">UserDetailsService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDetails <span class="title function_">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException &#123;</span><br><span class="line">        List&lt;GrantedAuthority&gt; auths = AuthorityUtils.commaSeparatedStringToAuthorityList(<span class="string">&quot;role&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;mary&quot;</span>, <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>().encode(<span class="string">&quot;123&quot;</span>), auths);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>引用场景：</strong></p>
-<p>一般实际开发中用的比较多的是第三种方式</p>
-<p>第一、二种方式：比如要超级管理员的时候，就只能用admin这个用户来登录，这个时候就而已用第一或第二种方式来配置。</p>
-<p>第三种方式：主要需求用于查数据库的时候</p>
-</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cla6mrkli0003lov6achx4xbt" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
 
     </footer>
   </div>
@@ -837,9 +827,9 @@
     <h2 class="author">John Doe</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>23</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>8</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>4</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>24</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>10</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>5</strong><br>标签</div></a>
     </div>
 
 
