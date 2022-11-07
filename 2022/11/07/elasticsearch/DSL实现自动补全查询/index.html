@@ -3,25 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>RestAPI实现聚合 | Hexo &amp; github</title>
+  <title>DSL实现自动补全查询 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1234567891011121314151617181920212223242526272829303132@Test    void testAggredation() throws IOException &amp;#123;        &#x2F;&#x2F;1. 准备Request        SearchRequest request &#x3D; new SearchRequest(&quot;hotel&amp;q">
+  <meta name="description" content="elasticsearch提供了Completion Suggester查询来实现自动补全功能。这个查询会匹配以用户输入内容开头的词条并返回。为了提高补全查询的效率，对于文档中字段的类型有一些约束： • 参与补全查询的字段必须是completion类型。    • 字段的内容一般是用来补全的多个词条形成的**数组**。  查询语法如下： 1234567891011121314&#x2F;&#x2F; 自动补全查询GE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RestAPI实现聚合">
-<meta property="og:url" content="http://example.com/2022/11/07/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/index.html">
+<meta property="og:title" content="DSL实现自动补全查询">
+<meta property="og:url" content="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132@Test    void testAggredation() throws IOException &amp;#123;        &#x2F;&#x2F;1. 准备Request        SearchRequest request &#x3D; new SearchRequest(&quot;hotel&amp;q">
+<meta property="og:description" content="elasticsearch提供了Completion Suggester查询来实现自动补全功能。这个查询会匹配以用户输入内容开头的词条并返回。为了提高补全查询的效率，对于文档中字段的类型有一些约束： • 参与补全查询的字段必须是completion类型。    • 字段的内容一般是用来补全的多个词条形成的**数组**。  查询语法如下： 1234567891011121314&#x2F;&#x2F; 自动补全查询GE">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/570bde95e90d44658df8da0c790f6586~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d513b0401de41e39c3596a888c18b17~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d0e18347de8447ef8b03ecf8d9f6ef10~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94d360f6ab8944398727066af9c9263e~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="article:published_time" content="2022-11-07T01:18:02.256Z">
-<meta property="article:modified_time" content="2022-11-07T01:43:47.897Z">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebc7c2dd979d46109816b3b5e157e466~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="article:published_time" content="2022-11-07T01:26:59.320Z">
+<meta property="article:modified_time" content="2022-11-07T01:27:56.433Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Elasticsearch">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/570bde95e90d44658df8da0c790f6586~tplv-k3u1fbpfcp-zoom-1.image">
+<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebc7c2dd979d46109816b3b5e157e466~tplv-k3u1fbpfcp-zoom-1.image">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -83,10 +80,10 @@
   </div>
 </div>
 
-        <section id="main"><article id="post-RestAPI实现聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-elasticsearch/DSL实现自动补全查询" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/07/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" class="article-date">
-  <time class="post-time" datetime="2022-11-07T01:18:02.256Z" itemprop="datePublished">
+    <a href="/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:26:59.320Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
     <span class="post-day">07</span>
   </time>
@@ -100,14 +97,14 @@
         
   
     <h1 class="article-title" itemprop="name">
-      RestAPI实现聚合
+      DSL实现自动补全查询
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
   </div>
 
           
@@ -119,17 +116,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/570bde95e90d44658df8da0c790f6586~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d513b0401de41e39c3596a888c18b17~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d0e18347de8447ef8b03ecf8d9f6ef10~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    void testAggredation() throws IOException &#123;</span><br><span class="line">        //1. 准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2. 准备DSL</span><br><span class="line">        //2.1 设置size</span><br><span class="line">        request.source().size(0);</span><br><span class="line">        //2.2 聚合</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms(&quot;brandAgg&quot;)</span><br><span class="line">                .field(&quot;brand&quot;)</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        //3. 发出请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line">        //4. 解析结果</span><br><span class="line">        Aggregations aggregations = response.getAggregations();</span><br><span class="line">        //4.1 根据聚合名称获取聚合结果</span><br><span class="line">        Terms brandTerms = aggregations.get(&quot;brandAgg&quot;);</span><br><span class="line">        //4.2 获取buckets</span><br><span class="line">        List&lt;? extends Terms.Bucket&gt; buckets = brandTerms.getBuckets();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        for(Terms.Bucket bucket : buckets)&#123;</span><br><span class="line">            //4.4 获取key</span><br><span class="line">            String key = bucket.getKeyAsString();</span><br><span class="line"></span><br><span class="line">            System.out.println(key);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>ps:</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94d360f6ab8944398727066af9c9263e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+        <p>elasticsearch提供了<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.6/search-suggesters.html" title="Completion Suggester">Completion Suggester</a>查询来实现自动补全功能。这个查询会匹配以用户输入内容开头的词条并返回。为了提高补全查询的效率，对于文档中字段的类型有一些约束：</p>
+<p>• 参与补全查询的字段必须是<strong>completion</strong>类型。</p>
+<pre><code>   • 字段的内容一般是用来补全的多个词条形成的**数组**。
+</code></pre>
+<p>查询语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 自动补全查询</span><br><span class="line">GET /test/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;suggest&quot;: &#123;</span><br><span class="line">    &quot;title_suggest&quot;: &#123;</span><br><span class="line">      &quot;text&quot;: &quot;s&quot;, // 关键字</span><br><span class="line">      &quot;completion&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;title&quot;, // 补全查询的字段</span><br><span class="line">        &quot;skip_duplicates&quot;: true, // 跳过重复的</span><br><span class="line">        &quot;size&quot;: 10 // 获取前10条结果</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebc7c2dd979d46109816b3b5e157e466~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="cla654hdr0008tkv6eep9gmvn" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="cla6mc5n6000i2cv6gw610gog" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -140,19 +139,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/11/07/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          RestClient-多条件聚合
+          设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去
         
       </div>
     </a>
   
   
-    <a href="/2022/11/07/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">DSL实现Metrics 聚合</div>
+      <div class="article-nav-title">自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项</div>
     </a>
   
 </nav>
