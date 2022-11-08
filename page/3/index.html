@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>24</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>10</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>5</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>33</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>16</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>11</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,580 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-juc/线程池应用_定时执行任务" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T02:18:09.630Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/">线程池应用_定时执行任务</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/juc/">juc</a>,<a class="article-category-link" href="/categories/juc/%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81/">应用代码</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>直接上代码，解决 “如何让每周四 18:00:00 定时执行任务 ？”类似问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import java.time.DayOfWeek;</span><br><span class="line">import java.time.Duration;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line">import java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/10/15</span><br><span class="line"> */</span><br><span class="line">public class TestSchedule &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *如何让每周四 18:00:00 定时执行任务 ？</span><br><span class="line">     */</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 获取当前时间</span><br><span class="line">        LocalDateTime now = LocalDateTime.now();</span><br><span class="line">        System.out.println( now );</span><br><span class="line"></span><br><span class="line">        // 获取周四时间</span><br><span class="line">        LocalDateTime time = now.withHour(18).withMinute(0).withSecond(0).withNano(0).with(DayOfWeek.THURSDAY);</span><br><span class="line">        // 如果 当前时间 &gt; 本周四时间，必须找到下周周四</span><br><span class="line">        if ( now.compareTo( time ) &gt;0 ) &#123;</span><br><span class="line">            // 加一周</span><br><span class="line">            time = time.plusWeeks( 1 );</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println( time );</span><br><span class="line"></span><br><span class="line">        // initialDelay 代表当前时间和周四的时间差</span><br><span class="line">        // period 一周的间隔时间</span><br><span class="line">        long initialDelay = Duration.between(now, time).toMillis();</span><br><span class="line">        long period = 1000 * 60 * 60 * 24 * 7;</span><br><span class="line">        ScheduledExecutorService pool = Executors.newScheduledThreadPool( 1 );</span><br><span class="line">        pool.scheduleAtFixedRate( () -&gt; &#123;</span><br><span class="line">            System.out.println( &quot;running...&quot; );</span><br><span class="line">        &#125;, initialDelay, period, TimeUnit.MILLISECONDS );</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Duration类专门用于做时间间隔运算的，如Duration.between( 时间1，时间2 ).toMillis()</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="cla7mjt39000dqsv678hah2n0" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/DSL实现Bucket聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:27:30.451Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/">DSL实现Bucket聚合</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类：</p>
+<p>桶（Bucket）聚合：用来对文档做分组</p>
+<pre><code>    •TermAggregation：按照文档字段值分组
+
+    •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组
+</code></pre>
+<h1 id="1、DSL实现Bucket聚合"><a href="#1、DSL实现Bucket聚合" class="headerlink" title="1、DSL实现Bucket聚合"></a><strong>1、DSL</strong>实现Bucket聚合</h1><p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
+<p>类型为term类型，DSL示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;: 0,  // 设置size为0，结果中不包含文档，只包含聚合结果</span><br><span class="line">  &quot;aggs&quot;: &#123; // 定义聚合</span><br><span class="line">    &quot;brandAgg&quot;: &#123; //给聚合起个名字</span><br><span class="line">      &quot;terms&quot;: &#123; // 聚合的类型，按照品牌值聚合，所以选择term</span><br><span class="line">        &quot;field&quot;: &quot;brand&quot;, // 参与聚合的字段</span><br><span class="line">        &quot;size&quot;: 20 // 希望获取的聚合结果数量</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2、-Bucket聚合聚合结果排序"><a href="#2、-Bucket聚合聚合结果排序" class="headerlink" title="2、 Bucket聚合聚合结果排序"></a><strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1><p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
+<p>我们可以修改结果排序方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能,自定义排序规则</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20,</span><br><span class="line">        &quot;order&quot;: &#123;</span><br><span class="line">          &quot;_count&quot;: &quot;asc&quot;  // 按照_count升序排列</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="3、Bucket聚合限定聚合范围"><a href="#3、Bucket聚合限定聚合范围" class="headerlink" title="3、Bucket聚合限定聚合范围"></a><strong>3、Bucket</strong>聚合限定聚合范围</h1><p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能，限定聚合范围</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;range&quot;: &#123;</span><br><span class="line">      &quot;price&quot;: &#123;</span><br><span class="line">        &quot;lte&quot;: 200   // 只对200元以下的文档聚合</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, </span><br><span class="line">  </span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-、总结"><a href="#4-、总结" class="headerlink" title="4 、总结"></a><strong>4 、总结</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="cla7mjt3f000iqsv63ghl4cz0" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-设计模式/设计模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:14:39.855Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-intro.html">设计模式简介 | 菜鸟教程 (runoob.com)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cla7mjt600049qsv61a4hayzr" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-零碎笔记/零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:14:39.844Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>RestTemplate</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/58949f8334f5">Spring之RestTemplate详解 - 简书 (jianshu.com)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cla7mjt63004cqsv6cjyv939b" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-关键字/java关键字" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:14:39.833Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/">java关键字</a>
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>transient表示当加序列化时，不会被序列化</p>
+<p><img src="/.com//Users\其然乐衣Letitbe\AppData\Roaming\Typora\typora-user-images\image-20221010191347950.png" alt="image-20221010191347950"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="cla7mjt4l001qqsv66q7zbcb7" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-刷题笔记/方法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:14:39.821Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/">java刷题笔记</a>
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Java的split方法使用多种分隔符切分字符串"><a href="#1-Java的split方法使用多种分隔符切分字符串" class="headerlink" title="1. Java的split方法使用多种分隔符切分字符串"></a>1. Java的split方法使用多种分隔符切分字符串</h1><p><strong>方法一：</strong><br>多个分隔符使用**’|’**分开，例如：</p>
+<pre><code>      String str = &quot;abc;123,456?999|haha&quot;;
+      String[] strs=str.split(&quot;;|,&quot;);
+      for(String s : strs)&#123;
+          System.out.println(s);
+      &#125;
+</code></pre>
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">123</span><br><span class="line">456?999|haha</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二：</strong><br>使用中括号括起来**[“…”]**，例如:</p>
+<pre><code>    String str = &quot;abc;123,456?999|haha&quot;;
+    String[] strs = str.split(&quot;[;,?|25]&quot;);
+    for(String s : strs)&#123;
+        System.out.println(s);
+    &#125;
+</code></pre>
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">6</span><br><span class="line">999</span><br><span class="line">haha</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/" data-id="cla7mjt4v0022qsv64yryg7ml" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/索引库中的文档操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:12:39.243Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/">索引库中的文档的操作</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="索引库中的文档的操作"><a href="#索引库中的文档的操作" class="headerlink" title="索引库中的文档的操作"></a>索引库中的文档的操作</h1><p><img src="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/41a470384f02452a8565ca97a2681702.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/264b09d6e2a94a8a87ac5527907b8c25.png" alt="img"><img src="https://img-blog.csdnimg.cn/9839abedff6b41709b41fdbf1d021320.png" alt="img"></p>
+<p>（实例）代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 插入文档</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zy@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 查询文档</span><br><span class="line">GET /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除文档</span><br><span class="line">DELETE /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式1：全量修改文档，如果存在则删除旧的，新的覆盖旧的，如果原先没有，则新增该文档（所以放修改方式相当于也是一种插入文档的方法）</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zhaoyun@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式2: 局部修改文档字段</span><br><span class="line">POST /heima/_update/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;doc&quot;:&#123;</span><br><span class="line">    &quot;email&quot;: &quot;ZY@itcast.cn&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>运行截图：</p>
+<p><img src="https://img-blog.csdnimg.cn/069e55bbd4ec47308b0147aa38adab91.png" alt="img"><img src="https://img-blog.csdnimg.cn/6e1212cd2f794a579424363b32fb9adc.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/640be243e52d45a18b47ef5dfe0b3095.png" alt="img"><img src="https://img-blog.csdnimg.cn/4aa5f5fd7ce74a6a814f9338b68beae5.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/e7ddbb1bb05f40078872f81abe3e60c9.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/06615bad2d7942acb41706e51cc56bdc.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="cla7mjt440019qsv6495ydtck" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/RestClient查询文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:12:39.239Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">RestClient查询文档</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="快速入门："><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h1><p><img src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h1 id="match-all查询："><a href="#match-all查询：" class="headerlink" title="match_all查询："></a>match_all查询：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//match_all查询</span><br><span class="line">    @Test</span><br><span class="line">    void testMatchAll() throws IOException &#123;</span><br><span class="line">        String index  = &quot;tb_disable_date_diary&quot;;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(index);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //解析响应</span><br><span class="line">        handleResponce(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //解析响应</span><br><span class="line">    private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数据</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            Diary diary = JSON.parseObject(json,Diary.class);</span><br><span class="line">            System.out.println(&quot;diary = &quot;+diary);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/48392c3346d746448e7109a3c8d960c0.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//分页和排序</span><br><span class="line">   @Test</span><br><span class="line">   void restPageAndSort() throws IOException &#123;</span><br><span class="line">       //页码，每页大小</span><br><span class="line">       int page = 2,size = 5;</span><br><span class="line"></span><br><span class="line">       //1.准备Request</span><br><span class="line">       SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">       //2.准备DSL</span><br><span class="line">       //2.1 query</span><br><span class="line">       request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">       //2.2 排序 sort</span><br><span class="line">       request.source().sort(&quot;price&quot;, SortOrder.ASC);</span><br><span class="line">       //2.3 分页from，size</span><br><span class="line">       request.source().from((page - 1) * size).size(5);</span><br><span class="line"></span><br><span class="line">       //3.发送请求</span><br><span class="line">       SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">       handleResponce(response);</span><br><span class="line"></span><br><span class="line">       System.out.println(response);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">       //4.解析响应</span><br><span class="line">       SearchHits searchHits = response.getHits();</span><br><span class="line">       //4.1获取总条数</span><br><span class="line">       long total = searchHits.getTotalHits().value;</span><br><span class="line">       System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">       //4.2文档数据</span><br><span class="line">       SearchHit[] hits = searchHits.getHits();</span><br><span class="line">       //4.3遍历</span><br><span class="line">       for(SearchHit hit : hits)&#123;</span><br><span class="line">           //获取文档source</span><br><span class="line">           String json = hit.getSourceAsString();</span><br><span class="line">           //反序列化</span><br><span class="line">           HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">           System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a><strong>高亮</strong></h2><p><img src="https://img-blog.csdnimg.cn/84cfb92b326c4ff18403e7089b76f7a9.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/8b969709155446f48b193ac2e9fa59f7.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//高亮</span><br><span class="line">    @Test</span><br><span class="line">    void testHighlight() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        //2.1 query</span><br><span class="line">        request.source().query(QueryBuilders.matchQuery(&quot;all&quot;,&quot;如家&quot;));</span><br><span class="line">        //2.2 高亮</span><br><span class="line">        request.source().highlighter(new HighlightBuilder().field(&quot;name&quot;).requireFieldMatch(false));</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        handleResponce1(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void handleResponce1(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数组</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line"></span><br><span class="line">            //获取高亮结果</span><br><span class="line">            Map&lt;String, HighlightField&gt; highlightFields = hit.getHighlightFields();</span><br><span class="line">            if(!CollectionUtils.isEmpty(highlightFields))&#123;</span><br><span class="line">                //根据各字段名获取高亮结果</span><br><span class="line">                HighlightField highlightField = highlightFields.get(&quot;name&quot;);</span><br><span class="line">                if(highlightField != null)&#123;</span><br><span class="line">                    //获取高亮</span><br><span class="line">                    String name = highlightField.getFragments()[0].string();</span><br><span class="line">                    //覆盖非高亮结果</span><br><span class="line">                    hotelDoc.setName(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/e569b9e6eae2472cb508245fe942dd15.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="cla7mjt3y0014qsv6bqgs85xk" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/javaRestClient操作索引库和文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:12:39.233Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/">javaRestClient操作索引库和文档</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-创建索引库："><a href="#1-创建索引库：" class="headerlink" title="1. 创建索引库："></a><strong>1. 创建索引库：</strong></h1><p><img src="https://img-blog.csdnimg.cn/0fb9368cceef43ddbd2bb17ed8d24088.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//创建索引库</span><br><span class="line">   @Test</span><br><span class="line">   void createHotelIndex() throws IOException &#123;</span><br><span class="line">       //1.创建Request对象</span><br><span class="line">       CreateIndexRequest request = new CreateIndexRequest(&quot;hotel&quot;);</span><br><span class="line">       //2.准备请求的参数：DSL语句</span><br><span class="line">       request.source(MAPPING_TEMPLATE, XContentType.JSON);</span><br><span class="line">       //3.发送请求</span><br><span class="line">       client.indices().create(request,RequestOptions.DEFAULT);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public static final String MAPPING_TEMPLATE = &quot;&#123;\n&quot; +</span><br><span class="line">            &quot;  \&quot;mappings\&quot;: &#123;\n&quot; +</span><br><span class="line">            &quot;    \&quot;properties\&quot;: &#123;\n&quot; +</span><br><span class="line">            &quot;      \&quot;id\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;name\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;text\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;analyzer\&quot;: \&quot;ik_max_word\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;address\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;index\&quot;:\&quot;false\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;price\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;integer\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;score\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;integer\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;brand\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;city\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;starName\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;business\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;location\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;geo_point\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;pic\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;index\&quot;:false\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;all\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;text\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;analyzer\&quot;: \&quot;ik_max_word\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;\n&quot; +</span><br><span class="line">            &quot;    &#125;\n&quot; +</span><br><span class="line">            &quot;  &#125;\n&quot; +</span><br><span class="line">            &quot;&#125;&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/18a3d3fc162e4e2ab8f61c956df60776.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/feb2d88bfe144638b243e9d89a0d7392.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/ad59b410007345dc967234c73e5ba534.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h2 id="2-删除索引库："><a href="#2-删除索引库：" class="headerlink" title="2. 删除索引库："></a>2. 删除索引库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//删除索引库</span><br><span class="line">    @Test</span><br><span class="line">    void textDeleteHotelIndex() throws IOException &#123;</span><br><span class="line">        //1.创建Request对象</span><br><span class="line">        DeleteIndexRequest request = new DeleteIndexRequest(&quot;hotel&quot;);</span><br><span class="line"></span><br><span class="line">        //2.发送请求</span><br><span class="line">        client.indices().delete(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="3-旁段是否存在索引库："><a href="#3-旁段是否存在索引库：" class="headerlink" title="3. 旁段是否存在索引库："></a>3. 旁段是否存在索引库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//判断是否存在索引库</span><br><span class="line">   @Test</span><br><span class="line">   void textExistsHotelIndex() throws IOException &#123;</span><br><span class="line">       //1.创建Request对象</span><br><span class="line">       GetIndexRequest request = new GetIndexRequest(&quot;hotel&quot;);</span><br><span class="line"></span><br><span class="line">       //2.发送请求</span><br><span class="line">       boolean exists = client.indices().exists(request,RequestOptions.DEFAULT);</span><br><span class="line">       System.out.println(exists ? &quot;索引库已经存在！&quot; : &quot;索引库不存在！&quot;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/69ddc8f23003493eb829f87158800d7e.png" alt="img"></p>
+<h2 id="4-修改文档"><a href="#4-修改文档" class="headerlink" title="4. 修改文档"></a>4. 修改文档</h2><p><img src="https://img-blog.csdnimg.cn/fcab1400718748bea29dc7c0466a2437.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//修改文档</span><br><span class="line">    @Test</span><br><span class="line">    void testUpdateDocument() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        UpdateRequest request = new UpdateRequest(&quot;hotel&quot;,&quot;61083&quot;);</span><br><span class="line"></span><br><span class="line">        //2.准备请求参数</span><br><span class="line">        request.doc(</span><br><span class="line">                &quot;price&quot;,&quot;952&quot;,</span><br><span class="line">                &quot;starName&quot;,&quot;四钻&quot;</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        client.update(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="5-查询文档"><a href="#5-查询文档" class="headerlink" title="5. 查询文档"></a>5. 查询文档</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//根据id查询</span><br><span class="line">   @Test</span><br><span class="line">   void testAddDocumentById() throws IOException &#123;</span><br><span class="line"></span><br><span class="line">       //1.准备好request</span><br><span class="line">       GetRequest request = new GetRequest(&quot;hotel&quot;,&quot;61083&quot;);</span><br><span class="line">       //2.发送请求 ，得到响应</span><br><span class="line">       GetResponse response = client.get(request,RequestOptions.DEFAULT);</span><br><span class="line">       //3.解析响应结果</span><br><span class="line">       String json = response.getSourceAsString();</span><br><span class="line"></span><br><span class="line">       HotelDoc hotelDoc= JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">       System.out.println(hotelDoc);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="6-批量添加文档"><a href="#6-批量添加文档" class="headerlink" title="6. 批量添加文档"></a>6. 批量添加文档</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//批量添加</span><br><span class="line">    @Test</span><br><span class="line">    void testBulkRequest() throws IOException &#123;</span><br><span class="line">        //批量查询酒店的数量</span><br><span class="line">        List&lt;Hotel&gt; hotels = new hotelService.list();</span><br><span class="line"></span><br><span class="line">        for(Hotel hotel : hotels)&#123;</span><br><span class="line">            HotelDoc hotelDoc = new HotelDoc(hotel);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //1.创建Request</span><br><span class="line">        BulkRequest request = new BulkRequest();</span><br><span class="line">        //2.准备参数，添加多个新增的Request</span><br><span class="line">        for(Hotel hotel : hotels)&#123;</span><br><span class="line">            //转换为文档类型的HotelDoc</span><br><span class="line">            HotelDoc hotelDoc = new HotelDoc(hotel);</span><br><span class="line">            //创建新增文档的Request对象</span><br><span class="line">            request.add(new IndexRequest(&quot;hotel&quot;)</span><br><span class="line">                    .id(hotelDoc.getId().toString())</span><br><span class="line">                    .source(JSON.toJSONString(hotelDoc),XContentType.JSON));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        client.bulk(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/8611bf94e9a9441a8a2eda88060392a2.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="cla7mjt420018qsv65ni88sha" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-elasticsearch/ES聚合分析报错：“reason“ " class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -122,7 +696,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="cla6npbxl000d08v68648e7te" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="cla7mjt3p000sqsv69fro5vsh" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -136,220 +710,10 @@
 
 
   
-    <article id="post-redis/springboot整合使用云服务器上的Redis" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/" class="article-date">
-  <time class="post-time" datetime="2022-11-05T15:22:53.637Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/">springboot整合使用云服务器上的Redis</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、前提条件"><a href="#一、前提条件" class="headerlink" title="一、前提条件"></a>一、前提条件</h1><p>修改redis.conf配置文件</p>
-<p><strong>1、protected-mode yes（默认的） 修改成 protected-mode no，解除保护模式</strong></p>
-<p><img src="/../../images/f1f4347079c44f87b15fe6d63b5a1372.png" alt="img"></p>
-<p><strong>2、注释掉绑定ip ，绑定ip的话，使得除了本机（服务器）以外的主机无法访问redis数据库</strong></p>
-<p> <img src="/../../images/88a1f690a1da4699996b12882112fdbd.png" alt="img"></p>
-<p><strong>3、将守护进程模式关闭 daemonize yes 改成 daemonize no</strong></p>
-<p><img src="/../../images/5c5c95f6922d424eaec6bb514bf989e7.png" alt="img"></p>
-<p>4、<strong>最后，一定记住要redis-server redis.conf重启redis的配置文件，否则修改不生效！！！</strong></p>
-<h1 id="二、整合步骤"><a href="#二、整合步骤" class="headerlink" title="二、整合步骤"></a>二、整合步骤</h1><p><strong>1、导入依赖</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--redis--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><strong>2、配置yml配置文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  redis:</span><br><span class="line">    host: 你的云服务器的ip</span><br><span class="line">    port: 6379                # Redis的端口</span><br><span class="line">    password: redis密码         # Redis服务器连接密码</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><strong>3、注入RedisTemplate</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><strong>使用例子</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void redisTestSet(  ) &#123;</span><br><span class="line"></span><br><span class="line">    ValueOperations ops = redisTemplate.opsForValue();</span><br><span class="line">    ops.set( &quot;username&quot;, 41);</span><br><span class="line">    System.out.println(  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void redisTestGet(  ) &#123;</span><br><span class="line">    ValueOperations ops = redisTemplate.opsForValue();</span><br><span class="line">    Object name = ops.get( &quot;username&quot;);</span><br><span class="line">    System.out.println( name );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h1 id="三、可能遇到的坑"><a href="#三、可能遇到的坑" class="headerlink" title="三、可能遇到的坑"></a>三、可能遇到的坑</h1><p><strong>报错1：</strong> </p>
-<p><img src="/../../images/4c85fac031a34ec1a8db6ec0f3126bd9.png" alt="img"></p>
-<p> 解决方式1：在redis.conf配置文件中requirepass后空一一格，然后加上密码</p>
-<p><img src="/../../images/61f205b1ecdd45b49cce8dd743d0ae1e.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<p> 解决方式2：命令模式</p>
-<p>1）登录redis</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>2)设置密码 （比如我设置密码为12345678）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set requirepass 12345678</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>3）验证 ：输入默认用户名 auth 和 密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth 12345678</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="/../../images/751ef059325d4675a73cc12881de3f72.png" alt="img"></p>
-<p><strong>错误2：</strong></p>
-<p>启动项目时报错：java.net.ConnectException: Connection refused: no further information</p>
-<p>原因：开头的前提条件2可能没有弄好，或是弄了但没有和重新启动redis</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/" data-id="cla6npby3001708v62nlcbllh" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-mysql/数据库原理及应用第三章知识点思维导图（SQL SERVER）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-05T12:49:40.624Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/">数据库原理及应用第三章知识点思维导图（SQL SERVER）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/sql/">sql</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>直接上图： </p>
-<p><img src="https://img-blog.csdnimg.cn/5584f01c08764c0bb05bbc22c577a0cb.jpeg" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/" data-id="cla6npby4001b08v63l0z3mf8" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-hello-world" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/05/hello-world/" class="article-date">
-  <time class="post-time" datetime="2022-11-05T12:03:38.450Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/05/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/hello-world/" data-id="cla6npbx7000108v69p1k1ucf" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -394,9 +758,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>24</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>10</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>5</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>33</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>16</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>11</strong><br>标签</div></a>
     </div>
 
 
