@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git 提交代码 到 gitee仓库指定文件夹中 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、创建一个空文件夹 二、将gitee仓库地址复制下来  三、在刚刚新建的空文件夹真打开 Git Bash Here 四、克隆 gitee 仓库   五、提交代码将想要提交的拖到克隆下来的目录下面 六、执行指令1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格 1git add 文件名   可能会出现如下报错，  则需要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 提交代码 到 gitee仓库指定文件夹中">
+<meta property="og:url" content="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="一、创建一个空文件夹 二、将gitee仓库地址复制下来  三、在刚刚新建的空文件夹真打开 Git Bash Here 四、克隆 gitee 仓库   五、提交代码将想要提交的拖到克隆下来的目录下面 六、执行指令1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格 1git add 文件名   可能会出现如下报错，  则需要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="article:published_time" content="2022-11-09T16:10:24.900Z">
+<meta property="article:modified_time" content="2022-11-09T16:51:29.798Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>48</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>24</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>19</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-GIt/git 提交代码 到 gitee仓库指定文件夹中" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:10:24.900Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git 提交代码 到 gitee仓库指定文件夹中
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、创建一个空文件夹"><a href="#一、创建一个空文件夹" class="headerlink" title="一、创建一个空文件夹"></a><strong>一、创建一个空文件夹</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二、将gitee仓库地址复制下来"><a href="#二、将gitee仓库地址复制下来" class="headerlink" title="二、将gitee仓库地址复制下来"></a><strong>二、将gitee仓库地址复制下来</strong></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="三、在刚刚新建的空文件夹真打开-Git-Bash-Here"><a href="#三、在刚刚新建的空文件夹真打开-Git-Bash-Here" class="headerlink" title="三、在刚刚新建的空文件夹真打开 Git Bash Here"></a><strong>三、在刚刚新建的空文件夹真打开 Git Bash Here</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="四、克隆-gitee-仓库"><a href="#四、克隆-gitee-仓库" class="headerlink" title="四、克隆 gitee 仓库"></a><strong>四、克隆 gitee 仓库</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="五、提交代码"><a href="#五、提交代码" class="headerlink" title="五、提交代码"></a><strong>五、提交代码</strong></h1><h2 id="将想要提交的拖到克隆下来的目录下面"><a href="#将想要提交的拖到克隆下来的目录下面" class="headerlink" title="将想要提交的拖到克隆下来的目录下面"></a>将想要提交的拖到克隆下来的目录下面</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="六、执行指令"><a href="#六、执行指令" class="headerlink" title="六、执行指令"></a><strong>六、执行指令</strong></h1><p><strong>1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
+
+
+<p>可能会出现如下报错，</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>则需要输入 git init  然后回车就好了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+
+<p> 然后再重新执行添加文件就可以了（注意，一定要将目录切换到仓库目录，负责执行命令时会报fatal: pathspec ‘hotel-demo’ did not match any files）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>2.  执行git <strong><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=commit&spm=1001.2101.3001.7020" title="commit">commit</a></strong> -m “注释的内容”  （ 提交到本地仓库）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;注释的内容&quot;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>3. 提交代码到 gitee</strong></p>
+<p>执行命令: git remote add origin 远程项目的 Https 地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程项目的 Https 地址</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>可能有人会报如下错误（没有的话可以忽略） </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 解决：执行 git remote rm origin 删除关联的origin的远程库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 然后再重新执行 git remote add origin 远程项目的 Https 地址即可</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>4. git push -u origin master （ 最后这一步就可以推送到自己的仓库了）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master </span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>完成 !!</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" data-id="cla9vv55b00097gv6fwug2teu" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          用Git上传项目gitLab（简单笔记）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">docker restart xxx重启容器报错：Error response from daemon Cannot restart container es</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>48</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>24</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>19</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2021 - 2022 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

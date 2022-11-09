@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>33</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>16</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>11</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>48</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>24</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>19</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -75,12 +75,12 @@
 
         <section id="main">
   
-    <article id="post-juc/线程池应用_定时执行任务" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-云服务器/nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T02:18:09.630Z" itemprop="datePublished">
+    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:42:30.851Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -92,14 +92,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/">线程池应用_定时执行任务</a>
+      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/">nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/juc/">juc</a>,<a class="article-category-link" href="/categories/juc/%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81/">应用代码</a>
+    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
   </div>
 
           
@@ -111,18 +111,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>直接上代码，解决 “如何让每周四 18:00:00 定时执行任务 ？”类似问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import java.time.DayOfWeek;</span><br><span class="line">import java.time.Duration;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line">import java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/10/15</span><br><span class="line"> */</span><br><span class="line">public class TestSchedule &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *如何让每周四 18:00:00 定时执行任务 ？</span><br><span class="line">     */</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 获取当前时间</span><br><span class="line">        LocalDateTime now = LocalDateTime.now();</span><br><span class="line">        System.out.println( now );</span><br><span class="line"></span><br><span class="line">        // 获取周四时间</span><br><span class="line">        LocalDateTime time = now.withHour(18).withMinute(0).withSecond(0).withNano(0).with(DayOfWeek.THURSDAY);</span><br><span class="line">        // 如果 当前时间 &gt; 本周四时间，必须找到下周周四</span><br><span class="line">        if ( now.compareTo( time ) &gt;0 ) &#123;</span><br><span class="line">            // 加一周</span><br><span class="line">            time = time.plusWeeks( 1 );</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println( time );</span><br><span class="line"></span><br><span class="line">        // initialDelay 代表当前时间和周四的时间差</span><br><span class="line">        // period 一周的间隔时间</span><br><span class="line">        long initialDelay = Duration.between(now, time).toMillis();</span><br><span class="line">        long period = 1000 * 60 * 60 * 24 * 7;</span><br><span class="line">        ScheduledExecutorService pool = Executors.newScheduledThreadPool( 1 );</span><br><span class="line">        pool.scheduleAtFixedRate( () -&gt; &#123;</span><br><span class="line">            System.out.println( &quot;running...&quot; );</span><br><span class="line">        &#125;, initialDelay, period, TimeUnit.MILLISECONDS );</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p><strong>（本博文的方法对于阿里云和腾讯与服务器都适用 ）</strong></p>
+<p><strong>场景：</strong></p>
+<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
 
-<p>Duration类专门用于做时间间隔运算的，如Duration.between( 时间1，时间2 ).toMillis()</p>
 
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>上图表示项目部署成功，便可以在浏览器上进行访问</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image">但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
+<p>而我们想项目程序在关闭退出终端后，也一样继续运行，</p>
+<p>这时候需要使用 <strong>nohup</strong> 命令启动（该命令可以在你退出帐户&#x2F;关闭终端之后继续运行相应的进程）</p>
+<p><strong>输入如下命令：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+
+
+<p> 但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>1、原因</strong></p>
+<p>是因为使用 nohup 会产生日志文件，默认写入到 nohup.out</p>
+<p><strong>2、解决</strong></p>
+<p>将 nohup 的日志输出到 &#x2F;dev&#x2F;null，这个目录会让所有到它这的信息自动消失</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &gt; /dev/null 2&gt; /dev/null &amp;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>其它解决方法：</strong><br>就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &amp; </span><br></pre></td></tr></table></figure>
+
+
+<p><strong>停止进程</strong></p>
+<p>如果想停止进程运行的话，可通过命令（kill -9 进程号PID）进程号来杀死</p>
+<p>另外也可以使用 ps -def | grep “进程名” 命令来查找PID。</p>
+<p>找到 PID 后，就可以使用 kill PID 来删除。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9  进程号PID</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="cla7t4n450016w0v6avn1429z" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="cla9vv56b002m7gv6118z9lom" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
 
     </footer>
   </div>
@@ -133,12 +162,12 @@
 
 
   
-    <article id="post-elasticsearch/DSL实现Bucket聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-springboot/Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:27:30.451Z" itemprop="datePublished">
+    <a href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:39:44.181Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -150,14 +179,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/">DSL实现Bucket聚合</a>
+      <a class="article-title" href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+    <a class="article-category-link" href="/categories/mybatisplus/">mybatisplus</a>,<a class="article-category-link" href="/categories/springboot/">springboot</a>
   </div>
 
           
@@ -169,39 +198,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类：</p>
-<p>桶（Bucket）聚合：用来对文档做分组</p>
-<pre><code>    •TermAggregation：按照文档字段值分组
-
-    •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组
-</code></pre>
-<h1 id="1、DSL实现Bucket聚合"><a href="#1、DSL实现Bucket聚合" class="headerlink" title="1、DSL实现Bucket聚合"></a><strong>1、DSL</strong>实现Bucket聚合</h1><p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
-<p>类型为term类型，DSL示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;: 0,  // 设置size为0，结果中不包含文档，只包含聚合结果</span><br><span class="line">  &quot;aggs&quot;: &#123; // 定义聚合</span><br><span class="line">    &quot;brandAgg&quot;: &#123; //给聚合起个名字</span><br><span class="line">      &quot;terms&quot;: &#123; // 聚合的类型，按照品牌值聚合，所以选择term</span><br><span class="line">        &quot;field&quot;: &quot;brand&quot;, // 参与聚合的字段</span><br><span class="line">        &quot;size&quot;: 20 // 希望获取的聚合结果数量</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2、-Bucket聚合聚合结果排序"><a href="#2、-Bucket聚合聚合结果排序" class="headerlink" title="2、 Bucket聚合聚合结果排序"></a><strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1><p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
-<p>我们可以修改结果排序方式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能,自定义排序规则</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20,</span><br><span class="line">        &quot;order&quot;: &#123;</span><br><span class="line">          &quot;_count&quot;: &quot;asc&quot;  // 按照_count升序排列</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="3、Bucket聚合限定聚合范围"><a href="#3、Bucket聚合限定聚合范围" class="headerlink" title="3、Bucket聚合限定聚合范围"></a><strong>3、Bucket</strong>聚合限定聚合范围</h1><p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能，限定聚合范围</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;range&quot;: &#123;</span><br><span class="line">      &quot;price&quot;: &#123;</span><br><span class="line">        &quot;lte&quot;: 200   // 只对200元以下的文档聚合</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, </span><br><span class="line">  </span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>问题描述<br>MyBatis无法查询出属性名和数据库字段名不完全相同的数据。</p>
+<p>即：属性名和数据库字段名分别为驼峰命名和下划线命名时查出的数据为NULL。</p>
+<p>问题分析<br>MyBatis默认是属性名和数据库字段名一一对应的，即 </p>
+<blockquote>
+<p>数据库表列：user_name </p>
+<p>实体类属性：user_name</p>
+</blockquote>
+<p>但是java中一般使用驼峰命名 </p>
+<blockquote>
+<p>数据库表列：user_name </p>
+<p>实体类属性：userName</p>
+</blockquote>
+<p>实体类属性：userName</p>
+<p><strong>解决方案 (开启驼峰命名转换)</strong><br>在Spring Boot中，可以通过设置<strong>map-underscore-to-camel-case</strong>属性为true来开启驼峰功能。  </p>
+<p>MyBatis配置： </p>
+<p><strong>application.properties中：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.configuration.map-underscore-to-camel-case=true</span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="4-、总结"><a href="#4-、总结" class="headerlink" title="4 、总结"></a><strong>4 、总结</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+<p><strong>application.yml中：</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  configuration:</span><br><span class="line">    map-underscore-to-camel-case: true</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="cla7t4n3e0006w0v61zr33f3x" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="cla9vv567002a7gv6acbd01t7" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
 
     </footer>
   </div>
@@ -212,12 +242,12 @@
 
 
   
-    <article id="post-设计模式/设计模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-springboot/mybatisplus + 数据库 相关注解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.855Z" itemprop="datePublished">
+    <a href="/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:36:22.517Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -229,12 +259,16 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+      <a class="article-title" href="/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/">mybatisplus + 数据库 相关注解</a>
     </h1>
   
 
         <div>
           
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/mybatisplus/">mybatisplus</a>
+  </div>
+
           
               
 
@@ -244,14 +278,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-intro.html">设计模式简介 | 菜鸟教程 (runoob.com)</a></p>
+        <p>关联：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5591d4a48c140d190c89a416d1e0e30~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>pom.xml配置注入依赖：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c519c49613b4b95b4635e6a0e4c78d4~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--        mybatisplus+数据库相关开始--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.4.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">&lt;!--        mybatisplus+数据库相关结束--&gt;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cla7t4n4q002cw0v65wasdkop" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" data-id="cla9vv568002d7gv69u5qfz4m" class="article-share-link">分享</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li></ul>
+
     </footer>
   </div>
   
@@ -261,12 +302,12 @@
 
 
   
-    <article id="post-零碎笔记/零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-MQ/（rabbitmq的高级特性）消息可靠性" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.844Z" itemprop="datePublished">
+    <a href="/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:32:05.810Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -278,12 +319,147 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
+      <a class="article-title" href="/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/">（rabbitmq的高级特性）消息可靠性</a>
     </h1>
   
 
         <div>
           
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/rabbitmq/">rabbitmq</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=158&spm_id_from=333.851.header_right.history_list.click&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili">高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h1 id="一、生产者消息确认"><a href="#一、生产者消息确认" class="headerlink" title="一、生产者消息确认"></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/976c4e3d38b843599bc3342a347cdce9~tplv-k3u1fbpfcp-zoom-1.image">一、生产者消息确认</h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9499d135a8b84556bd7d16d790c1594f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="1-在生成者这个微服务的apllication-yml中添加配置"><a href="#1-在生成者这个微服务的apllication-yml中添加配置" class="headerlink" title="1.在生成者这个微服务的apllication.yml中添加配置"></a>1.在生成者这个微服务的apllication.yml中添加配置<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a8b6d8c3569343339e077fe63939adb3~tplv-k3u1fbpfcp-zoom-1.image"></h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/977d66ad1951428e86d00bd13147c136~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  rabbitmq:</span><br><span class="line">    publisher-confirm-type: correlated</span><br><span class="line">    publisher-returns: true</span><br><span class="line">    template:</span><br><span class="line">      mandatory: true</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置"><a href="#2-每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置" class="headerlink" title="2.每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置"></a>2.每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8058dadf229f4f089249b9b905e33bf9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/23223eb1f684431ebba0fe3d179676f0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.beans.BeansException;</span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.ApplicationContextAware;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">/*</span><br><span class="line">ApplicationContextAware ： spring 的bean工厂的通知</span><br><span class="line"> */</span><br><span class="line">@Slf4j  //记录日志</span><br><span class="line">@Configuration</span><br><span class="line">public class CommonConfig implements ApplicationContextAware &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;</span><br><span class="line">        // 从bean工厂中获取 RabbitTemplate 对象</span><br><span class="line">        RabbitTemplate rabbitTemplate = applicationContext.getBean( RabbitTemplate.class );</span><br><span class="line">        // 配置ReturnCallback</span><br><span class="line">//        rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() &#123;</span><br><span class="line">//            // 像这种里面只有一个方法的，把鼠标方法 new 前面，会提醒 推荐用lambda表达式，快捷键 Alt + Enter</span><br><span class="line">//            @Override</span><br><span class="line">//            public void returnedMessage(Message message, int i, String s, String s1, String s2) &#123;</span><br><span class="line">//</span><br><span class="line">//            &#125;</span><br><span class="line">//        &#125;);</span><br><span class="line">        // 像这种里面只有一个方法的，把鼠标方法 new 前面，会提醒 推荐用lambda表达式，快捷键 Alt + Enter</span><br><span class="line">        rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -&gt; &#123;</span><br><span class="line">            // 记录日志 【 &#123;&#125;是占位符，replyCode, replyText, exchange...会依次填进占位符里的 】</span><br><span class="line">            log.error( &quot;消息发送到队列失败，响应码：&#123;&#125;, 失败原因：&#123;&#125;, 交换机：&#123;&#125;, 路由key：&#123;&#125;, 消息：&#123;&#125;&quot;, </span><br><span class="line">                    replyCode, replyText, exchange, routingKey, message.toString() );</span><br><span class="line"></span><br><span class="line">            // 如果有需要的话，可以重发消息</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-发送消息，指定消息ID、消息ConfirmCallback"><a href="#3-发送消息，指定消息ID、消息ConfirmCallback" class="headerlink" title="3.发送消息，指定消息ID、消息ConfirmCallback"></a>3.发送消息，指定消息ID、消息ConfirmCallback</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/562749aa0959434bac83cf26a34124a3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.CorrelationData;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line">import org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line">import org.springframework.util.concurrent.FailureCallback;</span><br><span class="line">import org.springframework.util.concurrent.SuccessCallback;</span><br><span class="line"></span><br><span class="line">import java.util.UUID;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class SpringAmqpTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testSendMessage2SimpleQueue() throws InterruptedException &#123;</span><br><span class="line">        // 1.准备消息</span><br><span class="line">        String message = &quot;hello, spring amqp!&quot;;</span><br><span class="line"></span><br><span class="line">        // 2.准备CorrelationData</span><br><span class="line">        // 2.1.消息ID</span><br><span class="line">        CorrelationData correlationData = new CorrelationData( UUID.randomUUID().toString() );</span><br><span class="line">        // 2.2.准备ConfirmCallback</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        correlationData.getFuture().addCallback(result -&gt; &#123;   //成功回调</span><br><span class="line">            // 判断结果</span><br><span class="line">            if( result.isAck() ) &#123;</span><br><span class="line">                // ACK</span><br><span class="line">                log.debug( &quot;消息成功投递到交换机！消息ID：&#123;&#125;&quot;, correlationData.getId() );</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                //NACK</span><br><span class="line">                log.error( &quot;消息投递到交换机失败！消息ID：&#123;&#125;&quot;, correlationData.getId() );</span><br><span class="line">                // 重发消息</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, ex -&gt; &#123;   //失败回调</span><br><span class="line">            //记录日志</span><br><span class="line">            log.error( &quot;消息发送失败！&quot;, ex );</span><br><span class="line">        &#125;);</span><br><span class="line">        // 2.发送消息</span><br><span class="line">        rabbitTemplate.convertAndSend(&quot;amq.topic&quot;, &quot;simple.text&quot;, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>测试：</p>
+<p>（给交换机添加绑定关系，这一步看情况做，如果绑定关系已经有的了的表不需要这一步）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/467fcbdbb5a44297aa42c52fdb8e1baf~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>测试错误例子</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2a8933eca3e4ec7ade295c93c9ad222~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>4.总结</strong></p>
+<p><strong>SpringAMQP中处理消息确认的几种情况：</strong></p>
+<p><strong>publisher-comfirm：</strong></p>
+<p>• 消息成功发送到exchange，返回ack</p>
+<p>• 消息发送失败，没有到达交换机，返回nack</p>
+<p>• 消息发送过程中出现异常，没有收到回执</p>
+<p><strong>消息成功发送到exchange，但没有路由到queue，调用ReturnCallback</strong></p>
+<p>​       </p>
+<h1 id="二、消息持久化"><a href="#二、消息持久化" class="headerlink" title="二、消息持久化"></a>二、消息持久化</h1><p>MQ默认的是内存存储，如果mq发生了宕机，数据是可能丢失。如果要想数据安全，就要做到持久化，也就是能将数据写进磁盘里</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/82eff0c6db2c4e1da180b1e059bd4b3c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb553ed03d294385affcf50f0427df5a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><p>交换机和队列持久化 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.mq.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.amqp.core.*;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class CommonConfig &#123;</span><br><span class="line"></span><br><span class="line">    // 交换机持久化</span><br><span class="line">    @Bean</span><br><span class="line">    public DirectExchange simpleDirect() &#123;</span><br><span class="line">        // 三个参数：                            交换机名称、      是否持久化、 当没有queue与其绑定时是否自动删除</span><br><span class="line">        return new DirectExchange( &quot;simple.direct&quot;, true, false );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 队列持久化</span><br><span class="line">    @Bean</span><br><span class="line">    public Queue simpleQueue() &#123;</span><br><span class="line">        // 使用QueueBuilder构建队列，durable就是持久化的   nonDurable()非持久化的</span><br><span class="line">        return QueueBuilder.durable( &quot;simple.queue&quot; ).build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 交换机、队列持久了，但并不代表消息就能持久了，所以必须做消息持久化</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66f17c8189b145d190787baebca25d49~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 1.准备消息   MessageDeliveryMode.PERSISTENT 消息持久化，这样重启mq消息也可以保留</span><br><span class="line">        Message message =  MessageBuilder.withBody( &quot;hello, spring&quot;.getBytes(StandardCharsets.UTF_8) )</span><br><span class="line">                .setDeliveryMode( MessageDeliveryMode.PERSISTENT )</span><br><span class="line">                .build();</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>交换机 和 队列 创建 以及 发送消息 的源码其实默认的就是 持久化 的</strong></p>
+<p><strong>而之所以学，是因为我们有时候为了提高性能，便可以将一些非必要的设置为 非持久化</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/87c46b7545ef43dcb468372b93620180~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b32741e57ce240bd8761e095794c2193~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="三、消费者消息确认"><a href="#三、消费者消息确认" class="headerlink" title="三、消费者消息确认"></a>三、消费者消息确认</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fad642f6fcf4ab9b966cef09c4b3445~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>测试 auto：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e2e1291b6a64428d87c95da9ef5016f4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>进入simple.queue生产一条消息 </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94c067caf9eb425d8c4de611b67a865b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>填写 消息并发送</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a08671d0cb84bf29df8fd390436d54b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 刷新</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ef90187423a43648814b93947f13ac1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a2bbbd542374023830cdc420f643ac0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 当消费者出现异常后，消息会不断requeue（重新入队）到队列，再重新发送给消费者，然后再次异常，再次requeue，无限循环，导致mq的消息处理飙升，带来不必要的压力：<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f6cdddbe6e854216b3a503de4280709b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> auto模式 这种情况下，虽然也不好，mq一直在尝试，但是至少消息不会丢失，</p>
+<p>auto的这种遇到处理失败后一直投递再投递，这种处理方式不太友好，但是可以改的，看<strong>四、失败重试机制</strong></p>
+<h1 id="四、失败重试机制"><a href="#四、失败重试机制" class="headerlink" title="四、失败重试机制"></a>四、失败重试机制</h1><h1 id="-1"><a href="#-1" class="headerlink" title></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6111acbe4a3e4f06a3855f43490dfa68~tplv-k3u1fbpfcp-zoom-1.image"></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba41987a46c8400e8ab03b2c2504eb2d~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3201199944734eaeb90e58883dc1a6ff~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 重试次数耗尽之后，其实会返回一个reject拒绝，然后就会把消息丢弃，<strong>这是重试机制的默认策略</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6e70936b61b43e6bc7e35afaee51c62~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 重试次数耗尽之后，会把消息丢弃，事实上丢弃也没事，因为已经重试了那么多次了，还是次失败的，即便把消息再丢回给mq，mq再投递给你，也还是会失败。</p>
+<p>那么除了丢弃，还有没有其它的策略呢？有的…</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e2fd1adaeb342e1bfa9663c7efad8b2~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 这种方案是最健康的方案了，也建议在生产环境下 使用这种方案</p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc1f72677ca147068b7be687d1ba882d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.mq.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.amqp.core.Binding;</span><br><span class="line">import org.springframework.amqp.core.BindingBuilder;</span><br><span class="line">import org.springframework.amqp.core.DirectExchange;</span><br><span class="line">import org.springframework.amqp.core.Queue;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.amqp.rabbit.retry.MessageRecoverer;</span><br><span class="line">import org.springframework.amqp.rabbit.retry.RepublishMessageRecoverer;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class ErrormessageConfig &#123;</span><br><span class="line"></span><br><span class="line">    //首先，定义接收失败消息的交换机、队列及其绑定关系：</span><br><span class="line">    @Bean</span><br><span class="line">    public DirectExchange errorMessageExchange() &#123;</span><br><span class="line">        return new DirectExchange( &quot;error.direct&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public Queue errorQueue() &#123;</span><br><span class="line">        return new Queue( &quot;error.queue&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public Binding errorMessageBinding() &#123;</span><br><span class="line">        return BindingBuilder.bind( errorQueue() ).to( errorMessageExchange() ).with( &quot;errpr&quot; );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //定义RepublishMessageRecoverer 会 覆盖spring默认的默bean (我们想覆盖spring默认的bean，重新定义一个bean即可)</span><br><span class="line">    @Bean</span><br><span class="line">    public MessageRecoverer republishMessageRecoverer( RabbitTemplate rabbitTemplate ) &#123;</span><br><span class="line">        return new RepublishMessageRecoverer( rabbitTemplate,  &quot;error.direct&quot;, &quot;error&quot; );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7188c75381374c40869984b806ae0369~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60d536df891f4153a02300de3ea88a63~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9720db6dd8c14a87b2b82299baaeb1d3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/631d7785be334e069f5d327a1db94a2a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" data-id="cla9vv55e000c7gv6crxy6ngl" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-博客相关/hexo上图片路径显示问题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T10:21:28.782Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/">hexo博客上的图片路径问题解决方法</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2/">hexo博客</a>,<a class="article-category-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/">解决问题</a>
+  </div>
+
           
               
 
@@ -294,16 +470,43 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
-<li>RestTemplate</li>
+<li>通过下面命令下载插件:</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/58949f8334f5">Spring之RestTemplate详解 - 简书 (jianshu.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-marked</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/../../images/image-20221107182147634.png" alt="image-20221107182147634"></p>
+<ol start="2">
+<li>在自己的博客的source路劲下新建一个images文件夹</li>
+</ol>
+<p><img src="/../../images/image-20221107182334417.png" alt="image-20221107182334417"></p>
+<ol start="3">
+<li>在typora，进入到 文件–&gt;偏好设置–&gt;图像，然后选择复制到指定路径，选到上面新建的images文件夹路径，勾选下面红框的选项</li>
+</ol>
+<p><img src="/../../images/image-20221107182509496.png" alt="image-20221107182509496"></p>
+<ol start="4">
+<li><p>修改你博客的配置文件**_config.yml**</p>
+<ol>
+<li><p>修改配置：<img src="/../../images/image-20221107183227789.png" alt="image-20221107183227789"></p>
+</li>
+<li><p>添加上下面语句：<img src="/../../images/image-20221107183236670.png" alt="image-20221107183236670"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>之后，你每次复制图片过来，图片路径就是相对路径了<img src="/../../images/image-20221107182744468.png" alt="image-20221107182744468"></p>
+<p>当然，对于网络位置的图片回自动是网络上的图片链接，这种图片在博客上是完全没问题的，比如：</p>
+<p><img src="/../../images/image-20221107182938178.png" alt="image-20221107182938178"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cla7t4n5c004iw0v6fkpndvbu" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" data-id="cla9vv56g002w7gv608q25dg6" class="article-share-link">分享</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2/" rel="tag">hexo博客</a></li></ul>
+
     </footer>
   </div>
   
@@ -313,12 +516,12 @@
 
 
   
-    <article id="post-关键字/java关键字" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-elasticsearch/mapping索引属性 &amp; 创建索的操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.833Z" itemprop="datePublished">
+    <a href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:33:17.980Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">07</span>
   </time>
 </a>
    
@@ -330,134 +533,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/">java关键字</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>transient表示当加序列化时，不会被序列化</p>
-<p><img src="/.com//Users\其然乐衣Letitbe\AppData\Roaming\Typora\typora-user-images\image-20221010191347950.png" alt="image-20221010191347950"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="cla7t4n4o0029w0v69wy58zej" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-刷题笔记/方法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.821Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/">java刷题笔记</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Java的split方法使用多种分隔符切分字符串"><a href="#1-Java的split方法使用多种分隔符切分字符串" class="headerlink" title="1. Java的split方法使用多种分隔符切分字符串"></a>1. Java的split方法使用多种分隔符切分字符串</h1><p><strong>方法一：</strong><br>多个分隔符使用**’|’**分开，例如：</p>
-<pre><code>      String str = &quot;abc;123,456?999|haha&quot;;
-      String[] strs=str.split(&quot;;|,&quot;);
-      for(String s : strs)&#123;
-          System.out.println(s);
-      &#125;
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">123</span><br><span class="line">456?999|haha</span><br></pre></td></tr></table></figure>
-
-<p><strong>方法二：</strong><br>使用中括号括起来**[“…”]**，例如:</p>
-<pre><code>    String str = &quot;abc;123,456?999|haha&quot;;
-    String[] strs = str.split(&quot;[;,?|25]&quot;);
-    for(String s : strs)&#123;
-        System.out.println(s);
-    &#125;
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">6</span><br><span class="line">999</span><br><span class="line">haha</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E6%96%B9%E6%B3%95/" data-id="cla7t4n4r002fw0v62ne03juk" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-elasticsearch/索引库中的文档操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.243Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/">索引库中的文档的操作</a>
+      <a class="article-title" href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/">mapping索引属性 &amp; 创建索的操作</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
   </div>
 
           
@@ -469,23 +552,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="索引库中的文档的操作"><a href="#索引库中的文档的操作" class="headerlink" title="索引库中的文档的操作"></a>索引库中的文档的操作</h1><p><img src="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/41a470384f02452a8565ca97a2681702.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/264b09d6e2a94a8a87ac5527907b8c25.png" alt="img"><img src="https://img-blog.csdnimg.cn/9839abedff6b41709b41fdbf1d021320.png" alt="img"></p>
+        <p><strong>概念对比</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="一-mapping索引属性"><a href="#一-mapping索引属性" class="headerlink" title="一. mapping索引属性"></a>一. mapping索引属性</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d5c03e735ed4dcd83fba915c066cdb3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二-索引库的操作"><a href="#二-索引库的操作" class="headerlink" title="二. 索引库的操作"></a>二. 索引库的操作</h1><h2 id="1-创建索引库"><a href="#1-创建索引库" class="headerlink" title="1. 创建索引库"></a>1. 创建索引库</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8c0a579dbdb483a84a112d0f1e0db78~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe320ace6ee740d3b1c269b71a2becad~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#创建索引库</span><br><span class="line">PUT /heima</span><br><span class="line">&#123;</span><br><span class="line">  &quot;mappings&quot;: &#123;</span><br><span class="line">    &quot;properties&quot;: &#123;</span><br><span class="line">      &quot;info&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">        &quot;analyzer&quot;: &quot;ik_smart&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;email&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;keyword&quot;,</span><br><span class="line">        &quot;index&quot;: false</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;name&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;object&quot;,</span><br><span class="line">        &quot;properties&quot;: &#123;</span><br><span class="line">          &quot;firstname&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;keyword&quot;</span><br><span class="line">          &#125;,</span><br><span class="line">          &quot;lastname&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;keyword&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f29631d07cc4265b1c347cea62657f9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="2-索引库的其他操作（查看，删除，修改（只能添加新的字段））："><a href="#2-索引库的其他操作（查看，删除，修改（只能添加新的字段））：" class="headerlink" title="2. 索引库的其他操作（查看，删除，修改（只能添加新的字段））："></a>2. 索引库的其他操作（<strong>查看，删除，修改（只能添加新的字段</strong>））：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a19018b3b804d24875641aba2283dfe~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9adc29f8d9a74cfebce28a884ff52f8f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>ps:索引库创建好后</p>
+<pre><code>    理论上是可以进行修改的
+
+    但是实际开发中，是**禁止去修改**原有的字段的（**但可以添加新的字段**），因为修改会**对性能的影响是很大**的，可能会导致整个库都不可用
+</code></pre>
+<p>​        </p>
 <p>（实例）代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 插入文档</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zy@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 查询文档</span><br><span class="line">GET /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除文档</span><br><span class="line">DELETE /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式1：全量修改文档，如果存在则删除旧的，新的覆盖旧的，如果原先没有，则新增该文档（所以放修改方式相当于也是一种插入文档的方法）</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zhaoyun@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式2: 局部修改文档字段</span><br><span class="line">POST /heima/_update/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;doc&quot;:&#123;</span><br><span class="line">    &quot;email&quot;: &quot;ZY@itcast.cn&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 查询</span><br><span class="line">GET /heima</span><br><span class="line"></span><br><span class="line"># 修改索引库，添加新字段</span><br><span class="line">PUT /heima/_mapping</span><br><span class="line">&#123;</span><br><span class="line">  &quot;properties&quot;: &#123;</span><br><span class="line">    &quot;age&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;integer&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 删除</span><br><span class="line">DELETE /heima</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>运行截图：</p>
-<p><img src="https://img-blog.csdnimg.cn/069e55bbd4ec47308b0147aa38adab91.png" alt="img"><img src="https://img-blog.csdnimg.cn/6e1212cd2f794a579424363b32fb9adc.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/640be243e52d45a18b47ef5dfe0b3095.png" alt="img"><img src="https://img-blog.csdnimg.cn/4aa5f5fd7ce74a6a814f9338b68beae5.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e7ddbb1bb05f40078872f81abe3e60c9.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/06615bad2d7942acb41706e51cc56bdc.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="cla7t4n400010w0v6fhu4dptt" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="cla9vv561001u7gv6ez5620tf" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -499,12 +590,12 @@
 
 
   
-    <article id="post-elasticsearch/RestClient查询文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-elasticsearch/RestClient操作索引库-初始化RestClient" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.239Z" itemprop="datePublished">
+    <a href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:32:05.788Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">07</span>
   </time>
 </a>
    
@@ -516,7 +607,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">RestClient查询文档</a>
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/">RestClient操作索引库-初始化RestClient</a>
     </h1>
   
 
@@ -535,25 +626,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="快速入门："><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h1><p><img src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<h1 id="match-all查询："><a href="#match-all查询：" class="headerlink" title="match_all查询："></a>match_all查询：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//match_all查询</span><br><span class="line">    @Test</span><br><span class="line">    void testMatchAll() throws IOException &#123;</span><br><span class="line">        String index  = &quot;tb_disable_date_diary&quot;;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(index);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //解析响应</span><br><span class="line">        handleResponce(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //解析响应</span><br><span class="line">    private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数据</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            Diary diary = JSON.parseObject(json,Diary.class);</span><br><span class="line">            System.out.println(&quot;diary = &quot;+diary);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <p>1.引入es的RestHighLevelClient依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--elasticsearch--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;7.12.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/48392c3346d746448e7109a3c8d960c0.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//分页和排序</span><br><span class="line">   @Test</span><br><span class="line">   void restPageAndSort() throws IOException &#123;</span><br><span class="line">       //页码，每页大小</span><br><span class="line">       int page = 2,size = 5;</span><br><span class="line"></span><br><span class="line">       //1.准备Request</span><br><span class="line">       SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">       //2.准备DSL</span><br><span class="line">       //2.1 query</span><br><span class="line">       request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">       //2.2 排序 sort</span><br><span class="line">       request.source().sort(&quot;price&quot;, SortOrder.ASC);</span><br><span class="line">       //2.3 分页from，size</span><br><span class="line">       request.source().from((page - 1) * size).size(5);</span><br><span class="line"></span><br><span class="line">       //3.发送请求</span><br><span class="line">       SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">       handleResponce(response);</span><br><span class="line"></span><br><span class="line">       System.out.println(response);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">       //4.解析响应</span><br><span class="line">       SearchHits searchHits = response.getHits();</span><br><span class="line">       //4.1获取总条数</span><br><span class="line">       long total = searchHits.getTotalHits().value;</span><br><span class="line">       System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">       //4.2文档数据</span><br><span class="line">       SearchHit[] hits = searchHits.getHits();</span><br><span class="line">       //4.3遍历</span><br><span class="line">       for(SearchHit hit : hits)&#123;</span><br><span class="line">           //获取文档source</span><br><span class="line">           String json = hit.getSourceAsString();</span><br><span class="line">           //反序列化</span><br><span class="line">           HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">           System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a><strong>高亮</strong></h2><p><img src="https://img-blog.csdnimg.cn/84cfb92b326c4ff18403e7089b76f7a9.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/8b969709155446f48b193ac2e9fa59f7.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//高亮</span><br><span class="line">    @Test</span><br><span class="line">    void testHighlight() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        //2.1 query</span><br><span class="line">        request.source().query(QueryBuilders.matchQuery(&quot;all&quot;,&quot;如家&quot;));</span><br><span class="line">        //2.2 高亮</span><br><span class="line">        request.source().highlighter(new HighlightBuilder().field(&quot;name&quot;).requireFieldMatch(false));</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        handleResponce1(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void handleResponce1(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数组</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line"></span><br><span class="line">            //获取高亮结果</span><br><span class="line">            Map&lt;String, HighlightField&gt; highlightFields = hit.getHighlightFields();</span><br><span class="line">            if(!CollectionUtils.isEmpty(highlightFields))&#123;</span><br><span class="line">                //根据各字段名获取高亮结果</span><br><span class="line">                HighlightField highlightField = highlightFields.get(&quot;name&quot;);</span><br><span class="line">                if(highlightField != null)&#123;</span><br><span class="line">                    //获取高亮</span><br><span class="line">                    String name = highlightField.getFragments()[0].string();</span><br><span class="line">                    //覆盖非高亮结果</span><br><span class="line">                    hotelDoc.setName(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/e569b9e6eae2472cb508245fe942dd15.png" alt="img"></p>
+<p>2.因为SpringBoot默认的ES版本是7.6.2，所以我们需要覆盖默认的ES版本： </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>3.初始化RestHighLevelClient：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return new RestHighLevelClient(RestClient.builder(</span><br><span class="line">                HttpHost.create(&quot;http://192.168.150.101:9200&quot;)</span><br><span class="line">));</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef0bee698bbd4d65a9ae016cd3db8af6~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="cla7t4n3u000ow0v62b2g0pai" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="cla9vv55y001o7gv6cv543jwc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -567,12 +657,12 @@
 
 
   
-    <article id="post-elasticsearch/javaRestClient操作索引库和文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-elasticsearch/RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.233Z" itemprop="datePublished">
+    <a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:29:24.978Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">07</span>
   </time>
 </a>
    
@@ -584,7 +674,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/">javaRestClient操作索引库和文档</a>
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/">RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）</a>
     </h1>
   
 
@@ -603,39 +693,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-创建索引库："><a href="#1-创建索引库：" class="headerlink" title="1. 创建索引库："></a><strong>1. 创建索引库：</strong></h1><p><img src="https://img-blog.csdnimg.cn/0fb9368cceef43ddbd2bb17ed8d24088.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//创建索引库</span><br><span class="line">   @Test</span><br><span class="line">   void createHotelIndex() throws IOException &#123;</span><br><span class="line">       //1.创建Request对象</span><br><span class="line">       CreateIndexRequest request = new CreateIndexRequest(&quot;hotel&quot;);</span><br><span class="line">       //2.准备请求的参数：DSL语句</span><br><span class="line">       request.source(MAPPING_TEMPLATE, XContentType.JSON);</span><br><span class="line">       //3.发送请求</span><br><span class="line">       client.indices().create(request,RequestOptions.DEFAULT);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="一、RestAPI实现自动补全查询（代码讲解）"><a href="#一、RestAPI实现自动补全查询（代码讲解）" class="headerlink" title="一、RestAPI实现自动补全查询（代码讲解） "></a><strong>一、RestAPI实现自动补全查询（代码讲解）</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/691a87ed40d74802b9a828ac3e6d9143~tplv-k3u1fbpfcp-zoom-1.image"></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9c9b7ccedcac4942bf81110db9feb355~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/11c56098294b43ef8f5d0e973ba0f217~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b93f6065a15a48209cd50596642890b6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">    @Autowired</span><br><span class="line">    private RestHighLevelClient client;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void testSuggestion() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                &quot;suggestions&quot;,</span><br><span class="line">                SuggestBuilders.completionSuggestion(&quot;suggestion&quot;)</span><br><span class="line">                        .prefix(&quot;hm&quot;)</span><br><span class="line">                        .skipDuplicates(true)</span><br><span class="line">                        .size(10)</span><br><span class="line">        ));</span><br><span class="line">        //3.发起请求</span><br><span class="line">        SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //4.解析结果</span><br><span class="line">        Suggest suggest = response.getSuggest();</span><br><span class="line">        //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">        CompletionSuggestion suggestions = suggest.getSuggestion(&quot;suggestions&quot;);</span><br><span class="line">        //4,2 获取options</span><br><span class="line">        List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        for( CompletionSuggestion.Entry.Option option : options)&#123;</span><br><span class="line">            String text = option.getText().toString();</span><br><span class="line">            System.out.println(text);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">//        System.out.println(response);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public static final String MAPPING_TEMPLATE = &quot;&#123;\n&quot; +</span><br><span class="line">            &quot;  \&quot;mappings\&quot;: &#123;\n&quot; +</span><br><span class="line">            &quot;    \&quot;properties\&quot;: &#123;\n&quot; +</span><br><span class="line">            &quot;      \&quot;id\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;name\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;text\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;analyzer\&quot;: \&quot;ik_max_word\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;address\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;index\&quot;:\&quot;false\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;price\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;integer\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;score\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;integer\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;brand\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;city\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;starName\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;business\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;location\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;geo_point\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;pic\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;index\&quot;:false\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;all\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;text\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;analyzer\&quot;: \&quot;ik_max_word\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;\n&quot; +</span><br><span class="line">            &quot;    &#125;\n&quot; +</span><br><span class="line">            &quot;  &#125;\n&quot; +</span><br><span class="line">            &quot;&#125;&quot;;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/18a3d3fc162e4e2ab8f61c956df60776.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/feb2d88bfe144638b243e9d89a0d7392.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/ad59b410007345dc967234c73e5ba534.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<h2 id="2-删除索引库："><a href="#2-删除索引库：" class="headerlink" title="2. 删除索引库："></a>2. 删除索引库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//删除索引库</span><br><span class="line">    @Test</span><br><span class="line">    void textDeleteHotelIndex() throws IOException &#123;</span><br><span class="line">        //1.创建Request对象</span><br><span class="line">        DeleteIndexRequest request = new DeleteIndexRequest(&quot;hotel&quot;);</span><br><span class="line"></span><br><span class="line">        //2.发送请求</span><br><span class="line">        client.indices().delete(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<p> @Autowired<br>    private RestHighLevelClient client;</p>
+<p>要在项目启动方法里面注入到bean里</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f87a3158ddd345dd91aef1107db73bbd~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二、以下进行黑马旅游网的案例实现自动补全功能："><a href="#二、以下进行黑马旅游网的案例实现自动补全功能：" class="headerlink" title="二、以下进行黑马旅游网的案例实现自动补全功能："></a>二、以下进行黑马旅游网的案例实现自动补全功能：</h1><p>开始时，输入x，不能自动补全</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa557cad6c04bf59cc42408b716f3aa~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>RestAPI实现自动补全：</p>
+<h2 id="（1）在controller层写好接口"><a href="#（1）在controller层写好接口" class="headerlink" title="（1）在controller层写好接口"></a>（1）在controller层写好接口</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e106fbadcc474ebab6cece2e59aa5f68~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;suggestion&quot;)</span><br><span class="line">    public List&lt;String&gt; getSuggestions(@RequestParam(&quot;key&quot;) String predix)&#123;</span><br><span class="line">        return hotelService.getSuggestions(predix);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="3-旁段是否存在索引库："><a href="#3-旁段是否存在索引库：" class="headerlink" title="3. 旁段是否存在索引库："></a>3. 旁段是否存在索引库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//判断是否存在索引库</span><br><span class="line">   @Test</span><br><span class="line">   void textExistsHotelIndex() throws IOException &#123;</span><br><span class="line">       //1.创建Request对象</span><br><span class="line">       GetIndexRequest request = new GetIndexRequest(&quot;hotel&quot;);</span><br><span class="line"></span><br><span class="line">       //2.发送请求</span><br><span class="line">       boolean exists = client.indices().exists(request,RequestOptions.DEFAULT);</span><br><span class="line">       System.out.println(exists ? &quot;索引库已经存在！&quot; : &quot;索引库不存在！&quot;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/69ddc8f23003493eb829f87158800d7e.png" alt="img"></p>
-<h2 id="4-修改文档"><a href="#4-修改文档" class="headerlink" title="4. 修改文档"></a>4. 修改文档</h2><p><img src="https://img-blog.csdnimg.cn/fcab1400718748bea29dc7c0466a2437.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//修改文档</span><br><span class="line">    @Test</span><br><span class="line">    void testUpdateDocument() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        UpdateRequest request = new UpdateRequest(&quot;hotel&quot;,&quot;61083&quot;);</span><br><span class="line"></span><br><span class="line">        //2.准备请求参数</span><br><span class="line">        request.doc(</span><br><span class="line">                &quot;price&quot;,&quot;952&quot;,</span><br><span class="line">                &quot;starName&quot;,&quot;四钻&quot;</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        client.update(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="5-查询文档"><a href="#5-查询文档" class="headerlink" title="5. 查询文档"></a>5. 查询文档</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//根据id查询</span><br><span class="line">   @Test</span><br><span class="line">   void testAddDocumentById() throws IOException &#123;</span><br><span class="line"></span><br><span class="line">       //1.准备好request</span><br><span class="line">       GetRequest request = new GetRequest(&quot;hotel&quot;,&quot;61083&quot;);</span><br><span class="line">       //2.发送请求 ，得到响应</span><br><span class="line">       GetResponse response = client.get(request,RequestOptions.DEFAULT);</span><br><span class="line">       //3.解析响应结果</span><br><span class="line">       String json = response.getSourceAsString();</span><br><span class="line"></span><br><span class="line">       HotelDoc hotelDoc= JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">       System.out.println(hotelDoc);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="（2）在service层写好"><a href="#（2）在service层写好" class="headerlink" title="（2）在service层写好"></a>（2）在service层写好</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb71b469d2954c14a6c1bbc199626447~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public List&lt;String&gt; getSuggestions(String predix) &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           //1.准备Request</span><br><span class="line">           SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">           //2.准备DSL</span><br><span class="line">           request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                   &quot;suggestions&quot;,</span><br><span class="line">                   SuggestBuilders.completionSuggestion(&quot;suggestion&quot;)</span><br><span class="line">                           .prefix(predix)</span><br><span class="line">                           .skipDuplicates(true)</span><br><span class="line">                           .size(10)</span><br><span class="line">           ));</span><br><span class="line">           //3.发起请求</span><br><span class="line">           SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">           //4.解析结果</span><br><span class="line">           Suggest suggest = response.getSuggest();</span><br><span class="line">           //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">           CompletionSuggestion suggestions = suggest.getSuggestion(&quot;suggestions&quot;);</span><br><span class="line">           //4,2 获取options</span><br><span class="line">           List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">           //4.3 遍历</span><br><span class="line">           List&lt;String&gt; list = new ArrayList&lt;String&gt;(options.size());</span><br><span class="line">           for( CompletionSuggestion.Entry.Option option : options)&#123;</span><br><span class="line">               String text = option.getText().toString();</span><br><span class="line">               System.out.println(text);</span><br><span class="line">               list.add(text);</span><br><span class="line">           &#125;</span><br><span class="line">           return list;</span><br><span class="line">       &#125; catch (IOException e) &#123;</span><br><span class="line">           throw  new RuntimeException();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="6-批量添加文档"><a href="#6-批量添加文档" class="headerlink" title="6. 批量添加文档"></a>6. 批量添加文档</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//批量添加</span><br><span class="line">    @Test</span><br><span class="line">    void testBulkRequest() throws IOException &#123;</span><br><span class="line">        //批量查询酒店的数量</span><br><span class="line">        List&lt;Hotel&gt; hotels = new hotelService.list();</span><br><span class="line"></span><br><span class="line">        for(Hotel hotel : hotels)&#123;</span><br><span class="line">            HotelDoc hotelDoc = new HotelDoc(hotel);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //1.创建Request</span><br><span class="line">        BulkRequest request = new BulkRequest();</span><br><span class="line">        //2.准备参数，添加多个新增的Request</span><br><span class="line">        for(Hotel hotel : hotels)&#123;</span><br><span class="line">            //转换为文档类型的HotelDoc</span><br><span class="line">            HotelDoc hotelDoc = new HotelDoc(hotel);</span><br><span class="line">            //创建新增文档的Request对象</span><br><span class="line">            request.add(new IndexRequest(&quot;hotel&quot;)</span><br><span class="line">                    .id(hotelDoc.getId().toString())</span><br><span class="line">                    .source(JSON.toJSONString(hotelDoc),XContentType.JSON));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        client.bulk(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/8611bf94e9a9441a8a2eda88060392a2.png" alt="img"></p>
+<h2 id="3-重新启动项目"><a href="#3-重新启动项目" class="headerlink" title="(3)重新启动项目"></a>(3)重新启动项目</h2><p>便可以进行自动补全了</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec50f82380f64659a212c21acf7788e9~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="cla7t4n3x000uw0v64gze4hid" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" data-id="cla9vv55u001i7gv6htefamk5" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -649,12 +735,12 @@
 
 
   
-    <article id="post-elasticsearch/ES聚合分析报错：“reason“ " class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-elasticsearch/设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.229Z" itemprop="datePublished">
+    <a href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:28:24.978Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">07</span>
   </time>
 </a>
    
@@ -666,7 +752,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/">ES聚合分析报错:“reason“</a>
+      <a class="article-title" href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/">设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</a>
     </h1>
   
 
@@ -685,18 +771,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>因为<code>brand</code>的<code>type</code>是<code>text，``text</code>或<code>annotated_text</code>字段<code>doc_values</code>默认为<code>false</code>。</p>
-<p>简单理解，就是<code>text</code>字段作为一个整体，默认没有索引。</p>
-<p><img src="https://img-blog.csdnimg.cn/7167950f76224359bedc252c4fb816da.png" alt="img"></p>
-<p> 解释：</p>
-<p>​    因为brand的type是<strong>text</strong>，<strong>text</strong>或<strong>annotated_text</strong>字段doc_values默认为false。简单理解，就是text字段作为一个整体，默认没有索引。</p>
-<p>​    不过text分词之后的keyword是有索引的，因而可以对brand.keyword进行聚合。如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/642629de221a4b4abbc09b979c654f63.png" alt="img"></p>
+        <h2 id="设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去"><a href="#设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去" class="headerlink" title="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去"></a><strong>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="若business有多个值，可进行切割"><a href="#若business有多个值，可进行切割" class="headerlink" title="若business有多个值，可进行切割"></a><strong>若business有多个值，可进行切割</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="进行切割"><a href="#进行切割" class="headerlink" title="进行切割"></a><strong>进行切割</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains(&quot;/&quot;))&#123;</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split(&quot;/&quot;);</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       &#125;else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>切割成功</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="cla7t4n3j000dw0v61sbg5rjq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="cla9vv56400237gv66ra4bz65" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/DSL实现自动补全查询" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:26:59.320Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/">DSL实现自动补全查询</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>elasticsearch提供了<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.6/search-suggesters.html" title="Completion Suggester">Completion Suggester</a>查询来实现自动补全功能。这个查询会匹配以用户输入内容开头的词条并返回。为了提高补全查询的效率，对于文档中字段的类型有一些约束：</p>
+<p>• 参与补全查询的字段必须是<strong>completion</strong>类型。</p>
+<pre><code>   • 字段的内容一般是用来补全的多个词条形成的**数组**。
+</code></pre>
+<p>查询语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 自动补全查询</span><br><span class="line">GET /test/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;suggest&quot;: &#123;</span><br><span class="line">    &quot;title_suggest&quot;: &#123;</span><br><span class="line">      &quot;text&quot;: &quot;s&quot;, // 关键字</span><br><span class="line">      &quot;completion&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;title&quot;, // 补全查询的字段</span><br><span class="line">        &quot;skip_duplicates&quot;: true, // 跳过重复的</span><br><span class="line">        &quot;size&quot;: 10 // 获取前10条结果</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>测试：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebc7c2dd979d46109816b3b5e157e466~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="cla9vv55r00187gv68srp6suq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -713,7 +864,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -758,9 +909,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>33</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>16</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>11</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>48</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>24</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>19</strong><br>标签</div></a>
     </div>
 
 
