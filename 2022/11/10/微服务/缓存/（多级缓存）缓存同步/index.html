@@ -5,12 +5,12 @@
   
   <title>（多级缓存）缓存同步 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对应的教程视频： 高级篇Day4-04-缓存同步_哔哩哔哩_bilibili  一、数据同步策略缓存数据同步的常见方式有三种： •设置有效期：给缓存设置有效期，到期后自动删除。再次查询时更新 •优势：简单、方便 •缺点：时效性差，缓存过期之前可能不一致 •场景：更新频率较低，时效性要求低的业务 •同步双写：在修改数据库的同时，直接修改缓存 •优势：时效性强，缓存与数据库强一致 •缺点：有代码侵入，">
+  <meta name="description" content="对应的教程视频：  高级篇Day4-04-缓存同步_哔哩哔哩_bilibili   一、数据同步策略 缓存数据同步的常见方式有三种： •设置有效期：给缓存设置有效期，到期后自动删除。再次查询时更新 •优势：简单、方便 •缺点：时效性差，缓存过期之前可能不一致 •场景：更新频率较低，时效性要求低的业务 •同步双写：在修改数据库的同时，直接修改缓存 •优势：时效性强，缓存与数据库强一致 •缺点：有代">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（多级缓存）缓存同步">
 <meta property="og:url" content="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="对应的教程视频： 高级篇Day4-04-缓存同步_哔哩哔哩_bilibili  一、数据同步策略缓存数据同步的常见方式有三种： •设置有效期：给缓存设置有效期，到期后自动删除。再次查询时更新 •优势：简单、方便 •缺点：时效性差，缓存过期之前可能不一致 •场景：更新频率较低，时效性要求低的业务 •同步双写：在修改数据库的同时，直接修改缓存 •优势：时效性强，缓存与数据库强一致 •缺点：有代码侵入，">
+<meta property="og:description" content="对应的教程视频：  高级篇Day4-04-缓存同步_哔哩哔哩_bilibili   一、数据同步策略 缓存数据同步的常见方式有三种： •设置有效期：给缓存设置有效期，到期后自动删除。再次查询时更新 •优势：简单、方便 •缺点：时效性差，缓存过期之前可能不一致 •场景：更新频率较低，时效性要求低的业务 •同步双写：在修改数据库的同时，直接修改缓存 •优势：时效性强，缓存与数据库强一致 •缺点：有代">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/bda8a839d8e3410aac0f850fcb0e4217.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2a9abda92ecf43fbbe6d8bf07a0feedb.png">
@@ -124,10 +124,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=157&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-04-缓存同步_哔哩哔哩_bilibili</a></p>
+        <h1 id="对应的教程视频"><a class="markdownIt-Anchor" href="#对应的教程视频"></a> 对应的教程视频：</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=157&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-04-缓存同步_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="一、数据同步策略"><a href="#一、数据同步策略" class="headerlink" title="一、数据同步策略"></a>一、数据同步策略</h1><p>缓存数据同步的常见方式有三种：</p>
+<h1 id="一-数据同步策略"><a class="markdownIt-Anchor" href="#一-数据同步策略"></a> 一、数据同步策略</h1>
+<p>缓存数据同步的常见方式有三种：</p>
 <p>•<strong>设置有效期</strong>：给缓存设置有效期，到期后自动删除。再次查询时更新</p>
 <p>•优势：简单、方便</p>
 <p>•缺点：时效性差，缓存过期之前可能不一致</p>
@@ -136,26 +138,27 @@
 <p>•优势：时效性强，缓存与数据库强一致</p>
 <p>•缺点：有代码侵入，耦合度高；</p>
 <p>•场景：对一致性、时效性要求较高的缓存数据</p>
-<p>•<strong>异步通知：</strong>修改数据库时发送事件通知，相关服务监听到通知后修改缓存数据</p>
+<p>•**异步通知：**修改数据库时发送事件通知，相关服务监听到通知后修改缓存数据</p>
 <p>•优势：低耦合，可以同时通知多个缓存服务</p>
 <p>•缺点：时效性一般，可能存在中间不一致状态</p>
 <p>•场景：时效性要求一般，有多个服务需要同步</p>
 <p><img src="https://img-blog.csdnimg.cn/bda8a839d8e3410aac0f850fcb0e4217.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/2a9abda92ecf43fbbe6d8bf07a0feedb.png" alt="img"></p>
-<h1 id="二、安装和配置Canal"><a href="#二、安装和配置Canal" class="headerlink" title="二、安装和配置Canal"></a>二、安装和配置Canal</h1><p><img src="https://img-blog.csdnimg.cn/e5131fff2fce4439be9a99a20f4dc213.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/2a9abda92ecf43fbbe6d8bf07a0feedb.png" alt="img"></p>
+<h1 id="二-安装和配置canal"><a class="markdownIt-Anchor" href="#二-安装和配置canal"></a> 二、安装和配置Canal</h1>
+<p><img src="https://img-blog.csdnimg.cn/e5131fff2fce4439be9a99a20f4dc213.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/25de1e7f4dc44d5db4105d32df986638.png" alt="img"></p>
 <p>下面我们就开启mysql的主从同步机制，让Canal来模拟salve</p>
-<h1 id="1-开启MySQL主从"><a href="#1-开启MySQL主从" class="headerlink" title="1.开启MySQL主从"></a>1.开启MySQL主从</h1><p>Canal是基于MySQL的主从同步功能，因此必须先开启MySQL的主从功能才可以。</p>
+<h1 id="1开启mysql主从"><a class="markdownIt-Anchor" href="#1开启mysql主从"></a> 1.开启MySQL主从</h1>
+<p>Canal是基于MySQL的主从同步功能，因此必须先开启MySQL的主从功能才可以。</p>
 <p>这里以之前用Docker运行的mysql为例：</p>
-<h2 id="1-1-开启binlog"><a href="#1-1-开启binlog" class="headerlink" title="1.1.开启binlog"></a>1.1.开启binlog</h2><p>打开mysql容器挂载的日志文件，我的在<code>/tmp/mysql/conf</code>目录:</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7I8WMYyf-1662205186188)(assets&#x2F;image-20210813153241537.png)]</p>
+<h2 id="11开启binlog"><a class="markdownIt-Anchor" href="#11开启binlog"></a> 1.1.开启binlog</h2>
+<p>打开mysql容器挂载的日志文件，我的在<code>/tmp/mysql/conf</code>目录:</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7I8WMYyf-1662205186188)(assets/image-20210813153241537.png)]</p>
 <p>修改文件：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /tmp/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>添加内容：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">binlog-do-db=heima</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>配置解读：</p>
 <ul>
@@ -164,38 +167,32 @@
 </ul>
 <p>最终效果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-name-resolve</span><br><span class="line">character_set_server=utf8</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">server-id=1000</span><br><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">binlog-do-db=heima</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="1-2-设置用户权限"><a href="#1-2-设置用户权限" class="headerlink" title="1.2.设置用户权限"></a>1.2.设置用户权限</h2><p>接下来添加一个仅用于数据同步的账户，出于安全考虑，这里仅提供对heima这个库的操作权限。</p>
+<h2 id="12设置用户权限"><a class="markdownIt-Anchor" href="#12设置用户权限"></a> 1.2.设置用户权限</h2>
+<p>接下来添加一个仅用于数据同步的账户，出于安全考虑，这里仅提供对heima这个库的操作权限。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create user canal@&#x27;%&#x27; IDENTIFIED by &#x27;canal&#x27;;</span><br><span class="line">GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT,SUPER ON *.* TO &#x27;canal&#x27;@&#x27;%&#x27; identified by &#x27;canal&#x27;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>重启mysql容器即可</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart mysql</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>测试设置是否成功：在mysql控制台，或者Navicat中，输入命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2-安装Canal"><a href="#2-安装Canal" class="headerlink" title="2.安装Canal"></a>2.安装Canal</h1><h2 id="2-1-创建网络"><a href="#2-1-创建网络" class="headerlink" title="2.1.创建网络"></a>2.1.创建网络</h2><p>我们需要创建一个网络，将MySQL、Canal、MQ放到同一个Docker网络中：</p>
+<h1 id="2安装canal"><a class="markdownIt-Anchor" href="#2安装canal"></a> 2.安装Canal</h1>
+<h2 id="21创建网络"><a class="markdownIt-Anchor" href="#21创建网络"></a> 2.1.创建网络</h2>
+<p>我们需要创建一个网络，将MySQL、Canal、MQ放到同一个Docker网络中：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create heima</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>让mysql加入这个网络：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network connect heima mysql</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="2-3-安装Canal"><a href="#2-3-安装Canal" class="headerlink" title="2.3.安装Canal"></a>2.3.安装Canal</h2><p>课前资料中提供了canal的镜像压缩包:</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-FvuASqcG-1662205186198)(assets&#x2F;image-20210813161804292.png)]</p>
+<h2 id="23安装canal"><a class="markdownIt-Anchor" href="#23安装canal"></a> 2.3.安装Canal</h2>
+<p>课前资料中提供了canal的镜像压缩包:</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-FvuASqcG-1662205186198)(assets/image-20210813161804292.png)]</p>
 <p>大家可以上传到虚拟机，然后通过命令导入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i canal.tar</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>然后运行命令创建Canal容器：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 11111:11111 --name canal \</span><br><span class="line">-e canal.destinations=heima \</span><br><span class="line">-e canal.instance.master.address=mysql:3306  \</span><br><span class="line">-e canal.instance.dbUsername=canal  \</span><br><span class="line">-e canal.instance.dbPassword=canal  \</span><br><span class="line">-e canal.instance.connectionCharset=UTF-8 \</span><br><span class="line">-e canal.instance.tsdb.enable=true \</span><br><span class="line">-e canal.instance.gtidon=false  \</span><br><span class="line">-e canal.instance.filter.regex=heima\\..* \</span><br><span class="line">--network heima \</span><br><span class="line">-d canal/canal-server:v1.1.5</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>说明:</p>
 <ul>
@@ -207,18 +204,18 @@
 </ul>
 <p>表名称监听支持的语法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql 数据解析关注的表，Perl正则表达式.</span><br><span class="line">多个正则之间以逗号(,)分隔，转义符需要双斜杠(\\) </span><br><span class="line">常见例子：</span><br><span class="line">1.  所有表：.*   or  .*\\..*</span><br><span class="line">2.  canal schema下所有表： canal\\..*</span><br><span class="line">3.  canal下的以canal打头的表：canal\\.canal.*</span><br><span class="line">4.  canal schema下的一张表：canal.test1</span><br><span class="line">5.  多个规则组合使用然后以逗号隔开：canal\\..*,mysql.test1,mysql.test2 </span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h1 id="三、监听Canal"><a href="#三、监听Canal" class="headerlink" title="三、监听Canal"></a>三、监听Canal</h1><p><img src="https://img-blog.csdnimg.cn/4f4e40a3a2e4469ca7836693c3db991d.png" alt="img"></p>
-<p> Canal提供了各种语言的客户端，当Canal监听到binlog变化时，会通知Canal的客户端。不过这里我们会使用GitHub上的第三方开源的canal-starter。地址：<a target="_blank" rel="noopener" href="https://github.com/NormanGyllenhaal/canal-client">GitHub - NormanGyllenhaal&#x2F;canal-client: spring boot canal starter 易用的canal 客户端 canal client</a></p>
-<p> <img src="https://img-blog.csdnimg.cn/b1b64382430e47e5b2be08b569e2cefa.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/1869924653994a95a7660b76b7823fa7.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/8f6d29940fc84098a92e02339632ff66.png" alt="img"></p>
+<h1 id="三-监听canal"><a class="markdownIt-Anchor" href="#三-监听canal"></a> 三、监听Canal</h1>
+<p><img src="https://img-blog.csdnimg.cn/4f4e40a3a2e4469ca7836693c3db991d.png" alt="img"></p>
+<p>Canal提供了各种语言的客户端，当Canal监听到binlog变化时，会通知Canal的客户端。不过这里我们会使用GitHub上的第三方开源的canal-starter。地址：<a target="_blank" rel="noopener" href="https://github.com/NormanGyllenhaal/canal-client">GitHub - NormanGyllenhaal/canal-client: spring boot canal starter 易用的canal 客户端 canal client</a></p>
+<p><img src="https://img-blog.csdnimg.cn/b1b64382430e47e5b2be08b569e2cefa.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/1869924653994a95a7660b76b7823fa7.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/8f6d29940fc84098a92e02339632ff66.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" data-id="claavrydk00ccssv6ccbo4mmk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" data-id="claavujpn00cg5wv6g4t2hygo" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
