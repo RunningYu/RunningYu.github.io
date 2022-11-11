@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>66</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>29</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>21</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>70</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>23</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,283 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-elasticsearch/设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:28:24.978Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/">设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去"><a href="#设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去" class="headerlink" title="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去"></a><strong>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="若business有多个值，可进行切割"><a href="#若business有多个值，可进行切割" class="headerlink" title="若business有多个值，可进行切割"></a><strong>若business有多个值，可进行切割</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="进行切割"><a href="#进行切割" class="headerlink" title="进行切割"></a><strong>进行切割</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains(&quot;/&quot;))&#123;</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split(&quot;/&quot;);</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       &#125;else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>切割成功</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="claclebyg002hy4v6c0a69xzw" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/DSL实现自动补全查询" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:26:59.320Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/">DSL实现自动补全查询</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>elasticsearch提供了<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.6/search-suggesters.html" title="Completion Suggester">Completion Suggester</a>查询来实现自动补全功能。这个查询会匹配以用户输入内容开头的词条并返回。为了提高补全查询的效率，对于文档中字段的类型有一些约束：</p>
+<p>• 参与补全查询的字段必须是<strong>completion</strong>类型。</p>
+<pre><code>   • 字段的内容一般是用来补全的多个词条形成的**数组**。
+</code></pre>
+<p>查询语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 自动补全查询</span><br><span class="line">GET /test/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;suggest&quot;: &#123;</span><br><span class="line">    &quot;title_suggest&quot;: &#123;</span><br><span class="line">      &quot;text&quot;: &quot;s&quot;, // 关键字</span><br><span class="line">      &quot;completion&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;title&quot;, // 补全查询的字段</span><br><span class="line">        &quot;skip_duplicates&quot;: true, // 跳过重复的</span><br><span class="line">        &quot;size&quot;: 10 // 获取前10条结果</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>测试：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebc7c2dd979d46109816b3b5e157e466~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="clacleby2001ny4v6aiqje9sp" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:24:15.702Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动补全："><a href="#自动补全：" class="headerlink" title="自动补全："></a>自动补全：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-pinyin" title="GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.">GitHub - medcl&#x2F;elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.</a></p>
+<h2 id="用初始化的拼音分词器进行分词："><a href="#用初始化的拼音分词器进行分词：" class="headerlink" title="用初始化的拼音分词器进行分词："></a>用初始化的拼音分词器进行分词：</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20550059a1414aeba684b69474dbd00f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>为了实现得到的分词有中文也有拼音，我门需要</p>
+<h1 id="自定义拼音分词器（中文-拼音）"><a href="#自定义拼音分词器（中文-拼音）" class="headerlink" title="自定义拼音分词器（中文 + 拼音）"></a>自定义拼音分词器（中文 + 拼音）</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54b101fabd25411aada38a0d4bf707f7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97823625e9e74820b861218b2a14d764~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">&#123;</span><br><span class="line">  &quot;settings&quot;: &#123;</span><br><span class="line">    &quot;analysis&quot;: &#123;</span><br><span class="line">      &quot;analyzer&quot;: &#123; </span><br><span class="line">        &quot;my_analyzer&quot;: &#123; </span><br><span class="line">          &quot;tokenizer&quot;: &quot;ik_max_word&quot;,</span><br><span class="line">          &quot;filter&quot;: &quot;py&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;py&quot;: &#123; </span><br><span class="line">          &quot;type&quot;: &quot;pinyin&quot;,</span><br><span class="line">          &quot;keep_full_pinyin&quot;: false,</span><br><span class="line">          &quot;keep_joined_full_pinyin&quot;: true,</span><br><span class="line">          &quot;keep_original&quot;: true,</span><br><span class="line">          &quot;limit_first_letter_length&quot;: 16,</span><br><span class="line">          &quot;remove_duplicated_term&quot;: true,</span><br><span class="line">          &quot;none_chinese_pinyin_tokenize&quot;: false</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;mappings&quot;: &#123;</span><br><span class="line">    &quot;properties&quot;: &#123;</span><br><span class="line">      &quot;name&quot;:&#123;</span><br><span class="line">        &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">        &quot;analyzer&quot;: &quot;my_analyzer&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="测试方式1："><a href="#测试方式1：" class="headerlink" title="测试方式1："></a>测试方式1：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式1</span><br><span class="line">POST /test/_analyze</span><br><span class="line">&#123;</span><br><span class="line">  &quot;text&quot;: [&quot;如家酒店还不错&quot;],</span><br><span class="line">  &quot;analyzer&quot;: &quot;my_analyzer&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段，-后搜索"><a href="#测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段，-后搜索" class="headerlink" title="测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索"></a><strong>测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b83a41a21ac44b8ba1bb160d05dfb0ad~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式2</span><br><span class="line">#先添加两个 拼音相同的 字段， 后搜索</span><br><span class="line">POST /test/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;id&quot;: 1,</span><br><span class="line">  &quot;name&quot;: &quot;狮子&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">POST /test/_doc/2</span><br><span class="line">&#123;</span><br><span class="line">  &quot;id&quot;: 2,</span><br><span class="line">  &quot;name&quot;: &quot;虱子&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GET /test/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;name&quot;: &quot;shizi&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h1><pre><code>    问题：当我用自定义的拼音分词器去搜索一段又狮子的中文时，却也搜出了库里面的的虱子，因为“狮子”和“虱子”有着相同的拼音，而拼音分词器就是可以将相同拼音的中文都搜出来
+</code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a08f04fd4074946bc7e792a8722dc6d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<pre><code> ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f77f4d4864aa4be4b88d785d04561117~tplv-k3u1fbpfcp-zoom-1.image)![](&lt;&gt; &quot;点击并拖拽以移动&quot;)
+</code></pre>
+<p>解决：</p>
+<pre><code>  为了避免搜索到同拼音字，搜索时不要用拼音分词器
+</code></pre>
+<p>​    </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2687fedd3364fabbefedb2c55c6289a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>删库，重设置和重建索引库，再重新测试上面的测试方式2就可以了</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5c99ca9c04e4707a474d6acbaaf1aa9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//删除库</span><br><span class="line">DELETE /test</span><br><span class="line"></span><br><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">&#123;</span><br><span class="line">  &quot;settings&quot;: &#123;</span><br><span class="line">    &quot;analysis&quot;: &#123;</span><br><span class="line">      &quot;analyzer&quot;: &#123; </span><br><span class="line">        &quot;my_analyzer&quot;: &#123; </span><br><span class="line">          &quot;tokenizer&quot;: &quot;ik_max_word&quot;,</span><br><span class="line">          &quot;filter&quot;: &quot;py&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;py&quot;: &#123; </span><br><span class="line">          &quot;type&quot;: &quot;pinyin&quot;,</span><br><span class="line">          &quot;keep_full_pinyin&quot;: false,</span><br><span class="line">          &quot;keep_joined_full_pinyin&quot;: true,</span><br><span class="line">          &quot;keep_original&quot;: true,</span><br><span class="line">          &quot;limit_first_letter_length&quot;: 16,</span><br><span class="line">          &quot;remove_duplicated_term&quot;: true,</span><br><span class="line">          &quot;none_chinese_pinyin_tokenize&quot;: false</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;mappings&quot;: &#123;</span><br><span class="line">    &quot;properties&quot;: &#123;</span><br><span class="line">      &quot;name&quot;:&#123;</span><br><span class="line">        &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">        &quot;analyzer&quot;: &quot;my_analyzer&quot;,</span><br><span class="line">        &quot;search_analyzer&quot;: &quot;ik_smart&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试（和上面的测试方式2一样）：</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ab02a4a307ec45f888e27b2cda2a30f6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>总结：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4aabf0e2fdbe468b9434e69eda633850~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="DSL实现自动补全查询："><a href="#DSL实现自动补全查询：" class="headerlink" title="DSL实现自动补全查询："></a>DSL实现自动补全查询：</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/125784439?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22125784439%22,%22source%22:%22QRLYLETITBE%22%7D&ctrtid=H8ap4" title="(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客">(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="claclebyd002dy4v6fcvhhehk" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/RestClient-多条件聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:22:10.641Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/">RestClient-多条件聚合</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/706377c31d5a4e9b8c4e7f6d2e0c52be~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>在对应的service层里面写：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/327ec6a5daef4bfd9070a4611fae8b4c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6e9cf3f32805433283776afded9729d7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> HotelService里的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public Map&lt;String, List&lt;String&gt;&gt; filters()  &#123;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            //1. 准备Request</span><br><span class="line">            SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">            //2. 准备DSL</span><br><span class="line">            //2.1 设置size</span><br><span class="line">            request.source().size(0);</span><br><span class="line">            //2.2 聚合</span><br><span class="line">            buildAggretgaion(request);</span><br><span class="line"></span><br><span class="line">            //3. 发出请求</span><br><span class="line">            SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">            //4. 解析结果</span><br><span class="line">            Map&lt;String,List&lt;String&gt;&gt; result = new HashMap&lt;String, List&lt;String&gt;&gt;();</span><br><span class="line">            Aggregations aggregations = response.getAggregations();</span><br><span class="line">            //4.1 根据品牌（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; brandList = getAddByName(aggregations,&quot;brandAgg&quot;);</span><br><span class="line">            result.put(&quot;品牌&quot;,brandList); //放入map</span><br><span class="line">            //4.2 根据城市（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; cityList = getAddByName(aggregations,&quot;cityList&quot;);</span><br><span class="line">            result.put(&quot;城市&quot;,cityList); //放入map</span><br><span class="line">            //4.3 根据星级（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; starList = getAddByName(aggregations,&quot;starList&quot;);</span><br><span class="line">            result.put(&quot;星级&quot;,starList); //放入map</span><br><span class="line"></span><br><span class="line">            return result;</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new RuntimeException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //(抽取出来的) 根据名称获取品牌的结果</span><br><span class="line">    private List&lt;String&gt; getAddByName(Aggregations aggregations, String aggName) &#123;</span><br><span class="line">        //4.1 根据聚合名称获取聚合结果</span><br><span class="line">        Terms brandTerms = aggregations.get(aggName);</span><br><span class="line">        //4.2 获取buckets</span><br><span class="line">        List&lt;? extends Terms.Bucket&gt; buckets = brandTerms.getBuckets();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        List&lt;String&gt; brandList = new ArrayList&lt;String&gt;();</span><br><span class="line">        for(Terms.Bucket bucket : buckets)&#123;</span><br><span class="line">            //4.4 获取key</span><br><span class="line">            String key = bucket.getKeyAsString();</span><br><span class="line">            brandList.add(key);</span><br><span class="line"></span><br><span class="line">            System.out.println(key);</span><br><span class="line">        &#125;</span><br><span class="line">        return brandList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //抽取出来的 聚合</span><br><span class="line">    private void buildAggretgaion(SearchRequest request) &#123;</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms(&quot;brandAgg&quot;)</span><br><span class="line">                .field(&quot;brand&quot;)</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms(&quot;cityAgg&quot;)</span><br><span class="line">                .field(&quot;city&quot;)</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms(&quot;starAgg&quot;)</span><br><span class="line">                .field(&quot;starName.keyword&quot;)</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" data-id="clacleby6001xy4v655p6fo0w" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-elasticsearch/RestAPI实现聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -124,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="clab6am1u001maov60p340euc" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="clacleby4001ty4v6cmdh2eb0" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -186,7 +463,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clab6am1p001daov6giglbyra" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clacleby0001iy4v6esgo0ul5" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -200,9 +477,9 @@
 
 
   
-    <article id="post-SpringSecurity/SpringSecurity零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringSecurity/SpringSecurity基本原理&amp;web权限方案" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/SpringSecurity/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
+    <a href="/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" class="article-date">
   <time class="post-time" datetime="2022-11-06T08:24:46.282Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
     <span class="post-day">06</span>
@@ -217,7 +494,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/SpringSecurity/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">SpringSecurity零碎笔记</a>
+      <a class="article-title" href="/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/">SpringSecurity基本原理&amp;web权限方案</a>
     </h1>
   
 
@@ -332,7 +609,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clab6am1d000qaov6enzdc0zo" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="claclebxl000gy4v66qcpgrqt" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -390,7 +667,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="clab6am2g002jaov60mx72xql" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="claclebyh002ly4v6azek6qce" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -469,7 +746,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clab6am1n001aaov63yve0p6l" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clacleby1001ky4v6f5vy65r9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -520,260 +797,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="clab6am2w003eaov62k2xaruh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="claclebyw003xy4v6h99l3vnp" class="article-share-link">分享</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-零碎笔记/零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.844Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>RestTemplate</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/58949f8334f5">Spring之RestTemplate详解 - 简书 (jianshu.com)</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clab6am2y003haov67a1r2avp" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-关键字/java关键字" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.833Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/">java关键字</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>transient表示当加序列化时，不会被序列化</p>
-<p><img src="/.com//Users\其然乐衣Letitbe\AppData\Roaming\Typora\typora-user-images\image-20221010191347950.png" alt="image-20221010191347950"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="clab6am2s0034aov665snfk7l" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-刷题笔记/刷题总结" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.821Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">刷题总结</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Java的split方法使用多种分隔符切分字符串"><a href="#1-Java的split方法使用多种分隔符切分字符串" class="headerlink" title="1. Java的split方法使用多种分隔符切分字符串"></a>1. Java的split方法使用多种分隔符切分字符串</h1><p><strong>方法一：</strong><br>多个分隔符使用**’|’**分开，例如：</p>
-<pre><code>      String str = &quot;abc;123,456?999|haha&quot;;
-      String[] strs=str.split(&quot;;|,&quot;);
-      for(String s : strs)&#123;
-          System.out.println(s);
-      &#125;
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">123</span><br><span class="line">456?999|haha</span><br></pre></td></tr></table></figure>
-
-<p><strong>方法二：</strong><br>使用中括号括起来**[“…”]**，例如:</p>
-<pre><code>    String str = &quot;abc;123,456?999|haha&quot;;
-    String[] strs = str.split(&quot;[;,?|25]&quot;);
-    for(String s : strs)&#123;
-        System.out.println(s);
-    &#125;
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">6</span><br><span class="line">999</span><br><span class="line">haha</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2-位运算"><a href="#2-位运算" class="headerlink" title="2.位运算"></a>2.位运算</h1><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">重要的 位运算 算法公式</span><br><span class="line"></span><br><span class="line">num1 &amp;= num1 - <span class="number">1</span>; <span class="comment">// 最低的 1 变成 0</span></span><br><span class="line"></span><br><span class="line">num1 |= num1 + <span class="number">1</span>; <span class="comment">// 最低的 0 变成 1</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>持续更新…</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="clab6am2t0037aov60pkccj1q" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-elasticsearch/索引库中的文档操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.243Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/">索引库中的文档的操作</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="索引库中的文档的操作"><a href="#索引库中的文档的操作" class="headerlink" title="索引库中的文档的操作"></a>索引库中的文档的操作</h1><p><img src="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/41a470384f02452a8565ca97a2681702.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/264b09d6e2a94a8a87ac5527907b8c25.png" alt="img"><img src="https://img-blog.csdnimg.cn/9839abedff6b41709b41fdbf1d021320.png" alt="img"></p>
-<p>（实例）代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 插入文档</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zy@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 查询文档</span><br><span class="line">GET /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除文档</span><br><span class="line">DELETE /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式1：全量修改文档，如果存在则删除旧的，新的覆盖旧的，如果原先没有，则新增该文档（所以放修改方式相当于也是一种插入文档的方法）</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zhaoyun@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式2: 局部修改文档字段</span><br><span class="line">POST /heima/_update/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;doc&quot;:&#123;</span><br><span class="line">    &quot;email&quot;: &quot;ZY@itcast.cn&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>运行截图：</p>
-<p><img src="https://img-blog.csdnimg.cn/069e55bbd4ec47308b0147aa38adab91.png" alt="img"><img src="https://img-blog.csdnimg.cn/6e1212cd2f794a579424363b32fb9adc.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/640be243e52d45a18b47ef5dfe0b3095.png" alt="img"><img src="https://img-blog.csdnimg.cn/4aa5f5fd7ce74a6a814f9338b68beae5.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e7ddbb1bb05f40078872f81abe3e60c9.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/06615bad2d7942acb41706e51cc56bdc.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clab6am280025aov62tdlbhj0" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
-
     </footer>
   </div>
   
@@ -831,9 +857,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>66</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>29</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>21</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>70</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>23</strong><br>标签</div></a>
     </div>
 
 
