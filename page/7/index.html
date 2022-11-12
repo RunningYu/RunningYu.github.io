@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>70</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>23</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>73</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>33</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>25</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,192 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-juc/线程池应用_定时执行任务" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T02:18:09.630Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/">线程池应用_定时执行任务</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/juc/">juc</a>,<a class="article-category-link" href="/categories/juc/%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81/">应用代码</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>直接上代码，解决 “如何让每周四 18:00:00 定时执行任务 ？”类似问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import java.time.DayOfWeek;</span><br><span class="line">import java.time.Duration;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line">import java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/10/15</span><br><span class="line"> */</span><br><span class="line">public class TestSchedule &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *如何让每周四 18:00:00 定时执行任务 ？</span><br><span class="line">     */</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 获取当前时间</span><br><span class="line">        LocalDateTime now = LocalDateTime.now();</span><br><span class="line">        System.out.println( now );</span><br><span class="line"></span><br><span class="line">        // 获取周四时间</span><br><span class="line">        LocalDateTime time = now.withHour(18).withMinute(0).withSecond(0).withNano(0).with(DayOfWeek.THURSDAY);</span><br><span class="line">        // 如果 当前时间 &gt; 本周四时间，必须找到下周周四</span><br><span class="line">        if ( now.compareTo( time ) &gt;0 ) &#123;</span><br><span class="line">            // 加一周</span><br><span class="line">            time = time.plusWeeks( 1 );</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println( time );</span><br><span class="line"></span><br><span class="line">        // initialDelay 代表当前时间和周四的时间差</span><br><span class="line">        // period 一周的间隔时间</span><br><span class="line">        long initialDelay = Duration.between(now, time).toMillis();</span><br><span class="line">        long period = 1000 * 60 * 60 * 24 * 7;</span><br><span class="line">        ScheduledExecutorService pool = Executors.newScheduledThreadPool( 1 );</span><br><span class="line">        pool.scheduleAtFixedRate( () -&gt; &#123;</span><br><span class="line">            System.out.println( &quot;running...&quot; );</span><br><span class="line">        &#125;, initialDelay, period, TimeUnit.MILLISECONDS );</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Duration类专门用于做时间间隔运算的，如Duration.between( 时间1，时间2 ).toMillis()</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="cladqj0dl002mwkv64mg03lb1" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/DSL实现Bucket聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:27:30.451Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/">DSL实现Bucket聚合</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类：</p>
+<p>桶（Bucket）聚合：用来对文档做分组</p>
+<pre><code>    •TermAggregation：按照文档字段值分组
+
+    •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组
+</code></pre>
+<h1 id="1、DSL实现Bucket聚合"><a href="#1、DSL实现Bucket聚合" class="headerlink" title="1、DSL实现Bucket聚合"></a><strong>1、DSL</strong>实现Bucket聚合</h1><p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
+<p>类型为term类型，DSL示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;: 0,  // 设置size为0，结果中不包含文档，只包含聚合结果</span><br><span class="line">  &quot;aggs&quot;: &#123; // 定义聚合</span><br><span class="line">    &quot;brandAgg&quot;: &#123; //给聚合起个名字</span><br><span class="line">      &quot;terms&quot;: &#123; // 聚合的类型，按照品牌值聚合，所以选择term</span><br><span class="line">        &quot;field&quot;: &quot;brand&quot;, // 参与聚合的字段</span><br><span class="line">        &quot;size&quot;: 20 // 希望获取的聚合结果数量</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2、-Bucket聚合聚合结果排序"><a href="#2、-Bucket聚合聚合结果排序" class="headerlink" title="2、 Bucket聚合聚合结果排序"></a><strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1><p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
+<p>我们可以修改结果排序方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能,自定义排序规则</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20,</span><br><span class="line">        &quot;order&quot;: &#123;</span><br><span class="line">          &quot;_count&quot;: &quot;asc&quot;  // 按照_count升序排列</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="3、Bucket聚合限定聚合范围"><a href="#3、Bucket聚合限定聚合范围" class="headerlink" title="3、Bucket聚合限定聚合范围"></a><strong>3、Bucket</strong>聚合限定聚合范围</h1><p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能，限定聚合范围</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;range&quot;: &#123;</span><br><span class="line">      &quot;price&quot;: &#123;</span><br><span class="line">        &quot;lte&quot;: 200   // 只对200元以下的文档聚合</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, </span><br><span class="line">  </span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-、总结"><a href="#4-、总结" class="headerlink" title="4 、总结"></a><strong>4 、总结</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="cladqj0d1001iwkv646du8n2w" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-设计模式/设计模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:14:39.855Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-intro.html">设计模式简介 | 菜鸟教程 (runoob.com)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cladqj0e60047wkv6gvbu41y5" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-零碎笔记/零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -115,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="claclebyv003uy4v697z0bk7p" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cladqj0e60044wkv6hlbm7x4f" class="article-share-link">分享</a>
       
       
     </footer>
@@ -165,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="claclebyn0035y4v617z89x1r" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="cladqj0dx003ewkv6eewrcjvi" class="article-share-link">分享</a>
       
       
     </footer>
@@ -246,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="claclebyt003oy4v67c0a2p2y" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="cladqj0e0003owkv6bq8c0l5j" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
@@ -312,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="claclebyc002cy4v67foz330f" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="cladqj0dh002bwkv60thaah0g" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -380,7 +566,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="clacleby80023y4v6b88qcjg7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="cladqj0dd0026wkv66yw9c672" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -462,7 +648,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="clacleby90027y4v61ztkhncv" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="cladqj0de0027wkv61tvmgznn" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -523,7 +709,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="clacleby3001qy4v67pit08fv" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="cladqj0d7001swkv626no2p05" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -537,226 +723,10 @@
 
 
   
-    <article id="post-redis/springboot整合使用云服务器上的Redis" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/" class="article-date">
-  <time class="post-time" datetime="2022-11-05T15:22:53.637Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/">springboot整合使用云服务器上的Redis</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/redis/">redis</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、前提条件"><a href="#一、前提条件" class="headerlink" title="一、前提条件"></a>一、前提条件</h1><p>修改redis.conf配置文件</p>
-<p><strong>1、protected-mode yes（默认的） 修改成 protected-mode no，解除保护模式</strong></p>
-<p><img src="/../../images/f1f4347079c44f87b15fe6d63b5a1372.png" alt="img"></p>
-<p><strong>2、注释掉绑定ip ，绑定ip的话，使得除了本机（服务器）以外的主机无法访问redis数据库</strong></p>
-<p> <img src="/../../images/88a1f690a1da4699996b12882112fdbd.png" alt="img"></p>
-<p><strong>3、将守护进程模式关闭 daemonize yes 改成 daemonize no</strong></p>
-<p><img src="/../../images/5c5c95f6922d424eaec6bb514bf989e7.png" alt="img"></p>
-<p>4、<strong>最后，一定记住要redis-server redis.conf重启redis的配置文件，否则修改不生效！！！</strong></p>
-<h1 id="二、整合步骤"><a href="#二、整合步骤" class="headerlink" title="二、整合步骤"></a>二、整合步骤</h1><p><strong>1、导入依赖</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--redis--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><strong>2、配置yml配置文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  redis:</span><br><span class="line">    host: 你的云服务器的ip</span><br><span class="line">    port: 6379                # Redis的端口</span><br><span class="line">    password: redis密码         # Redis服务器连接密码</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><strong>3、注入RedisTemplate</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><strong>使用例子</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void redisTestSet(  ) &#123;</span><br><span class="line"></span><br><span class="line">    ValueOperations ops = redisTemplate.opsForValue();</span><br><span class="line">    ops.set( &quot;username&quot;, 41);</span><br><span class="line">    System.out.println(  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void redisTestGet(  ) &#123;</span><br><span class="line">    ValueOperations ops = redisTemplate.opsForValue();</span><br><span class="line">    Object name = ops.get( &quot;username&quot;);</span><br><span class="line">    System.out.println( name );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h1 id="三、可能遇到的坑"><a href="#三、可能遇到的坑" class="headerlink" title="三、可能遇到的坑"></a>三、可能遇到的坑</h1><p><strong>报错1：</strong> </p>
-<p><img src="/../../images/4c85fac031a34ec1a8db6ec0f3126bd9.png" alt="img"></p>
-<p> 解决方式1：在redis.conf配置文件中requirepass后空一一格，然后加上密码</p>
-<p><img src="/../../images/61f205b1ecdd45b49cce8dd743d0ae1e.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<p> 解决方式2：命令模式</p>
-<p>1）登录redis</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>2)设置密码 （比如我设置密码为12345678）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set requirepass 12345678</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>3）验证 ：输入默认用户名 auth 和 密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth 12345678</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="/../../images/751ef059325d4675a73cc12881de3f72.png" alt="img"></p>
-<p><strong>错误2：</strong></p>
-<p>启动项目时报错：java.net.ConnectException: Connection refused: no further information</p>
-<p>原因：开头的前提条件2可能没有弄好，或是弄了但没有和重新启动redis</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/" data-id="claclebyj002qy4v676xlh8h6" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-mysql/数据库原理及应用第三章知识点思维导图（SQL SERVER）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-05T12:49:40.624Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/">数据库原理及应用第三章知识点思维导图（SQL SERVER）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/sql/">sql</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>直接上图： </p>
-<p><img src="https://img-blog.csdnimg.cn/5584f01c08764c0bb05bbc22c577a0cb.jpeg" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/" data-id="claclebyi002ny4v65bcd4z42" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-hello-world" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/05/hello-world/" class="article-date">
-  <time class="post-time" datetime="2022-11-05T12:03:38.450Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/05/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/hello-world/" data-id="claclebwy0000y4v60cbc1yds" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -801,9 +771,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>70</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>31</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>23</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>73</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>33</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>25</strong><br>标签</div></a>
     </div>
 
 
