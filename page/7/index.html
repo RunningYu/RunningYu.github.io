@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>73</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>33</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>25</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>46</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>30</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -75,12 +75,12 @@
 
         <section id="main">
   
-    <article id="post-juc/线程池应用_定时执行任务" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringSecurity/SpringSecurity微服务权限方案" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T02:18:09.630Z" itemprop="datePublished">
+    <a href="/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T12:58:57.142Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">09</span>
   </time>
 </a>
    
@@ -92,14 +92,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/">线程池应用_定时执行任务</a>
+      <a class="article-title" href="/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/">SpringSecurity微服务权限方案</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/juc/">juc</a>,<a class="article-category-link" href="/categories/juc/%E5%BA%94%E7%94%A8%E4%BB%A3%E7%A0%81/">应用代码</a>
+    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>
   </div>
 
           
@@ -111,18 +111,84 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>直接上代码，解决 “如何让每周四 18:00:00 定时执行任务 ？”类似问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import java.time.DayOfWeek;</span><br><span class="line">import java.time.Duration;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line">import java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/10/15</span><br><span class="line"> */</span><br><span class="line">public class TestSchedule &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *如何让每周四 18:00:00 定时执行任务 ？</span><br><span class="line">     */</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 获取当前时间</span><br><span class="line">        LocalDateTime now = LocalDateTime.now();</span><br><span class="line">        System.out.println( now );</span><br><span class="line"></span><br><span class="line">        // 获取周四时间</span><br><span class="line">        LocalDateTime time = now.withHour(18).withMinute(0).withSecond(0).withNano(0).with(DayOfWeek.THURSDAY);</span><br><span class="line">        // 如果 当前时间 &gt; 本周四时间，必须找到下周周四</span><br><span class="line">        if ( now.compareTo( time ) &gt;0 ) &#123;</span><br><span class="line">            // 加一周</span><br><span class="line">            time = time.plusWeeks( 1 );</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println( time );</span><br><span class="line"></span><br><span class="line">        // initialDelay 代表当前时间和周四的时间差</span><br><span class="line">        // period 一周的间隔时间</span><br><span class="line">        long initialDelay = Duration.between(now, time).toMillis();</span><br><span class="line">        long period = 1000 * 60 * 60 * 24 * 7;</span><br><span class="line">        ScheduledExecutorService pool = Executors.newScheduledThreadPool( 1 );</span><br><span class="line">        pool.scheduleAtFixedRate( () -&gt; &#123;</span><br><span class="line">            System.out.println( &quot;running...&quot; );</span><br><span class="line">        &#125;, initialDelay, period, TimeUnit.MILLISECONDS );</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p><img src="/../../images/image-20221109210902180.png" alt="image-20221109210902180"></p>
+<h1 id="1-认证授权过程分析"><a href="#1-认证授权过程分析" class="headerlink" title="1.认证授权过程分析"></a>1.认证授权过程分析</h1><h2 id="微服务本质："><a href="#微服务本质：" class="headerlink" title="微服务本质："></a>微服务本质：</h2><p><img src="/../../images/image-20221109210128213.png" alt="image-20221109210128213"></p>
+<p><img src="/../../images/image-20221109210445793.png" alt="image-20221109210445793"></p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p><img src="/../../images/image-20221109211556120.png" alt="image-20221109211556120"></p>
+<h2 id="数据模型介绍："><a href="#数据模型介绍：" class="headerlink" title="数据模型介绍："></a>数据模型介绍：</h2><p><img src="/../../images/image-20221109214015143.png" alt="image-20221109214015143"></p>
+<h2 id="使用技术说明："><a href="#使用技术说明：" class="headerlink" title="使用技术说明："></a>使用技术说明：</h2><p><img src="/../../images/image-20221110144805581.png" alt="image-20221110144805581"></p>
+<h2 id="搭建项目工程："><a href="#搭建项目工程：" class="headerlink" title="搭建项目工程："></a>搭建项目工程：</h2><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=25&vd_source=746b9336d739b80b11820809545b6604">25-尚硅谷-SpringSecurity-微服务权限案例-引入项目依赖_哔哩哔哩_bilibili</a></p>
+<p><img src="/../../images/image-20221110145058838.png" alt="image-20221110145058838"></p>
+<p><img src="/../../images/image-20221110150906119.png" alt="image-20221110150906119"></p>
+<h2 id="启动Redis和Nacos"><a href="#启动Redis和Nacos" class="headerlink" title="启动Redis和Nacos:"></a>启动Redis和Nacos:</h2><p><img src="/../../images/image-20221110180707351.png" alt="image-20221110180707351"></p>
+<h2 id="编写common工具类："><a href="#编写common工具类：" class="headerlink" title="编写common工具类："></a>编写common工具类：</h2><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=27&vd_source=746b9336d739b80b11820809545b6604">27-尚硅谷-SpringSecurity-微服务权限案例-编写common工具类_哔哩哔哩_bilibili</a></p>
+<p><img src="/../../images/image-20221110184003848.png" alt="image-20221110184003848"></p>
+<h2 id="编写security工具类："><a href="#编写security工具类：" class="headerlink" title="编写security工具类："></a>编写security工具类：</h2><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP/?p=28&spm_id_from=333.851.header_right.history_list.click&vd_source=746b9336d739b80b11820809545b6604">28-尚硅谷-SpringSecurity-微服务权限案例-编写security工具类_哔哩哔哩_bilibili</a></p>
+<p><img src="/../../images/image-20221110205032587.png" alt="image-20221110205032587"></p>
+<h4 id="2-1-密码处理工具类"><a href="#2-1-密码处理工具类" class="headerlink" title="2.1 密码处理工具类"></a>2.1 密码处理工具类</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import atguigu.utils.utils.MD5;</span><br><span class="line">import org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/11/10</span><br><span class="line"> */</span><br><span class="line">@Component</span><br><span class="line">public class DefaultPasswordEncoder implements PasswordEncoder &#123;</span><br><span class="line"></span><br><span class="line">    public DefaultPasswordEncoder() &#123;</span><br><span class="line">        // 调用有参构造方法，传值 -1</span><br><span class="line">        this(-1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public DefaultPasswordEncoder(int strength) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 进行MD5加密</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public String encode(CharSequence charSequence) &#123;</span><br><span class="line">        return MD5.encrypt(charSequence.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 进行密码比对</span><br><span class="line">     * 比对一样的话返回 true，不一样的话返回false</span><br><span class="line">     * @param charSequence    加密后的密码</span><br><span class="line">     * @param encodedPassword 传入的密码</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public boolean matches(CharSequence charSequence, String encodedPassword) &#123;</span><br><span class="line">        return encodedPassword.equals(MD5.encrypt(charSequence.toString()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>Duration类专门用于做时间间隔运算的，如Duration.between( 时间1，时间2 ).toMillis()</p>
+
+
+
+
+<h4 id="2-2-token操作工具类"><a href="#2-2-token操作工具类" class="headerlink" title="2.2 token操作工具类"></a>2.2 token操作工具类</h4><p>先导入依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;jjwt&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用jwt生成token代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.security.security;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.CompressionCodecs;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.Jwts;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.SignatureAlgorithm;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * token工具类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenManager</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * token有效时长</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> <span class="variable">tokenExpiration</span> <span class="operator">=</span> <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 编码密钥</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">tokenSignKey</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1. 使用 jwt 根据用户名生成token</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">createToken</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> Jwts.builder()</span><br><span class="line">                <span class="comment">// 设置主体信息</span></span><br><span class="line">                .setSubject(username)</span><br><span class="line">                <span class="comment">// 设置有效时长</span></span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + tokenExpiration))</span><br><span class="line">                .signWith(SignatureAlgorithm.HS512, tokenSignKey).compressWith(CompressionCodecs.GZIP).compact();</span><br><span class="line">        <span class="keyword">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2. 根据token字符串得到用户信息</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUserInfoFromToken</span><span class="params">(String token)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">userinfo</span> <span class="operator">=</span> Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token).getBody().getSubject();</span><br><span class="line">        <span class="keyword">return</span> userinfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3. 删除token</span></span><br><span class="line"><span class="comment">     * 但是这个删除方法其实不需要我们写，因为token不需要咱们删，客户端不携带 token 就可以了</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">removeToken</span><span class="params">(String token)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-3-退出处理器"><a href="#2-3-退出处理器" class="headerlink" title="2.3 退出处理器"></a>2.3 退出处理器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> atguigu.utils.utils.R;</span><br><span class="line"><span class="keyword">import</span> atguigu.utils.utils.ResponseUtil;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.logout.LogoutHandler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 退出处理器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenLogoutHandler</span> <span class="keyword">implements</span> <span class="title class_">LogoutHandler</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TokenManager tokenManager;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TokenLogoutHandler</span><span class="params">(TokenManager tokenManager, RedisTemplate redisTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.tokenManager = tokenManager;</span><br><span class="line">        <span class="built_in">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">logout</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Authentication authentication)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 从header里面获取token</span></span><br><span class="line">        <span class="comment">// 2. token不为空，移除token， 从redis删除token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (token != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 移除</span></span><br><span class="line">            tokenManager.removeToken(token);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从token获取用户名</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> tokenManager.getUserInfoFromToken(token);</span><br><span class="line">            <span class="comment">// key : username</span></span><br><span class="line">            redisTemplate.delete(username);</span><br><span class="line">        &#125;</span><br><span class="line">        ResponseUtil.out(response, R.ok());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-4-未授权统一处理类"><a href="#2-4-未授权统一处理类" class="headerlink" title="2.4 未授权统一处理类"></a>2.4 未授权统一处理类</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import atguigu.utils.utils.R;</span><br><span class="line">import atguigu.utils.utils.ResponseUtil;</span><br><span class="line">import org.springframework.security.core.AuthenticationException;</span><br><span class="line">import org.springframework.security.web.AuthenticationEntryPoint;</span><br><span class="line"></span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 未授权统一处理类</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/11/10</span><br><span class="line"> */</span><br><span class="line">public class UnauthEntryPoint implements AuthenticationEntryPoint &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException &#123;</span><br><span class="line">        ResponseUtil.out(response, R.error());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="编写security认证过滤器"><a href="#编写security认证过滤器" class="headerlink" title="编写security认证过滤器:"></a>编写security认证过滤器:</h2><p>对应教程视频;<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=29&vd_source=746b9336d739b80b11820809545b6604">29-尚硅谷-SpringSecurity-微服务权限案例-编写security认证过滤器_哔哩哔哩_bilibili</a></p>
+<h4 id="1-认证的过滤器"><a href="#1-认证的过滤器" class="headerlink" title="1. 认证的过滤器"></a>1. 认证的过滤器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> atguigu.utils.utils.R;</span><br><span class="line"><span class="keyword">import</span> atguigu.utils.utils.ResponseUtil;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.entity.SecurityUser;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.security.TokenManager;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.AuthenticationManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.UsernamePasswordAuthenticationToken;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.AuthenticationException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.util.matcher.AntPathRequestMatcher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenLoginFilter</span> <span class="keyword">extends</span> <span class="title class_">UsernamePasswordAuthenticationFilter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TokenManager tokenManager;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 由springsecurity封装的</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> AuthenticationManager authenticationManager;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TokenLoginFilter</span><span class="params">(AuthenticationManager authenticationManager, TokenManager tokenManager, RedisTemplate redisTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.authenticationManager = authenticationManager;</span><br><span class="line">        <span class="built_in">this</span>.tokenManager = tokenManager;</span><br><span class="line">        <span class="built_in">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">        <span class="comment">// 设置为不仅仅是post提交</span></span><br><span class="line">        <span class="built_in">this</span>.setPostOnly(<span class="literal">false</span>);</span><br><span class="line">        <span class="comment">// 设置登录路径，且匹配post提交</span></span><br><span class="line">        <span class="built_in">this</span>.setRequiresAuthenticationRequestMatcher(<span class="keyword">new</span> <span class="title class_">AntPathRequestMatcher</span>(<span class="string">&quot;/admin/acl/login&quot;</span>, <span class="string">&quot;POST&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1. 获取表单提交用户名和密码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Authentication <span class="title function_">attemptAuthentication</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> AuthenticationException &#123;</span><br><span class="line">        <span class="comment">// 获取表单提交数据</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>().readValue(request.getInputStream(), User.class);</span><br><span class="line">            <span class="keyword">return</span> authenticationManager.authenticate(<span class="keyword">new</span> <span class="title class_">UsernamePasswordAuthenticationToken</span>(user.getUsername(), user.getPassword(),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2. 认证成功时会调用的方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">successfulAuthentication</span><span class="params">(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="comment">// 这个方法可以获取认证通过后的用户的信息，然后根据用户名生成token，再把它放到redis中</span></span><br><span class="line">        <span class="type">SecurityUser</span> <span class="variable">user</span> <span class="operator">=</span> (SecurityUser) authResult.getPrincipal();</span><br><span class="line">        <span class="comment">// 根据用户名生成token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> tokenManager.createToken(user.getCurrentUserInfo().getUsername());</span><br><span class="line">        <span class="comment">// 把用户名称和用户权限列表放到redis</span></span><br><span class="line">        redisTemplate.opsForValue().set(user.getCurrentUserInfo().getUsername(), user.getPermissionValueList());</span><br><span class="line">        <span class="comment">// 返回token</span></span><br><span class="line">        ResponseUtil.out(response, R.ok().data(<span class="string">&quot;token&quot;</span>, token));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3. 认证失败时会调用的方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">unsuccessfulAuthentication</span><span class="params">(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="comment">// 返回错误的提示</span></span><br><span class="line">        ResponseUtil.out(response, R.error());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-授权过滤器"><a href="#2-授权过滤器" class="headerlink" title="2.授权过滤器"></a>2.授权过滤器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.atguigu.security.security.TokenManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.AuthenticationManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.UsernamePasswordAuthenticationToken;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.SimpleGrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.context.SecurityContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.www.BasicAuthenticationFilter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenAuthFilter</span> <span class="keyword">extends</span> <span class="title class_">BasicAuthenticationFilter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> TokenManager tokenManager;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TokenAuthFilter</span><span class="params">(AuthenticationManager authenticationManager)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(authenticationManager);</span><br><span class="line">        <span class="built_in">this</span>.tokenManager = tokenManager;</span><br><span class="line">        <span class="built_in">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doFilterInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="comment">// 获取当前认证成功用户权限信息</span></span><br><span class="line">        <span class="type">UsernamePasswordAuthenticationToken</span> <span class="variable">authRequest</span> <span class="operator">=</span> getAuthentication(request);</span><br><span class="line">        <span class="comment">// 判断如果有权限信息，放到权限上下文中</span></span><br><span class="line">        <span class="keyword">if</span> (authRequest != <span class="literal">null</span>) &#123;</span><br><span class="line">            SecurityContextHolder.getContext().setAuthentication(authRequest);</span><br><span class="line">        &#125;</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> UsernamePasswordAuthenticationToken <span class="title function_">getAuthentication</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 从header获取token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (token != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 从token获取用户</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> tokenManager.getUserInfoFromToken(token);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//从redis获取对应权限列表</span></span><br><span class="line">            List&lt;String&gt; permissionValueList = (List&lt;String&gt;) redisTemplate.opsForValue().get(username);</span><br><span class="line">            Collection&lt;GrantedAuthority&gt; authorities = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> ( String permissionValue : permissionValueList ) &#123;</span><br><span class="line">                <span class="type">SimpleGrantedAuthority</span> <span class="variable">auth</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleGrantedAuthority</span>(permissionValue);</span><br><span class="line">                authorities.add(auth);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UsernamePasswordAuthenticationToken</span>(username, token, authorities)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="编写entity"><a href="#编写entity" class="headerlink" title="编写entity:"></a>编写entity:</h1><p>SecurityUser实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.toolkit.StringUtils;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.SimpleGrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityUser</span> <span class="keyword">implements</span> <span class="title class_">UserDetails</span> &#123;</span><br><span class="line">    <span class="comment">//当前登录用户</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> User currentUserInfo;</span><br><span class="line">    <span class="comment">//当前权限</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; permissionValueList;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (user != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.currentUserInfo = user;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Collection&lt;? <span class="keyword">extends</span> <span class="title class_">GrantedAuthority</span>&gt; getAuthorities() &#123;</span><br><span class="line">        Collection&lt;GrantedAuthority&gt; authorities = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(String permissionValue : permissionValueList) &#123;</span><br><span class="line">            <span class="keyword">if</span>(StringUtils.isEmpty(permissionValue)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">SimpleGrantedAuthority</span> <span class="variable">authority</span> <span class="operator">=</span> <span class="keyword">new</span></span><br><span class="line">                    <span class="title class_">SimpleGrantedAuthority</span>(permissionValue);</span><br><span class="line">            authorities.add(authority);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> authorities;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPassword</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getPassword();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUsername</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getUsername();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonExpired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonLocked</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isCredentialsNonExpired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEnabled</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>User用户实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.security.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModel;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModelProperty;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel(description = &quot;用户实体类&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ApiModelProperty</span>用于swapper测试的</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;微信openid&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;密码&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;昵称&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String nickName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;用户头像&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String salt;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;用户签名&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String token;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="整合网关和前端："><a href="#整合网关和前端：" class="headerlink" title="整合网关和前端："></a>整合网关和前端：</h1><p>解决跨域配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.reactive.CorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.reactive.CorsWebFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.util.pattern.PathPatternParser;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/11</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解决跨域</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CorsWebFilter <span class="title function_">corsWebFilter</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">CorsConfiguration</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorsConfiguration</span>();</span><br><span class="line">        <span class="comment">// 表示该服务器允许任何类型的请求</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 允许任何域名来源的请求</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 允许携带任何请求头</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">UrlBasedCorsConfigurationSource</span> <span class="variable">source</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UrlBasedCorsConfigurationSource</span>(<span class="keyword">new</span> <span class="title class_">PathPatternParser</span>());</span><br><span class="line">        <span class="comment">// 表示所有路径都允许访问</span></span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, config);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CorsWebFilter</span>((CorsConfigurationSource) source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>配置文件：</strong></p>
+<p><strong>application.properties：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 端口号</span><br><span class="line">server.port=<span class="number">8222</span></span><br><span class="line"># 服务名</span><br><span class="line">spring.application.name=service-gateway</span><br><span class="line"># nacos服务地址</span><br><span class="line">spring.cloud.nacos.discovery.server-addr=<span class="number">222.177</span><span class="number">.66</span><span class="number">.230</span>:<span class="number">8848</span></span><br><span class="line"># 使服务发现路由</span><br><span class="line">spring.cloud.gateway.discovery.locator.enabled=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"># 配置路由规则</span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].id=service-acl</span><br><span class="line"># 设置路由uri  lb:<span class="comment">//注册服务名称</span></span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].uri=lb:<span class="comment">//service-acl</span></span><br><span class="line"># 具体路径规则</span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].predicates= path=<span class="comment">/*/acl/**</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>整合网关：</p>
+<p><img src="/../../images/image-20221111165948445.png" alt="image-20221111165948445"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="cladqj0dl002mwkv64mg03lb1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="claph4m73000mh4v683lrgq3n" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
 
     </footer>
   </div>
@@ -133,12 +199,12 @@
 
 
   
-    <article id="post-elasticsearch/DSL实现Bucket聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-云服务器/云服务器上部署一个Springboot的web项目（图文讲解）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:27:30.451Z" itemprop="datePublished">
+    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:52:39.210Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -150,14 +216,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/">DSL实现Bucket聚合</a>
+      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/">云服务器上部署一个Springboot的web项目（图文讲解）</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
   </div>
 
           
@@ -169,39 +235,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类：</p>
-<p>桶（Bucket）聚合：用来对文档做分组</p>
-<pre><code>    •TermAggregation：按照文档字段值分组
-
-    •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组
-</code></pre>
-<h1 id="1、DSL实现Bucket聚合"><a href="#1、DSL实现Bucket聚合" class="headerlink" title="1、DSL实现Bucket聚合"></a><strong>1、DSL</strong>实现Bucket聚合</h1><p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
-<p>类型为term类型，DSL示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;: 0,  // 设置size为0，结果中不包含文档，只包含聚合结果</span><br><span class="line">  &quot;aggs&quot;: &#123; // 定义聚合</span><br><span class="line">    &quot;brandAgg&quot;: &#123; //给聚合起个名字</span><br><span class="line">      &quot;terms&quot;: &#123; // 聚合的类型，按照品牌值聚合，所以选择term</span><br><span class="line">        &quot;field&quot;: &quot;brand&quot;, // 参与聚合的字段</span><br><span class="line">        &quot;size&quot;: 20 // 希望获取的聚合结果数量</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2、-Bucket聚合聚合结果排序"><a href="#2、-Bucket聚合聚合结果排序" class="headerlink" title="2、 Bucket聚合聚合结果排序"></a><strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1><p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
-<p>我们可以修改结果排序方式：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能,自定义排序规则</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20,</span><br><span class="line">        &quot;order&quot;: &#123;</span><br><span class="line">          &quot;_count&quot;: &quot;asc&quot;  // 按照_count升序排列</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="3、Bucket聚合限定聚合范围"><a href="#3、Bucket聚合限定聚合范围" class="headerlink" title="3、Bucket聚合限定聚合范围"></a><strong>3、Bucket</strong>聚合限定聚合范围</h1><p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能，限定聚合范围</span><br><span class="line">GET /hotel/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;range&quot;: &#123;</span><br><span class="line">      &quot;price&quot;: &#123;</span><br><span class="line">        &quot;lte&quot;: 200   // 只对200元以下的文档聚合</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, </span><br><span class="line">  </span><br><span class="line">  &quot;size&quot;:0,</span><br><span class="line">  &quot;aggs&quot;: &#123;</span><br><span class="line">    &quot;brandAgg&quot;: &#123;</span><br><span class="line">      &quot;terms&quot;: &#123;</span><br><span class="line">        &quot;field&quot;: &quot;brand.keyword&quot;,</span><br><span class="line">        &quot;size&quot;: 20</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="4-、总结"><a href="#4-、总结" class="headerlink" title="4 、总结"></a><strong>4 、总结</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+        <p><strong>（PS：在部署之前，</strong></p>
+<p><strong>1.你的虚拟机需要安装有jdk(这个Centos内部应该自带有，我的就是)和mysql（注意，如果你使用的数据库是8.0版本以上的，则需要安装mysql8.0以上的），没有安装到这两个的先自行去安装好</strong></p>
+<p><strong>2.Linux安装好mysql后，去用sqlyog（或是Navicat或其他）连接你虚拟机的数据库</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2296b37c16204c2c8d38359697a6918d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>1.双击packege，打包项目。（注意，先鼠标选中Maven中的test然后跟着黄色箭头点击(让test被划掉)，使得在打包项目的时候跳过test步骤，不然会执行项目的测试，从而可能改动数据库的原有数据） </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb4c2a5357143c2a45ccf285a6864d4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>2.找到打包好的项目的所在目录</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eca7a429f81942b5b5f330fcc62ba0be~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>3.（这一步有多种方法，我习惯这一种）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae9faa9689464d1d83694d2b338b8e13~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>4.进入到Linux的相应目录，然后执行最后一条命令来启动springboot项目</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d901c9c4af4ee79a05bafd8bdbcd15~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5859ee35d0744080a9e7a7f867392dda~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>5.启动成功，然后去根据虚拟机的ip端口去访问项目</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba0c92e9585a45c28b10ee909898c3f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>(ps：如果访问超时，则需要去Linux关闭防火墙</p>
+<p>1.首先切换回到 &#x2F;root&#x2F;bin目录下</p>
+<p>2.执行命令：systemctl stop firewalld.service（关闭防火墙)</p>
+<p>systemctl disable firewalld.service（关闭防火墙自动启动）</p>
+<p>4.查看防火墙状态：systemctl status firewalld.service（查看防火墙服务状态）</p>
+<p>看到这样就OK了：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ad7c29b91b74c32a0a6beb7cc2fbba6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>然后再去浏览器访问，便不会超时了</p>
+<p>）</p>
+<p>另一种启动方式，启动过程中不会显示出日志信息，还可用命令将日志信息存到server.log中，或是存到自己创建的文件中也行</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff1b88ebd29c4ba39150042f29a9cbcb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>这是我保存的日志信息</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/77676acd5dea48d28a875724cda4fe1b~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="cladqj0d1001iwkv646du8n2w" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" data-id="claph4m8l003lh4v6gm0f5e2a" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
 
     </footer>
   </div>
@@ -212,12 +279,12 @@
 
 
   
-    <article id="post-设计模式/设计模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-debug/(实体类没有写get和set方法若的祸啦)No serializer found for class com.example.domain" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.855Z" itemprop="datePublished">
+    <a href="/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:51:20.162Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -229,12 +296,16 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+      <a class="article-title" href="/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/">(实体类没有写get和set方法若的祸啦)No serializer found for class com.example.domain</a>
     </h1>
   
 
         <div>
           
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/debug/">debug</a>
+  </div>
+
           
               
 
@@ -244,14 +315,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-intro.html">设计模式简介 | 菜鸟教程 (runoob.com)</a></p>
+        <p>报错：<br>No serializer found for class com.example.domain.Men and no properties discovered to create Bean…</p>
+<p>springboot中使用@RestController注解前台页面返回不到对象数据异常<br>异常信息<br>首页控制台会打印如下异常：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/905ba06e04a44e4d9804fc48b3b66b5b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>红色框里详细如下</p>
+<p> No serializer found for class com.example.domain.Men and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: java.util.ArrayList[0])</p>
+<p>原因：实体类没有写有对应的get()和set方法</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0cf9ba46ba3240a8b14b445a75e9b3f2~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>在实体类写上set() 和 get() 方法即可，并在其方法前要有public</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6689833168ec45f58c52a4ec13892692~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cladqj0e60047wkv6gvbu41y5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/" data-id="claph4m7d001dh4v68u4l3txd" class="article-share-link">分享</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
+
     </footer>
   </div>
   
@@ -261,12 +342,12 @@
 
 
   
-    <article id="post-零碎笔记/零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-debug/service层传来的总是null" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.844Z" itemprop="datePublished">
+    <a href="/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:50:20.353Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -278,12 +359,135 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
+      <a class="article-title" href="/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/">service层传来的总是null?</a>
     </h1>
   
 
         <div>
           
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/debug/">debug</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开始写了四个接口，都没有问题，但是在写第五个接口时不行了，然后更可恶的是，前面的四个也都不行了！这这倒到底是怎么回事呢？接下来给大家分享我的情况：</p>
+<p>报错如下图：在postman中访问接口出现报错</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/090908c0b8c145a68847eb624ad2852d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>上图表示dataSectionService返回是空，问题原因是因为上头注入DataSectionService时定义成了static，切记是这样是不能的，否则就是会报异常，即便你的dao层的返回是正常的，但是在中间service层返回给controller层时是空的了。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39ddf278b52948f09394d44e41096353~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00f4a73faacc4bfcb329fa07794e4c9d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" data-id="claph4m7g001ih4v69ph7ei4i" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-debug/Field restTemplate in cn.itcast.order.service.OrderService required a bean of ty" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:49:12.388Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/">Field restTemplate in cn.itcast.order.service.OrderService required a bean of ty</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/debug/">debug</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>错误</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e0b2b4cf586a493bb7762b9241059196~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>这个错说明没有找到<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=restTemplate&spm=1001.2101.3001.7020" title="restTemplate">restTemplate</a>模板，说明没有注入到spring容器中去</p>
+<p>解决：再Applocation上注入即可 </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e68b5eeebb5b4b968a824854ef7f8efa~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/" data-id="claph4m7e001gh4v6bjs4aqm3" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-springboot/将maven项目改造成springboot项目" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:44:59.004Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/">将maven项目改造成springboot项目</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/springboot/">springboot</a>
+  </div>
+
           
               
 
@@ -294,16 +498,33 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
-<li>RestTemplate</li>
+<li>pom.xml配置之springboot<br>1.1 继承springboot父项目依赖</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/58949f8334f5">Spring之RestTemplate详解 - 简书 (jianshu.com)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.7.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>1.2  插件依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li>启动类配置</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class SquareApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SquareApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="3">
+<li>application.yml</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cladqj0e60044wkv6hlbm7x4f" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" data-id="claph4m8h003ih4v615tr4dx9" class="article-share-link">分享</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
+
     </footer>
   </div>
   
@@ -313,12 +534,12 @@
 
 
   
-    <article id="post-关键字/java关键字" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-云服务器/nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.833Z" itemprop="datePublished">
+    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:42:30.851Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -330,64 +551,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/">java关键字</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>transient表示当加序列化时，不会被序列化</p>
-<p><img src="/.com//Users\其然乐衣Letitbe\AppData\Roaming\Typora\typora-user-images\image-20221010191347950.png" alt="image-20221010191347950"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="cladqj0dx003ewkv6eewrcjvi" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-刷题笔记/刷题总结" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.821Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">刷题总结</a>
+      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/">nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>
+    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
   </div>
 
           
@@ -399,43 +570,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-Java的split方法使用多种分隔符切分字符串"><a href="#1-Java的split方法使用多种分隔符切分字符串" class="headerlink" title="1. Java的split方法使用多种分隔符切分字符串"></a>1. Java的split方法使用多种分隔符切分字符串</h1><p><strong>方法一：</strong><br>多个分隔符使用**’|’**分开，例如：</p>
-<pre><code>      String str = &quot;abc;123,456?999|haha&quot;;
-      String[] strs=str.split(&quot;;|,&quot;);
-      for(String s : strs)&#123;
-          System.out.println(s);
-      &#125;
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">123</span><br><span class="line">456?999|haha</span><br></pre></td></tr></table></figure>
-
-<p><strong>方法二：</strong><br>使用中括号括起来**[“…”]**，例如:</p>
-<pre><code>    String str = &quot;abc;123,456?999|haha&quot;;
-    String[] strs = str.split(&quot;[;,?|25]&quot;);
-    for(String s : strs)&#123;
-        System.out.println(s);
-    &#125;
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">6</span><br><span class="line">999</span><br><span class="line">haha</span><br></pre></td></tr></table></figure>
+        <p><strong>（本博文的方法对于阿里云和腾讯与服务器都适用 ）</strong></p>
+<p><strong>场景：</strong></p>
+<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
 
 
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>上图表示项目部署成功，便可以在浏览器上进行访问</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image">但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
+<p>而我们想项目程序在关闭退出终端后，也一样继续运行，</p>
+<p>这时候需要使用 <strong>nohup</strong> 命令启动（该命令可以在你退出帐户&#x2F;关闭终端之后继续运行相应的进程）</p>
+<p><strong>输入如下命令：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
 
-<h1 id="2-位运算"><a href="#2-位运算" class="headerlink" title="2.位运算"></a>2.位运算</h1><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">重要的 位运算 算法公式</span><br><span class="line"></span><br><span class="line">num1 &amp;= num1 - <span class="number">1</span>; <span class="comment">// 最低的 1 变成 0</span></span><br><span class="line"></span><br><span class="line">num1 |= num1 + <span class="number">1</span>; <span class="comment">// 最低的 0 变成 1</span></span><br></pre></td></tr></table></figure>
+
+<p> 但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>1、原因</strong></p>
+<p>是因为使用 nohup 会产生日志文件，默认写入到 nohup.out</p>
+<p><strong>2、解决</strong></p>
+<p>将 nohup 的日志输出到 &#x2F;dev&#x2F;null，这个目录会让所有到它这的信息自动消失</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &gt; /dev/null 2&gt; /dev/null &amp;</span><br></pre></td></tr></table></figure>
 
 
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>其它解决方法：</strong><br>就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &amp; </span><br></pre></td></tr></table></figure>
 
 
-
-<p>持续更新…</p>
-
+<p><strong>停止进程</strong></p>
+<p>如果想停止进程运行的话，可通过命令（kill -9 进程号PID）进程号来杀死</p>
+<p>另外也可以使用 ps -def | grep “进程名” 命令来查找PID。</p>
+<p>找到 PID 后，就可以使用 kill PID 来删除。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9  进程号PID</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="cladqj0e0003owkv6bq8c0l5j" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="claph4m8o003sh4v69tsnctri" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
 
     </footer>
   </div>
@@ -446,12 +621,12 @@
 
 
   
-    <article id="post-elasticsearch/索引库中的文档操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-springboot/Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.243Z" itemprop="datePublished">
+    <a href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:39:44.181Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -463,14 +638,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/">索引库中的文档的操作</a>
+      <a class="article-title" href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+    <a class="article-category-link" href="/categories/mybatisplus/">mybatisplus</a>,<a class="article-category-link" href="/categories/springboot/">springboot</a>
   </div>
 
           
@@ -482,26 +657,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="索引库中的文档的操作"><a href="#索引库中的文档的操作" class="headerlink" title="索引库中的文档的操作"></a>索引库中的文档的操作</h1><p><img src="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/41a470384f02452a8565ca97a2681702.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/264b09d6e2a94a8a87ac5527907b8c25.png" alt="img"><img src="https://img-blog.csdnimg.cn/9839abedff6b41709b41fdbf1d021320.png" alt="img"></p>
-<p>（实例）代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 插入文档</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zy@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 查询文档</span><br><span class="line">GET /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除文档</span><br><span class="line">DELETE /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式1：全量修改文档，如果存在则删除旧的，新的覆盖旧的，如果原先没有，则新增该文档（所以放修改方式相当于也是一种插入文档的方法）</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zhaoyun@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式2: 局部修改文档字段</span><br><span class="line">POST /heima/_update/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;doc&quot;:&#123;</span><br><span class="line">    &quot;email&quot;: &quot;ZY@itcast.cn&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>问题描述<br>MyBatis无法查询出属性名和数据库字段名不完全相同的数据。</p>
+<p>即：属性名和数据库字段名分别为驼峰命名和下划线命名时查出的数据为NULL。</p>
+<p>问题分析<br>MyBatis默认是属性名和数据库字段名一一对应的，即 </p>
+<blockquote>
+<p>数据库表列：user_name </p>
+<p>实体类属性：user_name</p>
+</blockquote>
+<p>但是java中一般使用驼峰命名 </p>
+<blockquote>
+<p>数据库表列：user_name </p>
+<p>实体类属性：userName</p>
+</blockquote>
+<p>实体类属性：userName</p>
+<p><strong>解决方案 (开启驼峰命名转换)</strong><br>在Spring Boot中，可以通过设置<strong>map-underscore-to-camel-case</strong>属性为true来开启驼峰功能。  </p>
+<p>MyBatis配置： </p>
+<p><strong>application.properties中：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.configuration.map-underscore-to-camel-case=true</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>运行截图：</p>
-<p><img src="https://img-blog.csdnimg.cn/069e55bbd4ec47308b0147aa38adab91.png" alt="img"><img src="https://img-blog.csdnimg.cn/6e1212cd2f794a579424363b32fb9adc.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/640be243e52d45a18b47ef5dfe0b3095.png" alt="img"><img src="https://img-blog.csdnimg.cn/4aa5f5fd7ce74a6a814f9338b68beae5.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e7ddbb1bb05f40078872f81abe3e60c9.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/06615bad2d7942acb41706e51cc56bdc.png" alt="img"></p>
+
+
+
+<p><strong>application.yml中：</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  configuration:</span><br><span class="line">    map-underscore-to-camel-case: true</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="cladqj0dh002bwkv60thaah0g" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="claph4m8e003dh4v68vm070ou" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
 
     </footer>
   </div>
@@ -512,12 +701,12 @@
 
 
   
-    <article id="post-elasticsearch/RestClient查询文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-springboot/mybatisplus + 数据库 相关注解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.239Z" itemprop="datePublished">
+    <a href="/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:36:22.517Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -529,14 +718,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">RestClient查询文档</a>
+      <a class="article-title" href="/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/">mybatisplus + 数据库 相关注解</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+    <a class="article-category-link" href="/categories/mybatisplus/">mybatisplus</a>
   </div>
 
           
@@ -548,28 +737,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="快速入门："><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h1><p><img src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<h1 id="match-all查询："><a href="#match-all查询：" class="headerlink" title="match_all查询："></a>match_all查询：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//match_all查询</span><br><span class="line">    @Test</span><br><span class="line">    void testMatchAll() throws IOException &#123;</span><br><span class="line">        String index  = &quot;tb_disable_date_diary&quot;;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(index);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //解析响应</span><br><span class="line">        handleResponce(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //解析响应</span><br><span class="line">    private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数据</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            Diary diary = JSON.parseObject(json,Diary.class);</span><br><span class="line">            System.out.println(&quot;diary = &quot;+diary);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <p>关联：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5591d4a48c140d190c89a416d1e0e30~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>pom.xml配置注入依赖：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c519c49613b4b95b4635e6a0e4c78d4~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--        mybatisplus+数据库相关开始--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.4.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">&lt;!--        mybatisplus+数据库相关结束--&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/48392c3346d746448e7109a3c8d960c0.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//分页和排序</span><br><span class="line">   @Test</span><br><span class="line">   void restPageAndSort() throws IOException &#123;</span><br><span class="line">       //页码，每页大小</span><br><span class="line">       int page = 2,size = 5;</span><br><span class="line"></span><br><span class="line">       //1.准备Request</span><br><span class="line">       SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">       //2.准备DSL</span><br><span class="line">       //2.1 query</span><br><span class="line">       request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">       //2.2 排序 sort</span><br><span class="line">       request.source().sort(&quot;price&quot;, SortOrder.ASC);</span><br><span class="line">       //2.3 分页from，size</span><br><span class="line">       request.source().from((page - 1) * size).size(5);</span><br><span class="line"></span><br><span class="line">       //3.发送请求</span><br><span class="line">       SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">       handleResponce(response);</span><br><span class="line"></span><br><span class="line">       System.out.println(response);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">       //4.解析响应</span><br><span class="line">       SearchHits searchHits = response.getHits();</span><br><span class="line">       //4.1获取总条数</span><br><span class="line">       long total = searchHits.getTotalHits().value;</span><br><span class="line">       System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">       //4.2文档数据</span><br><span class="line">       SearchHit[] hits = searchHits.getHits();</span><br><span class="line">       //4.3遍历</span><br><span class="line">       for(SearchHit hit : hits)&#123;</span><br><span class="line">           //获取文档source</span><br><span class="line">           String json = hit.getSourceAsString();</span><br><span class="line">           //反序列化</span><br><span class="line">           HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">           System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a><strong>高亮</strong></h2><p><img src="https://img-blog.csdnimg.cn/84cfb92b326c4ff18403e7089b76f7a9.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/8b969709155446f48b193ac2e9fa59f7.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//高亮</span><br><span class="line">    @Test</span><br><span class="line">    void testHighlight() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        //2.1 query</span><br><span class="line">        request.source().query(QueryBuilders.matchQuery(&quot;all&quot;,&quot;如家&quot;));</span><br><span class="line">        //2.2 高亮</span><br><span class="line">        request.source().highlighter(new HighlightBuilder().field(&quot;name&quot;).requireFieldMatch(false));</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        handleResponce1(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void handleResponce1(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数组</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line"></span><br><span class="line">            //获取高亮结果</span><br><span class="line">            Map&lt;String, HighlightField&gt; highlightFields = hit.getHighlightFields();</span><br><span class="line">            if(!CollectionUtils.isEmpty(highlightFields))&#123;</span><br><span class="line">                //根据各字段名获取高亮结果</span><br><span class="line">                HighlightField highlightField = highlightFields.get(&quot;name&quot;);</span><br><span class="line">                if(highlightField != null)&#123;</span><br><span class="line">                    //获取高亮</span><br><span class="line">                    String name = highlightField.getFragments()[0].string();</span><br><span class="line">                    //覆盖非高亮结果</span><br><span class="line">                    hotelDoc.setName(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/e569b9e6eae2472cb508245fe942dd15.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="cladqj0dd0026wkv66yw9c672" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" data-id="claph4m8g003gh4v68g6o2vkq" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li></ul>
 
     </footer>
   </div>
@@ -580,12 +761,12 @@
 
 
   
-    <article id="post-elasticsearch/javaRestClient操作索引库和文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-MQ/（rabbitmq的高级特性）消息可靠性" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.233Z" itemprop="datePublished">
+    <a href="/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:32:05.810Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">08</span>
   </time>
 </a>
    
@@ -597,14 +778,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/">javaRestClient操作索引库和文档</a>
+      <a class="article-title" href="/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/">（rabbitmq的高级特性）消息可靠性</a>
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
   </div>
 
           
@@ -616,103 +797,91 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-创建索引库："><a href="#1-创建索引库：" class="headerlink" title="1. 创建索引库："></a><strong>1. 创建索引库：</strong></h1><p><img src="https://img-blog.csdnimg.cn/0fb9368cceef43ddbd2bb17ed8d24088.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//创建索引库</span><br><span class="line">   @Test</span><br><span class="line">   void createHotelIndex() throws IOException &#123;</span><br><span class="line">       //1.创建Request对象</span><br><span class="line">       CreateIndexRequest request = new CreateIndexRequest(&quot;hotel&quot;);</span><br><span class="line">       //2.准备请求的参数：DSL语句</span><br><span class="line">       request.source(MAPPING_TEMPLATE, XContentType.JSON);</span><br><span class="line">       //3.发送请求</span><br><span class="line">       client.indices().create(request,RequestOptions.DEFAULT);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=158&spm_id_from=333.851.header_right.history_list.click&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili">高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h1 id="一、生产者消息确认"><a href="#一、生产者消息确认" class="headerlink" title="一、生产者消息确认"></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/976c4e3d38b843599bc3342a347cdce9~tplv-k3u1fbpfcp-zoom-1.image">一、生产者消息确认</h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9499d135a8b84556bd7d16d790c1594f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="1-在生成者这个微服务的apllication-yml中添加配置"><a href="#1-在生成者这个微服务的apllication-yml中添加配置" class="headerlink" title="1.在生成者这个微服务的apllication.yml中添加配置"></a>1.在生成者这个微服务的apllication.yml中添加配置<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a8b6d8c3569343339e077fe63939adb3~tplv-k3u1fbpfcp-zoom-1.image"></h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/977d66ad1951428e86d00bd13147c136~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  rabbitmq:</span><br><span class="line">    publisher-confirm-type: correlated</span><br><span class="line">    publisher-returns: true</span><br><span class="line">    template:</span><br><span class="line">      mandatory: true</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public static final String MAPPING_TEMPLATE = &quot;&#123;\n&quot; +</span><br><span class="line">            &quot;  \&quot;mappings\&quot;: &#123;\n&quot; +</span><br><span class="line">            &quot;    \&quot;properties\&quot;: &#123;\n&quot; +</span><br><span class="line">            &quot;      \&quot;id\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;name\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;text\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;analyzer\&quot;: \&quot;ik_max_word\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;address\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;index\&quot;:\&quot;false\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;price\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;integer\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;score\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;integer\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;brand\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;city\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;starName\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;business\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;copy_to\&quot;: \&quot;all\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;location\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;geo_point\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;pic\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;keyword\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;index\&quot;:false\n&quot; +</span><br><span class="line">            &quot;      &#125;,\n&quot; +</span><br><span class="line">            &quot;      \&quot;all\&quot;:&#123;\n&quot; +</span><br><span class="line">            &quot;        \&quot;type\&quot;:\&quot;text\&quot;,\n&quot; +</span><br><span class="line">            &quot;        \&quot;analyzer\&quot;: \&quot;ik_max_word\&quot;\n&quot; +</span><br><span class="line">            &quot;      &#125;\n&quot; +</span><br><span class="line">            &quot;    &#125;\n&quot; +</span><br><span class="line">            &quot;  &#125;\n&quot; +</span><br><span class="line">            &quot;&#125;&quot;;</span><br></pre></td></tr></table></figure>
 
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/18a3d3fc162e4e2ab8f61c956df60776.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/feb2d88bfe144638b243e9d89a0d7392.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/ad59b410007345dc967234c73e5ba534.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<h2 id="2-删除索引库："><a href="#2-删除索引库：" class="headerlink" title="2. 删除索引库："></a>2. 删除索引库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//删除索引库</span><br><span class="line">    @Test</span><br><span class="line">    void textDeleteHotelIndex() throws IOException &#123;</span><br><span class="line">        //1.创建Request对象</span><br><span class="line">        DeleteIndexRequest request = new DeleteIndexRequest(&quot;hotel&quot;);</span><br><span class="line"></span><br><span class="line">        //2.发送请求</span><br><span class="line">        client.indices().delete(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="3-旁段是否存在索引库："><a href="#3-旁段是否存在索引库：" class="headerlink" title="3. 旁段是否存在索引库："></a>3. 旁段是否存在索引库：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//判断是否存在索引库</span><br><span class="line">   @Test</span><br><span class="line">   void textExistsHotelIndex() throws IOException &#123;</span><br><span class="line">       //1.创建Request对象</span><br><span class="line">       GetIndexRequest request = new GetIndexRequest(&quot;hotel&quot;);</span><br><span class="line"></span><br><span class="line">       //2.发送请求</span><br><span class="line">       boolean exists = client.indices().exists(request,RequestOptions.DEFAULT);</span><br><span class="line">       System.out.println(exists ? &quot;索引库已经存在！&quot; : &quot;索引库不存在！&quot;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/69ddc8f23003493eb829f87158800d7e.png" alt="img"></p>
-<h2 id="4-修改文档"><a href="#4-修改文档" class="headerlink" title="4. 修改文档"></a>4. 修改文档</h2><p><img src="https://img-blog.csdnimg.cn/fcab1400718748bea29dc7c0466a2437.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//修改文档</span><br><span class="line">    @Test</span><br><span class="line">    void testUpdateDocument() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        UpdateRequest request = new UpdateRequest(&quot;hotel&quot;,&quot;61083&quot;);</span><br><span class="line"></span><br><span class="line">        //2.准备请求参数</span><br><span class="line">        request.doc(</span><br><span class="line">                &quot;price&quot;,&quot;952&quot;,</span><br><span class="line">                &quot;starName&quot;,&quot;四钻&quot;</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        client.update(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="5-查询文档"><a href="#5-查询文档" class="headerlink" title="5. 查询文档"></a>5. 查询文档</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//根据id查询</span><br><span class="line">   @Test</span><br><span class="line">   void testAddDocumentById() throws IOException &#123;</span><br><span class="line"></span><br><span class="line">       //1.准备好request</span><br><span class="line">       GetRequest request = new GetRequest(&quot;hotel&quot;,&quot;61083&quot;);</span><br><span class="line">       //2.发送请求 ，得到响应</span><br><span class="line">       GetResponse response = client.get(request,RequestOptions.DEFAULT);</span><br><span class="line">       //3.解析响应结果</span><br><span class="line">       String json = response.getSourceAsString();</span><br><span class="line"></span><br><span class="line">       HotelDoc hotelDoc= JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">       System.out.println(hotelDoc);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="6-批量添加文档"><a href="#6-批量添加文档" class="headerlink" title="6. 批量添加文档"></a>6. 批量添加文档</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//批量添加</span><br><span class="line">    @Test</span><br><span class="line">    void testBulkRequest() throws IOException &#123;</span><br><span class="line">        //批量查询酒店的数量</span><br><span class="line">        List&lt;Hotel&gt; hotels = new hotelService.list();</span><br><span class="line"></span><br><span class="line">        for(Hotel hotel : hotels)&#123;</span><br><span class="line">            HotelDoc hotelDoc = new HotelDoc(hotel);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //1.创建Request</span><br><span class="line">        BulkRequest request = new BulkRequest();</span><br><span class="line">        //2.准备参数，添加多个新增的Request</span><br><span class="line">        for(Hotel hotel : hotels)&#123;</span><br><span class="line">            //转换为文档类型的HotelDoc</span><br><span class="line">            HotelDoc hotelDoc = new HotelDoc(hotel);</span><br><span class="line">            //创建新增文档的Request对象</span><br><span class="line">            request.add(new IndexRequest(&quot;hotel&quot;)</span><br><span class="line">                    .id(hotelDoc.getId().toString())</span><br><span class="line">                    .source(JSON.toJSONString(hotelDoc),XContentType.JSON));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        client.bulk(request,RequestOptions.DEFAULT);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/8611bf94e9a9441a8a2eda88060392a2.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="cladqj0de0027wkv61tvmgznn" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
+<h3 id="2-每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置"><a href="#2-每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置" class="headerlink" title="2.每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置"></a>2.每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8058dadf229f4f089249b9b905e33bf9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/23223eb1f684431ebba0fe3d179676f0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.beans.BeansException;</span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.ApplicationContextAware;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">/*</span><br><span class="line">ApplicationContextAware ： spring 的bean工厂的通知</span><br><span class="line"> */</span><br><span class="line">@Slf4j  //记录日志</span><br><span class="line">@Configuration</span><br><span class="line">public class CommonConfig implements ApplicationContextAware &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;</span><br><span class="line">        // 从bean工厂中获取 RabbitTemplate 对象</span><br><span class="line">        RabbitTemplate rabbitTemplate = applicationContext.getBean( RabbitTemplate.class );</span><br><span class="line">        // 配置ReturnCallback</span><br><span class="line">//        rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() &#123;</span><br><span class="line">//            // 像这种里面只有一个方法的，把鼠标方法 new 前面，会提醒 推荐用lambda表达式，快捷键 Alt + Enter</span><br><span class="line">//            @Override</span><br><span class="line">//            public void returnedMessage(Message message, int i, String s, String s1, String s2) &#123;</span><br><span class="line">//</span><br><span class="line">//            &#125;</span><br><span class="line">//        &#125;);</span><br><span class="line">        // 像这种里面只有一个方法的，把鼠标方法 new 前面，会提醒 推荐用lambda表达式，快捷键 Alt + Enter</span><br><span class="line">        rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -&gt; &#123;</span><br><span class="line">            // 记录日志 【 &#123;&#125;是占位符，replyCode, replyText, exchange...会依次填进占位符里的 】</span><br><span class="line">            log.error( &quot;消息发送到队列失败，响应码：&#123;&#125;, 失败原因：&#123;&#125;, 交换机：&#123;&#125;, 路由key：&#123;&#125;, 消息：&#123;&#125;&quot;, </span><br><span class="line">                    replyCode, replyText, exchange, routingKey, message.toString() );</span><br><span class="line"></span><br><span class="line">            // 如果有需要的话，可以重发消息</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
+<h3 id="3-发送消息，指定消息ID、消息ConfirmCallback"><a href="#3-发送消息，指定消息ID、消息ConfirmCallback" class="headerlink" title="3.发送消息，指定消息ID、消息ConfirmCallback"></a>3.发送消息，指定消息ID、消息ConfirmCallback</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/562749aa0959434bac83cf26a34124a3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.CorrelationData;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line">import org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line">import org.springframework.util.concurrent.FailureCallback;</span><br><span class="line">import org.springframework.util.concurrent.SuccessCallback;</span><br><span class="line"></span><br><span class="line">import java.util.UUID;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class SpringAmqpTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testSendMessage2SimpleQueue() throws InterruptedException &#123;</span><br><span class="line">        // 1.准备消息</span><br><span class="line">        String message = &quot;hello, spring amqp!&quot;;</span><br><span class="line"></span><br><span class="line">        // 2.准备CorrelationData</span><br><span class="line">        // 2.1.消息ID</span><br><span class="line">        CorrelationData correlationData = new CorrelationData( UUID.randomUUID().toString() );</span><br><span class="line">        // 2.2.准备ConfirmCallback</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        correlationData.getFuture().addCallback(result -&gt; &#123;   //成功回调</span><br><span class="line">            // 判断结果</span><br><span class="line">            if( result.isAck() ) &#123;</span><br><span class="line">                // ACK</span><br><span class="line">                log.debug( &quot;消息成功投递到交换机！消息ID：&#123;&#125;&quot;, correlationData.getId() );</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                //NACK</span><br><span class="line">                log.error( &quot;消息投递到交换机失败！消息ID：&#123;&#125;&quot;, correlationData.getId() );</span><br><span class="line">                // 重发消息</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, ex -&gt; &#123;   //失败回调</span><br><span class="line">            //记录日志</span><br><span class="line">            log.error( &quot;消息发送失败！&quot;, ex );</span><br><span class="line">        &#125;);</span><br><span class="line">        // 2.发送消息</span><br><span class="line">        rabbitTemplate.convertAndSend(&quot;amq.topic&quot;, &quot;simple.text&quot;, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  
-    <article id="post-elasticsearch/ES聚合分析报错：“reason“ " class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.229Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/">ES聚合分析报错:“reason“</a>
-    </h1>
-  
 
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
-  </div>
+<p>测试：</p>
+<p>（给交换机添加绑定关系，这一步看情况做，如果绑定关系已经有的了的表不需要这一步）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/467fcbdbb5a44297aa42c52fdb8e1baf~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>测试错误例子</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2a8933eca3e4ec7ade295c93c9ad222~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>4.总结</strong></p>
+<p><strong>SpringAMQP中处理消息确认的几种情况：</strong></p>
+<p><strong>publisher-comfirm：</strong></p>
+<p>• 消息成功发送到exchange，返回ack</p>
+<p>• 消息发送失败，没有到达交换机，返回nack</p>
+<p>• 消息发送过程中出现异常，没有收到回执</p>
+<p><strong>消息成功发送到exchange，但没有路由到queue，调用ReturnCallback</strong></p>
+<p>​       </p>
+<h1 id="二、消息持久化"><a href="#二、消息持久化" class="headerlink" title="二、消息持久化"></a>二、消息持久化</h1><p>MQ默认的是内存存储，如果mq发生了宕机，数据是可能丢失。如果要想数据安全，就要做到持久化，也就是能将数据写进磁盘里</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/82eff0c6db2c4e1da180b1e059bd4b3c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb553ed03d294385affcf50f0427df5a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><p>交换机和队列持久化 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.mq.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.amqp.core.*;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class CommonConfig &#123;</span><br><span class="line"></span><br><span class="line">    // 交换机持久化</span><br><span class="line">    @Bean</span><br><span class="line">    public DirectExchange simpleDirect() &#123;</span><br><span class="line">        // 三个参数：                            交换机名称、      是否持久化、 当没有queue与其绑定时是否自动删除</span><br><span class="line">        return new DirectExchange( &quot;simple.direct&quot;, true, false );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 队列持久化</span><br><span class="line">    @Bean</span><br><span class="line">    public Queue simpleQueue() &#123;</span><br><span class="line">        // 使用QueueBuilder构建队列，durable就是持久化的   nonDurable()非持久化的</span><br><span class="line">        return QueueBuilder.durable( &quot;simple.queue&quot; ).build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          
-              
 
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>因为<code>brand</code>的<code>type</code>是<code>text，``text</code>或<code>annotated_text</code>字段<code>doc_values</code>默认为<code>false</code>。</p>
-<p>简单理解，就是<code>text</code>字段作为一个整体，默认没有索引。</p>
-<p><img src="https://img-blog.csdnimg.cn/7167950f76224359bedc252c4fb816da.png" alt="img"></p>
-<p> 解释：</p>
-<p>​    因为brand的type是<strong>text</strong>，<strong>text</strong>或<strong>annotated_text</strong>字段doc_values默认为false。简单理解，就是text字段作为一个整体，默认没有索引。</p>
-<p>​    不过text分词之后的keyword是有索引的，因而可以对brand.keyword进行聚合。如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/642629de221a4b4abbc09b979c654f63.png" alt="img"></p>
+
+<p> 交换机、队列持久了，但并不代表消息就能持久了，所以必须做消息持久化</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66f17c8189b145d190787baebca25d49~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 1.准备消息   MessageDeliveryMode.PERSISTENT 消息持久化，这样重启mq消息也可以保留</span><br><span class="line">        Message message =  MessageBuilder.withBody( &quot;hello, spring&quot;.getBytes(StandardCharsets.UTF_8) )</span><br><span class="line">                .setDeliveryMode( MessageDeliveryMode.PERSISTENT )</span><br><span class="line">                .build();</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>交换机 和 队列 创建 以及 发送消息 的源码其实默认的就是 持久化 的</strong></p>
+<p><strong>而之所以学，是因为我们有时候为了提高性能，便可以将一些非必要的设置为 非持久化</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/87c46b7545ef43dcb468372b93620180~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b32741e57ce240bd8761e095794c2193~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="三、消费者消息确认"><a href="#三、消费者消息确认" class="headerlink" title="三、消费者消息确认"></a>三、消费者消息确认</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fad642f6fcf4ab9b966cef09c4b3445~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>测试 auto：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e2e1291b6a64428d87c95da9ef5016f4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>进入simple.queue生产一条消息 </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94c067caf9eb425d8c4de611b67a865b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>填写 消息并发送</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a08671d0cb84bf29df8fd390436d54b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 刷新</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ef90187423a43648814b93947f13ac1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a2bbbd542374023830cdc420f643ac0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 当消费者出现异常后，消息会不断requeue（重新入队）到队列，再重新发送给消费者，然后再次异常，再次requeue，无限循环，导致mq的消息处理飙升，带来不必要的压力：<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f6cdddbe6e854216b3a503de4280709b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> auto模式 这种情况下，虽然也不好，mq一直在尝试，但是至少消息不会丢失，</p>
+<p>auto的这种遇到处理失败后一直投递再投递，这种处理方式不太友好，但是可以改的，看<strong>四、失败重试机制</strong></p>
+<h1 id="四、失败重试机制"><a href="#四、失败重试机制" class="headerlink" title="四、失败重试机制"></a>四、失败重试机制</h1><h1 id="-1"><a href="#-1" class="headerlink" title></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6111acbe4a3e4f06a3855f43490dfa68~tplv-k3u1fbpfcp-zoom-1.image"></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba41987a46c8400e8ab03b2c2504eb2d~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3201199944734eaeb90e58883dc1a6ff~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 重试次数耗尽之后，其实会返回一个reject拒绝，然后就会把消息丢弃，<strong>这是重试机制的默认策略</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6e70936b61b43e6bc7e35afaee51c62~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 重试次数耗尽之后，会把消息丢弃，事实上丢弃也没事，因为已经重试了那么多次了，还是次失败的，即便把消息再丢回给mq，mq再投递给你，也还是会失败。</p>
+<p>那么除了丢弃，还有没有其它的策略呢？有的…</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e2fd1adaeb342e1bfa9663c7efad8b2~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 这种方案是最健康的方案了，也建议在生产环境下 使用这种方案</p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc1f72677ca147068b7be687d1ba882d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.mq.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.amqp.core.Binding;</span><br><span class="line">import org.springframework.amqp.core.BindingBuilder;</span><br><span class="line">import org.springframework.amqp.core.DirectExchange;</span><br><span class="line">import org.springframework.amqp.core.Queue;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.amqp.rabbit.retry.MessageRecoverer;</span><br><span class="line">import org.springframework.amqp.rabbit.retry.RepublishMessageRecoverer;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class ErrormessageConfig &#123;</span><br><span class="line"></span><br><span class="line">    //首先，定义接收失败消息的交换机、队列及其绑定关系：</span><br><span class="line">    @Bean</span><br><span class="line">    public DirectExchange errorMessageExchange() &#123;</span><br><span class="line">        return new DirectExchange( &quot;error.direct&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public Queue errorQueue() &#123;</span><br><span class="line">        return new Queue( &quot;error.queue&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public Binding errorMessageBinding() &#123;</span><br><span class="line">        return BindingBuilder.bind( errorQueue() ).to( errorMessageExchange() ).with( &quot;errpr&quot; );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //定义RepublishMessageRecoverer 会 覆盖spring默认的默bean (我们想覆盖spring默认的bean，重新定义一个bean即可)</span><br><span class="line">    @Bean</span><br><span class="line">    public MessageRecoverer republishMessageRecoverer( RabbitTemplate rabbitTemplate ) &#123;</span><br><span class="line">        return new RepublishMessageRecoverer( rabbitTemplate,  &quot;error.direct&quot;, &quot;error&quot; );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7188c75381374c40869984b806ae0369~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60d536df891f4153a02300de3ea88a63~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9720db6dd8c14a87b2b82299baaeb1d3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/631d7785be334e069f5d327a1db94a2a~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="cladqj0d7001swkv626no2p05" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" data-id="claph4m7c001bh4v6bdx6azxm" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
 
     </footer>
   </div>
@@ -726,7 +895,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -771,9 +940,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>73</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>33</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>25</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>94</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>46</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>30</strong><br>标签</div></a>
     </div>
 
 
