@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>49</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>34</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>104</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>52</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>37</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,133 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-SpringSecurity/总结分析" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" class="article-date">
+  <time class="post-time" datetime="2022-11-12T09:40:41.206Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="clb51enhg001bcgv663gd2lwn" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-权限认证/JWT 生成Token、解析Token的简单工具类" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="article-date">
+  <time class="post-time" datetime="2022-11-12T08:55:13.197Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/">JWT 生成Token、解析Token的简单工具类</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/token/">token</a>,<a class="article-category-link" href="/categories/token/JWT/">JWT</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pom-xml导入依赖："><a href="#pom-xml导入依赖：" class="headerlink" title="pom.xml导入依赖："></a>pom.xml导入依赖：</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;jjwt&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;<span class="number">0.9</span><span class="number">.1</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="JwtTokenManager工具类"><a href="#JwtTokenManager工具类" class="headerlink" title="JwtTokenManager工具类"></a>JwtTokenManager工具类</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.atguigu.security.entity.User;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.Claims;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.CompressionCodecs;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.Jwts;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.SignatureAlgorithm;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/12</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JwtTokenManager</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 用于签名的私钥</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">PRIVATE_KEY</span> <span class="operator">=</span> <span class="string">&quot;516Letitbe&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 签发者</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ISSUER</span> <span class="operator">=</span> <span class="string">&quot;Letitbe&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 过期时间 1 小时</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">EXPIRATION_ONE_HOUR</span> <span class="operator">=</span> <span class="number">3600L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 过期时间 1 天</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">EXPIRATION_ONE_DAY</span> <span class="operator">=</span> <span class="number">3600</span> * <span class="number">24</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成Token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user         token存储的 实体类 信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> expireTime   token的过期时间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">createToken</span><span class="params">(User user, <span class="type">long</span> expireTime)</span> &#123;</span><br><span class="line">        <span class="comment">// 过期时间</span></span><br><span class="line">        <span class="keyword">if</span> ( expireTime == <span class="number">0</span> ) &#123;</span><br><span class="line">            <span class="comment">// 如果是0，就设置默认 1天 的过期时间</span></span><br><span class="line">            expireTime = EXPIRATION_ONE_DAY;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, Object&gt; claims = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">// 自定义有效载荷部分, 将User实体类用户名和密码存储</span></span><br><span class="line">        claims.put(<span class="string">&quot;id&quot;</span>, user.getId());</span><br><span class="line">        claims.put(<span class="string">&quot;username&quot;</span>, user.getUsername());</span><br><span class="line">        claims.put(<span class="string">&quot;password&quot;</span>, user.getPassword());</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> Jwts.builder()</span><br><span class="line">                <span class="comment">// 发证人</span></span><br><span class="line">                .setIssuer(ISSUER)</span><br><span class="line">                <span class="comment">// 有效载荷</span></span><br><span class="line">                .setClaims(claims)</span><br><span class="line">                <span class="comment">// 设定签发时间</span></span><br><span class="line">                .setIssuedAt(<span class="keyword">new</span> <span class="title class_">Date</span>())</span><br><span class="line">                <span class="comment">// 设置有效时长</span></span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + expireTime))</span><br><span class="line">                <span class="comment">// 使用HS512算法签名，PRIVATE_KEY为签名密钥</span></span><br><span class="line">                .signWith(SignatureAlgorithm.HS512, PRIVATE_KEY)</span><br><span class="line">                <span class="comment">// compressWith() 压缩方法，当载荷过长时可对其进行压缩</span></span><br><span class="line">                <span class="comment">// 可采用jjwt实现的两种压缩方法CompressionCodecs.GZIP和CompressionCodecs.DEFLATE</span></span><br><span class="line">                .compressWith(CompressionCodecs.GZIP)</span><br><span class="line">                <span class="comment">// 生成JWT</span></span><br><span class="line">                .compact();</span><br><span class="line">        <span class="keyword">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取token中的User实体类</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">getUserFromToken</span><span class="params">(String token)</span> &#123;</span><br><span class="line">        <span class="comment">// 获取有效载荷</span></span><br><span class="line">        <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> getClaimsFromToken(token);</span><br><span class="line">        <span class="comment">// 解析token后，从有效载荷取出值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> (String) claims.get(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> (String) claims.get(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> (String) claims.get(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="comment">// 封装成User实体类</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        user.setId( id );</span><br><span class="line">        user.setUsername( username );</span><br><span class="line">        user.setPassword( password );</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取有效载荷</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Claims <span class="title function_">getClaimsFromToken</span><span class="params">(String token)</span>&#123;</span><br><span class="line">        <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            claims = Jwts.parser()</span><br><span class="line">                    <span class="comment">//设定解密私钥</span></span><br><span class="line">                    .setSigningKey(PRIVATE_KEY)</span><br><span class="line">                    <span class="comment">//传入Token</span></span><br><span class="line">                    .parseClaimsJws(token)</span><br><span class="line">                    <span class="comment">//获取载荷类</span></span><br><span class="line">                    .getBody();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> claims;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">czyTokenTest</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        user.setId(<span class="string">&quot;1arg232t3tg231235&quot;</span>);</span><br><span class="line">        user.setUsername(<span class="string">&quot;其然乐衣&quot;</span>);</span><br><span class="line">        user.setPassword(<span class="string">&quot;2000516&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> jwtTokenManager.createToken(user, <span class="number">0L</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;生成的token: &quot;</span>);</span><br><span class="line">        System.out.println(token);</span><br><span class="line">        <span class="type">User</span> <span class="variable">userFromToken</span> <span class="operator">=</span> jwtTokenManager.getUserFromToken(token);</span><br><span class="line">        System.out.println(<span class="string">&quot;userFromToken:&quot;</span>);</span><br><span class="line">        System.out.println(userFromToken);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../images/image-20221112165845740.png" alt="image-20221112165845740"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="clb51enj20048cgv6ew35677s" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/token/" rel="tag">token</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-零碎笔记/test测试注意事项" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
+  <time class="post-time" datetime="2022-11-12T07:09:51.307Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>非void返回类型的test是不能独立自己进行运行的，否则会报下午的错误“No tests were found”</p>
+<p><img src="/../../images/image-20221112151022771.png" alt="image-20221112151022771"></p>
+<p>但可以通过其它的测试类来调用运行，比如：</p>
+<p><img src="/../../images/image-20221112151331621.png" alt="image-20221112151331621"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clb51enj4004bcgv61ukp0zqt" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-SpringSecurity/网上学习资源链接" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -291,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clb2a6s4h001bwwv63da2eczj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clb51enhe0018cgv6ch75064d" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -361,7 +488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clb2a6s49000vwwv63pv2hke4" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clb51enh5000tcgv663da7dum" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -420,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clb2a6s4e0015wwv6dyoncpil" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clb51enh90011cgv67vpj213s" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -532,7 +659,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clb2a6s48000twwv6aiqq5wcr" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clb51enh4000qcgv6h9babdgn" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -587,7 +714,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="clb2a6s60003pwwv69400detj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="clb51eniv003ucgv6d1dw3aar" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li></ul>
@@ -653,7 +780,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" data-id="clb2a6s5p0031wwv6d6fx8col" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" data-id="clb51enid002qcgv63g4359qn" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -723,233 +850,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" data-id="clb2a6s42000hwwv67xyjdpri" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-MQ/（rabbitmq的高级特性）惰性队列" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T09:23:29.728Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/">（rabbitmq的高级特性）惰性队列</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=160&vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-03-消息堆积及惰性队列_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<h1 id="1-消息堆积问题"><a href="#1-消息堆积问题" class="headerlink" title="1.消息堆积问题"></a>1.消息堆积问题</h1><p><img src="https://img-blog.csdnimg.cn/b99d3d1549204d588c14889ef1d9c246.png" alt="img"></p>
-<p> 当出现高并发的时候，一如说有一百万条，这些消息都扔到内存当中，显然是不合适的，所以需要学习 队形队列</p>
-<h1 id="2-惰性队列"><a href="#2-惰性队列" class="headerlink" title="2.惰性队列"></a>2.惰性队列</h1><p> <img src="https://img-blog.csdnimg.cn/1245c0f36dd548db84d5c5d494c2d331.png" alt="img"></p>
-<p>使用第一种Bean方式方式显然方便些</p>
-<p><img src="https://img-blog.csdnimg.cn/69f85d1fbdcb4501a3804dabefea0ce2.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/9876735c7b4845b3b333773526244587.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" data-id="clb2a6s46000mwwv6dgq71s8v" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-MQ/(rabbitmq的高级特性)死信交换机" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T09:19:27.933Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/">(rabbitmq的高级特性)死信交换机</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 对应的教程视频：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=159&vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-02-死信交换机_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<h1 id="1-初始死信交换机"><a href="#1-初始死信交换机" class="headerlink" title="1.初始死信交换机"></a>1.初始死信交换机</h1><p><img src="https://img-blog.csdnimg.cn/2689f1bfc1eb42778182145abfcf6675.png" alt="img"></p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>什么样的消息会成为死信？</p>
-<p>•消息被消费者reject或者返回nack</p>
-<p>•消息超时未消费</p>
-<p>•队列满了</p>
-<p>如何给队列绑定死信交换机？</p>
-<p>•给队列设置dead-letter-exchange属性，指定一个交换机</p>
-<p>•给队列设置dead-letter-routing-key属性，设置死信交换机与死信队列的RoutingKey</p>
-<h1 id="2-TTL"><a href="#2-TTL" class="headerlink" title="2.TTL"></a>2.TTL</h1><p><img src="https://img-blog.csdnimg.cn/e68465dd5a8b49dd8ccb078c78f1ef94.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/ab0c69d04e4546f481d0f07ed98eb68a.png" alt="img"><img src="https://img-blog.csdnimg.cn/d7bc1af04dae44f9b6a644135646c125.png" alt="img"></p>
-<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title=" 总结："></a><img src="https://img-blog.csdnimg.cn/af49a4d919f84acdb4de208beb3f50f4.png" alt="img"> <strong>总结：</strong></h2><p>消息超时的两种方式是？</p>
-<p>•给队列设置ttl属性，进入队列后超过ttl时间的消息变为死信</p>
-<p>•给消息设置ttl属性，队列接收到消息超过ttl时间后变为死信</p>
-<p>•两者共存时，以时间短的ttl为准</p>
-<p>如何实现发送一个消息20秒后消费者才收到消息？</p>
-<p>•给消息的目标队列指定死信交换机</p>
-<p>•消费者监听与死信交换机绑定的队列</p>
-<p>•发送消息时给消息设置ttl为20秒</p>
-<h1 id="3-延迟队列"><a href="#3-延迟队列" class="headerlink" title="3.延迟队列"></a>3.延迟队列</h1><p><img src="https://img-blog.csdnimg.cn/7e4045074e8645398aee01a86bd72b6d.png" alt="img"></p>
-<p> <strong>延迟队列插件</strong></p>
-<p>因为延迟队列的需求非常多，所以RabbitMQ的官方也推出了一个插件，原生支持延迟队列效果。</p>
-<p> 详细安装过程略~~~（我也没装，只是做下笔记，具体怎么装看教程视频吧或是自行查询资料）</p>
-<p><img src="https://img-blog.csdnimg.cn/4f7be72a86ca4d52bace861262cf91b0.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/662b16adf47048b5b82200fe32c3d4b2.png" alt="img"><img src="https://img-blog.csdnimg.cn/8400f734ba474b95b9177715cb17f499.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/6281fbc64d7048149430bca5ba0d4641.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/8df2a4654802484e9d257c28c0f4eb48.png" alt="img"></p>
-<h2 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h2><p>延迟队列插件的使用步骤包括哪些？</p>
-<p>•声明一个交换机，添加delayed属性为true</p>
-<p>•发送消息时，添加x-delay头，值为超时时间</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/" data-id="clb2a6s3z000ewwv6400t3hq0" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-MQ/rabbitmq的高级特性" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T09:17:35.388Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/">rabbitmq的高级特性</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MQ的一些常见问题"><a href="#MQ的一些常见问题" class="headerlink" title="MQ的一些常见问题"></a>MQ的一些常见问题</h1><ul>
-<li><strong>消息可靠性问题：</strong>如何确保发送的消息至少被消费一次</li>
-<li><strong>延迟消息问题：</strong>如何实现消息的延迟投递</li>
-<li><strong>消息堆积问题：</strong>如何解决数百万消息堆积，无法及时消费的问题</li>
-<li><strong>高可用问题：</strong>如何避免单点的MQ故障而导致的不可用问题</li>
-</ul>
-<p>一、消息可靠性</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126685420?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126685420%22,%22source%22:%22QRLYLETITBE%22%7D">(78条消息) （rabbitmq的高级特性）消息可靠性_其然乐衣的博客-CSDN博客</a></p>
-</blockquote>
-<p>二、死信交换机</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126711760?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126711760%22,%22source%22:%22QRLYLETITBE%22%7D">(18条消息) (rabbitmq的高级特性)死信交换机_其然乐衣的博客-CSDN博客</a></p>
-</blockquote>
-<p>三、惰性队列</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126712044?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126712044%22,%22source%22:%22QRLYLETITBE%22%7D">(19条消息) （rabbitmq的高级特性）惰性队列_其然乐衣的博客-CSDN博客</a></p>
-</blockquote>
-<p>四、MQ集群</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126713121?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126713121%22,%22source%22:%22QRLYLETITBE%22%7D">(19条消息) （rabbitmq的高级特性）MQ集群_其然乐衣的博客-CSDN博客</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" data-id="clb2a6s3y000dwwv6h7onaddu" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" data-id="clb51engy000gcgv6h2131set" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -1011,9 +912,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>101</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>49</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>34</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>104</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>52</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>37</strong><br>标签</div></a>
     </div>
 
 
