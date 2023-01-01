@@ -119,15 +119,17 @@
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cy0628/p/15164994.html">Swagger注释API :@ApiModel - Chen洋 - 博客园 (cnblogs.com)</a></p>
 <p>导入swagger依赖：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@ApiModel这个注解</span><br><span class="line">  这个注解的是作用在类上面的，是用来描述类的一些基本信息的。下面，我们会逐个的进行讲解。</span><br><span class="line"></span><br><span class="line">value属性</span><br><span class="line">  这个属性，提供的是类的一个备用名。如果我们不设置，那么默认情况下，将使用的是class类的名字。</span><br><span class="line"></span><br><span class="line">description属性</span><br><span class="line">  对于类，提供一个详细的描述信息</span><br><span class="line"></span><br><span class="line">parent属性</span><br><span class="line">  这个属性，描述的是类的一些父类的信息。</span><br><span class="line"></span><br><span class="line">discriminator属性</span><br><span class="line">  这个属性解释起来有些麻烦，因为这个类主要是体现出了断言当中。</span><br><span class="line"></span><br><span class="line">subTypes属性</span><br><span class="line">  举个实例，如果我们此时有一个父类Animal。同时，对于这个父类，我们的系统中有这个类的子类Cat、Dog、Pig等。如果我们在我们的父类上，通过这个属性，指定了我们想要使用的子类的话，那么在生成Swagger的文档的话，会自动的展示的是Animal这个属性，但是在属性的字段中，会显示出子类的一些独有的属性，其实在这里，是不推荐使用的。因为这样会让别人认为，这些子类独有的属性，也是父类才有的。</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li></li>
-</ol>
+
+
+
+<p>3. </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clcdl1rl2004s8wv608o9dsnp" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clcdlbfdl004ttsv6h3464phn" class="article-share-link">分享</a>
       
       
     </footer>

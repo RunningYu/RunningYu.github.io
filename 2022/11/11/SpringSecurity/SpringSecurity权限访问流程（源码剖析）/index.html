@@ -5,22 +5,22 @@
   
   <title>SpringSecurity权限访问流程（源码剖析） | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ExceptionTranslationFilter 过滤器 该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：   FilterSecurityInterceptor 过滤器 FilterSecurityInterceptor 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置">
+  <meta name="description" content="ExceptionTranslationFilter 过滤器该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：  FilterSecurityInterceptor 过滤器FilterSecurityInterceptor 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringSecurity权限访问流程（源码剖析）">
 <meta property="og:url" content="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="ExceptionTranslationFilter 过滤器 该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：   FilterSecurityInterceptor 过滤器 FilterSecurityInterceptor 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置">
+<meta property="og:description" content="ExceptionTranslationFilter 过滤器该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：  FilterSecurityInterceptor 过滤器FilterSecurityInterceptor 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111205806671.png">
-<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111210309165.png">
+<meta property="og:image" content="http://example.com/images/image-20221111205806671.png">
+<meta property="og:image" content="http://example.com/images/image-20221111210309165.png">
 <meta property="article:published_time" content="2022-11-11T12:45:44.574Z">
 <meta property="article:modified_time" content="2022-11-11T13:04:00.950Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="SpringSecurity">
 <meta property="article:tag" content="源码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/11/11/images/image-20221111205806671.png">
+<meta name="twitter:image" content="http://example.com/images/image-20221111205806671.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -118,18 +118,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="exceptiontranslationfilter-过滤器"><a class="markdownIt-Anchor" href="#exceptiontranslationfilter-过滤器"></a> <strong>ExceptionTranslationFilter 过滤器</strong></h2>
-<p>该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：</p>
-<p><img src="../../images/image-20221111205806671.png" alt="image-20221111205806671"></p>
-<h1 id="filtersecurityinterceptor-过滤器"><a class="markdownIt-Anchor" href="#filtersecurityinterceptor-过滤器"></a> <strong>FilterSecurityInterceptor</strong> <strong>过滤器</strong></h1>
-<p><strong>FilterSecurityInterceptor</strong> 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器<strong>ExceptionTranslationFilter</strong> 进行捕获和处理。具体源码如下：</p>
-<p><img src="../../images/image-20221111210309165.png" alt="image-20221111210309165"></p>
+        <h2 id="ExceptionTranslationFilter-过滤器"><a href="#ExceptionTranslationFilter-过滤器" class="headerlink" title="ExceptionTranslationFilter 过滤器"></a><strong>ExceptionTranslationFilter 过滤器</strong></h2><p>该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：</p>
+<p><img src="/../../images/image-20221111205806671.png" alt="image-20221111205806671"></p>
+<h1 id="FilterSecurityInterceptor-过滤器"><a href="#FilterSecurityInterceptor-过滤器" class="headerlink" title="FilterSecurityInterceptor 过滤器"></a><strong>FilterSecurityInterceptor</strong> <strong>过滤器</strong></h1><p><strong>FilterSecurityInterceptor</strong> 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器<strong>ExceptionTranslationFilter</strong> 进行捕获和处理。具体源码如下：</p>
+<p><img src="/../../images/image-20221111210309165.png" alt="image-20221111210309165"></p>
 <p>需要注意，<strong>Spring Security</strong> 的过滤器链是配置在 SpringMVC 的核心组件DispatcherServlet 运行之前。也就是说，请求通过 <strong>Spring Security</strong> 的所有过滤器，不意味着能够正常访问资源，该请求还需要通过 SpringMVC 的拦截器链。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clcdl1rj8000o8wv641wy1rfo" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clcdlbfbw000ztsv64f7xce2e" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
