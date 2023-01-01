@@ -43,7 +43,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>108</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
       <a href="/categories"><div><strong>55</strong><br>分类</div></a>
       <a href="/tags"><div><strong>40</strong><br>标签</div></a>
     </div>
@@ -75,6 +75,92 @@
 
         <section id="main">
   
+    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/双亲委派机制" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time class="post-time" datetime="2022-11-15T13:36:11.647Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">15</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">(JVM)双亲委派机制</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/interview/">interview</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>,<a class="article-category-link" href="/categories/interview/">interview</a>,<a class="article-category-link" href="/categories/interview/JVM/">JVM</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h1><p>Java 虚拟机对 class 文件采用的是<mark>按需加载</mark>的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是<mark>双亲委派模式</mark>，即把请求交由父类处理，它是一种任务委派模式。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a><strong>工作原理</strong></h2><ul>
+<li>1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；</li>
+<li>2）如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；</li>
+<li>3）<strong>如果父类加载器可以完成类加载任务，就成功返回</strong>（就不会由子类加载器去加载了），倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png" alt="image-20200705105151258"></p>
+<p>举例：</p>
+<p>1. </p>
+<p><img src="/../../../images/image-20221115204949307.png" alt="image-20221115204949307"></p>
+<p>出于安全考虑，Bootstrap 启动类加载器只加载包名为 java、javax、sun 等开头的类。一看你是java开头的，引导类加载就说了。这是归我管我来加载String（核心API里的String）。因此有父类来加载后，就不会再向下委托了，所以我们new 的这个String对象就是核心API里面的String类对象，而不是我们自定义的String，因此就没有打印出自定义String里的static静态资源里的语句</p>
+<p>2. </p>
+<p><img src="/../../../images/image-20221115205956137.png" alt="image-20221115205956137"></p>
+<p>委托到引导类加载器，它发现你这个包是jvm开头的，不归引导类加载管，就向下委托，也不归扩展类加载器管，所以最后回到系统类加载器来加载，因此最后输出结果就是系统类加载来进行的加载</p>
+<p>3. </p>
+<p><img src="/../../../images/image-20221115210219781.png" alt="image-20221115210219781"></p>
+<p>一直往上委托，就交给到了引导类加载器，它加载了String类以后，然后就想去执行main方法，但是核心API的String里面是没有main方法的，所以就报了 <mark>错误: 在类 java.lang.String 中找不到 main 方法</mark>. 可知，根本就没有试着想去加载我们自定义的String类，完全忽略掉你了</p>
+<p>4. </p>
+<p>当我们加载 jdbc.jar 用于实现数据库连接的时候，首先我们需要知道的是 jdbc.jar 是基于 SPI 接口进行实现的，所以在加载的时候，会进行双亲委派，最终从根加载器中加载 SPI 核心类，然后在加载 SPI 接口类，接着在进行反向委派，通过线程上下文类加载器进行实现类 jdbc.jar 的加载。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/bed320014f52bb27c8f3d795b3dc3b4a.png" alt="image-20200705105810107"></p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h2><ul>
+<li><strong>避免类的重复加载</strong></li>
+<li><strong>保护程序安全，防止核心 API 被随意篡改</strong><ul>
+<li>自定义类：java.lang.String</li>
+<li>自定义类：java.lang.ShkStart（报错：阻止创建 java.lang 开头的类）</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../../images/image-20221115212723174.png" alt="image-20221115212723174"></p>
+<p>引导类加载器看到是 java.lang开头的，就表示这是归它管，于是就要去加载这个ShkStart类了，但直接直接给它报错了，相当于，要加载java.lang这个包，要想访问是要有权限的，现在报错就是阻止我们去直接用这个java.lang包来自定义这个ShkStart类。其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个类，加载成功的话，就会导致对引导类加载器本身造成影响，所以这里是直接把引导类加载器给整挂了。所以我们也禁止去用java.lang这样的包名去命名</p>
+<p>其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个种自定义的类，加载成功的话，但里面可能会有一些<strong>恶意代码</strong>，就可能会会对现有的项目和程序进行破坏</p>
+<h2 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a><strong>沙箱安全机制</strong></h2><p>自定义 String 类，但是在加载自定义 String 类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载 jdk 自带的文件（rt.jar 包中 java\lang\String.class），报错信息说没有 main 方法，就是因为加载的是 rt.jar 包中的 string 类。这样可以保证对 java 核心源代码的保护，这就是沙箱安全机制。</p>
+<h1 id><a href="#" class="headerlink" title></a></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="clcdj6qhi0060v4v6de1g8t8e" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-interview/redis/说说你对Redis的了解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/" class="article-date">
@@ -104,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/" data-id="clbqsknxm0065i0v62fc6dz7k" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/" data-id="clcdj6qh1004wv4v6fa9odxho" class="article-share-link">分享</a>
       
       
     </footer>
@@ -139,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/14/interview/waitingSee/" data-id="clbqsknwc002xi0v6gupiebot" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/14/interview/waitingSee/" data-id="clcdj6qfj000tv4v61wyw7bto" class="article-share-link">分享</a>
       
       
     </footer>
@@ -419,7 +505,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clbqsknxj005vi0v64gn962mp" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clcdj6qhh005zv4v690k64urf" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -486,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" data-id="clbqsknvp001ci0v69vwu9njl" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" data-id="clcdj6qge002uv4v6a2we6af4" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -519,7 +605,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="clbqsknvo0019i0v6f3ctaeaq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="clcdj6qgg0033v4v60oa76wed" class="article-share-link">分享</a>
       
       
     </footer>
@@ -578,7 +664,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="clbqsknww004ki0v697h27jjr" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="clcdj6qgv004dv4v6f42ietjc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/token/" rel="tag">token</a></li></ul>
@@ -615,7 +701,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clbqsknwx004mi0v62ucp820c" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clcdj6qgy004kv4v62hh7gs4v" class="article-share-link">分享</a>
       
       
     </footer>
@@ -843,7 +929,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clbqsknvq001ei0v6g55xg2y9" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clcdj6qgi0039v4v69pdcdkwk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -913,66 +999,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clbqsknvk000wi0v6dodqhewb" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringSecurity/SpringSecurity权限访问流程（源码剖析）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-11T12:45:44.574Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity权限访问流程（源码剖析）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>,<a class="article-category-link" href="/categories/SpringSecurity/%E6%BA%90%E7%A0%81/">源码</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ExceptionTranslationFilter-过滤器"><a href="#ExceptionTranslationFilter-过滤器" class="headerlink" title="ExceptionTranslationFilter 过滤器"></a><strong>ExceptionTranslationFilter 过滤器</strong></h2><p>该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：</p>
-<p><img src="/../../images/image-20221111205806671.png" alt="image-20221111205806671"></p>
-<h1 id="FilterSecurityInterceptor-过滤器"><a href="#FilterSecurityInterceptor-过滤器" class="headerlink" title="FilterSecurityInterceptor 过滤器"></a><strong>FilterSecurityInterceptor</strong> <strong>过滤器</strong></h1><p><strong>FilterSecurityInterceptor</strong> 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器<strong>ExceptionTranslationFilter</strong> 进行捕获和处理。具体源码如下：</p>
-<p><img src="/../../images/image-20221111210309165.png" alt="image-20221111210309165"></p>
-<p>需要注意，<strong>Spring Security</strong> 的过滤器链是配置在 SpringMVC 的核心组件DispatcherServlet 运行之前。也就是说，请求通过 <strong>Spring Security</strong> 的所有过滤器，不意味着能够正常访问资源，该请求还需要通过 SpringMVC 的拦截器链。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clbqsknvn0016i0v6fqhzhpse" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clcdj6qga002kv4v69r9lg3lt" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -1034,7 +1061,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>108</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
       <a href="/categories"><div><strong>55</strong><br>分类</div></a>
       <a href="/tags"><div><strong>40</strong><br>标签</div></a>
     </div>
@@ -1072,7 +1099,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy;2021 - 2022 其然乐衣<br>
+      &copy;2022 - 2023 其然乐衣<br>
       由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
       主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
       
