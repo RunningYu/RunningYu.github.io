@@ -5,12 +5,12 @@
   
   <title>【分布式事务】XA模式、AT模式、TCC模式、SAGA模式 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考B站黑马教程视频：  高级篇Day2-03-动手实践_哔哩哔哩_bilibili    一、XA模式       二、 AT模式           三、TCC模式          四、Saga模式    四、四种模式的对比">
+  <meta name="description" content="参考B站黑马教程视频：  高级篇Day2-03-动手实践_哔哩哔哩_bilibili   一、XA模式        二、 AT模式              三、TCC模式             四、Saga模式  四、四种模式的对比">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【分布式事务】XA模式、AT模式、TCC模式、SAGA模式">
 <meta property="og:url" content="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="参考B站黑马教程视频：  高级篇Day2-03-动手实践_哔哩哔哩_bilibili    一、XA模式       二、 AT模式           三、TCC模式          四、Saga模式    四、四种模式的对比">
+<meta property="og:description" content="参考B站黑马教程视频：  高级篇Day2-03-动手实践_哔哩哔哩_bilibili   一、XA模式        二、 AT模式              三、TCC模式             四、Saga模式  四、四种模式的对比">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/745beeae3ca642c78aff91d85fe6628b~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c9130e3bdc64f0eb5852ca6c122a425~tplv-k3u1fbpfcp-zoom-1.image">
@@ -145,44 +145,39 @@
       
         <p>参考B站黑马教程视频：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=149&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day2-03-动手实践_哔哩哔哩_bilibili">高级篇Day2-03-动手实践_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=149&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day2-03-动手实践_哔哩哔哩_bilibili">高级篇Day2-03-动手实践_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/745beeae3ca642c78aff91d85fe6628b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<h1 id="一-xa模式"><a class="markdownIt-Anchor" href="#一-xa模式"></a> 一、XA模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c9130e3bdc64f0eb5852ca6c122a425~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bdcf55f4a9848f091776d531d062fda~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/470683757d404e9688dbaf17dde1edf0~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/669714ab671d437985d27de4021fdfc0~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a124dc1f7c8045d3bea64739f2191865~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<h1 id="二-at模式"><a class="markdownIt-Anchor" href="#二-at模式"></a> 二、 AT模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/67a70e46700c4c9ab2bbc3cf614250eb~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f3cc8ef1f0d4ee3b6b215befd90ac01~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1a15c92cce5547ba8e95cb162ec43bf7~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d01d8f3820f24936bbd2b090f1ce2b55~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c36cdaa74c8a475c8c5b60e173b9f8e4~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7824bc6efe3144aaad603f8dcc802cf6~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1281ce856033497cb5d651d63b7c2f19~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94f0eedf792e47bb9839bfbef207fb54~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0339c27aa63c4370ab5b1513e108aa33~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<h1 id="三-tcc模式"><a class="markdownIt-Anchor" href="#三-tcc模式"></a> 三、TCC模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42b3538f29434d20b6954899bda76fd7~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010912f002144482880661a46e39f59f~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/858e90ef0cd9406da4779a8abaf33349~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3f0eb18dced54dff9f788ebd88b96b17~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0f398e2c9224bc3892c8489d3883fa9~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05af9a60f4c34db79768a15dc95f5f5c~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae608053977d442fbdd556e033fcda7e~tplv-k3u1fbpfcp-zoom-1.image" alt><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6fb7648df8b41db845dc0f146824dbb~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4722208a42c0470983ca00f035de1504~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<h1 id="四-saga模式"><a class="markdownIt-Anchor" href="#四-saga模式"></a> 四、Saga模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/662bf331e424447dbefac8d90dbe8580~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/927441e650854e68a75aba60a260036d~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<h1 id="四-四种模式的对比"><a class="markdownIt-Anchor" href="#四-四种模式的对比"></a> 四、四种模式的对比</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/acb1137e27d84003a2cccf18458e2a05~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/745beeae3ca642c78aff91d85fe6628b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="一、XA模式"><a href="#一、XA模式" class="headerlink" title="一、XA模式"></a>一、XA模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c9130e3bdc64f0eb5852ca6c122a425~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bdcf55f4a9848f091776d531d062fda~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/470683757d404e9688dbaf17dde1edf0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/669714ab671d437985d27de4021fdfc0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a124dc1f7c8045d3bea64739f2191865~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二、-AT模式"><a href="#二、-AT模式" class="headerlink" title="二、 AT模式"></a>二、 AT模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/67a70e46700c4c9ab2bbc3cf614250eb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f3cc8ef1f0d4ee3b6b215befd90ac01~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1a15c92cce5547ba8e95cb162ec43bf7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d01d8f3820f24936bbd2b090f1ce2b55~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c36cdaa74c8a475c8c5b60e173b9f8e4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7824bc6efe3144aaad603f8dcc802cf6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1281ce856033497cb5d651d63b7c2f19~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94f0eedf792e47bb9839bfbef207fb54~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0339c27aa63c4370ab5b1513e108aa33~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="三、TCC模式"><a href="#三、TCC模式" class="headerlink" title="三、TCC模式"></a>三、TCC模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42b3538f29434d20b6954899bda76fd7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010912f002144482880661a46e39f59f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/858e90ef0cd9406da4779a8abaf33349~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3f0eb18dced54dff9f788ebd88b96b17~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0f398e2c9224bc3892c8489d3883fa9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05af9a60f4c34db79768a15dc95f5f5c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae608053977d442fbdd556e033fcda7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6fb7648df8b41db845dc0f146824dbb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4722208a42c0470983ca00f035de1504~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="四、Saga模式"><a href="#四、Saga模式" class="headerlink" title="四、Saga模式"></a>四、Saga模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/662bf331e424447dbefac8d90dbe8580~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/927441e650854e68a75aba60a260036d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="四、四种模式的对比"><a href="#四、四种模式的对比" class="headerlink" title="四、四种模式的对比"></a>四、四种模式的对比</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/acb1137e27d84003a2cccf18458e2a05~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clcdky3530076lov67mp4dp9i" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clcdkzmry006og4v6evooalgk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" rel="tag">分布式事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>

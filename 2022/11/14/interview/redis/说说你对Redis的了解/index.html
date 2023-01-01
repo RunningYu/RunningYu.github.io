@@ -5,12 +5,12 @@
   
   <title>Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:  说说你对Redis的了解 categories:  [面试, redis] tags: rabbitmq  得分点 Redis概念,Redis优点及用途 标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、">
+  <meta name="description" content="title:  说说你对Redis的了解categories:  [面试, redis]tags: rabbitmq  得分点 Redis概念,Redis优点及用途  标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 H">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo &amp; github">
 <meta property="og:url" content="http://example.com/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="title:  说说你对Redis的了解 categories:  [面试, redis] tags: rabbitmq  得分点 Redis概念,Redis优点及用途 标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、">
+<meta property="og:description" content="title:  说说你对Redis的了解categories:  [面试, redis]tags: rabbitmq  得分点 Redis概念,Redis优点及用途  标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 H">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-14T15:02:35.609Z">
 <meta property="article:modified_time" content="2022-11-14T15:06:13.947Z">
@@ -92,23 +92,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title:  说说你对Redis的了解<br>
-categories:</p>
+        <p>title:  说说你对Redis的了解<br>categories:</p>
 <ul>
-<li>[面试, redis]<br>
-tags:</li>
+<li>[面试, redis]<br>tags:</li>
 <li>rabbitmq</li>
 </ul>
-<p>得分点 Redis概念,Redis优点及用途</p>
+<p>得分点 Redis概念,Redis优点及用途 </p>
 <p>标准回答 ：</p>
-<p>Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带来了满足多种应用场景的能力,而且,Redis将所有数据放到内存中的做法让它的读写性能十分惊人。不仅如此,Redis的持久化机制保证了在发生类似断电,机械故障等情况时,内存中的数据不会丢失。此外Redis还提供了键过期、发布订阅、事务、流水线、Lua脚本等多个附加功能。总之,在合适的情况下使用Redis会大大增强系统的性能,减少开发人员工作量。 加分回答 适合Redis使用的场景： - 热点数据的缓存：redis访问速度块、支持的数据类型丰富,很适合用来存储热点数据。 - 限时业务：redis中可以使用expire命令设置一个键的生存时间,到时间后redis会删除它。因此,Redis在限时业务中的表现很亮眼。 - 计数器：incrby命令可以实现原子性的递增,所以可以运用于高并发的秒杀活动、分布式序列号的生成。 - 排行榜：关系型数据库在排行榜方面查询速度普遍偏慢,所以可以借助redis的SortedSet进行热点数据的排序。 - 分布式锁：这个主要利用redis的setnx命令进行,在后面的如何用Redis实现一个分布式锁中会进行详解。 - 延时操作：redis自2.8.0之后版本提供Keyspace Notifications功能,允许客户订阅Pub/Sub频道,以便以某种方式接收影响Redis数据集的事件。 - 分页查询、模糊查询：edis的set集合中提供了一个zrangebylex方法,通过ZRANGEBYLEX zset - + LIMIT 0 10 可以进行分页数据查询,其中- +表示获取全部数据；rangebylex key min max 这个就可以返回字典区间的数据可以利用这个特性可以进行模糊查询功能。 - 点赞,好友等相互关系的存储：Redis set对外提供的功能与list类似是一个列表的功能,特殊之处在于set是可以自动排重的,我们可以通过这一点实现类似共同好友等功能。 - 队列：由于redis有list push和list pop这样的命令,所以能够很方便的执行队列操作。</p>
+<p>Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带来了满足多种应用场景的能力,而且,Redis将所有数据放到内存中的做法让它的读写性能十分惊人。不仅如此,Redis的持久化机制保证了在发生类似断电,机械故障等情况时,内存中的数据不会丢失。此外Redis还提供了键过期、发布订阅、事务、流水线、Lua脚本等多个附加功能。总之,在合适的情况下使用Redis会大大增强系统的性能,减少开发人员工作量。 加分回答 适合Redis使用的场景： - 热点数据的缓存：redis访问速度块、支持的数据类型丰富,很适合用来存储热点数据。 - 限时业务：redis中可以使用expire命令设置一个键的生存时间,到时间后redis会删除它。因此,Redis在限时业务中的表现很亮眼。 - 计数器：incrby命令可以实现原子性的递增,所以可以运用于高并发的秒杀活动、分布式序列号的生成。 - 排行榜：关系型数据库在排行榜方面查询速度普遍偏慢,所以可以借助redis的SortedSet进行热点数据的排序。 - 分布式锁：这个主要利用redis的setnx命令进行,在后面的如何用Redis实现一个分布式锁中会进行详解。 - 延时操作：redis自2.8.0之后版本提供Keyspace Notifications功能,允许客户订阅Pub&#x2F;Sub频道,以便以某种方式接收影响Redis数据集的事件。 - 分页查询、模糊查询：edis的set集合中提供了一个zrangebylex方法,通过ZRANGEBYLEX zset - + LIMIT 0 10 可以进行分页数据查询,其中- +表示获取全部数据；rangebylex key min max 这个就可以返回字典区间的数据可以利用这个特性可以进行模糊查询功能。 - 点赞,好友等相互关系的存储：Redis set对外提供的功能与list类似是一个列表的功能,特殊之处在于set是可以自动排重的,我们可以通过这一点实现类似共同好友等功能。 - 队列：由于redis有list push和list pop这样的命令,所以能够很方便的执行队列操作。</p>
 <p>简介版回答：</p>
 <p>Redis是一款基于键值对的NoSQL数据库，Redis中拥有string(字符串)，hash(哈希)、list(列表)、set（集合）等多种数据结构，redis将数据写进内存的性能很快，不仅如此，如遇到系统崩溃，内存中的数据不会丢失；redis访问速度快、支持的数据类型丰富，很适合用来储存热点数据、 而且适用业务广，如可以运用expire命令来做限时业务，设置一个键的生存时间，到时间后redis会自动删除它，，如排行榜可以借住redis的SortedSet进行热点数据的排序，还有分页查询，模糊查询，点赞好友等</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/" data-id="clcdky34l0063lov63i3sg0gp" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/" data-id="clcdkzmrq0065g4v6ebs06d38" class="article-share-link">分享</a>
       
       
     </footer>
