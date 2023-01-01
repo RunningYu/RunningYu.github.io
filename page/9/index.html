@@ -112,21 +112,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
-<li>pom.xml配置之springboot<br>1.1 继承springboot父项目依赖</li>
+<li>pom.xml配置之springboot<br>
+1.1 继承springboot父项目依赖</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.7.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
-
-
 <p>1.2  插件依赖</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-
-
 <ol start="2">
 <li>启动类配置</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class SquareApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SquareApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 <ol start="3">
 <li>application.yml</li>
 </ol>
@@ -134,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" data-id="clcdkzmqt0046g4v69dozcq1p" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" data-id="clcdl1rkn003u8wv6ej4f7sg8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
@@ -186,33 +181,26 @@
       
         <p><strong>（本博文的方法对于阿里云和腾讯与服务器都适用 ）</strong></p>
 <p><strong>场景：</strong></p>
-<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： </p>
+<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>上图表示项目部署成功，便可以在浏览器上进行访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image">但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image" alt>但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
 <p>而我们想项目程序在关闭退出终端后，也一样继续运行，</p>
-<p>这时候需要使用 <strong>nohup</strong> 命令启动（该命令可以在你退出帐户&#x2F;关闭终端之后继续运行相应的进程）</p>
+<p>这时候需要使用 <strong>nohup</strong> 命令启动（该命令可以在你退出帐户/关闭终端之后继续运行相应的进程）</p>
 <p><strong>输入如下命令：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
-
-
-<p> 但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>1、原因</strong></p>
 <p>是因为使用 nohup 会产生日志文件，默认写入到 nohup.out</p>
 <p><strong>2、解决</strong></p>
-<p>将 nohup 的日志输出到 &#x2F;dev&#x2F;null，这个目录会让所有到它这的信息自动消失</p>
+<p>将 nohup 的日志输出到 /dev/null，这个目录会让所有到它这的信息自动消失</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &gt; /dev/null 2&gt; /dev/null &amp;</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>其它解决方法：</strong><br>就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><strong>其它解决方法：</strong><br>
+就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &amp; </span><br></pre></td></tr></table></figure>
-
-
 <p><strong>停止进程</strong></p>
 <p>如果想停止进程运行的话，可通过命令（kill -9 进程号PID）进程号来杀死</p>
 <p>另外也可以使用 ps -def | grep “进程名” 命令来查找PID。</p>
@@ -221,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="clcdkzmqe003bg4v622wc8an5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="clcdl1rkq003y8wv66dvchyb6" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
@@ -271,37 +259,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>问题描述<br>MyBatis无法查询出属性名和数据库字段名不完全相同的数据。</p>
+        <p>问题描述<br>
+MyBatis无法查询出属性名和数据库字段名不完全相同的数据。</p>
 <p>即：属性名和数据库字段名分别为驼峰命名和下划线命名时查出的数据为NULL。</p>
-<p>问题分析<br>MyBatis默认是属性名和数据库字段名一一对应的，即 </p>
+<p>问题分析<br>
+MyBatis默认是属性名和数据库字段名一一对应的，即</p>
 <blockquote>
-<p>数据库表列：user_name </p>
+<p>数据库表列：user_name</p>
 <p>实体类属性：user_name</p>
 </blockquote>
-<p>但是java中一般使用驼峰命名 </p>
+<p>但是java中一般使用驼峰命名</p>
 <blockquote>
-<p>数据库表列：user_name </p>
+<p>数据库表列：user_name</p>
 <p>实体类属性：userName</p>
 </blockquote>
 <p>实体类属性：userName</p>
-<p><strong>解决方案 (开启驼峰命名转换)</strong><br>在Spring Boot中，可以通过设置<strong>map-underscore-to-camel-case</strong>属性为true来开启驼峰功能。  </p>
-<p>MyBatis配置： </p>
+<p><strong>解决方案 (开启驼峰命名转换)</strong><br>
+在Spring Boot中，可以通过设置<strong>map-underscore-to-camel-case</strong>属性为true来开启驼峰功能。</p>
+<p>MyBatis配置：</p>
 <p><strong>application.properties中：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.configuration.map-underscore-to-camel-case=true</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p><strong>application.yml中：</strong> </p>
+<p><strong>application.yml中：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  configuration:</span><br><span class="line">    map-underscore-to-camel-case: true</span><br></pre></td></tr></table></figure>
-
-
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="clcdkzmqj003og4v63dh47c0f" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="clcdl1rki003j8wv689ug1rtr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
@@ -352,16 +336,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>关联：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5591d4a48c140d190c89a416d1e0e30~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5591d4a48c140d190c89a416d1e0e30~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>pom.xml配置注入依赖：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c519c49613b4b95b4635e6a0e4c78d4~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c519c49613b4b95b4635e6a0e4c78d4~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--        mybatisplus+数据库相关开始--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.4.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">&lt;!--        mybatisplus+数据库相关结束--&gt;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" data-id="clcdkzmqm003sg4v67yasai53" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" data-id="clcdl1rkj003n8wv6btg6evr6" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li></ul>
@@ -411,31 +394,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=158&spm_id_from=333.851.header_right.history_list.click&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili">高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili</a></p>
+        <h1 id="对应的教程视频"><a class="markdownIt-Anchor" href="#对应的教程视频"></a> 对应的教程视频：</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=158&amp;spm_id_from=333.851.header_right.history_list.click&amp;vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili">高级篇Day5-01-MQ常见问题及消息可靠性_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="一、生产者消息确认"><a href="#一、生产者消息确认" class="headerlink" title="一、生产者消息确认"></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/976c4e3d38b843599bc3342a347cdce9~tplv-k3u1fbpfcp-zoom-1.image">一、生产者消息确认</h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9499d135a8b84556bd7d16d790c1594f~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h3 id="1-在生成者这个微服务的apllication-yml中添加配置"><a href="#1-在生成者这个微服务的apllication-yml中添加配置" class="headerlink" title="1.在生成者这个微服务的apllication.yml中添加配置"></a>1.在生成者这个微服务的apllication.yml中添加配置<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a8b6d8c3569343339e077fe63939adb3~tplv-k3u1fbpfcp-zoom-1.image"></h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/977d66ad1951428e86d00bd13147c136~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="一-生产者消息确认"><a class="markdownIt-Anchor" href="#一-生产者消息确认"></a> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/976c4e3d38b843599bc3342a347cdce9~tplv-k3u1fbpfcp-zoom-1.image" alt>一、生产者消息确认</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9499d135a8b84556bd7d16d790c1594f~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h3 id="1在生成者这个微服务的apllicationyml中添加配置"><a class="markdownIt-Anchor" href="#1在生成者这个微服务的apllicationyml中添加配置"></a> 1.在生成者这个微服务的apllication.yml中添加配置<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a8b6d8c3569343339e077fe63939adb3~tplv-k3u1fbpfcp-zoom-1.image" alt></h3>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/977d66ad1951428e86d00bd13147c136~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  rabbitmq:</span><br><span class="line">    publisher-confirm-type: correlated</span><br><span class="line">    publisher-returns: true</span><br><span class="line">    template:</span><br><span class="line">      mandatory: true</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置"><a href="#2-每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置" class="headerlink" title="2.每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置"></a>2.每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8058dadf229f4f089249b9b905e33bf9~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/23223eb1f684431ebba0fe3d179676f0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="2每个rabbittemplate只能配置一个returncallback因此需要在项目启动过程中配置"><a class="markdownIt-Anchor" href="#2每个rabbittemplate只能配置一个returncallback因此需要在项目启动过程中配置"></a> 2.每个RabbitTemplate只能配置一个ReturnCallback，因此需要在项目启动过程中配置</h3>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8058dadf229f4f089249b9b905e33bf9~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/23223eb1f684431ebba0fe3d179676f0~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>代码：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.beans.BeansException;</span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.ApplicationContextAware;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">/*</span><br><span class="line">ApplicationContextAware ： spring 的bean工厂的通知</span><br><span class="line"> */</span><br><span class="line">@Slf4j  //记录日志</span><br><span class="line">@Configuration</span><br><span class="line">public class CommonConfig implements ApplicationContextAware &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;</span><br><span class="line">        // 从bean工厂中获取 RabbitTemplate 对象</span><br><span class="line">        RabbitTemplate rabbitTemplate = applicationContext.getBean( RabbitTemplate.class );</span><br><span class="line">        // 配置ReturnCallback</span><br><span class="line">//        rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() &#123;</span><br><span class="line">//            // 像这种里面只有一个方法的，把鼠标方法 new 前面，会提醒 推荐用lambda表达式，快捷键 Alt + Enter</span><br><span class="line">//            @Override</span><br><span class="line">//            public void returnedMessage(Message message, int i, String s, String s1, String s2) &#123;</span><br><span class="line">//</span><br><span class="line">//            &#125;</span><br><span class="line">//        &#125;);</span><br><span class="line">        // 像这种里面只有一个方法的，把鼠标方法 new 前面，会提醒 推荐用lambda表达式，快捷键 Alt + Enter</span><br><span class="line">        rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -&gt; &#123;</span><br><span class="line">            // 记录日志 【 &#123;&#125;是占位符，replyCode, replyText, exchange...会依次填进占位符里的 】</span><br><span class="line">            log.error( &quot;消息发送到队列失败，响应码：&#123;&#125;, 失败原因：&#123;&#125;, 交换机：&#123;&#125;, 路由key：&#123;&#125;, 消息：&#123;&#125;&quot;, </span><br><span class="line">                    replyCode, replyText, exchange, routingKey, message.toString() );</span><br><span class="line"></span><br><span class="line">            // 如果有需要的话，可以重发消息</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-发送消息，指定消息ID、消息ConfirmCallback"><a href="#3-发送消息，指定消息ID、消息ConfirmCallback" class="headerlink" title="3.发送消息，指定消息ID、消息ConfirmCallback"></a>3.发送消息，指定消息ID、消息ConfirmCallback</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/562749aa0959434bac83cf26a34124a3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 代码：</p>
+<h3 id="3发送消息指定消息id-消息confirmcallback"><a class="markdownIt-Anchor" href="#3发送消息指定消息id-消息confirmcallback"></a> 3.发送消息，指定消息ID、消息ConfirmCallback</h3>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/562749aa0959434bac83cf26a34124a3~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.CorrelationData;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line">import org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line">import org.springframework.util.concurrent.FailureCallback;</span><br><span class="line">import org.springframework.util.concurrent.SuccessCallback;</span><br><span class="line"></span><br><span class="line">import java.util.UUID;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class SpringAmqpTest &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private RabbitTemplate rabbitTemplate;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testSendMessage2SimpleQueue() throws InterruptedException &#123;</span><br><span class="line">        // 1.准备消息</span><br><span class="line">        String message = &quot;hello, spring amqp!&quot;;</span><br><span class="line"></span><br><span class="line">        // 2.准备CorrelationData</span><br><span class="line">        // 2.1.消息ID</span><br><span class="line">        CorrelationData correlationData = new CorrelationData( UUID.randomUUID().toString() );</span><br><span class="line">        // 2.2.准备ConfirmCallback</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        correlationData.getFuture().addCallback(result -&gt; &#123;   //成功回调</span><br><span class="line">            // 判断结果</span><br><span class="line">            if( result.isAck() ) &#123;</span><br><span class="line">                // ACK</span><br><span class="line">                log.debug( &quot;消息成功投递到交换机！消息ID：&#123;&#125;&quot;, correlationData.getId() );</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                //NACK</span><br><span class="line">                log.error( &quot;消息投递到交换机失败！消息ID：&#123;&#125;&quot;, correlationData.getId() );</span><br><span class="line">                // 重发消息</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, ex -&gt; &#123;   //失败回调</span><br><span class="line">            //记录日志</span><br><span class="line">            log.error( &quot;消息发送失败！&quot;, ex );</span><br><span class="line">        &#125;);</span><br><span class="line">        // 2.发送消息</span><br><span class="line">        rabbitTemplate.convertAndSend(&quot;amq.topic&quot;, &quot;simple.text&quot;, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 <p>测试：</p>
 <p>（给交换机添加绑定关系，这一步看情况做，如果绑定关系已经有的了的表不需要这一步）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/467fcbdbb5a44297aa42c52fdb8e1baf~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/467fcbdbb5a44297aa42c52fdb8e1baf~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>测试错误例子</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2a8933eca3e4ec7ade295c93c9ad222~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2a8933eca3e4ec7ade295c93c9ad222~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>4.总结</strong></p>
 <p><strong>SpringAMQP中处理消息确认的几种情况：</strong></p>
 <p><strong>publisher-comfirm：</strong></p>
@@ -443,56 +424,55 @@
 <p>• 消息发送失败，没有到达交换机，返回nack</p>
 <p>• 消息发送过程中出现异常，没有收到回执</p>
 <p><strong>消息成功发送到exchange，但没有路由到queue，调用ReturnCallback</strong></p>
-<p>​       </p>
-<h1 id="二、消息持久化"><a href="#二、消息持久化" class="headerlink" title="二、消息持久化"></a>二、消息持久化</h1><p>MQ默认的是内存存储，如果mq发生了宕机，数据是可能丢失。如果要想数据安全，就要做到持久化，也就是能将数据写进磁盘里</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/82eff0c6db2c4e1da180b1e059bd4b3c~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb553ed03d294385affcf50f0427df5a~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><p>交换机和队列持久化 </p>
+<p>​</p>
+<h1 id="二-消息持久化"><a class="markdownIt-Anchor" href="#二-消息持久化"></a> 二、消息持久化</h1>
+<p>MQ默认的是内存存储，如果mq发生了宕机，数据是可能丢失。如果要想数据安全，就要做到持久化，也就是能将数据写进磁盘里</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/82eff0c6db2c4e1da180b1e059bd4b3c~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb553ed03d294385affcf50f0427df5a~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码：</h3>
+<p>交换机和队列持久化</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.mq.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.amqp.core.*;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class CommonConfig &#123;</span><br><span class="line"></span><br><span class="line">    // 交换机持久化</span><br><span class="line">    @Bean</span><br><span class="line">    public DirectExchange simpleDirect() &#123;</span><br><span class="line">        // 三个参数：                            交换机名称、      是否持久化、 当没有queue与其绑定时是否自动删除</span><br><span class="line">        return new DirectExchange( &quot;simple.direct&quot;, true, false );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 队列持久化</span><br><span class="line">    @Bean</span><br><span class="line">    public Queue simpleQueue() &#123;</span><br><span class="line">        // 使用QueueBuilder构建队列，durable就是持久化的   nonDurable()非持久化的</span><br><span class="line">        return QueueBuilder.durable( &quot;simple.queue&quot; ).build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 交换机、队列持久了，但并不代表消息就能持久了，所以必须做消息持久化</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66f17c8189b145d190787baebca25d49~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>交换机、队列持久了，但并不代表消息就能持久了，所以必须做消息持久化</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66f17c8189b145d190787baebca25d49~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 1.准备消息   MessageDeliveryMode.PERSISTENT 消息持久化，这样重启mq消息也可以保留</span><br><span class="line">        Message message =  MessageBuilder.withBody( &quot;hello, spring&quot;.getBytes(StandardCharsets.UTF_8) )</span><br><span class="line">                .setDeliveryMode( MessageDeliveryMode.PERSISTENT )</span><br><span class="line">                .build();</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>交换机 和 队列 创建 以及 发送消息 的源码其实默认的就是 持久化 的</strong></p>
 <p><strong>而之所以学，是因为我们有时候为了提高性能，便可以将一些非必要的设置为 非持久化</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/87c46b7545ef43dcb468372b93620180~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b32741e57ce240bd8761e095794c2193~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="三、消费者消息确认"><a href="#三、消费者消息确认" class="headerlink" title="三、消费者消息确认"></a>三、消费者消息确认</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fad642f6fcf4ab9b966cef09c4b3445~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/87c46b7545ef43dcb468372b93620180~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b32741e57ce240bd8761e095794c2193~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id><a class="markdownIt-Anchor" href="#"></a> </h1>
+<h1 id="三-消费者消息确认"><a class="markdownIt-Anchor" href="#三-消费者消息确认"></a> 三、消费者消息确认</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fad642f6fcf4ab9b966cef09c4b3445~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>测试 auto：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e2e1291b6a64428d87c95da9ef5016f4~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>进入simple.queue生产一条消息 </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94c067caf9eb425d8c4de611b67a865b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e2e1291b6a64428d87c95da9ef5016f4~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>进入simple.queue生产一条消息</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94c067caf9eb425d8c4de611b67a865b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>填写 消息并发送</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a08671d0cb84bf29df8fd390436d54b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 刷新</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ef90187423a43648814b93947f13ac1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a2bbbd542374023830cdc420f643ac0~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 当消费者出现异常后，消息会不断requeue（重新入队）到队列，再重新发送给消费者，然后再次异常，再次requeue，无限循环，导致mq的消息处理飙升，带来不必要的压力：<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f6cdddbe6e854216b3a503de4280709b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> auto模式 这种情况下，虽然也不好，mq一直在尝试，但是至少消息不会丢失，</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a08671d0cb84bf29df8fd390436d54b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>刷新</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ef90187423a43648814b93947f13ac1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a2bbbd542374023830cdc420f643ac0~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>当消费者出现异常后，消息会不断requeue（重新入队）到队列，再重新发送给消费者，然后再次异常，再次requeue，无限循环，导致mq的消息处理飙升，带来不必要的压力：<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f6cdddbe6e854216b3a503de4280709b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>auto模式 这种情况下，虽然也不好，mq一直在尝试，但是至少消息不会丢失，</p>
 <p>auto的这种遇到处理失败后一直投递再投递，这种处理方式不太友好，但是可以改的，看<strong>四、失败重试机制</strong></p>
-<h1 id="四、失败重试机制"><a href="#四、失败重试机制" class="headerlink" title="四、失败重试机制"></a>四、失败重试机制</h1><h1 id="-1"><a href="#-1" class="headerlink" title></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6111acbe4a3e4f06a3855f43490dfa68~tplv-k3u1fbpfcp-zoom-1.image"></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba41987a46c8400e8ab03b2c2504eb2d~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3201199944734eaeb90e58883dc1a6ff~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 重试次数耗尽之后，其实会返回一个reject拒绝，然后就会把消息丢弃，<strong>这是重试机制的默认策略</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6e70936b61b43e6bc7e35afaee51c62~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 重试次数耗尽之后，会把消息丢弃，事实上丢弃也没事，因为已经重试了那么多次了，还是次失败的，即便把消息再丢回给mq，mq再投递给你，也还是会失败。</p>
+<h1 id="四-失败重试机制"><a class="markdownIt-Anchor" href="#四-失败重试机制"></a> 四、失败重试机制</h1>
+<h1 id="-2"><a class="markdownIt-Anchor" href="#-2"></a> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6111acbe4a3e4f06a3855f43490dfa68~tplv-k3u1fbpfcp-zoom-1.image" alt></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba41987a46c8400e8ab03b2c2504eb2d~tplv-k3u1fbpfcp-zoom-1.image" alt><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3201199944734eaeb90e58883dc1a6ff~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>重试次数耗尽之后，其实会返回一个reject拒绝，然后就会把消息丢弃，<strong>这是重试机制的默认策略</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6e70936b61b43e6bc7e35afaee51c62~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>重试次数耗尽之后，会把消息丢弃，事实上丢弃也没事，因为已经重试了那么多次了，还是次失败的，即便把消息再丢回给mq，mq再投递给你，也还是会失败。</p>
 <p>那么除了丢弃，还有没有其它的策略呢？有的…</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e2fd1adaeb342e1bfa9663c7efad8b2~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 这种方案是最健康的方案了，也建议在生产环境下 使用这种方案</p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc1f72677ca147068b7be687d1ba882d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e2fd1adaeb342e1bfa9663c7efad8b2~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>这种方案是最健康的方案了，也建议在生产环境下 使用这种方案</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc1f72677ca147068b7be687d1ba882d~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.mq.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.amqp.core.Binding;</span><br><span class="line">import org.springframework.amqp.core.BindingBuilder;</span><br><span class="line">import org.springframework.amqp.core.DirectExchange;</span><br><span class="line">import org.springframework.amqp.core.Queue;</span><br><span class="line">import org.springframework.amqp.rabbit.core.RabbitTemplate;</span><br><span class="line">import org.springframework.amqp.rabbit.retry.MessageRecoverer;</span><br><span class="line">import org.springframework.amqp.rabbit.retry.RepublishMessageRecoverer;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class ErrormessageConfig &#123;</span><br><span class="line"></span><br><span class="line">    //首先，定义接收失败消息的交换机、队列及其绑定关系：</span><br><span class="line">    @Bean</span><br><span class="line">    public DirectExchange errorMessageExchange() &#123;</span><br><span class="line">        return new DirectExchange( &quot;error.direct&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public Queue errorQueue() &#123;</span><br><span class="line">        return new Queue( &quot;error.queue&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">    @Bean</span><br><span class="line">    public Binding errorMessageBinding() &#123;</span><br><span class="line">        return BindingBuilder.bind( errorQueue() ).to( errorMessageExchange() ).with( &quot;errpr&quot; );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //定义RepublishMessageRecoverer 会 覆盖spring默认的默bean (我们想覆盖spring默认的bean，重新定义一个bean即可)</span><br><span class="line">    @Bean</span><br><span class="line">    public MessageRecoverer republishMessageRecoverer( RabbitTemplate rabbitTemplate ) &#123;</span><br><span class="line">        return new RepublishMessageRecoverer( rabbitTemplate,  &quot;error.direct&quot;, &quot;error&quot; );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7188c75381374c40869984b806ae0369~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60d536df891f4153a02300de3ea88a63~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9720db6dd8c14a87b2b82299baaeb1d3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/631d7785be334e069f5d327a1db94a2a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7188c75381374c40869984b806ae0369~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60d536df891f4153a02300de3ea88a63~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9720db6dd8c14a87b2b82299baaeb1d3~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/631d7785be334e069f5d327a1db94a2a~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" data-id="clcdkzmoz000hg4v64kvr9red" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" data-id="clcdl1rkc002x8wv6cwwvhv4i" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -546,36 +526,37 @@
 <li>通过下面命令下载插件:</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-marked</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/../../images/image-20221107182147634.png" alt="image-20221107182147634"></p>
+<p><img src="../../images/image-20221107182147634.png" alt="image-20221107182147634"></p>
 <ol start="2">
 <li>在自己的博客的source路劲下新建一个images文件夹</li>
 </ol>
-<p><img src="/../../images/image-20221107182334417.png" alt="image-20221107182334417"></p>
+<p><img src="../../images/image-20221107182334417.png" alt="image-20221107182334417"></p>
 <ol start="3">
 <li>在typora，进入到 文件–&gt;偏好设置–&gt;图像，然后选择复制到指定路径，选到上面新建的images文件夹路径，勾选下面红框的选项</li>
 </ol>
-<p><img src="/../../images/image-20221107182509496.png" alt="image-20221107182509496"></p>
+<p><img src="../../images/image-20221107182509496.png" alt="image-20221107182509496"></p>
 <ol start="4">
-<li><p>修改你博客的配置文件**_config.yml**</p>
+<li>
+<p>修改你博客的配置文件**_config.yml**</p>
 <ol>
-<li><p>修改配置：<img src="/../../images/image-20221107183227789.png" alt="image-20221107183227789"></p>
+<li>
+<p>修改配置：<img src="../../images/image-20221107183227789.png" alt="image-20221107183227789"></p>
 </li>
-<li><p>添加上下面语句：<img src="/../../images/image-20221107183236670.png" alt="image-20221107183236670"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>添加上下面语句：<img src="../../images/image-20221107183236670.png" alt="image-20221107183236670"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 </li>
 </ol>
-<p>之后，你每次复制图片过来，图片路径就是相对路径了<img src="/../../images/image-20221107182744468.png" alt="image-20221107182744468"></p>
+<p>之后，你每次复制图片过来，图片路径就是相对路径了<img src="../../images/image-20221107182744468.png" alt="image-20221107182744468"></p>
 <p>当然，对于网络位置的图片回自动是网络上的图片链接，这种图片在博客上是完全没问题的，比如：</p>
-<p><img src="/../../images/image-20221107182938178.png" alt="image-20221107182938178"></p>
+<p><img src="../../images/image-20221107182938178.png" alt="image-20221107182938178"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" data-id="clcdkzmqq0042g4v67blkawp8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" data-id="clcdl1rkv00468wv6cnbpf1h8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2/" rel="tag">hexo博客</a></li></ul>
@@ -626,30 +607,32 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>概念对比</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="一-mapping索引属性"><a href="#一-mapping索引属性" class="headerlink" title="一. mapping索引属性"></a>一. mapping索引属性</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d5c03e735ed4dcd83fba915c066cdb3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="二-索引库的操作"><a href="#二-索引库的操作" class="headerlink" title="二. 索引库的操作"></a>二. 索引库的操作</h1><h2 id="1-创建索引库"><a href="#1-创建索引库" class="headerlink" title="1. 创建索引库"></a>1. 创建索引库</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8c0a579dbdb483a84a112d0f1e0db78~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe320ace6ee740d3b1c269b71a2becad~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="一-mapping索引属性"><a class="markdownIt-Anchor" href="#一-mapping索引属性"></a> 一. mapping索引属性</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d5c03e735ed4dcd83fba915c066cdb3~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="二-索引库的操作"><a class="markdownIt-Anchor" href="#二-索引库的操作"></a> 二. 索引库的操作</h1>
+<h2 id="1-创建索引库"><a class="markdownIt-Anchor" href="#1-创建索引库"></a> 1. 创建索引库</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8c0a579dbdb483a84a112d0f1e0db78~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe320ace6ee740d3b1c269b71a2becad~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>实例：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#创建索引库</span><br><span class="line">PUT /heima</span><br><span class="line">&#123;</span><br><span class="line">  &quot;mappings&quot;: &#123;</span><br><span class="line">    &quot;properties&quot;: &#123;</span><br><span class="line">      &quot;info&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;text&quot;,</span><br><span class="line">        &quot;analyzer&quot;: &quot;ik_smart&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;email&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;keyword&quot;,</span><br><span class="line">        &quot;index&quot;: false</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;name&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;object&quot;,</span><br><span class="line">        &quot;properties&quot;: &#123;</span><br><span class="line">          &quot;firstname&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;keyword&quot;</span><br><span class="line">          &#125;,</span><br><span class="line">          &quot;lastname&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;keyword&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f29631d07cc4265b1c347cea62657f9~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="2-索引库的其他操作（查看，删除，修改（只能添加新的字段））："><a href="#2-索引库的其他操作（查看，删除，修改（只能添加新的字段））：" class="headerlink" title="2. 索引库的其他操作（查看，删除，修改（只能添加新的字段））："></a>2. 索引库的其他操作（<strong>查看，删除，修改（只能添加新的字段</strong>））：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a19018b3b804d24875641aba2283dfe~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9adc29f8d9a74cfebce28a884ff52f8f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f29631d07cc4265b1c347cea62657f9~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="2-索引库的其他操作查看删除修改只能添加新的字段"><a class="markdownIt-Anchor" href="#2-索引库的其他操作查看删除修改只能添加新的字段"></a> 2. 索引库的其他操作（<strong>查看，删除，修改（只能添加新的字段</strong>））：</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a19018b3b804d24875641aba2283dfe~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9adc29f8d9a74cfebce28a884ff52f8f~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>ps:索引库创建好后</p>
 <pre><code>    理论上是可以进行修改的
 
     但是实际开发中，是**禁止去修改**原有的字段的（**但可以添加新的字段**），因为修改会**对性能的影响是很大**的，可能会导致整个库都不可用
 </code></pre>
-<p>​        </p>
+<p>​</p>
 <p>（实例）代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 查询</span><br><span class="line">GET /heima</span><br><span class="line"></span><br><span class="line"># 修改索引库，添加新字段</span><br><span class="line">PUT /heima/_mapping</span><br><span class="line">&#123;</span><br><span class="line">  &quot;properties&quot;: &#123;</span><br><span class="line">    &quot;age&quot;: &#123;</span><br><span class="line">      &quot;type&quot;: &quot;integer&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 删除</span><br><span class="line">DELETE /heima</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="clcdkzmq2002kg4v61i6chk8s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="clcdl1rjz00278wv6bdd12ie7" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -701,22 +684,16 @@
       
         <p>1.引入es的RestHighLevelClient依赖：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--elasticsearch--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;7.12.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2.因为SpringBoot默认的ES版本是7.6.2，所以我们需要覆盖默认的ES版本： </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>2.因为SpringBoot默认的ES版本是7.6.2，所以我们需要覆盖默认的ES版本：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>3.初始化RestHighLevelClient：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return new RestHighLevelClient(RestClient.builder(</span><br><span class="line">                HttpHost.create(&quot;http://192.168.150.101:9200&quot;)</span><br><span class="line">));</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef0bee698bbd4d65a9ae016cd3db8af6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef0bee698bbd4d65a9ae016cd3db8af6~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="clcdkzmpy002bg4v6h4715fuz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="clcdl1rjw001x8wv6flar9g22" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -766,35 +743,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、RestAPI实现自动补全查询（代码讲解）"><a href="#一、RestAPI实现自动补全查询（代码讲解）" class="headerlink" title="一、RestAPI实现自动补全查询（代码讲解） "></a><strong>一、RestAPI实现自动补全查询（代码讲解）</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/691a87ed40d74802b9a828ac3e6d9143~tplv-k3u1fbpfcp-zoom-1.image"></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9c9b7ccedcac4942bf81110db9feb355~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/11c56098294b43ef8f5d0e973ba0f217~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b93f6065a15a48209cd50596642890b6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+        <h1 id="一-restapi实现自动补全查询代码讲解"><a class="markdownIt-Anchor" href="#一-restapi实现自动补全查询代码讲解"></a> <strong>一、RestAPI实现自动补全查询（代码讲解）</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/691a87ed40d74802b9a828ac3e6d9143~tplv-k3u1fbpfcp-zoom-1.image" alt></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9c9b7ccedcac4942bf81110db9feb355~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/11c56098294b43ef8f5d0e973ba0f217~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b93f6065a15a48209cd50596642890b6~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">    @Autowired</span><br><span class="line">    private RestHighLevelClient client;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void testSuggestion() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                &quot;suggestions&quot;,</span><br><span class="line">                SuggestBuilders.completionSuggestion(&quot;suggestion&quot;)</span><br><span class="line">                        .prefix(&quot;hm&quot;)</span><br><span class="line">                        .skipDuplicates(true)</span><br><span class="line">                        .size(10)</span><br><span class="line">        ));</span><br><span class="line">        //3.发起请求</span><br><span class="line">        SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //4.解析结果</span><br><span class="line">        Suggest suggest = response.getSuggest();</span><br><span class="line">        //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">        CompletionSuggestion suggestions = suggest.getSuggestion(&quot;suggestions&quot;);</span><br><span class="line">        //4,2 获取options</span><br><span class="line">        List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        for( CompletionSuggestion.Entry.Option option : options)&#123;</span><br><span class="line">            String text = option.getText().toString();</span><br><span class="line">            System.out.println(text);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">//        System.out.println(response);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
 <p>其中：</p>
-<p> @Autowired<br>    private RestHighLevelClient client;</p>
+<p>@Autowired<br>
+private RestHighLevelClient client;</p>
 <p>要在项目启动方法里面注入到bean里</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f87a3158ddd345dd91aef1107db73bbd~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="二、以下进行黑马旅游网的案例实现自动补全功能："><a href="#二、以下进行黑马旅游网的案例实现自动补全功能：" class="headerlink" title="二、以下进行黑马旅游网的案例实现自动补全功能："></a>二、以下进行黑马旅游网的案例实现自动补全功能：</h1><p>开始时，输入x，不能自动补全</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa557cad6c04bf59cc42408b716f3aa~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f87a3158ddd345dd91aef1107db73bbd~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="二-以下进行黑马旅游网的案例实现自动补全功能"><a class="markdownIt-Anchor" href="#二-以下进行黑马旅游网的案例实现自动补全功能"></a> 二、以下进行黑马旅游网的案例实现自动补全功能：</h1>
+<p>开始时，输入x，不能自动补全</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa557cad6c04bf59cc42408b716f3aa~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>RestAPI实现自动补全：</p>
-<h2 id="（1）在controller层写好接口"><a href="#（1）在controller层写好接口" class="headerlink" title="（1）在controller层写好接口"></a>（1）在controller层写好接口</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e106fbadcc474ebab6cece2e59aa5f68~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="1在controller层写好接口"><a class="markdownIt-Anchor" href="#1在controller层写好接口"></a> （1）在controller层写好接口</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e106fbadcc474ebab6cece2e59aa5f68~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;suggestion&quot;)</span><br><span class="line">    public List&lt;String&gt; getSuggestions(@RequestParam(&quot;key&quot;) String predix)&#123;</span><br><span class="line">        return hotelService.getSuggestions(predix);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="（2）在service层写好"><a href="#（2）在service层写好" class="headerlink" title="（2）在service层写好"></a>（2）在service层写好</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb71b469d2954c14a6c1bbc199626447~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="2在service层写好"><a class="markdownIt-Anchor" href="#2在service层写好"></a> （2）在service层写好</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb71b469d2954c14a6c1bbc199626447~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public List&lt;String&gt; getSuggestions(String predix) &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           //1.准备Request</span><br><span class="line">           SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">           //2.准备DSL</span><br><span class="line">           request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                   &quot;suggestions&quot;,</span><br><span class="line">                   SuggestBuilders.completionSuggestion(&quot;suggestion&quot;)</span><br><span class="line">                           .prefix(predix)</span><br><span class="line">                           .skipDuplicates(true)</span><br><span class="line">                           .size(10)</span><br><span class="line">           ));</span><br><span class="line">           //3.发起请求</span><br><span class="line">           SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">           //4.解析结果</span><br><span class="line">           Suggest suggest = response.getSuggest();</span><br><span class="line">           //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">           CompletionSuggestion suggestions = suggest.getSuggestion(&quot;suggestions&quot;);</span><br><span class="line">           //4,2 获取options</span><br><span class="line">           List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">           //4.3 遍历</span><br><span class="line">           List&lt;String&gt; list = new ArrayList&lt;String&gt;(options.size());</span><br><span class="line">           for( CompletionSuggestion.Entry.Option option : options)&#123;</span><br><span class="line">               String text = option.getText().toString();</span><br><span class="line">               System.out.println(text);</span><br><span class="line">               list.add(text);</span><br><span class="line">           &#125;</span><br><span class="line">           return list;</span><br><span class="line">       &#125; catch (IOException e) &#123;</span><br><span class="line">           throw  new RuntimeException();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-重新启动项目"><a href="#3-重新启动项目" class="headerlink" title="(3)重新启动项目"></a>(3)重新启动项目</h2><p>便可以进行自动补全了</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec50f82380f64659a212c21acf7788e9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="3重新启动项目"><a class="markdownIt-Anchor" href="#3重新启动项目"></a> (3)重新启动项目</h2>
+<p>便可以进行自动补全了</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec50f82380f64659a212c21acf7788e9~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" data-id="clcdkzmpw0027g4v62se4f7wr" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" data-id="clcdl1rjv001w8wv6anujgney" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -844,19 +821,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去"><a href="#设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去" class="headerlink" title="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去"></a><strong>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="若business有多个值，可进行切割"><a href="#若business有多个值，可进行切割" class="headerlink" title="若business有多个值，可进行切割"></a><strong>若business有多个值，可进行切割</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="进行切割"><a href="#进行切割" class="headerlink" title="进行切割"></a><strong>进行切割</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains(&quot;/&quot;))&#123;</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split(&quot;/&quot;);</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       &#125;else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+        <h2 id="设置索引库结构给用户添加可自动补全的suggestion并将一些字段变成集合放到suggestion里面去"><a class="markdownIt-Anchor" href="#设置索引库结构给用户添加可自动补全的suggestion并将一些字段变成集合放到suggestion里面去"></a> <strong>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</strong></h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h2 id="若business有多个值可进行切割"><a class="markdownIt-Anchor" href="#若business有多个值可进行切割"></a> <strong>若business有多个值，可进行切割</strong></h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h2 id="进行切割"><a class="markdownIt-Anchor" href="#进行切割"></a> <strong>进行切割</strong></h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains(&quot;/&quot;))&#123;</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split(&quot;/&quot;);</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       &#125;else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></table></figure>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>切割成功</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="clcdkzmq8002vg4v675fnflek" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="clcdl1rk8002o8wv66vjiga87" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
