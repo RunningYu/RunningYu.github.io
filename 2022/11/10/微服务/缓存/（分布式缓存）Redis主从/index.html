@@ -5,12 +5,12 @@
   
   <title>（分布式缓存）Redis主从 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对应的视频教程 高级篇Day3-02-Redis主从_哔哩哔哩_bilibili  一、搭建Redis主从集群1.集群结构我们搭建的主从集群结构如图：  共包含三个节点，一个主节点，两个从节点。 这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：    IP PORT 角色    192.168.150.101 7001 master   192.168.150.101 7">
+  <meta name="description" content="对应的视频教程  高级篇Day3-02-Redis主从_哔哩哔哩_bilibili   一、搭建Redis主从集群  1.集群结构 我们搭建的主从集群结构如图：  共包含三个节点，一个主节点，两个从节点。 这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：    IP PORT 角色     192.168.150.101 7001 master   192.168.15">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（分布式缓存）Redis主从">
 <meta property="og:url" content="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="对应的视频教程 高级篇Day3-02-Redis主从_哔哩哔哩_bilibili  一、搭建Redis主从集群1.集群结构我们搭建的主从集群结构如图：  共包含三个节点，一个主节点，两个从节点。 这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：    IP PORT 角色    192.168.150.101 7001 master   192.168.150.101 7">
+<meta property="og:description" content="对应的视频教程  高级篇Day3-02-Redis主从_哔哩哔哩_bilibili   一、搭建Redis主从集群  1.集群结构 我们搭建的主从集群结构如图：  共包含三个节点，一个主节点，两个从节点。 这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：    IP PORT 角色     192.168.150.101 7001 master   192.168.15">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/760dffe18def4d9dbb5499bcc3cc2a4f.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/4cf724d39ef5484a9eab3d9b064fe44f.png">
@@ -134,10 +134,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应的视频教程"><a href="#对应的视频教程" class="headerlink" title="对应的视频教程"></a>对应的视频教程</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=151&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-02-Redis主从_哔哩哔哩_bilibili</a></p>
+        <h1 id="对应的视频教程"><a class="markdownIt-Anchor" href="#对应的视频教程"></a> 对应的视频教程</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=151&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-02-Redis主从_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="一、搭建Redis主从集群"><a href="#一、搭建Redis主从集群" class="headerlink" title="一、搭建Redis主从集群"></a>一、搭建Redis主从集群</h1><h2 id="1-集群结构"><a href="#1-集群结构" class="headerlink" title="1.集群结构"></a>1.集群结构</h2><p>我们搭建的主从集群结构如图：</p>
+<h1 id="一-搭建redis主从集群"><a class="markdownIt-Anchor" href="#一-搭建redis主从集群"></a> 一、搭建Redis主从集群</h1>
+<h2 id="1集群结构"><a class="markdownIt-Anchor" href="#1集群结构"></a> 1.集群结构</h2>
+<p>我们搭建的主从集群结构如图：</p>
 <p><img src="https://img-blog.csdnimg.cn/760dffe18def4d9dbb5499bcc3cc2a4f.png" alt="img"></p>
 <p>共包含三个节点，一个主节点，两个从节点。</p>
 <p>这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：</p>
@@ -149,7 +152,8 @@
 <th>角色</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>192.168.150.101</td>
 <td>7001</td>
 <td>master</td>
@@ -164,90 +168,88 @@
 <td>7003</td>
 <td>slave</td>
 </tr>
-</tbody></table>
-<h2 id="2-准备实例和配置"><a href="#2-准备实例和配置" class="headerlink" title="2.准备实例和配置"></a>2.准备实例和配置</h2><p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
+</tbody>
+</table>
+<h2 id="2准备实例和配置"><a class="markdownIt-Anchor" href="#2准备实例和配置"></a> 2.准备实例和配置</h2>
+<p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
 <p>1）创建目录</p>
 <p>我们创建三个文件夹，名字分别叫7001、7002、7003：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir 7001 7002 7003</span><br></pre></td></tr></table></figure>
-
 <p>如图：</p>
 <p><img src="https://img-blog.csdnimg.cn/4cf724d39ef5484a9eab3d9b064fe44f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>2）恢复原始配置</p>
-<p>修改redis-6.2.4&#x2F;redis.conf文件，将其中的持久化模式改为默认的RDB模式，AOF保持关闭状态。</p>
+<p>修改redis-6.2.4/redis.conf文件，将其中的持久化模式改为默认的RDB模式，AOF保持关闭状态。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启RDB</span><br><span class="line"># save &quot;&quot;</span><br><span class="line">save 3600 1</span><br><span class="line">save 300 100</span><br><span class="line">save 60 10000</span><br><span class="line"></span><br><span class="line"># 关闭AOF</span><br><span class="line">appendonly no</span><br></pre></td></tr></table></figure>
-
 <p>3）拷贝配置文件到每个实例目录</p>
-<p>然后将redis-6.2.4&#x2F;redis.conf文件拷贝到三个目录中（在&#x2F;tmp目录执行下列命令）：</p>
+<p>然后将redis-6.2.4/redis.conf文件拷贝到三个目录中（在/tmp目录执行下列命令）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 方式一：逐个拷贝</span><br><span class="line">cp redis-6.2.4/redis.conf 7001</span><br><span class="line">cp redis-6.2.4/redis.conf 7002</span><br><span class="line">cp redis-6.2.4/redis.conf 7003</span><br><span class="line"># 方式二：管道组合命令，一键拷贝</span><br><span class="line">echo 7001 7002 7003 | xargs -t -n 1 cp redis-6.2.4/redis.conf</span><br></pre></td></tr></table></figure>
-
 <p>4）修改每个实例的端口、工作目录</p>
-<p>修改每个文件夹内的配置文件，将端口分别修改为7001、7002、7003，将rdb文件保存位置都修改为自己所在目录（在&#x2F;tmp目录执行下列命令）：</p>
+<p>修改每个文件夹内的配置文件，将端口分别修改为7001、7002、7003，将rdb文件保存位置都修改为自己所在目录（在/tmp目录执行下列命令）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i -e &#x27;s/6379/7001/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7001\//g&#x27; 7001/redis.conf</span><br><span class="line">sed -i -e &#x27;s/6379/7002/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7002\//g&#x27; 7002/redis.conf</span><br><span class="line">sed -i -e &#x27;s/6379/7003/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7003\//g&#x27; 7003/redis.conf</span><br></pre></td></tr></table></figure>
-
 <p>5）修改每个实例的声明IP</p>
 <p>虚拟机本身有多个IP，为了避免将来混乱，我们需要在redis.conf文件中指定每一个实例的绑定ip信息，格式如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># redis实例的声明 IP</span><br><span class="line">replica-announce-ip 192.168.150.101</span><br></pre></td></tr></table></figure>
-
-<p>每个目录都要改，我们一键完成修改（在&#x2F;tmp目录执行下列命令）：</p>
+<p>每个目录都要改，我们一键完成修改（在/tmp目录执行下列命令）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 逐一执行</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7001/redis.conf</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7002/redis.conf</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7003/redis.conf</span><br><span class="line"></span><br><span class="line"># 或者一键修改</span><br><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 | xargs -I&#123;&#125; -t sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; &#123;&#125;/redis.conf</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动"></a>3.启动</h2><p>为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</p>
+<h2 id="3启动"><a class="markdownIt-Anchor" href="#3启动"></a> 3.启动</h2>
+<p>为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 第1个</span><br><span class="line">redis-server 7001/redis.conf</span><br><span class="line"># 第2个</span><br><span class="line">redis-server 7002/redis.conf</span><br><span class="line"># 第3个</span><br><span class="line">redis-server 7003/redis.conf</span><br></pre></td></tr></table></figure>
-
 <p>启动后：</p>
 <p><img src="https://img-blog.csdnimg.cn/a59daa70d87f4f9d949860dae391942c.png" alt="img"></p>
 <p>如果要一键停止，可以运行下面命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 | xargs -I&#123;&#125; -t redis-cli -p &#123;&#125; shutdown</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-开启主从关系"><a href="#4-开启主从关系" class="headerlink" title="4.开启主从关系"></a>4.开启主从关系</h2><p>现在三个实例还没有任何关系，要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。</p>
+<h2 id="4开启主从关系"><a class="markdownIt-Anchor" href="#4开启主从关系"></a> 4.开启主从关系</h2>
+<p>现在三个实例还没有任何关系，要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。</p>
 <p>有临时和永久两种模式：</p>
 <ul>
-<li><p>修改配置文件（永久生效）</p>
+<li>
+<p>修改配置文件（永久生效）</p>
 <ul>
 <li>在redis.conf中添加一行配置：<code>slaveof &lt;masterip&gt; &lt;masterport&gt;</code></li>
 </ul>
 </li>
-<li><p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <p><strong>注意</strong>：在5.0以后新增命令replicaof，与salveof效果一致。</p>
 <p>这里我们为了演示方便，使用方式二。</p>
 <p>通过redis-cli命令连接7002，执行下面命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7002</span><br><span class="line">redis-cli -p 7002</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></table></figure>
-
 <p>通过redis-cli命令连接7003，执行下面命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7003</span><br><span class="line">redis-cli -p 7003</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://img-blog.csdnimg.cn/8ba1e82306a74338b0b8e7b64087e790.png" alt="img"></p>
 <p>然后连接 7001节点，查看集群状态：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7001</span><br><span class="line">redis-cli -p 7001</span><br><span class="line"># 查看状态</span><br><span class="line">info replication</span><br></pre></td></tr></table></figure>
-
 <p>结果：</p>
 <p><img src="https://img-blog.csdnimg.cn/9fe619ef341e48e9a7d11a46b6f1e943.png" alt="img"></p>
-<h2 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h2><p>执行下列操作以测试：</p>
+<h2 id="5测试"><a class="markdownIt-Anchor" href="#5测试"></a> 5.测试</h2>
+<p>执行下列操作以测试：</p>
 <ul>
 <li>利用redis-cli连接7001，执行<code>set num 123</code></li>
 <li>利用redis-cli连接7002，执行<code>get num</code>，再执行<code>set num 666</code></li>
 <li>利用redis-cli连接7003，执行<code>get num</code>，再执行<code>set num 888</code></li>
 </ul>
 <p>可以发现，只有在7001这个master节点上可以执行写操作，7002和7003这两个slave节点只能执行读操作。</p>
-<p> <img src="https://img-blog.csdnimg.cn/8b72b006934c477b9aaf1806542007a1.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/8b72b006934c477b9aaf1806542007a1.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/e9985b1fcb7046b2849d2b260e4183a4.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/00e23fce5f8040b7bdcdd8daf059785d.png" alt="img"></p>
-<h1 id="二、数据同步原理"><a href="#二、数据同步原理" class="headerlink" title="二、数据同步原理"></a>二、数据同步原理</h1><p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/c89f161adfcf4eb9a16367bb72919139.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/00e23fce5f8040b7bdcdd8daf059785d.png" alt="img"></p>
+<h1 id="二-数据同步原理"><a class="markdownIt-Anchor" href="#二-数据同步原理"></a> 二、数据同步原理</h1>
+<p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/c89f161adfcf4eb9a16367bb72919139.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/c519a72fdc2140268b2b18c3e82df57e.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/32c36304a2ce450eaa3ecee4e3203ccd.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/5cb9aa1893bb409c8a65259d8dd094da.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clcdkrzha0071ccv63x1zem5b" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clcdky359007nlov60wkr9iu9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>

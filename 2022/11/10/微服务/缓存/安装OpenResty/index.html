@@ -5,12 +5,12 @@
   
   <title>安装OpenResty | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装OpenResty1.安装首先你的Linux虚拟机必须联网 1）安装开发库首先要安装OpenResty的依赖开发库，执行命令： 1yum install -y pcre-devel openssl-devel gcc --skip-broken   2）安装OpenResty仓库你可以在你的 CentOS 系统中添加 openresty 仓库，这样就可以便于未来安装或更新我们的软件包（通过 y">
+  <meta name="description" content="安装OpenResty  1.安装 首先你的Linux虚拟机必须联网  1）安装开发库 首先要安装OpenResty的依赖开发库，执行命令： 1yum install -y pcre-devel openssl-devel gcc --skip-broken   2）安装OpenResty仓库 你可以在你的 CentOS 系统中添加 openresty 仓库，这样就可以便于未来安装或更新我们的软">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装OpenResty">
 <meta property="og:url" content="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="安装OpenResty1.安装首先你的Linux虚拟机必须联网 1）安装开发库首先要安装OpenResty的依赖开发库，执行命令： 1yum install -y pcre-devel openssl-devel gcc --skip-broken   2）安装OpenResty仓库你可以在你的 CentOS 系统中添加 openresty 仓库，这样就可以便于未来安装或更新我们的软件包（通过 y">
+<meta property="og:description" content="安装OpenResty  1.安装 首先你的Linux虚拟机必须联网  1）安装开发库 首先要安装OpenResty的依赖开发库，执行命令： 1yum install -y pcre-devel openssl-devel gcc --skip-broken   2）安装OpenResty仓库 你可以在你的 CentOS 系统中添加 openresty 仓库，这样就可以便于未来安装或更新我们的软">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/40823c6fcead429c8f59070c7a9ed20f.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/7469d035c7044b60b9ca2306cea81596.png">
@@ -118,84 +118,79 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="安装OpenResty"><a href="#安装OpenResty" class="headerlink" title="安装OpenResty"></a>安装OpenResty</h1><h1 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h1><p>首先你的Linux虚拟机必须联网</p>
-<h2 id="1）安装开发库"><a href="#1）安装开发库" class="headerlink" title="1）安装开发库"></a><strong>1）安装开发库</strong></h2><p>首先要安装OpenResty的依赖开发库，执行命令：</p>
+        <h1 id="安装openresty"><a class="markdownIt-Anchor" href="#安装openresty"></a> 安装OpenResty</h1>
+<h1 id="1安装"><a class="markdownIt-Anchor" href="#1安装"></a> 1.安装</h1>
+<p>首先你的Linux虚拟机必须联网</p>
+<h2 id="1安装开发库"><a class="markdownIt-Anchor" href="#1安装开发库"></a> <strong>1）安装开发库</strong></h2>
+<p>首先要安装OpenResty的依赖开发库，执行命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y pcre-devel openssl-devel gcc --skip-broken</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="2）安装OpenResty仓库"><a href="#2）安装OpenResty仓库" class="headerlink" title="2）安装OpenResty仓库"></a><strong>2）安装OpenResty仓库</strong></h2><p>你可以在你的 CentOS 系统中添加 <code>openresty</code> 仓库，这样就可以便于未来安装或更新我们的软件包（通过 <code>yum check-update</code> 命令）。运行下面的命令就可以添加我们的仓库：</p>
+<h2 id="2安装openresty仓库"><a class="markdownIt-Anchor" href="#2安装openresty仓库"></a> <strong>2）安装OpenResty仓库</strong></h2>
+<p>你可以在你的 CentOS 系统中添加 <code>openresty</code> 仓库，这样就可以便于未来安装或更新我们的软件包（通过 <code>yum check-update</code> 命令）。运行下面的命令就可以添加我们的仓库：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>如果提示说命令不存在，则运行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils </span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>然后再重复上面的命令</p>
-<h2 id="3）安装OpenResty"><a href="#3）安装OpenResty" class="headerlink" title="3）安装OpenResty"></a><strong>3）安装OpenResty</strong></h2><p>然后就可以像下面这样安装软件包，比如 <code>openresty</code>：</p>
+<h2 id="3安装openresty"><a class="markdownIt-Anchor" href="#3安装openresty"></a> <strong>3）安装OpenResty</strong></h2>
+<p>然后就可以像下面这样安装软件包，比如 <code>openresty</code>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y openresty</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="4）安装opm工具"><a href="#4）安装opm工具" class="headerlink" title="4）安装opm工具"></a><strong>4）安装opm工具</strong></h2><p>opm是OpenResty的一个管理工具，可以帮助我们安装一个第三方的Lua模块。</p>
+<h2 id="4安装opm工具"><a class="markdownIt-Anchor" href="#4安装opm工具"></a> <strong>4）安装opm工具</strong></h2>
+<p>opm是OpenResty的一个管理工具，可以帮助我们安装一个第三方的Lua模块。</p>
 <p>如果你想安装命令行工具 <code>opm</code>，那么可以像下面这样安装 <code>openresty-opm</code> 包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y openresty-opm</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="5）目录结构"><a href="#5）目录结构" class="headerlink" title="5）目录结构"></a><strong>5）目录结构</strong></h2><p>默认情况下，OpenResty安装的目录是：&#x2F;usr&#x2F;local&#x2F;openresty</p>
+<h2 id="5目录结构"><a class="markdownIt-Anchor" href="#5目录结构"></a> <strong>5）目录结构</strong></h2>
+<p>默认情况下，OpenResty安装的目录是：/usr/local/openresty</p>
 <p><img src="https://img-blog.csdnimg.cn/40823c6fcead429c8f59070c7a9ed20f.png" alt="在这里插入图片描述"></p>
 <p>看到里面的nginx目录了吗，OpenResty就是在Nginx基础上集成了一些Lua模块。</p>
-<h2 id="6）配置nginx的环境变量"><a href="#6）配置nginx的环境变量" class="headerlink" title="6）配置nginx的环境变量"></a><strong>6）配置nginx的环境变量</strong></h2><p>打开配置文件：</p>
+<h2 id="6配置nginx的环境变量"><a class="markdownIt-Anchor" href="#6配置nginx的环境变量"></a> <strong>6）配置nginx的环境变量</strong></h2>
+<p>打开配置文件：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>在最下面加入两行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NGINX_HOME=/usr/local/openresty/nginx</span><br><span class="line">export PATH=$&#123;NGINX_HOME&#125;/sbin:$PATH</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>NGINX_HOME：后面是OpenResty安装目录下的nginx的目录</p>
 <p>然后让配置生效：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h1 id="2-启动和运行"><a href="#2-启动和运行" class="headerlink" title="2.启动和运行"></a>2.启动和运行</h1><p>OpenResty底层是基于Nginx的，查看OpenResty目录的nginx目录，结构与windows中安装的nginx基本一致：<br> <img src="https://img-blog.csdnimg.cn/7469d035c7044b60b9ca2306cea81596.png" alt="在这里插入图片描述"></p>
+<h1 id="2启动和运行"><a class="markdownIt-Anchor" href="#2启动和运行"></a> 2.启动和运行</h1>
+<p>OpenResty底层是基于Nginx的，查看OpenResty目录的nginx目录，结构与windows中安装的nginx基本一致：<br>
+<img src="https://img-blog.csdnimg.cn/7469d035c7044b60b9ca2306cea81596.png" alt="在这里插入图片描述"></p>
 <p>所以运行方式与nginx基本一致：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 启动nginx</span><br><span class="line">nginx</span><br><span class="line"># 重新加载配置</span><br><span class="line">nginx -s reload</span><br><span class="line"># 停止</span><br><span class="line">nginx -s stop</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>nginx的默认配置文件注释太多，影响后续我们的编辑，这里将nginx.conf中的注释部分删除，保留有效部分。</p>
 <p>修改<code>/usr/local/openresty/nginx/conf/nginx.conf</code>文件，内容如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br><span class="line">worker_processes  1;</span><br><span class="line">error_log  logs/error.log;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       8081;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>在Linux的控制台输入命令以启动nginx：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>然后访问页面：<a href="http://192.168.150.101:8081，注意ip地址替换为你自己的虚拟机IP：">http://192.168.150.101:8081，注意ip地址替换为你自己的虚拟机IP：</a></p>
-<h1 id="3-备注"><a href="#3-备注" class="headerlink" title="3.备注"></a>3.备注</h1><p>加载OpenResty的lua模块：</p>
+<p>然后访问页面：<a target="_blank" rel="noopener" href="http://192.168.150.101:8081">http://192.168.150.101:8081</a>，注意ip地址替换为你自己的虚拟机IP：</p>
+<h1 id="3备注"><a class="markdownIt-Anchor" href="#3备注"></a> 3.备注</h1>
+<p>加载OpenResty的lua模块：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#lua 模块</span><br><span class="line">lua_package_path &quot;/usr/local/openresty/lualib/?.lua;;&quot;;</span><br><span class="line">#c模块     </span><br><span class="line">lua_package_cpath &quot;/usr/local/openresty/lualib/?.so;;&quot;;  </span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>common.lua</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-- 封装函数，发送http请求，并解析响应</span><br><span class="line">local function read_http(path, params)</span><br><span class="line">    local resp = ngx.location.capture(path,&#123;</span><br><span class="line">        method = ngx.HTTP_GET,</span><br><span class="line">        args = params,</span><br><span class="line">    &#125;)</span><br><span class="line">    if not resp then</span><br><span class="line">        -- 记录错误信息，返回404</span><br><span class="line">        ngx.log(ngx.ERR, &quot;http not found, path: &quot;, path , &quot;, args: &quot;, args)</span><br><span class="line">        ngx.exit(404)</span><br><span class="line">    end</span><br><span class="line">    return resp.body</span><br><span class="line">end</span><br><span class="line">-- 将方法导出</span><br><span class="line">local _M = &#123;  </span><br><span class="line">    read_http = read_http</span><br><span class="line">&#125;  </span><br><span class="line">return _M</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>释放Redis连接API：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- 关闭redis连接的工具方法，其实是放入连接池</span><br><span class="line">local function close_redis(red)</span><br><span class="line">    local pool_max_idle_time = 10000 -- 连接的空闲时间，单位是毫秒</span><br><span class="line">    local pool_size = 100 --连接池大小</span><br><span class="line">    local ok, err = red:set_keepalive(pool_max_idle_time, pool_size)</span><br><span class="line">    if not ok then</span><br><span class="line">        ngx.log(ngx.ERR, &quot;放入redis连接池失败: &quot;, err)</span><br><span class="line">    end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>读取Redis数据的API：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-- 查询redis的方法 ip和port是redis地址，key是查询的key</span><br><span class="line">local function read_redis(ip, port, key)</span><br><span class="line">    -- 获取一个连接</span><br><span class="line">    local ok, err = red:connect(ip, port)</span><br><span class="line">    if not ok then</span><br><span class="line">        ngx.log(ngx.ERR, &quot;连接redis失败 : &quot;, err)</span><br><span class="line">        return nil</span><br><span class="line">    end</span><br><span class="line">    -- 查询redis</span><br><span class="line">    local resp, err = red:get(key)</span><br><span class="line">    -- 查询失败处理</span><br><span class="line">    if not resp then</span><br><span class="line">        ngx.log(ngx.ERR, &quot;查询Redis失败: &quot;, err, &quot;, key = &quot; , key)</span><br><span class="line">    end</span><br><span class="line">    --得到的数据为空处理</span><br><span class="line">    if resp == ngx.null then</span><br><span class="line">        resp = nil</span><br><span class="line">        ngx.log(ngx.ERR, &quot;查询Redis数据为空, key = &quot;, key)</span><br><span class="line">    end</span><br><span class="line">    close_redis(red)</span><br><span class="line">    return resp</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>开启共享词典：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 共享字典，也就是本地缓存，名称叫做：item_cache，大小150m</span><br><span class="line">lua_shared_dict item_cache 150m; </span><br></pre></td></tr></table></figure>
 
-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/" data-id="clcdkrzh9006wccv666i180y7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/" data-id="clcdky356007hlov655gibhq0" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>

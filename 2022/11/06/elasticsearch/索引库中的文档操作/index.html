@@ -5,12 +5,12 @@
   
   <title>索引库中的文档的操作 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="索引库中的文档的操作   （实例）代码： 1234567891011121314151617181920212223242526272829303132333435363738# 插入文档POST &#x2F;heima&#x2F;_doc&#x2F;1&amp;#123;  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,  &quot;email&quot;: &quot;zy@itcast.c">
+  <meta name="description" content="索引库中的文档的操作    （实例）代码： 1234567891011121314151617181920212223242526272829303132333435363738# 插入文档POST &#x2F;heima&#x2F;_doc&#x2F;1&amp;#123;  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,  &quot;email&quot;: &quot;zy@itcast">
 <meta property="og:type" content="article">
 <meta property="og:title" content="索引库中的文档的操作">
 <meta property="og:url" content="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="索引库中的文档的操作   （实例）代码： 1234567891011121314151617181920212223242526272829303132333435363738# 插入文档POST &#x2F;heima&#x2F;_doc&#x2F;1&amp;#123;  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,  &quot;email&quot;: &quot;zy@itcast.c">
+<meta property="og:description" content="索引库中的文档的操作    （实例）代码： 1234567891011121314151617181920212223242526272829303132333435363738# 插入文档POST &#x2F;heima&#x2F;_doc&#x2F;1&amp;#123;  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,  &quot;email&quot;: &quot;zy@itcast">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/41a470384f02452a8565ca97a2681702.png">
@@ -125,23 +125,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="索引库中的文档的操作"><a href="#索引库中的文档的操作" class="headerlink" title="索引库中的文档的操作"></a>索引库中的文档的操作</h1><p><img src="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png" alt="img"></p>
+        <h1 id="索引库中的文档的操作"><a class="markdownIt-Anchor" href="#索引库中的文档的操作"></a> 索引库中的文档的操作</h1>
+<p><img src="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/41a470384f02452a8565ca97a2681702.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/264b09d6e2a94a8a87ac5527907b8c25.png" alt="img"><img src="https://img-blog.csdnimg.cn/9839abedff6b41709b41fdbf1d021320.png" alt="img"></p>
 <p>（实例）代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 插入文档</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zy@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 查询文档</span><br><span class="line">GET /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除文档</span><br><span class="line">DELETE /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式1：全量修改文档，如果存在则删除旧的，新的覆盖旧的，如果原先没有，则新增该文档（所以放修改方式相当于也是一种插入文档的方法）</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;info&quot;: &quot;黑马程序员java讲师&quot;,</span><br><span class="line">  &quot;email&quot;: &quot;zhaoyun@itcast.cn&quot;,</span><br><span class="line">  &quot;name&quot;: &#123;</span><br><span class="line">    &quot;firstname&quot;: &quot;云&quot;,</span><br><span class="line">    &quot;lastname&quot;: &quot;赵&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式2: 局部修改文档字段</span><br><span class="line">POST /heima/_update/1</span><br><span class="line">&#123;</span><br><span class="line">  &quot;doc&quot;:&#123;</span><br><span class="line">    &quot;email&quot;: &quot;ZY@itcast.cn&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>运行截图：</p>
 <p><img src="https://img-blog.csdnimg.cn/069e55bbd4ec47308b0147aa38adab91.png" alt="img"><img src="https://img-blog.csdnimg.cn/6e1212cd2f794a579424363b32fb9adc.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/640be243e52d45a18b47ef5dfe0b3095.png" alt="img"><img src="https://img-blog.csdnimg.cn/4aa5f5fd7ce74a6a814f9338b68beae5.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/e7ddbb1bb05f40078872f81abe3e60c9.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/06615bad2d7942acb41706e51cc56bdc.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/06615bad2d7942acb41706e51cc56bdc.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clcdkrzfo002sccv6gv823c1z" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clcdky32l0027lov64lnw9q9r" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
