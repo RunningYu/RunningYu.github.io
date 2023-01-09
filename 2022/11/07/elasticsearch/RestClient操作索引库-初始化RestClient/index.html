@@ -119,22 +119,16 @@
       
         <p>1.引入es的RestHighLevelClient依赖：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--elasticsearch--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;7.12.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2.因为SpringBoot默认的ES版本是7.6.2，所以我们需要覆盖默认的ES版本： </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>2.因为SpringBoot默认的ES版本是7.6.2，所以我们需要覆盖默认的ES版本：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>3.初始化RestHighLevelClient：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return new RestHighLevelClient(RestClient.builder(</span><br><span class="line">                HttpHost.create(&quot;http://192.168.150.101:9200&quot;)</span><br><span class="line">));</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef0bee698bbd4d65a9ae016cd3db8af6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef0bee698bbd4d65a9ae016cd3db8af6~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="clcowvj3x002e3wv66655hqy7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="clcox2rcd002goov622oth874" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -226,7 +220,7 @@
     </div>
 
     <div class="friend-link">
-      <h2>友情链接</h2>
+      <h2>其它个人平台链接</h2>
       
         <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
           My_CSDN

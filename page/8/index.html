@@ -111,21 +111,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第一种（简单定义）"><a href="#第一种（简单定义）" class="headerlink" title="第一种（简单定义）"></a>第一种（简单定义）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回通用类</span><br><span class="line"> * @param &lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">@Data</span><br><span class="line">public class R&lt;T&gt; &#123;</span><br><span class="line">    /** 编码：1成功，0和其它数字为失败*/</span><br><span class="line">    private Integer code;</span><br><span class="line">    /** 信息返回*/</span><br><span class="line">    private String msg;</span><br><span class="line">    /** 信息返回数据*/</span><br><span class="line">    private T data;</span><br><span class="line">    /** 动态数据*/</span><br><span class="line">    private Map map = new HashMap();</span><br><span class="line">    public static &lt;T&gt; R&lt;T&gt; success(T object) &#123;</span><br><span class="line">        R&lt;T&gt; r = new R&lt;T&gt;();</span><br><span class="line">        r.data = object;</span><br><span class="line">        r.code = 1;</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">    public static &lt;T&gt; R&lt;T&gt; error(String msg) &#123;</span><br><span class="line">        R r = new R();</span><br><span class="line">        r.msg = msg;</span><br><span class="line">        r.code = 0;</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">    public R&lt;T&gt; add(String key, Object value) &#123;</span><br><span class="line">        this.map.put(key, value);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h1><p>导入依赖</p>
+        <h1 id="第一种简单定义"><a class="markdownIt-Anchor" href="#第一种简单定义"></a> 第一种（简单定义）</h1>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回通用类</span><br><span class="line"> * @param &lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">@Data</span><br><span class="line">public class R&lt;T&gt; &#123;</span><br><span class="line">    /** 编码：1成功，0和其它数字为失败*/</span><br><span class="line">    private Integer code;</span><br><span class="line">    /** 信息返回*/</span><br><span class="line">    private String msg;</span><br><span class="line">    /** 信息返回数据*/</span><br><span class="line">    private T data;</span><br><span class="line">    /** 动态数据*/</span><br><span class="line">    private Map map = new HashMap();</span><br><span class="line">    public static &lt;T&gt; R&lt;T&gt; success(T object) &#123;</span><br><span class="line">        R&lt;T&gt; r = new R&lt;T&gt;();</span><br><span class="line">        r.data = object;</span><br><span class="line">        r.code = 1;</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">    public static &lt;T&gt; R&lt;T&gt; error(String msg) &#123;</span><br><span class="line">        R r = new R();</span><br><span class="line">        r.msg = msg;</span><br><span class="line">        r.code = 0;</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">    public R&lt;T&gt; add(String key, Object value) &#123;</span><br><span class="line">        this.map.put(key, value);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src alt title="点击并拖拽以移动"></p>
+<h1 id><a class="markdownIt-Anchor" href="#"></a> </h1>
+<h1 id="第二种"><a class="markdownIt-Anchor" href="#第二种"></a> 第二种</h1>
+<p>导入依赖</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
 <p>编写结果数据通用类</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import io.swagger.annotations.ApiModel;</span><br><span class="line">import io.swagger.annotations.ApiModelProperty;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * todo JsonInclude 注解忽略 null值 看业务需求添加</span><br><span class="line"> */</span><br><span class="line">@ApiModel(&quot;分页响应参数&quot;)</span><br><span class="line">@JsonInclude(value = JsonInclude.Include.NON_EMPTY)</span><br><span class="line">@Data</span><br><span class="line">public class JsonResult&lt;T&gt; implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(value = &quot;结果状态&quot;, example = &quot;200&quot;)</span><br><span class="line">    private Integer code = 200;</span><br><span class="line">    @ApiModelProperty(value = &quot;结果数据&quot;)</span><br><span class="line">    private T data;</span><br><span class="line">    @ApiModelProperty(value = &quot;结果描述&quot;, example = &quot;成功&quot;)</span><br><span class="line">    private String message = &quot;ok&quot;;</span><br><span class="line"></span><br><span class="line">    public JsonResult() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code) &#123;</span><br><span class="line">        this();</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, T data) &#123;</span><br><span class="line">        this(code);</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message) &#123;</span><br><span class="line">        this(code);</span><br><span class="line">        this.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message, T data) &#123;</span><br><span class="line">        this(code, message);</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success() &#123;</span><br><span class="line">        return new JsonResult(200);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(T data) &#123;</span><br><span class="line">        return new JsonResult(200, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String message, T data) &#123;</span><br><span class="line">        return new JsonResult(200, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(Integer code, String message, T data) &#123;</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static JsonResult&lt;String&gt; error() &#123;</span><br><span class="line">        return new JsonResult(500);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(String message) &#123;</span><br><span class="line">        return new JsonResult(500, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message) &#123;</span><br><span class="line">        return new JsonResult(code, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message, T data) &#123;</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="clcowvj4o004g3wv65izgax9g" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="clcox2rdh004moov6altcbcd5" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/" rel="tag">数据封装</a></li></ul>
@@ -175,70 +174,71 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、授权规则"><a href="#一、授权规则" class="headerlink" title="一、授权规则"></a>一、授权规则</h1><p><strong>第1步：添加判断来源逻辑</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image"></p>
+        <h1 id="一-授权规则"><a class="markdownIt-Anchor" href="#一-授权规则"></a> 一、授权规则</h1>
+<p><strong>第1步：添加判断来源逻辑</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class HeaderOriginParser implements RequestOriginParser &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String parseOrigin(HttpServletRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        //1.获取请求头</span><br><span class="line">        String origin = request.getHeader( &quot;origin&quot; );</span><br><span class="line">        //2.非空判断</span><br><span class="line">        if ( StringUtils.isEmpty( origin ) ) &#123;</span><br><span class="line">            origin = &quot;blank&quot;;   //如果是空的就返回一个默认值</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return origin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 <p><strong>第2步：编写过滤器–&gt;给网关添加origin头</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>第3步：</strong> 重新启动，访问一个接口</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>第4步：</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>第5步：重新范访问上面的接口</p>
 <p>8088是直接范文oder服务的，也就是绕过了网关，但是现在我们已经设置了授权规则，所以直接访问是不行的，你报错如下</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 现在我们通过网关来访问，网关的端口设置的是10010，用10010来访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 因为网关做了权限的校验，所以需要把权限加上</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p>现在我们通过网关来访问，网关的端口设置的是10010，用10010来访问</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p>因为网关做了权限的校验，所以需要把权限加上</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
 <p><strong>因此，通过上面的授权规则设置后，通过网关来访问的就可以，而通过浏览器直接访问的就不行</strong></p>
 <p>下面是黑马PPT的笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id="二、自定义异常结果"><a href="#二、自定义异常结果" class="headerlink" title="二、自定义异常结果"></a>二、自定义异常结果</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <strong>第1步：</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 代码：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<h1 id="二-自定义异常结果"><a class="markdownIt-Anchor" href="#二-自定义异常结果"></a> 二、自定义异常结果</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><strong>第1步：</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p>代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.BlockException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.FlowException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class SentinelExceptionHandler implements BlockExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception &#123;</span><br><span class="line">        String msg = &quot;未知异常&quot;;</span><br><span class="line">        int status = 429;</span><br><span class="line"></span><br><span class="line">        if ( e instanceof FlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被限流了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof ParamFlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被热点参数限流&quot;;</span><br><span class="line">        &#125; else if ( e instanceof DegradeException ) &#123;</span><br><span class="line">            msg = &quot;请求被降级了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof AuthorityException ) &#123;</span><br><span class="line">            msg = &quot;没有权限访问&quot;;</span><br><span class="line">            status = 401;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        response.setContentType( &quot;application/json;charset=utf-8&quot; );</span><br><span class="line">        response.setStatus( status );</span><br><span class="line">        response.getWriter().println( &quot;&#123;&quot;msg&quot;: &quot; + msg +&quot;, &quot;status&quot;: &quot; + status + &quot;&#125;&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>第2步：</strong> 重启微服务，然后浏览器访问接口</p>
 <p><strong>第3步：</strong> 在sentinel中给端口设置响应的规则进行测试</p>
-<p>（1）新增授权规则 </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p>（1）新增授权规则</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
 <p>（2）新增流控规则</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 下面是黑马PPT笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id="三、规则持久化"><a href="#三、规则持久化" class="headerlink" title="三、规则持久化"></a>三、规则持久化</h1><p>这一节知识就没有详细的操作笔记，需要观看黑马教程视频如下链接：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p>下面是黑马PPT笔记</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<h1 id="三-规则持久化"><a class="markdownIt-Anchor" href="#三-规则持久化"></a> 三、规则持久化</h1>
+<p>这一节知识就没有详细的操作笔记，需要观看黑马教程视频如下链接：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=146&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili">高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=146&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili">高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili</a></p>
 </blockquote>
 <p><strong>前言：</strong></p>
 <p><strong>当我们服务重启，我们所配的所有规则就会丢失，因为sentinel会默认把这些规则保存在内存里，重启就自然丢失了。而在生产的环境下 肯定是不能容忍这样的问题的。所以我们就需要学习怎么将****sentinel的规则持久化。</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h3 id><a href="#" class="headerlink" title></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></h3><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<h3 id><a class="markdownIt-Anchor" href="#"></a> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></h3>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clcowvj5i006t3wv6hojg9uia" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clcox2ret007uoov6hn7f99uy" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -292,17 +292,17 @@
 <p>Sentinel 具有以下特征:</p>
 <p>•<strong>丰富的应用场景</strong>：Sentinel 承接了阿里巴巴近 10 年的双十一大促流量的核心场景，例如秒杀（即突发流量控制在系统容量可以承受的范围）、消息削峰填谷、集群流量控制、实时熔断下游不可用应用等。</p>
 <p>•<strong>完备的实时监控</strong>：Sentinel 同时提供实时的监控功能。您可以在控制台中看到接入应用的单台机器秒级数据，甚至 500 台以下规模的集群的汇总运行情况。</p>
-<p>•<strong>广泛的开源生态</strong>：Sentinel 提供开箱即用的与其它开源框架&#x2F;库的整合模块，例如与 Spring Cloud、Dubbo、gRPC 的整合。您只需要引入相应的依赖并进行简单的配置即可快速地接入 Sentinel。</p>
+<p>•<strong>广泛的开源生态</strong>：Sentinel 提供开箱即用的与其它开源框架/库的整合模块，例如与 Spring Cloud、Dubbo、gRPC 的整合。您只需要引入相应的依赖并进行简单的配置即可快速地接入 Sentinel。</p>
 <p>•<strong>完善的</strong> <strong>SPI</strong> <strong>扩展点</strong>：Sentinel 提供简单易用、完善的 SPI 扩展接口。您可以通过实现扩展接口来快速地定制逻辑。例如定制规则管理、适配动态数据源等。</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20237b6177d541998fa970b5b2fb9ba1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae2fa1d0ac60466a92186098af87f490~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2083e797b72e41a69fbc5e52b3077951~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/676c94cd816c4b2d95f99b8a3572d2ac~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20237b6177d541998fa970b5b2fb9ba1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae2fa1d0ac60466a92186098af87f490~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2083e797b72e41a69fbc5e52b3077951~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/676c94cd816c4b2d95f99b8a3572d2ac~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="clcowvj5k006w3wv6fj6d6kc2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="clcox2reu007zoov65rasec25" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -356,27 +356,29 @@
 <p>• 快速失败：达到阈值后，新的请求会被立即拒绝并抛出FlowException异常。是默认的处理方式。</p>
 <p>• warm up：预热模式，对超出阈值的请求同样是拒绝并抛出异常。但这种模式阈值会动态变化,从一个较小值逐渐增加到最大阈值。</p>
 <p>• 排队等待：让所有的请求按照先后次序排队执行，两个请求的间隔不能小于指定时长</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf2acabbe42c4d59ba57ac1746efbe72~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="流控效果-warm-up"><a href="#流控效果-warm-up" class="headerlink" title="流控效果-warm up"></a>流控效果-<strong>warm up</strong></h1><p>warm up也叫<strong>预热</strong>模式，是应对服务冷启动的一种方案。请求阈值初始值是 threshold &#x2F; coldFactor，持续指定时长后，逐渐提高到threshold值。而coldFactor的默认值是3.</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7cb643747de42fbbf07e67f66382752~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf2acabbe42c4d59ba57ac1746efbe72~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="流控效果-warm-up"><a class="markdownIt-Anchor" href="#流控效果-warm-up"></a> 流控效果-<strong>warm up</strong></h1>
+<p>warm up也叫<strong>预热</strong>模式，是应对服务冷启动的一种方案。请求阈值初始值是 threshold / coldFactor，持续指定时长后，逐渐提高到threshold值。而coldFactor的默认值是3.</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7cb643747de42fbbf07e67f66382752~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>添加规则：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b2b9033602f45ac80923d9c44f32ec2~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efa48b598b3b40febf2cf3b23e062901~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b2b9033602f45ac80923d9c44f32ec2~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efa48b598b3b40febf2cf3b23e062901~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>借助JMeter测试：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b936da7ff482473bbf59c37958f964dc~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b936da7ff482473bbf59c37958f964dc~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>启动后，通过的会随着预热过程而逐渐变多，拒绝逐渐变少</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97ec69f1667246329b926dcebb2f1b09~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3f8c537aff846ee9ac14d8f6d72fdea~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebe8e5b42e8e4420b84bb1d71852b5f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97ec69f1667246329b926dcebb2f1b09~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3f8c537aff846ee9ac14d8f6d72fdea~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebe8e5b42e8e4420b84bb1d71852b5f8~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>实时监控显示：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ac3aa62e175b4712875072a5b42607fb~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="流控效果-排队等待"><a href="#流控效果-排队等待" class="headerlink" title="流控效果-排队等待"></a>流控效果-排队等待</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2161a4aaf7084c7c94e1d76f620307a0~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/22c88521614944c7bb83341b85a84793~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238bc1dae1384083b0a05f9b14304147~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d1d18095a7446a8924b68bc99f118a0~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7d27a74a69d34b1b9f866058691107cf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10c1f225aef84934abcc8aa2751928cd~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ba02ec011c24ec7a4c5c5c608f20e36~tplv-k3u1fbpfcp-zoom-1.image"> 排队等待的有点：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ac3aa62e175b4712875072a5b42607fb~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="流控效果-排队等待"><a class="markdownIt-Anchor" href="#流控效果-排队等待"></a> 流控效果-排队等待</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2161a4aaf7084c7c94e1d76f620307a0~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/22c88521614944c7bb83341b85a84793~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238bc1dae1384083b0a05f9b14304147~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d1d18095a7446a8924b68bc99f118a0~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7d27a74a69d34b1b9f866058691107cf~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10c1f225aef84934abcc8aa2751928cd~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ba02ec011c24ec7a4c5c5c608f20e36~tplv-k3u1fbpfcp-zoom-1.image" alt> 排队等待的有点：</p>
 <pre><code>   （1） 发出的QPS是15，但大多数是通过的（10）而其它有的都是放到队列里面去了，小部分是拒绝的。
 
    （2）而且不管你发出QPS的波动有多么剧烈，我放出的永远是均衡的，同过的都是10。这样对于微服务来说，波动的肯定不比均衡的好，所以这样的作用也是起到了流量整形的作用
@@ -385,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" data-id="clcowvj5h006o3wv67gnr378r" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" data-id="clcox2rer007noov6gpcn7eom" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -435,20 +437,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b15ec093f4414539b6d4c1d5b0b0c3cf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363d9e0f524245e8937672f4f6609239~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 步骤 1：注册RestTemplate</p>
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b15ec093f4414539b6d4c1d5b0b0c3cf~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363d9e0f524245e8937672f4f6609239~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>步骤 1：注册RestTemplate</p>
 <p>在order-service的OrderApplication中注册RestTemplate</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/afb47de2b56a46dd8bc2621feac8c81e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/afb47de2b56a46dd8bc2621feac8c81e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class SquareApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SquareApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 创建RestTemplate 并注入Spring容器</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public RestTemplate restTemplate()&#123;</span><br><span class="line">        return new RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf012adbd3b9440d9d15dd2bbc763050~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf012adbd3b9440d9d15dd2bbc763050~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" data-id="clcowvj5m00713wv66ydddznq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" data-id="clcox2ret007voov6ee3a51fk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" rel="tag">远程调用</a></li></ul>
@@ -498,16 +498,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb61fd3a0a2f4d70920108045b60da5b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5427111cce7342eab886c0563819500b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eaf04def88974008bdb8277f58e49fec~tplv-k3u1fbpfcp-zoom-1.image"></p>
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb61fd3a0a2f4d70920108045b60da5b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5427111cce7342eab886c0563819500b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eaf04def88974008bdb8277f58e49fec~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>如果出错了，看下面：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebe9ad0d2ed7451b9bd50f3134e5256a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebe9ad0d2ed7451b9bd50f3134e5256a~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/" data-id="clcowvj38000o3wv6ge4p1rvm" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/" data-id="clcox2rb2000eoov68etf22rn" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
@@ -557,56 +557,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、创建一个空文件夹"><a href="#一、创建一个空文件夹" class="headerlink" title="一、创建一个空文件夹"></a><strong>一、创建一个空文件夹</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="二、将gitee仓库地址复制下来"><a href="#二、将gitee仓库地址复制下来" class="headerlink" title="二、将gitee仓库地址复制下来"></a><strong>二、将gitee仓库地址复制下来</strong></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="三、在刚刚新建的空文件夹真打开-Git-Bash-Here"><a href="#三、在刚刚新建的空文件夹真打开-Git-Bash-Here" class="headerlink" title="三、在刚刚新建的空文件夹真打开 Git Bash Here"></a><strong>三、在刚刚新建的空文件夹真打开 Git Bash Here</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="四、克隆-gitee-仓库"><a href="#四、克隆-gitee-仓库" class="headerlink" title="四、克隆 gitee 仓库"></a><strong>四、克隆 gitee 仓库</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="五、提交代码"><a href="#五、提交代码" class="headerlink" title="五、提交代码"></a><strong>五、提交代码</strong></h1><h2 id="将想要提交的拖到克隆下来的目录下面"><a href="#将想要提交的拖到克隆下来的目录下面" class="headerlink" title="将想要提交的拖到克隆下来的目录下面"></a>将想要提交的拖到克隆下来的目录下面</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="六、执行指令"><a href="#六、执行指令" class="headerlink" title="六、执行指令"></a><strong>六、执行指令</strong></h1><p><strong>1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格</strong></p>
+        <h1 id="一-创建一个空文件夹"><a class="markdownIt-Anchor" href="#一-创建一个空文件夹"></a> <strong>一、创建一个空文件夹</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="二-将gitee仓库地址复制下来"><a class="markdownIt-Anchor" href="#二-将gitee仓库地址复制下来"></a> <strong>二、将gitee仓库地址复制下来</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="三-在刚刚新建的空文件夹真打开-git-bash-here"><a class="markdownIt-Anchor" href="#三-在刚刚新建的空文件夹真打开-git-bash-here"></a> <strong>三、在刚刚新建的空文件夹真打开 Git Bash Here</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="四-克隆-gitee-仓库"><a class="markdownIt-Anchor" href="#四-克隆-gitee-仓库"></a> <strong>四、克隆 gitee 仓库</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="五-提交代码"><a class="markdownIt-Anchor" href="#五-提交代码"></a> <strong>五、提交代码</strong></h1>
+<h2 id="将想要提交的拖到克隆下来的目录下面"><a class="markdownIt-Anchor" href="#将想要提交的拖到克隆下来的目录下面"></a> 将想要提交的拖到克隆下来的目录下面</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="六-执行指令"><a class="markdownIt-Anchor" href="#六-执行指令"></a> <strong>六、执行指令</strong></h1>
+<p><strong>1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
-
-
 <p>可能会出现如下报错，</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>则需要输入 git init  然后回车就好了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-
-<p> 然后再重新执行添加文件就可以了（注意，一定要将目录切换到仓库目录，负责执行命令时会报fatal: pathspec ‘hotel-demo’ did not match any files）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>2.  执行git <strong><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=commit&spm=1001.2101.3001.7020" title="commit">commit</a></strong> -m “注释的内容”  （ 提交到本地仓库）</strong></p>
+<p>然后再重新执行添加文件就可以了（注意，一定要将目录切换到仓库目录，负责执行命令时会报fatal: pathspec ‘hotel-demo’ did not match any files）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><strong>2.  执行git <strong><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=commit&amp;spm=1001.2101.3001.7020" title="commit">commit</a></strong> -m “注释的内容”  （ 提交到本地仓库）</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;注释的内容&quot;</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>3. 提交代码到 gitee</strong></p>
 <p>执行命令: git remote add origin 远程项目的 Https 地址</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程项目的 Https 地址</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>可能有人会报如下错误（没有的话可以忽略） </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 解决：执行 git remote rm origin 删除关联的origin的远程库</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>可能有人会报如下错误（没有的话可以忽略）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>解决：执行 git remote rm origin 删除关联的origin的远程库</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 然后再重新执行 git remote add origin 远程项目的 Https 地址即可</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>然后再重新执行 git remote add origin 远程项目的 Https 地址即可</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>4. git push -u origin master （ 最后这一步就可以推送到自己的仓库了）</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master </span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>完成 !!</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" data-id="clcowvj37000k3wv679bq0sbf" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" data-id="clcox2rb6000koov66drn8sba" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
@@ -656,28 +651,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.报错：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/821e52df48964f178aa83dbc6157dbf4~tplv-k3u1fbpfcp-zoom-1.image" style="zoom:50%;"></p>
+        <p>1.报错：<br>
+<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/821e52df48964f178aa83dbc6157dbf4~tplv-k3u1fbpfcp-zoom-1.image" style="zoom:50%;"></p>
 <ol start="2">
-<li><p>原因：重启服务器后，我重启过网络 network 。我想大概是这个影响了 docker　的网络。</p>
+<li>
+<p>原因：重启服务器后，我重启过网络 network 。我想大概是这个影响了 docker　的网络。</p>
 </li>
-<li><p>解决：　重启 docker 服务即可：</p>
+<li>
+<p>解决：　重启 docker 服务即可：</p>
 </li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
-
-
 <ol start="4">
 <li>重启容器即可成功</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart 容器名</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/396cbd693e724deaa7dfad44cf8a25f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/396cbd693e724deaa7dfad44cf8a25f3~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/" data-id="clcowvj2y00073wv63bd5192r" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/" data-id="clcox2rbs001joov642hb5o99" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
@@ -728,23 +722,23 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Docker镜像仓库</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/95f0ea430c0c49fbb0e02770a6547a1f~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd5290c4efc6463bbbe3142834794a72~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a282dde2bd04742801d934133fd6d5d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/640c6c2974f547528709d0d546dbc8c7~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1a659c9d8444ebbba9da70932abef7b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d529023faf4417198f564653a97a54b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3acf7107043f48cd83de8f964de490d5~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/95f0ea430c0c49fbb0e02770a6547a1f~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd5290c4efc6463bbbe3142834794a72~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a282dde2bd04742801d934133fd6d5d~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/640c6c2974f547528709d0d546dbc8c7~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1a659c9d8444ebbba9da70932abef7b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d529023faf4417198f564653a97a54b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3acf7107043f48cd83de8f964de490d5~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>去网页进行访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0e7fe09df2c44584bea5fe9147325bde~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ef9a288e9fe4a6a9a718268d3777bbb~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/871a56c43a00445ba0f8147c02b34d42~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c28079d54474f54a99f8f90d0ccfee8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0e7fe09df2c44584bea5fe9147325bde~tplv-k3u1fbpfcp-zoom-1.image" alt><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ef9a288e9fe4a6a9a718268d3777bbb~tplv-k3u1fbpfcp-zoom-1.image" alt><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/871a56c43a00445ba0f8147c02b34d42~tplv-k3u1fbpfcp-zoom-1.image" alt><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c28079d54474f54a99f8f90d0ccfee8~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>删除镜像，之后再拉取回镜像</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/44ad2222b49b4ac29c77d278aab85f02~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5feba34a268347749d31de6d6bece1a4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/44ad2222b49b4ac29c77d278aab85f02~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5feba34a268347749d31de6d6bece1a4~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/Docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" data-id="clcowvj2v00053wv67gpr89u8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/Docker/Docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" data-id="clcox2rbp001doov6fxjf4vfp" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li></ul>
@@ -806,12 +800,12 @@
 
     -f 强制删除
 </code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3510b4b2e1ba4ac0ad6bca2ab322a9a3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3510b4b2e1ba4ac0ad6bca2ab322a9a3~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%98%AF%E6%8A%A5%E9%94%99Error%20response%20from%20daemon%20conflict%20unable%20to%20remove%20repository%20/" data-id="clcowvj2u00043wv6e8t95snh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/Docker/Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%98%AF%E6%8A%A5%E9%94%99Error%20response%20from%20daemon%20conflict%20unable%20to%20remove%20repository%20/" data-id="clcox2rbq001goov6ca8h0j31" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
@@ -889,7 +883,7 @@
     </div>
 
     <div class="friend-link">
-      <h2>友情链接</h2>
+      <h2>其它个人平台链接</h2>
       
         <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
           My_CSDN
