@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>112</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>56</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>41</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>114</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>57</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>42</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,156 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-MQ/（rabbitmq的高级特性）惰性队列" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T09:23:29.728Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/">（rabbitmq的高级特性）惰性队列</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=160&vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-03-消息堆积及惰性队列_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h1 id="1-消息堆积问题"><a href="#1-消息堆积问题" class="headerlink" title="1.消息堆积问题"></a>1.消息堆积问题</h1><p><img src="https://img-blog.csdnimg.cn/b99d3d1549204d588c14889ef1d9c246.png" alt="img"></p>
+<p> 当出现高并发的时候，一如说有一百万条，这些消息都扔到内存当中，显然是不合适的，所以需要学习 队形队列</p>
+<h1 id="2-惰性队列"><a href="#2-惰性队列" class="headerlink" title="2.惰性队列"></a>2.惰性队列</h1><p> <img src="https://img-blog.csdnimg.cn/1245c0f36dd548db84d5c5d494c2d331.png" alt="img"></p>
+<p>使用第一种Bean方式方式显然方便些</p>
+<p><img src="https://img-blog.csdnimg.cn/69f85d1fbdcb4501a3804dabefea0ce2.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/9876735c7b4845b3b333773526244587.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" data-id="clcowvj34000e3wv68rz2azsv" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-MQ/(rabbitmq的高级特性)死信交换机" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T09:19:27.933Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/">(rabbitmq的高级特性)死信交换机</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 对应的教程视频：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=159&vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-02-死信交换机_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h1 id="1-初始死信交换机"><a href="#1-初始死信交换机" class="headerlink" title="1.初始死信交换机"></a>1.初始死信交换机</h1><p><img src="https://img-blog.csdnimg.cn/2689f1bfc1eb42778182145abfcf6675.png" alt="img"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>什么样的消息会成为死信？</p>
+<p>•消息被消费者reject或者返回nack</p>
+<p>•消息超时未消费</p>
+<p>•队列满了</p>
+<p>如何给队列绑定死信交换机？</p>
+<p>•给队列设置dead-letter-exchange属性，指定一个交换机</p>
+<p>•给队列设置dead-letter-routing-key属性，设置死信交换机与死信队列的RoutingKey</p>
+<h1 id="2-TTL"><a href="#2-TTL" class="headerlink" title="2.TTL"></a>2.TTL</h1><p><img src="https://img-blog.csdnimg.cn/e68465dd5a8b49dd8ccb078c78f1ef94.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/ab0c69d04e4546f481d0f07ed98eb68a.png" alt="img"><img src="https://img-blog.csdnimg.cn/d7bc1af04dae44f9b6a644135646c125.png" alt="img"></p>
+<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title=" 总结："></a><img src="https://img-blog.csdnimg.cn/af49a4d919f84acdb4de208beb3f50f4.png" alt="img"> <strong>总结：</strong></h2><p>消息超时的两种方式是？</p>
+<p>•给队列设置ttl属性，进入队列后超过ttl时间的消息变为死信</p>
+<p>•给消息设置ttl属性，队列接收到消息超过ttl时间后变为死信</p>
+<p>•两者共存时，以时间短的ttl为准</p>
+<p>如何实现发送一个消息20秒后消费者才收到消息？</p>
+<p>•给消息的目标队列指定死信交换机</p>
+<p>•消费者监听与死信交换机绑定的队列</p>
+<p>•发送消息时给消息设置ttl为20秒</p>
+<h1 id="3-延迟队列"><a href="#3-延迟队列" class="headerlink" title="3.延迟队列"></a>3.延迟队列</h1><p><img src="https://img-blog.csdnimg.cn/7e4045074e8645398aee01a86bd72b6d.png" alt="img"></p>
+<p> <strong>延迟队列插件</strong></p>
+<p>因为延迟队列的需求非常多，所以RabbitMQ的官方也推出了一个插件，原生支持延迟队列效果。</p>
+<p> 详细安装过程略~~~（我也没装，只是做下笔记，具体怎么装看教程视频吧或是自行查询资料）</p>
+<p><img src="https://img-blog.csdnimg.cn/4f7be72a86ca4d52bace861262cf91b0.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/662b16adf47048b5b82200fe32c3d4b2.png" alt="img"><img src="https://img-blog.csdnimg.cn/8400f734ba474b95b9177715cb17f499.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/6281fbc64d7048149430bca5ba0d4641.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/8df2a4654802484e9d257c28c0f4eb48.png" alt="img"></p>
+<h2 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h2><p>延迟队列插件的使用步骤包括哪些？</p>
+<p>•声明一个交换机，添加delayed属性为true</p>
+<p>•发送消息时，添加x-delay头，值为超时时间</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/" data-id="clcowvj2z00093wv6at09crpz" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-MQ/rabbitmq的高级特性" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -137,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" data-id="clcohf99v001j04v6fs05ecxk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" data-id="clcowvj30000a3wv6192m1hkk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -281,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" data-id="clcohf9cg007e04v66fx82pic" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" data-id="clcowvj5v007t3wv68zq011i2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -375,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/" data-id="clcohf9cg007d04v6f2j31unb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/" data-id="clcowvj5u007q3wv63pkxfwpx" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -502,7 +652,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/" data-id="clcohf9ca006x04v67oipew1x" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/" data-id="clcowvj5p007a3wv68ctj1hkw" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -577,7 +727,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="clcohf9ci007j04v63pxd8m7c" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="clcowvj5t007o3wv6f2pq3rpr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -646,7 +796,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/" data-id="clcohf9cd007304v689y4df9t" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/" data-id="clcowvj5s007k3wv6gkuihafg" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -717,7 +867,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" data-id="clcohf9cb006z04v6fm1qhjbl" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" data-id="clcowvj5o00773wv6bp9xa99o" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -908,300 +1058,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/" data-id="clcohf9c8006s04v6bwdj7tbm" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-微服务/缓存/（分布式缓存）Redis哨兵" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T02:50:54.617Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/">（分布式缓存）Redis哨兵</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=152&vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-03-Redis哨兵_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<h1 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h1><ul>
-<li>哨兵的作用和原理</li>
-<li>搭建哨兵集群</li>
-<li>RedisTemplate的哨兵模式</li>
-</ul>
-<h1 id="一、哨兵的作用和原理"><a href="#一、哨兵的作用和原理" class="headerlink" title="一、哨兵的作用和原理"></a>一、哨兵的作用和原理</h1><p><img src="https://img-blog.csdnimg.cn/2b52c12b7a1b4d368a2b605873b82930.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/d06a5ac4f10e4b1496d454ebc1f57250.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/b76d7ce8f8314194a996d3d6f680cc6e.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/b42e0e3f92ad46efb231bcb628532d55.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/adbee544452f4d6badc1b7790bb4b2ae.png" alt="img"></p>
-<h1 id="二、搭建哨兵集群"><a href="#二、搭建哨兵集群" class="headerlink" title="二、搭建哨兵集群"></a>二、搭建哨兵集群</h1><h2 id="1-集群结构"><a href="#1-集群结构" class="headerlink" title="1.集群结构"></a>1.集群结构</h2><p>这里我们搭建一个三节点形成的Sentinel集群，来监管之前的Redis主从集群。如图：</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-MOzScJfs-1662037549415)(assets&#x2F;image-20210701215227018.png)]</p>
-<p>三个sentinel实例信息如下：</p>
-<table>
-<thead>
-<tr>
-<th>节点</th>
-<th>IP</th>
-<th>PORT</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>s1</td>
-<td>192.168.150.101</td>
-<td>27001</td>
-</tr>
-<tr>
-<td>s2</td>
-<td>192.168.150.101</td>
-<td>27002</td>
-</tr>
-<tr>
-<td>s3</td>
-<td>192.168.150.101</td>
-<td>27003</td>
-</tr>
-</tbody></table>
-<h2 id="2-准备实例和配置"><a href="#2-准备实例和配置" class="headerlink" title="2.准备实例和配置"></a>2.准备实例和配置</h2><p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
-<p>我们创建三个文件夹，名字分别叫s1、s2、s3：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir s1 s2 s3</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>如图：</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-smeM4g2V-1662037549418)(assets&#x2F;image-20210701215534714.png)]</p>
-<p>然后我们在s1目录创建一个sentinel.conf文件，添加下面的内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">port 27001</span><br><span class="line">sentinel announce-ip 192.168.150.101</span><br><span class="line">sentinel monitor mymaster 192.168.150.101 7001 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 5000</span><br><span class="line">sentinel failover-timeout mymaster 60000</span><br><span class="line">dir &quot;/tmp/s1&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>解读：</p>
-<ul>
-<li><p><code>port 27001</code>：是当前sentinel实例的端口</p>
-</li>
-<li><p>&#96;&#96;&#96;<br>sentinel monitor mymaster 192.168.150.101 7001 2</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  ：指定主节点信息 </span><br><span class="line"></span><br><span class="line">  - `mymaster`：主节点名称，自定义，任意写</span><br><span class="line">  - `192.168.150.101 7001`：主节点的ip和端口</span><br><span class="line">  - `2`：选举master时的quorum值</span><br><span class="line"></span><br><span class="line">然后将s1/sentinel.conf文件拷贝到s2、s3两个目录中（在/tmp目录执行下列命令）：</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1 id="方式一：逐个拷贝"><a href="#方式一：逐个拷贝" class="headerlink" title="方式一：逐个拷贝"></a>方式一：逐个拷贝</h1><p>cp s1&#x2F;sentinel.conf s2<br>cp s1&#x2F;sentinel.conf s3</p>
-<h1 id="方式二：管道组合命令，一键拷贝"><a href="#方式二：管道组合命令，一键拷贝" class="headerlink" title="方式二：管道组合命令，一键拷贝"></a>方式二：管道组合命令，一键拷贝</h1><p>echo s2 s3 | xargs -t -n 1 cp s1&#x2F;sentinel.conf</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)</span><br><span class="line"></span><br><span class="line">修改s2、s3两个文件夹内的配置文件，将端口分别修改为27002、27003：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>sed -i -e ‘s&#x2F;27001&#x2F;27002&#x2F;g’ -e ‘s&#x2F;s1&#x2F;s2&#x2F;g’ s2&#x2F;sentinel.conf<br>sed -i -e ‘s&#x2F;27001&#x2F;27003&#x2F;g’ -e ‘s&#x2F;s1&#x2F;s3&#x2F;g’ s3&#x2F;sentinel.conf</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)</span><br><span class="line"></span><br><span class="line">## 3.启动</span><br><span class="line"></span><br><span class="line">为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="第1个"><a href="#第1个" class="headerlink" title="第1个"></a>第1个</h1><p>redis-sentinel s1&#x2F;sentinel.conf</p>
-<h1 id="第2个"><a href="#第2个" class="headerlink" title="第2个"></a>第2个</h1><p>redis-sentinel s2&#x2F;sentinel.conf</p>
-<h1 id="第3个"><a href="#第3个" class="headerlink" title="第3个"></a>第3个</h1><p>redis-sentinel s3&#x2F;sentinel.conf</p>
-<p>&#96;&#96;&#96;</p>
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>启动后：</p>
-<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>尝试让master节点7001宕机，查看sentinel日志：</p>
-<p>查看7003的日志：</p>
-<p>查看7002的日志：</p>
-<h1 id="三、RedisTemplate的哨兵模式"><a href="#三、RedisTemplate的哨兵模式" class="headerlink" title="三、RedisTemplate的哨兵模式"></a>三、RedisTemplate的哨兵模式</h1><p>在Sentinel集群监管下的Redis主从集群，其节点会因为自动故障转移而发生变化，Redis的客户端必须感知这种变化，及时更新连接信息。Spring的RedisTemplate底层利用lettuce实现了节点的感知和自动切换。</p>
-<p>首先，我们引入课前资料提供的Demo工程：</p>
-<p><img src="https://img-blog.csdnimg.cn/9560625acea141d798bfcb128ea95031.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/44d017488b6b4ef094613c07de195732.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" data-id="clcohf9ce007704v61pg8bhe6" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-微服务/缓存/（分布式缓存）Redis主从" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T02:48:08.504Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/">（分布式缓存）Redis主从</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="对应的视频教程"><a href="#对应的视频教程" class="headerlink" title="对应的视频教程"></a>对应的视频教程</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=151&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-02-Redis主从_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<h1 id="一、搭建Redis主从集群"><a href="#一、搭建Redis主从集群" class="headerlink" title="一、搭建Redis主从集群"></a>一、搭建Redis主从集群</h1><h2 id="1-集群结构"><a href="#1-集群结构" class="headerlink" title="1.集群结构"></a>1.集群结构</h2><p>我们搭建的主从集群结构如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/760dffe18def4d9dbb5499bcc3cc2a4f.png" alt="img"></p>
-<p>共包含三个节点，一个主节点，两个从节点。</p>
-<p>这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：</p>
-<table>
-<thead>
-<tr>
-<th>IP</th>
-<th>PORT</th>
-<th>角色</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>192.168.150.101</td>
-<td>7001</td>
-<td>master</td>
-</tr>
-<tr>
-<td>192.168.150.101</td>
-<td>7002</td>
-<td>slave</td>
-</tr>
-<tr>
-<td>192.168.150.101</td>
-<td>7003</td>
-<td>slave</td>
-</tr>
-</tbody></table>
-<h2 id="2-准备实例和配置"><a href="#2-准备实例和配置" class="headerlink" title="2.准备实例和配置"></a>2.准备实例和配置</h2><p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
-<p>1）创建目录</p>
-<p>我们创建三个文件夹，名字分别叫7001、7002、7003：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir 7001 7002 7003</span><br></pre></td></tr></table></figure>
-
-<p>如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/4cf724d39ef5484a9eab3d9b064fe44f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>2）恢复原始配置</p>
-<p>修改redis-6.2.4&#x2F;redis.conf文件，将其中的持久化模式改为默认的RDB模式，AOF保持关闭状态。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启RDB</span><br><span class="line"># save &quot;&quot;</span><br><span class="line">save 3600 1</span><br><span class="line">save 300 100</span><br><span class="line">save 60 10000</span><br><span class="line"></span><br><span class="line"># 关闭AOF</span><br><span class="line">appendonly no</span><br></pre></td></tr></table></figure>
-
-<p>3）拷贝配置文件到每个实例目录</p>
-<p>然后将redis-6.2.4&#x2F;redis.conf文件拷贝到三个目录中（在&#x2F;tmp目录执行下列命令）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 方式一：逐个拷贝</span><br><span class="line">cp redis-6.2.4/redis.conf 7001</span><br><span class="line">cp redis-6.2.4/redis.conf 7002</span><br><span class="line">cp redis-6.2.4/redis.conf 7003</span><br><span class="line"># 方式二：管道组合命令，一键拷贝</span><br><span class="line">echo 7001 7002 7003 | xargs -t -n 1 cp redis-6.2.4/redis.conf</span><br></pre></td></tr></table></figure>
-
-<p>4）修改每个实例的端口、工作目录</p>
-<p>修改每个文件夹内的配置文件，将端口分别修改为7001、7002、7003，将rdb文件保存位置都修改为自己所在目录（在&#x2F;tmp目录执行下列命令）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i -e &#x27;s/6379/7001/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7001\//g&#x27; 7001/redis.conf</span><br><span class="line">sed -i -e &#x27;s/6379/7002/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7002\//g&#x27; 7002/redis.conf</span><br><span class="line">sed -i -e &#x27;s/6379/7003/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7003\//g&#x27; 7003/redis.conf</span><br></pre></td></tr></table></figure>
-
-<p>5）修改每个实例的声明IP</p>
-<p>虚拟机本身有多个IP，为了避免将来混乱，我们需要在redis.conf文件中指定每一个实例的绑定ip信息，格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># redis实例的声明 IP</span><br><span class="line">replica-announce-ip 192.168.150.101</span><br></pre></td></tr></table></figure>
-
-<p>每个目录都要改，我们一键完成修改（在&#x2F;tmp目录执行下列命令）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 逐一执行</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7001/redis.conf</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7002/redis.conf</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7003/redis.conf</span><br><span class="line"></span><br><span class="line"># 或者一键修改</span><br><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 | xargs -I&#123;&#125; -t sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; &#123;&#125;/redis.conf</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动"></a>3.启动</h2><p>为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 第1个</span><br><span class="line">redis-server 7001/redis.conf</span><br><span class="line"># 第2个</span><br><span class="line">redis-server 7002/redis.conf</span><br><span class="line"># 第3个</span><br><span class="line">redis-server 7003/redis.conf</span><br></pre></td></tr></table></figure>
-
-<p>启动后：</p>
-<p><img src="https://img-blog.csdnimg.cn/a59daa70d87f4f9d949860dae391942c.png" alt="img"></p>
-<p>如果要一键停止，可以运行下面命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 | xargs -I&#123;&#125; -t redis-cli -p &#123;&#125; shutdown</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-开启主从关系"><a href="#4-开启主从关系" class="headerlink" title="4.开启主从关系"></a>4.开启主从关系</h2><p>现在三个实例还没有任何关系，要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。</p>
-<p>有临时和永久两种模式：</p>
-<ul>
-<li><p>修改配置文件（永久生效）</p>
-<ul>
-<li>在redis.conf中添加一行配置：<code>slaveof &lt;masterip&gt; &lt;masterport&gt;</code></li>
-</ul>
-</li>
-<li><p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>注意</strong>：在5.0以后新增命令replicaof，与salveof效果一致。</p>
-<p>这里我们为了演示方便，使用方式二。</p>
-<p>通过redis-cli命令连接7002，执行下面命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7002</span><br><span class="line">redis-cli -p 7002</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></table></figure>
-
-<p>通过redis-cli命令连接7003，执行下面命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7003</span><br><span class="line">redis-cli -p 7003</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/8ba1e82306a74338b0b8e7b64087e790.png" alt="img"></p>
-<p>然后连接 7001节点，查看集群状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7001</span><br><span class="line">redis-cli -p 7001</span><br><span class="line"># 查看状态</span><br><span class="line">info replication</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<p><img src="https://img-blog.csdnimg.cn/9fe619ef341e48e9a7d11a46b6f1e943.png" alt="img"></p>
-<h2 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h2><p>执行下列操作以测试：</p>
-<ul>
-<li>利用redis-cli连接7001，执行<code>set num 123</code></li>
-<li>利用redis-cli连接7002，执行<code>get num</code>，再执行<code>set num 666</code></li>
-<li>利用redis-cli连接7003，执行<code>get num</code>，再执行<code>set num 888</code></li>
-</ul>
-<p>可以发现，只有在7001这个master节点上可以执行写操作，7002和7003这两个slave节点只能执行读操作。</p>
-<p> <img src="https://img-blog.csdnimg.cn/8b72b006934c477b9aaf1806542007a1.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e9985b1fcb7046b2849d2b260e4183a4.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/00e23fce5f8040b7bdcdd8daf059785d.png" alt="img"></p>
-<h1 id="二、数据同步原理"><a href="#二、数据同步原理" class="headerlink" title="二、数据同步原理"></a>二、数据同步原理</h1><p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/c89f161adfcf4eb9a16367bb72919139.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/c519a72fdc2140268b2b18c3e82df57e.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/32c36304a2ce450eaa3ecee4e3203ccd.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/5cb9aa1893bb409c8a65259d8dd094da.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clcohf9cc007204v69hkuc0lt" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/" data-id="clcowvj5n00723wv65resa082" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -1263,9 +1120,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>112</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>56</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>41</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>114</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>57</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>42</strong><br>标签</div></a>
     </div>
 
 

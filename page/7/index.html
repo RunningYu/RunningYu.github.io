@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>112</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>56</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>41</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>114</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>57</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>42</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,299 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-微服务/缓存/（分布式缓存）Redis哨兵" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T02:50:54.617Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/">（分布式缓存）Redis哨兵</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=152&vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-03-Redis哨兵_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h1 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h1><ul>
+<li>哨兵的作用和原理</li>
+<li>搭建哨兵集群</li>
+<li>RedisTemplate的哨兵模式</li>
+</ul>
+<h1 id="一、哨兵的作用和原理"><a href="#一、哨兵的作用和原理" class="headerlink" title="一、哨兵的作用和原理"></a>一、哨兵的作用和原理</h1><p><img src="https://img-blog.csdnimg.cn/2b52c12b7a1b4d368a2b605873b82930.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/d06a5ac4f10e4b1496d454ebc1f57250.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/b76d7ce8f8314194a996d3d6f680cc6e.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/b42e0e3f92ad46efb231bcb628532d55.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/adbee544452f4d6badc1b7790bb4b2ae.png" alt="img"></p>
+<h1 id="二、搭建哨兵集群"><a href="#二、搭建哨兵集群" class="headerlink" title="二、搭建哨兵集群"></a>二、搭建哨兵集群</h1><h2 id="1-集群结构"><a href="#1-集群结构" class="headerlink" title="1.集群结构"></a>1.集群结构</h2><p>这里我们搭建一个三节点形成的Sentinel集群，来监管之前的Redis主从集群。如图：</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-MOzScJfs-1662037549415)(assets&#x2F;image-20210701215227018.png)]</p>
+<p>三个sentinel实例信息如下：</p>
+<table>
+<thead>
+<tr>
+<th>节点</th>
+<th>IP</th>
+<th>PORT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s1</td>
+<td>192.168.150.101</td>
+<td>27001</td>
+</tr>
+<tr>
+<td>s2</td>
+<td>192.168.150.101</td>
+<td>27002</td>
+</tr>
+<tr>
+<td>s3</td>
+<td>192.168.150.101</td>
+<td>27003</td>
+</tr>
+</tbody></table>
+<h2 id="2-准备实例和配置"><a href="#2-准备实例和配置" class="headerlink" title="2.准备实例和配置"></a>2.准备实例和配置</h2><p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
+<p>我们创建三个文件夹，名字分别叫s1、s2、s3：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir s1 s2 s3</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>如图：</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-smeM4g2V-1662037549418)(assets&#x2F;image-20210701215534714.png)]</p>
+<p>然后我们在s1目录创建一个sentinel.conf文件，添加下面的内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">port 27001</span><br><span class="line">sentinel announce-ip 192.168.150.101</span><br><span class="line">sentinel monitor mymaster 192.168.150.101 7001 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 5000</span><br><span class="line">sentinel failover-timeout mymaster 60000</span><br><span class="line">dir &quot;/tmp/s1&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>解读：</p>
+<ul>
+<li><p><code>port 27001</code>：是当前sentinel实例的端口</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>sentinel monitor mymaster 192.168.150.101 7001 2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  ：指定主节点信息 </span><br><span class="line"></span><br><span class="line">  - `mymaster`：主节点名称，自定义，任意写</span><br><span class="line">  - `192.168.150.101 7001`：主节点的ip和端口</span><br><span class="line">  - `2`：选举master时的quorum值</span><br><span class="line"></span><br><span class="line">然后将s1/sentinel.conf文件拷贝到s2、s3两个目录中（在/tmp目录执行下列命令）：</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="方式一：逐个拷贝"><a href="#方式一：逐个拷贝" class="headerlink" title="方式一：逐个拷贝"></a>方式一：逐个拷贝</h1><p>cp s1&#x2F;sentinel.conf s2<br>cp s1&#x2F;sentinel.conf s3</p>
+<h1 id="方式二：管道组合命令，一键拷贝"><a href="#方式二：管道组合命令，一键拷贝" class="headerlink" title="方式二：管道组合命令，一键拷贝"></a>方式二：管道组合命令，一键拷贝</h1><p>echo s2 s3 | xargs -t -n 1 cp s1&#x2F;sentinel.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)</span><br><span class="line"></span><br><span class="line">修改s2、s3两个文件夹内的配置文件，将端口分别修改为27002、27003：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>sed -i -e ‘s&#x2F;27001&#x2F;27002&#x2F;g’ -e ‘s&#x2F;s1&#x2F;s2&#x2F;g’ s2&#x2F;sentinel.conf<br>sed -i -e ‘s&#x2F;27001&#x2F;27003&#x2F;g’ -e ‘s&#x2F;s1&#x2F;s3&#x2F;g’ s3&#x2F;sentinel.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)</span><br><span class="line"></span><br><span class="line">## 3.启动</span><br><span class="line"></span><br><span class="line">为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="第1个"><a href="#第1个" class="headerlink" title="第1个"></a>第1个</h1><p>redis-sentinel s1&#x2F;sentinel.conf</p>
+<h1 id="第2个"><a href="#第2个" class="headerlink" title="第2个"></a>第2个</h1><p>redis-sentinel s2&#x2F;sentinel.conf</p>
+<h1 id="第3个"><a href="#第3个" class="headerlink" title="第3个"></a>第3个</h1><p>redis-sentinel s3&#x2F;sentinel.conf</p>
+<p>&#96;&#96;&#96;</p>
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>启动后：</p>
+<h2 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h2><p>尝试让master节点7001宕机，查看sentinel日志：</p>
+<p>查看7003的日志：</p>
+<p>查看7002的日志：</p>
+<h1 id="三、RedisTemplate的哨兵模式"><a href="#三、RedisTemplate的哨兵模式" class="headerlink" title="三、RedisTemplate的哨兵模式"></a>三、RedisTemplate的哨兵模式</h1><p>在Sentinel集群监管下的Redis主从集群，其节点会因为自动故障转移而发生变化，Redis的客户端必须感知这种变化，及时更新连接信息。Spring的RedisTemplate底层利用lettuce实现了节点的感知和自动切换。</p>
+<p>首先，我们引入课前资料提供的Demo工程：</p>
+<p><img src="https://img-blog.csdnimg.cn/9560625acea141d798bfcb128ea95031.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/44d017488b6b4ef094613c07de195732.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" data-id="clcowvj5q007e3wv6c3cz2qak" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-微服务/缓存/（分布式缓存）Redis主从" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T02:48:08.504Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/">（分布式缓存）Redis主从</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="对应的视频教程"><a href="#对应的视频教程" class="headerlink" title="对应的视频教程"></a>对应的视频教程</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=151&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-02-Redis主从_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h1 id="一、搭建Redis主从集群"><a href="#一、搭建Redis主从集群" class="headerlink" title="一、搭建Redis主从集群"></a>一、搭建Redis主从集群</h1><h2 id="1-集群结构"><a href="#1-集群结构" class="headerlink" title="1.集群结构"></a>1.集群结构</h2><p>我们搭建的主从集群结构如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/760dffe18def4d9dbb5499bcc3cc2a4f.png" alt="img"></p>
+<p>共包含三个节点，一个主节点，两个从节点。</p>
+<p>这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：</p>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>PORT</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.150.101</td>
+<td>7001</td>
+<td>master</td>
+</tr>
+<tr>
+<td>192.168.150.101</td>
+<td>7002</td>
+<td>slave</td>
+</tr>
+<tr>
+<td>192.168.150.101</td>
+<td>7003</td>
+<td>slave</td>
+</tr>
+</tbody></table>
+<h2 id="2-准备实例和配置"><a href="#2-准备实例和配置" class="headerlink" title="2.准备实例和配置"></a>2.准备实例和配置</h2><p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
+<p>1）创建目录</p>
+<p>我们创建三个文件夹，名字分别叫7001、7002、7003：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir 7001 7002 7003</span><br></pre></td></tr></table></figure>
+
+<p>如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/4cf724d39ef5484a9eab3d9b064fe44f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>2）恢复原始配置</p>
+<p>修改redis-6.2.4&#x2F;redis.conf文件，将其中的持久化模式改为默认的RDB模式，AOF保持关闭状态。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启RDB</span><br><span class="line"># save &quot;&quot;</span><br><span class="line">save 3600 1</span><br><span class="line">save 300 100</span><br><span class="line">save 60 10000</span><br><span class="line"></span><br><span class="line"># 关闭AOF</span><br><span class="line">appendonly no</span><br></pre></td></tr></table></figure>
+
+<p>3）拷贝配置文件到每个实例目录</p>
+<p>然后将redis-6.2.4&#x2F;redis.conf文件拷贝到三个目录中（在&#x2F;tmp目录执行下列命令）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 方式一：逐个拷贝</span><br><span class="line">cp redis-6.2.4/redis.conf 7001</span><br><span class="line">cp redis-6.2.4/redis.conf 7002</span><br><span class="line">cp redis-6.2.4/redis.conf 7003</span><br><span class="line"># 方式二：管道组合命令，一键拷贝</span><br><span class="line">echo 7001 7002 7003 | xargs -t -n 1 cp redis-6.2.4/redis.conf</span><br></pre></td></tr></table></figure>
+
+<p>4）修改每个实例的端口、工作目录</p>
+<p>修改每个文件夹内的配置文件，将端口分别修改为7001、7002、7003，将rdb文件保存位置都修改为自己所在目录（在&#x2F;tmp目录执行下列命令）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i -e &#x27;s/6379/7001/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7001\//g&#x27; 7001/redis.conf</span><br><span class="line">sed -i -e &#x27;s/6379/7002/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7002\//g&#x27; 7002/redis.conf</span><br><span class="line">sed -i -e &#x27;s/6379/7003/g&#x27; -e &#x27;s/dir .\//dir \/tmp\/7003\//g&#x27; 7003/redis.conf</span><br></pre></td></tr></table></figure>
+
+<p>5）修改每个实例的声明IP</p>
+<p>虚拟机本身有多个IP，为了避免将来混乱，我们需要在redis.conf文件中指定每一个实例的绑定ip信息，格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># redis实例的声明 IP</span><br><span class="line">replica-announce-ip 192.168.150.101</span><br></pre></td></tr></table></figure>
+
+<p>每个目录都要改，我们一键完成修改（在&#x2F;tmp目录执行下列命令）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 逐一执行</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7001/redis.conf</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7002/redis.conf</span><br><span class="line">sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; 7003/redis.conf</span><br><span class="line"></span><br><span class="line"># 或者一键修改</span><br><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 | xargs -I&#123;&#125; -t sed -i &#x27;1a replica-announce-ip 192.168.150.101&#x27; &#123;&#125;/redis.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动"></a>3.启动</h2><p>为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 第1个</span><br><span class="line">redis-server 7001/redis.conf</span><br><span class="line"># 第2个</span><br><span class="line">redis-server 7002/redis.conf</span><br><span class="line"># 第3个</span><br><span class="line">redis-server 7003/redis.conf</span><br></pre></td></tr></table></figure>
+
+<p>启动后：</p>
+<p><img src="https://img-blog.csdnimg.cn/a59daa70d87f4f9d949860dae391942c.png" alt="img"></p>
+<p>如果要一键停止，可以运行下面命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 | xargs -I&#123;&#125; -t redis-cli -p &#123;&#125; shutdown</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-开启主从关系"><a href="#4-开启主从关系" class="headerlink" title="4.开启主从关系"></a>4.开启主从关系</h2><p>现在三个实例还没有任何关系，要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。</p>
+<p>有临时和永久两种模式：</p>
+<ul>
+<li><p>修改配置文件（永久生效）</p>
+<ul>
+<li>在redis.conf中添加一行配置：<code>slaveof &lt;masterip&gt; &lt;masterport&gt;</code></li>
+</ul>
+</li>
+<li><p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>注意</strong>：在5.0以后新增命令replicaof，与salveof效果一致。</p>
+<p>这里我们为了演示方便，使用方式二。</p>
+<p>通过redis-cli命令连接7002，执行下面命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7002</span><br><span class="line">redis-cli -p 7002</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></table></figure>
+
+<p>通过redis-cli命令连接7003，执行下面命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7003</span><br><span class="line">redis-cli -p 7003</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/8ba1e82306a74338b0b8e7b64087e790.png" alt="img"></p>
+<p>然后连接 7001节点，查看集群状态：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7001</span><br><span class="line">redis-cli -p 7001</span><br><span class="line"># 查看状态</span><br><span class="line">info replication</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://img-blog.csdnimg.cn/9fe619ef341e48e9a7d11a46b6f1e943.png" alt="img"></p>
+<h2 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h2><p>执行下列操作以测试：</p>
+<ul>
+<li>利用redis-cli连接7001，执行<code>set num 123</code></li>
+<li>利用redis-cli连接7002，执行<code>get num</code>，再执行<code>set num 666</code></li>
+<li>利用redis-cli连接7003，执行<code>get num</code>，再执行<code>set num 888</code></li>
+</ul>
+<p>可以发现，只有在7001这个master节点上可以执行写操作，7002和7003这两个slave节点只能执行读操作。</p>
+<p> <img src="https://img-blog.csdnimg.cn/8b72b006934c477b9aaf1806542007a1.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/e9985b1fcb7046b2849d2b260e4183a4.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/00e23fce5f8040b7bdcdd8daf059785d.png" alt="img"></p>
+<h1 id="二、数据同步原理"><a href="#二、数据同步原理" class="headerlink" title="二、数据同步原理"></a>二、数据同步原理</h1><p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/c89f161adfcf4eb9a16367bb72919139.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/c519a72fdc2140268b2b18c3e82df57e.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/32c36304a2ce450eaa3ecee4e3203ccd.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/5cb9aa1893bb409c8a65259d8dd094da.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clcowvj5q007d3wv6ck90bvg4" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-微服务/缓存/（分布式缓存）Redis持久化" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -167,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clcohf9cf007904v61g0xe8ge" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clcowvj5s007i3wv66nds4tli" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -200,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/redis/Untitled/" data-id="clcohf9ax003s04v6008t89gl" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/redis/Untitled/" data-id="clcowvj4a003e3wv61gco5mdz" class="article-share-link">分享</a>
       
       
     </footer>
@@ -284,7 +577,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" data-id="clcohf9b1004004v67m0scw9k" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" data-id="clcowvj4c003k3wv69ue42vzd" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
@@ -367,7 +660,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" data-id="clcohf9c9006v04v62fjk5nr8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" data-id="clcowvj5n00743wv6al4s11x9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -426,7 +719,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" data-id="clcohf99t001c04v644g14zis" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" data-id="clcowvj3d00123wv68yj530u3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
@@ -491,7 +784,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clcohf9c5006l04v68n2a3axj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clcowvj5i006r3wv662hwd3p0" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -575,7 +868,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clcohf9cj007m04v60x2h3vpj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clcowvj5l006y3wv61jub98le" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" rel="tag">分布式事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -644,184 +937,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" data-id="clcohf9c3006g04v6c3225ga4" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-数据封装/Java后端数据返回通用类" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:25:42.126Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/">Java后端数据返回通用类</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/">数据封装</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第一种（简单定义）"><a href="#第一种（简单定义）" class="headerlink" title="第一种（简单定义）"></a>第一种（简单定义）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 返回通用类</span><br><span class="line"> * @param &lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">@Data</span><br><span class="line">public class R&lt;T&gt; &#123;</span><br><span class="line">    /** 编码：1成功，0和其它数字为失败*/</span><br><span class="line">    private Integer code;</span><br><span class="line">    /** 信息返回*/</span><br><span class="line">    private String msg;</span><br><span class="line">    /** 信息返回数据*/</span><br><span class="line">    private T data;</span><br><span class="line">    /** 动态数据*/</span><br><span class="line">    private Map map = new HashMap();</span><br><span class="line">    public static &lt;T&gt; R&lt;T&gt; success(T object) &#123;</span><br><span class="line">        R&lt;T&gt; r = new R&lt;T&gt;();</span><br><span class="line">        r.data = object;</span><br><span class="line">        r.code = 1;</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">    public static &lt;T&gt; R&lt;T&gt; error(String msg) &#123;</span><br><span class="line">        R r = new R();</span><br><span class="line">        r.msg = msg;</span><br><span class="line">        r.code = 0;</span><br><span class="line">        return r;</span><br><span class="line">    &#125;</span><br><span class="line">    public R&lt;T&gt; add(String key, Object value) &#123;</span><br><span class="line">        this.map.put(key, value);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h1><p>导入依赖</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>编写结果数据通用类</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import io.swagger.annotations.ApiModel;</span><br><span class="line">import io.swagger.annotations.ApiModelProperty;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * todo JsonInclude 注解忽略 null值 看业务需求添加</span><br><span class="line"> */</span><br><span class="line">@ApiModel(&quot;分页响应参数&quot;)</span><br><span class="line">@JsonInclude(value = JsonInclude.Include.NON_EMPTY)</span><br><span class="line">@Data</span><br><span class="line">public class JsonResult&lt;T&gt; implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(value = &quot;结果状态&quot;, example = &quot;200&quot;)</span><br><span class="line">    private Integer code = 200;</span><br><span class="line">    @ApiModelProperty(value = &quot;结果数据&quot;)</span><br><span class="line">    private T data;</span><br><span class="line">    @ApiModelProperty(value = &quot;结果描述&quot;, example = &quot;成功&quot;)</span><br><span class="line">    private String message = &quot;ok&quot;;</span><br><span class="line"></span><br><span class="line">    public JsonResult() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code) &#123;</span><br><span class="line">        this();</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, T data) &#123;</span><br><span class="line">        this(code);</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message) &#123;</span><br><span class="line">        this(code);</span><br><span class="line">        this.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message, T data) &#123;</span><br><span class="line">        this(code, message);</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success() &#123;</span><br><span class="line">        return new JsonResult(200);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(T data) &#123;</span><br><span class="line">        return new JsonResult(200, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String message, T data) &#123;</span><br><span class="line">        return new JsonResult(200, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(Integer code, String message, T data) &#123;</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static JsonResult&lt;String&gt; error() &#123;</span><br><span class="line">        return new JsonResult(500);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(String message) &#123;</span><br><span class="line">        return new JsonResult(500, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message) &#123;</span><br><span class="line">        return new JsonResult(code, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message, T data) &#123;</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="clcohf9b7004g04v6a70wcb73" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/" rel="tag">数据封装</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-微服务/Sentinel/授权规则及规则持久化" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:22:22.090Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/">授权规则及规则持久化</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、授权规则"><a href="#一、授权规则" class="headerlink" title="一、授权规则"></a>一、授权规则</h1><p><strong>第1步：添加判断来源逻辑</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class HeaderOriginParser implements RequestOriginParser &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String parseOrigin(HttpServletRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        //1.获取请求头</span><br><span class="line">        String origin = request.getHeader( &quot;origin&quot; );</span><br><span class="line">        //2.非空判断</span><br><span class="line">        if ( StringUtils.isEmpty( origin ) ) &#123;</span><br><span class="line">            origin = &quot;blank&quot;;   //如果是空的就返回一个默认值</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return origin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>第2步：编写过滤器–&gt;给网关添加origin头</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>第3步：</strong> 重新启动，访问一个接口</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>第4步：</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>第5步：重新范访问上面的接口</p>
-<p>8088是直接范文oder服务的，也就是绕过了网关，但是现在我们已经设置了授权规则，所以直接访问是不行的，你报错如下</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 现在我们通过网关来访问，网关的端口设置的是10010，用10010来访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 因为网关做了权限的校验，所以需要把权限加上</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><strong>因此，通过上面的授权规则设置后，通过网关来访问的就可以，而通过浏览器直接访问的就不行</strong></p>
-<p>下面是黑马PPT的笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id="二、自定义异常结果"><a href="#二、自定义异常结果" class="headerlink" title="二、自定义异常结果"></a>二、自定义异常结果</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <strong>第1步：</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.BlockException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.FlowException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class SentinelExceptionHandler implements BlockExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception &#123;</span><br><span class="line">        String msg = &quot;未知异常&quot;;</span><br><span class="line">        int status = 429;</span><br><span class="line"></span><br><span class="line">        if ( e instanceof FlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被限流了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof ParamFlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被热点参数限流&quot;;</span><br><span class="line">        &#125; else if ( e instanceof DegradeException ) &#123;</span><br><span class="line">            msg = &quot;请求被降级了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof AuthorityException ) &#123;</span><br><span class="line">            msg = &quot;没有权限访问&quot;;</span><br><span class="line">            status = 401;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        response.setContentType( &quot;application/json;charset=utf-8&quot; );</span><br><span class="line">        response.setStatus( status );</span><br><span class="line">        response.getWriter().println( &quot;&#123;&quot;msg&quot;: &quot; + msg +&quot;, &quot;status&quot;: &quot; + status + &quot;&#125;&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>第2步：</strong> 重启微服务，然后浏览器访问接口</p>
-<p><strong>第3步：</strong> 在sentinel中给端口设置响应的规则进行测试</p>
-<p>（1）新增授权规则 </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p>（2）新增流控规则</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 下面是黑马PPT笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id="三、规则持久化"><a href="#三、规则持久化" class="headerlink" title="三、规则持久化"></a>三、规则持久化</h1><p>这一节知识就没有详细的操作笔记，需要观看黑马教程视频如下链接：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=146&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili">高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<p><strong>前言：</strong></p>
-<p><strong>当我们服务重启，我们所配的所有规则就会丢失，因为sentinel会默认把这些规则保存在内存里，重启就自然丢失了。而在生产的环境下 肯定是不能容忍这样的问题的。所以我们就需要学习怎么将****sentinel的规则持久化。</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h3 id><a href="#" class="headerlink" title></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></h3><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clcohf9c6006n04v69p826lxu" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" data-id="clcowvj5g006m3wv6bdfx8cwm" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -883,9 +999,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>112</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>56</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>41</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>114</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>57</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>42</strong><br>标签</div></a>
     </div>
 
 

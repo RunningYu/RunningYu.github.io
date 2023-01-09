@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>112</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>56</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>41</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>114</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>57</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>42</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,114 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-刷题笔记/Untitled" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/Untitled/" class="article-date">
+  <time class="post-time" datetime="2023-01-09T14:34:53.184Z" itemprop="datePublished">
+    <span class="post-month">1月</span><br/>
+    <span class="post-day">09</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/Untitled/" data-id="clcowvj4i00413wv6458vghti" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-刷题笔记/刷题记录/leetcode-134.加油站" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/" class="article-date">
+  <time class="post-time" datetime="2023-01-09T14:34:18.875Z" itemprop="datePublished">
+    <span class="post-month">1月</span><br/>
+    <span class="post-day">09</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">leetcode-134.加油站</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>,<a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/leetcode/">leetcode</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>在一条环路上有 <code>n</code> 个加油站，其中第 <code>i</code> 个加油站有汽油 <code>gas[i]</code> 升。</p>
+<p>你有一辆油箱容量无限的的汽车，从第 <code>i</code> 个加油站开往第 <code>i+1</code> 个加油站需要消耗汽油 <code>cost[i]</code> 升。你从其中的一个加油站出发，开始时油箱为空。</p>
+<p>给定两个整数数组 <code>gas</code> 和 <code>cost</code> ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 <code>-1</code> 。如果存在解，则 <strong>保证</strong> 它是 <strong>唯一</strong> 的。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: gas = [1,2,3,4,5], cost = [3,4,5,1,2]</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油</span><br><span class="line">开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油</span><br><span class="line">开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油</span><br><span class="line">开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油</span><br><span class="line">开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油</span><br><span class="line">开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。</span><br><span class="line">因此，3 可为起始索引。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: gas = [2,3,4], cost = [3,4,3]</span><br><span class="line">输出: -1</span><br><span class="line">解释:</span><br><span class="line">你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。</span><br><span class="line">我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油</span><br><span class="line">开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油</span><br><span class="line">开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油</span><br><span class="line">你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。</span><br><span class="line">因此，无论怎样，你都不可能绕环路行驶一周。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>gas.length == n</code></li>
+<li><code>cost.length == n</code></li>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>0 &lt;= gas[i], cost[i] &lt;= 104</code></li>
+</ul>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>下图的 黑色折线图 即 总油量剩余值，若要满足题目的要求：跑完全程再回到起点，总油量剩余值 的任意部分都需要在 X 轴以上，且跑到终点时：总剩余汽油量 &gt;&#x3D; 0。</p>
+<p>为了让 黑色折线图 任意部分都在 X 轴以上，我们需要向上移动 黑色折线图，直到所有点都在 X 轴或 X 轴以上。此时，处在 X 轴的点即为出发点。即 黑色折线图 的最低值的位置：index &#x3D; 3。</p>
+<p><img src="https://pic.leetcode-cn.com/98ee6782654518e1a33852e99825f1537869a542ee26738cf02d5fb6f0f0a899-%E6%97%A0%E6%A0%87%E9%A2%98.png" alt="无标题.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    思路：</span></span><br><span class="line"><span class="comment">        找到最后一个 sum 还是减小状态的下标即可，然后结果就是这个下标的下一个下标，即( index + 1 ) % len</span></span><br><span class="line"><span class="comment">        因为index 是最低点了，后面就是回升的了。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">canCompleteCircuit</span><span class="params">(<span class="type">int</span>[] gas, <span class="type">int</span>[] cost)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> gas.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i ++ ) &#123;</span><br><span class="line">            sum += gas[ i ] - cost[ i ];</span><br><span class="line">            <span class="comment">// System.out.println( sum + &quot; &quot; + i );</span></span><br><span class="line">            <span class="keyword">if</span> ( sum &lt; min ) &#123;</span><br><span class="line">                min = sum;</span><br><span class="line">                index = i + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum &lt; <span class="number">0</span> ? -<span class="number">1</span> : index % len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/" data-id="clcowvj5e006e3wv65xwl1hrx" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-JVM/JVM中篇：字节码与类的加载篇/2-javap使用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -137,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/" data-id="clcohf9bs005y04v63ptigbeg" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/" data-id="clcowvj5b00683wv69fkfd00u" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
@@ -189,7 +297,10 @@
       
         <p>[toc]</p>
 <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p><img src="https://img-blog.csdnimg.cn/img_convert/630bca9b1bbeeeb4f772fea5f94d43fc.png"><img src="https://img-blog.csdnimg.cn/img_convert/74bb5f23ad01f05a39f8eb171d205390.png"><img src="https://img-blog.csdnimg.cn/img_convert/bb3c57508713e377f3f4084409abaa30.png" alt="img"></p>
-<h1 id="2-加载与存储指令"><a href="#2-加载与存储指令" class="headerlink" title="2. 加载与存储指令"></a>2. 加载与存储指令</h1><p><img src="https://img-blog.csdnimg.cn/img_convert/3585fe67d5d83aff5db707d8eedccbae.png" alt="0ca8044c-f78d-4787-aeac-c986a35f9cdf"><br><img src="https://gitee.com/vectorx/ImageCloud/raw/master/img/20210424190846.png" alt="16e3afaf-b7d8-4a23-8897-9fe02586aafd"><img src="https://img-blog.csdnimg.cn/img_convert/8e911caaa5c0502b038af324c16edce8.png" alt="08e01fd0-a33e-47e4-8fd2-34c2935db71d"></p>
+<h1 id="2-加载与存储指令"><a href="#2-加载与存储指令" class="headerlink" title="2. 加载与存储指令"></a>2. 加载与存储指令</h1><p><img src="/../../../images/image-20230109154720979.png" alt="image-20230109154720979"></p>
+<p><img src="/../../../images/image-20230109155158364.png" alt="image-20230109155158364"></p>
+<hr>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/3585fe67d5d83aff5db707d8eedccbae.png" alt="0ca8044c-f78d-4787-aeac-c986a35f9cdf"><br><img src="https://gitee.com/vectorx/ImageCloud/raw/master/img/20210424190846.png" alt="16e3afaf-b7d8-4a23-8897-9fe02586aafd"><img src="https://img-blog.csdnimg.cn/img_convert/8e911caaa5c0502b038af324c16edce8.png" alt="08e01fd0-a33e-47e4-8fd2-34c2935db71d"></p>
 <hr>
 
 <h2 id="2-1-局部变量压栈指令"><a href="#2-1-局部变量压栈指令" class="headerlink" title="2.1. 局部变量压栈指令"></a>2.1. 局部变量压栈指令</h2><blockquote>
@@ -436,7 +547,11 @@
 <td align="center"></td>
 </tr>
 </tbody></table>
-<h2 id="常量入栈指令剖析"><a href="#常量入栈指令剖析" class="headerlink" title="常量入栈指令剖析"></a>常量入栈指令剖析</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/fafa61a6702b5fc88179c404ba736029.png" alt="437a717e-98e2-4847-b52e-e6632d0745a4"><br><img src="https://img-blog.csdnimg.cn/img_convert/c0a6284e1deaf76669089e669916f440.png" alt="ffd7246e-2e46-41e0-9fd6-1e65ace5dbd1"></p>
+<h2 id="常量入栈指令剖析"><a href="#常量入栈指令剖析" class="headerlink" title="常量入栈指令剖析"></a>常量入栈指令剖析</h2><p>范围：const &lt; push &lt; ldc</p>
+<hr>
+
+<p><img src="/../../../images/image-20230109164556416.png" alt="image-20230109164556416"></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/fafa61a6702b5fc88179c404ba736029.png" alt="437a717e-98e2-4847-b52e-e6632d0745a4"><br><img src="https://img-blog.csdnimg.cn/img_convert/c0a6284e1deaf76669089e669916f440.png" alt="ffd7246e-2e46-41e0-9fd6-1e65ace5dbd1"></p>
 <table>
     <tbody>  
         <tr>
@@ -501,10 +616,7 @@
 </tbody></tbody></table>
 
 
-
 <p><img src="https://img-blog.csdnimg.cn/img_convert/59982d71dc70f7d7b873f50130281c21.png" alt="566b9397-5afe-4a3f-9e17-9ebf504dfc80"><br><img src="https://img-blog.csdnimg.cn/img_convert/cd990ebc801bf53b4f7b1966d9974345.png" alt="b59702d2-4c93-44df-87f1-01a5dfe53b61"></p>
-<hr>
-
 <h2 id="2-3-出栈装入局部变量表指令"><a href="#2-3-出栈装入局部变量表指令" class="headerlink" title="2.3. 出栈装入局部变量表指令"></a>2.3. 出栈装入局部变量表指令</h2><blockquote>
 <p>istore 将int类型值存入局部变量</p>
 <p>lstore 将long类型值存入局部变量</p>
@@ -1188,7 +1300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/" data-id="clcohf9c0006804v6a4wzcsiw" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/" data-id="clcowvj5c00693wv60id269yw" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
@@ -1247,7 +1359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/" data-id="clcohf9bu006204v66z0k58ez" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/" data-id="clcowvj5d006d3wv6cl30ffb3" class="article-share-link">分享</a>
       
       
     </footer>
@@ -1280,7 +1392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/" data-id="clcohf9b6004f04v6h2m47hx5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/" data-id="clcowvj4q004l3wv6e4ybbm60" class="article-share-link">分享</a>
       
       
     </footer>
@@ -1338,7 +1450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/" data-id="clcohf9b5004b04v693n1ecva" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/" data-id="clcowvj4p004i3wv605l792p9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/" rel="tag">异常or报错</a></li></ul>
@@ -1398,7 +1510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="clcohf9ai002t04v65ywebhd1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="clcowvj41002q3wv6dvcj1mgp" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -1476,7 +1588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" data-id="clcohf9c2006d04v68n0o1nr6" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" data-id="clcowvj5f006j3wv62rddd4lv" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" rel="tag">事务回滚</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%80%A7/" rel="tag">安全性</a></li></ul>
@@ -1509,185 +1621,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/03/Untitled/" data-id="clcohf98x000104v67gohd71b" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/03/Untitled/" data-id="clcowvj2p00013wv6e8hme4o5" class="article-share-link">分享</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-文件服务器/MinIO/Minio设置文件永久访问和下载" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" class="article-date">
-  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">01</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/">Minio设置文件永久访问和下载</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a>,<a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/">MinIO</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1. </p>
-<blockquote>
-<p>docker pull minio&#x2F;mc</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/8c2815c4dfe14d15b74abcd173b9db9c.png" alt="img"></p>
-<p>2. </p>
-<blockquote>
-<p>docker run -it –entrypoint&#x3D;&#x2F;bin&#x2F;sh minio&#x2F;mc</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/a26767d7c9d74cc5bee45a1bffd745af.png" alt="img"></p>
-<p>3. </p>
-<blockquote>
-<p>mc config host add <ALIAS> <YOUR-S3-ENDPOINT> <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY> [–api API-SIGNATURE]</YOUR-SECRET-KEY></YOUR-ACCESS-KEY></YOUR-S3-ENDPOINT></ALIAS></p>
-</blockquote>
-<blockquote>
-<p> mc ls minio</p>
-</blockquote>
-<ul>
-<li>ALIAS: 别名就是给你的云存储服务起了一个短点的外号。</li>
-<li>S3 endpoint,access key和secret key是你的云存储服务提供的。 <ul>
-<li>endpoint  </li>
-<li>access key、secret key 到这里大家肯定都知道啦。</li>
-</ul>
-</li>
-<li>API签名是可选参数，默认情况下，它被设置为”S3v4”。</li>
-</ul>
-<p>例如：</p>
-<p><img src="https://img-blog.csdnimg.cn/8d4b5fb05f35420d8342b57906cde36b.png" alt="img"></p>
-<ol start="4">
-<li>通过下面命令分别设置永久下载和永久分享</li>
-</ol>
-<blockquote>
-<p>mc anonymous set download minio&#x2F;file</p>
-</blockquote>
-<blockquote>
-<p> mc anonymous set public minio&#x2F;file</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/db7e3502bffc4e729b9cde0ff25c31f3.png" alt="img"></p>
-<p>详细说明参考如下博文：</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6992467402877304868">Docker 安装最新Minio Client，还附带解决如何设置永久访问和永久下载链接！！（详图）有需求值得收藏的哈！！！！ - 掘金 (juejin.cn)</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" data-id="clcohf9cj007o04v64q36728v" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-文件服务器/MinIO/云服务器docker安装MinIO" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" class="article-date">
-  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">01</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">云服务器docker安装MinIO</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a>,<a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/">MinIO</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>执行命令 <code>docker pull minio/minio</code> 下载稳定版本镜像</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull minio/minio</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png" alt="img"></p>
-<ol start="2">
-<li>创建并启动minio容器</li>
-</ol>
-<p> MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9000:9000 -p 9001:9001 -d --name minio -v /opt/docker/minio/data:/data -v /opt/docker/minio/config:/root/.minio -e &quot;MINIO_ROOT_USER=minio&quot; -e &quot;MINIO_ROOT_PASSWORD=minio@123456&quot; minio/minio server /data --console-address &quot;:9000&quot; --address &quot;:9001&quot;</span><br></pre></td></tr></table></figure>
-
-<p>–console-address “:9000”  中的9000 是可视化界面的访问端口</p>
-<p> –address “:9001” 中的 9001是api端口，在springboot中整合是用到</p>
-<ol start="3">
-<li>开放9000端口</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/fd189f85c8834e899f4b5e0284876ea7.png" alt="img"></p>
-<p>9001端口也是像上面一样开放即可</p>
-<ol start="4">
-<li>访问登录，使用IP+9000 登录即可测试，然后输入自己在启动创建容器时设置的账号和密码</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/d6823c8747fb4b8ab196b9f3a892d18a.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/94216afbb986434c9934f8d7d1fe523f.png" alt="img"></p>
-<hr>
-<p>安装和使用，可以参照这个博文：</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7101581935486615559">SpringBoot 整合 Minio 上传文件 - 掘金 (juejin.cn)</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" data-id="clcohf9cl007u04v6d6ca62v8" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
-
     </footer>
   </div>
   
@@ -1745,9 +1681,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>112</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>56</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>41</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>114</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>57</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>42</strong><br>标签</div></a>
     </div>
 
 
