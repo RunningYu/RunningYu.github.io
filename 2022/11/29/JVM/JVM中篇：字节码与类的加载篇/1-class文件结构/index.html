@@ -5,25 +5,36 @@
   
   <title>1-class文件结构 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[toc] 1. Class 文件结构1.1. Class 字节码文件结构                                           类型              名称              说明              长度              数量                              魔数             u4">
+  <meta name="description" content="[toc]  1. Class 文件结构1.1. Class 字节码文件结构                                           类型              名称              说明              长度              数量                              魔数             u4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1-class文件结构">
 <meta property="og:url" content="http://example.com/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="[toc] 1. Class 文件结构1.1. Class 字节码文件结构                                           类型              名称              说明              长度              数量                              魔数             u4">
+<meta property="og:description" content="[toc]  1. Class 文件结构1.1. Class 字节码文件结构                                           类型              名称              说明              长度              数量                              魔数             u4">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20230108231953467.png">
+<meta property="og:image" content="http://example.com/images/image-20230106211846510.png">
+<meta property="og:image" content="http://example.com/images/image-20230106212954414.png">
+<meta property="og:image" content="http://example.com/images/image-20230106213322903.png">
+<meta property="og:image" content="http://example.com/images/image-20230106213238542.png">
+<meta property="og:image" content="http://example.com/images/image-20230107101026854.png">
+<meta property="og:image" content="http://example.com/images/image-20230107101258275.png">
+<meta property="og:image" content="http://example.com/images/image-20230107162311874.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/5c2a8d904287373990cffe9b82428daa.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a17ef03e0783c664a51491aafde85d2a.png">
+<meta property="og:image" content="http://example.com/images/image-20230107105451433.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/8266c05b4b1506d4c456b427b90b1b75.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f3485b5ca6cb750454230270021fc68a.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/412a7e52bfb1ee0aa8229db1402ae58a.png">
+<meta property="og:image" content="http://example.com/images/image-20230108220200811.png">
+<meta property="og:image" content="http://example.com/images/image-20230109103959417.png">
 <meta property="article:published_time" content="2022-11-29T14:01:57.207Z">
-<meta property="article:modified_time" content="2022-11-29T18:04:39.798Z">
+<meta property="article:modified_time" content="2023-01-09T02:40:28.240Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="JVM中篇：字节码与类的加载器">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/5c2a8d904287373990cffe9b82428daa.png">
+<meta name="twitter:image" content="http://example.com/images/image-20230108231953467.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -55,7 +66,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>111</strong><br>文章</div></a>
       <a href="/categories"><div><strong>56</strong><br>分类</div></a>
       <a href="/tags"><div><strong>41</strong><br>标签</div></a>
     </div>
@@ -122,6 +133,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>[toc]</p>
+<p><img src="/../../../images/image-20230108231953467.png" alt="image-20230108231953467"></p>
 <h1 id="1-Class-文件结构"><a href="#1-Class-文件结构" class="headerlink" title="1. Class 文件结构"></a>1. Class 文件结构</h1><h2 id="1-1-Class-字节码文件结构"><a href="#1-1-Class-字节码文件结构" class="headerlink" title="1.1. Class 字节码文件结构"></a>1.1. Class 字节码文件结构</h2><table>
     <tbody>  
         <tr>
@@ -256,6 +268,13 @@
 </tbody></tbody></table>
 
 
+<p><img src="/../../../images/image-20230106211846510.png" alt="image-20230106211846510"></p>
+<p><img src="/../../../images/image-20230106212954414.png" alt="image-20230106212954414"></p>
+<p><img src="/../../../images/image-20230106213322903.png" alt="image-20230106213322903"></p>
+<p><img src="/../../../images/image-20230106213238542.png" alt="image-20230106213238542"></p>
+<p><img src="/../../../images/image-20230107101026854.png" alt="image-20230107101026854"></p>
+<p><img src="/../../../images/image-20230107101258275.png" alt="image-20230107101258275"></p>
+<p><img src="/../../../images/image-20230107162311874.png" alt="image-20230107162311874"></p>
 <h2 id="1-2-Class-文件数据类型"><a href="#1-2-Class-文件数据类型" class="headerlink" title="1.2. Class 文件数据类型"></a>1.2. Class 文件数据类型</h2><table>
 <thead>
 <tr>
@@ -278,7 +297,7 @@
 <h2 id="1-3-魔数"><a href="#1-3-魔数" class="headerlink" title="1.3. 魔数"></a>1.3. 魔数</h2><p><strong>Magic Number（魔数）</strong></p>
 <ul>
 <li>每个 Class 文件开头的 4 个字节的无符号整数称为魔数（Magic Number）</li>
-<li>它的唯一作用是确定这个文件是否为一个能被虚拟机接受的有效合法的 Class 文件。即：魔数是 Class 文件的标识符。</li>
+<li>它的唯一作用是确定这个文件是否为一个能被虚拟机接受的有效合法的 Class 文件。即：<strong>魔数是 Class 文件的标识符</strong>。</li>
 <li>魔数值固定为 0xCAFEBABE。不会改变。</li>
 <li>如果一个 Class 文件不以 0xCAFEBABE 开头，虚拟机在进行文件校验的时候就会直接抛出以下错误：</li>
 </ul>
@@ -287,7 +306,7 @@
 <ul>
 <li>使用魔数而不是扩展名来进行识别主要是基于安全方面的考虑，因为文件扩展名可以随意地改动。</li>
 </ul>
-<h2 id="1-4-文件版本号"><a href="#1-4-文件版本号" class="headerlink" title="1.4. 文件版本号"></a>1.4. 文件版本号</h2><p>紧接着魔数的 4 个字节存储的是 Class 文件的版本号。同样也是 4 个字节。第 5 个和第 6 个字节所代表的含义就是编译的副版本号 minor_version，而第 7 个和第 8 个字节就是编译的主版本号 major_version。</p>
+<h2 id="1-4-文件版本号"><a href="#1-4-文件版本号" class="headerlink" title="1.4. 文件版本号"></a>1.4. 文件版本号</h2><p>紧接着魔数的 4 个字节存储的是 Class 文件的版本号。同样也是 4 个字节。第 5 个和第 6 个字节所代表的含义就是编译的副版本号 <strong>minor_version</strong>，而第 7 个和第 8 个字节就是编译的主版本号 <strong>major_version</strong>。</p>
 <p>它们共同构成了 class 文件的格式版本号。譬如某个 Class 文件的主版本号为 M，副版本号为 m，那么这个 Class 文件的格式版本号就确定为 M.m。</p>
 <p>版本号和 Java 编译器的对应关系如下表：</p>
 <h3 id="1-4-1-Class-文件版本号对应关系"><a href="#1-4-1-Class-文件版本号对应关系" class="headerlink" title="1.4.1. Class 文件版本号对应关系"></a>1.4.1. Class 文件版本号对应关系</h3><table>
@@ -397,7 +416,7 @@
 <p><img src="https://img-blog.csdnimg.cn/img_convert/a17ef03e0783c664a51491aafde85d2a.png" alt="image-20210508234020104"></p>
 <p>其值为 0x0016，掐指一算，也就是 22。需要注意的是，这实际上只有 21 项常量。索引为范围是 1-21。为什么呢？</p>
 <p>通常我们写代码时都是从 0 开始的，但是这里的常量池却是从 1 开始，因为它把第 0 项常量空出来了。这是为了满足后面某些指向常量池的索引值的数据在特定情况下需要表达“不引用任何一个常量池项目”的含义，这种情况可用索引值 0 来表示。</p>
-<h3 id="1-5-2-常量池表"><a href="#1-5-2-常量池表" class="headerlink" title="1.5.2. 常量池表"></a>1.5.2. 常量池表</h3><p>constant_pool 是一种表结构，以 1 ~ constant_pool_count - 1 为索引。表明了后面有多少个常量项。</p>
+<h3 id="1-5-2-常量池表"><a href="#1-5-2-常量池表" class="headerlink" title="1.5.2. 常量池表"></a>1.5.2. 常量池表</h3><p>constant_pool 是一种表结构，以 <strong>1 ~ constant_pool_count - 1</strong> 为索引。表明了后面有多少个常量项。</p>
 <p>常量池主要存放两大类常量：<mark>字面量（Literal）</mark>和<mark>符号引用（Symbolic References）</mark></p>
 <p>它包含了 class 文件结构及其子结构中引用的所有字符串常量、类或接口名、字段名和其他常量。常量池中的每一项都具备相同的特征。第 1 个字节作为类型标记，用于确定该项的格式，这个字节称为 tag byte（标记字节、标签字节）。</p>
 <table>
@@ -510,7 +529,7 @@
 </tr>
 </tbody></table>
 <p><strong>全限定名</strong></p>
-<p>com&#x2F;atguigu&#x2F;test&#x2F;Demo 这个就是类的全限定名，仅仅是把包名的“.“替换成”&#x2F;”，为了使连续的多个全限定名之间不产生混淆，在使用时最后一般会加入一个“;”表示全限定名结束。</p>
+<p>com&#x2F;atguigu&#x2F;test&#x2F;Demo 这个就是类的<strong>全限定名</strong>，仅仅是把包名（全类名）的“.“替换成”&#x2F;”，为了使连续的多个全限定名之间不产生混淆，在使用时最后一般会加入一个“;”表示全限定名结束。</p>
 <p><strong>简单名称</strong></p>
 <p>简单名称是指没有类型和参数修饰的方法或者字段名称，上面例子中的类的 add()方法和 num 字段的简单名称分别是 add 和 num。</p>
 <p><strong>描述符</strong></p>
@@ -568,6 +587,7 @@
 </tr>
 </tbody></table>
 <p>用描述符来描述方法时，按照先参数列表，后返回值的顺序描述，参数列表按照参数的严格顺序放在一组小括号“()”之内。如方法 java.lang.String tostring()的描述符为()Ljava&#x2F;lang&#x2F;String; ，方法 int abc(int[]x, int y)的描述符为([II)I。</p>
+<p><img src="/../../../images/image-20230107105451433.png" alt="image-20230107105451433"></p>
 <p><strong>补充说明：</strong></p>
 <p>虚拟机在加载 Class 文件时才会进行动态链接，也就是说，Class 文件中不会保存各个方法和字段的最终内存布局信息。因此，这些字段和方法的符号引用不经过转换是无法直接被虚拟机使用的。<mark>当虚拟机运行时，需要从常量池中获得对应的符号引用，再在类加载过程中的解析阶段将其替换为直接引用，并翻译到具体的内存地址中</mark>。</p>
 <p>这里说明下符号引用和直接引用的区别与关联：</p>
@@ -577,6 +597,7 @@
 </ul>
 <h4 id="Ⅱ-常量类型和结构"><a href="#Ⅱ-常量类型和结构" class="headerlink" title="Ⅱ. 常量类型和结构"></a>Ⅱ. 常量类型和结构</h4><p>常量池中每一项常量都是一个表，J0K1.7 之后共有 14 种不同的表结构数据。如下表格所示：</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/8266c05b4b1506d4c456b427b90b1b75.png" alt="image-20210509001319088"></p>
+<p>常量池表数据的解读视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=221&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">221-常量池表数据的解读2_哔哩哔哩_bilibili</a></p>
 <p>根据上图每个类型的描述我们也可以知道每个类型是用来描述常量池中哪些内容（主要是字面量、符号引用）的。比如:<br>CONSTANT_Integer_info 是用来描述常量池中字面量信息的，而且只是整型字面量信息。</p>
 <p>标志为 15、16、18 的常量项类型是用来支持动态语言调用的（jdk1.7 时才加入的）。</p>
 <p><strong>细节说明:</strong></p>
@@ -615,7 +636,7 @@
 <li>常量池中为什么要包含这些内容？Java 代码在进行 Javac 编译的时候，并不像 C 和 C++那样有“连接”这一步骤，而是在虚拟机加载 C1ass 文件的时候进行动态链接。也就是说，<mark>在 Class 文件中不会保存各个方法、字段的最终内存布局信息，因此这些字段、方法的符号引用不经过运行期转换的话无法得到真正的内存入口地址，也就无法直接被虚拟机使用</mark>。当虚拟机运行时，需要从常量池获得对应的符号引用，再在类创建时或运行时解析、翻译到具体的内存地址之中。关于类的创建和动态链接的内容，在虚拟机类加载过程时再进行详细讲解</li>
 </ul>
 <h2 id="1-6-访问标志"><a href="#1-6-访问标志" class="headerlink" title="1.6. 访问标志"></a>1.6. 访问标志</h2><p><strong>访问标识（access_flag、访问标志、访问标记）</strong></p>
-<p>在常量池后，紧跟着访问标记。该标记使用两个字节表示，用于识别一些类或者接口层次的访问信息，包括：这个 Class 是类还是接口；是否定义为 public 类型；是否定义为 abstract 类型；如果是类的话，是否被声明为 final 等。各种访问标记如下所示：</p>
+<p>在常量池后，紧跟着访问标记。<strong>该标记使用两个字节表示，用于识别一些类或者接口层次的访问信息</strong>，包括：这个 Class 是类还是接口；是否定义为 public 类型；是否定义为 abstract 类型；如果是类的话，是否被声明为 final 等。各种访问标记如下所示：</p>
 <table>
 <thead>
 <tr>
@@ -897,7 +918,7 @@
 <li>一方面，methods 表只描述当前类或接口中声明的方法，不包括从父类或父接口继承的方法。另一方面，methods 表有可能会出现由编译器自动添加的方法，最典型的便是编译器产生的方法信息（比如：类（接口）初始化方法&lt;clinit&gt;()和实例初始化方法&lt;init&gt;()）。</li>
 </ul>
 <p><strong>使用注意事项：</strong></p>
-<p>在 Java 语言中，要重载（Overload）一个方法，除了要与原方法具有相同的简单名称之外，还要求必须拥有一个与原方法不同的特征签名，特征签名就是一个方法中各个参数在常量池中的字段符号引用的集合，也就是因为返回值不会包含在特征签名之中，因此 Java 语言里无法仅仅依靠返回值的不同来对一个已有方法进行重载。但在 Class 文件格式中，特征签名的范围更大一些，只要描述符不是完全一致的两个方法就可以共存。也就是说，如果两个方法有相同的名称和特征签名，但返回值不同，那么也是可以合法共存于同一个 class 文件中。</p>
+<p>在 Java 语言中，要重载（Overload）一个方法，除了要与原方法<strong>具有相同的简单名称</strong>之外，还要求<strong>必须拥有一个与原方法不同的特征签名</strong>，特征签名就是一个方法中各个参数在常量池中的字段符号引用的集合，也就是因为返回值不会包含在特征签名之中，因此 Java 语言里无法仅仅依靠返回值的不同来对一个已有方法进行重载。但在 Class 文件格式中，特征签名的范围更大一些，只要描述符不是完全一致的两个方法就可以共存。也就是说，如果两个方法有相同的名称和特征签名，但返回值不同，那么也是可以合法共存于同一个 class 文件中。</p>
 <p>也就是说，尽管 Java 语法规范并不允许在一个类或者接口中声明多个方法签名相同的方法，但是和 Java 语法规范相反，字节码文件中却恰恰允许存放多个方法签名相同的方法，唯一的条件就是这些方法之间的返回值不能相同。</p>
 <h3 id="1-9-1-方法计数器"><a href="#1-9-1-方法计数器" class="headerlink" title="1.9.1. 方法计数器"></a>1.9.1. 方法计数器</h3><p><strong>methods_count（方法计数器）</strong></p>
 <p>methods_count 的值表示当前 class 文件 methods 表的成员个数。使用两个字节来表示。</p>
@@ -1136,7 +1157,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Deprecated_attribute&#123;</span><br><span class="line">	u2 attribute_name_index;</span><br><span class="line">	u4 attribute_length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>③ Code 属性</strong></p>
-<p>Code 属性就是存放方法体里面的代码。但是，并非所有方法表都有 Code 属性。像接口或者抽象方法，他们没有具体的方法体，因此也就不会有 Code 属性了。Code 属性表的结构，如下图：</p>
+<p>Code 属性就是存放<strong>方法体里面的代码</strong>。但是，并非所有方法表都有 Code 属性。像接口或者抽象方法，他们没有具体的方法体，因此也就不会有 Code 属性了。Code 属性表的结构，如下图：</p>
 <table>
 <thead>
 <tr>
@@ -1212,7 +1233,7 @@
 <p>为了方便说明特别定义一个表示类或接口的 Class 格式为 C。如果 C 的常量池中包含某个 CONSTANT_Class_info 成员，且这个成员所表示的类或接口不属于任何一个包，那么 C 的 ClassFile 结构的属性表中就必须含有对应的 InnerClasses 属性。InnerClasses 属性是在 JDK1.1 中为了支持内部类和内部接口而引入的，位于 ClassFile 结构的属性表。</p>
 <p><strong>⑤ LineNumberTable 属性</strong></p>
 <p>LineNumberTable 属性是可选变长属性，位于 Code 结构的属性表。</p>
-<p>LineNumberTable 属性是<mark>用来描述 Java 源码行号与字节码行号之间的对应关系</mark>。这个属性可以用来在调试的时候定位代码执行的行数。</p>
+<p>LineNumberTable 属性是<mark>用来描述 <strong>Java 源码行号 与 字节码行号</strong>之间的对应关系</mark>。这个属性可以用来在调试的时候定位代码执行的行数。</p>
 <ul>
 <li>start_pc，即字节码行号；1ine_number，即 Java 源代码行号。</li>
 </ul>
@@ -1229,6 +1250,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LocalVariableTable属性表结构：</span></span><br><span class="line">LocalVariableTable_attribute&#123;</span><br><span class="line">    u2 attribute_name_index;</span><br><span class="line">    u4 attribute_length;</span><br><span class="line">    u2 local_variable_table_length;</span><br><span class="line">    &#123;</span><br><span class="line">        u2 start_pc;</span><br><span class="line">        u2 length;</span><br><span class="line">        u2 name_index;</span><br><span class="line">        u2 descriptor_index;</span><br><span class="line">        u2 index;</span><br><span class="line">    &#125; local_variable_table[local_variable_table_length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><img src="/../../../images/image-20230108220200811.png" alt="image-20230108220200811"></p>
 <p><strong>⑦ Signature 属性</strong></p>
 <p>Signature 属性是可选的定长属性，位于 ClassFile，field_info 或 method_info 结构的属性表中。在 Java 语言中，任何类、接口、初始化方法或成员的泛型签名如果包含了类型变量（Type Variables）或参数化类型（Parameterized Types），则 Signature 属性会为它记录泛型签名信息。</p>
 <p><strong>⑧ SourceFile 属性</strong></p>
@@ -1264,11 +1286,12 @@
 <p>可以看到，其长度总是固定的 8 个字节。</p>
 <p><strong>⑨ 其他属性</strong></p>
 <p>Java 虚拟机中预定义的属性有 20 多个，这里就不一一介绍了，通过上面几个属性的介绍，只要领会其精髓，其他属性的解读也是易如反掌。</p>
+<h2 id="Class文件结构小结"><a href="#Class文件结构小结" class="headerlink" title="Class文件结构小结"></a>Class文件结构小结</h2><p><img src="/../../../images/image-20230109103959417.png" alt="image-20230109103959417"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" data-id="clcdls4t1004wh8v6b70k4rs6" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" data-id="clco76ssd0062t4v61mmg1ip9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
@@ -1344,7 +1367,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>111</strong><br>文章</div></a>
       <a href="/categories"><div><strong>56</strong><br>分类</div></a>
       <a href="/tags"><div><strong>41</strong><br>标签</div></a>
     </div>

@@ -43,7 +43,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>111</strong><br>文章</div></a>
       <a href="/categories"><div><strong>56</strong><br>分类</div></a>
       <a href="/tags"><div><strong>41</strong><br>标签</div></a>
     </div>
@@ -74,6 +74,146 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-elasticsearch/RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:29:24.978Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/">RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、RestAPI实现自动补全查询（代码讲解）"><a href="#一、RestAPI实现自动补全查询（代码讲解）" class="headerlink" title="一、RestAPI实现自动补全查询（代码讲解） "></a><strong>一、RestAPI实现自动补全查询（代码讲解）</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/691a87ed40d74802b9a828ac3e6d9143~tplv-k3u1fbpfcp-zoom-1.image"></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9c9b7ccedcac4942bf81110db9feb355~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/11c56098294b43ef8f5d0e973ba0f217~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b93f6065a15a48209cd50596642890b6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">    @Autowired</span><br><span class="line">    private RestHighLevelClient client;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void testSuggestion() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                &quot;suggestions&quot;,</span><br><span class="line">                SuggestBuilders.completionSuggestion(&quot;suggestion&quot;)</span><br><span class="line">                        .prefix(&quot;hm&quot;)</span><br><span class="line">                        .skipDuplicates(true)</span><br><span class="line">                        .size(10)</span><br><span class="line">        ));</span><br><span class="line">        //3.发起请求</span><br><span class="line">        SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //4.解析结果</span><br><span class="line">        Suggest suggest = response.getSuggest();</span><br><span class="line">        //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">        CompletionSuggestion suggestions = suggest.getSuggestion(&quot;suggestions&quot;);</span><br><span class="line">        //4,2 获取options</span><br><span class="line">        List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        for( CompletionSuggestion.Entry.Option option : options)&#123;</span><br><span class="line">            String text = option.getText().toString();</span><br><span class="line">            System.out.println(text);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">//        System.out.println(response);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>其中：</p>
+<p> @Autowired<br>    private RestHighLevelClient client;</p>
+<p>要在项目启动方法里面注入到bean里</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f87a3158ddd345dd91aef1107db73bbd~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二、以下进行黑马旅游网的案例实现自动补全功能："><a href="#二、以下进行黑马旅游网的案例实现自动补全功能：" class="headerlink" title="二、以下进行黑马旅游网的案例实现自动补全功能："></a>二、以下进行黑马旅游网的案例实现自动补全功能：</h1><p>开始时，输入x，不能自动补全</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa557cad6c04bf59cc42408b716f3aa~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>RestAPI实现自动补全：</p>
+<h2 id="（1）在controller层写好接口"><a href="#（1）在controller层写好接口" class="headerlink" title="（1）在controller层写好接口"></a>（1）在controller层写好接口</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e106fbadcc474ebab6cece2e59aa5f68~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;suggestion&quot;)</span><br><span class="line">    public List&lt;String&gt; getSuggestions(@RequestParam(&quot;key&quot;) String predix)&#123;</span><br><span class="line">        return hotelService.getSuggestions(predix);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="（2）在service层写好"><a href="#（2）在service层写好" class="headerlink" title="（2）在service层写好"></a>（2）在service层写好</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb71b469d2954c14a6c1bbc199626447~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public List&lt;String&gt; getSuggestions(String predix) &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           //1.准备Request</span><br><span class="line">           SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">           //2.准备DSL</span><br><span class="line">           request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                   &quot;suggestions&quot;,</span><br><span class="line">                   SuggestBuilders.completionSuggestion(&quot;suggestion&quot;)</span><br><span class="line">                           .prefix(predix)</span><br><span class="line">                           .skipDuplicates(true)</span><br><span class="line">                           .size(10)</span><br><span class="line">           ));</span><br><span class="line">           //3.发起请求</span><br><span class="line">           SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">           //4.解析结果</span><br><span class="line">           Suggest suggest = response.getSuggest();</span><br><span class="line">           //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">           CompletionSuggestion suggestions = suggest.getSuggestion(&quot;suggestions&quot;);</span><br><span class="line">           //4,2 获取options</span><br><span class="line">           List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">           //4.3 遍历</span><br><span class="line">           List&lt;String&gt; list = new ArrayList&lt;String&gt;(options.size());</span><br><span class="line">           for( CompletionSuggestion.Entry.Option option : options)&#123;</span><br><span class="line">               String text = option.getText().toString();</span><br><span class="line">               System.out.println(text);</span><br><span class="line">               list.add(text);</span><br><span class="line">           &#125;</span><br><span class="line">           return list;</span><br><span class="line">       &#125; catch (IOException e) &#123;</span><br><span class="line">           throw  new RuntimeException();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-重新启动项目"><a href="#3-重新启动项目" class="headerlink" title="(3)重新启动项目"></a>(3)重新启动项目</h2><p>便可以进行自动补全了</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec50f82380f64659a212c21acf7788e9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" data-id="clco76sqd001ut4v61x2e11mm" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:28:24.978Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/">设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去"><a href="#设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去" class="headerlink" title="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去"></a><strong>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="若business有多个值，可进行切割"><a href="#若business有多个值，可进行切割" class="headerlink" title="若business有多个值，可进行切割"></a><strong>若business有多个值，可进行切割</strong></h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="进行切割"><a href="#进行切割" class="headerlink" title="进行切割"></a><strong>进行切割</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains(&quot;/&quot;))&#123;</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split(&quot;/&quot;);</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       &#125;else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>切割成功</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="clco76sql002at4v65rop6a1r" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-elasticsearch/DSL实现自动补全查询" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -125,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="clcdls4q3001vh8v6csbn3aac" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="clco76sq4001kt4v6duuw79o6" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -217,7 +357,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clcdls4re0034h8v6aw6h6u50" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clco76sqn002dt4v64hp4crvk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -276,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" data-id="clcdls4qg0028h8v6au3y14tx" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" data-id="clco76sqb001pt4v60zaxgsgz" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -339,7 +479,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="clcdls4q90021h8v67cfj95x8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="clco76sqc001st4v6epag8vxu" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -401,7 +541,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clcdls4qc0024h8v6b4f77cc9" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clco76sq3001ht4v6cadmb0yk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -547,7 +687,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clcdls4oz000zh8v67gfh5kg5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clco76spr000wt4v6bin12su6" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -605,7 +745,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="clcdls4r4002xh8v6791x17dq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="clco76sqz0032t4v6g8u5aw7f" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -684,7 +824,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clcdls4po001nh8v6anvch30r" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clco76sq0001ct4v67ncu3h5s" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -698,123 +838,10 @@
 
 
   
-    <article id="post-设计模式/设计模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.855Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-intro.html">设计模式简介 | 菜鸟教程 (runoob.com)</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="clcdls4su004kh8v6bz5614y3" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-零碎知识&amp;笔记/零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.844Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>RestTemplate</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/58949f8334f5">Spring之RestTemplate详解 - 简书 (jianshu.com)</a></p>
-<ol start="2">
-<li>@ApiModel</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cy0628/p/15164994.html">Swagger注释API :@ApiModel - Chen洋 - 博客园 (cnblogs.com)</a></p>
-<p>导入swagger依赖：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@ApiModel这个注解</span><br><span class="line">  这个注解的是作用在类上面的，是用来描述类的一些基本信息的。下面，我们会逐个的进行讲解。</span><br><span class="line"></span><br><span class="line">value属性</span><br><span class="line">  这个属性，提供的是类的一个备用名。如果我们不设置，那么默认情况下，将使用的是class类的名字。</span><br><span class="line"></span><br><span class="line">description属性</span><br><span class="line">  对于类，提供一个详细的描述信息</span><br><span class="line"></span><br><span class="line">parent属性</span><br><span class="line">  这个属性，描述的是类的一些父类的信息。</span><br><span class="line"></span><br><span class="line">discriminator属性</span><br><span class="line">  这个属性解释起来有些麻烦，因为这个类主要是体现出了断言当中。</span><br><span class="line"></span><br><span class="line">subTypes属性</span><br><span class="line">  举个实例，如果我们此时有一个父类Animal。同时，对于这个父类，我们的系统中有这个类的子类Cat、Dog、Pig等。如果我们在我们的父类上，通过这个属性，指定了我们想要使用的子类的话，那么在生成Swagger的文档的话，会自动的展示的是Animal这个属性，但是在属性的字段中，会显示出子类的一些独有的属性，其实在这里，是不推荐使用的。因为这样会让别人认为，这些子类独有的属性，也是父类才有的。</span><br></pre></td></tr></table></figure>
-
-
-
-<p>3. </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clcdls4sx004rh8v67kx97f07" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -859,7 +886,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>111</strong><br>文章</div></a>
       <a href="/categories"><div><strong>56</strong><br>分类</div></a>
       <a href="/tags"><div><strong>41</strong><br>标签</div></a>
     </div>

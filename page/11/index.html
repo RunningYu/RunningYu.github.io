@@ -43,7 +43,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>111</strong><br>文章</div></a>
       <a href="/categories"><div><strong>56</strong><br>分类</div></a>
       <a href="/tags"><div><strong>41</strong><br>标签</div></a>
     </div>
@@ -74,6 +74,119 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-设计模式/设计模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:14:39.855Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/design-pattern-intro.html">设计模式简介 | 菜鸟教程 (runoob.com)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="clco76srm004qt4v6a2m0hjcj" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-零碎知识&amp;笔记/零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:14:39.844Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">零碎笔记</a>
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>RestTemplate</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/58949f8334f5">Spring之RestTemplate详解 - 简书 (jianshu.com)</a></p>
+<ol start="2">
+<li>@ApiModel</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cy0628/p/15164994.html">Swagger注释API :@ApiModel - Chen洋 - 博客园 (cnblogs.com)</a></p>
+<p>导入swagger依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@ApiModel这个注解</span><br><span class="line">  这个注解的是作用在类上面的，是用来描述类的一些基本信息的。下面，我们会逐个的进行讲解。</span><br><span class="line"></span><br><span class="line">value属性</span><br><span class="line">  这个属性，提供的是类的一个备用名。如果我们不设置，那么默认情况下，将使用的是class类的名字。</span><br><span class="line"></span><br><span class="line">description属性</span><br><span class="line">  对于类，提供一个详细的描述信息</span><br><span class="line"></span><br><span class="line">parent属性</span><br><span class="line">  这个属性，描述的是类的一些父类的信息。</span><br><span class="line"></span><br><span class="line">discriminator属性</span><br><span class="line">  这个属性解释起来有些麻烦，因为这个类主要是体现出了断言当中。</span><br><span class="line"></span><br><span class="line">subTypes属性</span><br><span class="line">  举个实例，如果我们此时有一个父类Animal。同时，对于这个父类，我们的系统中有这个类的子类Cat、Dog、Pig等。如果我们在我们的父类上，通过这个属性，指定了我们想要使用的子类的话，那么在生成Swagger的文档的话，会自动的展示的是Animal这个属性，但是在属性的字段中，会显示出子类的一些独有的属性，其实在这里，是不推荐使用的。因为这样会让别人认为，这些子类独有的属性，也是父类才有的。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clco76srm004ot4v64hrnevwp" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-关键字/java关键字" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -113,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="clcdls4sl0047h8v6dwpqdq5z" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="clco76sra0041t4v68c7y68jl" class="article-share-link">分享</a>
       
       
     </footer>
@@ -225,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="clcdls4sc0044h8v66386gafg" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="clco76sre0048t4v6esgnd8uq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
@@ -291,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clcdls4qu002mh8v62aibbck2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clco76sqn002ft4v66ygbh2d3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -359,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="clcdls4qk002ch8v67xm34bnv" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="clco76sqe001yt4v6hyxe1owm" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -441,7 +554,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="clcdls4qn002fh8v66uyt8zhz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" data-id="clco76sqj0024t4v6hx6ge747" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -502,7 +615,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="clcdls4q5001yh8v6e06x9tv0" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/ES%E8%81%9A%E5%90%88%E5%88%86%E6%9E%90%E6%8A%A5%E9%94%99%EF%BC%9A%E2%80%9Creason%E2%80%9C%20/" data-id="clco76sq6001mt4v63dhr11f6" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -601,7 +714,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/" data-id="clcdls4rb0031h8v63mwefwel" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/05/redis/springboot%E6%95%B4%E5%90%88%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/" data-id="clco76sr3003kt4v60ov9gjv2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
@@ -657,7 +770,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/" data-id="clcdls4rl003fh8v6676nhl4s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/05/mysql/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%EF%BC%88SQL%20SERVER%EF%BC%89/" data-id="clco76sr00035t4v605r5aahg" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li></ul>
@@ -671,72 +784,10 @@
 
 
   
-    <article id="post-hello-world" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/05/hello-world/" class="article-date">
-  <time class="post-time" datetime="2022-11-05T12:03:38.450Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/05/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div>
-          
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p><img src="/../images/image-20221121220556724.png" alt="image-20221121220556724"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/05/hello-world/" data-id="clcdls4nc0003h8v6dg7fe7h0" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span>
+    <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/12/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -781,7 +832,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>109</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>111</strong><br>文章</div></a>
       <a href="/categories"><div><strong>56</strong><br>分类</div></a>
       <a href="/tags"><div><strong>41</strong><br>标签</div></a>
     </div>
