@@ -5,12 +5,12 @@
   
   <title>多级缓存 （亿级流量的缓存方案） | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、JVM进程缓存 (73条消息) （多级缓存）JVM进程缓存_其然乐衣的博客-CSDN博客  2、Lua语法入门 (74条消息) （多级缓存）Lua语法入门_其然乐衣的博客-CSDN博客  3、多级缓存 (75条消息) （多级缓存）多级缓存_其然乐衣的博客-CSDN博客  4、缓存同步策略 (75条消息) （多级缓存）缓存同步_其然乐衣的博客-CSDN博客  总结：">
+  <meta name="description" content="1、JVM进程缓存  (73条消息) （多级缓存）JVM进程缓存_其然乐衣的博客-CSDN博客   2、Lua语法入门  (74条消息) （多级缓存）Lua语法入门_其然乐衣的博客-CSDN博客   3、多级缓存  (75条消息) （多级缓存）多级缓存_其然乐衣的博客-CSDN博客   4、缓存同步策略  (75条消息) （多级缓存）缓存同步_其然乐衣的博客-CSDN博客   总结：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多级缓存 （亿级流量的缓存方案）">
 <meta property="og:url" content="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="1、JVM进程缓存 (73条消息) （多级缓存）JVM进程缓存_其然乐衣的博客-CSDN博客  2、Lua语法入门 (74条消息) （多级缓存）Lua语法入门_其然乐衣的博客-CSDN博客  3、多级缓存 (75条消息) （多级缓存）多级缓存_其然乐衣的博客-CSDN博客  4、缓存同步策略 (75条消息) （多级缓存）缓存同步_其然乐衣的博客-CSDN博客  总结：">
+<meta property="og:description" content="1、JVM进程缓存  (73条消息) （多级缓存）JVM进程缓存_其然乐衣的博客-CSDN博客   2、Lua语法入门  (74条消息) （多级缓存）Lua语法入门_其然乐衣的博客-CSDN博客   3、多级缓存  (75条消息) （多级缓存）多级缓存_其然乐衣的博客-CSDN博客   4、缓存同步策略  (75条消息) （多级缓存）缓存同步_其然乐衣的博客-CSDN博客   总结：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/238fc4c7fdeb4ebfb2311a793102d10b.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/fdc04f7711214c149e0d042b6838a8f9.png">
@@ -121,28 +121,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> <img src="https://img-blog.csdnimg.cn/238fc4c7fdeb4ebfb2311a793102d10b.png" alt="img"></p>
+        <p><img src="https://img-blog.csdnimg.cn/238fc4c7fdeb4ebfb2311a793102d10b.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/fdc04f7711214c149e0d042b6838a8f9.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/ccd59cfc2d0b4d22bbeead792258ac8f.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/a434cc59226d4cedbe29c97956653ddd.png" alt="img"></p>
-<h2 id="1、JVM进程缓存"><a href="#1、JVM进程缓存" class="headerlink" title="1、JVM进程缓存"></a>1、JVM进程缓存</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126665519?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126665519%22,%22source%22:%22QRLYLETITBE%22%7D">(73条消息) （多级缓存）JVM进程缓存_其然乐衣的博客-CSDN博客</a></p>
+<h2 id="1-jvm进程缓存"><a class="markdownIt-Anchor" href="#1-jvm进程缓存"></a> 1、JVM进程缓存</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126665519?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126665519%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(73条消息) （多级缓存）JVM进程缓存_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
-<h2 id="2、Lua语法入门"><a href="#2、Lua语法入门" class="headerlink" title="2、Lua语法入门"></a>2、Lua语法入门</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126666384?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126666384%22,%22source%22:%22QRLYLETITBE%22%7D">(74条消息) （多级缓存）Lua语法入门_其然乐衣的博客-CSDN博客</a></p>
+<h2 id="2-lua语法入门"><a class="markdownIt-Anchor" href="#2-lua语法入门"></a> 2、Lua语法入门</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126666384?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126666384%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(74条消息) （多级缓存）Lua语法入门_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
-<h2 id="3、多级缓存"><a href="#3、多级缓存" class="headerlink" title="3、多级缓存"></a>3、多级缓存</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126669262?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126669262%22,%22source%22:%22QRLYLETITBE%22%7D">(75条消息) （多级缓存）多级缓存_其然乐衣的博客-CSDN博客</a></p>
+<h2 id="3-多级缓存"><a class="markdownIt-Anchor" href="#3-多级缓存"></a> 3、多级缓存</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126669262?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126669262%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(75条消息) （多级缓存）多级缓存_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
-<h2 id="4、缓存同步策略"><a href="#4、缓存同步策略" class="headerlink" title="4、缓存同步策略"></a>4、缓存同步策略</h2><blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126681566?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126681566%22,%22source%22:%22QRLYLETITBE%22%7D">(75条消息) （多级缓存）缓存同步_其然乐衣的博客-CSDN博客</a></p>
+<h2 id="4-缓存同步策略"><a class="markdownIt-Anchor" href="#4-缓存同步策略"></a> 4、缓存同步策略</h2>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126681566?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126681566%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(75条消息) （多级缓存）缓存同步_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p><img src="https://img-blog.csdnimg.cn/a8894e7f55f64bc5933762875d23a252.png" alt="img"></p>
+<h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结：</h1>
+<p><img src="https://img-blog.csdnimg.cn/a8894e7f55f64bc5933762875d23a252.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" data-id="clcz0iddp008e00v6dvxubp9g" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" data-id="clcz0m6a4008fd0v67vqd6bdf" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
