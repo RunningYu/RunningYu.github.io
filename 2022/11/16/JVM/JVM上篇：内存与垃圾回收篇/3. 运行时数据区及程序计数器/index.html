@@ -5,12 +5,12 @@
   
   <title>3. 运行时数据区及程序计数器 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[toc]  3. 运行时数据区及程序计数器  3.1. 运行时数据区  3.1.1. 概述 本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段  当我们通过前面的：类的加载-&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区  内存是非常重要的系统资源，是硬盘和">
+  <meta name="description" content="[toc] 3. 运行时数据区及程序计数器3.1. 运行时数据区3.1.1. 概述本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段  当我们通过前面的：类的加载-&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区  内存是非常重要的系统资源，是硬盘和 CPU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3. 运行时数据区及程序计数器">
 <meta property="og:url" content="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="[toc]  3. 运行时数据区及程序计数器  3.1. 运行时数据区  3.1.1. 概述 本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段  当我们通过前面的：类的加载-&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区  内存是非常重要的系统资源，是硬盘和">
+<meta property="og:description" content="[toc] 3. 运行时数据区及程序计数器3.1. 运行时数据区3.1.1. 概述本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段  当我们通过前面的：类的加载-&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区  内存是非常重要的系统资源，是硬盘和 CPU">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b5d91ce04cfef9a681bbed216732511a.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b3cd82be688254afd263db9094e004a7.png">
@@ -22,8 +22,8 @@
 <meta property="og:image" content="http://img10.360buyimg.com/n7/s523x355_jfs/t6595/305/70607884/742714/c76b7170/59390c8aNf12b52ac.bmp">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e6785d89d74d694f7cfe22ba74a164d9.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/998d864c026e5d6b565d1cfaecda2bb0.png">
-<meta property="og:image" content="http://example.com/2022/11/16/images/image-20221116095436397.png">
-<meta property="og:image" content="http://example.com/2022/11/16/images/image-20221116095326530.png">
+<meta property="og:image" content="http://example.com/images/image-20221116095436397.png">
+<meta property="og:image" content="http://example.com/images/image-20221116095326530.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/68aa12d47725e4559e6b71489d91122e.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/bbab7cdab74c493af70b423f06e6ff86.png">
 <meta property="article:published_time" content="2022-11-16T00:40:57.094Z">
@@ -130,12 +130,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote></blockquote>
+        <blockquote>
+</blockquote>
 <p>[toc]</p>
-<h1 id="3-运行时数据区及程序计数器"><a class="markdownIt-Anchor" href="#3-运行时数据区及程序计数器"></a> 3. 运行时数据区及程序计数器</h1>
-<h2 id="31-运行时数据区"><a class="markdownIt-Anchor" href="#31-运行时数据区"></a> 3.1. 运行时数据区</h2>
-<h3 id="311-概述"><a class="markdownIt-Anchor" href="#311-概述"></a> 3.1.1. 概述</h3>
-<p>本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段</p>
+<h1 id="3-运行时数据区及程序计数器"><a href="#3-运行时数据区及程序计数器" class="headerlink" title="3. 运行时数据区及程序计数器"></a>3. 运行时数据区及程序计数器</h1><h2 id="3-1-运行时数据区"><a href="#3-1-运行时数据区" class="headerlink" title="3.1. 运行时数据区"></a>3.1. 运行时数据区</h2><h3 id="3-1-1-概述"><a href="#3-1-1-概述" class="headerlink" title="3.1.1. 概述"></a>3.1.1. 概述</h3><p>本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/b5d91ce04cfef9a681bbed216732511a.png" alt="image-20200705111640511"></p>
 <p>当我们通过前面的：类的加载-&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/b3cd82be688254afd263db9094e004a7.png" alt="image-20200705111843003"></p>
@@ -154,27 +152,23 @@
 <p><img src="https://img-blog.csdnimg.cn/img_convert/0f0cce71a35c12ef13e6482d0663dc21.png" alt="image-20200705112601211"></p>
 <p>每个 JVM 只有一个 Runtime 实例。即为运行时环境，相当于内存结构的中间的那个框框：运行时环境。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/efc4643bdd550c6ecacb9d764e71890e.png" alt="image-20210509173410373"></p>
-<h3 id><a class="markdownIt-Anchor" href="#"></a> </h3>
-<hr>
-<h1 id="312-线程"><a class="markdownIt-Anchor" href="#312-线程"></a> 3.1.2. 线程</h1>
-<p>线程是一个程序里的运行单元。JVM 允许一个应用有多个线程并行的执行。 在 Hotspot JVM 里，每个线程都与操作系统的本地线程直接映射。</p>
+<h3 id><a href="#" class="headerlink" title></a></h3><hr>
+<h1 id="3-1-2-线程"><a href="#3-1-2-线程" class="headerlink" title="3.1.2. 线程"></a>3.1.2. 线程</h1><p>线程是一个程序里的运行单元。JVM 允许一个应用有多个线程并行的执行。 在 Hotspot JVM 里，每个线程都与操作系统的本地线程直接映射。</p>
 <p>当一个 Java 线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java 线程执行终止后，本地线程也会回收。</p>
 <p>操作系统负责所有线程的安排调度到任何一个可用的 CPU 上。一旦本地线程初始化成功，它就会调用 Java 线程中的 run()方法。</p>
 <p><img src="http://img10.360buyimg.com/n7/s523x355_jfs/t6595/305/70607884/742714/c76b7170/59390c8aNf12b52ac.bmp" alt="image"></p>
 <p>JVM 是否要终止还要取决于当前线程是不是最后一个非守护线程（线程分为 守护线程、非守护线程）。如果们内存中都只剩下守护线程的话，JVM就可以退出了。</p>
 <p>守护进程就是服务进程(例如GC进程,他们的存在不是必须的),当所有非守护进程执行结束了,守护就没有存在的意义了,自然jvm的运行就可以停止了</p>
-<h3 id="313-jvm-系统线程"><a class="markdownIt-Anchor" href="#313-jvm-系统线程"></a> 3.1.3. JVM 系统线程</h3>
-<p>如果你使用 console 或者是任何一个调试工具，都能看到在后台有许多线程在运行。这些后台线程不包括调用<code>public static void main(String[] args)</code>的 main 线程以及所有这个 main 线程自己创建的线程。</p>
+<h3 id="3-1-3-JVM-系统线程"><a href="#3-1-3-JVM-系统线程" class="headerlink" title="3.1.3. JVM 系统线程"></a>3.1.3. JVM 系统线程</h3><p>如果你使用 console 或者是任何一个调试工具，都能看到在后台有许多线程在运行。这些后台线程不包括调用<code>public static void main(String[] args)</code>的 main 线程以及所有这个 main 线程自己创建的线程。</p>
 <p>这些主要的后台系统线程在 Hotspot JVM 里主要是以下几个：</p>
 <ul>
-<li><mark>虚拟机线程</mark>：这种线程的操作是需要 JVM 达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要 JVM 达到安全点，这样堆才不会变化。这种线程的执行类型包括&quot;stop-the-world&quot;的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</li>
+<li><mark>虚拟机线程</mark>：这种线程的操作是需要 JVM 达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要 JVM 达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</li>
 <li><mark>周期任务线程</mark>：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
 <li><mark>GC 线程</mark>：这种线程对在 JVM 里不同种类的垃圾收集行为提供了支持。</li>
 <li><mark>编译线程</mark>：这种线程在运行时会将字节码编译成到本地代码。</li>
 <li><mark>信号调度线程</mark>：这种线程接收信号并发送给 JVM，在它内部通过调用适当的方法进行处理。</li>
 </ul>
-<h2 id="32-程序计数器pc-寄存器"><a class="markdownIt-Anchor" href="#32-程序计数器pc-寄存器"></a> 3.2. 程序计数器(PC 寄存器)</h2>
-<p>JVM 中的程序计数寄存器（Program Counter Register）中，Register 的命名源于 CPU 的寄存器，寄存器存储指令相关的现场信息。CPU 只有把数据装载到寄存器才能够运行。这里，并非是广义上所指的物理寄存器，或许将其翻译为 PC 计数器（或指令计数器）会更加贴切（也称为程序钩子），并且也不容易引起一些不必要的误会。<mark>JVM 中的 PC 寄存器是对物理 PC 寄存器的一种抽象模拟</mark>。</p>
+<h2 id="3-2-程序计数器-PC-寄存器"><a href="#3-2-程序计数器-PC-寄存器" class="headerlink" title="3.2. 程序计数器(PC 寄存器)"></a>3.2. 程序计数器(PC 寄存器)</h2><p>JVM 中的程序计数寄存器（Program Counter Register）中，Register 的命名源于 CPU 的寄存器，寄存器存储指令相关的现场信息。CPU 只有把数据装载到寄存器才能够运行。这里，并非是广义上所指的物理寄存器，或许将其翻译为 PC 计数器（或指令计数器）会更加贴切（也称为程序钩子），并且也不容易引起一些不必要的误会。<mark>JVM 中的 PC 寄存器是对物理 PC 寄存器的一种抽象模拟</mark>。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/e6785d89d74d694f7cfe22ba74a164d9.png" alt="image-20200705155551919"></p>
 <p><strong>作用</strong></p>
 <p>PC 寄存器用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令。</p>
@@ -189,11 +183,10 @@
 <p>Method Area 和 Head Area都有GC垃圾回收，也会发生OOM内存溢出</p>
 <p>PC寄存器既没有GC，也没有OOM (OutOfMemoryError )</p>
 <p><strong>举例说明</strong></p>
-<p><img src="../../../images/image-20221116095436397.png" alt="image-20221116095436397"></p>
+<p><img src="/../../../images/image-20221116095436397.png" alt="image-20221116095436397"></p>
 <p>字节码文件分析：</p>
-<p><img src="../../../images/image-20221116095326530.png" alt="image-20221116095326530"></p>
-<h1 id="pc寄存器面试问题"><a class="markdownIt-Anchor" href="#pc寄存器面试问题"></a> PC寄存器面试问题</h1>
-<p><strong>使用 PC 寄存器存储字节码指令地址有什么用呢？为什么使用 PC 寄存器记录当前线程的执行地址呢？</strong></p>
+<p><img src="/../../../images/image-20221116095326530.png" alt="image-20221116095326530"></p>
+<h1 id="PC寄存器面试问题"><a href="#PC寄存器面试问题" class="headerlink" title="PC寄存器面试问题"></a>PC寄存器面试问题</h1><p><strong>使用 PC 寄存器存储字节码指令地址有什么用呢？为什么使用 PC 寄存器记录当前线程的执行地址呢？</strong></p>
 <p>因为 CPU 需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</p>
 <p>JVM 的字节码解释器就需要通过改变 PC 寄存器的值来明确下一条应该执行什么样的字节码指令。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/68aa12d47725e4559e6b71489d91122e.png" alt="image-20200705161409533"></p>
@@ -214,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" data-id="clcz0h30u005lvwv6coocaa73" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" data-id="clcz0idcp005o00v63ig28pao" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
