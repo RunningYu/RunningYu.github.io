@@ -43,7 +43,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>125</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>126</strong><br>文章</div></a>
       <a href="/categories"><div><strong>60</strong><br>分类</div></a>
       <a href="/tags"><div><strong>45</strong><br>标签</div></a>
     </div>
@@ -74,6 +74,69 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-elasticsearch/RestAPI实现聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:18:02.256Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/">RestAPI实现聚合</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/570bde95e90d44658df8da0c790f6586~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d513b0401de41e39c3596a888c18b17~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d0e18347de8447ef8b03ecf8d9f6ef10~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    void testAggredation() throws IOException &#123;</span><br><span class="line">        //1. 准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2. 准备DSL</span><br><span class="line">        //2.1 设置size</span><br><span class="line">        request.source().size(0);</span><br><span class="line">        //2.2 聚合</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms(&quot;brandAgg&quot;)</span><br><span class="line">                .field(&quot;brand&quot;)</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        //3. 发出请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line">        //4. 解析结果</span><br><span class="line">        Aggregations aggregations = response.getAggregations();</span><br><span class="line">        //4.1 根据聚合名称获取聚合结果</span><br><span class="line">        Terms brandTerms = aggregations.get(&quot;brandAgg&quot;);</span><br><span class="line">        //4.2 获取buckets</span><br><span class="line">        List&lt;? extends Terms.Bucket&gt; buckets = brandTerms.getBuckets();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        for(Terms.Bucket bucket : buckets)&#123;</span><br><span class="line">            //4.4 获取key</span><br><span class="line">            String key = bucket.getKeyAsString();</span><br><span class="line"></span><br><span class="line">            System.out.println(key);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>ps:</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94d360f6ab8944398727066af9c9263e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="clcz0dgwh001f48v67j7b2tu9" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-elasticsearch/DSL实现Metrics 聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -123,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clcw6opw80021iov6gqxzhe5s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clcz0dgwf001b48v6hmsy1wyz" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -269,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clcw6opvo0012iov6epax65ft" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clcz0dgw6000o48v6f58ye1nj" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -327,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="clcw6opwy0036iov6cz4a3i7d" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="clcz0dgx3002v48v6evbs280y" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -406,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clcw6opw6001xiov62c2sfiob" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clcz0dgwb001348v6h8becn05" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -457,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="clcw6opyp004wiov67dna8ovu" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="clcz0dgxp004m48v6e8wobu07" class="article-share-link">分享</a>
       
       
     </footer>
@@ -521,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clcw6opyk004siov62x9n4w1h" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clcz0dgxr004u48v626rgec21" class="article-share-link">分享</a>
       
       
     </footer>
@@ -571,7 +634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="clcw6opxx0046iov6cso2758a" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="clcz0dgxf003t48v67azjc9i0" class="article-share-link">分享</a>
       
       
     </footer>
@@ -683,7 +746,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="clcw6opxs0043iov62afihx76" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="clcz0dgxg003w48v6guto9fv7" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
@@ -749,75 +812,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clcw6opws002wiov697xs5h4c" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-elasticsearch/RestClient查询文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.239Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">RestClient查询文档</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="快速入门："><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h1><p><img src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<h1 id="match-all查询："><a href="#match-all查询：" class="headerlink" title="match_all查询："></a>match_all查询：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//match_all查询</span><br><span class="line">    @Test</span><br><span class="line">    void testMatchAll() throws IOException &#123;</span><br><span class="line">        String index  = &quot;tb_disable_date_diary&quot;;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(index);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //解析响应</span><br><span class="line">        handleResponce(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //解析响应</span><br><span class="line">    private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数据</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            Diary diary = JSON.parseObject(json,Diary.class);</span><br><span class="line">            System.out.println(&quot;diary = &quot;+diary);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/48392c3346d746448e7109a3c8d960c0.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//分页和排序</span><br><span class="line">   @Test</span><br><span class="line">   void restPageAndSort() throws IOException &#123;</span><br><span class="line">       //页码，每页大小</span><br><span class="line">       int page = 2,size = 5;</span><br><span class="line"></span><br><span class="line">       //1.准备Request</span><br><span class="line">       SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">       //2.准备DSL</span><br><span class="line">       //2.1 query</span><br><span class="line">       request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">       //2.2 排序 sort</span><br><span class="line">       request.source().sort(&quot;price&quot;, SortOrder.ASC);</span><br><span class="line">       //2.3 分页from，size</span><br><span class="line">       request.source().from((page - 1) * size).size(5);</span><br><span class="line"></span><br><span class="line">       //3.发送请求</span><br><span class="line">       SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">       handleResponce(response);</span><br><span class="line"></span><br><span class="line">       System.out.println(response);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   private void handleResponce(SearchResponse response) &#123;</span><br><span class="line">       //4.解析响应</span><br><span class="line">       SearchHits searchHits = response.getHits();</span><br><span class="line">       //4.1获取总条数</span><br><span class="line">       long total = searchHits.getTotalHits().value;</span><br><span class="line">       System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">       //4.2文档数据</span><br><span class="line">       SearchHit[] hits = searchHits.getHits();</span><br><span class="line">       //4.3遍历</span><br><span class="line">       for(SearchHit hit : hits)&#123;</span><br><span class="line">           //获取文档source</span><br><span class="line">           String json = hit.getSourceAsString();</span><br><span class="line">           //反序列化</span><br><span class="line">           HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">           System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a><strong>高亮</strong></h2><p><img src="https://img-blog.csdnimg.cn/84cfb92b326c4ff18403e7089b76f7a9.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/8b969709155446f48b193ac2e9fa59f7.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//高亮</span><br><span class="line">    @Test</span><br><span class="line">    void testHighlight() throws IOException &#123;</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(&quot;hotel&quot;);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        //2.1 query</span><br><span class="line">        request.source().query(QueryBuilders.matchQuery(&quot;all&quot;,&quot;如家&quot;));</span><br><span class="line">        //2.2 高亮</span><br><span class="line">        request.source().highlighter(new HighlightBuilder().field(&quot;name&quot;).requireFieldMatch(false));</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        handleResponce1(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void handleResponce1(SearchResponse response) &#123;</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println(&quot;共搜索到&quot;+total+&quot;条数据&quot;);</span><br><span class="line">        //4.2文档数组</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits)&#123;</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line"></span><br><span class="line">            //获取高亮结果</span><br><span class="line">            Map&lt;String, HighlightField&gt; highlightFields = hit.getHighlightFields();</span><br><span class="line">            if(!CollectionUtils.isEmpty(highlightFields))&#123;</span><br><span class="line">                //根据各字段名获取高亮结果</span><br><span class="line">                HighlightField highlightField = highlightFields.get(&quot;name&quot;);</span><br><span class="line">                if(highlightField != null)&#123;</span><br><span class="line">                    //获取高亮</span><br><span class="line">                    String name = highlightField.getFragments()[0].string();</span><br><span class="line">                    //覆盖非高亮结果</span><br><span class="line">                    hotelDoc.setName(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(&quot;hotelDoc = &quot;+hotelDoc);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/e569b9e6eae2472cb508245fe942dd15.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="clcw6opwm002kiov62bc6c5ae" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clcz0dgwq001x48v6drlm86zv" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -879,7 +874,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>125</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>126</strong><br>文章</div></a>
       <a href="/categories"><div><strong>60</strong><br>分类</div></a>
       <a href="/tags"><div><strong>45</strong><br>标签</div></a>
     </div>
