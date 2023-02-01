@@ -5,28 +5,28 @@
   
   <title>SpringSecurity 请求间共享认证信息（源码剖析） | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SpringSecurity 请求间共享认证信息对应教程视频：39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili 一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 Spring Security 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析  ⚫ 在前面讲解认证成功的">
+  <meta name="description" content="SpringSecurity 请求间共享认证信息 对应教程视频：39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili 一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 Spring Security 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析  ⚫ 在前面讲解认证成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringSecurity 请求间共享认证信息（源码剖析）">
 <meta property="og:url" content="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="SpringSecurity 请求间共享认证信息对应教程视频：39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili 一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 Spring Security 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析  ⚫ 在前面讲解认证成功的">
+<meta property="og:description" content="SpringSecurity 请求间共享认证信息 对应教程视频：39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili 一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 Spring Security 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析  ⚫ 在前面讲解认证成">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20221111211841097.png">
-<meta property="og:image" content="http://example.com/images/image-20221111211945405.png">
-<meta property="og:image" content="http://example.com/images/image-20221111212010159.png">
-<meta property="og:image" content="http://example.com/images/image-20221111212020024.png">
-<meta property="og:image" content="http://example.com/images/image-20221111212029106.png">
-<meta property="og:image" content="http://example.com/images/image-20221111212041020.png">
-<meta property="og:image" content="http://example.com/images/image-20221111212148379.png">
-<meta property="og:image" content="http://example.com/images/image-20221111212156838.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111211841097.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111211945405.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111212010159.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111212020024.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111212029106.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111212041020.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111212148379.png">
+<meta property="og:image" content="http://example.com/2022/11/11/images/image-20221111212156838.png">
 <meta property="article:published_time" content="2022-11-11T13:03:53.265Z">
 <meta property="article:modified_time" content="2022-11-11T13:30:58.631Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="SpringSecurity">
 <meta property="article:tag" content="源码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20221111211841097.png">
+<meta name="twitter:image" content="http://example.com/2022/11/11/images/image-20221111211841097.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -124,27 +124,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="SpringSecurity-请求间共享认证信息"><a href="#SpringSecurity-请求间共享认证信息" class="headerlink" title="SpringSecurity 请求间共享认证信息"></a><strong>SpringSecurity 请求间共享认证信息</strong></h1><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=39&vd_source=746b9336d739b80b11820809545b6604">39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili</a></p>
+        <h1 id="springsecurity-请求间共享认证信息"><a class="markdownIt-Anchor" href="#springsecurity-请求间共享认证信息"></a> <strong>SpringSecurity 请求间共享认证信息</strong></h1>
+<p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=39&amp;vd_source=746b9336d739b80b11820809545b6604">39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili</a></p>
 <p>一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 <strong>Spring</strong> <strong>Security</strong> 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析</p>
-<p><img src="/../../images/image-20221111211841097.png" alt="image-20221111211841097"></p>
+<p><img src="../../images/image-20221111211841097.png" alt="image-20221111211841097"></p>
 <p>⚫ 在前面讲解认证成功的处理方法 successfulAuthentication() 时，有以下代码：</p>
-<p><img src="/../../images/image-20221111211945405.png" alt="image-20221111211945405"></p>
+<p><img src="../../images/image-20221111211945405.png" alt="image-20221111211945405"></p>
 <p>⚫ 查 看 SecurityContext 接 口 及 其 实 现 类 SecurityContextImpl ， 该 类 其 实 就 是 对Authentication 的封装：</p>
 <p>⚫ 查 看 SecurityContextHolder 类 ， 该 类 其 实 是 对 ThreadLocal 的 封 装 ， 存 储SecurityContext 对象：</p>
-<p><img src="/../../images/image-20221111212010159.png" alt="image-20221111212010159"></p>
-<p><img src="/../../images/image-20221111212020024.png" alt="image-20221111212020024"></p>
-<p><img src="/../../images/image-20221111212029106.png" alt="image-20221111212029106"></p>
-<p><img src="/../../images/image-20221111212041020.png" alt="image-20221111212041020"></p>
-<h1 id="SecurityContextPersistenceFilter-过滤器"><a href="#SecurityContextPersistenceFilter-过滤器" class="headerlink" title="SecurityContextPersistenceFilter 过滤器"></a>SecurityContextPersistenceFilter 过滤器</h1><p>前面提到过，在 <strong>UsernamePasswordAuthenticationFilter</strong> 过滤器认证成功之后，会在认证成功的处理方法中将已认证的用户信息对象 Authentication 封装进</p>
+<p><img src="../../images/image-20221111212010159.png" alt="image-20221111212010159"></p>
+<p><img src="../../images/image-20221111212020024.png" alt="image-20221111212020024"></p>
+<p><img src="../../images/image-20221111212029106.png" alt="image-20221111212029106"></p>
+<p><img src="../../images/image-20221111212041020.png" alt="image-20221111212041020"></p>
+<h1 id="securitycontextpersistencefilter-过滤器"><a class="markdownIt-Anchor" href="#securitycontextpersistencefilter-过滤器"></a> SecurityContextPersistenceFilter 过滤器</h1>
+<p>前面提到过，在 <strong>UsernamePasswordAuthenticationFilter</strong> 过滤器认证成功之后，会在认证成功的处理方法中将已认证的用户信息对象 Authentication 封装进</p>
 <p>SecurityContext，并存入 SecurityContextHolder。之后，响应会通过 <strong>SecurityContextPersistenceFilter</strong> 过滤器，该过滤器的位置在所有过滤器的最前面，请求到来先进它，响应返回最后一个通过它，所以在该过滤器中处理已认证的用户信息对象 Authentication 与 Session 绑定。</p>
 <p>认证成功的响应通过 <strong>SecurityContextPersistenceFilter</strong> 过滤器时，会从SecurityContextHolder 中取出封装了已认证用户信息对象 Authentication 的SecurityContext，放进 Session 中。当请求再次到来时，请求首先经过该过滤器，该过滤器会判断当前请求的 Session 是否存有 SecurityContext 对象，如果有则将该对象取出再次放入 SecurityContextHolder 中，之后该请求所在的线程获得认证用户信息，后续的资源访问不需要进行身份认证；当响应再次返回时，该过滤器同样从 SecurityContextHolder 取出SecurityContext 对象，放入 Session 中。具体源码如下：</p>
-<p><img src="/../../images/image-20221111212148379.png" alt="image-20221111212148379"></p>
-<p><img src="/../../images/image-20221111212156838.png" alt="image-20221111212156838"></p>
+<p><img src="../../images/image-20221111212148379.png" alt="image-20221111212148379"></p>
+<p><img src="../../images/image-20221111212156838.png" alt="image-20221111212156838"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldlvr4ou000nigv67mntaud8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldlvstgi0015owv6gzq955gf" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>

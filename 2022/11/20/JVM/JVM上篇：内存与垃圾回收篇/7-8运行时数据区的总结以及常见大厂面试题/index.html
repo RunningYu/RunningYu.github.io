@@ -5,15 +5,15 @@
   
   <title>运行时数据区的总结以及常见大厂面试题 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运行时数据区的总结以及常见大厂面试题 线程私有的：程序计数器、本地方法栈、虚拟机栈 虚拟机栈里的栈帧的结构：返回值、局部变量表、操作数栈、动态链接（装着指向运行时常量池的当前方法的引用，知道当前方法是引用运行时常量池中的哪个方法）  常见面试题 百度： 说一下 JVM 内存模型吧，有哪些区？分别干什么的？答： JVM内存区域主要包含：方法区 程序计数器 Java虚拟机栈 本地方法栈 Java堆 1">
+  <meta name="description" content="运行时数据区的总结以及常见大厂面试题  线程私有的：程序计数器、本地方法栈、虚拟机栈 虚拟机栈里的栈帧的结构：返回值、局部变量表、操作数栈、动态链接（装着指向运行时常量池的当前方法的引用，知道当前方法是引用运行时常量池中的哪个方法）   常见面试题  百度：  说一下 JVM 内存模型吧，有哪些区？分别干什么的？ 答： JVM内存区域主要包含：方法区 程序计数器 Java虚拟机栈 本地方法栈 J">
 <meta property="og:type" content="article">
 <meta property="og:title" content="运行时数据区的总结以及常见大厂面试题">
 <meta property="og:url" content="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7-8%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E7%9A%84%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="运行时数据区的总结以及常见大厂面试题 线程私有的：程序计数器、本地方法栈、虚拟机栈 虚拟机栈里的栈帧的结构：返回值、局部变量表、操作数栈、动态链接（装着指向运行时常量池的当前方法的引用，知道当前方法是引用运行时常量池中的哪个方法）  常见面试题 百度： 说一下 JVM 内存模型吧，有哪些区？分别干什么的？答： JVM内存区域主要包含：方法区 程序计数器 Java虚拟机栈 本地方法栈 Java堆 1">
+<meta property="og:description" content="运行时数据区的总结以及常见大厂面试题  线程私有的：程序计数器、本地方法栈、虚拟机栈 虚拟机栈里的栈帧的结构：返回值、局部变量表、操作数栈、动态链接（装着指向运行时常量池的当前方法的引用，知道当前方法是引用运行时常量池中的哪个方法）   常见面试题  百度：  说一下 JVM 内存模型吧，有哪些区？分别干什么的？ 答： JVM内存区域主要包含：方法区 程序计数器 Java虚拟机栈 本地方法栈 J">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f73315a70302396e391a532dcf87ce26.png">
-<meta property="og:image" content="http://example.com/images/image-20221120105434202.png">
+<meta property="og:image" content="http://example.com/2022/11/20/images/image-20221120105434202.png">
 <meta property="article:published_time" content="2022-11-20T02:58:43.530Z">
 <meta property="article:modified_time" content="2022-11-20T14:39:32.028Z">
 <meta property="article:author" content="其然乐衣">
@@ -119,16 +119,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="运行时数据区的总结以及常见大厂面试题"><a href="#运行时数据区的总结以及常见大厂面试题" class="headerlink" title="运行时数据区的总结以及常见大厂面试题"></a>运行时数据区的总结以及常见大厂面试题</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/f73315a70302396e391a532dcf87ce26.png" alt="image-20200708220303243"></p>
+        <h2 id="运行时数据区的总结以及常见大厂面试题"><a class="markdownIt-Anchor" href="#运行时数据区的总结以及常见大厂面试题"></a> 运行时数据区的总结以及常见大厂面试题</h2>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/f73315a70302396e391a532dcf87ce26.png" alt="image-20200708220303243"></p>
 <p>线程私有的：程序计数器、本地方法栈、虚拟机栈</p>
 <p>虚拟机栈里的栈帧的结构：返回值、局部变量表、操作数栈、动态链接（装着指向运行时常量池的当前方法的引用，知道当前方法是引用运行时常量池中的哪个方法）</p>
-<p><img src="/../../../images/image-20221120105434202.png" alt="image-20221120105434202"></p>
-<h2 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h2><blockquote>
+<p><img src="../../../images/image-20221120105434202.png" alt="image-20221120105434202"></p>
+<h2 id="常见面试题"><a class="markdownIt-Anchor" href="#常见面试题"></a> 常见面试题</h2>
+<blockquote>
 <p><mark>百度</mark>：</p>
-<h3 id="说一下-JVM-内存模型吧，有哪些区？分别干什么的？"><a href="#说一下-JVM-内存模型吧，有哪些区？分别干什么的？" class="headerlink" title="说一下 JVM 内存模型吧，有哪些区？分别干什么的？"></a>说一下 JVM 内存模型吧，有哪些区？分别干什么的？</h3><p><strong>答：</strong></p>
+<h3 id="说一下-jvm-内存模型吧有哪些区分别干什么的"><a class="markdownIt-Anchor" href="#说一下-jvm-内存模型吧有哪些区分别干什么的"></a> 说一下 JVM 内存模型吧，有哪些区？分别干什么的？</h3>
+<p><strong>答：</strong></p>
 <p>JVM内存区域主要包含：方法区 程序计数器 Java虚拟机栈 本地方法栈 Java堆</p>
 <p><strong>1、方法区：</strong></p>
-<p>方法区在JDK1.8之后把名字改成了“Metaspace”，可以翻译成”元数据空间”，这是一块<strong>线程共享</strong>的内存空间，主要用于存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。</p>
+<p>方法区在JDK1.8之后把名字改成了“Metaspace&quot;，可以翻译成&quot;元数据空间&quot;，这是一块<strong>线程共享</strong>的内存空间，主要用于存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。</p>
 <p>Java虚拟机规范将方法区描述为堆的一个逻辑部分，但它有一个别名”Non-Heap 非堆“ 用于与Java堆区分。</p>
 <p>很多人愿意把方法区成为”永久代“，本质上两者并不等价。HotSpot虚拟机 团队选择把GC分代收集扩展至方法区，或者说使用永久带实现方法区而已。</p>
 <p>方法区存在的<strong>问题</strong>：</p>
@@ -141,7 +144,7 @@
 <p>线程请求的栈深度大于虚拟机所允许的深度，抛出StackOverflowError异常虚拟机栈动态扩展时无法申请到足够的内存，抛出OutOfMemoryError异常</p>
 <p><strong>3、本地方法栈</strong></p>
 <p>其发挥的作用和存在的问题与Java虚拟机栈类似，这里主要说一下其区别。其区别主要是虚拟机栈为虚拟机执行Java方法服务，而本地方法栈为虚拟机使用到Native方法服务。</p>
-<p><strong>知识点：</strong>Hotspot虚拟机中将本地方法栈与虚拟机栈合二为一。</p>
+<p>**知识点：**Hotspot虚拟机中将本地方法栈与虚拟机栈合二为一。</p>
 <p><strong>4、Java堆</strong></p>
 <p>Java堆是虚拟机中占内存最大的一块内存空间，是所<strong>有线程共享</strong>的内存区域，当虚拟机启动的时候就会创建。它的作用主要是存放对象实例，几乎所有的对象实例都在这里分配内存。我们来看下Java虚拟机规范是怎么描述它的：</p>
 <p>所有的对象实例以及数组都要在堆上分配，但是随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化发生，所有的对象都分配到堆上也渐渐变得不是那么”绝对“了。</p>
@@ -156,7 +159,7 @@
 <p>关于jvm内存区域空间要重点关注<strong>方法区，程序计数器，Java虚拟机栈</strong>和<strong>Java堆</strong>这些内存区域的作用。只有在了解了虚拟机是怎么使用内存的之后，才能在出现内存溢出和泄漏时更快速的定位和排查解决问题。</p>
 <p><mark>蚂蚁金服</mark>：</p>
 <p>Java8 的内存分代改进 JVM 内存分哪几个区，每个区的作用是什么？</p>
-<p>一面：JVM 内存分布&#x2F;内存结构？栈和堆的区别？堆的结构？为什么两个 survivor 区？</p>
+<p>一面：JVM 内存分布/内存结构？栈和堆的区别？堆的结构？为什么两个 survivor 区？</p>
 <p><strong>二面：Eden 和 survior 的比例分配</strong></p>
 <p>答：8 : 1 : 1</p>
 <p><mark>小米</mark>：</p>
@@ -166,7 +169,8 @@
 <p>答案一：</p>
 <p>对于JVM而言，大部分对象都是属于一个朝生夕死的状态，这部分对象随着方法的调用而创建，方法的结束而消亡，只有少部分的对象会长久的留在JVM 内存中，所以根据这样的特性JVM 把内存分为了新生代 和老年代两个区，一般情况新创建的对象会放到新生代中，只有经过一定次数的GC后还没有被回收的对象，我们认为这部分对象在未来也会长时间存在，所以会把这部分的对象转移到老年代的区域中去。</p>
 <p>答案二：</p>
-<p>1）新生代(Young Gen)：年轻代主要存放新创建的对象，内存大小相对会比较小，垃圾回收会比较频繁。年轻代分成1个Eden Space和2个Suvivor Space（from 和to）。<br> 2）老年代(Tenured Gen)：年老代主要存放JVM认为生命周期比较长的对象（经过几次的Young Gen的垃圾回收后仍然存在），内存大小相对会比较大，垃圾回收也相对没有那么频繁。</p>
+<p>1）新生代(Young Gen)：年轻代主要存放新创建的对象，内存大小相对会比较小，垃圾回收会比较频繁。年轻代分成1个Eden Space和2个Suvivor Space（from 和to）。<br>
+2）老年代(Tenured Gen)：年老代主要存放JVM认为生命周期比较长的对象（经过几次的Young Gen的垃圾回收后仍然存在），内存大小相对会比较大，垃圾回收也相对没有那么频繁。</p>
 </blockquote>
 <blockquote>
 <p><mark>字节跳动</mark>：</p>
@@ -174,11 +178,14 @@
 <p>二面：讲讲 vm 运行时数据库区 什么时候对象会进入老年代？</p>
 <p>答：</p>
 <ol>
-<li><p>长期存活的对象:<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%99%9A%E6%8B%9F%E6%9C%BA&spm=1001.2101.3001.7020">虚拟机</a>给每个对象定义了一个对象年龄(Age)计数器,如果对象在Eden出生并经过第一次Minor GC后仍然存活,并且能被Survivor容纳的话,将被移动到Survivor空间中,并且对象年龄设为1,。对象在Survivor区中每熬过一次Minor GC,年龄就增加1,当他的年龄增加到一定程度(默认是15岁), 就将会被晋升到老年代中。对象晋升到老年代的年龄阈值,可以通过参数-XX:MaxTenuringThreshold设置。</p>
+<li>
+<p>长期存活的对象:<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%99%9A%E6%8B%9F%E6%9C%BA&amp;spm=1001.2101.3001.7020">虚拟机</a>给每个对象定义了一个对象年龄(Age)计数器,如果对象在Eden出生并经过第一次Minor GC后仍然存活,并且能被Survivor容纳的话,将被移动到Survivor空间中,并且对象年龄设为1,。对象在Survivor区中每熬过一次Minor GC,年龄就增加1,当他的年龄增加到一定程度(默认是15岁), 就将会被晋升到老年代中。对象晋升到老年代的年龄阈值,可以通过参数-XX:MaxTenuringThreshold设置。</p>
 </li>
-<li><p>当遇到超大对象时，发现新生代中的Eden区(即便进行了Minor GC)放不下，就会直接尝试放到老年代Tenured&#x2F;OId，如果老年代也放不下，就触发Major GC 或 Full GC，之后老年代区能放得下就放，不能的话就报OOM。大对象对虚拟机的内存分配就是坏消息,尤其是一些朝生夕灭的短命大对象,写程序时应避免。</p>
+<li>
+<p>当遇到超大对象时，发现新生代中的Eden区(即便进行了Minor GC)放不下，就会直接尝试放到老年代Tenured/OId，如果老年代也放不下，就触发Major GC 或 Full GC，之后老年代区能放得下就放，不能的话就报OOM。大对象对虚拟机的内存分配就是坏消息,尤其是一些朝生夕灭的短命大对象,写程序时应避免。</p>
 </li>
-<li><p>动态对象年龄判定:为了能更好地适应不同程度的内存状况,虚拟机并不是永远地要求对象的年龄必须达到了MaxTenuringThreshold才能晋升到老年代,如果在Survivor空间中相同年龄的所有对象大小的总和大于Survivor空间的一半,年龄大于或等于年龄的对象就可以直接进入老年代,无须等到MaxTenuringThreshold中要求的年龄。</p>
+<li>
+<p>动态对象年龄判定:为了能更好地适应不同程度的内存状况,虚拟机并不是永远地要求对象的年龄必须达到了MaxTenuringThreshold才能晋升到老年代,如果在Survivor空间中相同年龄的所有对象大小的总和大于Survivor空间的一半,年龄大于或等于年龄的对象就可以直接进入老年代,无须等到MaxTenuringThreshold中要求的年龄。</p>
 </li>
 </ol>
 <p><mark>京东</mark>：</p>
@@ -187,11 +194,14 @@
 <p><strong>新生代中为什么要分为 Eden 和 survivor。</strong></p>
 <p>答：</p>
 <ol>
-<li><p>如果没有Survivor，Eden区每进行一次Minor GC，存活的对象就会被送到老年代。老年代很快被填满，触发Major GC.老年代的内存空间远大于新生代，进行一次Full GC消耗的时间比Minor GC长得多，大概是Minor GC的十倍以上, 如果Major GC触发次数多的话，就会降低性能，所以要尽可能避免或减少老年代触发Major GC。因此需要分为Eden和Survivor。</p>
+<li>
+<p>如果没有Survivor，Eden区每进行一次Minor GC，存活的对象就会被送到老年代。老年代很快被填满，触发Major GC.老年代的内存空间远大于新生代，进行一次Full GC消耗的时间比Minor GC长得多，大概是Minor GC的十倍以上, 如果Major GC触发次数多的话，就会降低性能，所以要尽可能避免或减少老年代触发Major GC。因此需要分为Eden和Survivor。</p>
 </li>
-<li><p>Survivor的存在意义，就是减少被送到老年代的对象，进而减少Full GC的发生，Survivor的预筛选保证，只有经历16次Minor GC还能在新生代中存活的对象，才会被送到老年代。</p>
+<li>
+<p>Survivor的存在意义，就是减少被送到老年代的对象，进而减少Full GC的发生，Survivor的预筛选保证，只有经历16次Minor GC还能在新生代中存活的对象，才会被送到老年代。</p>
 </li>
-<li><p><strong>设置两个Survivor区最大的好处</strong>就是解决了碎片化，刚刚新建的对象在Eden中，经历一次Minor GC，Eden中的存活对象就会被移动到第一块survivor space S0，Eden被清空；等Eden区再满了，就再触发一次Minor GC，Eden和S0中的存活对象又会被复制送入第二块survivor spaceS1（这个过程非常重要，因为这种复制算法保证了S1中来自S0和Eden两部分的存活对象占用连续的内存空间，避免了碎片化的发生）</p>
+<li>
+<p><strong>设置两个Survivor区最大的好处</strong>就是解决了碎片化，刚刚新建的对象在Eden中，经历一次Minor GC，Eden中的存活对象就会被移动到第一块survivor space S0，Eden被清空；等Eden区再满了，就再触发一次Minor GC，Eden和S0中的存活对象又会被复制送入第二块survivor spaceS1（这个过程非常重要，因为这种复制算法保证了S1中来自S0和Eden两部分的存活对象占用连续的内存空间，避免了碎片化的发生）</p>
 </li>
 </ol>
 <p><mark>天猫</mark>：</p>
@@ -201,19 +211,21 @@
 <table>
 <thead>
 <tr>
-<th align="left">JDK1.6 及之前</th>
-<th align="left">有永久代（permanet），静态变量存储在永久代上</th>
+<th style="text-align:left">JDK1.6 及之前</th>
+<th style="text-align:left">有永久代（permanet），静态变量存储在永久代上</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left"><strong>JDK1.7</strong></td>
-<td align="left"><strong>有永久代，但已经逐步 “去永久代”，字符串常量池，静态变量移除，保存在堆中</strong></td>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>JDK1.7</strong></td>
+<td style="text-align:left"><strong>有永久代，但已经逐步 “去永久代”，字符串常量池，静态变量移除，保存在堆中</strong></td>
 </tr>
 <tr>
-<td align="left"><strong>JDK1.8</strong></td>
-<td align="left"><strong>无永久代，类型信息，字段，方法，常量保存在本地内存的元空间，但字符串常量池、静态变量仍然在堆中。</strong></td>
+<td style="text-align:left"><strong>JDK1.8</strong></td>
+<td style="text-align:left"><strong>无永久代，类型信息，字段，方法，常量保存在本地内存的元空间，但字符串常量池、静态变量仍然在堆中。</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>其中，String Table之所以要调整位置：</p>
 <p>jdk7 中将 StringTable 放到了堆空间中。因为<strong>永久代的回收效率很低</strong>，在 full gc 的时候才会触发。而 full gc 是老年代的空间不足、永久代不足时才会触发。</p>
 <p>这就导致 StringTable 回收效率不高。而我们开发中会有大量的字符串被创建，回收效率低，导致永久代内存不足。放到堆里，能及时回收内存。</p>
@@ -227,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7-8%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E7%9A%84%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="cldlvr4qw005pigv63k0aedwh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7-8%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E7%9A%84%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="cldlvstja005wowv63nobdvsd" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
