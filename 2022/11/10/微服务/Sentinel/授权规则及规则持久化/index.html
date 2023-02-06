@@ -5,12 +5,12 @@
   
   <title>授权规则及规则持久化 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、授权规则 第1步：添加判断来源逻辑  代码： 12345678910111213141516171819202122232425package cn.itcast.order.sentinel;import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;import org.apache">
+  <meta name="description" content="一、授权规则第1步：添加判断来源逻辑  代码： 12345678910111213141516171819202122232425package cn.itcast.order.sentinel;import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;import org.apache.c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="授权规则及规则持久化">
 <meta property="og:url" content="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="一、授权规则 第1步：添加判断来源逻辑  代码： 12345678910111213141516171819202122232425package cn.itcast.order.sentinel;import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;import org.apache">
+<meta property="og:description" content="一、授权规则第1步：添加判断来源逻辑  代码： 12345678910111213141516171819202122232425package cn.itcast.order.sentinel;import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;import org.apache.c">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image">
@@ -18,39 +18,68 @@
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
 <meta property="article:published_time" content="2022-11-09T16:22:22.090Z">
 <meta property="article:modified_time" content="2022-11-09T16:51:55.537Z">
 <meta property="article:author" content="其然乐衣">
-<meta property="article:tag" content="微服务">
 <meta property="article:tag" content="Sentinel">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image">
   
@@ -150,71 +179,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一-授权规则"><a class="markdownIt-Anchor" href="#一-授权规则"></a> 一、授权规则</h1>
-<p><strong>第1步：添加判断来源逻辑</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+        <h1 id="一、授权规则"><a href="#一、授权规则" class="headerlink" title="一、授权规则"></a>一、授权规则</h1><p><strong>第1步：添加判断来源逻辑</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class HeaderOriginParser implements RequestOriginParser &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String parseOrigin(HttpServletRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        //1.获取请求头</span><br><span class="line">        String origin = request.getHeader( &quot;origin&quot; );</span><br><span class="line">        //2.非空判断</span><br><span class="line">        if ( StringUtils.isEmpty( origin ) ) &#123;</span><br><span class="line">            origin = &quot;blank&quot;;   //如果是空的就返回一个默认值</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return origin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <p><strong>第2步：编写过滤器–&gt;给网关添加origin头</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p><strong>第3步：</strong> 重新启动，访问一个接口</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p><strong>第4步：</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>第5步：重新范访问上面的接口</p>
 <p>8088是直接范文oder服务的，也就是绕过了网关，但是现在我们已经设置了授权规则，所以直接访问是不行的，你报错如下</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p>现在我们通过网关来访问，网关的端口设置的是10010，用10010来访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p>因为网关做了权限的校验，所以需要把权限加上</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 现在我们通过网关来访问，网关的端口设置的是10010，用10010来访问</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 因为网关做了权限的校验，所以需要把权限加上</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
 <p><strong>因此，通过上面的授权规则设置后，通过网关来访问的就可以，而通过浏览器直接访问的就不行</strong></p>
 <p>下面是黑马PPT的笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<h1 id="二-自定义异常结果"><a class="markdownIt-Anchor" href="#二-自定义异常结果"></a> 二、自定义异常结果</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><strong>第1步：</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p>代码：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<h1 id="二、自定义异常结果"><a href="#二、自定义异常结果" class="headerlink" title="二、自定义异常结果"></a>二、自定义异常结果</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <strong>第1步：</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.BlockException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.FlowException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class SentinelExceptionHandler implements BlockExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception &#123;</span><br><span class="line">        String msg = &quot;未知异常&quot;;</span><br><span class="line">        int status = 429;</span><br><span class="line"></span><br><span class="line">        if ( e instanceof FlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被限流了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof ParamFlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被热点参数限流&quot;;</span><br><span class="line">        &#125; else if ( e instanceof DegradeException ) &#123;</span><br><span class="line">            msg = &quot;请求被降级了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof AuthorityException ) &#123;</span><br><span class="line">            msg = &quot;没有权限访问&quot;;</span><br><span class="line">            status = 401;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        response.setContentType( &quot;application/json;charset=utf-8&quot; );</span><br><span class="line">        response.setStatus( status );</span><br><span class="line">        response.getWriter().println( &quot;&#123;&quot;msg&quot;: &quot; + msg +&quot;, &quot;status&quot;: &quot; + status + &quot;&#125;&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>第2步：</strong> 重启微服务，然后浏览器访问接口</p>
 <p><strong>第3步：</strong> 在sentinel中给端口设置响应的规则进行测试</p>
-<p>（1）新增授权规则</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p>（1）新增授权规则 </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
 <p>（2）新增流控规则</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p>下面是黑马PPT笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<h1 id="三-规则持久化"><a class="markdownIt-Anchor" href="#三-规则持久化"></a> 三、规则持久化</h1>
-<p>这一节知识就没有详细的操作笔记，需要观看黑马教程视频如下链接：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 下面是黑马PPT笔记</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<h1 id="三、规则持久化"><a href="#三、规则持久化" class="headerlink" title="三、规则持久化"></a>三、规则持久化</h1><p>这一节知识就没有详细的操作笔记，需要观看黑马教程视频如下链接：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=146&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili">高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=146&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili">高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili</a></p>
 </blockquote>
 <p><strong>前言：</strong></p>
 <p><strong>当我们服务重启，我们所配的所有规则就会丢失，因为sentinel会默认把这些规则保存在内存里，重启就自然丢失了。而在生产的环境下 肯定是不能容忍这样的问题的。所以我们就需要学习怎么将****sentinel的规则持久化。</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<h3 id><a class="markdownIt-Anchor" href="#"></a> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></h3>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image" alt><img src alt title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<h3 id><a href="#" class="headerlink" title></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></h3><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="cldsghldj009bekv67jf2f9yi" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="cldsgin2b0084esv6hugu1ze2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>

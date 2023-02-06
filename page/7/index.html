@@ -111,29 +111,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="springsecurity-请求间共享认证信息"><a class="markdownIt-Anchor" href="#springsecurity-请求间共享认证信息"></a> <strong>SpringSecurity 请求间共享认证信息</strong></h1>
-<p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=39&amp;vd_source=746b9336d739b80b11820809545b6604">39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili</a></p>
+        <h1 id="SpringSecurity-请求间共享认证信息"><a href="#SpringSecurity-请求间共享认证信息" class="headerlink" title="SpringSecurity 请求间共享认证信息"></a><strong>SpringSecurity 请求间共享认证信息</strong></h1><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=39&vd_source=746b9336d739b80b11820809545b6604">39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili</a></p>
 <p>一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 <strong>Spring</strong> <strong>Security</strong> 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析</p>
-<p><img src="../../images/image-20221111211841097.png" alt="image-20221111211841097"></p>
+<p><img src="/../../images/image-20221111211841097.png" alt="image-20221111211841097"></p>
 <p>⚫ 在前面讲解认证成功的处理方法 successfulAuthentication() 时，有以下代码：</p>
-<p><img src="../../images/image-20221111211945405.png" alt="image-20221111211945405"></p>
+<p><img src="/../../images/image-20221111211945405.png" alt="image-20221111211945405"></p>
 <p>⚫ 查 看 SecurityContext 接 口 及 其 实 现 类 SecurityContextImpl ， 该 类 其 实 就 是 对Authentication 的封装：</p>
 <p>⚫ 查 看 SecurityContextHolder 类 ， 该 类 其 实 是 对 ThreadLocal 的 封 装 ， 存 储SecurityContext 对象：</p>
-<p><img src="../../images/image-20221111212010159.png" alt="image-20221111212010159"></p>
-<p><img src="../../images/image-20221111212020024.png" alt="image-20221111212020024"></p>
-<p><img src="../../images/image-20221111212029106.png" alt="image-20221111212029106"></p>
-<p><img src="../../images/image-20221111212041020.png" alt="image-20221111212041020"></p>
-<h1 id="securitycontextpersistencefilter-过滤器"><a class="markdownIt-Anchor" href="#securitycontextpersistencefilter-过滤器"></a> SecurityContextPersistenceFilter 过滤器</h1>
-<p>前面提到过，在 <strong>UsernamePasswordAuthenticationFilter</strong> 过滤器认证成功之后，会在认证成功的处理方法中将已认证的用户信息对象 Authentication 封装进</p>
+<p><img src="/../../images/image-20221111212010159.png" alt="image-20221111212010159"></p>
+<p><img src="/../../images/image-20221111212020024.png" alt="image-20221111212020024"></p>
+<p><img src="/../../images/image-20221111212029106.png" alt="image-20221111212029106"></p>
+<p><img src="/../../images/image-20221111212041020.png" alt="image-20221111212041020"></p>
+<h1 id="SecurityContextPersistenceFilter-过滤器"><a href="#SecurityContextPersistenceFilter-过滤器" class="headerlink" title="SecurityContextPersistenceFilter 过滤器"></a>SecurityContextPersistenceFilter 过滤器</h1><p>前面提到过，在 <strong>UsernamePasswordAuthenticationFilter</strong> 过滤器认证成功之后，会在认证成功的处理方法中将已认证的用户信息对象 Authentication 封装进</p>
 <p>SecurityContext，并存入 SecurityContextHolder。之后，响应会通过 <strong>SecurityContextPersistenceFilter</strong> 过滤器，该过滤器的位置在所有过滤器的最前面，请求到来先进它，响应返回最后一个通过它，所以在该过滤器中处理已认证的用户信息对象 Authentication 与 Session 绑定。</p>
 <p>认证成功的响应通过 <strong>SecurityContextPersistenceFilter</strong> 过滤器时，会从SecurityContextHolder 中取出封装了已认证用户信息对象 Authentication 的SecurityContext，放进 Session 中。当请求再次到来时，请求首先经过该过滤器，该过滤器会判断当前请求的 Session 是否存有 SecurityContext 对象，如果有则将该对象取出再次放入 SecurityContextHolder 中，之后该请求所在的线程获得认证用户信息，后续的资源访问不需要进行身份认证；当响应再次返回时，该过滤器同样从 SecurityContextHolder 取出SecurityContext 对象，放入 Session 中。具体源码如下：</p>
-<p><img src="../../images/image-20221111212148379.png" alt="image-20221111212148379"></p>
-<p><img src="../../images/image-20221111212156838.png" alt="image-20221111212156838"></p>
+<p><img src="/../../images/image-20221111212148379.png" alt="image-20221111212148379"></p>
+<p><img src="/../../images/image-20221111212156838.png" alt="image-20221111212156838"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldsghlbb002nekv62hi2fqlc" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldsgimzz0011esv62du64yds" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -183,18 +181,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="exceptiontranslationfilter-过滤器"><a class="markdownIt-Anchor" href="#exceptiontranslationfilter-过滤器"></a> <strong>ExceptionTranslationFilter 过滤器</strong></h2>
-<p>该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：</p>
-<p><img src="../../images/image-20221111205806671.png" alt="image-20221111205806671"></p>
-<h1 id="filtersecurityinterceptor-过滤器"><a class="markdownIt-Anchor" href="#filtersecurityinterceptor-过滤器"></a> <strong>FilterSecurityInterceptor</strong> <strong>过滤器</strong></h1>
-<p><strong>FilterSecurityInterceptor</strong> 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器<strong>ExceptionTranslationFilter</strong> 进行捕获和处理。具体源码如下：</p>
-<p><img src="../../images/image-20221111210309165.png" alt="image-20221111210309165"></p>
+        <h2 id="ExceptionTranslationFilter-过滤器"><a href="#ExceptionTranslationFilter-过滤器" class="headerlink" title="ExceptionTranslationFilter 过滤器"></a><strong>ExceptionTranslationFilter 过滤器</strong></h2><p>该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：</p>
+<p><img src="/../../images/image-20221111205806671.png" alt="image-20221111205806671"></p>
+<h1 id="FilterSecurityInterceptor-过滤器"><a href="#FilterSecurityInterceptor-过滤器" class="headerlink" title="FilterSecurityInterceptor 过滤器"></a><strong>FilterSecurityInterceptor</strong> <strong>过滤器</strong></h1><p><strong>FilterSecurityInterceptor</strong> 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器<strong>ExceptionTranslationFilter</strong> 进行捕获和处理。具体源码如下：</p>
+<p><img src="/../../images/image-20221111210309165.png" alt="image-20221111210309165"></p>
 <p>需要注意，<strong>Spring Security</strong> 的过滤器链是配置在 SpringMVC 的核心组件DispatcherServlet 运行之前。也就是说，请求通过 <strong>Spring Security</strong> 的所有过滤器，不意味着能够正常访问资源，该请求还需要通过 SpringMVC 的拦截器链。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldsghlbf0031ekv6hbie7d4n" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldsgin03001gesv6c57vd8zg" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -245,71 +241,68 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>ps:硅谷老师的笔记(代码背景白色)</strong></p>
-<h1 id="springsecurity-基本流程"><a class="markdownIt-Anchor" href="#springsecurity-基本流程"></a> <strong>SpringSecurity 基本流程</strong></h1>
-<p><strong>上：对应教程视频：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=36&amp;vd_source=746b9336d739b80b11820809545b6604">36-尚硅谷-SpringSecurity-源码剖析-认证流程详解上_哔哩哔哩_bilibili</a></p>
-<p><img src="../../images/image-20221111185833955.png" alt="image-20221111185833955"></p>
+<h1 id="SpringSecurity-基本流程"><a href="#SpringSecurity-基本流程" class="headerlink" title="SpringSecurity 基本流程"></a><strong>SpringSecurity 基本流程</strong></h1><p><strong>上：对应教程视频：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=36&vd_source=746b9336d739b80b11820809545b6604">36-尚硅谷-SpringSecurity-源码剖析-认证流程详解上_哔哩哔哩_bilibili</a></p>
+<p><img src="/../../images/image-20221111185833955.png" alt="image-20221111185833955"></p>
 <p>绿色部分是认证过滤器，需要我们自己配置，可以配置多个认证过滤器。认证过滤器可以使用 <strong>Spring Security</strong> 提供的认证过滤器，也可以自定义过滤器（例如：短信验证）。认证过滤器要在 **configure(HttpSecurity http)**方法中配置，没有配置不生效。下面会重点介绍以下三个过滤器：</p>
 <p><strong>UsernamePasswordAuthenticationFilter</strong> 过滤器：该过滤器会拦截前端提交的 POST 方式的登录表单请求，并进行身份认证。</p>
 <p><strong>ExceptionTranslationFilter</strong> 过滤器：该过滤器不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。</p>
 <p><strong>FilterSecurityInterceptor</strong> 过滤器：该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，并由 <strong>ExceptionTranslationFilter</strong> 过滤器进行捕获和处理。</p>
-<h1 id="springsecurity-认证流程源码剖析"><a class="markdownIt-Anchor" href="#springsecurity-认证流程源码剖析"></a> <strong>SpringSecurity 认证流程</strong>（源码剖析）</h1>
-<p><img src="../../images/image-20221111185759068.png" alt="image-20221111185759068"></p>
+<h1 id="SpringSecurity-认证流程（源码剖析）"><a href="#SpringSecurity-认证流程（源码剖析）" class="headerlink" title="SpringSecurity 认证流程（源码剖析）"></a><strong>SpringSecurity 认证流程</strong>（源码剖析）</h1><p><img src="/../../images/image-20221111185759068.png" alt="image-20221111185759068"></p>
 <p>前端的post请求都会被<strong>UsernamePasswordAuthenticationFilter</strong>这个过滤器给拦截，并进行身份的认证</p>
 <p>（1) 到父类<strong>AbstractAuthenticationProcessingFilter</strong></p>
 <p>​		第一步：过滤的方法<strong>doFilter</strong>，判断提交方式是否post提交</p>
-<p><img src="../../images/image-20221111175238982.png" alt="image-20221111175238982"></p>
-<p>​		第二步：调用子类<strong>UsernamePasswordAuthenticationFilter</strong>的<strong>attemptAuthentication</strong>方法进行身份认证，认证成功之后，把认证信息封装到<strong>Authentication</strong>对象里面</p>
+<p><img src="/../../images/image-20221111175238982.png" alt="image-20221111175238982"></p>
+<p>​		第二步：调用子类<strong>UsernamePasswordAuthenticationFilter</strong>的<strong>attemptAuthentication</strong>方法进行身份认证，认证成功之后，把认证信息封装到<strong>Authentication</strong>对象里面	</p>
 <p>​					<strong>Authentication</strong>用于封装认证信息的类对象</p>
 <p>​					在post提交表单之后，得到表单提交过来的数据，然后这里调用子类里的<strong>attemptAuthentication</strong>方法去查数据库和进行验证，认证之后，那认证通过后的信息用<strong>Authentication</strong>进行封装</p>
-<p><img src="../../images/image-20221111175602673.png" alt="image-20221111175602673"></p>
+<p><img src="/../../images/image-20221111175602673.png" alt="image-20221111175602673"></p>
 <p>第三步：session策略处理</p>
-<p><img src="../../images/image-20221111180301213.png" alt="image-20221111180301213"></p>
+<p><img src="/../../images/image-20221111180301213.png" alt="image-20221111180301213"></p>
 <p>第四步：</p>
 <p>1、认证失败抛出异常，执行认证失败的方法</p>
 <p>认证成功后会进行封装，但认证失败会，会在catch里面调用<strong>unsuccessfulAuthentication</strong>方法，做认证失败处理，比如提示用户你没有权限</p>
-<p><img src="../../images/image-20221111180616578.png" alt="image-20221111180616578"></p>
+<p><img src="/../../images/image-20221111180616578.png" alt="image-20221111180616578"></p>
 <p>ps:网友的笔记(代码背景白色)</p>
-<p><img src="../../images/image-20221111185611776.png" alt="image-20221111185611776"></p>
+<p><img src="/../../images/image-20221111185611776.png" alt="image-20221111185611776"></p>
 <p>2、认证成功后，调用认证成功后的方法</p>
-<p><img src="../../images/image-20221111181109625.png" alt="image-20221111181109625"></p>
+<p><img src="/../../images/image-20221111181109625.png" alt="image-20221111181109625"></p>
 <p><strong>ps:<strong>上面第二步：调用子类</strong>UsernamePasswordAuthenticationFilter</strong>的<strong>attemptAuthentication</strong>方法去查数据库和进行验证的源码剖析：</p>
 <p><strong>attemptAuthentication中的</strong></p>
 <p>第一步：判断前端是否是post提交</p>
 <p>第二步：获取前端表单提交数据</p>
-<p><img src="../../images/image-20221111182257781.png" alt="image-20221111182257781"></p>
-<p><img src="../../images/image-20221111185415885.png" alt="image-20221111185415885"></p>
-<p><img src="../../images/image-20221111185333746.png" alt="image-20221111185333746"></p>
+<p><img src="/../../images/image-20221111182257781.png" alt="image-20221111182257781"></p>
+<p><img src="/../../images/image-20221111185415885.png" alt="image-20221111185415885"></p>
+<p><img src="/../../images/image-20221111185333746.png" alt="image-20221111185333746"></p>
 <p>第三步：</p>
 <p>使用获取数据，构造成对象(<strong>UsernamePasswordAuthenticationToken</strong>)，标记为未认证的状态</p>
 <p>把请求一些属性信息设置到该对象里面（ this.setDetails(request, authRequest); ）</p>
 <p>调用authenticate方法进行身份认证（调用我们自己编写的<strong>userDetailsService</strong>里面的方法进行查数据过程或认证过程）</p>
-<p><img src="../../images/image-20221111182712378.png" alt="image-20221111182712378"></p>
-<p><img src="../../images/image-20221111190458033.png" alt="image-20221111190458033"></p>
+<p><img src="/../../images/image-20221111182712378.png" alt="image-20221111182712378"></p>
+<p><img src="/../../images/image-20221111190458033.png" alt="image-20221111190458033"></p>
 <p>（3）查看 <strong>UsernamePasswordAuthenticationToken</strong> 的构建过程</p>
-<p><img src="../../images/image-20221111185138507.png" alt="image-20221111185138507"></p>
-<p><strong>下：对应教程视频：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=37&amp;vd_source=746b9336d739b80b11820809545b6604">37-尚硅谷-SpringSecurity-源码剖析-认证流程详解下_哔哩哔哩_bilibili</a></p>
+<p><img src="/../../images/image-20221111185138507.png" alt="image-20221111185138507"></p>
+<p><strong>下：对应教程视频：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=37&vd_source=746b9336d739b80b11820809545b6604">37-尚硅谷-SpringSecurity-源码剖析-认证流程详解下_哔哩哔哩_bilibili</a></p>
 <p>（4）查看ProviderManager源码，认证实现</p>
 <p>上述过程中，<strong>UsernamePasswordAuthenticationFilter</strong> 过滤器的<strong>attemptAuthentication</strong>() 方法的<strong>身份认证过程</strong>将未认证的 <strong>Authentication</strong> 对象传入<strong>ProviderManager</strong> 类的 <strong>authenticate</strong>() 方法进行身份认证。</p>
 <p>ProviderManager 是 AuthenticationManager 接口的实现类，该接口是认证相关的核心接口，也是认证的入口。在实际开发中，我们可能有多种不同的认证方式，例如：用户名+密码、邮箱+密码、手机号+验证码等，而这些认证方式的入口始终只有一个，那就是AuthenticationManager。在该接口的常用实现类 ProviderManager 内部会维护一个**List<AuthenticationProvider>**列表，存放多种认证方式，实际上这是委托者模式（Delegate）的应用。每种认证方式对应着一个 AuthenticationProvider，AuthenticationManager 根据认证方式的不同（根据传入的 Authentication 类型判断）委托对应的 AuthenticationProvider 进行用户认证。</AuthenticationProvider></p>
-<p><img src="../../images/image-20221111203614625.png" alt="image-20221111203614625"></p>
-<p><img src="../../images/image-20221111203630089.png" alt="image-20221111203630089"></p>
-<p><img src="../../images/image-20221111203653228.png" alt="image-20221111203653228"></p>
-<p><img src="../../images/image-20221111203710806.png" alt="image-20221111203710806"></p>
-<p><strong>上述认证成功之后的（<strong>6</strong>）过程，调用</strong> <strong>CredentialsContainer</strong> <strong>接口定义的eraseCredentials</strong>() <strong>方法去除敏感信息。查看</strong></p>
+<p><img src="/../../images/image-20221111203614625.png" alt="image-20221111203614625"></p>
+<p><img src="/../../images/image-20221111203630089.png" alt="image-20221111203630089"></p>
+<p><img src="/../../images/image-20221111203653228.png" alt="image-20221111203653228"></p>
+<p><img src="/../../images/image-20221111203710806.png" alt="image-20221111203710806"></p>
+<p><strong>上述认证成功之后的（</strong>6<strong>）过程，调用</strong> <strong>CredentialsContainer</strong> <strong>接口定义的eraseCredentials</strong>() <strong>方法去除敏感信息。查看</strong></p>
 <p><strong>UsernamePasswordAuthenticationToken</strong> <strong>实现的</strong> <strong>eraseCredentials()</strong> <strong>方法，该方</strong>法实现在其父类中：</p>
-<p><img src="../../images/image-20221111203846591.png" alt="image-20221111203846591"></p>
+<p><img src="/../../images/image-20221111203846591.png" alt="image-20221111203846591"></p>
 <p>上述过程就是认证流程的最核心部分，接下来重新回到</p>
-<p><strong>UsernamePasswordAuthenticationFilter</strong> 过滤器的 doFilter() 方法，查看认证成功/失败的处理：</p>
-<p><img src="../../images/image-20221111203923720.png" alt="image-20221111203923720"></p>
-<h4 id="查看successfulauthentication-和-unsuccessfulauthentication-方法源码"><a class="markdownIt-Anchor" href="#查看successfulauthentication-和-unsuccessfulauthentication-方法源码"></a> 查看successfulAuthentication() 和 unsuccessfulAuthentication() 方法源码：</h4>
-<p><img src="../../images/image-20221111204011293.png" alt="image-20221111204011293"></p>
-<p><img src="../../images/image-20221111204101980.png" alt="image-20221111204101980"></p>
+<p><strong>UsernamePasswordAuthenticationFilter</strong> 过滤器的 doFilter() 方法，查看认证成功&#x2F;失败的处理：</p>
+<p><img src="/../../images/image-20221111203923720.png" alt="image-20221111203923720"></p>
+<h4 id="查看successfulAuthentication-和-unsuccessfulAuthentication-方法源码："><a href="#查看successfulAuthentication-和-unsuccessfulAuthentication-方法源码：" class="headerlink" title="查看successfulAuthentication() 和 unsuccessfulAuthentication() 方法源码："></a>查看successfulAuthentication() 和 unsuccessfulAuthentication() 方法源码：</h4><p><img src="/../../images/image-20221111204011293.png" alt="image-20221111204011293"></p>
+<p><img src="/../../images/image-20221111204101980.png" alt="image-20221111204101980"></p>
 <p>———————————————————————————————————————————————————————————————————————</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldsghlba002lekv6e6j12j21" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldsgin010018esv6fdbm4mud" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -359,13 +352,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-autowired"><a class="markdownIt-Anchor" href="#1-autowired"></a> 1. @Autowired</h1>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/x-jingxin/p/12918974.html">@Autowired 写在构造方法上 - x_jingxin - 博客园 (cnblogs.com)</a></p>
+        <h1 id="1-Autowired"><a href="#1-Autowired" class="headerlink" title="1. @Autowired"></a>1. @Autowired</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/x-jingxin/p/12918974.html">@Autowired 写在构造方法上 - x_jingxin - 博客园 (cnblogs.com)</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cldsghlbp003wekv6bisz1080" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cldsgin0y003yesv6cfxe534f" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li></ul>
@@ -416,22 +408,22 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>参考视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16J411h7Rd?p=116&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">04.067-活跃性-定位死锁_哔哩哔哩_bilibili</a></p>
+<p> 参考视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16J411h7Rd?p=116&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">04.067-活跃性-定位死锁_哔哩哔哩_bilibili</a></p>
 </blockquote>
 <p><strong>方式1 ：jstack工具</strong></p>
-<p>通过终端命令：jstack 进程号 （图上面写错了，不是进程的端口号，是进程号）</p>
+<p> 通过终端命令：jstack 进程号 （图上面写错了，不是进程的端口号，是进程号）</p>
 <p><img src="https://img-blog.csdnimg.cn/98cd05b7a9ac4db1a434dd16cedf747f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑通过上面的运行后可以看到下面的 线程信息：</p>
 <p><img src="https://img-blog.csdnimg.cn/188b8741f76d4b68b02383249c0f5612.png" alt="img"></p>
-<p>方式1的jstack工具可以查看死锁的位置（哪一行），然后让我们去修改相应的代码</p>
-<p><strong>方式2：jconsole工具</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/8730559d36184371ab7b0e704935b94f.png" alt="img"><img src="https://img-blog.csdnimg.cn/717a771fd58048c4b3e0d67c2a382bd7.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/193622a6730f4390b3cd5dddde10fdc4.png" alt="img"></p>
-<p>点击之后<img src="https://img-blog.csdnimg.cn/bb94babc5de941d6932699155cc5f2a1.png" alt="img"></p>
+<p>方式1的jstack工具可以查看死锁的位置（哪一行），然后让我们去修改相应的代码 </p>
+<p> <strong>方式2：jconsole工具</strong> </p>
+<p>   <img src="https://img-blog.csdnimg.cn/8730559d36184371ab7b0e704935b94f.png" alt="img"><img src="https://img-blog.csdnimg.cn/717a771fd58048c4b3e0d67c2a382bd7.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/193622a6730f4390b3cd5dddde10fdc4.png" alt="img"></p>
+<p> 点击之后<img src="https://img-blog.csdnimg.cn/bb94babc5de941d6932699155cc5f2a1.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" data-id="cldsghlbi003bekv689u7bv4v" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" data-id="cldsgin0t003gesv6eioqbr86" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -483,20 +475,16 @@
       
         <p>对应的教程视频：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=161&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-04-MQ集群_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=161&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-04-MQ集群_哔哩哔哩_bilibili</a></p>
 </blockquote>
 <p>1.集群分类</p>
 <p><img src="https://img-blog.csdnimg.cn/a9ebe4585fd54ed8b699e315a6141c1b.png" alt="img"></p>
 <p>因为比较推荐使用仲裁队列，所以 普通集群和镜像集群就不做笔记的记录了</p>
-<h1 id="2普通集群"><a class="markdownIt-Anchor" href="#2普通集群"></a> 2.普通集群</h1>
-<h1 id="3镜像集群"><a class="markdownIt-Anchor" href="#3镜像集群"></a> 3.镜像集群</h1>
-<h1 id="3仲裁队列"><a class="markdownIt-Anchor" href="#3仲裁队列"></a> 3.仲裁队列</h1>
-<p>仲裁队列：仲裁队列是3.8版本以后才有的新功能，用来替代镜像队列，具备下列特征：</p>
+<h1 id="2-普通集群"><a href="#2-普通集群" class="headerlink" title="2.普通集群"></a>2.普通集群</h1><h1 id="3-镜像集群"><a href="#3-镜像集群" class="headerlink" title="3.镜像集群"></a>3.镜像集群</h1><h1 id="3-仲裁队列"><a href="#3-仲裁队列" class="headerlink" title="3.仲裁队列"></a>3.仲裁队列</h1><p>仲裁队列：仲裁队列是3.8版本以后才有的新功能，用来替代镜像队列，具备下列特征：</p>
 <p>•与镜像队列一样，都是主从模式，支持主从数据同步</p>
 <p>•使用非常简单，没有复杂的配置</p>
 <p>•主从同步基于Raft协议，强一致</p>
-<h3 id="搭建非常简单不需要任何配置直接在控制台添加一个队列就行"><a class="markdownIt-Anchor" href="#搭建非常简单不需要任何配置直接在控制台添加一个队列就行"></a> 搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：</h3>
-<p>在任意控制台添加一个队列，一定要选择队列类型为Quorum类型</p>
+<h3 id="搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）："><a href="#搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：" class="headerlink" title="搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）："></a>搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：</h3><p>在任意控制台添加一个队列，一定要选择队列类型为Quorum类型</p>
 <p><img src="https://img-blog.csdnimg.cn/b9b16bfc723f4178b04c1d8b1e857991.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/59c23da4cec14f29b409ba7141f30431.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/ad2ce48988004e1f889af46c0b63ba20.png" alt="img"></p>
@@ -505,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" data-id="cldsghlaq000vekv6hh2665mj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" data-id="cldsgimzr000gesv6g04x7w48" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -555,23 +543,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应的教程视频"><a class="markdownIt-Anchor" href="#对应的教程视频"></a> 对应的教程视频：</h1>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=160&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-03-消息堆积及惰性队列_哔哩哔哩_bilibili</a></p>
+        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=160&vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-03-消息堆积及惰性队列_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="1消息堆积问题"><a class="markdownIt-Anchor" href="#1消息堆积问题"></a> 1.消息堆积问题</h1>
-<p><img src="https://img-blog.csdnimg.cn/b99d3d1549204d588c14889ef1d9c246.png" alt="img"></p>
-<p>当出现高并发的时候，一如说有一百万条，这些消息都扔到内存当中，显然是不合适的，所以需要学习 队形队列</p>
-<h1 id="2惰性队列"><a class="markdownIt-Anchor" href="#2惰性队列"></a> 2.惰性队列</h1>
-<p><img src="https://img-blog.csdnimg.cn/1245c0f36dd548db84d5c5d494c2d331.png" alt="img"></p>
+<h1 id="1-消息堆积问题"><a href="#1-消息堆积问题" class="headerlink" title="1.消息堆积问题"></a>1.消息堆积问题</h1><p><img src="https://img-blog.csdnimg.cn/b99d3d1549204d588c14889ef1d9c246.png" alt="img"></p>
+<p> 当出现高并发的时候，一如说有一百万条，这些消息都扔到内存当中，显然是不合适的，所以需要学习 队形队列</p>
+<h1 id="2-惰性队列"><a href="#2-惰性队列" class="headerlink" title="2.惰性队列"></a>2.惰性队列</h1><p> <img src="https://img-blog.csdnimg.cn/1245c0f36dd548db84d5c5d494c2d331.png" alt="img"></p>
 <p>使用第一种Bean方式方式显然方便些</p>
 <p><img src="https://img-blog.csdnimg.cn/69f85d1fbdcb4501a3804dabefea0ce2.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/9876735c7b4845b3b333773526244587.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/9876735c7b4845b3b333773526244587.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" data-id="cldsghlat0018ekv6gp5de7o8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" data-id="cldsgimzt000jesv68gi83o58" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -621,25 +606,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>对应的教程视频：</p>
+        <p> 对应的教程视频：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=159&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-02-死信交换机_哔哩哔哩_bilibili</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=159&vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-02-死信交换机_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="1初始死信交换机"><a class="markdownIt-Anchor" href="#1初始死信交换机"></a> 1.初始死信交换机</h1>
-<p><img src="https://img-blog.csdnimg.cn/2689f1bfc1eb42778182145abfcf6675.png" alt="img"></p>
-<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结：</h2>
-<p>什么样的消息会成为死信？</p>
+<h1 id="1-初始死信交换机"><a href="#1-初始死信交换机" class="headerlink" title="1.初始死信交换机"></a>1.初始死信交换机</h1><p><img src="https://img-blog.csdnimg.cn/2689f1bfc1eb42778182145abfcf6675.png" alt="img"></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>什么样的消息会成为死信？</p>
 <p>•消息被消费者reject或者返回nack</p>
 <p>•消息超时未消费</p>
 <p>•队列满了</p>
 <p>如何给队列绑定死信交换机？</p>
 <p>•给队列设置dead-letter-exchange属性，指定一个交换机</p>
 <p>•给队列设置dead-letter-routing-key属性，设置死信交换机与死信队列的RoutingKey</p>
-<h1 id="2ttl"><a class="markdownIt-Anchor" href="#2ttl"></a> 2.TTL</h1>
-<p><img src="https://img-blog.csdnimg.cn/e68465dd5a8b49dd8ccb078c78f1ef94.png" alt="img"></p>
+<h1 id="2-TTL"><a href="#2-TTL" class="headerlink" title="2.TTL"></a>2.TTL</h1><p><img src="https://img-blog.csdnimg.cn/e68465dd5a8b49dd8ccb078c78f1ef94.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/ab0c69d04e4546f481d0f07ed98eb68a.png" alt="img"><img src="https://img-blog.csdnimg.cn/d7bc1af04dae44f9b6a644135646c125.png" alt="img"></p>
-<h2 id="img-总结"><a class="markdownIt-Anchor" href="#img-总结"></a> <img src="https://img-blog.csdnimg.cn/af49a4d919f84acdb4de208beb3f50f4.png" alt="img"> <strong>总结：</strong></h2>
-<p>消息超时的两种方式是？</p>
+<h2 id="总结：-1"><a href="#总结：-1" class="headerlink" title=" 总结："></a><img src="https://img-blog.csdnimg.cn/af49a4d919f84acdb4de208beb3f50f4.png" alt="img"> <strong>总结：</strong></h2><p>消息超时的两种方式是？</p>
 <p>•给队列设置ttl属性，进入队列后超过ttl时间的消息变为死信</p>
 <p>•给消息设置ttl属性，队列接收到消息超过ttl时间后变为死信</p>
 <p>•两者共存时，以时间短的ttl为准</p>
@@ -647,24 +628,22 @@
 <p>•给消息的目标队列指定死信交换机</p>
 <p>•消费者监听与死信交换机绑定的队列</p>
 <p>•发送消息时给消息设置ttl为20秒</p>
-<h1 id="3延迟队列"><a class="markdownIt-Anchor" href="#3延迟队列"></a> 3.延迟队列</h1>
-<p><img src="https://img-blog.csdnimg.cn/7e4045074e8645398aee01a86bd72b6d.png" alt="img"></p>
-<p><strong>延迟队列插件</strong></p>
+<h1 id="3-延迟队列"><a href="#3-延迟队列" class="headerlink" title="3.延迟队列"></a>3.延迟队列</h1><p><img src="https://img-blog.csdnimg.cn/7e4045074e8645398aee01a86bd72b6d.png" alt="img"></p>
+<p> <strong>延迟队列插件</strong></p>
 <p>因为延迟队列的需求非常多，所以RabbitMQ的官方也推出了一个插件，原生支持延迟队列效果。</p>
-<p>详细安装过程略~~~（我也没装，只是做下笔记，具体怎么装看教程视频吧或是自行查询资料）</p>
+<p> 详细安装过程略~~~（我也没装，只是做下笔记，具体怎么装看教程视频吧或是自行查询资料）</p>
 <p><img src="https://img-blog.csdnimg.cn/4f7be72a86ca4d52bace861262cf91b0.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/662b16adf47048b5b82200fe32c3d4b2.png" alt="img"><img src="https://img-blog.csdnimg.cn/8400f734ba474b95b9177715cb17f499.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/6281fbc64d7048149430bca5ba0d4641.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/8df2a4654802484e9d257c28c0f4eb48.png" alt="img"></p>
-<h2 id="总结-2"><a class="markdownIt-Anchor" href="#总结-2"></a> 总结：</h2>
-<p>延迟队列插件的使用步骤包括哪些？</p>
+<p> <img src="https://img-blog.csdnimg.cn/8df2a4654802484e9d257c28c0f4eb48.png" alt="img"></p>
+<h2 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h2><p>延迟队列插件的使用步骤包括哪些？</p>
 <p>•声明一个交换机，添加delayed属性为true</p>
 <p>•发送消息时，添加x-delay头，值为超时时间</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/" data-id="cldsghlao000qekv62y2n5j47" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/" data-id="cldsgimzp000cesv65mwvbco2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -714,34 +693,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="mq的一些常见问题"><a class="markdownIt-Anchor" href="#mq的一些常见问题"></a> MQ的一些常见问题</h1>
-<ul>
-<li>**消息可靠性问题：**如何确保发送的消息至少被消费一次</li>
-<li>**延迟消息问题：**如何实现消息的延迟投递</li>
-<li>**消息堆积问题：**如何解决数百万消息堆积，无法及时消费的问题</li>
-<li>**高可用问题：**如何避免单点的MQ故障而导致的不可用问题</li>
+        <h1 id="MQ的一些常见问题"><a href="#MQ的一些常见问题" class="headerlink" title="MQ的一些常见问题"></a>MQ的一些常见问题</h1><ul>
+<li><strong>消息可靠性问题：</strong>如何确保发送的消息至少被消费一次</li>
+<li><strong>延迟消息问题：</strong>如何实现消息的延迟投递</li>
+<li><strong>消息堆积问题：</strong>如何解决数百万消息堆积，无法及时消费的问题</li>
+<li><strong>高可用问题：</strong>如何避免单点的MQ故障而导致的不可用问题</li>
 </ul>
 <p>一、消息可靠性</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126685420?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126685420%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(78条消息) （rabbitmq的高级特性）消息可靠性_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126685420?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126685420%22,%22source%22:%22QRLYLETITBE%22%7D">(78条消息) （rabbitmq的高级特性）消息可靠性_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 <p>二、死信交换机</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126711760?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126711760%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(18条消息) (rabbitmq的高级特性)死信交换机_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126711760?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126711760%22,%22source%22:%22QRLYLETITBE%22%7D">(18条消息) (rabbitmq的高级特性)死信交换机_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 <p>三、惰性队列</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126712044?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126712044%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(19条消息) （rabbitmq的高级特性）惰性队列_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126712044?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126712044%22,%22source%22:%22QRLYLETITBE%22%7D">(19条消息) （rabbitmq的高级特性）惰性队列_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 <p>四、MQ集群</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126713121?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126713121%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(19条消息) （rabbitmq的高级特性）MQ集群_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126713121?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126713121%22,%22source%22:%22QRLYLETITBE%22%7D">(19条消息) （rabbitmq的高级特性）MQ集群_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" data-id="cldsghlap000tekv69d7v4mkl" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" data-id="cldsgimzq000desv687nv5m5q" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -791,12 +769,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应的教程视频"><a class="markdownIt-Anchor" href="#对应的教程视频"></a> 对应的教程视频：</h1>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=157&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-04-缓存同步_哔哩哔哩_bilibili</a></p>
+        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=157&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-04-缓存同步_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="一-数据同步策略"><a class="markdownIt-Anchor" href="#一-数据同步策略"></a> 一、数据同步策略</h1>
-<p>缓存数据同步的常见方式有三种：</p>
+<h1 id="一、数据同步策略"><a href="#一、数据同步策略" class="headerlink" title="一、数据同步策略"></a>一、数据同步策略</h1><p>缓存数据同步的常见方式有三种：</p>
 <p>•<strong>设置有效期</strong>：给缓存设置有效期，到期后自动删除。再次查询时更新</p>
 <p>•优势：简单、方便</p>
 <p>•缺点：时效性差，缓存过期之前可能不一致</p>
@@ -805,27 +781,26 @@
 <p>•优势：时效性强，缓存与数据库强一致</p>
 <p>•缺点：有代码侵入，耦合度高；</p>
 <p>•场景：对一致性、时效性要求较高的缓存数据</p>
-<p>•**异步通知：**修改数据库时发送事件通知，相关服务监听到通知后修改缓存数据</p>
+<p>•<strong>异步通知：</strong>修改数据库时发送事件通知，相关服务监听到通知后修改缓存数据</p>
 <p>•优势：低耦合，可以同时通知多个缓存服务</p>
 <p>•缺点：时效性一般，可能存在中间不一致状态</p>
 <p>•场景：时效性要求一般，有多个服务需要同步</p>
 <p><img src="https://img-blog.csdnimg.cn/bda8a839d8e3410aac0f850fcb0e4217.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/2a9abda92ecf43fbbe6d8bf07a0feedb.png" alt="img"></p>
-<h1 id="二-安装和配置canal"><a class="markdownIt-Anchor" href="#二-安装和配置canal"></a> 二、安装和配置Canal</h1>
-<p><img src="https://img-blog.csdnimg.cn/e5131fff2fce4439be9a99a20f4dc213.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/2a9abda92ecf43fbbe6d8bf07a0feedb.png" alt="img"></p>
+<h1 id="二、安装和配置Canal"><a href="#二、安装和配置Canal" class="headerlink" title="二、安装和配置Canal"></a>二、安装和配置Canal</h1><p><img src="https://img-blog.csdnimg.cn/e5131fff2fce4439be9a99a20f4dc213.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/25de1e7f4dc44d5db4105d32df986638.png" alt="img"></p>
 <p>下面我们就开启mysql的主从同步机制，让Canal来模拟salve</p>
-<h1 id="1开启mysql主从"><a class="markdownIt-Anchor" href="#1开启mysql主从"></a> 1.开启MySQL主从</h1>
-<p>Canal是基于MySQL的主从同步功能，因此必须先开启MySQL的主从功能才可以。</p>
+<h1 id="1-开启MySQL主从"><a href="#1-开启MySQL主从" class="headerlink" title="1.开启MySQL主从"></a>1.开启MySQL主从</h1><p>Canal是基于MySQL的主从同步功能，因此必须先开启MySQL的主从功能才可以。</p>
 <p>这里以之前用Docker运行的mysql为例：</p>
-<h2 id="11开启binlog"><a class="markdownIt-Anchor" href="#11开启binlog"></a> 1.1.开启binlog</h2>
-<p>打开mysql容器挂载的日志文件，我的在<code>/tmp/mysql/conf</code>目录:</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7I8WMYyf-1662205186188)(assets/image-20210813153241537.png)]</p>
+<h2 id="1-1-开启binlog"><a href="#1-1-开启binlog" class="headerlink" title="1.1.开启binlog"></a>1.1.开启binlog</h2><p>打开mysql容器挂载的日志文件，我的在<code>/tmp/mysql/conf</code>目录:</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7I8WMYyf-1662205186188)(assets&#x2F;image-20210813153241537.png)]</p>
 <p>修改文件：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /tmp/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>添加内容：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">binlog-do-db=heima</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>配置解读：</p>
 <ul>
@@ -834,32 +809,38 @@
 </ul>
 <p>最终效果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-name-resolve</span><br><span class="line">character_set_server=utf8</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">server-id=1000</span><br><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">binlog-do-db=heima</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="12设置用户权限"><a class="markdownIt-Anchor" href="#12设置用户权限"></a> 1.2.设置用户权限</h2>
-<p>接下来添加一个仅用于数据同步的账户，出于安全考虑，这里仅提供对heima这个库的操作权限。</p>
+<h2 id="1-2-设置用户权限"><a href="#1-2-设置用户权限" class="headerlink" title="1.2.设置用户权限"></a>1.2.设置用户权限</h2><p>接下来添加一个仅用于数据同步的账户，出于安全考虑，这里仅提供对heima这个库的操作权限。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create user canal@&#x27;%&#x27; IDENTIFIED by &#x27;canal&#x27;;</span><br><span class="line">GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT,SUPER ON *.* TO &#x27;canal&#x27;@&#x27;%&#x27; identified by &#x27;canal&#x27;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>重启mysql容器即可</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart mysql</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>测试设置是否成功：在mysql控制台，或者Navicat中，输入命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
-<h1 id="2安装canal"><a class="markdownIt-Anchor" href="#2安装canal"></a> 2.安装Canal</h1>
-<h2 id="21创建网络"><a class="markdownIt-Anchor" href="#21创建网络"></a> 2.1.创建网络</h2>
-<p>我们需要创建一个网络，将MySQL、Canal、MQ放到同一个Docker网络中：</p>
+
+
+
+<h1 id="2-安装Canal"><a href="#2-安装Canal" class="headerlink" title="2.安装Canal"></a>2.安装Canal</h1><h2 id="2-1-创建网络"><a href="#2-1-创建网络" class="headerlink" title="2.1.创建网络"></a>2.1.创建网络</h2><p>我们需要创建一个网络，将MySQL、Canal、MQ放到同一个Docker网络中：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create heima</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>让mysql加入这个网络：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network connect heima mysql</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="23安装canal"><a class="markdownIt-Anchor" href="#23安装canal"></a> 2.3.安装Canal</h2>
-<p>课前资料中提供了canal的镜像压缩包:</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-FvuASqcG-1662205186198)(assets/image-20210813161804292.png)]</p>
+<h2 id="2-3-安装Canal"><a href="#2-3-安装Canal" class="headerlink" title="2.3.安装Canal"></a>2.3.安装Canal</h2><p>课前资料中提供了canal的镜像压缩包:</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-FvuASqcG-1662205186198)(assets&#x2F;image-20210813161804292.png)]</p>
 <p>大家可以上传到虚拟机，然后通过命令导入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i canal.tar</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>然后运行命令创建Canal容器：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 11111:11111 --name canal \</span><br><span class="line">-e canal.destinations=heima \</span><br><span class="line">-e canal.instance.master.address=mysql:3306  \</span><br><span class="line">-e canal.instance.dbUsername=canal  \</span><br><span class="line">-e canal.instance.dbPassword=canal  \</span><br><span class="line">-e canal.instance.connectionCharset=UTF-8 \</span><br><span class="line">-e canal.instance.tsdb.enable=true \</span><br><span class="line">-e canal.instance.gtidon=false  \</span><br><span class="line">-e canal.instance.filter.regex=heima\\..* \</span><br><span class="line">--network heima \</span><br><span class="line">-d canal/canal-server:v1.1.5</span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>说明:</p>
 <ul>
@@ -871,18 +852,18 @@
 </ul>
 <p>表名称监听支持的语法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql 数据解析关注的表，Perl正则表达式.</span><br><span class="line">多个正则之间以逗号(,)分隔，转义符需要双斜杠(\\) </span><br><span class="line">常见例子：</span><br><span class="line">1.  所有表：.*   or  .*\\..*</span><br><span class="line">2.  canal schema下所有表： canal\\..*</span><br><span class="line">3.  canal下的以canal打头的表：canal\\.canal.*</span><br><span class="line">4.  canal schema下的一张表：canal.test1</span><br><span class="line">5.  多个规则组合使用然后以逗号隔开：canal\\..*,mysql.test1,mysql.test2 </span><br></pre></td></tr></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h1 id="三-监听canal"><a class="markdownIt-Anchor" href="#三-监听canal"></a> 三、监听Canal</h1>
-<p><img src="https://img-blog.csdnimg.cn/4f4e40a3a2e4469ca7836693c3db991d.png" alt="img"></p>
-<p>Canal提供了各种语言的客户端，当Canal监听到binlog变化时，会通知Canal的客户端。不过这里我们会使用GitHub上的第三方开源的canal-starter。地址：<a target="_blank" rel="noopener" href="https://github.com/NormanGyllenhaal/canal-client">GitHub - NormanGyllenhaal/canal-client: spring boot canal starter 易用的canal 客户端 canal client</a></p>
-<p><img src="https://img-blog.csdnimg.cn/b1b64382430e47e5b2be08b569e2cefa.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/1869924653994a95a7660b76b7823fa7.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/8f6d29940fc84098a92e02339632ff66.png" alt="img"></p>
+<h1 id="三、监听Canal"><a href="#三、监听Canal" class="headerlink" title="三、监听Canal"></a>三、监听Canal</h1><p><img src="https://img-blog.csdnimg.cn/4f4e40a3a2e4469ca7836693c3db991d.png" alt="img"></p>
+<p> Canal提供了各种语言的客户端，当Canal监听到binlog变化时，会通知Canal的客户端。不过这里我们会使用GitHub上的第三方开源的canal-starter。地址：<a target="_blank" rel="noopener" href="https://github.com/NormanGyllenhaal/canal-client">GitHub - NormanGyllenhaal&#x2F;canal-client: spring boot canal starter 易用的canal 客户端 canal client</a></p>
+<p> <img src="https://img-blog.csdnimg.cn/b1b64382430e47e5b2be08b569e2cefa.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/1869924653994a95a7660b76b7823fa7.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/8f6d29940fc84098a92e02339632ff66.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" data-id="cldsghldh0092ekv65o9x7usq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" data-id="cldsgin2o0095esv6227i8pel" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
