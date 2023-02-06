@@ -43,7 +43,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>127</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>130</strong><br>文章</div></a>
       <a href="/categories"><div><strong>60</strong><br>分类</div></a>
       <a href="/tags"><div><strong>45</strong><br>标签</div></a>
     </div>
@@ -75,6 +75,246 @@
 
         <section id="main">
   
+    <article id="post-设计模式/创建者模式/工厂模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="post-time" datetime="2022-11-15T14:36:07.877Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">15</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>,<a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/">创建者模式</a>,<a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="工厂模式"><a class="markdownIt-Anchor" href="#工厂模式"></a> 工厂模式</h1>
+<p>工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一。这种类型的设计模式属于<strong>创建型模式</strong>，它提供了一种创建对象的最佳方式。</p>
+<p>在工厂模式中，<strong>我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。</strong></p>
+<h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
+<p>**意图：**定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。</p>
+<p>**主要解决：**主要解决接口选择的问题。</p>
+<p>**何时使用：**我们明确地计划不同条件下创建不同实例时。</p>
+<p>**如何解决：**让其子类实现工厂接口，返回的也是一个抽象的产品。</p>
+<p>**关键代码：**创建过程在其子类执行。</p>
+<p><strong>应用实例：</strong> 1、您需要一辆汽车，可以直接从工厂里面提货，而不用去管这辆汽车是怎么做出来的，以及这个汽车里面的具体实现。 2、Hibernate 换数据库只需换方言和驱动就可以。</p>
+<p><strong>优点：</strong> 1、一个调用者想创建一个对象，只要知道其名称就可以了。 2、扩展性高，如果想增加一个产品，只要扩展一个工厂类就可以。 3、屏蔽产品的具体实现，调用者只关心产品的接口。</p>
+<p>**缺点：**每次增加一个产品时，都需要增加一个具体类和对象实现工厂，使得系统中类的个数成倍增加，在一定程度上增加了系统的复杂度，同时也增加了系统具体类的依赖。这并不是什么好事。</p>
+<p><strong>使用场景：</strong> 1、日志记录器：记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。 2、数据库访问，当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。 3、设计一个连接服务器的框架，需要三个协议，“POP3”、“IMAP”、“HTTP”，可以把这三个作为产品类，共同实现一个接口。</p>
+<p>**注意事项：**作为一种创建类模式，在任何需要生成复杂对象的地方，都可以使用工厂方法模式。有一点需要注意的地方就是复杂对象适合使用工厂模式，而简单对象，特别是只需要通过 new 就可以完成创建的对象，无需使用工厂模式。如果使用工厂模式，就需要引入一个工厂类，会增加系统的复杂度。</p>
+<h2 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h2>
+<p>我们将创建一个 <em>Shape</em> 接口和实现 <em>Shape</em> 接口的实体类。下一步是定义工厂类 <em>ShapeFactory</em>。</p>
+<p><em>FactoryPatternDemo</em> 类使用 <em>ShapeFactory</em> 来获取 <em>Shape</em> 对象。它将向 <em>ShapeFactory</em> 传递信息（<em>CIRCLE / RECTANGLE / SQUARE</em>），以便获取它所需对象的类型。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/08/AB6B814A-0B09-4863-93D6-1E22D6B07FF8.jpg" alt="工厂模式的 UML 图"></p>
+<h3 id="步骤-1"><a class="markdownIt-Anchor" href="#步骤-1"></a> 步骤 1</h3>
+<p>创建一个接口:</p>
+<h2 id="shapejava"><a class="markdownIt-Anchor" href="#shapejava"></a> Shape.java</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 步骤1：创建一个接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="步骤-2"><a class="markdownIt-Anchor" href="#步骤-2"></a> 步骤 2</h3>
+<p>创建实现接口的实体类。</p>
+<h2 id="rectanglejava"><a class="markdownIt-Anchor" href="#rectanglejava"></a> Rectangle.java</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 步骤2：创建接口的实体类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Rectangle</span> <span class="keyword">implements</span> <span class="title class_">Shape</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println( <span class="string">&quot;Inside Rectangle :: draw() method.&quot;</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="squarejava"><a class="markdownIt-Anchor" href="#squarejava"></a> Square.java</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 步骤2：创建接口的实体类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Square</span> <span class="keyword">implements</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Inside Square::draw() method.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="circlejava"><a class="markdownIt-Anchor" href="#circlejava"></a> Circle.java</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 步骤2：创建接口的实体类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">implements</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">draw</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Inside Circle::draw() method.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="步骤-3"><a class="markdownIt-Anchor" href="#步骤-3"></a> 步骤 3</h3>
+<p>创建一个工厂，生成基于给定信息的实体类的对象。</p>
+<h2 id="shapefactoryjava"><a class="markdownIt-Anchor" href="#shapefactoryjava"></a> ShapeFactory.java</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 步骤3：创建一个工厂，生成基于给定信息的实体类的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShapeFactory</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 使用 getShape 方法获取类型的对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Shape <span class="title function_">getShape</span><span class="params">(String shapeType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (shapeType == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (shapeType.equalsIgnoreCase(<span class="string">&quot;CIRCLE&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Circle</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (shapeType.equalsIgnoreCase(<span class="string">&quot;RECTANGLE&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Rectangle</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(shapeType.equalsIgnoreCase(<span class="string">&quot;SQUARE&quot;</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Square</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="步骤-4"><a class="markdownIt-Anchor" href="#步骤-4"></a> 步骤 4</h3>
+<p>使用该工厂，通过传递类型信息来获取实体类的对象。</p>
+<h2 id="factorypatterndemojava"><a class="markdownIt-Anchor" href="#factorypatterndemojava"></a> FactoryPatternDemo.java</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 步骤4：使用该工厂，通过传递类型信息来获取实体类的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FactoryPatterDemo</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ShapeFactory</span> <span class="variable">shapeFactory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ShapeFactory</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取 Circle 的对象，并调用它的 draw 方法</span></span><br><span class="line">        <span class="type">Shape</span> <span class="variable">shape1</span> <span class="operator">=</span> shapeFactory.getShape(<span class="string">&quot;CIRCLE&quot;</span>);</span><br><span class="line">        <span class="comment">// 调用 Circle 的 draw 方法</span></span><br><span class="line">        shape1.draw();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取 Rectangle 的对象，并调用它的 draw 方法</span></span><br><span class="line">        <span class="type">Shape</span> <span class="variable">shape2</span> <span class="operator">=</span> shapeFactory.getShape(<span class="string">&quot;RECTANGLE&quot;</span>);</span><br><span class="line">        <span class="comment">//调用 Rectangle 的 draw 方法</span></span><br><span class="line">        shape2.draw();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取 Square 的对象，并调用它的 draw 方法</span></span><br><span class="line">        <span class="type">Shape</span> <span class="variable">shape3</span> <span class="operator">=</span> shapeFactory.getShape(<span class="string">&quot;SQUARE&quot;</span>);</span><br><span class="line">        <span class="comment">//调用 Square 的 draw 方法</span></span><br><span class="line">        shape3.draw();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="步骤-5"><a class="markdownIt-Anchor" href="#步骤-5"></a> 步骤 5</h3>
+<p>执行程序，输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Inside Circle::draw() method.</span><br><span class="line">Inside Rectangle::draw() method.</span><br><span class="line">Inside Square::draw() method.</span><br></pre></td></tr></table></figure>
+<p>截图分析</p>
+<p><img src="../../../images/image-20221115223614920.png" alt="image-20221115223614920"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clds88g19009z54v69tss08bx" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/双亲委派机制" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time class="post-time" datetime="2022-11-15T13:36:11.647Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">15</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">(JVM)双亲委派机制</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/interview/">interview</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>,<a class="article-category-link" href="/categories/interview/">interview</a>,<a class="article-category-link" href="/categories/interview/JVM/">JVM</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="双亲委派机制"><a class="markdownIt-Anchor" href="#双亲委派机制"></a> 双亲委派机制</h1>
+<p>Java 虚拟机对 class 文件采用的是<mark>按需加载</mark>的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是<mark>双亲委派模式</mark>，即把请求交由父类处理，它是一种任务委派模式。</p>
+<h2 id="工作原理"><a class="markdownIt-Anchor" href="#工作原理"></a> <strong>工作原理</strong></h2>
+<ul>
+<li>1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；</li>
+<li>2）如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；</li>
+<li>3）<strong>如果父类加载器可以完成类加载任务，就成功返回</strong>（就不会由子类加载器去加载了），倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png" alt="image-20200705105151258"></p>
+<p>举例：</p>
+<ol>
+<li></li>
+</ol>
+<p><img src="../../../images/image-20221115204949307.png" alt="image-20221115204949307"></p>
+<p>出于安全考虑，Bootstrap 启动类加载器只加载包名为 java、javax、sun 等开头的类。一看你是java开头的，引导类加载就说了。这是归我管我来加载String（核心API里的String）。因此有父类来加载后，就不会再向下委托了，所以我们new 的这个String对象就是核心API里面的String类对象，而不是我们自定义的String，因此就没有打印出自定义String里的static静态资源里的语句</p>
+<ol start="2">
+<li></li>
+</ol>
+<p><img src="../../../images/image-20221115205956137.png" alt="image-20221115205956137"></p>
+<p>委托到引导类加载器，它发现你这个包是jvm开头的，不归引导类加载管，就向下委托，也不归扩展类加载器管，所以最后回到系统类加载器来加载，因此最后输出结果就是系统类加载来进行的加载</p>
+<ol start="3">
+<li></li>
+</ol>
+<p><img src="../../../images/image-20221115210219781.png" alt="image-20221115210219781"></p>
+<p>一直往上委托，就交给到了引导类加载器，它加载了String类以后，然后就想去执行main方法，但是核心API的String里面是没有main方法的，所以就报了 <mark>错误: 在类 java.lang.String 中找不到 main 方法</mark>. 可知，根本就没有试着想去加载我们自定义的String类，完全忽略掉你了</p>
+<ol start="4">
+<li></li>
+</ol>
+<p>当我们加载 jdbc.jar 用于实现数据库连接的时候，首先我们需要知道的是 jdbc.jar 是基于 SPI 接口进行实现的，所以在加载的时候，会进行双亲委派，最终从根加载器中加载 SPI 核心类，然后在加载 SPI 接口类，接着在进行反向委派，通过线程上下文类加载器进行实现类 jdbc.jar 的加载。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/bed320014f52bb27c8f3d795b3dc3b4a.png" alt="image-20200705105810107"></p>
+<h2 id="优势"><a class="markdownIt-Anchor" href="#优势"></a> <strong>优势</strong></h2>
+<ul>
+<li><strong>避免类的重复加载</strong></li>
+<li><strong>保护程序安全，防止核心 API 被随意篡改</strong>
+<ul>
+<li>自定义类：java.lang.String</li>
+<li>自定义类：java.lang.ShkStart（报错：阻止创建 java.lang 开头的类）</li>
+</ul>
+</li>
+</ul>
+<p><img src="../../../images/image-20221115212723174.png" alt="image-20221115212723174"></p>
+<p>引导类加载器看到是 java.lang开头的，就表示这是归它管，于是就要去加载这个ShkStart类了，但直接直接给它报错了，相当于，要加载java.lang这个包，要想访问是要有权限的，现在报错就是阻止我们去直接用这个java.lang包来自定义这个ShkStart类。其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个类，加载成功的话，就会导致对引导类加载器本身造成影响，所以这里是直接把引导类加载器给整挂了。所以我们也禁止去用java.lang这样的包名去命名</p>
+<p>其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个种自定义的类，加载成功的话，但里面可能会有一些<strong>恶意代码</strong>，就可能会会对现有的项目和程序进行破坏</p>
+<h2 id="沙箱安全机制"><a class="markdownIt-Anchor" href="#沙箱安全机制"></a> <strong>沙箱安全机制</strong></h2>
+<p>自定义 String 类，但是在加载自定义 String 类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载 jdk 自带的文件（rt.jar 包中 java\lang\String.class），报错信息说没有 main 方法，就是因为加载的是 rt.jar 包中的 string 类。这样可以保证对 java 核心源代码的保护，这就是沙箱安全机制。</p>
+<h1 id><a class="markdownIt-Anchor" href="#"></a> </h1>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="clds88g08006954v6gpjzf369" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-interview/redis/说说你对Redis的了解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/" class="article-date">
+  <time class="post-time" datetime="2022-11-14T15:02:35.609Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">14</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title:  说说你对Redis的了解<br>
+categories:</p>
+<ul>
+<li>[面试, redis]<br>
+tags:</li>
+<li>rabbitmq</li>
+</ul>
+<p>得分点 Redis概念,Redis优点及用途</p>
+<p>标准回答 ：</p>
+<p>Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带来了满足多种应用场景的能力,而且,Redis将所有数据放到内存中的做法让它的读写性能十分惊人。不仅如此,Redis的持久化机制保证了在发生类似断电,机械故障等情况时,内存中的数据不会丢失。此外Redis还提供了键过期、发布订阅、事务、流水线、Lua脚本等多个附加功能。总之,在合适的情况下使用Redis会大大增强系统的性能,减少开发人员工作量。 加分回答 适合Redis使用的场景： - 热点数据的缓存：redis访问速度块、支持的数据类型丰富,很适合用来存储热点数据。 - 限时业务：redis中可以使用expire命令设置一个键的生存时间,到时间后redis会删除它。因此,Redis在限时业务中的表现很亮眼。 - 计数器：incrby命令可以实现原子性的递增,所以可以运用于高并发的秒杀活动、分布式序列号的生成。 - 排行榜：关系型数据库在排行榜方面查询速度普遍偏慢,所以可以借助redis的SortedSet进行热点数据的排序。 - 分布式锁：这个主要利用redis的setnx命令进行,在后面的如何用Redis实现一个分布式锁中会进行详解。 - 延时操作：redis自2.8.0之后版本提供Keyspace Notifications功能,允许客户订阅Pub/Sub频道,以便以某种方式接收影响Redis数据集的事件。 - 分页查询、模糊查询：edis的set集合中提供了一个zrangebylex方法,通过ZRANGEBYLEX zset - + LIMIT 0 10 可以进行分页数据查询,其中- +表示获取全部数据；rangebylex key min max 这个就可以返回字典区间的数据可以利用这个特性可以进行模糊查询功能。 - 点赞,好友等相互关系的存储：Redis set对外提供的功能与list类似是一个列表的功能,特殊之处在于set是可以自动排重的,我们可以通过这一点实现类似共同好友等功能。 - 队列：由于redis有list push和list pop这样的命令,所以能够很方便的执行队列操作。</p>
+<p>简介版回答：</p>
+<p>Redis是一款基于键值对的NoSQL数据库，Redis中拥有string(字符串)，hash(哈希)、list(列表)、set（集合）等多种数据结构，redis将数据写进内存的性能很快，不仅如此，如遇到系统崩溃，内存中的数据不会丢失；redis访问速度快、支持的数据类型丰富，很适合用来储存热点数据、 而且适用业务广，如可以运用expire命令来做限时业务，设置一个键的生存时间，到时间后redis会自动删除它，，如排行榜可以借住redis的SortedSet进行热点数据的排序，还有分页查询，模糊查询，点赞好友等</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/14/interview/redis/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9Redis%E7%9A%84%E4%BA%86%E8%A7%A3/" data-id="clds88g0p007o54v6b2jlfxuj" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-interview/waitingSee" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/11/14/interview/waitingSee/" class="article-date">
@@ -98,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/14/interview/waitingSee/" data-id="cldlvsthv0038owv64cz5dpq8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/14/interview/waitingSee/" data-id="clds88fz1002a54v6cmgfaevs" class="article-share-link">分享</a>
       
       
     </footer>
@@ -427,7 +667,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cldlvstjl0066owv65fvrefwt" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clds88g0a006e54v6fy9u3avh" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -489,7 +729,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" data-id="cldlvstgp001iowv6145b1fxd" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" data-id="clds88fyt001n54v6d78z6v5s" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -522,7 +762,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="cldlvstgr001lowv6c0yk5lsh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="clds88fyy002154v6ery7c5qb" class="article-share-link">分享</a>
       
       
     </footer>
@@ -581,7 +821,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="cldlvstip004powv6emvx3d6s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="clds88fzt004z54v6816c2zf3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/token/" rel="tag">token</a></li></ul>
@@ -639,7 +879,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="cldlvstis004wowv6h450c30u" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clds88fzv005554v6fc2i2rug" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
@@ -895,258 +1135,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="cldlvstgt001nowv65wzd4v0i" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clds88fyw001u54v6dzece5h1" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringSecurity/SpringSecurity 请求间共享认证信息（源码剖析）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-11T13:03:53.265Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity 请求间共享认证信息（源码剖析）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>,<a class="article-category-link" href="/categories/SpringSecurity/%E6%BA%90%E7%A0%81/">源码</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="springsecurity-请求间共享认证信息"><a class="markdownIt-Anchor" href="#springsecurity-请求间共享认证信息"></a> <strong>SpringSecurity 请求间共享认证信息</strong></h1>
-<p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=39&amp;vd_source=746b9336d739b80b11820809545b6604">39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili</a></p>
-<p>一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 <strong>Spring</strong> <strong>Security</strong> 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析</p>
-<p><img src="../../images/image-20221111211841097.png" alt="image-20221111211841097"></p>
-<p>⚫ 在前面讲解认证成功的处理方法 successfulAuthentication() 时，有以下代码：</p>
-<p><img src="../../images/image-20221111211945405.png" alt="image-20221111211945405"></p>
-<p>⚫ 查 看 SecurityContext 接 口 及 其 实 现 类 SecurityContextImpl ， 该 类 其 实 就 是 对Authentication 的封装：</p>
-<p>⚫ 查 看 SecurityContextHolder 类 ， 该 类 其 实 是 对 ThreadLocal 的 封 装 ， 存 储SecurityContext 对象：</p>
-<p><img src="../../images/image-20221111212010159.png" alt="image-20221111212010159"></p>
-<p><img src="../../images/image-20221111212020024.png" alt="image-20221111212020024"></p>
-<p><img src="../../images/image-20221111212029106.png" alt="image-20221111212029106"></p>
-<p><img src="../../images/image-20221111212041020.png" alt="image-20221111212041020"></p>
-<h1 id="securitycontextpersistencefilter-过滤器"><a class="markdownIt-Anchor" href="#securitycontextpersistencefilter-过滤器"></a> SecurityContextPersistenceFilter 过滤器</h1>
-<p>前面提到过，在 <strong>UsernamePasswordAuthenticationFilter</strong> 过滤器认证成功之后，会在认证成功的处理方法中将已认证的用户信息对象 Authentication 封装进</p>
-<p>SecurityContext，并存入 SecurityContextHolder。之后，响应会通过 <strong>SecurityContextPersistenceFilter</strong> 过滤器，该过滤器的位置在所有过滤器的最前面，请求到来先进它，响应返回最后一个通过它，所以在该过滤器中处理已认证的用户信息对象 Authentication 与 Session 绑定。</p>
-<p>认证成功的响应通过 <strong>SecurityContextPersistenceFilter</strong> 过滤器时，会从SecurityContextHolder 中取出封装了已认证用户信息对象 Authentication 的SecurityContext，放进 Session 中。当请求再次到来时，请求首先经过该过滤器，该过滤器会判断当前请求的 Session 是否存有 SecurityContext 对象，如果有则将该对象取出再次放入 SecurityContextHolder 中，之后该请求所在的线程获得认证用户信息，后续的资源访问不需要进行身份认证；当响应再次返回时，该过滤器同样从 SecurityContextHolder 取出SecurityContext 对象，放入 Session 中。具体源码如下：</p>
-<p><img src="../../images/image-20221111212148379.png" alt="image-20221111212148379"></p>
-<p><img src="../../images/image-20221111212156838.png" alt="image-20221111212156838"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldlvstgi0015owv6gzq955gf" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringSecurity/SpringSecurity权限访问流程（源码剖析）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-11T12:45:44.574Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity权限访问流程（源码剖析）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>,<a class="article-category-link" href="/categories/SpringSecurity/%E6%BA%90%E7%A0%81/">源码</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="exceptiontranslationfilter-过滤器"><a class="markdownIt-Anchor" href="#exceptiontranslationfilter-过滤器"></a> <strong>ExceptionTranslationFilter 过滤器</strong></h2>
-<p>该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：</p>
-<p><img src="../../images/image-20221111205806671.png" alt="image-20221111205806671"></p>
-<h1 id="filtersecurityinterceptor-过滤器"><a class="markdownIt-Anchor" href="#filtersecurityinterceptor-过滤器"></a> <strong>FilterSecurityInterceptor</strong> <strong>过滤器</strong></h1>
-<p><strong>FilterSecurityInterceptor</strong> 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器<strong>ExceptionTranslationFilter</strong> 进行捕获和处理。具体源码如下：</p>
-<p><img src="../../images/image-20221111210309165.png" alt="image-20221111210309165"></p>
-<p>需要注意，<strong>Spring Security</strong> 的过滤器链是配置在 SpringMVC 的核心组件DispatcherServlet 运行之前。也就是说，请求通过 <strong>Spring Security</strong> 的所有过滤器，不意味着能够正常访问资源，该请求还需要通过 SpringMVC 的拦截器链。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldlvstgo001gowv61sfpd6mw" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringSecurity/SpringSecurity 认证流程（源码剖析）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-11T09:45:24.188Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">11</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity 认证流程（源码剖析）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>,<a class="article-category-link" href="/categories/SpringSecurity/%E6%BA%90%E7%A0%81/">源码</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>ps:硅谷老师的笔记(代码背景白色)</strong></p>
-<h1 id="springsecurity-基本流程"><a class="markdownIt-Anchor" href="#springsecurity-基本流程"></a> <strong>SpringSecurity 基本流程</strong></h1>
-<p><strong>上：对应教程视频：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=36&amp;vd_source=746b9336d739b80b11820809545b6604">36-尚硅谷-SpringSecurity-源码剖析-认证流程详解上_哔哩哔哩_bilibili</a></p>
-<p><img src="../../images/image-20221111185833955.png" alt="image-20221111185833955"></p>
-<p>绿色部分是认证过滤器，需要我们自己配置，可以配置多个认证过滤器。认证过滤器可以使用 <strong>Spring Security</strong> 提供的认证过滤器，也可以自定义过滤器（例如：短信验证）。认证过滤器要在 **configure(HttpSecurity http)**方法中配置，没有配置不生效。下面会重点介绍以下三个过滤器：</p>
-<p><strong>UsernamePasswordAuthenticationFilter</strong> 过滤器：该过滤器会拦截前端提交的 POST 方式的登录表单请求，并进行身份认证。</p>
-<p><strong>ExceptionTranslationFilter</strong> 过滤器：该过滤器不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。</p>
-<p><strong>FilterSecurityInterceptor</strong> 过滤器：该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，并由 <strong>ExceptionTranslationFilter</strong> 过滤器进行捕获和处理。</p>
-<h1 id="springsecurity-认证流程源码剖析"><a class="markdownIt-Anchor" href="#springsecurity-认证流程源码剖析"></a> <strong>SpringSecurity 认证流程</strong>（源码剖析）</h1>
-<p><img src="../../images/image-20221111185759068.png" alt="image-20221111185759068"></p>
-<p>前端的post请求都会被<strong>UsernamePasswordAuthenticationFilter</strong>这个过滤器给拦截，并进行身份的认证</p>
-<p>（1) 到父类<strong>AbstractAuthenticationProcessingFilter</strong></p>
-<p>​		第一步：过滤的方法<strong>doFilter</strong>，判断提交方式是否post提交</p>
-<p><img src="../../images/image-20221111175238982.png" alt="image-20221111175238982"></p>
-<p>​		第二步：调用子类<strong>UsernamePasswordAuthenticationFilter</strong>的<strong>attemptAuthentication</strong>方法进行身份认证，认证成功之后，把认证信息封装到<strong>Authentication</strong>对象里面</p>
-<p>​					<strong>Authentication</strong>用于封装认证信息的类对象</p>
-<p>​					在post提交表单之后，得到表单提交过来的数据，然后这里调用子类里的<strong>attemptAuthentication</strong>方法去查数据库和进行验证，认证之后，那认证通过后的信息用<strong>Authentication</strong>进行封装</p>
-<p><img src="../../images/image-20221111175602673.png" alt="image-20221111175602673"></p>
-<p>第三步：session策略处理</p>
-<p><img src="../../images/image-20221111180301213.png" alt="image-20221111180301213"></p>
-<p>第四步：</p>
-<p>1、认证失败抛出异常，执行认证失败的方法</p>
-<p>认证成功后会进行封装，但认证失败会，会在catch里面调用<strong>unsuccessfulAuthentication</strong>方法，做认证失败处理，比如提示用户你没有权限</p>
-<p><img src="../../images/image-20221111180616578.png" alt="image-20221111180616578"></p>
-<p>ps:网友的笔记(代码背景白色)</p>
-<p><img src="../../images/image-20221111185611776.png" alt="image-20221111185611776"></p>
-<p>2、认证成功后，调用认证成功后的方法</p>
-<p><img src="../../images/image-20221111181109625.png" alt="image-20221111181109625"></p>
-<p><strong>ps:<strong>上面第二步：调用子类</strong>UsernamePasswordAuthenticationFilter</strong>的<strong>attemptAuthentication</strong>方法去查数据库和进行验证的源码剖析：</p>
-<p><strong>attemptAuthentication中的</strong></p>
-<p>第一步：判断前端是否是post提交</p>
-<p>第二步：获取前端表单提交数据</p>
-<p><img src="../../images/image-20221111182257781.png" alt="image-20221111182257781"></p>
-<p><img src="../../images/image-20221111185415885.png" alt="image-20221111185415885"></p>
-<p><img src="../../images/image-20221111185333746.png" alt="image-20221111185333746"></p>
-<p>第三步：</p>
-<p>使用获取数据，构造成对象(<strong>UsernamePasswordAuthenticationToken</strong>)，标记为未认证的状态</p>
-<p>把请求一些属性信息设置到该对象里面（ this.setDetails(request, authRequest); ）</p>
-<p>调用authenticate方法进行身份认证（调用我们自己编写的<strong>userDetailsService</strong>里面的方法进行查数据过程或认证过程）</p>
-<p><img src="../../images/image-20221111182712378.png" alt="image-20221111182712378"></p>
-<p><img src="../../images/image-20221111190458033.png" alt="image-20221111190458033"></p>
-<p>（3）查看 <strong>UsernamePasswordAuthenticationToken</strong> 的构建过程</p>
-<p><img src="../../images/image-20221111185138507.png" alt="image-20221111185138507"></p>
-<p><strong>下：对应教程视频：</strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=37&amp;vd_source=746b9336d739b80b11820809545b6604">37-尚硅谷-SpringSecurity-源码剖析-认证流程详解下_哔哩哔哩_bilibili</a></p>
-<p>（4）查看ProviderManager源码，认证实现</p>
-<p>上述过程中，<strong>UsernamePasswordAuthenticationFilter</strong> 过滤器的<strong>attemptAuthentication</strong>() 方法的<strong>身份认证过程</strong>将未认证的 <strong>Authentication</strong> 对象传入<strong>ProviderManager</strong> 类的 <strong>authenticate</strong>() 方法进行身份认证。</p>
-<p>ProviderManager 是 AuthenticationManager 接口的实现类，该接口是认证相关的核心接口，也是认证的入口。在实际开发中，我们可能有多种不同的认证方式，例如：用户名+密码、邮箱+密码、手机号+验证码等，而这些认证方式的入口始终只有一个，那就是AuthenticationManager。在该接口的常用实现类 ProviderManager 内部会维护一个**List<AuthenticationProvider>**列表，存放多种认证方式，实际上这是委托者模式（Delegate）的应用。每种认证方式对应着一个 AuthenticationProvider，AuthenticationManager 根据认证方式的不同（根据传入的 Authentication 类型判断）委托对应的 AuthenticationProvider 进行用户认证。</AuthenticationProvider></p>
-<p><img src="../../images/image-20221111203614625.png" alt="image-20221111203614625"></p>
-<p><img src="../../images/image-20221111203630089.png" alt="image-20221111203630089"></p>
-<p><img src="../../images/image-20221111203653228.png" alt="image-20221111203653228"></p>
-<p><img src="../../images/image-20221111203710806.png" alt="image-20221111203710806"></p>
-<p><strong>上述认证成功之后的（<strong>6</strong>）过程，调用</strong> <strong>CredentialsContainer</strong> <strong>接口定义的eraseCredentials</strong>() <strong>方法去除敏感信息。查看</strong></p>
-<p><strong>UsernamePasswordAuthenticationToken</strong> <strong>实现的</strong> <strong>eraseCredentials()</strong> <strong>方法，该方</strong>法实现在其父类中：</p>
-<p><img src="../../images/image-20221111203846591.png" alt="image-20221111203846591"></p>
-<p>上述过程就是认证流程的最核心部分，接下来重新回到</p>
-<p><strong>UsernamePasswordAuthenticationFilter</strong> 过滤器的 doFilter() 方法，查看认证成功/失败的处理：</p>
-<p><img src="../../images/image-20221111203923720.png" alt="image-20221111203923720"></p>
-<h4 id="查看successfulauthentication-和-unsuccessfulauthentication-方法源码"><a class="markdownIt-Anchor" href="#查看successfulauthentication-和-unsuccessfulauthentication-方法源码"></a> 查看successfulAuthentication() 和 unsuccessfulAuthentication() 方法源码：</h4>
-<p><img src="../../images/image-20221111204011293.png" alt="image-20221111204011293"></p>
-<p><img src="../../images/image-20221111204101980.png" alt="image-20221111204101980"></p>
-<p>———————————————————————————————————————————————————————————————————————</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cldlvstgj0018owv69m3gdk5n" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
 
     </footer>
   </div>
@@ -1205,7 +1197,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>127</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>130</strong><br>文章</div></a>
       <a href="/categories"><div><strong>60</strong><br>分类</div></a>
       <a href="/tags"><div><strong>45</strong><br>标签</div></a>
     </div>
