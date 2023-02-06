@@ -75,9 +75,9 @@
 
         <section id="main">
   
-    <article id="post-redis/单机安装Redis" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-redis/Untitled" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" class="article-date">
+    <a href="/2022/11/10/redis/Untitled/" class="article-date">
   <time class="post-time" datetime="2022-11-10T02:36:32.250Z" itemprop="datePublished">
     <span class="post-month">11月</span><br/>
     <span class="post-day">10</span>
@@ -88,70 +88,15 @@
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/">单机安装Redis</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/redis/">redis</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="单机安装Redis"><a href="#单机安装Redis" class="headerlink" title="单机安装Redis"></a>单机安装Redis</h1><p>首先需要安装Redis所需要的依赖：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc tcl</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>然后将课前资料提供的Redis安装包上传到虚拟机的任意目录：</p>
-<p>例如，我放到了&#x2F;tmp目录：</p>
-<p>解压缩：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf redis-6.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>解压后：</p>
-<p>进入redis目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd redis-6.2.4</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>运行编译命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>如果没有出错，应该就安装成功了。</p>
-<p>然后修改redis.conf文件中的一些配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 绑定地址，默认是127.0.0.1，会导致只能在本地访问。修改为0.0.0.0则可以在任意IP访问</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"># 数据库数量，设置为1</span><br><span class="line">databases 1</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>启动Redis：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis.conf</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>停止redis服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli shutdown</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" data-id="clds8mosb003ovsv60mnr9q2l" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/redis/Untitled/" data-id="cldsggm6a004720v63o6i52c9" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
-
     </footer>
   </div>
   
@@ -230,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" data-id="clds8motv008kvsv6frruhvlt" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" data-id="cldsggm87008o20v67jwpe7qw" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -289,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" data-id="clds8mos8003evsv61nat8m70" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" data-id="cldsggm5e001z20v686dvfsfb" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
@@ -354,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clds8mots0089vsv6crddarby" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="cldsggm7y008e20v62oil4x2z" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -438,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clds8mou4009lvsv61qkfh1bm" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="cldsggm7r008120v66y9y2how" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" rel="tag">分布式事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -507,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" data-id="clds8moto0082vsv6fnvibu8q" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" data-id="cldsggm7t008620v6foqr2fnk" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -572,7 +517,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="clds8mosl004pvsv6abo57dqv" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="cldsggm6g004s20v62gho9fh8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/" rel="tag">数据封装</a></li></ul>
@@ -685,7 +630,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clds8motv008mvsv68hfh8wcj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="cldsggm7z008h20v6gmfe2y5e" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -749,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="clds8motu008gvsv6h0stcfrb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="cldsggm84008l20v62pgb2ot9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -832,7 +777,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" data-id="clds8motp0087vsv6avwhfvzo" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" data-id="cldsggm7u008920v64huo52jy" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
