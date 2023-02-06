@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="Hexo &amp; github">
 <meta property="og:description" content="RestTemplate  Spring之RestTemplate详解 - 简书 (jianshu.com)  @ApiModel  Swagger注释API :@ApiModel - Chen洋 - 博客园 (cnblogs.com) 导入swagger依赖： 12345&lt;dependency&gt;    &lt;groupId&gt;io.swagger&lt;&#x2F;groupId&amp;gt">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20230204161656614.png">
+<meta property="og:image" content="http://example.com/2022/11/06/images/image-20230204161656614.png">
 <meta property="article:published_time" content="2022-11-06T01:14:39.844Z">
 <meta property="article:modified_time" content="2023-02-04T08:17:00.429Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="零碎知识&amp;笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20230204161656614.png">
+<meta name="twitter:image" content="http://example.com/2022/11/06/images/image-20230204161656614.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -126,20 +126,16 @@
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cy0628/p/15164994.html">Swagger注释API :@ApiModel - Chen洋 - 博客园 (cnblogs.com)</a></p>
 <p>导入swagger依赖：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@ApiModel这个注解</span><br><span class="line">  这个注解的是作用在类上面的，是用来描述类的一些基本信息的。下面，我们会逐个的进行讲解。</span><br><span class="line"></span><br><span class="line">value属性</span><br><span class="line">  这个属性，提供的是类的一个备用名。如果我们不设置，那么默认情况下，将使用的是class类的名字。</span><br><span class="line"></span><br><span class="line">description属性</span><br><span class="line">  对于类，提供一个详细的描述信息</span><br><span class="line"></span><br><span class="line">parent属性</span><br><span class="line">  这个属性，描述的是类的一些父类的信息。</span><br><span class="line"></span><br><span class="line">discriminator属性</span><br><span class="line">  这个属性解释起来有些麻烦，因为这个类主要是体现出了断言当中。</span><br><span class="line"></span><br><span class="line">subTypes属性</span><br><span class="line">  举个实例，如果我们此时有一个父类Animal。同时，对于这个父类，我们的系统中有这个类的子类Cat、Dog、Pig等。如果我们在我们的父类上，通过这个属性，指定了我们想要使用的子类的话，那么在生成Swagger的文档的话，会自动的展示的是Animal这个属性，但是在属性的字段中，会显示出子类的一些独有的属性，其实在这里，是不推荐使用的。因为这样会让别人认为，这些子类独有的属性，也是父类才有的。</span><br></pre></td></tr></table></figure>
-
-
-
 <ol start="3">
 <li>? 泛型通配符</li>
 </ol>
-<p>   <img src="/../../images/image-20230204161656614.png" alt="image-20230204161656614"></p>
+<p><img src="../../images/image-20230204161656614.png" alt="image-20230204161656614"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cldsggm6l005520v66zyncxif" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="cldsghlby004rekv66ugk0b6d" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
