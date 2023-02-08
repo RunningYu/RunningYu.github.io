@@ -43,7 +43,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>136</strong><br>文章</div></a>
       <a href="/categories"><div><strong>63</strong><br>分类</div></a>
       <a href="/tags"><div><strong>47</strong><br>标签</div></a>
     </div>
@@ -74,6 +74,320 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-elasticsearch/数据同步" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" class="article-date">
+  <time class="post-time" datetime="2022-12-12T09:06:59.689Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">数据同步</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="方案一：同步调用"><a href="#方案一：同步调用" class="headerlink" title="方案一：同步调用"></a>方案一：同步调用</h3><p><img src="/../../images/image-20221212170758302.png" alt="image-20221212170758302"></p>
+<p>如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。</p>
+<h3 id="方案二：异步通知"><a href="#方案二：异步通知" class="headerlink" title="方案二：异步通知"></a>方案二：异步通知</h3><p><img src="/../../images/image-20221212171310763.png" alt="image-20221212171310763"></p>
+<p>利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。</p>
+<h3 id="方案三：监听binlog"><a href="#方案三：监听binlog" class="headerlink" title="方案三：监听binlog"></a>方案三：监听binlog</h3><p><img src="/../../images/image-20221212171812077.png" alt="image-20221212171812077"></p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><img src="/../../images/image-20221212171713573.png" alt="image-20221212171713573"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="cldvwq3zs0028vkv638rncrzx" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-安全性/事务回滚/Spring Boot事务回滚" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" class="article-date">
+  <time class="post-time" datetime="2022-12-03T12:27:01.326Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br/>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">Spring Boot事务回滚</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%85%A8%E6%80%A7/">安全性</a>,<a class="article-category-link" href="/categories/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">事务回滚</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们开发系统的时候经常会遇到一些关于交易的需求，交易的过程大多数都比较繁琐（会包括修改库存、修改余额、记录交易账单等等步骤），这时候我们就不得不考虑其中的潜在风险了，比如我们在交易的过程中修改了库存（库存 -1），接下来需要进行支付操作，但是此时系统突然宕机或者网络突然中断，这也就导致我们无法完成整个交易流程，虽然用户还没付钱，但是我们的库存变少了（商家肯定就不高兴了👿），所以我们就需要用到事务回滚来解决上述的问题。</p>
+<h1 id="Spring-Boot-事务回滚"><a href="#Spring-Boot-事务回滚" class="headerlink" title="Spring Boot 事务回滚"></a>Spring Boot 事务回滚</h1><p>我们有两种方式可以实现事务回滚，第一种是自动回滚，第二种是手动回滚，这两种实现方式大同小异，二者都需要使用 @Transactional 注解来实现事务回滚，下面直接上代码，看看二者之间到底哪里不一样。</p>
+<p>在接口实现类中有一个插入会员信息的方法，咱们就对这个方法进行改造，分别实现一下自动回滚和手动回滚👇</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">    cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">    SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">    <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<h2 id="自动回滚"><a href="#自动回滚" class="headerlink" title="自动回滚"></a>自动回滚</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">    cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">    SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">    <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到方法上增加了一个注解 @Transactional(rollbackFor &#x3D; Exception.class) ，通过该注解可以对异常进行捕获，当发生异常时就可以进行回滚，从而撤销本次的入库操作。</p>
+<p>很多方法中都会用 try-catch 对异常进行处理，如果此时在 catch 中对可能出现的异常进行了处理，但是并没有再手动抛出（throw）异常，Spring 则会认为该方法成功执行，也就不会进行回滚👇。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4b9858bcb9f4d22a5cc2931883efe1e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="在这里插入图片描述"> 正解如下👇：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">        cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">        SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">        <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;方法出现异常：&quot;</span> + e);</span><br><span class="line">        <span class="comment">//手动抛出异常</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>P.S. 如果 try-catch 语句在 finally 语句块中进行了 return 操作，那么 catch 语句块中手动抛出的异常也会被覆盖，同样不会自动回滚。</p>
+<h2 id="手动回滚"><a href="#手动回滚" class="headerlink" title="手动回滚"></a>手动回滚</h2><p>手动回滚的实现方式也非常简单，只需要添加一句代码即可实现👇</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">        cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">        SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">        <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;方法出现异常：&quot;</span> + e);</span><br><span class="line">        <span class="comment">//实现手动回滚</span></span><br><span class="line">        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>P.S. 这里只是举个例子，手动回滚语句不一定要添加在 catch 代码块中，我们可以在任何一个地方使用手动回滚语句。<strong>需要注意的是，我们虽然可以在其他地方增加手动回滚语句，但是手动回滚语句后的代码还会继续执行，所以不建议在非 catch 代码块中使用手动回滚语句。</strong> 如果非要这么用的话，就一定要好好斟酌一下自己的业务逻辑是不是会有 BUG 了。</p>
+<h1 id="Spring-Boot-事务回滚注意事项"><a href="#Spring-Boot-事务回滚注意事项" class="headerlink" title="Spring Boot 事务回滚注意事项"></a>Spring Boot 事务回滚注意事项</h1><p>这里我们再简单说几句关于 Spring Boot 事务回滚中的注意事项：</p>
+<ol>
+<li>想实现回滚，首先要保证 Spring Boot 开启了事务（在启动类上增加 @EnableTransactionManagement 注解开启事务（其实 Spring Boot 默认就是开启事务的），其次就是实现回滚的方法必须是 public 的。</li>
+<li>@Transactional(rollbackFor&#x3D;Exception.class) 表示的是该方法无论抛出什么异常都会进行自动回滚；如果不加 (rollbackFor&#x3D;Exception.class) 的话，则代表了默认值，也就是只有当该方法抛出了非检查型异常（RuntimeException）时才会进行回滚。</li>
+<li>由于事务的四大特性（原子性、一致性、隔离性、持久性），所以 @Transactional 一般是要加在业务层（也就是接口实现类）中。</li>
+<li>如果将 @Transactional(rollbackFor&#x3D;Exception.class) 加在了接口实现类上，那么这个类下的所有方法都将会被加上事务管理，即所有方法都会在自己出现异常时进行回滚操作。</li>
+</ol>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本人经验有限，有些地方可能讲的没有特别到位，如果您在阅读的时候想到了什么问题，欢迎在评论区留言，我们后续再一一探讨🙇‍</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" data-id="cldvwq42c008evkv6fe3dfq36" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" rel="tag">事务回滚</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%80%A7/" rel="tag">安全性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-文件服务器/MinIO/Minio设置文件永久访问和下载" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" class="article-date">
+  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br/>
+    <span class="post-day">01</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/">Minio设置文件永久访问和下载</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a>,<a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/">MinIO</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1. </p>
+<blockquote>
+<p>docker pull minio&#x2F;mc</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/8c2815c4dfe14d15b74abcd173b9db9c.png" alt="img"></p>
+<p>2. </p>
+<blockquote>
+<p>docker run -it –entrypoint&#x3D;&#x2F;bin&#x2F;sh minio&#x2F;mc</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/a26767d7c9d74cc5bee45a1bffd745af.png" alt="img"></p>
+<p>3. </p>
+<blockquote>
+<p>mc config host add <ALIAS> <YOUR-S3-ENDPOINT> <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY> [–api API-SIGNATURE]</YOUR-SECRET-KEY></YOUR-ACCESS-KEY></YOUR-S3-ENDPOINT></ALIAS></p>
+</blockquote>
+<blockquote>
+<p> mc ls minio</p>
+</blockquote>
+<ul>
+<li>ALIAS: 别名就是给你的云存储服务起了一个短点的外号。</li>
+<li>S3 endpoint,access key和secret key是你的云存储服务提供的。 <ul>
+<li>endpoint  </li>
+<li>access key、secret key 到这里大家肯定都知道啦。</li>
+</ul>
+</li>
+<li>API签名是可选参数，默认情况下，它被设置为”S3v4”。</li>
+</ul>
+<p>例如：</p>
+<p><img src="https://img-blog.csdnimg.cn/8d4b5fb05f35420d8342b57906cde36b.png" alt="img"></p>
+<ol start="4">
+<li>通过下面命令分别设置永久下载和永久分享</li>
+</ol>
+<blockquote>
+<p>mc anonymous set download minio&#x2F;file</p>
+</blockquote>
+<blockquote>
+<p> mc anonymous set public minio&#x2F;file</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/db7e3502bffc4e729b9cde0ff25c31f3.png" alt="img"></p>
+<p>详细说明参考如下博文：</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6992467402877304868">Docker 安装最新Minio Client，还附带解决如何设置永久访问和永久下载链接！！（详图）有需求值得收藏的哈！！！！ - 掘金 (juejin.cn)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" data-id="cldvwq42s009kvkv69igc4ipl" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-文件服务器/MinIO/云服务器docker安装MinIO" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" class="article-date">
+  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br/>
+    <span class="post-day">01</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">云服务器docker安装MinIO</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a>,<a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/">MinIO</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>执行命令 <code>docker pull minio/minio</code> 下载稳定版本镜像</li>
+</ol>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull minio/minio</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png" alt="img"></p>
+<ol start="2">
+<li>创建并启动minio容器</li>
+</ol>
+<p> MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9000:9000 -p 9001:9001 -d --name minio -v /opt/docker/minio/data:/data -v /opt/docker/minio/config:/root/.minio -e &quot;MINIO_ROOT_USER=minio&quot; -e &quot;MINIO_ROOT_PASSWORD=minio@123456&quot; minio/minio server /data --console-address &quot;:9000&quot; --address &quot;:9001&quot;</span><br></pre></td></tr></table></figure>
+
+<p>–console-address “:9000”  中的9000 是可视化界面的访问端口</p>
+<p> –address “:9001” 中的 9001是api端口，在springboot中整合是用到</p>
+<ol start="3">
+<li>开放9000端口</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/fd189f85c8834e899f4b5e0284876ea7.png" alt="img"></p>
+<p>9001端口也是像上面一样开放即可</p>
+<ol start="4">
+<li>访问登录，使用IP+9000 登录即可测试，然后输入自己在启动创建容器时设置的账号和密码</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/d6823c8747fb4b8ab196b9f3a892d18a.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/94216afbb986434c9934f8d7d1fe523f.png" alt="img"></p>
+<hr>
+<p>安装和使用，可以参照这个博文：</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7101581935486615559">SpringBoot 整合 Minio 上传文件 - 掘金 (juejin.cn)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" data-id="cldvwq42u009nvkv60le0csgj" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-JVM/JVM中篇：字节码与类的加载篇/1-class文件结构" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -1270,7 +1584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" data-id="cldv7jm5d006ozcv62qm071cy" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" data-id="cldvwq41y0075vkv64y8r1l1k" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
@@ -1393,7 +1707,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/27/Quartz/Quartz%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cldv7jm2r0013zcv6hi4t1atb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/27/Quartz/Quartz%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cldvwq3yy000nvkv65aeghvmq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" rel="tag">定时任务</a></li></ul>
@@ -2085,7 +2399,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/24/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/13.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" data-id="cldv7jm4p005gzcv6dody5xlx" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/24/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/13.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" data-id="cldvwq41e005svkv67x022bpn" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -2309,7 +2623,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/23/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/12.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" data-id="cldv7jm4l005bzcv6esupbu73" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/23/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/12.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" data-id="cldvwq41c005nvkv690aibt55" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -2411,7 +2725,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" data-id="cldv7jm6l00a2zcv6errd3xbh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" data-id="cldvwq43100a1vkv6dpuu3y6s" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">结构型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="tag">适配器模式</a></li></ul>
@@ -2834,984 +3148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/11.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%AE%97%E6%B3%95/" data-id="cldv7jm4o005ezcv6cfu1evxx" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/10. StringTable" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/10.%20StringTable/" class="article-date">
-  <time class="post-time" datetime="2022-11-21T01:52:16.546Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">21</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/10.%20StringTable/">10. StringTable</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="10-StringTable"><a href="#10-StringTable" class="headerlink" title="10. StringTable"></a>10. StringTable</h1><h2 id="10-1-String-的基本特性"><a href="#10-1-String-的基本特性" class="headerlink" title="10.1. String 的基本特性"></a>10.1. String 的基本特性</h2><ul>
-<li>String：字符串，使用一对””引起来表示</li>
-<li>String 声明为 final 的，不可被继承</li>
-<li>String 实现了 Serializable 接口：表示字符串是支持序列化的。</li>
-<li>String 实现了 Comparable 接口：表示 string 可以比较大小</li>
-<li>String 在 jdk8 及以前内部定义了 final char[] value 用于存储字符串数据。JDK9 时改为 byte[]</li>
-</ul>
-<h3 id="10-1-1-String-在-jdk9-中存储结构变更"><a href="#10-1-1-String-在-jdk9-中存储结构变更" class="headerlink" title="10.1.1. String 在 jdk9 中存储结构变更"></a>10.1.1. String 在 jdk9 中存储结构变更</h3><p>官网地址：<a target="_blank" rel="noopener" href="http://openjdk.java.net/jeps/254">JEP 254: Compact Strings (java.net)</a></p>
-<blockquote>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>The current implementation of the <code>String</code> class stores characters in a <code>char</code> array, using two bytes (sixteen bits) for each character. Data gathered from many different applications indicates that strings are a major component of heap usage and, moreover, that most <code>String</code> objects contain only Latin-1 characters. Such characters require only one byte of storage, hence half of the space in the internal <code>char</code> arrays of such <code>String</code> objects is going unused.</p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>We propose to change the internal representation of the <code>String</code> class from a UTF-16 <code>char</code> array to a <code>byte</code> array plus an encoding-flag field. The new <code>String</code> class will store characters encoded either as ISO-8859-1&#x2F;Latin-1 (one byte per character), or as UTF-16 (two bytes per character), based upon the contents of the string. The encoding flag will indicate which encoding is used.</p>
-<p>String-related classes such as <code>AbstractStringBuilder</code>, <code>StringBuilder</code>, and <code>StringBuffer</code> will be updated to use the same representation, as will the HotSpot VM’s intrinsic string operations.</p>
-<p>This is purely an implementation change, with no changes to existing public interfaces. There are no plans to add any new public APIs or other interfaces.</p>
-<p>The prototyping work done to date confirms the expected reduction in memory footprint, substantial reductions of GC activity, and minor performance regressions in some corner cases.</p>
-</blockquote>
-<p><strong>动机</strong></p>
-<p>目前 String 类的实现将字符存储在一个 char 数组中，每个字符使用两个字节（16 位）。从许多不同的应用中收集到的数据表明，字符串是堆使用的主要组成部分，此外，大多数字符串对象只包含 Latin-1 字符。这些字符只需要一个字节的存储空间，因此这些字符串对象的内部字符数组中有一半的空间没有被使用。</p>
-<p><strong>说明</strong></p>
-<p>我们建议将 String 类的内部表示方法从 UTF-16 字符数组改为字节数组加编码标志域。新的 String 类将根据字符串的内容，以 ISO-8859-1&#x2F;Latin-1（每个字符一个字节）或 UTF-16（每个字符两个字节）的方式存储字符编码。编码标志将表明使用的是哪种编码。</p>
-<hr>
-<p>与字符串相关的类，如<mark>AbstractStringBuilder、StringBuilder 和 StringBuffer 将被更新以使用相同的表示方法，HotSpot VM 的内在字符串操作也是如此</mark>。</p>
-<p>这纯粹是一个实现上的变化，对现有的公共接口没有变化。目前没有计划增加任何新的公共 API 或其他接口。</p>
-<p>迄今为止所做的原型设计工作证实了内存占用的预期减少，GC 活动的大幅减少，以及在某些角落情况下的轻微性能倒退。</p>
-<p>结论：String 再也不用 char[] 来存储了，改成了 byte [] 加上编码标记，节约了一些空间</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">String</span> <span class="keyword">implements</span> <span class="title class_">java</span>.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;</span><br><span class="line">    <span class="meta">@Stable</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">byte</span>[] value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="10-1-2-String-的基本特性"><a href="#10-1-2-String-的基本特性" class="headerlink" title="10.1.2. String 的基本特性"></a>10.1.2. String 的基本特性</h3><p>String：代表不可变的字符序列。简称：不可变性。</p>
-<ul>
-<li>当对字符串重新赋值时，需要重写指定内存区域赋值，不能使用原有的 value 进行赋值。</li>
-<li>当对现有的字符串进行连接操作时，也需要重新指定内存区域赋值，不能使用原有的 value 进行赋值。</li>
-<li>当调用 string 的 replace()方法修改指定字符或字符串时，也需要重新指定内存区域赋值，不能使用原有的 value 进行赋值。</li>
-</ul>
-<p>通过字面量的方式（区别于 new）给一个字符串赋值，此时的字符串值声明在字符串常量池中。</p>
-<p><mark>字符串常量池是不会存储相同内容的字符串的</mark></p>
-<p>String 的 String Pool 是一个固定大小的 Hashtable，默认值大小长度是 1009。如果放进 String Pool 的 String 非常多，就会造成 Hash 冲突严重，从而导致链表会很长，而<strong>链表长了后直接会造成的影响就是当调用 String.intern 时性能会大幅下降</strong>。</p>
-<p>如：通过设置不同长度来测试性能：<img src="/../../../images/image-20221121105838424.png" alt="image-20221121105838424"></p>
-<p>使用<code>-XX:StringTablesize</code>可设置 StringTable 的长度</p>
-<ul>
-<li>在 jdk6 中 StringTable 是固定的，就是 1009 的长度，所以如果常量池中的字符串过多就会导致效率下降很快。StringTablesize 设置没有要求</li>
-<li>在 jdk7 中，StringTable 的长度默认值是 60013，StringTablesize 设置没有要求</li>
-<li>在 JDK8 中，设置 StringTable 长度的话，1009 是可以设置的最小值<ul>
-<li>如果设置小于1009的话，就会报如下错误：<img src="/../../../images/image-20221121105440727.png" alt="image-20221121105440727"></li>
-</ul>
-</li>
-</ul>
-<p>例子：（String 的基本使用，体现String的不可变性）</p>
-<p><img src="/../../../images/image-20221121102353645.png" alt="image-20221121102353645"></p>
-<p><img src="/../../../images/image-20221121100748082.png" alt="image-20221121100748082"></p>
-<p><img src="/../../../images/image-20221121102438865.png" alt="image-20221121102438865"></p>
-<p>无论你是char数组还是byte数组，字符串一旦定义好了，其实字符串底层的数组长度就定死了，要想往后面拼接的话，数组扩容本身也不能往后补，就得重新造一个。其二的话，堆空间中的字符串常量池，只要你修改，就得去重新创建，这就体现了不可变性</p>
-<p><img src="/../../../images/image-20221121102458111.png" alt="image-20221121102458111"></p>
-<p>面试题：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 一道String的面试题</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringExer</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;good&quot;</span>);</span><br><span class="line">    <span class="type">char</span>[] ch = &#123;<span class="string">&#x27;t&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;t&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">change</span><span class="params">(String str, <span class="type">char</span> ch[])</span> &#123;</span><br><span class="line">        str = <span class="string">&quot;test ok&quot;</span>;</span><br><span class="line">        ch[<span class="number">0</span>] = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">StringExer</span> <span class="variable">ex</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringExer</span>();</span><br><span class="line">        ex.change(ex.str, ex.ch);</span><br><span class="line">        System.out.println(ex.str); <span class="comment">// good</span></span><br><span class="line">        System.out.println(ex.ch);  <span class="comment">// best</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39552268/article/details/111415291">(5条消息) java 中String到底是值传递还是引用传递的问题_技术无产者的博客-CSDN博客</a></p>
-<h2 id="10-2-String-的内存分配"><a href="#10-2-String-的内存分配" class="headerlink" title="10.2. String 的内存分配"></a>10.2. String 的内存分配</h2><p>在 Java 语言中有 8 种基本数据类型和一种比较特殊的类型 String。这些类型为了使它们在运行过程中速度更快、更节省内存，都提供了一种常量池的概念。</p>
-<p>常量池就类似一个 Java 系统级别提供的缓存。8 种基本数据类型的常量池都是系统协调的，<mark>String 类型的常量池比较特殊。它的主要使用方法有两种。</mark></p>
-<ul>
-<li><p>直接使用双引号声明出来的 String 对象会直接存储在常量池中。</p>
-</li>
-<li><p>如果不是用双引号声明的 String 对象，可以使用 String 提供的 intern()方法。这个后面重点谈</p>
-</li>
-</ul>
-<p>Java 6 及以前，字符串常量池存放在<strong>永久代</strong></p>
-<p>如：字符串常量池装不下时报oom显示永久代PermGen空间：<img src="/../../../images/image-20221121111144881.png" alt="image-20221121111144881"></p>
-<p>Java 7 中 Oracle 的工程师对字符串池的逻辑做了很大的改变，即将<mark>字符串常量池的位置调整到 Java <strong>堆内</strong></mark></p>
-<ul>
-<li>所有的字符串都保存在堆（Heap）中，和其他普通对象一样，这样可以让你在进行调优应用时仅需要调整堆大小就可以了。</li>
-<li>字符串常量池概念原本使用得比较多，但是这个改动使得我们有足够的理由让我们重新考虑在 Java 7 中使用<code>String.intern()</code>。</li>
-</ul>
-<p>如：字符串常量池装不下时报oom显示堆空间（和jdk8一样）：<img src="/../../../images/image-20221121111122217.png" alt="image-20221121111122217"></p>
-<p>Java8 元空间，字符串常量在<strong>堆</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/27b7bf706fc1724baf503eac9b49c7fc.png" alt="image-20200711093546398"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/c59830deeebca85d5b2e446211e4e28d.png" alt="image-20200711093558709"></p>
-<p><strong>StringTable 为什么要调整？</strong></p>
-<p>官网地址：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/jdk7-relnotes.html#jdk7changes">Java SE 7 Features and Enhancements (oracle.com)</a></p>
-<blockquote>
-<p><strong>Synopsis:</strong> In JDK 7, interned strings are no longer allocated in the permanent generation of the Java heap, but are instead allocated in the main part of the Java heap (known as the young and old generations), along with the other objects created by the application. This change will result in more data residing in the main Java heap, and less data in the permanent generation, and thus may require heap sizes to be adjusted. Most applications will see only relatively small differences in heap usage due to this change, but larger applications that load many classes or make heavy use of the <code>String.intern()</code> method will see more significant differences.</p>
-</blockquote>
-<p>简介：在 JDK 7 中，内部字符串不再分配在 Java 堆的永久代中，而是分配在 Java 堆的主要部分（称为年轻代和老年代），与应用程序创建的其他对象一起。这种变化将导致更多的数据驻留在主 Java 堆中，而更少的数据在永久代中，因此可能需要调整堆的大小。大多数应用程序将看到由于这一变化而导致的堆使用的相对较小的差异，但<mark>加载许多类或大量使用 String.intern()方法的大型应用程序将看到更明显的差异</mark>。</p>
-<h2 id="10-3-String-的基本操作"><a href="#10-3-String-的基本操作" class="headerlink" title="10.3. String 的基本操作"></a>10.3. String 的基本操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.println();    <span class="comment">//2320</span></span><br><span class="line">    System.out.println(<span class="string">&quot;1&quot;</span>); <span class="comment">//2321</span></span><br><span class="line">    System.out.println(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;5&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;6&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;7&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;8&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;9&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;10&quot;</span>); <span class="comment">//2330</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下面的字符串就不会再次加载进字符串常量池了，因为上面都已经加载过了，常量池汇中都有了</span></span><br><span class="line">    System.out.println(<span class="string">&quot;1&quot;</span>); <span class="comment">//2321</span></span><br><span class="line">    System.out.println(<span class="string">&quot;2&quot;</span>); <span class="comment">//2322</span></span><br><span class="line">    System.out.println(<span class="string">&quot;3&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">    System.out.println(l<span class="string">&quot;5&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;6&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;7&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;8&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;9&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;10&quot;</span>);<span class="comment">//2330</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>debug模式查看:</p>
-<p><img src="/../../../images/image-20221121113447184.png" alt="image-20221121113447184"></p>
-<p>Java 语言规范里要求完全相同的字符串字面量，应该包含同样的 Unicode 字符序列（包含同一份码点序列的常量），并且必须是指向同一个 String 类实例。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Memory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;<span class="comment">//line 1</span></span><br><span class="line">        <span class="type">int</span> i= <span class="number">1</span>;<span class="comment">//line 2</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();<span class="comment">//line 3</span></span><br><span class="line">        <span class="type">Memory</span> <span class="variable">mem</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Memory</span>();<span class="comment">//Line 4</span></span><br><span class="line">        mem.foo(obj);<span class="comment">//Line 5</span></span><br><span class="line">    &#125;<span class="comment">//Line 9</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">(Object param)</span> &#123;<span class="comment">//line 6</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> param.toString();<span class="comment">//line 7</span></span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;<span class="comment">//Line 8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/0ca01e17abb22f0fa16e87dd93b26a65.png" alt="image-20210511111607132"></p>
-<h2 id="10-4-字符串拼接操作"><a href="#10-4-字符串拼接操作" class="headerlink" title="10.4. 字符串拼接操作"></a>10.4. 字符串拼接操作</h2><ul>
-<li>常量与常量的拼接结果在<strong>常量池</strong>，原理是<strong>编译期优化</strong></li>
-<li><strong>常量池</strong>中不会存在相同内容的变量</li>
-<li>只要其中有一个是<strong>变量</strong>，结果就在<strong>堆</strong>中。变量拼接的原理是 StringBuilder</li>
-<li>如果拼接的结果调用 intern()方法，则主动将常量池中还没有的字符串对象放入池中，并返回此对象地址</li>
-</ul>
-<p><strong>举例 1</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 都是常量，前端编译期会进行代码优化</span></span><br><span class="line">    <span class="comment">// 通过idea直接看对应的反编译的class文件，会显示 String s1 = &quot;abc&quot;; 说明做了代码优化</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span> + <span class="string">&quot;b&quot;</span> + <span class="string">&quot;c&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// true，有上述可知，s1和s2实际上指向字符串常量池中的同一个值</span></span><br><span class="line">    System.out.println(s1 == s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>举例 2</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;javaEE&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;javaEEhadoop&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;javaEE&quot;</span> + <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> s1 + <span class="string">&quot;hadoop&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> <span class="string">&quot;javaEE&quot;</span> + s2;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s7</span> <span class="operator">=</span> s1 + s2;</span><br><span class="line"></span><br><span class="line">    System.out.println(s3 == s4); <span class="comment">// true 编译期优化</span></span><br><span class="line">    System.out.println(s3 == s5); <span class="comment">// false s1是变量，不能编译期优化</span></span><br><span class="line">    System.out.println(s3 == s6); <span class="comment">// false s2是变量，不能编译期优化</span></span><br><span class="line">    System.out.println(s3 == s7); <span class="comment">// false s1、s2都是变量</span></span><br><span class="line">    System.out.println(s5 == s6); <span class="comment">// false s5、s6 不同的对象实例</span></span><br><span class="line">    System.out.println(s5 == s7); <span class="comment">// false s5、s7 不同的对象实例</span></span><br><span class="line">    System.out.println(s6 == s7); <span class="comment">// false s6、s7 不同的对象实例</span></span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">s8</span> <span class="operator">=</span> s6.intern();</span><br><span class="line">    System.out.println(s3 == s8); <span class="comment">// true intern之后，s8和s3一样，指向字符串常量池中的&quot;javaEEhadoop&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../../images/image-20221121151128082.png" alt="image-20221121151128082"></p>
-<p>虽然 s3 和 s4 的指向的值都是“ab”,但是他们<br>各自存放的地方不一样，也就是地址不一样</p>
-<p><strong>举例 3</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  1. 字符串拼接操作不一定使用的是 StringBuilder （变量拼接的原理是 StringBuilder）</span></span><br><span class="line"><span class="comment">  	 如果拼接符号左右两边都是字符串常量或常量引用，则仍然使用编译优化，即非StringBuilder的方式</span></span><br><span class="line"><span class="comment">  2. 针对于 final 修饰类、方法、基本数据类型、引用数据类型的量的结构时，能使用上 final 的时候建议使用上</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test6</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s0</span> <span class="operator">=</span> <span class="string">&quot;beijing&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;bei&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;jing&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> s1 + s2;</span><br><span class="line">    System.out.println(s0 == s3); <span class="comment">// false 	s3指向堆空降中的对象实例，s0指向字符串常量池中的&quot;beijing&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">String</span> <span class="variable">s7</span> <span class="operator">=</span> <span class="string">&quot;shanxi&quot;</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;shan&quot;</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> <span class="string">&quot;xi&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> s4 + s5;</span><br><span class="line">    System.out.println(s6 == s7); <span class="comment">// true 	s4和s5是final修饰的，编译期就能确定s6的值了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>不使用 final 修饰，即为变量。如 s3 行的 s1 和 s2，会通过 new StringBuilder 进行拼接</li>
-<li>使用 final 修饰，即为常量。会在编译器进行代码优化。<mark>在实际开发中，能够使用 final 的，尽量使用</mark></li>
-</ul>
-<p><strong>举例 4</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;b&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;ab&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> s1 + s2;</span><br><span class="line">    System.out.println(s3==s4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>字节码</strong></p>
-<p>我们拿例 4 的字节码进行查看，可以发现<code>s1 + s2</code>实际上是 new 了一个 StringBuilder 对象，并使用了 append 方法将 s1 和 s2 添加进来，最后调用了 toString 方法赋给 s4</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> 0 ldc #2 &lt;a&gt;</span><br><span class="line"> 2 astore_1</span><br><span class="line"> 3 ldc #3 &lt;b&gt;</span><br><span class="line"> 5 astore_2</span><br><span class="line"> 6 ldc #4 &lt;ab&gt;</span><br><span class="line"> 8 astore_3</span><br><span class="line"> 9 new #5 &lt;java/lang/StringBuilder&gt;</span><br><span class="line">12 dup</span><br><span class="line">13 invokespecial #6 &lt;java/lang/StringBuilder.&lt;init&gt;&gt;</span><br><span class="line">16 aload_1</span><br><span class="line">17 invokevirtual #7 &lt;java/lang/StringBuilder.append&gt;</span><br><span class="line">20 aload_2</span><br><span class="line">21 invokevirtual #7 &lt;java/lang/StringBuilder.append&gt;</span><br><span class="line">24 invokevirtual #8 &lt;java/lang/StringBuilder.toString&gt;</span><br><span class="line">27 astore 4</span><br><span class="line">29 getstatic #9 &lt;java/lang/System.out&gt;</span><br><span class="line">32 aload_3</span><br><span class="line">33 aload 4</span><br><span class="line">35 if_acmpne 42 (+7)</span><br><span class="line">38 iconst_1</span><br><span class="line">39 goto 43 (+4)</span><br><span class="line">42 iconst_0</span><br><span class="line">43 invokevirtual #10 &lt;java/io/PrintStream.println&gt;</span><br><span class="line">46 return</span><br></pre></td></tr></table></figure>
-
-<p><strong>字符串拼接操作性能对比</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;  </span><br><span class="line">        <span class="type">int</span> <span class="variable">times</span> <span class="operator">=</span> <span class="number">50000</span>;      </span><br><span class="line">        <span class="comment">// String      </span></span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();     </span><br><span class="line">        testString(times);  </span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();       </span><br><span class="line">        System.out.println(<span class="string">&quot;String: &quot;</span> + (end-start) + <span class="string">&quot;ms&quot;</span>);     </span><br><span class="line">        <span class="comment">// StringBuilder       </span></span><br><span class="line">        start = System.currentTimeMillis();   </span><br><span class="line">        testStringBuilder(times);      </span><br><span class="line">        end = System.currentTimeMillis();  </span><br><span class="line">        System.out.println(<span class="string">&quot;StringBuilder: &quot;</span> + (end-start) + <span class="string">&quot;ms&quot;</span>);    </span><br><span class="line">        <span class="comment">// StringBuffer      </span></span><br><span class="line">        start = System.currentTimeMillis();      </span><br><span class="line">        testStringBuffer(times);   </span><br><span class="line">        end = System.currentTimeMillis();    </span><br><span class="line">        System.out.println(<span class="string">&quot;StringBuffer: &quot;</span> + (end-start) + <span class="string">&quot;ms&quot;</span>);   </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testString</span><span class="params">(<span class="type">int</span> times)</span> &#123; </span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;      </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; times; i++) &#123;     </span><br><span class="line">            str = str + <span class="string">&quot;test&quot;</span>;      </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testStringBuilder</span><span class="params">(<span class="type">int</span> times)</span> &#123;     </span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();    </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; times; i++) &#123;        </span><br><span class="line">            sb.append(<span class="string">&quot;test&quot;</span>);     </span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testStringBuffer</span><span class="params">(<span class="type">int</span> times)</span> &#123;   </span><br><span class="line">        <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();  </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; times; i++) &#123;        </span><br><span class="line">            sb.append(<span class="string">&quot;test&quot;</span>);      </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果String: 7963ms	StringBuilder: 1ms	StringBuffer: 4ms</span></span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><p>本实验进行 5 万次循环，String 拼接方式的时间是 StringBuilder.append 方式的约 8000 倍，StringBuffer.append()方式的时间是 StringBuilder.append()方式的约 4 倍（StringBuffer是同步的，会慢些）</p>
-</li>
-<li><p>可以看到，通过 StringBuilder 的 append 方式的速度，要比直接对 String 使用“+”拼接的方式<mark>快的不是一点半点</mark></p>
-</li>
-</ol>
-<p>​		因为：（1）StringBuiler 的 append()的方式：自始自终只创建过一个StringBuilder的对象</p>
-<p>​							使用String的字符串拼接方式：创建过多个 StringBuilder 和 String 的对象</p>
-<p>​					（2）使用String 的字符串拼接方式：内存中由于创建了较多的StringBuilder和String的对象，内存占用更大；如果进行GC，需要花费的额外时间。</p>
-<ol start="3">
-<li><p>那么，在实际开发中，对于需要<mark>多次或大量拼接</mark>的操作，在不考虑线程安全问题时，我们就应该尽可能<mark>使用 StringBuilder 进行 append 操作</mark></p>
-</li>
-<li><p><strong>改进的空间</strong>：除此之外，还有那些操作能够帮助我们提高字符串方面的运行效率呢？（改进的空间）</p>
-</li>
-</ol>
-<p>​			在实际开发中，如果基本确定要前前后后添加的字符串长度不高于某个限定值hightLevel的情况下，建议使用<mark>带参构造器</mark>指定 capacity来实例化，以减少扩容的次数，优化程序执行效果（扩容的逻辑可以自行查看源代码）</p>
-<p>​			StringBuilder 空参构造器的初始化大小为 16。</p>
-<p>​			StringBuilder s &#x3D; new StringBuilder(capacity); &#x2F;&#x2F; new char[capacity]</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Constructs a string builder with no characters in it and an * initial capacity of 16 characters. </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">StringBuilder</span><span class="params">()</span> &#123; </span><br><span class="line">    <span class="built_in">super</span>(<span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Constructs a string builder with no characters in it and an </span></span><br><span class="line"><span class="comment">* initial capacity specified by the &#123;<span class="doctag">@code</span> capacity&#125; argument. </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span>      capacity  the initial capacity. </span></span><br><span class="line"><span class="comment">* <span class="doctag">@throws</span>     NegativeArraySizeException  if the &#123;<span class="doctag">@code</span> capacity&#125; </span></span><br><span class="line"><span class="comment">*               argument is less than &#123;<span class="doctag">@code</span> 0&#125;. </span></span><br><span class="line"><span class="comment">*/</span><span class="keyword">public</span> <span class="title function_">StringBuilder</span><span class="params">(<span class="type">int</span> capacity)</span> &#123;   </span><br><span class="line">    <span class="built_in">super</span>(capacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="10-5-intern-的使用"><a href="#10-5-intern-的使用" class="headerlink" title="10.5. intern()的使用"></a>10.5. intern()的使用</h2><p>官方 API 文档中的解释</p>
-<blockquote>
-<p>public String intern()</p>
-<p>Returns a canonical representation for the string object.</p>
-<p>A pool of strings, initially empty, is maintained privately by the class <code>String</code>.</p>
-<p>When the intern method is invoked, if the pool already contains a string equal to this <code>String</code> object as determined by the <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#equals-java.lang.Object-"><code>equals(Object)</code></a> method, then the string from the pool is returned. Otherwise, this <code>String</code> object is added to the pool and a reference to this <code>String</code> object is returned.</p>
-<p>It follows that for any two strings <code>s</code> and <code>t</code>, <code>s.intern() == t.intern()</code> is <code>true</code> if and only if <code>s.equals(t)</code> is <code>true</code>.</p>
-<p>All literal strings and string-valued constant expressions are interned. String literals are defined in section 3.10.5 of the The Java™ Language Specification.</p>
-<ul>
-<li><p><strong>Returns:</strong></p>
-<p>a string that has the same contents as this string, but is guaranteed to be from a pool of unique strings.</p>
-</li>
-</ul>
-</blockquote>
-<p>当调用 intern 方法时，如果池子里已经包含了一个与这个 String 对象相等的字符串，正如 equals(Object)方法所确定的，那么池子里的字符串会被返回。否则，这个 String 对象被添加到池中，并返回这个 String 对象的引用。</p>
-<p>由此可见，对于任何两个字符串 s 和 t，当且仅当 s.equals(t)为真时，s.intern() &#x3D;&#x3D; t.intern()为真。</p>
-<p>所有字面字符串和以字符串为值的常量表达式都是 interned。</p>
-<p>返回一个与此字符串内容相同的字符串，但保证是来自一个唯一的字符串池。</p>
-<hr>
-<p>intern 是一个 native 方法，调用的是底层 C 的方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title function_">intern</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
-
-<p>如果不是用双引号声明的 String 对象，可以使用 String 提供的 intern 方法，它会从字符串常量池中查询当前字符串是否存在，若不存在就会将当前字符串放入常量池中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">myInfo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">string</span>(<span class="string">&quot;I love atguigu&quot;</span>).intern();</span><br></pre></td></tr></table></figure>
-
-<p>也就是说，如果在任意字符串上调用 String.intern 方法，那么其返回结果所指向的那个类实例，必须和直接以常量形式出现的字符串实例完全相同。因此，下列表达式的值必定是 true</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="string">&quot;a&quot;</span>+<span class="string">&quot;b&quot;</span>+<span class="string">&quot;c&quot;</span>).intern() == <span class="string">&quot;abc&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>通俗点讲，Interned string 就是确保字符串在内存里只有一份拷贝，这样可以节约内存空间，加快字符串操作任务的执行速度。注意，这个值会被存放在字符串内部池（String Intern Pool）</p>
-<p><img src="/../../../images/image-20221121160359225.png" alt="image-20221121160359225"></p>
-<p>如何保证变量 s 指向的是字符串常量池中的数据呢？</p>
-<p>有两种方式：</p>
-<p>方式一：字面量定义的方式</p>
-<p>​			String s &#x3D; “hhhh”;</p>
-<p>方式二：调用 intern()</p>
-<p>​			String s &#x3D; new String(“hhhh”).intern();</p>
-<p>​			String s &#x3D; new StringBuilder(“hhhh”).toString().intern();</p>
-<p>（用字面量或者intern方法才会在字符串常量池中创建，否则在堆中创建）</p>
-<p><img src="/../../../images/image-20221121161348231.png" alt="image-20221121161348231"></p>
-<p><img src="/../../../images/image-20221121163558377.png" alt="image-20221121163558377"></p>
-<h3 id="10-5-1-intern-的使用：JDK6-vs-JDK7-x2F-8"><a href="#10-5-1-intern-的使用：JDK6-vs-JDK7-x2F-8" class="headerlink" title="10.5.1. intern 的使用：JDK6 vs JDK7&#x2F;8"></a>10.5.1. intern 的使用：JDK6 vs JDK7&#x2F;8</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">* ① String s = new String(&quot;1&quot;)</span></span><br><span class="line"><span class="comment">* 创建了两个对象 </span></span><br><span class="line"><span class="comment">* 		堆空间中一个new对象</span></span><br><span class="line"><span class="comment">* 		字符串常量池中一个字符串常量&quot;1&quot;（注意：此时字符串常量池中已有&quot;1&quot;）</span></span><br><span class="line"><span class="comment">* ② s.intern(); 调用此方法之前，字符串常量池中已存在了&quot;1&quot; </span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* s  指向的是堆空间中的对象地址</span></span><br><span class="line"><span class="comment">* s2 指向的是堆空间中常量池中&quot;1&quot;的地址 </span></span><br><span class="line"><span class="comment">* 所以不相等 </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">s.intern();</span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">System.out.println(s==s2);<span class="comment">// jdk1.6 false jdk7/8 false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* *</span></span><br><span class="line"><span class="comment">① String s3 = new String(&quot;1&quot;) + new String(&quot;1&quot;) </span></span><br><span class="line"><span class="comment">* s3变量记录的地址为new String（&quot;11&quot;），等价于new String（&quot;11&quot;），但是，常量池中并不生成字符串&quot;11&quot;； </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* ② s3.intern() </span></span><br><span class="line"><span class="comment">* 由于此时常量池中并无&quot;11&quot;，所以这里会在字符串常量池中生成&quot;11&quot;，如何理解：</span></span><br><span class="line"><span class="comment">		jdk6: 创建了一个新的对象&quot;11&quot;，也就有新的地址</span></span><br><span class="line"><span class="comment">		jdk7: 此时常量中并没有创建&quot;11&quot;，则会把 对象的引用地址 复制一份，放入串池，并返回串池中的引用地址。</span></span><br><span class="line"><span class="comment">		      即，创建一个指向堆空间中 new String(&quot;11&quot;) 的地址</span></span><br><span class="line"><span class="comment">* String s4 = &quot;11&quot;; // s4 变量记录的地址：使用的是上一行代码执行时，在常量池中生成的&quot;11&quot;的地址</span></span><br><span class="line"><span class="comment">* 所以s3 和 s4 指向的都是一个地址</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;1&quot;</span>) + <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">s3.intern();</span><br><span class="line"><span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;11&quot;</span>;</span><br><span class="line">System.out.println(s3==s4);  <span class="comment">//jdk1.6 false 	jdk7/8 true</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/4c11070481d7c3cdb566163802cf582b.png" alt="image-20210511152240683"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/3a3bab69ad3c6302ea00c301dffb5193.png" alt="image-20200711145925091"></p>
-<p>面试题的扩展：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringIntern1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// StringIntern.java中的练习扩展</span></span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;1&quot;</span>) + <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        <span class="comment">// 执行完上一行代码以后，字符串常量池中，不存在 &quot;11&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;11&quot;</span>; <span class="comment">//在字符串常量池中生成对象&quot;11&quot;</span></span><br><span class="line"></span><br><span class="line">        s3.intern();</span><br><span class="line">        System.out.println( s3 == s4 );  <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> s3.intern();</span><br><span class="line">        System.out.println( s5 == s4 );  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        s3 = s3.intern();</span><br><span class="line">        System.out.println( s3 == s4 );  <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>总结 String 的 intern()的使用：</p>
-<p>JDK1.6 中，将这个字符串对象尝试放入串池。</p>
-<ul>
-<li>如果串池中有，则并不会放入。返回已有的串池中的对象的地址</li>
-<li>如果没有，会把此<mark><strong>对象</strong>复制一份</mark>，放入串池，并返回串池中的对象地址</li>
-</ul>
-<p>JDK1.7 起，将这个字符串对象尝试放入串池。</p>
-<ul>
-<li>如果串池中有，则并不会放入。返回已有的串池中的对象的地址</li>
-<li>如果没有，则会把<mark>对象的<strong>引用地址</strong></mark>复制一份，放入串池，并返回串池中的引用地址</li>
-</ul>
-<p><strong>练习 1</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringExer1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;a&quot;</span>) + <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;b&quot;</span>);  <span class="comment">// 变量s记录的地址为new String(&quot;ab&quot;)</span></span><br><span class="line">        <span class="comment">// 在执行完上一行代码后，字符串常量池中并没有&quot;ab&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * jdk6中：在 字符串常量池 中 创建一个 字符串&quot;ab&quot;</span></span><br><span class="line"><span class="comment">         * jdk8中：字符串常量池 中 没有创建 字符串&quot;ab&quot;，而是 创建 了一个 引用（指向 new String (&quot;ab&quot;)）</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> s.intern();</span><br><span class="line"></span><br><span class="line">        System.out.println(s2 == <span class="string">&quot;ab&quot;</span>);  <span class="comment">// jdk6: true    jdk8: true</span></span><br><span class="line">        System.out.println(s == <span class="string">&quot;ab&quot;</span>);   <span class="comment">// jdk6: false   jdk8: true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>图解：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/bb9abdd927bd9ac80c1c18359d299629.png" alt="image-20200711150859709"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/e6c4796fa8d9b5dda9438c799bb45540.png" alt="image-20200711151326909"></p>
-<p><strong>练习 2</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/ad465da04603bb228d6dde8950ee95ec.png" alt="image-20200711151433277"></p>
-<p>练习3：（自己设置的）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="string">&quot;ab&quot;</span>;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;ab&quot;</span>);</span><br><span class="line">    System.out.println(s1 == <span class="string">&quot;ab&quot;</span>);  <span class="comment">// false</span></span><br><span class="line">    System.out.println(s1 == s);     <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;ab&quot;</span>;</span><br><span class="line">    System.out.println(s2 == <span class="string">&quot;ab&quot;</span>);  <span class="comment">// true</span></span><br><span class="line">    System.out.println(s2 == s);     <span class="comment">// true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="10-5-2-intern-的效率测试：空间角度"><a href="#10-5-2-intern-的效率测试：空间角度" class="headerlink" title="10.5.2. intern 的效率测试：空间角度"></a>10.5.2. intern 的效率测试：空间角度</h3><p>我们通过测试一下，使用了 intern 和不使用的时候，其实相差还挺多的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringIntern2</span> &#123; </span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_COUNT</span> <span class="operator">=</span> <span class="number">1000</span> * <span class="number">10000</span>;  </span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> String[] arr = <span class="keyword">new</span> <span class="title class_">String</span>[MAX_COUNT];</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;      </span><br><span class="line">        Integer [] data = <span class="keyword">new</span> <span class="title class_">Integer</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>&#125;;    </span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();     </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; MAX_COUNT; i++) &#123;         </span><br><span class="line">            <span class="comment">// arr[i] = new String(String.valueOf(data[i%data.length]));    </span></span><br><span class="line">            arr[i] = <span class="keyword">new</span> <span class="title class_">String</span>(String.valueOf(data[i%data.length])).intern(); </span><br><span class="line">        &#125;       </span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();   </span><br><span class="line">        System.out.println(<span class="string">&quot;花费的时间为：&quot;</span> + (end - start));      </span><br><span class="line">        <span class="keyword">try</span> &#123;         </span><br><span class="line">            Thread.sleep(<span class="number">1000000</span>);   </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;         </span><br><span class="line">            e.getStackTrace();       </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 运行结果:   不使用intern：7256ms    使用intern：1395ms</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>结论</strong>：</p>
-<p>对于程序中大量使用存在的字符串时，尤其存在很多已经重复的字符串时，使用 intern()方法能够节省内存空间。</p>
-<p>而 arr[i] &#x3D; new String(String.valueOf(data[i%data.length])).intern(); 中前面的 new String(String.valueOf(data[i%data.length])) 的对象，在堆空间中，后期被发现不用就会被GC垃圾回收销毁了，所以就不会在内存中创建过多的String</p>
-<p>大的网站平台，需要内存中存储大量的字符串。比如社交网站，很多人都存储：北京市、海淀区等信息。这时候如果字符串都调用 intern()方法，就会很明显降低内存的大小。</p>
-<h2 id="10-6-StringTable-的垃圾回收"><a href="#10-6-StringTable-的垃圾回收" class="headerlink" title="10.6. StringTable 的垃圾回收"></a>10.6. StringTable 的垃圾回收</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringGCTest</span> &#123;  </span><br><span class="line">    <span class="comment">/**    </span></span><br><span class="line"><span class="comment">    * -Xms15m -Xmx15m -XX:+PrintGCDetails  </span></span><br><span class="line"><span class="comment">    */</span>   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;      </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;    </span><br><span class="line">            String.valueOf(i).intern();       </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [PSYoungGen: 4096K-&gt;504K(4608K)] 4096K-&gt;1689K(15872K), <span class="number">0.0581583</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.06</span> secs] [GC (Allocation Failure) [PSYoungGen: 4600K-&gt;504K(4608K)] 5785K-&gt;2310K(15872K), <span class="number">0.0015621</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs] [GC (Allocation Failure) [PSYoungGen: 4600K-&gt;504K(4608K)] 6406K-&gt;2350K(15872K), <span class="number">0.0034849</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.00</span>, real=<span class="number">0.00</span> secs]</span><br><span class="line">Heap PSYoungGen     </span><br><span class="line">    total 4608K, used 1919K [<span class="number">0x00000000ffb00000</span>, <span class="number">0x0000000100000000</span>, <span class="number">0x0000000100000000</span>)  eden space 4096K, <span class="number">34</span>% used [<span class="number">0x00000000ffb00000</span>,<span class="number">0x00000000ffc61d30</span>,<span class="number">0x00000000fff00000</span>)  from space 512K, <span class="number">98</span>% used [<span class="number">0x00000000fff00000</span>,<span class="number">0x00000000fff7e010</span>,<span class="number">0x00000000fff80000</span>)  to   space 512K, <span class="number">0</span>% used [<span class="number">0x00000000fff80000</span>,<span class="number">0x00000000fff80000</span>,<span class="number">0x0000000100000000</span>) ParOldGen       total 11264K, used 1846K [<span class="number">0x00000000ff000000</span>, <span class="number">0x00000000ffb00000</span>, <span class="number">0x00000000ffb00000</span>)  object space 11264K, <span class="number">16</span>% used [<span class="number">0x00000000ff000000</span>,<span class="number">0x00000000ff1cd9b0</span>,<span class="number">0x00000000ffb00000</span>) Metaspace       used 3378K, capacity 4496K, committed 4864K, reserved 1056768K  <span class="keyword">class</span> <span class="title class_">space</span>    used 361K, capacity 388K, committed 512K, reserved 1048576K</span><br></pre></td></tr></table></figure>
-
-<h2 id="10-7-G1-中的-String-去重操作"><a href="#10-7-G1-中的-String-去重操作" class="headerlink" title="10.7. G1 中的 String 去重操作"></a>10.7. G1 中的 String 去重操作</h2><p>官网地址：<a target="_blank" rel="noopener" href="http://openjdk.java.net/jeps/192">JEP 192: String Deduplication in G1 (java.net)</a></p>
-<blockquote>
-<h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><p>Many large-scale Java applications are currently bottlenecked on memory. Measurements have shown that roughly 25% of the Java heap live data set in these types of applications is consumed by <code>String</code> objects. Further, roughly half of those <code>String</code> objects are duplicates, where duplicates means <code>string1.equals(string2)</code> is true. Having duplicate <code>String</code> objects on the heap is, essentially, just a waste of memory. This project will implement automatic and continuous <code>String</code> deduplication in the G1 garbage collector to avoid wasting memory and reduce the memory footprint.</p>
-</blockquote>
-<p>目前，许多大规模的 Java 应用程序在内存上遇到了瓶颈。测量表明，在这些类型的应用程序中，大约 25%的 Java 堆实时数据集被<code>String&#39;对象所消耗。此外，这些 &quot;String &quot;对象中大约有一半是重复的，其中重复意味着 &quot;string1.equals(string2) &quot;是真的。在堆上有重复的</code>String’对象，从本质上讲，只是一种内存的浪费。这个项目将在 G1 垃圾收集器中实现自动和持续的&#96;String’重复数据删除，以避免浪费内存，减少内存占用。</p>
-<hr>
-<p>注意这里说的重复，指的是在堆中的数据，而不是常量池中的，因为常量池中的本身就不会重复</p>
-<p>背景：对许多 Java 应用（有大的也有小的）做的测试得出以下结果：</p>
-<ul>
-<li>堆存活数据集合里面 string 对象占了 25%</li>
-<li>堆存活数据集合里面重复的 string 对象有 13.5%</li>
-<li>string 对象的平均长度是 45</li>
-</ul>
-<p>许多大规模的 Java 应用的瓶颈在于内存，测试表明，在这些类型的应用里面，<mark>Java 堆中存活的数据集合差不多 25%是 String 对象</mark>。更进一步，这里面差不多一半 string 对象是重复的，重复的意思是说： <code>stringl.equals(string2)= true</code>。<mark>堆上存在重复的 String 对象必然是一种内存的浪费</mark>。这个项目将在 G1 垃圾收集器中实现自动持续对重复的 string 对象进行去重，这样就能避免浪费内存。</p>
-<p><strong>实现</strong></p>
-<ol>
-<li>当垃圾收集器工作的时候，会访问堆上存活的对象。<mark>对每一个访问的对象都会检查是否是候选的要去重的 String 对象</mark></li>
-<li>如果是，把这个对象的一个引用插入到队列中等待后续的处理。一个去重的线程在后台运行，处理这个队列。处理队列的一个元素意味着从队列删除这个元素，然后尝试去重它引用的 string 对象。</li>
-<li>使用一个 hashtable 来记录所有的被 String 对象使用的不重复的 char 数组。当去重的时候，会查这个 hashtable，来看堆上是否已经存在一个一模一样的 char 数组。</li>
-<li>如果存在，String 对象会被调整引用那个数组，释放对原来的数组的引用，最终会被垃圾收集器回收掉。</li>
-<li>如果查找失败，char 数组会被插入到 hashtable，这样以后的时候就可以共享这个数组了。</li>
-</ol>
-<p><strong>命令行选项</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开启String去重，默认是不开启的，需要手动开启。</span> </span><br><span class="line">UseStringDeduplication(bool) </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打印详细的去重统计信息</span> </span><br><span class="line">PrintStringDeduplicationStatistics(bool)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">达到这个年龄的String对象被认为是去重的候选对象</span></span><br><span class="line">StringpeDuplicationAgeThreshold(uintx)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/10.%20StringTable/" data-id="cldv7jm4k0059zcv628d41191" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/2. 类加载子系统" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/2.%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" class="article-date">
-  <time class="post-time" datetime="2022-11-20T15:01:03.641Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">20</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/2.%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/">2. 类加载子系统</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="2-类加载子系统"><a href="#2-类加载子系统" class="headerlink" title="2. 类加载子系统"></a>2. 类加载子系统</h1><h2 id="2-1-内存结构概述"><a href="#2-1-内存结构概述" class="headerlink" title="2.1. 内存结构概述"></a>2.1. 内存结构概述</h2><ul>
-<li>Class 文件</li>
-<li><mark>类加载子系统</mark></li>
-<li>运行时数据区<ul>
-<li>方法区</li>
-<li>堆</li>
-<li>程序计数器</li>
-<li>虚拟机栈</li>
-<li>本地方法栈</li>
-</ul>
-</li>
-<li>执行引擎</li>
-<li>本地方法接口</li>
-<li>本地方法库</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/e4bc9ed374db7f35e68f23f4813205bd.png" alt="image-20200705080719531"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/5f06cd7e27506a91940c7b87e01d0b46.png" alt="image-20200705080911284"></p>
-<p>如果自己想手写一个 Java 虚拟机的话，主要考虑哪些结构呢？</p>
-<ul>
-<li>类加载器</li>
-<li>执行引擎</li>
-</ul>
-<h2 id="2-2-类加载器与类的加载过程"><a href="#2-2-类加载器与类的加载过程" class="headerlink" title="2.2. 类加载器与类的加载过程"></a>2.2. 类加载器与类的加载过程</h2><p><strong>类加载器子系统作用</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/3569bfb903e80b66ee7e972a6b4a5036.png" alt="image-20200705081813409"></p>
-<ul>
-<li>类加载器子系统负责从文件系统或者网络中加载 Class 文件，class 文件在文件开头有特定的文件标识。</li>
-<li>ClassLoader 只负责 class 文件的加载，至于它是否可以运行，则由 Execution Engine 决定。</li>
-<li>加载的类信息存放于一块称为方法区的内存空间。除了类的信息外，方法区中还会存放运行时常量池信息，可能还包括字符串字面量和数字常量（这部分常量信息是 Class 文件中常量池部分的内存映射）</li>
-</ul>
-<p><strong>类加载器 ClasLoader 角色</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/e8172076eaa7a152408633a353f06b2c.png" alt="image-20200705081913538"></p>
-<ul>
-<li>class file 存在于本地硬盘上，可以理解为设计师画在纸上的模板，而最终这个模板在执行的时候是要加载到 JVM 当中来根据这个文件实例化出 n 个一模一样的实例。</li>
-<li>class file 加载到 JVM 中，被称为 DNA 元数据模板，放在方法区。</li>
-<li>在.class 文件-&gt;JVM-&gt;最终成为元数据模板，此过程就要一个运输工具（类装载器 Class Loader），扮演一个快递员的角色。</li>
-</ul>
-<p><strong>类的加载过程</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *示例代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloLoader</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>用流程图表示上述示例代码：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/8cc54647114c456695ac352336c74600.png" alt="image-20200705082255746"></p>
-<h3 id="加载阶段"><a href="#加载阶段" class="headerlink" title="加载阶段"></a>加载阶段</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/a9497a1eeb7fae3022846b509186fdcd.png" alt="image-20200705082601441"></p>
-<ul>
-<li><ol>
-<li>通过一个类的全限定名获取定义此类的二进制字节流</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>在内存中生成一个代表这个类的 java.lang.Class 对象，作为方法区这个类的各种数据的访问入口</li>
-</ol>
-</li>
-</ul>
-<p><strong>补充：加载 class 文件的方式</strong></p>
-<ul>
-<li>从<mark>本地系统</mark>中直接加载</li>
-<li>通过<mark>网络</mark>获取，典型场景：Web Applet</li>
-<li>从 zip<mark>压缩包</mark>中读取，成为日后 jar、war 格式的基础</li>
-<li>运行时计算生成，使用最多的是：<mark>动态代理技术</mark></li>
-<li>由其他文件生成，典型场景：<mark>JSP 应用</mark></li>
-<li>从专有<mark>数据库</mark>中提取.class 文件，比较少见</li>
-<li>从<mark>加密文件</mark>中获取，典型的防 Class 文件被反编译的保护措施</li>
-</ul>
-<h3 id="链接阶段"><a href="#链接阶段" class="headerlink" title="链接阶段"></a>链接阶段</h3><ul>
-<li><strong>验证（Verify）</strong>：<ul>
-<li>目的在子确保 Class 文件的字节流中包含信息符合当前虚拟机要求，保证被加载类的正确性，不会危害虚拟机自身安全。</li>
-<li>主要包括四种验证，<mark>文件格式验证，元数据验证，字节码验证，符号引用验证。</mark></li>
-</ul>
-</li>
-<li><strong>准备（Prepare）</strong>：<ul>
-<li>为类变量分配内存并且设置该类变量的默认初始值，即零值。</li>
-<li><mark>这里不包含用 final 修饰的 static，因为 final 在编译的时候就会分配了，准备阶段会显式初始化；</mark></li>
-<li><mark>这里不会为实例变量分配初始化</mark>，类变量会分配在方法区中，而实例变量是会随着对象一起分配到 Java 堆中。</li>
-</ul>
-</li>
-<li><strong>解析（Resolve）</strong>：<ul>
-<li>将常量池内的<mark>符号引用转换为直接引用</mark>的过程。</li>
-<li>事实上，解析操作往往会伴随着 JVM 在执行完初始化之后再执行。</li>
-<li>符号引用就是一组符号来描述所引用的目标。符号引用的字面量形式明确定义在《java 虚拟机规范》的 Class 文件格式中。直接引用就是直接指向目标的指针、相对偏移量或一个间接定位到目标的句柄。</li>
-<li>解析动作主要针对类或接口、字段、类方法、接口方法、方法类型等。对应常量池中的 CONSTANT_Class_info，CONSTANT_Fieldref_info、CONSTANT_Methodref_info 等。</li>
-</ul>
-</li>
-</ul>
-<h3 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="初始化阶段"></a>初始化阶段</h3><ul>
-<li><mark>初始化阶段就是执行类构造器方法&lt;clinit&gt;()的过程。</mark></li>
-<li>此方法不需定义，是 javac 编译器自动收集类中的所有类变量的赋值动作和静态代码块中的语句合并而来。</li>
-<li>构造器方法中指令按语句在源文件中出现的顺序执行。</li>
-<li><mark>&lt;clinit&gt;()不同于类的构造器。</mark>（关联：构造器是虚拟机视角下的&lt;init&gt;()）</li>
-<li>若该类具有父类，JVM 会保证子类的&lt;clinit&gt;()执行前，父类的&lt;clinit&gt;()已经执行完毕。</li>
-<li>虚拟机必须保证一个类的&lt;clinit&gt;()方法在多线程下被同步加锁。</li>
-</ul>
-<h2 id="2-3-类加载器分类"><a href="#2-3-类加载器分类" class="headerlink" title="2.3. 类加载器分类"></a>2.3. 类加载器分类</h2><p>JVM 支持两种类型的类加载器 。分别为<mark>引导类加载器（Bootstrap ClassLoader）</mark>和<mark>自定义类加载器（User-Defined ClassLoader）</mark>。</p>
-<p>从概念上来讲，自定义类加载器一般指的是程序中由开发人员自定义的一类类加载器，但是 Java 虚拟机规范却没有这么定义，而是将<mark>所有派生于抽象类 ClassLoader 的类加载器都划分为自定义类加载器</mark>。</p>
-<p>无论类加载器的类型如何划分，在程序中我们最常见的类加载器始终只有 3 个，如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/1e553c6d5254f827d2dfab537bea3ab9.png" alt="image-20200705094149223"></p>
-<p>这里的四者之间的关系是包含关系。不是上层下层，也不是子父类的继承关系。</p>
-<h3 id="2-3-1-虚拟机自带的加载器"><a href="#2-3-1-虚拟机自带的加载器" class="headerlink" title="2.3.1. 虚拟机自带的加载器"></a>2.3.1. 虚拟机自带的加载器</h3><p><strong>启动类加载器（引导类加载器，Bootstrap ClassLoader）</strong></p>
-<ul>
-<li>这个类加载使用 <strong>C&#x2F;C++语言</strong>实现的，嵌套在 JVM 内部。</li>
-<li>它用来加载 Java 的核心库（JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar、resources.jar 或 sun.boot.class.path 路径下的内容），用于提供 JVM 自身需要的类</li>
-<li>并不继承自 java.lang.ClassLoader，没有父加载器。</li>
-<li>加载扩展类和应用程序类加载器，并指定为他们的父类加载器。</li>
-<li>出于安全考虑，Bootstrap 启动类加载器只加载包名为 java、javax、sun 等开头的类</li>
-</ul>
-<p><strong>扩展类加载器（Extension ClassLoader）</strong></p>
-<ul>
-<li>Java 语言编写，由 sun.misc.Launcher$ExtClassLoader 实现。</li>
-<li>派生于 ClassLoader 类</li>
-<li>父类加载器为启动类加载器</li>
-<li>从 java.ext.dirs 系统属性所指定的目录中加载类库，或从 JDK 的安装目录的 jre&#x2F;1ib&#x2F;ext 子目录（扩展目录）下加载类库。如果用户创建的 JAR 放在此目录下，也会自动由扩展类加载器加载。</li>
-</ul>
-<p><strong>应用程序类加载器（系统类加载器，AppClassLoader）</strong></p>
-<ul>
-<li>java 语言编写，由 sun.misc.LaunchersAppClassLoader 实现</li>
-<li>派生于 ClassLoader 类</li>
-<li>父类加载器为扩展类加载器</li>
-<li>它负责加载环境变量 classpath 或系统属性 java.class.path 指定路径下的类库</li>
-<li><mark>该类加载是程序中默认的类加载器</mark>，一般来说，Java 应用的类都是由它来完成加载</li>
-<li>通过 ClassLoader#getSystemclassLoader() 方法可以获取到该类加载器</li>
-</ul>
-<h3 id="2-3-2-用户自定义类加载器"><a href="#2-3-2-用户自定义类加载器" class="headerlink" title="2.3.2. 用户自定义类加载器"></a>2.3.2. 用户自定义类加载器</h3><p>在 Java 的日常应用程序开发中，类的加载几乎是由上述 3 种类加载器相互配合执行的，在必要时，我们还可以自定义类加载器，来定制类的加载方式。</p>
-<p> 为什么要自定义类加载器？</p>
-<ul>
-<li>隔离加载类</li>
-<li>修改类加载的方式</li>
-<li>扩展加载源</li>
-<li>防止源码泄漏</li>
-</ul>
-<p>用户自定义类加载器实现步骤：</p>
-<ol>
-<li>开发人员可以通过继承抽象类 ava.lang.ClassLoader 类的方式，实现自己的类加载器，以满足一些特殊的需求</li>
-<li>在 JDK1.2 之前，在自定义类加载器时，总会去继承 ClassLoader 类并重写 loadClass() 方法，从而实现自定义的类加载类，但是在 JDK1.2 之后已不再建议用户去覆盖 loadclass() 方法，而是建议把自定义的类加载逻辑写在 findClass()方法中</li>
-<li>在编写自定义类加载器时，如果没有太过于复杂的需求，可以直接继承 URLClassLoader 类，这样就可以避免自己去编写 findClass() 方法及其获取字节码流的方式，使自定义类加载器编写更加简洁。</li>
-</ol>
-<h2 id="2-4-ClassLoader-的使用说明"><a href="#2-4-ClassLoader-的使用说明" class="headerlink" title="2.4. ClassLoader 的使用说明"></a>2.4. ClassLoader 的使用说明</h2><p>ClassLoader 类是一个抽象类，其后所有的类加载器都继承自 ClassLoader（不包括启动类加载器）</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/876534b3c2f447d3fc33e6f1db218068.png" alt="image-20200705103516138"></p>
-<p>sun.misc.Launcher 它是一个 java 虚拟机的入口应用</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/a22114b608dffe484041b591d486a7fd.png" alt="image-20200705103636003"></p>
-<p><strong>获取 ClassLoader 的途径</strong></p>
-<ul>
-<li><p>方式一：获取当前 ClassLoader</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clazz.getClassLoader()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方式二：获取当前线程上下文的 ClassLoader</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread.currentThread().getContextClassLoader()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方式三：获取系统的 ClassLoader</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ClassLoader.getSystemClassLoader()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方式四：获取调用者的 ClassLoader</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DriverManager.getCallerClassLoader()</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="2-5-双亲委派机制"><a href="#2-5-双亲委派机制" class="headerlink" title="2.5. 双亲委派机制"></a>2.5. 双亲委派机制</h2><p>Java 虚拟机对 class 文件采用的是<mark>按需加载</mark>的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是<mark>双亲委派模式</mark>，即把请求交由父类处理，它是一种任务委派模式。</p>
-<p><strong>工作原理</strong></p>
-<ul>
-<li>1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；</li>
-<li>2）如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；</li>
-<li>3）如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式。</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png" alt="image-20200705105151258"></p>
-<p><strong>举例</strong></p>
-<p>当我们加载 jdbc.jar 用于实现数据库连接的时候，首先我们需要知道的是 jdbc.jar 是基于 SPI 接口进行实现的，所以在加载的时候，会进行双亲委派，最终从根加载器中加载 SPI 核心类，然后在加载 SPI 接口类，接着在进行反向委派，通过线程上下文类加载器进行实现类 jdbc.jar 的加载。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/bed320014f52bb27c8f3d795b3dc3b4a.png" alt="image-20200705105810107"></p>
-<p><strong>优势</strong></p>
-<ul>
-<li>避免类的重复加载</li>
-<li>保护程序安全，防止核心 API 被随意篡改<ul>
-<li>自定义类：java.lang.String</li>
-<li>自定义类：java.lang.ShkStart（报错：阻止创建 java.lang 开头的类）</li>
-</ul>
-</li>
-</ul>
-<p><strong>沙箱安全机制</strong></p>
-<p>自定义 String 类，但是在加载自定义 String 类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载 jdk 自带的文件（rt.jar 包中 java\lang\String.class），报错信息说没有 main 方法，就是因为加载的是 rt.jar 包中的 string 类。这样可以保证对 java 核心源代码的保护，这就是沙箱安全机制。</p>
-<h2 id="2-6-其他"><a href="#2-6-其他" class="headerlink" title="2.6. 其他"></a>2.6. 其他</h2><p><strong>如何判断两个 class 对象是否相同</strong></p>
-<p>在 JVM 中表示两个 class 对象是否为同一个类存在两个必要条件：</p>
-<ul>
-<li>类的完整类名必须一致，包括包名。</li>
-<li>加载这个类的 ClassLoader（指 ClassLoader 实例对象）必须相同。</li>
-</ul>
-<p>换句话说，在 JVM 中，即使这两个类对象（class 对象）来源同一个 Class 文件，被同一个虚拟机所加载，但只要加载它们的 ClassLoader 实例对象不同，那么这两个类对象也是不相等的。</p>
-<p><strong>对类加载器的引用</strong></p>
-<p>JVM 必须知道一个类型是由启动加载器加载的还是由用户类加载器加载的。如果一个类型是由用户类加载器加载的，那么 JVM 会<mark>将这个类加载器的一个引用作为类型信息的一部分保存在方法区中</mark>。当解析一个类型到另一个类型的引用的时候，JVM 需要保证这两个类型的类加载器是相同的。</p>
-<p><strong>类的主动使用和被动使用</strong></p>
-<p>Java 程序对类的使用方式分为：主动使用和被动使用。</p>
-<p>主动使用，又分为七种情况：</p>
-<ul>
-<li><p>创建类的实例</p>
-</li>
-<li><p>访问某个类或接口的静态变量，或者对该静态变量赋值</p>
-</li>
-<li><p>调用类的静态方法</p>
-</li>
-<li><p>反射（比如：Class.forName（”com.atguigu.Test”））</p>
-</li>
-<li><p>初始化一个类的子类</p>
-</li>
-<li><p>Java 虚拟机启动时被标明为启动类的类</p>
-</li>
-<li><p>JDK 7 开始提供的动态语言支持：</p>
-<p>java.lang.invoke.MethodHandle 实例的解析结果</p>
-<p>REF_getStatic、REF_putStatic、REF_invokeStatic 句柄对应的类没有初始化，则初始化</p>
-</li>
-</ul>
-<p>除了以上七种情况，其他使用 Java 类的方式都被看作是对<mark>类的被动使用</mark>，都<mark>不会导致类的初始化</mark>。</p>
-<hr>
-<p><img src="/../../../images/image-20221120230332074.png" alt="image-20221120230332074"></p>
-<p><img src="/../../../images/image-20221120230322953.png" alt="image-20221120230322953"></p>
-<p><img src="/../../../images/image-20221120230310840.png" alt="image-20221120230310840"></p>
-<p><img src="/../../../images/image-20221120230259551.png" alt="image-20221120230259551"></p>
-<p><img src="/../../../images/image-20221120230251515.png" alt="image-20221120230251515"></p>
-<p><img src="/../../../images/image-20221120230241584.png" alt="image-20221120230241584"></p>
-<p><img src="/../../../images/image-20221120230234436.png" alt="image-20221120230234436"></p>
-<p><img src="/../../../images/image-20221120230223130.png" alt="image-20221120230223130"></p>
-<p><img src="/../../../images/image-20221120230214513.png" alt="image-20221120230214513"></p>
-<p><img src="/../../../images/image-20221120230150104.png" alt="image-20221120230150104"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/2.%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" data-id="cldv7jm4r005mzcv69yna6vjt" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/9. 执行引擎" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/9.%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/" class="article-date">
-  <time class="post-time" datetime="2022-11-20T09:22:55.257Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">20</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/9.%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/">9. 执行引擎</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="9-执行引擎"><a href="#9-执行引擎" class="headerlink" title="9. 执行引擎"></a>9. 执行引擎</h1><h2 id="9-1-执行引擎概述"><a href="#9-1-执行引擎概述" class="headerlink" title="9.1. 执行引擎概述"></a>9.1. 执行引擎概述</h2><p>执行引擎属于 JVM 的下层，里面包括<mark>解释器、及时编译器、垃圾回收器</mark></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/9c0459b0f80a1c9bb534418b8e5a4ddd.png" alt="image-20200710080707873"></p>
-<p>执行引擎是 Java 虚拟机核心的组成部分之一。</p>
-<p>“虚拟机”是一个相对于“物理机”的概念，这两种机器都有代码执行能力，其区别是物理机的执行引擎是直接建立在处理器、缓存、指令集和操作系统层面上的，而<mark>虚拟机的执行引擎则是由软件自行实现的</mark>，因此可以不受物理条件制约地定制指令集与执行引擎的结构体系，<mark>能够执行那些不被硬件直接支持的指令集格式</mark>。</p>
-<p>JVM 的主要任务是负责<mark>装载字节码到其内部</mark>，但字节码并不能够直接运行在操作系统之上，因为字节码指令并非等价于本地机器指令，它内部包含的仅仅只是一些能够被 JVM 所识别的字节码指令、符号表，以及其他辅助信息。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/b28ff1d82bc72999d1cbbae3f419673d.png" alt="image-20200710081118053"></p>
-<p>那么，如果想要让一个 Java 程序运行起来，执行引擎（Execution Engine）的任务就是<mark>将字节码指令解释&#x2F;编译为对应平台上的本地机器指令</mark>.才可以。简单来说，JVM 中的执行引擎充当了将高级语言翻译为机器语言的译者。</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-H3dqdi5T-1620741818957)(<a target="_blank" rel="noopener" href="https://gitee.com/vectorx/ImageCloud/raw/master/img/20210511090655.png)]">https://gitee.com/vectorx/ImageCloud/raw/master/img/20210511090655.png)]</a></p>
-<h3 id="9-1-1-执行引擎的工作流程"><a href="#9-1-1-执行引擎的工作流程" class="headerlink" title="9.1.1. 执行引擎的工作流程"></a>9.1.1. 执行引擎的工作流程</h3><ol>
-<li>执行引擎在执行的过程中究竟需要执行什么样的字节码指令完全依赖于 PC 寄存器。</li>
-<li>每当执行完一项指令操作后，PC 寄存器就会更新下一条需要被执行的指令地址。</li>
-<li>当然方法在执行的过程中，执行引擎有可能会通过存储在局部变量表中的对象引用准确定位到存储在 Java 堆区中的对象实例信息，以及通过对象头中的元数据指针定位到目标对象的类型信息。</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/a03c1910e508456b690ec9088300de5f.png" alt="image-20200710081627217"></p>
-<p>从外观上来看，所有的 Java 虚拟机的执行引擎输入，输出都是一致的：输入的是字节码二进制流，处理过程是字节码解析执行的等效过程，输出的是执行过程。</p>
-<p><img src="/../../../images/image-20221120193453610.png" alt="image-20221120193453610"></p>
-<p>执行引擎就是复杂将字节码指令，翻译成对应的机器指令，让程序能在操作系统中去执行，</p>
-<h2 id="9-2-Java-代码编译和执行过程"><a href="#9-2-Java-代码编译和执行过程" class="headerlink" title="9.2. Java 代码编译和执行过程"></a>9.2. Java 代码编译和执行过程</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/e2a8ec10bc97a061e4b77abf63936ba1.png" alt="image-20200710082141643"></p>
-<p>（绿色代表解析过程，蓝色代表编译过程）</p>
-<p>大部分的程序代码转换成物理机的目标代码或虚拟机能执行的指令集之前，都需要经过上图中的各个步骤</p>
-<p><strong>Java 代码编译</strong>是由 Java 源码编译器（<mark>前端编译器</mark>）来完成，流程图如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/93e5f0b67767b7d783ace2471447f449.png" alt="image-20200710082433146"></p>
-<p><strong>Java 字节码的执行</strong>是由 JVM 执行引擎（<mark>后端编译器</mark>）来完成，流程图 如下所示</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/bf1139f9652e2a1ac0cab00df869e23e.png" alt="image-20200710083036258"></p>
-<h3 id="9-2-1-什么是解释器（Interpreter）？什么是-JIT-编译器？"><a href="#9-2-1-什么是解释器（Interpreter）？什么是-JIT-编译器？" class="headerlink" title="9.2.1. 什么是解释器（Interpreter）？什么是 JIT 编译器？"></a>9.2.1. 什么是解释器（Interpreter）？什么是 JIT 编译器？</h3><p><strong>解释器</strong>：当 Java 虚拟机启动时会根据预定义的规范<mark>对字节码采用逐行解释的方式执行</mark>，将每条字节码文件中的内容“翻译”为对应平台的本地机器指令执行。</p>
-<p><strong>JIT（Just In Time Compiler）编译器</strong>：就是虚拟机将源代码直接编译成和本地机器平台相关的机器语言。</p>
-<h3 id="9-2-2-为什么-Java-是半编译半解释型语言？"><a href="#9-2-2-为什么-Java-是半编译半解释型语言？" class="headerlink" title="9.2.2. 为什么 Java 是半编译半解释型语言？"></a>9.2.2. 为什么 Java 是半编译半解释型语言？</h3><p>JDK1.0 时代，将 Java 语言定位为“解释执行”还是比较准确的。再后来，Java 也发展出可以直接生成本地代码的编译器。现在 JVM 在执行 Java 代码的时候，通常都会将解释执行与编译执行二者结合起来进行。</p>
-<p><strong>图示</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/f10a353479e6d2bca99abd4781fd9940.png" alt="image-20200710083656277"></p>
-<h2 id="9-3-机器码、指令、汇编语言"><a href="#9-3-机器码、指令、汇编语言" class="headerlink" title="9.3. 机器码、指令、汇编语言"></a>9.3. 机器码、指令、汇编语言</h2><h3 id="9-3-1-机器码"><a href="#9-3-1-机器码" class="headerlink" title="9.3.1. 机器码"></a>9.3.1. 机器码</h3><p>各种用二进制编码方式表示的指令，叫做机器指令码。开始，人们就用它采编写程序，这就是机器语言。</p>
-<p>机器语言虽然能够被计算机理解和接受，但和人们的语言差别太大，不易被人们理解和记忆，并且用它编程容易出差错。</p>
-<p>用它编写的程序一经输入计算机，CPU 直接读取运行，因此和其他语言编的程序相比，执行速度最快。</p>
-<p>机器指令与 CPU 紧密相关，所以不同种类的 CPU 所对应的机器指令也就不同。</p>
-<h3 id="9-3-2-指令"><a href="#9-3-2-指令" class="headerlink" title="9.3.2. 指令"></a>9.3.2. 指令</h3><p>由于机器码是有 0 和 1 组成的二进制序列，可读性实在太差，于是人们发明了指令。</p>
-<p>指令就是把机器码中特定的 0 和 1 序列，简化成对应的指令（一般为英文简写，如 mov，inc 等），可读性稍好</p>
-<p>由于不同的硬件平台，执行同一个操作，对应的机器码可能不同，所以不同的硬件平台的同一种指令（比如 mov），对应的机器码也可能不同。</p>
-<h3 id="9-3-3-指令集"><a href="#9-3-3-指令集" class="headerlink" title="9.3.3. 指令集"></a>9.3.3. 指令集</h3><p>不同的硬件平台，各自支持的指令，是有差别的。因此每个平台所支持的指令，称之为对应平台的指令集。 如常见的</p>
-<ul>
-<li>x86 指令集，对应的是 x86 架构的平台</li>
-<li>ARM 指令集，对应的是 ARM 架构的平台</li>
-</ul>
-<h3 id="9-3-4-汇编语言"><a href="#9-3-4-汇编语言" class="headerlink" title="9.3.4. 汇编语言"></a>9.3.4. 汇编语言</h3><p>由于指令的可读性还是太差，于是人们又发明了汇编语言。</p>
-<p>在汇编语言中，<mark>用助记符（Mnemonics）代替机器指令的操作码，用&lt;mark 地址符号（Symbol）或标号（Label）代替指令或操作数的地址</mark>。在不同的硬件平台，汇编语言对应着不同的机器语言指令集，通过汇编过程转换成机器指令。</p>
-<p>由于计算机只认识指令码，所以用<mark>汇编语言编写的程序还必须翻译成机器指令码</mark>，计算机才能识别和执行。</p>
-<h3 id="9-3-5-高级语言"><a href="#9-3-5-高级语言" class="headerlink" title="9.3.5. 高级语言"></a>9.3.5. 高级语言</h3><p>为了使计算机用户编程序更容易些，后来就出现了各种高级计算机语言。高级语言比机器语言、汇编语言<mark>更接近人的语言</mark></p>
-<p>当计算机执行高级语言编写的程序时，<mark>仍然需要把程序解释和编译成机器的指令码</mark>。完成这个过程的程序就叫做解释程序或编译程序。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/c812403e1ebae81455d5276b884e5ca8.png" alt="image-20200710085323733"></p>
-<p>高级语言也不是直接翻译成机器指令，而是翻译成汇编语言码，如下面说的 C 和 C++</p>
-<h4 id="C、C-源程序执行过程"><a href="#C、C-源程序执行过程" class="headerlink" title="C、C++源程序执行过程"></a>C、C++源程序执行过程</h4><p>编译过程又可以分成两个阶段：编译和汇编。</p>
-<p>编译过程：是读取源程序（字符流），对之进行词法和语法的分析，将高级语言指令转换为功能等效的汇编代码</p>
-<p>汇编过程：实际上指把汇编语言代码翻译成目标机器指令的过程。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/71d4298a250e724d64d78a2d8ec67cdc.png" alt="image-20200710085553258"></p>
-<h3 id="9-3-6-字节码"><a href="#9-3-6-字节码" class="headerlink" title="9.3.6. 字节码"></a>9.3.6. 字节码</h3><p>（字节码主要是为了实现跨平台性）</p>
-<p>字节码是一种中间状态（中间码）的二进制代码（文件），它比机器码更抽象，需要直译器转译后才能成为机器码</p>
-<p>字节码主要为了实现特定软件运行和软件环境、<mark>与硬件环境无关</mark>。</p>
-<p>字节码的实现方式是通过编译器和虚拟机器。编译器将源码编译成字节码，特定平台上的虚拟机器将字节码转译为可以直接执行的指令。字节码典型的应用为：Java bytecode</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/cba8c417f20ae9f6671e64574d2e229a.png" alt="image-20210511092336091"></p>
-<h2 id="9-4-解释器"><a href="#9-4-解释器" class="headerlink" title="9.4. 解释器"></a>9.4. 解释器</h2><p>JVM 设计者们的初衷仅仅只是单纯地为了<mark>满足 Java 程序实现跨平台特性</mark>，因此避免采用静态编译的方式直接生成本地机器指令，从而诞生了实现解释器在运行时采用逐行解释字节码执行程序的想法。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/f1a9c57cf4b6b4197b85d6e2a48a045e.png" alt="image-20200710090203674"></p>
-<p>为什么 Java 源文件不直接翻译成 JMV，而是翻译成字节码文件？可能是因为直接翻译的代价是比较大的</p>
-<h3 id="9-4-1-解释器工作机制"><a href="#9-4-1-解释器工作机制" class="headerlink" title="9.4.1. 解释器工作机制"></a>9.4.1. 解释器工作机制</h3><p>解释器真正意义上所承担的角色就是一个运行时“翻译者”，将字节码文件中的内容“翻译”为对应平台的本地机器指令执行。</p>
-<p>当一条字节码指令被解释执行完成后，接着再根据 PC 寄存器中记录的下一条需要被执行的字节码指令执行解释操作。</p>
-<h3 id="9-4-2-解释器分类"><a href="#9-4-2-解释器分类" class="headerlink" title="9.4.2. 解释器分类"></a>9.4.2. 解释器分类</h3><p>在 Java 的发展历史里，一共有两套解释执行器，即古老的字节码解释器、现在普遍使用的模板解释器。</p>
-<ul>
-<li><strong>字节码解释器</strong>在执行时通过<mark>纯软件代码模拟字节码</mark>的执行，效率非常低下。</li>
-<li>而<strong>模板解释器</strong>将<mark>每一条字节码和一个模板函数相关联</mark>，模板函数中直接产生这条字节码执行时的机器码，从而很大程度上提高了解释器的性能。</li>
-</ul>
-<p>在 HotSpot VM 中，解释器主要由 Interpreter 模块和 Code 模块构成。</p>
-<ul>
-<li>Interpreter 模块：实现了解释器的核心功能</li>
-<li>Code 模块：用于管理 HotSpot VM 在运行时生成的本地机器指令</li>
-</ul>
-<h3 id="9-4-3-现状"><a href="#9-4-3-现状" class="headerlink" title="9.4.3. 现状"></a>9.4.3. 现状</h3><p>由于解释器在设计和实现上非常简单，因此除了 Java 语言之外，还有许多高级语言同样也是基于解释器执行的，比如 Python、Perl、Ruby 等。但是在今天，<mark>基于解释器执行已经沦落为低效的代名词</mark>，并且时常被一些 C&#x2F;C++程序员所调侃。</p>
-<p>为了解决这个问题，JVM 平台支持一种叫作即时编译的技术。即时编译的目的是避免函数被解释执行，而是<mark>将整个函数体编译成为机器码，每次函数执行时，只执行编译后的机器码即可</mark>，这种方式可以使执行效率大幅度提升。</p>
-<p>不过无论如何，基于解释器的执行模式仍然为中间语言的发展做出了不可磨灭的贡献。</p>
-<h2 id="9-5-JIT-编译器"><a href="#9-5-JIT-编译器" class="headerlink" title="9.5. JIT 编译器"></a>9.5. JIT 编译器</h2><h3 id="9-5-1-Java-代码的执行分类"><a href="#9-5-1-Java-代码的执行分类" class="headerlink" title="9.5.1. Java 代码的执行分类"></a>9.5.1. Java 代码的执行分类</h3><ul>
-<li><p>第一种是将源代码编译成字节码文件，然后在运行时通过解释器将字节码文件转为机器码执行</p>
-</li>
-<li><p>第二种是编译执行（直接编译成机器码，但是要知道不同机器上编译的机器码是不一样，而字节码是可以跨平台的）。现代虚拟机为了提高执行效率，会使用即时编译技术（JIT，Just In Time）将方法编译成机器码后再执行</p>
-</li>
-</ul>
-<p>HotSpot VM 是目前市面上高性能虚拟机的代表作之一。它采用<mark>解释器与即时编译器并存的架构</mark>。在 Java 虚拟机运行时，解释器和即时编译器能够相互协作，各自取长补短，尽力去选择最合适的方式来权衡编译本地代码的时间和直接解释执行代码的时间。</p>
-<p>在今天，Java 程序的运行性能早已脱胎换骨，已经达到了可以和 C&#x2F;C++ 程序一较高下的地步。</p>
-<p><strong>问题来了</strong></p>
-<p>有些开发人员会感觉到诧异，<mark>既然 HotSpot VM 中已经内置 JIT 编译器了，那么为什么还需要再使用解释器来“拖累”程序的执行性能呢？</mark>比如 JRockit VM 内部就不包含解释器，字节码全部都依靠即时编译器编译后执行。</p>
-<p>首先明确： 当程序启动后，解释器可以马上发挥作用，省去编译的时间，立即执行。 编译器要想发挥作用，把代码编译成本地代码，需要一定的执行时间。但编译为本地代码后，执行效率高。</p>
-<p>所以： 尽管 JRockit VM 中程序的执行性能会非常高效，但程序在启动时必然需要花费更长的时间来进行编译。对于服务端应用来说，启动时间并非是关注重点，但对于那些看中启动时间的应用场景而言，或许就需要采用解释器与即时编译器并存的架构来换取一个平衡点。在此模式下，<mark>当 Java 虚拟器启动时，解释器可以首先发挥作用，而不必等待即时编译器全部编译完成后再执行，这样可以省去许多不必要的编译时间</mark>。随着时间的推移，编译器发挥作用，把越来越多的代码编译成本地代码，获得更高的执行效率。</p>
-<p>同时，解释执行在编译器进行激进优化不成立的时候，作为编译器的“逃生门”。</p>
-<h3 id="9-5-2-HotSpot-JVM-执行方式"><a href="#9-5-2-HotSpot-JVM-执行方式" class="headerlink" title="9.5.2. HotSpot JVM 执行方式"></a>9.5.2. HotSpot JVM 执行方式</h3><p><font color="green"><strong>解析器和JIT编译器结合使用</strong><color></color></font></p>
-<p>当虚拟机启动的时候，<mark>解释器可以首先发挥作用</mark>，而不必等待即时编译器全部编译完成再执行，这样可以省去许多不必要的编译时间。并且随着程序运行时间的推移，即时编译器逐渐发挥作用，根据热点探测功能，<mark>将有价值的字节码编译为本地机器指令</mark>，以换取更高的程序执行效率。</p>
-<p><strong>案例来了</strong></p>
-<p>注意解释执行与编译执行在线上环境微妙的辩证关系。<mark>机器在热机状态可以承受的负载要大于冷机状态</mark>。如果以热机状态时的流量进行切流，可能使处于冷机状态的服务器因无法承载流量而假死。</p>
-<p>在生产环境发布过程中，以分批的方式进行发布，根据机器数量划分成多个批次，每个批次的机器数至多占到整个集群的 1&#x2F;8。曾经有这样的故障案例：某程序员在发布平台进行分批发布，在输入发布总批数时，误填写成分为两批发布。如果是热机状态，在正常情况下一半的机器可以勉强承载流量，但由于刚启动的 JVM 均是解释执行，还没有进行热点代码统计和 JIT 动态编译，导致机器启动之后，当前 1&#x2F;2 发布成功的服务器马上全部宕机，此故障说明了 JIT 的存在。—阿里团队</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/7f26fbc3a6ec701fe4f84eea99811540.png" alt="image-20200710095417462"></p>
-<h3 id="9-5-3-概念解释"><a href="#9-5-3-概念解释" class="headerlink" title="9.5.3. 概念解释"></a>9.5.3. 概念解释</h3><p>Java 语言的“编译期”其实是一段“不确定”的操作过程，因为它可能是指一个<mark>前端编译器</mark>（其实叫“编译器的前端”更准确一些）把.java 文件转变成.class 文件的过程；</p>
-<p>也可能是指虚拟机的<mark>后端运行期编译器</mark>（JIT 编译器，Just In Time Compiler）把字节码转变成机器码的过程。</p>
-<p>还可能是指使用<mark>静态提前编译器</mark>（AOT 编译器，Ahead of Time Compiler）直接把.java 文件编译成本地机器代码的过程。</p>
-<ul>
-<li><p>前端编译器：Sun 的 Javac、Eclipse JDT 中的增量式编译器（ECJ）。</p>
-</li>
-<li><p>JIT 编译器：HotSpot VM 的 C1、C2 编译器。</p>
-</li>
-<li><p>AOT 编译器：GNU Compiler for the Java（GCJ）、Excelsior JET。</p>
-</li>
-</ul>
-<h3 id="9-5-4-热点代码及探测技术"><a href="#9-5-4-热点代码及探测技术" class="headerlink" title="9.5.4. 热点代码及探测技术"></a>9.5.4. 热点代码及探测技术</h3><p>当然是否需要启动 JIT 编译器将字节码直接编译为对应平台的本地机器指令，则需要根据代码被调用执行的频率而定。关于那些需要被编译为本地代码的字节码，也被称之为“热点代码”，JIT 编译器在运行时会针对那些频繁被调用的“热点代码”做出深度优化，将其直接编译为对应平台的本地机器指令，以此提升 Java 程序的执行性能。</p>
-<p><mark>一个被多次调用的方法，或者是一个方法体内部循环次数较多的循环体都可以被称之为“热点代码”</mark>，因此都可以通过 JIT 编译器编译为本地机器指令。由于这种编译方式发生在方法的执行过程中，因此被称之为栈上替换，或简称为<mark>OSR（On Stack Replacement）编译</mark>。</p>
-<p>一个方法究竟要被调用多少次，或者一个循环体究竟需要执行多少次循环才可以达到这个标准？必然需要一个明确的阈值，JIT 编译器才会将这些“热点代码”编译为本地机器指令执行。这里主要依靠<mark>热点探测功能</mark>。</p>
-<p><mark>目前 HotSpot VM 所采用的热点探测方式是基于计数器的热点探测</mark>。</p>
-<p>采用基于计数器的热点探测，HotSpot VM 将会为每一个方法都建立 2 个不同类型的计数器，分别为<mark>方法调用计数器（Invocation Counter）和回边计数器（Back Edge Counter）</mark>。</p>
-<ul>
-<li>方法调用计数器用于统计方法的调用次数</li>
-<li>回边计数器则用于统计循环体执行的循环次数</li>
-</ul>
-<h4 id="方法调用计数器"><a href="#方法调用计数器" class="headerlink" title="方法调用计数器"></a>方法调用计数器</h4><p>这个计数器就用于统计方法被调用的次数，它的默认阀值在 Client 模式下是 1500 次，在 Server 模式下是 10000 次。超过这个阈值，就会触发 JIT 编译。</p>
-<p>这个阀值可以通过虚拟机参数 <code>-XX:CompileThreshold</code>来人为设定。</p>
-<p>当一个方法被调用时，会先检查该方法是否存在被 JIT 编译过的版本，如果存在，则优先使用编译后的本地代码来执行。如果不存在已被编译过的版本，则将此方法的调用计数器值加 1，然后判断<mark>方法调用计数器与回边计数器值之和</mark>是否超过方法调用计数器的阀值。如果已超过阈值，那么将会向即时编译器提交一个该方法的代码编译请求。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/26dc8459b4b31e3d9c40b3aec10b15cd.png" alt="image-20200710101829934"></p>
-<h4 id="热点衰减"><a href="#热点衰减" class="headerlink" title="热点衰减"></a>热点衰减</h4><p>如果不做任何设置，方法调用计数器统计的并不是方法被调用的绝对次数，而是一个相对的执行频率，即<mark>一段时间之内方法被调用的次数</mark>。当超过<mark>一定的时间限度</mark>，如果方法的调用次数仍然不足以让它提交给即时编译器编译，那这个方法的调用计数器就会被减少一半，这个过程称为方法调用计数器热度的<mark>衰减（Counter Decay）</mark>，而这段时间就称为此方法统计的<mark>半衰周期（Counter Half Life Time）</mark></p>
-<p>进行热度衰减的动作是在虚拟机进行垃圾收集时顺便进行的，可以使用虚拟机参数 <code>-XX:-UseCounterDecay</code> 来关闭热度衰减，让方法计数器统计方法调用的绝对次数，这样，只要系统运行时间足够长，绝大部分方法都会被编译成本地代码。</p>
-<p>另外，可以使用<code>-XX:CounterHalfLifeTime</code>参数设置半衰周期的时间，单位是秒。</p>
-<h4 id="回边计数器"><a href="#回边计数器" class="headerlink" title="回边计数器"></a>回边计数器</h4><p>它的作用是统计一个<mark>方法中循环体代码执行的次数</mark>，在字节码中遇到控制流向后跳转的指令称为“回边”（Back Edge）。显然，建立回边计数器统计的目的就是为了触发 OSR 编译。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/4de983636a290fde3fea83a6cd60d6a5.png" alt="image-20200710103103869"></p>
-<h3 id="9-5-5-HotSpotVM-可以设置程序执行方法"><a href="#9-5-5-HotSpotVM-可以设置程序执行方法" class="headerlink" title="9.5.5. HotSpotVM 可以设置程序执行方法"></a>9.5.5. HotSpotVM 可以设置程序执行方法</h3><p>缺省情况下 HotSpot VM 是采用解释器与即时编译器并存的架构，当然开发人员可以根据具体的应用场景，<strong>通过命令显式地为 Java 虚拟机指定在运行时到底是完全采用解释器执行，还是完全采用即时编译器执行</strong>。如下所示：</p>
-<ul>
-<li><code>-Xint</code>：完全采用解释器模式执行程序；</li>
-<li><code>-Xcomp</code>：完全采用即时编译器模式执行程序。如果即时编译出现问题，解释器会介入执行</li>
-<li><code>-Xmixed</code>：采用解释器+即时编译器的混合模式共同执行程序。</li>
-</ul>
-<p><img src="/../../../images/image-20221120214349955.png" alt="image-20221120214349955"></p>
-<p>例子：</p>
-<p>通过设置三种不同的方式进行测试：</p>
-<p><img src="/../../../images/image-20221120214924904.png" alt="image-20221120214924904"></p>
-<p>设置方式如下：</p>
-<p><img src="/../../../images/image-20221120214714985.png" alt="image-20221120214714985"></p>
-<h3 id="9-5-6-HotSpotVM-中-JIT-分类"><a href="#9-5-6-HotSpotVM-中-JIT-分类" class="headerlink" title="9.5.6. HotSpotVM 中 JIT 分类"></a>9.5.6. HotSpotVM 中 JIT 分类</h3><p>JIT 的编译器还分为了两种，分别是 C1 和 C2，在 HotSpot VM 中内嵌有两个 JIT 编译器，分别为 Client Compiler 和 Server Compiler，但大多数情况下我们简称为 C1 编译器 和 C2 编译器。开发人员可以通过如下命令显式指定 Java 虚拟机在运行时到底使用哪一种即时编译器，如下所示：</p>
-<ul>
-<li><code>-client</code>：指定 Java 虚拟机运行在 Client 模式下，并使用 C1 编译器；C1 编译器会对字节码<mark>进行简单和可靠的优化，耗时短</mark>，以达到更快的编译速度。</li>
-<li><code>-server</code>：指定 Java 虚拟机运行在 server 模式下，并使用 C2 编译器。C2<mark>进行耗时较长的优化，以及激进优化</mark>，但优化的代码执行效率更高。</li>
-</ul>
-<p><mark>分层编译（Tiered Compilation）策略</mark>：程序解释执行（ 不开启性能监控）可以触发 C1 编译，将字节码编译成机器码，可以进行简单优化，也可以加上性能监控，C2 编译会根据性能监控信息进行激进优化。</p>
-<p>不过在 Java7 版本之后，一旦开发人员在程序中显式指定命令“-server”时，默认将会开启分层编译策略，由 C1 编译器和 C2 编译器相互协作共同来执行编译任务。</p>
-<h4 id="C1-和-C2-编译器不同的优化策略"><a href="#C1-和-C2-编译器不同的优化策略" class="headerlink" title="C1 和 C2 编译器不同的优化策略"></a>C1 和 C2 编译器不同的优化策略</h4><p>在不同的编译器上有不同的优化策略，C1 编译器上主要有<mark>方法内联、去虚拟化、冗余消除</mark>。</p>
-<ul>
-<li>方法内联：将引用的函数代码编译到引用点处，这样可以减少栈帧的生成，减少参数传递以及跳转过程</li>
-<li>去虚拟化：对唯一的实现类进行内联</li>
-<li>冗余消除：在运行期间把一些不会执行的代码折叠掉</li>
-</ul>
-<p>C2 的优化主要是在全局层面，逃逸分析（前面讲过，并不成熟）是优化的基础。基于逃逸分析在 C2 上有如下几种优化：</p>
-<ul>
-<li><mark>标量替换</mark>：用标量值代替聚合对象的属性值</li>
-<li><mark>栈上分配</mark>：对于未逃逸的对象分配对象在栈而不是堆</li>
-<li><mark>同步消除</mark>：清除同步操作，通常指 synchronized</li>
-</ul>
-<p><img src="/../../../images/image-20221120215856902.png" alt="image-20221120215856902"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>一般来讲，JIT 编译出来的机器码性能比解释器高。</p>
-<p>C2 编译器启动时长比 C1 慢，系统稳定执行以后，C2 编译器执行速度远快于 C1 编译器</p>
-<h3 id="写到最后-1"><a href="#写到最后-1" class="headerlink" title="写到最后 1"></a>写到最后 1</h3><ul>
-<li>自 JDK10 起，HotSpot 又加入了一个全新的及时编译器：Graal 编译器</li>
-<li>编译效果短短几年时间就追评了 C2 编译器，未来可期</li>
-<li>目前，带着实验状态标签，需要使用开关参数<code>-XX:+UnlockExperimentalvMOptions -XX:+UseJVMCICompiler</code>去激活才能使用</li>
-</ul>
-<h3 id="写到最后-2：AOT-编译器"><a href="#写到最后-2：AOT-编译器" class="headerlink" title="写到最后 2：AOT 编译器"></a>写到最后 2：AOT 编译器</h3><p>jdk9 引入了 AOT 编译器（静态提前编译器，Ahead of Time Compiler）</p>
-<p>Java 9 引入了实验性 AOT 编译工具 jaotc。它借助了 Graal 编译器，将所输入的 Java 类文件转换为机器码，并存放至生成的动态共享库之中。</p>
-<p>所谓 AOT 编译，是与即时编译相对立的一个概念。我们知道，<mark>即时编译指的是在程序的运行过程中，将字节码转换为可在硬件上直接运行的机器码</mark>，并部署至托管环境中的过程。而<mark>AOT 编译指的则是，在程序运行之前，便将字节码转换为机器码的过程。</mark></p>
-<p>最大的好处：Java 虚拟机加载已经预编译成二进制库，可以直接执行。不必等待及时编译器的预热，减少 Java 应用给人带来“第一次运行慢” 的不良体验</p>
-<p>缺点：</p>
-<ul>
-<li><mark>破坏了 java “ 一次编译，到处运行”的理念</mark>，必须为每个不同的硬件，OS 编译对应的发行包</li>
-<li><mark>降低了 Java 链接过程的动态性</mark>，加载的代码在编译器就必须全部已知。</li>
-<li>还需要继续优化中，最初只支持 Linux X64 java base</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/9.%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/" data-id="cldv7jm500065zcv644t024e9" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/8.对象实例化及直接内存" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/8.%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/" class="article-date">
-  <time class="post-time" datetime="2022-11-20T04:16:21.730Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">20</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/8.%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/">8. 对象实例化及直接内存</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="8-对象实例化及直接内存"><a href="#8-对象实例化及直接内存" class="headerlink" title="8. 对象实例化及直接内存"></a>8. 对象实例化及直接内存</h1><h2 id="8-1-对象实例化"><a href="#8-1-对象实例化" class="headerlink" title="8.1. 对象实例化"></a>8.1. 对象实例化</h2><p><strong>面试题</strong></p>
-<blockquote>
-<p><mark>美团</mark>：</p>
-<p>对象在 JVM 中是怎么存储的？</p>
-<p>对象头信息里面有哪些东西？</p>
-<p><mark>蚂蚁金服</mark>：</p>
-<p>Java 对象头有什么？</p>
-</blockquote>
-<p><img src="/../../../images/image-20221120122751656.png" alt="image-20221120122751656"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/fe7dfd78e13789563d56f9fbd1b79cad.png" alt="image-20200709095356247"></p>
-<h3 id="8-1-1-创建对象的方式"><a href="#8-1-1-创建对象的方式" class="headerlink" title="8.1.1. 创建对象的方式"></a>8.1.1. 创建对象的方式</h3><ul>
-<li>new：最常见的方式、Xxx 的静态方法，XxxBuilder&#x2F;XxxFactory 的静态方法</li>
-<li>Class 的 newInstance 方法：反射的方式，只能调用空参的构造器，权限必须是 public</li>
-<li>Constructor 的 newInstance(XXX)：反射的方式，可以调用空参、带参的构造器，权限没有要求</li>
-<li>使用 clone()：不调用任何的构造器，要求当前的类需要实现 Cloneable 接口，实现 clone()</li>
-<li>使用序列化：从文件中、从网络中获取一个对象的二进制流</li>
-<li>第三方库 Objenesis</li>
-</ul>
-<h3 id="8-1-2-创建对象的步骤"><a href="#8-1-2-创建对象的步骤" class="headerlink" title="8.1.2. 创建对象的步骤"></a>8.1.2. 创建对象的步骤</h3><p>前面所述是从字节码角度看待对象的创建过程，现在从执行步骤的角度来分析：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/504c93d37f3d51c88b1834d78c33eaa2.png" alt="image-20210510220743192"></p>
-<h4 id="1-判断对象对应的类是否加载、链接、初始化（即，要加载创建的对象所属的类）"><a href="#1-判断对象对应的类是否加载、链接、初始化（即，要加载创建的对象所属的类）" class="headerlink" title="1. 判断对象对应的类是否加载、链接、初始化（即，要加载创建的对象所属的类）"></a>1. 判断对象对应的类是否加载、链接、初始化（即，要加载创建的对象所属的类）</h4><p>虚拟机遇到一条 new 指令，首先去检查这个指令的参数能否在 Metaspace 的常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已经被加载，解析和初始化（即判断类元信息是否存在）。</p>
-<p>如果没有，那么在<strong>双亲委派</strong>模式下，使用当前类加载器以 ClassLoader + 包名 + 类名为 key 进行查找对应的 .class 文件；</p>
-<ul>
-<li>如果没有找到文件，则抛出 ClassNotFoundException 异常</li>
-<li>如果找到，则进行类加载，并生成对应的 Class 对象</li>
-</ul>
-<h4 id="2-为对象分配内存"><a href="#2-为对象分配内存" class="headerlink" title="2. 为对象分配内存"></a>2. 为对象分配内存</h4><p>首先计算对象占用空间的大小，接着在堆中划分一块内存给新对象。如果实例成员变量是引用变量，仅分配引用变量空间即可，即 4 个字节大小</p>
-<p><strong>如果内存规整</strong>：虚拟机将采用的是<mark>指针碰撞法（Bump The Point）</mark>来为对象分配内存。</p>
-<ul>
-<li>意思是所有用过的内存在一边，空闲的内存放另外一边，中间放着一个指针作为分界点的指示器，分配内存就仅仅是把指针指向空闲那边挪动一段与对象大小相等的距离罢了。如果垃圾收集器选择的是 Serial ，ParNew 这种基于压缩算法的，虚拟机采用这种分配方式。一般使用带 Compact（整理）过程的收集器时，使用指针碰撞。</li>
-</ul>
-<p><strong>如果内存不规整</strong>：虚拟机需要维护一个<mark>空闲列表（Free List）</mark>来为对象分配内存。</p>
-<ul>
-<li>已使用的内存和未使用的内存相互交错，那么虚拟机将采用的是空闲列表来为对象分配内存。意思是虚拟机维护了一个列表，记录上哪些内存块是可用的，再分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的内容。</li>
-</ul>
-<p>选择哪种分配方式由 Java 堆是否规整所决定，而 Java 堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。</p>
-<h4 id="3-处理并发问题"><a href="#3-处理并发问题" class="headerlink" title="3. 处理并发问题"></a>3. 处理并发问题</h4><ul>
-<li><p>采用 CAS 失败重试、区域加锁保证更新的原子性</p>
-<ul>
-<li>ps ： CAS（Compare-And-Swap）,它是一条CPU并发原语，用于判断内存中某个位置的值是否为<strong>预期值</strong>，如果是则更改为新的值，这个过程是<strong>原子</strong>的。</li>
-</ul>
-</li>
-<li><p>每个线程预先分配一块 TLAB：通过设置 <code>-XX:+UseTLAB</code>参数来设定</p>
-<ul>
-<li>ps：TLAB是线程私有的，不会被其它线程共享使用，但是TLAB区域不大</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-初始化分配到的内存"><a href="#4-初始化分配到的内存" class="headerlink" title="4. 初始化分配到的内存"></a>4. 初始化分配到的内存</h4><p>所有属性设置默认值，保证对象实例字段在不赋值时可以直接使用</p>
-<h4 id="5-设置对象的对象头"><a href="#5-设置对象的对象头" class="headerlink" title="5. 设置对象的对象头"></a>5. 设置对象的对象头</h4><p>将对象的所属类（即类的元数据信息）、对象的 HashCode 和对象的 GC 信息、锁信息等数据存储在对象的对象头中。这个过程的具体设置方式取决于 JVM 实现。</p>
-<h4 id="6-执行-init-方法进行初始化"><a href="#6-执行-init-方法进行初始化" class="headerlink" title="6. 执行 init 方法进行初始化"></a>6. 执行 init 方法进行初始化</h4><p>在 Java 程序的视角看来，初始化才正式开始。<mark>初始化成员变量，执行实例化代码块，调用类的构造方法</mark>，并把堆内对象的首地址赋值给引用变量。</p>
-<p>因此一般来说（由字节码中跟随 invokespecial 指令所决定），new 指令之后会接着就是执行方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完成创建出来。</p>
-<p><strong>给对象属性赋值的操作</strong></p>
-<ul>
-<li>属性的默认初始化</li>
-<li>显式初始化</li>
-<li>代码块中初始化</li>
-<li>构造器中初始化</li>
-</ul>
-<p><strong>对象实例化的过程</strong></p>
-<ol>
-<li>加载类元信息</li>
-<li>为对象分配内存</li>
-<li>处理并发问题</li>
-<li>属性的默认初始化（零值初始化）</li>
-<li>设置对象头信息</li>
-<li>属性的显示初始化、代码块中初始化、构造器中初始化</li>
-</ol>
-<h2 id="8-2-对象内存布局"><a href="#8-2-对象内存布局" class="headerlink" title="8.2. 对象内存布局"></a>8.2. 对象内存布局</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/f6e34140a6bd24a85d9f766652b57d98.png" alt="image-20200709151033237"></p>
-<h3 id="8-2-1-对象头（Header）"><a href="#8-2-1-对象头（Header）" class="headerlink" title="8.2.1. 对象头（Header）"></a>8.2.1. 对象头（Header）</h3><p>对象头包含了两部分，分别是<mark>运行时元数据（Mark Word）</mark>和<mark>类型指针</mark>。如果是数组，还需要记录数组的长度</p>
-<h4 id="运行时元数据"><a href="#运行时元数据" class="headerlink" title="运行时元数据"></a>运行时元数据</h4><ul>
-<li>哈希值（HashCode）</li>
-<li>GC 分代年龄</li>
-<li>锁状态标志</li>
-<li>线程持有的锁</li>
-<li>偏向线程 ID</li>
-<li>翩向时间戳</li>
-</ul>
-<h4 id="类型指针"><a href="#类型指针" class="headerlink" title="类型指针"></a>类型指针</h4><p>指向类元数据 InstanceKlass，确定该对象所属的类型。</p>
-<h3 id="8-2-2-实例数据（Instance-Data）"><a href="#8-2-2-实例数据（Instance-Data）" class="headerlink" title="8.2.2. 实例数据（Instance Data）"></a>8.2.2. 实例数据（Instance Data）</h3><p>它是对象真正存储的有效信息，包括程序代码中定义的各种类型的字段（包括从父类继承下来的和本身拥有的字段）</p>
-<ul>
-<li>相同宽度的字段总是被分配在一起</li>
-<li>父类中定义的变量会出现在子类之前</li>
-<li>如果 CompactFields 参数为 true（默认为 true）：子类的窄变量可能插入到父类变量的空隙</li>
-</ul>
-<h3 id="8-2-3-对齐填充（Padding）"><a href="#8-2-3-对齐填充（Padding）" class="headerlink" title="8.2.3. 对齐填充（Padding）"></a>8.2.3. 对齐填充（Padding）</h3><p>不是必须的，也没有特别的含义，仅仅起到占位符的作用</p>
-<p><strong>举例</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Customer</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> <span class="number">1001</span>;</span><br><span class="line">    String name;</span><br><span class="line">    Account acct;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        name = <span class="string">&quot;匿名客户&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Customer</span><span class="params">()</span> &#123;</span><br><span class="line">        acct = <span class="keyword">new</span> <span class="title class_">Account</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomerTest</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(string[] args)</span>&#123;</span><br><span class="line">        Customer cust=<span class="keyword">new</span> <span class="title class_">Customer</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>图示</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/1bba0ee2a8a614b80d6cac9fecbb3f8a.png" alt="image-20200709152801713"></p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/3be25c48b29d3cef51354f19cbe31d7d.png" alt="image-20210510225407119"></p>
-<h2 id="8-3-对象的访问定位"><a href="#8-3-对象的访问定位" class="headerlink" title="8.3. 对象的访问定位"></a>8.3. 对象的访问定位</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/375b00ca9022291e7d2e214ce2d7cbfd.png" alt="image-20210510230045654"></p>
-<p>JVM 是如何通过栈帧中的对象引用访问到其内部的对象实例呢？</p>
-<p>定位，通过栈上reference访问</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/deab7773248ea150e5f7dee3901700cd.png" alt="image-20200709164149920"></p>
-<h3 id="8-3-1-句柄访问"><a href="#8-3-1-句柄访问" class="headerlink" title="8.3.1. 句柄访问"></a>8.3.1. 句柄访问</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/59cc079fe02b7a5836ff7c2c7fffb635.png" alt="image-20210510230241991"></p>
-<p>reference 中存储稳定句柄地址，对象被移动（垃圾收集时移动对象很普遍）时只会改变句柄中实例数据指针即可，reference 本身不需要被修改</p>
-<h3 id="8-3-2-直接指针（HotSpot-采用）"><a href="#8-3-2-直接指针（HotSpot-采用）" class="headerlink" title="8.3.2. 直接指针（HotSpot 采用）"></a>8.3.2. 直接指针（HotSpot 采用）</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/694601dcb023c6d10168a00fe000becc.png" alt="image-20210510230337956"></p>
-<p>直接指针是局部变量表中的引用，直接指向堆中的实例，在对象实例中有类型指针，指向的是方法区中的对象类型数据</p>
-<p>直接指针的reference是不稳定的，可能发生变化的，因为reference指向的对象，在垃圾回收时，需要移动，所以reference就会跟着修改</p>
-<h2 id="8-4-直接内存（Direct-Memory）"><a href="#8-4-直接内存（Direct-Memory）" class="headerlink" title="8.4. 直接内存（Direct Memory）"></a>8.4. 直接内存（Direct Memory）</h2><h3 id="8-4-1-直接内存概述"><a href="#8-4-1-直接内存概述" class="headerlink" title="8.4.1. 直接内存概述"></a>8.4.1. 直接内存概述</h3><p>不是虚拟机运行时数据区的一部分，也不是《Java 虚拟机规范》中定义的内存区域。<mark>直接内存是在 Java 堆外的、直接向系统申请的内存区间</mark>。来源于 NIO，通过存在堆中的 DirectByteBuffer 操作 Native 内存。通常，访问直接内存的速度会优于 Java 堆，即<mark>读写性能高</mark>。</p>
-<ul>
-<li>因此出于性能考虑，读写频繁的场合可能会考虑使用直接内存。</li>
-<li>Java 的 NIO 库允许 Java 程序使用直接内存，用于数据缓冲区</li>
-</ul>
-<h3 id="8-4-2-非直接缓存区"><a href="#8-4-2-非直接缓存区" class="headerlink" title="8.4.2. 非直接缓存区"></a>8.4.2. 非直接缓存区</h3><p>使用 IO 读写文件，需要与磁盘交互，需要由用户态切换到内核态。在内核态时，需要两份内存存储重复数据，效率低。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/c691d62d73e977fb942748a81313f5e6.png" alt="image-20210510231408607"></p>
-<h3 id="8-4-3-直接缓存区"><a href="#8-4-3-直接缓存区" class="headerlink" title="8.4.3. 直接缓存区"></a>8.4.3. 直接缓存区</h3><p>使用 NIO 时，操作系统划出的直接缓存区可以被 java 代码直接访问，只有一份。<strong>NIO</strong> 适合对大文件的读写操作。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/d13b08447999ab32811a440496e4dac7.png" alt="image-20210510231456550"></p>
-<p>也可能导致 OutOfMemoryError 异常</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">&quot;main&quot;</span> java.lang.OutOfMemoryError: Direct buffer memory</span><br><span class="line">    at java.nio.Bits.reserveMemory(Bits.java:<span class="number">693</span>)</span><br><span class="line">    at java.nio.DirectByteBuffer.&lt;init&gt;(DirectByteBuffer.java:<span class="number">123</span>)</span><br><span class="line">    at java.nio.ByteBuffer.allocateDirect(ByteBuffer.java:<span class="number">311</span>)</span><br><span class="line">    at com.atguigu.java.BufferTest2.main(BufferTest2.java:<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-
-<p>由于直接内存在 Java 堆外，因此它的大小不会直接受限于-Xmx 指定的最大堆大小，但是系统内存是有限的，Java 堆和直接内存的总和依然受限于操作系统能给出的最大内存。</p>
-<ul>
-<li>分配回收成本较高</li>
-<li>不受 JVM 内存回收管理</li>
-</ul>
-<p>直接内存大小可以通过<code>MaxDirectMemorySize</code>设置。如果不指定，默认与堆的最大值-Xmx 参数值一致</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/0ac6c50a98325c93b5652602137b9dea.png" alt="image-20200709230647277"></p>
-<p>java总的进程空间 &#x3D; java的堆空间 + 本地内存空间</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/8.%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/" data-id="cldv7jm4y0061zcv656bi4996" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/11.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%AE%97%E6%B3%95/" data-id="cldvwq41b005mvkv6hrfl283m" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -3873,7 +3210,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>136</strong><br>文章</div></a>
       <a href="/categories"><div><strong>63</strong><br>分类</div></a>
       <a href="/tags"><div><strong>47</strong><br>标签</div></a>
     </div>
