@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>130</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>60</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>45</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,159 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-刷题笔记/刷题记录/leetcode-134.加油站" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/" class="article-date">
+  <time class="post-time" datetime="2023-01-09T14:34:18.875Z" itemprop="datePublished">
+    <span class="post-month">1月</span><br/>
+    <span class="post-day">09</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">leetcode-134.加油站</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>,<a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/leetcode/">leetcode</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>在一条环路上有 <code>n</code> 个加油站，其中第 <code>i</code> 个加油站有汽油 <code>gas[i]</code> 升。</p>
+<p>你有一辆油箱容量无限的的汽车，从第 <code>i</code> 个加油站开往第 <code>i+1</code> 个加油站需要消耗汽油 <code>cost[i]</code> 升。你从其中的一个加油站出发，开始时油箱为空。</p>
+<p>给定两个整数数组 <code>gas</code> 和 <code>cost</code> ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 <code>-1</code> 。如果存在解，则 <strong>保证</strong> 它是 <strong>唯一</strong> 的。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: gas = [1,2,3,4,5], cost = [3,4,5,1,2]</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油</span><br><span class="line">开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油</span><br><span class="line">开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油</span><br><span class="line">开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油</span><br><span class="line">开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油</span><br><span class="line">开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。</span><br><span class="line">因此，3 可为起始索引。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: gas = [2,3,4], cost = [3,4,3]</span><br><span class="line">输出: -1</span><br><span class="line">解释:</span><br><span class="line">你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。</span><br><span class="line">我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油</span><br><span class="line">开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油</span><br><span class="line">开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油</span><br><span class="line">你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。</span><br><span class="line">因此，无论怎样，你都不可能绕环路行驶一周。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>gas.length == n</code></li>
+<li><code>cost.length == n</code></li>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>0 &lt;= gas[i], cost[i] &lt;= 104</code></li>
+</ul>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>下图的 黑色折线图 即 总油量剩余值，若要满足题目的要求：跑完全程再回到起点，总油量剩余值 的任意部分都需要在 X 轴以上，且跑到终点时：总剩余汽油量 &gt;&#x3D; 0。</p>
+<p>为了让 黑色折线图 任意部分都在 X 轴以上，我们需要向上移动 黑色折线图，直到所有点都在 X 轴或 X 轴以上。此时，处在 X 轴的点即为出发点。即 黑色折线图 的最低值的位置：index &#x3D; 3。</p>
+<p><img src="/../../../images/image-20230109224824634.png" alt="image-20230109224824634"></p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    思路：</span></span><br><span class="line"><span class="comment">        找到最后一个 sum 还是减小状态的下标即可，然后结果就是这个下标的下一个下标，即( index + 1 ) % len</span></span><br><span class="line"><span class="comment">        因为index 是最低点了，后面就是回升的了。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">canCompleteCircuit</span><span class="params">(<span class="type">int</span>[] gas, <span class="type">int</span>[] cost)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> gas.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i ++ ) &#123;</span><br><span class="line">            sum += gas[ i ] - cost[ i ];</span><br><span class="line">            <span class="comment">// System.out.println( sum + &quot; &quot; + i );</span></span><br><span class="line">            <span class="keyword">if</span> ( sum &lt; min ) &#123;</span><br><span class="line">                min = sum;</span><br><span class="line">                index = i + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum &lt; <span class="number">0</span> ? -<span class="number">1</span> : index % len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/" data-id="cldv7hkw5008220v68m0b9zm0" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-JVM/JVM中篇：字节码与类的加载篇/2-javap使用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time class="post-time" datetime="2023-01-09T07:12:26.476Z" itemprop="datePublished">
+    <span class="post-month">1月</span><br/>
+    <span class="post-day">09</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">02-javap使用</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/">JVM中篇：字节码与类的加载器</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、解析字节码的作用"><a href="#1、解析字节码的作用" class="headerlink" title="1、解析字节码的作用"></a>1、解析字节码的作用</h2><p><img src="/../../../images/image-20230109105233604.png" alt="image-20230109105233604"></p>
+<h2 id="2、javac-g-操作"><a href="#2、javac-g-操作" class="headerlink" title="2、javac -g 操作"></a>2、javac -g 操作</h2><p><img src="/../../../images/image-20230109105203289.png" alt="image-20230109105203289"></p>
+<h2 id="3、javap的用法"><a href="#3、javap的用法" class="headerlink" title="3、javap的用法"></a>3、javap的用法</h2><p><img src="/../../../images/image-20230109105401609.png" alt="image-20230109105401609"></p>
+<p><img src="/../../../images/image-20230109111148023.png" alt="image-20230109111148023"></p>
+<p><img src="/../../../images/image-20230109111249850.png" alt="image-20230109111249850"></p>
+<p><mark>注意：-v虽然包含的信息很全，但是不包含私有private的，用 **-v -p **才可以带上私有的，这样信息就是最全的了</mark></p>
+<p>如：演示javap -s （输出内部类型签名）：</p>
+<p><img src="/../../../images/image-20230109110318593.png" alt="image-20230109110318593"></p>
+<p>演示 javap -l （输出行号和本地变量表（局部变量表））：</p>
+<p><img src="/../../../images/image-20230109110533368.png" alt="image-20230109110533368"></p>
+<p>-c 和 -v 的内容对比：</p>
+<p><img src="/../../../images/image-20230109111622323.png" alt="image-20230109111622323"></p>
+<p><img src="/../../../images/image-20230109111550389.png" alt="image-20230109111550389"></p>
+<h2 id="javap解析得到的文件结构的解读"><a href="#javap解析得到的文件结构的解读" class="headerlink" title="javap解析得到的文件结构的解读"></a>javap解析得到的文件结构的解读</h2><p><img src="/../../../images/image-20230109150619055.png" alt="image-20230109150619055"></p>
+<p><img src="/../../../images/image-20230109150710937.png" alt="image-20230109150710937"></p>
+<p><img src="/../../../images/image-20230109150838112.png" alt="image-20230109150838112"></p>
+<p><img src="/../../../images/image-20230109150909746.png" alt="image-20230109150909746"></p>
+<p><img src="/../../../images/image-20230109145505307.png" alt="image-20230109145505307"></p>
+<p><img src="/../../../images/image-20230109150257068.png" alt="image-20230109150257068"></p>
+<p><img src="/../../../images/image-20230109150459817.png" alt="image-20230109150459817"></p>
+<p><img src="/../../../images/image-20230109150441824.png" alt="image-20230109150441824"></p>
+<h2 id="javap使用小结"><a href="#javap使用小结" class="headerlink" title="javap使用小结"></a>javap使用小结</h2><p><img src="/../../../images/image-20230109151005736.png" alt="image-20230109151005736"></p>
+<h1 id><a href="#" class="headerlink" title></a></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/" data-id="cldv7hkvp006z20v66tu61wgu" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-JVM/JVM中篇：字节码与类的加载篇/3-字节码指令集" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -1150,7 +1303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/" data-id="cldsgin1z006yesv63r7g6syc" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/" data-id="cldv7hkvq007220v63zv0dj9q" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
@@ -1209,7 +1362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/" data-id="cldsgin210074esv6hamug88s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/" data-id="cldv7hkvv007a20v66sgnh13n" class="article-share-link">分享</a>
       
       
     </footer>
@@ -1242,7 +1395,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/" data-id="cldsgin14004iesv6d0h0572b" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/" data-id="cldv7hkuj004o20v60p1301ma" class="article-share-link">分享</a>
       
       
     </footer>
@@ -1300,7 +1453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/" data-id="cldsgin13004hesv64d5hfadv" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/" data-id="cldv7hkuk004q20v60z2p2cqs" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/" rel="tag">异常or报错</a></li></ul>
@@ -1360,7 +1513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="cldsgin0j002kesv6eavl6bir" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="cldv7hktj002520v68qh6gmm4" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -1438,7 +1591,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" data-id="cldsgin29007tesv66tjn54rw" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" data-id="cldv7hkw3007u20v6aaul0jj3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" rel="tag">事务回滚</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%80%A7/" rel="tag">安全性</a></li></ul>
@@ -1532,7 +1685,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" data-id="cldsgin2r009desv6e1p0cccr" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" data-id="cldv7hkwn009l20v69uy76ms5" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
@@ -1614,7 +1767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" data-id="cldsgin2s009iesv67b7cgrk4" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" data-id="cldv7hkwo009q20v6ecfb5q10" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
@@ -1628,1342 +1781,10 @@
 
 
   
-    <article id="post-JVM/JVM中篇：字节码与类的加载篇/1-class文件结构" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" class="article-date">
-  <time class="post-time" datetime="2022-11-29T14:01:57.207Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">29</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">1-class文件结构</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/">JVM中篇：字节码与类的加载器</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<p><img src="/../../../images/image-20230108231953467.png" alt="image-20230108231953467"></p>
-<h1 id="1-Class-文件结构"><a href="#1-Class-文件结构" class="headerlink" title="1. Class 文件结构"></a>1. Class 文件结构</h1><h2 id="1-1-Class-字节码文件结构"><a href="#1-1-Class-字节码文件结构" class="headerlink" title="1.1. Class 字节码文件结构"></a>1.1. Class 字节码文件结构</h2><table>
-    <tbody>  
-        <tr>
-            <th></th> 
-            <th>类型</th> 
-            <th>名称</th> 
-            <th>说明</th> 
-            <th>长度</th> 
-            <th>数量</th> 
-       </tr>
-       <tr>
-            <td>魔数</td>
-            <td>u4</td>
-            <td>magic</td>
-            <td>魔数,识别Class文件格式</td>
-            <td>4个字节</td>     
-            <td>1</td>
-       </tr>
-       <tr>
-            <td rowspan="2">版本号</td>
-            <td>u2</td>
-            <td>minor_version</td>
-            <td>副版本号(小版本)</td>
-            <td>2个字节</td>     
-            <td>1</td>
-       </tr>
-       <tr>
-            <td>u2</td>
-            <td>major_version</td>
-            <td>主版本号(大版本)</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>	
-        <tr>
-            <td rowspan="2">常量池集合</td>
-            <td>u2</td>
-            <td>constant_pool_count</td>
-            <td>常量池计数器</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>cp_info</td>
-            <td>constant_pool</td>
-            <td>常量池表</td>
-            <td>n个字节</td>     
-            <td>constant_pool_count - 1</td>
-        </tr>
-        <tr>
-            <td>访问标识</td>
-            <td>u2</td>
-            <td>access_flags</td>
-            <td>访问标识</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>	
-        <tr>
-            <td rowspan="4">索引集合</td>
-            <td>u2</td>
-            <td>this_class</td>
-            <td>类索引</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>u2</td>
-            <td>super_class</td>
-            <td>父类索引</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>u2</td>
-            <td>interfaces_count</td>
-            <td>接口计数器</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>u2</td>
-            <td>interfaces</td>
-            <td>接口索引集合</td>
-            <td>2个字节</td>     
-            <td>interfaces_count</td>
-        </tr>    
-        <tr>
-            <td rowspan="2">字段表集合</td>
-            <td>u2</td>
-            <td>fields_count</td>
-            <td>字段计数器</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>field_info</td>
-            <td>fields</td>
-            <td>字段表</td>
-            <td>n个字节</td>     
-            <td>fields_count</td>
-        </tr>	
-        <tr>
-            <td rowspan="2">方法表集合</td>
-            <td>u2</td>
-            <td>methods_count</td>
-            <td>方法计数器</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>method_info</td>
-            <td>methods</td>
-            <td>方法表</td>
-            <td>n个字节</td>     
-            <td>methods_count</td>
-        </tr>
-        <tr>
-            <td rowspan="2">属性表集合</td>
-            <td>u2</td>
-            <td>attributes_count</td>
-            <td>属性计数器</td>
-            <td>2个字节</td>     
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>attribute_info</td>
-            <td>attributes</td>
-            <td>属性表</td>
-            <td>n个字节</td>     
-            <td>attributes_count</td>
-        </tr>	
-   <tbody> 
-</tbody></tbody></table>
-
-
-<p><img src="/../../../images/image-20230106211846510.png" alt="image-20230106211846510"></p>
-<p><img src="/../../../images/image-20230106212954414.png" alt="image-20230106212954414"></p>
-<p><img src="/../../../images/image-20230106213322903.png" alt="image-20230106213322903"></p>
-<p><img src="/../../../images/image-20230106213238542.png" alt="image-20230106213238542"></p>
-<p><img src="/../../../images/image-20230107101026854.png" alt="image-20230107101026854"></p>
-<p><img src="/../../../images/image-20230107101258275.png" alt="image-20230107101258275"></p>
-<p><img src="/../../../images/image-20230107162311874.png" alt="image-20230107162311874"></p>
-<h2 id="1-2-Class-文件数据类型"><a href="#1-2-Class-文件数据类型" class="headerlink" title="1.2. Class 文件数据类型"></a>1.2. Class 文件数据类型</h2><table>
-<thead>
-<tr>
-<th align="left">数据类型</th>
-<th align="left">定义</th>
-<th align="left">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">无符号数</td>
-<td align="left">无符号数可以用来描述数字、索引引用、数量值或按照 utf-8 编码构成的字符串值。</td>
-<td align="left">其中无符号数属于基本的数据类型。 以 u1、u2、u4、u8 来分别代表 1 个字节、2 个字节、4 个字节和 8 个字节</td>
-</tr>
-<tr>
-<td align="left">表</td>
-<td align="left">表是由多个无符号数或其他表构成的复合数据结构。</td>
-<td align="left">所有的表都以“_info”结尾。 由于表没有固定长度，所以通常会在其前面加上个数说明。</td>
-</tr>
-</tbody></table>
-<h2 id="1-3-魔数"><a href="#1-3-魔数" class="headerlink" title="1.3. 魔数"></a>1.3. 魔数</h2><p><strong>Magic Number（魔数）</strong></p>
-<ul>
-<li>每个 Class 文件开头的 4 个字节的无符号整数称为魔数（Magic Number）</li>
-<li>它的唯一作用是确定这个文件是否为一个能被虚拟机接受的有效合法的 Class 文件。即：<strong>魔数是 Class 文件的标识符</strong>。</li>
-<li>魔数值固定为 0xCAFEBABE。不会改变。</li>
-<li>如果一个 Class 文件不以 0xCAFEBABE 开头，虚拟机在进行文件校验的时候就会直接抛出以下错误：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: A JNI error has occurred, please check your installation and <span class="keyword">try</span> again</span><br><span class="line">Exception in thread <span class="string">&quot;main&quot;</span> java.lang.ClassFormatError: Incompatible magic value <span class="number">1885430635</span> in <span class="keyword">class</span> <span class="title class_">file</span> StringTest</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>使用魔数而不是扩展名来进行识别主要是基于安全方面的考虑，因为文件扩展名可以随意地改动。</li>
-</ul>
-<h2 id="1-4-文件版本号"><a href="#1-4-文件版本号" class="headerlink" title="1.4. 文件版本号"></a>1.4. 文件版本号</h2><p>紧接着魔数的 4 个字节存储的是 Class 文件的版本号。同样也是 4 个字节。第 5 个和第 6 个字节所代表的含义就是编译的副版本号 <strong>minor_version</strong>，而第 7 个和第 8 个字节就是编译的主版本号 <strong>major_version</strong>。</p>
-<p>它们共同构成了 class 文件的格式版本号。譬如某个 Class 文件的主版本号为 M，副版本号为 m，那么这个 Class 文件的格式版本号就确定为 M.m。</p>
-<p>版本号和 Java 编译器的对应关系如下表：</p>
-<h3 id="1-4-1-Class-文件版本号对应关系"><a href="#1-4-1-Class-文件版本号对应关系" class="headerlink" title="1.4.1. Class 文件版本号对应关系"></a>1.4.1. Class 文件版本号对应关系</h3><table>
-<thead>
-<tr>
-<th>主版本（十进制）</th>
-<th>副版本（十进制）</th>
-<th>编译器版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>45</td>
-<td>3</td>
-<td>1.1</td>
-</tr>
-<tr>
-<td>46</td>
-<td>0</td>
-<td>1.2</td>
-</tr>
-<tr>
-<td>47</td>
-<td>0</td>
-<td>1.3</td>
-</tr>
-<tr>
-<td>48</td>
-<td>0</td>
-<td>1.4</td>
-</tr>
-<tr>
-<td>49</td>
-<td>0</td>
-<td>1.5</td>
-</tr>
-<tr>
-<td>50</td>
-<td>0</td>
-<td>1.6</td>
-</tr>
-<tr>
-<td>51</td>
-<td>0</td>
-<td>1.7</td>
-</tr>
-<tr>
-<td>52</td>
-<td>0</td>
-<td>1.8</td>
-</tr>
-<tr>
-<td>53</td>
-<td>0</td>
-<td>1.9</td>
-</tr>
-<tr>
-<td>54</td>
-<td>0</td>
-<td>1.10</td>
-</tr>
-<tr>
-<td>55</td>
-<td>0</td>
-<td>1.11</td>
-</tr>
-</tbody></table>
-<p>Java 的版本号是从 45 开始的，JDK1.1 之后的每个 JDK 大版本发布主版本号向上加 1。</p>
-<p><mark>不同版本的 Java 编译器编译的 Class 文件对应的版本是不一样的。目前，高版本的 Java 虚拟机可以执行由低版本编译器生成的 Class 文件，但是低版本的 Java 虚拟机不能执行由高版本编译器生成的 Class 文件。否则 JVM 会抛出 java.lang.UnsupportedClassVersionError 异常。（向下兼容）</mark></p>
-<p>在实际应用中，由于开发环境和生产环境的不同，可能会导致该问题的发生。因此，需要我们在开发时，特别注意开发编译的 JDK 版本和生产环境中的 JDK 版本是否一致。</p>
-<ul>
-<li>虚拟机 JDK 版本为 1.k（k&gt;&#x3D;2）时，对应的 class 文件格式版本号的范围为 45.0 - 44+k.0（含两端）。</li>
-</ul>
-<h2 id="1-5-常量池集合"><a href="#1-5-常量池集合" class="headerlink" title="1.5. 常量池集合"></a>1.5. 常量池集合</h2><p>常量池是 Class 文件中内容最为丰富的区域之一。常量池对于 Class 文件中的字段和方法解析也有着至关重要的作用。</p>
-<p>随着 Java 虚拟机的不断发展，常量池的内容也日渐丰富。可以说，常量池是整个 Class 文件的基石。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/5c2a8d904287373990cffe9b82428daa.png" alt="image-20210508233536076"></p>
-<p>在版本号之后，紧跟着的是常量池的数量，以及若干个常量池表项。</p>
-<p>常量池中常量的数量是不固定的，所以在常量池的入口需要放置一项 u2 类型的无符号数，代表常量池容量计数值（constant_pool_count）。与 Java 中语言习惯不一样的是，这个容量计数是从 1 而不是 0 开始的。</p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">名称</th>
-<th align="left">数量</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">u2（无符号数）</td>
-<td align="left">constant_pool_count</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">cp_info（表）</td>
-<td align="left">constant_pool</td>
-<td align="left">constant_pool_count - 1</td>
-</tr>
-</tbody></table>
-<p>由上表可见，Class 文件使用了一个前置的容量计数器（constant_pool_count）加若干个连续的数据项（constant_pool）的形式来描述常量池内容。我们把这一系列连续常量池数据称为常量池集合。</p>
-<ul>
-<li><mark>常量池表项</mark>中，用于存放编译时期生成的各种<mark>字面量</mark>和<mark>符号引用</mark>，这部分内容将在类加载后进入方法区的<mark>运行时常量池</mark>中存放</li>
-</ul>
-<h3 id="1-5-1-常量池计数器"><a href="#1-5-1-常量池计数器" class="headerlink" title="1.5.1. 常量池计数器"></a>1.5.1. 常量池计数器</h3><p><strong>constant_pool_count（常量池计数器）</strong></p>
-<ul>
-<li>由于常量池的数量不固定，时长时短，所以需要放置两个字节来表示常量池容量计数值。</li>
-<li>常量池容量计数值（u2 类型）：<mark>从 1 开始</mark>，表示常量池中有多少项常量。即 constant_pool_count&#x3D;1 表示常量池中有 0 个常量项。</li>
-<li>Demo 的值为：</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/a17ef03e0783c664a51491aafde85d2a.png" alt="image-20210508234020104"></p>
-<p>其值为 0x0016，掐指一算，也就是 22。需要注意的是，这实际上只有 21 项常量。索引为范围是 1-21。为什么呢？</p>
-<p>通常我们写代码时都是从 0 开始的，但是这里的常量池却是从 1 开始，因为它把第 0 项常量空出来了。这是为了满足后面某些指向常量池的索引值的数据在特定情况下需要表达“不引用任何一个常量池项目”的含义，这种情况可用索引值 0 来表示。</p>
-<h3 id="1-5-2-常量池表"><a href="#1-5-2-常量池表" class="headerlink" title="1.5.2. 常量池表"></a>1.5.2. 常量池表</h3><p>constant_pool 是一种表结构，以 <strong>1 ~ constant_pool_count - 1</strong> 为索引。表明了后面有多少个常量项。</p>
-<p>常量池主要存放两大类常量：<mark>字面量（Literal）</mark>和<mark>符号引用（Symbolic References）</mark></p>
-<p>它包含了 class 文件结构及其子结构中引用的所有字符串常量、类或接口名、字段名和其他常量。常量池中的每一项都具备相同的特征。第 1 个字节作为类型标记，用于确定该项的格式，这个字节称为 tag byte（标记字节、标签字节）。</p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">标志(或标识)</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">CONSTANT_Utf8_info</td>
-<td align="left">1</td>
-<td align="left">UTF-8 编码的字符串</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_Integer_info</td>
-<td align="left">3</td>
-<td align="left">整型字面量</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_Float_info</td>
-<td align="left">4</td>
-<td align="left">浮点型字面量</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_Long_info</td>
-<td align="left">5</td>
-<td align="left">长整型字面量</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_Double_info</td>
-<td align="left">6</td>
-<td align="left">双精度浮点型字面量</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_Class_info</td>
-<td align="left">7</td>
-<td align="left">类或接口的符号引用</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_String_info</td>
-<td align="left">8</td>
-<td align="left">字符串类型字面量</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_Fieldref_info</td>
-<td align="left">9</td>
-<td align="left">字段的符号引用</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_Methodref_info</td>
-<td align="left">10</td>
-<td align="left">类中方法的符号引用</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_InterfaceMethodref_info</td>
-<td align="left">11</td>
-<td align="left">接口中方法的符号引用</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_NameAndType_info</td>
-<td align="left">12</td>
-<td align="left">字段或方法的符号引用</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_MethodHandle_info</td>
-<td align="left">15</td>
-<td align="left">表示方法句柄</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_MethodType_info</td>
-<td align="left">16</td>
-<td align="left">标志方法类型</td>
-</tr>
-<tr>
-<td align="left">CONSTANT_InvokeDynamic_info</td>
-<td align="left">18</td>
-<td align="left">表示一个动态方法调用点</td>
-</tr>
-</tbody></table>
-<h4 id="Ⅰ-字面量和符号引用"><a href="#Ⅰ-字面量和符号引用" class="headerlink" title="Ⅰ. 字面量和符号引用"></a>Ⅰ. 字面量和符号引用</h4><p>在对这些常量解读前，我们需要搞清楚几个概念。</p>
-<p>常量池主要存放两大类常量：字面量（Literal）和符号引用（Symbolic References）。如下表：</p>
-<table>
-<thead>
-<tr>
-<th align="left">常量</th>
-<th align="left">具体的常量</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">字面量</td>
-<td align="left">文本字符串</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left">声明为 final 的常量值</td>
-</tr>
-<tr>
-<td align="left">符号引用</td>
-<td align="left">类和接口的全限定名</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left">字段的名称和描述符</td>
-</tr>
-<tr>
-<td align="left"></td>
-<td align="left">方法的名称和描述符</td>
-</tr>
-</tbody></table>
-<p><strong>全限定名</strong></p>
-<p>com&#x2F;atguigu&#x2F;test&#x2F;Demo 这个就是类的<strong>全限定名</strong>，仅仅是把包名（全类名）的“.“替换成”&#x2F;”，为了使连续的多个全限定名之间不产生混淆，在使用时最后一般会加入一个“;”表示全限定名结束。</p>
-<p><strong>简单名称</strong></p>
-<p>简单名称是指没有类型和参数修饰的方法或者字段名称，上面例子中的类的 add()方法和 num 字段的简单名称分别是 add 和 num。</p>
-<p><strong>描述符</strong></p>
-<p><mark>描述符的作用是用来描述字段的数据类型、方法的参数列表（包括数量、类型以及顺序）和返回值</mark>。根据描述符规则，基本数据类型（byte、char、double、float、int、long、short、boolean）以及代表无返回值的 void 类型都用一个大写字符来表示，而对象类型则用字符 L 加对象的全限定名来表示，详见下表：</p>
-<table>
-<thead>
-<tr>
-<th align="left">标志符</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">B</td>
-<td align="left">基本数据类型 byte</td>
-</tr>
-<tr>
-<td align="left">C</td>
-<td align="left">基本数据类型 char</td>
-</tr>
-<tr>
-<td align="left">D</td>
-<td align="left">基本数据类型 double</td>
-</tr>
-<tr>
-<td align="left">F</td>
-<td align="left">基本数据类型 float</td>
-</tr>
-<tr>
-<td align="left">I</td>
-<td align="left">基本数据类型 int</td>
-</tr>
-<tr>
-<td align="left">J</td>
-<td align="left">基本数据类型 long</td>
-</tr>
-<tr>
-<td align="left">S</td>
-<td align="left">基本数据类型 short</td>
-</tr>
-<tr>
-<td align="left">Z</td>
-<td align="left">基本数据类型 boolean</td>
-</tr>
-<tr>
-<td align="left">V</td>
-<td align="left">代表 void 类型</td>
-</tr>
-<tr>
-<td align="left">L</td>
-<td align="left">对象类型，比如：<code>Ljava/lang/Object;</code></td>
-</tr>
-<tr>
-<td align="left">[</td>
-<td align="left">数组类型，代表一维数组。比如：&#96;double[] is [D</td>
-</tr>
-</tbody></table>
-<p>用描述符来描述方法时，按照先参数列表，后返回值的顺序描述，参数列表按照参数的严格顺序放在一组小括号“()”之内。如方法 java.lang.String tostring()的描述符为()Ljava&#x2F;lang&#x2F;String; ，方法 int abc(int[]x, int y)的描述符为([II)I。</p>
-<p><img src="/../../../images/image-20230107105451433.png" alt="image-20230107105451433"></p>
-<p><strong>补充说明：</strong></p>
-<p>虚拟机在加载 Class 文件时才会进行动态链接，也就是说，Class 文件中不会保存各个方法和字段的最终内存布局信息。因此，这些字段和方法的符号引用不经过转换是无法直接被虚拟机使用的。<mark>当虚拟机运行时，需要从常量池中获得对应的符号引用，再在类加载过程中的解析阶段将其替换为直接引用，并翻译到具体的内存地址中</mark>。</p>
-<p>这里说明下符号引用和直接引用的区别与关联：</p>
-<ul>
-<li>符号引用：符号引用以<mark>一组符号</mark>来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。<mark>符号引用与虚拟机实现的内存布局无关</mark>，引用的目标并不一定已经加载到了内存中。</li>
-<li>直接引用：直接引用可以是直接<mark>指向目标的指针、相对偏移量或是一个能间接定位到目标的句柄</mark>。<mark>直接引用是与虚拟机实现的内存布局相关的</mark>，同一个符号引用在不同虚拟机实例上翻译出来的直接引用一般不会相同。如果有了直接引用，那说明引用的目标必定已经存在于内存之中了。</li>
-</ul>
-<h4 id="Ⅱ-常量类型和结构"><a href="#Ⅱ-常量类型和结构" class="headerlink" title="Ⅱ. 常量类型和结构"></a>Ⅱ. 常量类型和结构</h4><p>常量池中每一项常量都是一个表，J0K1.7 之后共有 14 种不同的表结构数据。如下表格所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/8266c05b4b1506d4c456b427b90b1b75.png" alt="image-20210509001319088"></p>
-<p>常量池表数据的解读视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=221&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">221-常量池表数据的解读2_哔哩哔哩_bilibili</a></p>
-<p>根据上图每个类型的描述我们也可以知道每个类型是用来描述常量池中哪些内容（主要是字面量、符号引用）的。比如:<br>CONSTANT_Integer_info 是用来描述常量池中字面量信息的，而且只是整型字面量信息。</p>
-<p>标志为 15、16、18 的常量项类型是用来支持动态语言调用的（jdk1.7 时才加入的）。</p>
-<p><strong>细节说明:</strong></p>
-<ul>
-<li>CONSTANT_Class_info 结构用于表示类或接口</li>
-<li>CONSTAT_Fieldref_info、CONSTAHT_Methodref_infoF 和 lCONSTANIT_InterfaceMethodref_info 结构表示字段、方汇和按口小法</li>
-<li>CONSTANT_String_info 结构用于表示示 String 类型的常量对象</li>
-<li>CONSTANT_Integer_info 和 CONSTANT_Float_info 表示 4 字节（int 和 float）的数值常量</li>
-<li>CONSTANT_Long_info 和 CONSTAT_Double_info 结构表示 8 字作（long 和 double）的数值常量<ul>
-<li>在 class 文件的常最池表中，所行的 a 字节常借均占两个表成员（项）的空问。如果一个 CONSTAHT_Long_info 和 CNSTAHT_Double_info 结构在常量池中的索引位 n，则常量池中一个可用的索引位 n+2，此时常量池长中索引为 n+1 的项仍然有效但必须视为不可用的。</li>
-</ul>
-</li>
-<li>CONSTANT_NameAndType_info 结构用于表示字段或方法，但是和之前的 3 个结构不同，CONSTANT_NameAndType_info 结构没有指明该字段或方法所属的类或接口。</li>
-<li>CONSTANT_Utf8_info 用于表示字符常量的值</li>
-<li>CONSTANT_MethodHandle_info 结构用于表示方法句柄</li>
-<li>CONSTANT_MethodType_info 结构表示方法类型</li>
-<li>CONSTANT_InvokeDynamic_info 结构表示 invokedynamic 指令所用到的引导方法(bootstrap method)、引导方法所用到的动态调用名称(dynamic invocation name)、参数和返回类型，并可以给引导方法传入一系列称为静态参数（static argument）的常量。</li>
-</ul>
-<p><strong>解析方法：</strong></p>
-<ul>
-<li>一个字节一个字节的解析</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/f3485b5ca6cb750454230270021fc68a.png" alt="image-20210509002525647"></p>
-<ul>
-<li>使用 javap 命令解析：javap-verbose Demo.class 或 jclasslib 工具会更方便。</li>
-</ul>
-<p><strong>总结 1：</strong></p>
-<ul>
-<li>这 14 种表（或者常量项结构）的共同点是：表开始的第一位是一个 u1 类型的标志位（tag），代表当前这个常量项使用的是哪种表结构，即哪种常量类型。</li>
-<li>在常量池列表中，CONSTANT_Utf8_info 常量项是一种使用改进过的 UTF-8 编码格式来存储诸如文字字符串、类或者接口的全限定名、字段或者方法的简单名称以及描述符等常量字符串信息。</li>
-<li>这 14 种常量项结构还有一个特点是，其中 13 个常量项占用的字节固定，只有 CONSTANT_Utf8_info 占用字节不固定，其大小由 length 决定。为什么呢？<mark>因为从常量池存放的内容可知，其存放的是字面量和符号引用，最终这些内容都会是一个字符串，这些字符串的大小是在编写程序时才确定</mark>，比如你定义一个类，类名可以取长取短，所以在没编译前，大小不固定，编译后，通过 utf-8 编码，就可以知道其长度。</li>
-</ul>
-<p><strong>总结 2：</strong></p>
-<ul>
-<li>常量池：可以理解为 Class 文件之中的资源仓库，它是 Class 文件结构中与其他项目关联最多的数据类型（后面的很多数据类型都会指向此处），也是占用 Class 文件空间最大的数据项目之一。</li>
-<li>常量池中为什么要包含这些内容？Java 代码在进行 Javac 编译的时候，并不像 C 和 C++那样有“连接”这一步骤，而是在虚拟机加载 C1ass 文件的时候进行动态链接。也就是说，<mark>在 Class 文件中不会保存各个方法、字段的最终内存布局信息，因此这些字段、方法的符号引用不经过运行期转换的话无法得到真正的内存入口地址，也就无法直接被虚拟机使用</mark>。当虚拟机运行时，需要从常量池获得对应的符号引用，再在类创建时或运行时解析、翻译到具体的内存地址之中。关于类的创建和动态链接的内容，在虚拟机类加载过程时再进行详细讲解</li>
-</ul>
-<h2 id="1-6-访问标志"><a href="#1-6-访问标志" class="headerlink" title="1.6. 访问标志"></a>1.6. 访问标志</h2><p><strong>访问标识（access_flag、访问标志、访问标记）</strong></p>
-<p>在常量池后，紧跟着访问标记。<strong>该标记使用两个字节表示，用于识别一些类或者接口层次的访问信息</strong>，包括：这个 Class 是类还是接口；是否定义为 public 类型；是否定义为 abstract 类型；如果是类的话，是否被声明为 final 等。各种访问标记如下所示：</p>
-<table>
-<thead>
-<tr>
-<th align="left">标志名称</th>
-<th>标志值</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ACC_PUBLIC</td>
-<td>0x0001</td>
-<td align="left">标志为 public 类型</td>
-</tr>
-<tr>
-<td align="left">ACC_FINAL</td>
-<td>0x0010</td>
-<td align="left">标志被声明为 final，只有类可以设置</td>
-</tr>
-<tr>
-<td align="left">ACC_SUPER</td>
-<td>0x0020</td>
-<td align="left">标志允许使用 invokespecial 字节码指令的新语义，JDK1.0.2 之后编译出来的类的这个标志默认为真。（使用增强的方法调用父类方法）</td>
-</tr>
-<tr>
-<td align="left">ACC_INTERFACE</td>
-<td>0x0200</td>
-<td align="left">标志这是一个接口</td>
-</tr>
-<tr>
-<td align="left">ACC_ABSTRACT</td>
-<td>0x0400</td>
-<td align="left">是否为 abstract 类型，对于接口或者抽象类来说，次标志值为真，其他类型为假</td>
-</tr>
-<tr>
-<td align="left">ACC_SYNTHETIC</td>
-<td>0x1000</td>
-<td align="left">标志此类并非由用户代码产生（即：由编译器产生的类，没有源码对应）</td>
-</tr>
-<tr>
-<td align="left">ACC_ANNOTATION</td>
-<td>0x2000</td>
-<td align="left">标志这是一个注解</td>
-</tr>
-<tr>
-<td align="left">ACC_ENUM</td>
-<td>0x4000</td>
-<td align="left">标志这是一个枚举</td>
-</tr>
-</tbody></table>
-<p>类的访问权限通常为 ACC_开头的常量。</p>
-<p>每一种类型的表示都是通过设置访问标记的 32 位中的特定位来实现的。比如，若是 public final 的类，则该标记为 ACC_PUBLIC | ACC_FINAL。</p>
-<p>使用 ACC_SUPER 可以让类更准确地定位到父类的方法 super.method()，现代编译器都会设置并且使用这个标记。</p>
-<p><strong>补充说明：</strong></p>
-<ol>
-<li><p>带有 ACC_INTERFACE 标志的 class 文件表示的是接口而不是类，反之则表示的是类而不是接口。</p>
-<ul>
-<li>如果一个 class 文件被设置了 ACC_INTERFACE 标志，那么同时也得设置 ACC_ABSTRACT 标志。同时它不能再设置 ACC_FINAL、ACC_SUPER 或 ACC_ENUM 标志。</li>
-<li>如果没有设置 ACC_INTERFACE 标志，那么这个 class 文件可以具有上表中除 ACC_ANNOTATION 外的其他所有标志。当然，ACC_FINAL 和 ACC_ABSTRACT 这类互斥的标志除外。这两个标志不得同时设置。</li>
-</ul>
-</li>
-<li><p>ACC_SUPER 标志用于确定类或接口里面的 invokespecial 指令使用的是哪一种执行语义。<mark>针对 Java 虚拟机指令集的编译器都应当设置这个标志</mark>。对于 Java SE 8 及后续版本来说，无论 class 文件中这个标志的实际值是什么，也不管 class 文件的版本号是多少，Java 虚拟机都认为每个 class 文件均设置了 ACC_SUPER 标志。</p>
-<ul>
-<li>ACC_SUPER 标志是为了向后兼容由旧 Java 编译器所编译的代码而设计的。目前的 ACC_SUPER 标志在由 JDK1.0.2 之前的编译器所生成的 access_flags 中是没有确定含义的，如果设置了该标志，那么 0racle 的 Java 虚拟机实现会将其忽略。</li>
-</ul>
-</li>
-<li><p>ACC_SYNTHETIC 标志意味着该类或接口是由编译器生成的，而不是由源代码生成的。</p>
-</li>
-<li><p>注解类型必须设置 ACC_ANNOTATION 标志。如果设置了 ACC_ANNOTATION 标志，那么也必须设置 ACC_INTERFACE 标志。</p>
-</li>
-<li><p>ACC_ENUM 标志表明该类或其父类为枚举类型。</p>
-</li>
-</ol>
-<h2 id="1-7-类索引、父类索引、接口索引"><a href="#1-7-类索引、父类索引、接口索引" class="headerlink" title="1.7. 类索引、父类索引、接口索引"></a>1.7. 类索引、父类索引、接口索引</h2><p>在访问标记后，会指定该类的类别、父类类别以及实现的接口，格式如下：</p>
-<table>
-<thead>
-<tr>
-<th>长度</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>u2</td>
-<td align="left">this_class</td>
-</tr>
-<tr>
-<td>u2</td>
-<td align="left">super_class</td>
-</tr>
-<tr>
-<td>u2</td>
-<td align="left">interfaces_count</td>
-</tr>
-<tr>
-<td>u2</td>
-<td align="left">interfaces[interfaces_count]</td>
-</tr>
-</tbody></table>
-<p>这三项数据来确定这个类的继承关系：</p>
-<ul>
-<li>类索引用于确定这个类的全限定名</li>
-<li>父类索引用于确定这个类的父类的全限定名。由于 Java 语言不允许多重继承，所以父类索引只有一个，除了 java.1ang.Object 之外，所有的 Java 类都有父类，因此除了 java.lang.Object 外，所有 Java 类的父类索引都不为 e。</li>
-<li>接口索引集合就用来描述这个类实现了哪些接口，这些被实现的接口将按 implements 语句（如果这个类本身是一个接口，则应当是 extends 语句）后的接口顺序从左到右排列在接口索引集合中。</li>
-</ul>
-<h3 id="1-7-1-this-class（类索引）"><a href="#1-7-1-this-class（类索引）" class="headerlink" title="1.7.1. this_class（类索引）"></a>1.7.1. this_class（类索引）</h3><p>2 字节无符号整数，指向常量池的索引。它提供了类的全限定名，如 com&#x2F;atguigu&#x2F;java1&#x2F;Demo。this_class 的值必须是对常量池表中某项的一个有效索引值。常量池在这个索引处的成员必须为 CONSTANT_Class_info 类型结构体，该结构体表示这个 class 文件所定义的类或接口。</p>
-<h3 id="1-7-2-super-class（父类索引）"><a href="#1-7-2-super-class（父类索引）" class="headerlink" title="1.7.2. super_class（父类索引）"></a>1.7.2. super_class（父类索引）</h3><p>2 字节无符号整数，指向常量池的索引。它提供了当前类的父类的全限定名。如果我们没有继承任何类，其默认继承的是 java&#x2F;lang&#x2F;object 类。同时，由于 Java 不支持多继承，所以其父类只有一个。</p>
-<p>super_class 指向的父类不能是 final。</p>
-<h3 id="1-7-3-interfaces"><a href="#1-7-3-interfaces" class="headerlink" title="1.7.3. interfaces"></a>1.7.3. interfaces</h3><p>指向常量池索引集合，它提供了一个符号引用到所有已实现的接口</p>
-<p>由于一个类可以实现多个接口，因此需要以数组形式保存多个接口的索引，表示接口的每个索引也是一个指向常量池的 CONSTANT_Class（当然这里就必须是接口，而不是类）。</p>
-<h4 id="Ⅰ-interfaces-count（接口计数器）"><a href="#Ⅰ-interfaces-count（接口计数器）" class="headerlink" title="Ⅰ. interfaces_count（接口计数器）"></a>Ⅰ. interfaces_count（接口计数器）</h4><p>interfaces_count 项的值表示当前类或接口的直接超接口数量。</p>
-<h4 id="Ⅱ-interfaces-（接口索引集合）"><a href="#Ⅱ-interfaces-（接口索引集合）" class="headerlink" title="Ⅱ. interfaces[]（接口索引集合）"></a>Ⅱ. interfaces[]（接口索引集合）</h4><p>interfaces[]中每个成员的值必须是对常量池表中某项的有效索引值，它的长度为 interfaces_count。每个成员 interfaces[i]必须为 CONSTANT_Class_info 结构，其中 0 &lt;&#x3D; i &lt; interfaces_count。在 interfaces[]中，各成员所表示的接口顺序和对应的源代码中给定的接口顺序（从左至右）一样，即 interfaces[0]对应的是源代码中最左边的接口。</p>
-<h2 id="1-8-字段表集合"><a href="#1-8-字段表集合" class="headerlink" title="1.8. 字段表集合"></a>1.8. 字段表集合</h2><p><strong>fields</strong></p>
-<p>用于描述接口或类中声明的变量。字段（field）包括<mark>类级变量以及实例级变量</mark>，但是不包括方法内部、代码块内部声明的局部变量。</p>
-<p>字段叫什么名字、字段被定义为什么数据类型，这些都是无法固定的，只能引用常量池中的常量来描述。</p>
-<p>它指向常量池索引集合，它描述了每个字段的完整信息。比如<mark>字段的标识符、访问修饰符（public、private 或 protected）、是类变量还是实例变量（static 修饰符）、是否是常量（final 修饰符）</mark>等。</p>
-<p><strong>注意事项：</strong></p>
-<ul>
-<li>字段表集合中不会列出从父类或者实现的接口中继承而来的字段，但有可能列出原本 Java 代码之中不存在的字段。譬如在内部类中为了保持对外部类的访问性，会自动添加指向外部类实例的字段。</li>
-<li>在 Java 语言中字段是无法重载的，两个字段的数据类型、修饰符不管是否相同，都必须使用不一样的名称，但是对于字节码来讲，如果两个字段的描述符不一致，那字段重名就是合法的。</li>
-</ul>
-<h3 id="1-8-1-字段计数器"><a href="#1-8-1-字段计数器" class="headerlink" title="1.8.1. 字段计数器"></a>1.8.1. 字段计数器</h3><p><strong>fields_count（字段计数器）</strong></p>
-<p>fields_count 的值表示当前 class 文件 fields 表的成员个数。使用两个字节来表示。</p>
-<p>fields 表中每个成员都是一个 field_info 结构，用于表示该类或接口所声明的所有类字段或者实例字段，不包括方法内部声明的变量，也不包括从父类或父接口继承的那些字段。</p>
-<table>
-<thead>
-<tr>
-<th align="left">标志名称</th>
-<th align="left">标志值</th>
-<th align="left">含义</th>
-<th align="left">数量</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">u2</td>
-<td align="left">access_flags</td>
-<td align="left">访问标志</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">name_index</td>
-<td align="left">字段名索引</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">descriptor_index</td>
-<td align="left">描述符索引</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">attributes_count</td>
-<td align="left">属性计数器</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">attribute_info</td>
-<td align="left">attributes</td>
-<td align="left">属性集合</td>
-<td align="left">attributes_count</td>
-</tr>
-</tbody></table>
-<h3 id="1-8-2-字段表"><a href="#1-8-2-字段表" class="headerlink" title="1.8.2. 字段表"></a>1.8.2. 字段表</h3><h4 id="Ⅰ-字段表访问标识"><a href="#Ⅰ-字段表访问标识" class="headerlink" title="Ⅰ. 字段表访问标识"></a>Ⅰ. 字段表访问标识</h4><p>我们知道，一个字段可以被各种关键字去修饰，比如：作用域修饰符（public、private、protected）、static 修饰符、final 修饰符、volatile 修饰符等等。因此，其可像类的访问标志那样，使用一些标志来标记字段。字段的访问标志有如下这些：</p>
-<table>
-<thead>
-<tr>
-<th align="left">标志名称</th>
-<th align="left">标志值</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ACC_PUBLIC</td>
-<td align="left">0x0001</td>
-<td align="left">字段是否为 public</td>
-</tr>
-<tr>
-<td align="left">ACC_PRIVATE</td>
-<td align="left">0x0002</td>
-<td align="left">字段是否为 private</td>
-</tr>
-<tr>
-<td align="left">ACC_PROTECTED</td>
-<td align="left">0x0004</td>
-<td align="left">字段是否为 protected</td>
-</tr>
-<tr>
-<td align="left">ACC_STATIC</td>
-<td align="left">0x0008</td>
-<td align="left">字段是否为 static</td>
-</tr>
-<tr>
-<td align="left">ACC_FINAL</td>
-<td align="left">0x0010</td>
-<td align="left">字段是否为 final</td>
-</tr>
-<tr>
-<td align="left">ACC_VOLATILE</td>
-<td align="left">0x0040</td>
-<td align="left">字段是否为 volatile</td>
-</tr>
-<tr>
-<td align="left">ACC_TRANSTENT</td>
-<td align="left">0x0080</td>
-<td align="left">字段是否为 transient</td>
-</tr>
-<tr>
-<td align="left">ACC_SYNCHETIC</td>
-<td align="left">0x1000</td>
-<td align="left">字段是否为由编译器自动产生</td>
-</tr>
-<tr>
-<td align="left">ACC_ENUM</td>
-<td align="left">0x4000</td>
-<td align="left">字段是否为 enum</td>
-</tr>
-</tbody></table>
-<h4 id="Ⅱ-描述符索引"><a href="#Ⅱ-描述符索引" class="headerlink" title="Ⅱ. 描述符索引"></a>Ⅱ. 描述符索引</h4><p>描述符的作用是用来描述字段的数据类型、方法的参数列表（包括数量、类型以及顺序）和返回值。根据描述符规则，基本数据类型（byte，char，double，float，int，long，short，boolean）及代表无返回值的 void 类型都用一个大写字符来表示，而对象则用字符 L 加对象的全限定名来表示，如下所示：</p>
-<table>
-<thead>
-<tr>
-<th align="left">标志符</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">B</td>
-<td align="left">基本数据类型 byte</td>
-</tr>
-<tr>
-<td align="left">C</td>
-<td align="left">基本数据类型 char</td>
-</tr>
-<tr>
-<td align="left">D</td>
-<td align="left">基本数据类型 double</td>
-</tr>
-<tr>
-<td align="left">F</td>
-<td align="left">基本数据类型 float</td>
-</tr>
-<tr>
-<td align="left">I</td>
-<td align="left">基本数据类型 int</td>
-</tr>
-<tr>
-<td align="left">J</td>
-<td align="left">基本数据类型 long</td>
-</tr>
-<tr>
-<td align="left">S</td>
-<td align="left">基本数据类型 short</td>
-</tr>
-<tr>
-<td align="left">Z</td>
-<td align="left">基本数据类型 boolean</td>
-</tr>
-<tr>
-<td align="left">V</td>
-<td align="left">代表 void 类型</td>
-</tr>
-<tr>
-<td align="left">L</td>
-<td align="left">对象类型，比如：<code>Ljava/lang/Object;</code></td>
-</tr>
-<tr>
-<td align="left">[</td>
-<td align="left">数组类型，代表一维数组。比如：&#96;double[][][] is [[[D</td>
-</tr>
-</tbody></table>
-<h4 id="Ⅲ-属性表集合"><a href="#Ⅲ-属性表集合" class="headerlink" title="Ⅲ. 属性表集合"></a>Ⅲ. 属性表集合</h4><p>一个字段还可能拥有一些属性，用于存储更多的额外信息。比如初始化值、一些注释信息等。属性个数存放在 attribute_count 中，属性具体内容存放在 attributes 数组中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以常量属性为例，结构为：</span></span><br><span class="line">ConstantValue_attribute&#123;</span><br><span class="line">	u2 attribute_name_index;</span><br><span class="line">	u4 attribute_length;</span><br><span class="line">    u2 constantvalue_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>说明：对于常量属性而言，attribute_length 值恒为 2。</p>
-<h2 id="1-9-方法表集合"><a href="#1-9-方法表集合" class="headerlink" title="1.9. 方法表集合"></a>1.9. 方法表集合</h2><p>methods：指向常量池索引集合，它完整描述了每个方法的签名。</p>
-<ul>
-<li>在字节码文件中，每一个 method_info 项都对应着一个类或者接口中的方法信息。比如方法的访问修饰符（public、private 或 protected），方法的返回值类型以及方法的参数信息等。</li>
-<li>如果这个方法不是抽象的或者不是 native 的，那么字节码中会体现出来。</li>
-<li>一方面，methods 表只描述当前类或接口中声明的方法，不包括从父类或父接口继承的方法。另一方面，methods 表有可能会出现由编译器自动添加的方法，最典型的便是编译器产生的方法信息（比如：类（接口）初始化方法&lt;clinit&gt;()和实例初始化方法&lt;init&gt;()）。</li>
-</ul>
-<p><strong>使用注意事项：</strong></p>
-<p>在 Java 语言中，要重载（Overload）一个方法，除了要与原方法<strong>具有相同的简单名称</strong>之外，还要求<strong>必须拥有一个与原方法不同的特征签名</strong>，特征签名就是一个方法中各个参数在常量池中的字段符号引用的集合，也就是因为返回值不会包含在特征签名之中，因此 Java 语言里无法仅仅依靠返回值的不同来对一个已有方法进行重载。但在 Class 文件格式中，特征签名的范围更大一些，只要描述符不是完全一致的两个方法就可以共存。也就是说，如果两个方法有相同的名称和特征签名，但返回值不同，那么也是可以合法共存于同一个 class 文件中。</p>
-<p>也就是说，尽管 Java 语法规范并不允许在一个类或者接口中声明多个方法签名相同的方法，但是和 Java 语法规范相反，字节码文件中却恰恰允许存放多个方法签名相同的方法，唯一的条件就是这些方法之间的返回值不能相同。</p>
-<h3 id="1-9-1-方法计数器"><a href="#1-9-1-方法计数器" class="headerlink" title="1.9.1. 方法计数器"></a>1.9.1. 方法计数器</h3><p><strong>methods_count（方法计数器）</strong></p>
-<p>methods_count 的值表示当前 class 文件 methods 表的成员个数。使用两个字节来表示。</p>
-<p>methods 表中每个成员都是一个 method_info 结构。</p>
-<h3 id="1-9-2-方法表"><a href="#1-9-2-方法表" class="headerlink" title="1.9.2. 方法表"></a>1.9.2. 方法表</h3><p><strong>methods[]（方法表）</strong></p>
-<p>methods 表中的每个成员都必须是一个 method_info 结构，用于表示当前类或接口中某个方法的完整描述。如果某个 method_info 结构的 access_flags 项既没有设置 ACC_NATIVE 标志也没有设置 ACC_ABSTRACT 标志，那么该结构中也应包含实现这个方法所用的 Java 虚拟机指令。</p>
-<p>method_info 结构可以表示类和接口中定义的所有方法，包括实例方法、类方法、实例初始化方法和类或接口初始化方法</p>
-<p>方法表的结构实际跟字段表是一样的，方法表结构如下：</p>
-<table>
-<thead>
-<tr>
-<th align="left">标志名称</th>
-<th align="left">标志值</th>
-<th align="left">含义</th>
-<th align="left">数量</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">u2</td>
-<td align="left">access_flags</td>
-<td align="left">访问标志</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">name_index</td>
-<td align="left">方法名索引</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">descriptor_index</td>
-<td align="left">描述符索引</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">attributes_count</td>
-<td align="left">属性计数器</td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">attribute_info</td>
-<td align="left">attributes</td>
-<td align="left">属性集合</td>
-<td align="left">attributes_count</td>
-</tr>
-</tbody></table>
-<p><strong>方法表访问标志</strong></p>
-<p>跟字段表一样，方法表也有访问标志，而且他们的标志有部分相同，部分则不同，方法表的具体访问标志如下：</p>
-<table>
-<thead>
-<tr>
-<th align="left">标志名称</th>
-<th align="left">标志值</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">ACC_PUBLIC</td>
-<td align="left">0x0001</td>
-<td align="left">public，方法可以从包外访问</td>
-</tr>
-<tr>
-<td align="left">ACC_PRIVATE</td>
-<td align="left">0x0002</td>
-<td align="left">private，方法只能本类访问</td>
-</tr>
-<tr>
-<td align="left">ACC_PROTECTED</td>
-<td align="left">0x0004</td>
-<td align="left">protected，方法在自身和子类可以访问</td>
-</tr>
-<tr>
-<td align="left">ACC_STATIC</td>
-<td align="left">0x0008</td>
-<td align="left">static，静态方法</td>
-</tr>
-</tbody></table>
-<h2 id="1-10-属性表集合"><a href="#1-10-属性表集合" class="headerlink" title="1.10. 属性表集合"></a>1.10. 属性表集合</h2><p>方法表集合之后的属性表集合，<mark>指的是 class 文件所携带的辅助信息</mark>，比如该 class 文件的源文件的名称。以及任何带有 RetentionPolicy.CLASS 或者 RetentionPolicy.RUNTIME 的注解。这类信息通常被用于 Java 虚拟机的验证和运行，以及 Java 程序的调试，<mark>一般无须深入了解</mark>。</p>
-<p>此外，字段表、方法表都可以有自己的属性表。用于描述某些场景专有的信息。</p>
-<p>属性表集合的限制没有那么严格，不再要求各个属性表具有严格的顺序，并且只要不与已有的属性名重复，任何人实现的编译器都可以向属性表中写入自己定义的属性信息，但 Java 虚拟机运行时会忽略掉它不认识的属性。</p>
-<h3 id="1-10-1-属性计数器"><a href="#1-10-1-属性计数器" class="headerlink" title="1.10.1. 属性计数器"></a>1.10.1. 属性计数器</h3><p><strong>attributes_count（属性计数器）</strong></p>
-<p>attributes_count 的值表示当前 class 文件属性表的成员个数。属性表中每一项都是一个 attribute_info 结构。</p>
-<h3 id="1-10-2-属性表"><a href="#1-10-2-属性表" class="headerlink" title="1.10.2. 属性表"></a>1.10.2. 属性表</h3><p><strong>attributes[]（属性表）</strong></p>
-<p>属性表的每个项的值必须是 attribute_info 结构。属性表的结构比较灵活，各种不同的属性只要满足以下结构即可。</p>
-<p><strong>属性的通用格式</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">名称</th>
-<th align="left">数量</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">u2</td>
-<td align="left">attribute_name_index</td>
-<td align="left">1</td>
-<td align="left">属性名索引</td>
-</tr>
-<tr>
-<td align="left">u4</td>
-<td align="left">attribute_length</td>
-<td align="left">1</td>
-<td align="left">属性长度</td>
-</tr>
-<tr>
-<td align="left">u1</td>
-<td align="left">info</td>
-<td align="left">attribute_length</td>
-<td align="left">属性表</td>
-</tr>
-</tbody></table>
-<p><strong>属性类型</strong></p>
-<p>属性表实际上可以有很多类型，上面看到的 Code 属性只是其中一种，Java8 里面定义了 23 种属性。下面这些是虚拟机中预定义的属性：</p>
-<table>
-<thead>
-<tr>
-<th align="left">属性名称</th>
-<th align="left">使用位置</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">Code</td>
-<td align="left">方法表</td>
-<td align="left">Java 代码编译成的字节码指令</td>
-</tr>
-<tr>
-<td align="left">ConstantValue</td>
-<td align="left">字段表</td>
-<td align="left">final 关键字定义的常量池</td>
-</tr>
-<tr>
-<td align="left">Deprecated</td>
-<td align="left">类，方法，字段表</td>
-<td align="left">被声明为 deprecated 的方法和字段</td>
-</tr>
-<tr>
-<td align="left">Exceptions</td>
-<td align="left">方法表</td>
-<td align="left">方法抛出的异常</td>
-</tr>
-<tr>
-<td align="left">EnclosingMethod</td>
-<td align="left">类文件</td>
-<td align="left">仅当一个类为局部类或者匿名类时才能拥有这个属性，这个属性用于标识这个类所在的外围方法</td>
-</tr>
-<tr>
-<td align="left">InnerClass</td>
-<td align="left">类文件</td>
-<td align="left">内部类列表</td>
-</tr>
-<tr>
-<td align="left">LineNumberTable</td>
-<td align="left">Code 属性</td>
-<td align="left">Java 源码的行号与字节码指令的对应关系</td>
-</tr>
-<tr>
-<td align="left">LocalVariableTable</td>
-<td align="left">Code 属性</td>
-<td align="left">方法的局部变量描述</td>
-</tr>
-<tr>
-<td align="left">StackMapTable</td>
-<td align="left">Code 属性</td>
-<td align="left">JDK1.6 中新增的属性，供新的类型检查检验器和处理目标方法的局部变量和操作数有所需要的类是否匹配</td>
-</tr>
-<tr>
-<td align="left">Signature</td>
-<td align="left">类，方法表，字段表</td>
-<td align="left">用于支持泛型情况下的方法签名</td>
-</tr>
-<tr>
-<td align="left">SourceFile</td>
-<td align="left">类文件</td>
-<td align="left">记录源文件名称</td>
-</tr>
-<tr>
-<td align="left">SourceDebugExtension</td>
-<td align="left">类文件</td>
-<td align="left">用于存储额外的调试信息</td>
-</tr>
-<tr>
-<td align="left">Synthetic</td>
-<td align="left">类，方法表，字段表</td>
-<td align="left">标志方法或字段为编译器自动生成的</td>
-</tr>
-<tr>
-<td align="left">LocalVariableTypeTable</td>
-<td align="left">类</td>
-<td align="left">是哟很难过特征签名代替描述符，是为了引入泛型语法之后能描述泛型参数化类型而添加</td>
-</tr>
-<tr>
-<td align="left">RuntimeVisibleAnnotations</td>
-<td align="left">类，方法表，字段表</td>
-<td align="left">为动态注解提供支持</td>
-</tr>
-<tr>
-<td align="left">RuntimeInvisibleAnnotations</td>
-<td align="left">类，方法表，字段表</td>
-<td align="left">用于指明哪些注解是运行时不可见的</td>
-</tr>
-<tr>
-<td align="left">RuntimeVisibleParameterAnnotation</td>
-<td align="left">方法表</td>
-<td align="left">作用与 RuntimeVisibleAnnotations 属性类似，只不过作用对象或方法</td>
-</tr>
-<tr>
-<td align="left">RuntimeInvisibleParameterAnnotation</td>
-<td align="left">方法表</td>
-<td align="left">作用与 RuntimeInvisibleAnnotations 属性类似，只不过作用对象或方法</td>
-</tr>
-<tr>
-<td align="left">AnnotationDefault</td>
-<td align="left">方法表</td>
-<td align="left">用于记录注解类元素的默认值</td>
-</tr>
-<tr>
-<td align="left">BootstrapMethods</td>
-<td align="left">类文件</td>
-<td align="left">用于保存 invokeddynamic 指令引用的引导方法限定符</td>
-</tr>
-</tbody></table>
-<p>或者（查看官网）</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/412a7e52bfb1ee0aa8229db1402ae58a.png" alt="image-20210421235232911"></p>
-<p><strong>部分属性详解</strong></p>
-<p><strong>① ConstantValue 属性</strong></p>
-<p>ConstantValue 属性表示一个常量字段的值。位于 field_info 结构的属性表中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ConstantValue_attribute&#123;</span><br><span class="line">	u2 attribute_name_index;</span><br><span class="line">	u4 attribute_length;</span><br><span class="line">	u2 constantvalue_index;<span class="comment">//字段值在常量池中的索引，常量池在该索引处的项给出该属性表示的常量值。（例如，值是1ong型的，在常量池中便是CONSTANT_Long）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>② Deprecated 属性</strong></p>
-<p>Deprecated 属性是在 JDK1.1 为了支持注释中的关键词@deprecated 而引入的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Deprecated_attribute&#123;</span><br><span class="line">	u2 attribute_name_index;</span><br><span class="line">	u4 attribute_length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>③ Code 属性</strong></p>
-<p>Code 属性就是存放<strong>方法体里面的代码</strong>。但是，并非所有方法表都有 Code 属性。像接口或者抽象方法，他们没有具体的方法体，因此也就不会有 Code 属性了。Code 属性表的结构，如下图：</p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">名称</th>
-<th align="left">数量</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">u2</td>
-<td align="left">attribute_name_index</td>
-<td align="left">1</td>
-<td align="left">属性名索引</td>
-</tr>
-<tr>
-<td align="left">u4</td>
-<td align="left">attribute_length</td>
-<td align="left">1</td>
-<td align="left">属性长度</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">max_stack</td>
-<td align="left">1</td>
-<td align="left">操作数栈深度的最大值</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">max_locals</td>
-<td align="left">1</td>
-<td align="left">局部变量表所需的存续空间</td>
-</tr>
-<tr>
-<td align="left">u4</td>
-<td align="left">code_length</td>
-<td align="left">1</td>
-<td align="left">字节码指令的长度</td>
-</tr>
-<tr>
-<td align="left">u1</td>
-<td align="left">code</td>
-<td align="left">code_lenth</td>
-<td align="left">存储字节码指令</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">exception_table_length</td>
-<td align="left">1</td>
-<td align="left">异常表长度</td>
-</tr>
-<tr>
-<td align="left">exception_info</td>
-<td align="left">exception_table</td>
-<td align="left">exception_length</td>
-<td align="left">异常表</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">attributes_count</td>
-<td align="left">1</td>
-<td align="left">属性集合计数器</td>
-</tr>
-<tr>
-<td align="left">attribute_info</td>
-<td align="left">attributes</td>
-<td align="left">attributes_count</td>
-<td align="left">属性集合</td>
-</tr>
-</tbody></table>
-<p>可以看到：Code 属性表的前两项跟属性表是一致的，即 Code 属性表遵循属性表的结构，后面那些则是他自定义的结构。</p>
-<p><strong>④ InnerClasses 属性</strong></p>
-<p>为了方便说明特别定义一个表示类或接口的 Class 格式为 C。如果 C 的常量池中包含某个 CONSTANT_Class_info 成员，且这个成员所表示的类或接口不属于任何一个包，那么 C 的 ClassFile 结构的属性表中就必须含有对应的 InnerClasses 属性。InnerClasses 属性是在 JDK1.1 中为了支持内部类和内部接口而引入的，位于 ClassFile 结构的属性表。</p>
-<p><strong>⑤ LineNumberTable 属性</strong></p>
-<p>LineNumberTable 属性是可选变长属性，位于 Code 结构的属性表。</p>
-<p>LineNumberTable 属性是<mark>用来描述 <strong>Java 源码行号 与 字节码行号</strong>之间的对应关系</mark>。这个属性可以用来在调试的时候定位代码执行的行数。</p>
-<ul>
-<li>start_pc，即字节码行号；1ine_number，即 Java 源代码行号。</li>
-</ul>
-<p>在 Code 属性的属性表中，LineNumberTable 属性可以按照任意顺序出现，此外，多个 LineNumberTable 属性可以共同表示一个行号在源文件中表示的内容，即 LineNumberTable 属性不需要与源文件的行一一对应。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LineNumberTable属性表结构：</span></span><br><span class="line">LineNumberTable_attribute&#123;</span><br><span class="line">    u2 attribute_name_index;</span><br><span class="line">    u4 attribute_length;</span><br><span class="line">    u2 line_number_table_length;</span><br><span class="line">    &#123;</span><br><span class="line">        u2 start_pc;</span><br><span class="line">        u2 line_number;</span><br><span class="line">    &#125; line_number_table[line_number_table_length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>⑥ LocalVariableTable 属性</strong></p>
-<p>LocalVariableTable 是可选变长属性，位于 Code 属性的属性表中。它被调试器用于确定方法在执行过程中局部变量的信息。在 Code 属性的属性表中，LocalVariableTable 属性可以按照任意顺序出现。Code 属性中的每个局部变量最多只能有一个 LocalVariableTable 属性。</p>
-<ul>
-<li>start pc + length 表示这个变量在字节码中的生命周期起始和结束的偏移位置（this 生命周期从头 e 到结尾 10）</li>
-<li>index 就是这个变量在局部变量表中的槽位<mark>（槽位可复用）</mark></li>
-<li>name 就是变量名</li>
-<li>Descriptor 表示局部变量类型描述</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LocalVariableTable属性表结构：</span></span><br><span class="line">LocalVariableTable_attribute&#123;</span><br><span class="line">    u2 attribute_name_index;</span><br><span class="line">    u4 attribute_length;</span><br><span class="line">    u2 local_variable_table_length;</span><br><span class="line">    &#123;</span><br><span class="line">        u2 start_pc;</span><br><span class="line">        u2 length;</span><br><span class="line">        u2 name_index;</span><br><span class="line">        u2 descriptor_index;</span><br><span class="line">        u2 index;</span><br><span class="line">    &#125; local_variable_table[local_variable_table_length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../../images/image-20230108220200811.png" alt="image-20230108220200811"></p>
-<p><strong>⑦ Signature 属性</strong></p>
-<p>Signature 属性是可选的定长属性，位于 ClassFile，field_info 或 method_info 结构的属性表中。在 Java 语言中，任何类、接口、初始化方法或成员的泛型签名如果包含了类型变量（Type Variables）或参数化类型（Parameterized Types），则 Signature 属性会为它记录泛型签名信息。</p>
-<p><strong>⑧ SourceFile 属性</strong></p>
-<p>SourceFile 属性结构</p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">名称</th>
-<th align="left">数量</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">u2</td>
-<td align="left">attribute_name_index</td>
-<td align="left">1</td>
-<td align="left">属性名索引</td>
-</tr>
-<tr>
-<td align="left">u4</td>
-<td align="left">attribute_length</td>
-<td align="left">1</td>
-<td align="left">属性长度</td>
-</tr>
-<tr>
-<td align="left">u2</td>
-<td align="left">sourcefile index</td>
-<td align="left">1</td>
-<td align="left">源码文件素引</td>
-</tr>
-</tbody></table>
-<p>可以看到，其长度总是固定的 8 个字节。</p>
-<p><strong>⑨ 其他属性</strong></p>
-<p>Java 虚拟机中预定义的属性有 20 多个，这里就不一一介绍了，通过上面几个属性的介绍，只要领会其精髓，其他属性的解读也是易如反掌。</p>
-<h2 id="Class文件结构小结"><a href="#Class文件结构小结" class="headerlink" title="Class文件结构小结"></a>Class文件结构小结</h2><p><img src="/../../../images/image-20230109103959417.png" alt="image-20230109103959417"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/29/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/1-class%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" data-id="cldsgin1w006resv63f6ie1bu" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Quartz/Quartz学习笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/27/Quartz/Quartz%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="post-time" datetime="2022-11-27T12:50:56.294Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">27</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/27/Quartz/Quartz%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Quartz学习笔记</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">定时任务</a>,<a class="article-category-link" href="/categories/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/Quartz/">Quartz</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/../../images/image-20221127205106372.png" alt="image-20221127205106372"></p>
-<p><img src="/../../images/image-20221127213810488.png" alt="image-20221127213810488"></p>
-<p><img src="/../../images/image-20221128143023074.png" alt="image-20221128143023074"></p>
-<p><img src="/../../images/image-20221128130326946.png" alt="image-20221128130326946"></p>
-<p><img src="/../../images/image-20221128142414350.png" alt="image-20221128142414350"></p>
-<p><img src="/../../images/image-20221128142313901.png" alt="image-20221128142313901"></p>
-<p>quartz 总体架构</p>
-<p><img src="/../../images/image-20221127223745383.png" alt="image-20221127223745383"></p>
-<h2 id="Quartz的使用"><a href="#Quartz的使用" class="headerlink" title="Quartz的使用"></a>Quartz的使用</h2><p>导包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- quartz --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-quartz&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.quartz.Job;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionContext;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/27</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyJop</span> <span class="keyword">implements</span> <span class="title class_">Job</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">(JobExecutionContext jobExecutionContext)</span> <span class="keyword">throws</span> JobExecutionException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;MyJob execute:&quot;</span> + <span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>测试类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> quartz.quartz;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.quartz.*;</span><br><span class="line"><span class="keyword">import</span> org.quartz.impl.StdSchedulerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/27</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestJob</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">JobDetail</span> <span class="variable">jobDetail</span> <span class="operator">=</span> JobBuilder.newJob(MyJop.class)</span><br><span class="line">                <span class="comment">// name: 任务名称（在调度器里不能重复，唯一的） group : 组</span></span><br><span class="line">                .withIdentity(<span class="string">&quot;jop1&quot;</span>, <span class="string">&quot;group1&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 触发器</span></span><br><span class="line">        <span class="type">Trigger</span> <span class="variable">trigger</span> <span class="operator">=</span> TriggerBuilder.newTrigger()</span><br><span class="line">                .withIdentity(<span class="string">&quot;trigger1&quot;</span>, <span class="string">&quot;trigger1&quot;</span>)</span><br><span class="line">                .startNow()</span><br><span class="line">                <span class="comment">//                                                            时间间隔           永久重复执行</span></span><br><span class="line">                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(<span class="number">2</span>).repeatForever())</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调度器</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Scheduler</span> <span class="variable">scheduler</span> <span class="operator">=</span> StdSchedulerFactory.getDefaultScheduler();</span><br><span class="line">            scheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line">            <span class="comment">// 启动</span></span><br><span class="line">            scheduler.start();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SchedulerException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果图</p>
-<p><img src="/../../images/image-20221127225021946.png" alt="image-20221127225021946"></p>
-<hr>
-<h2 id><a href="#" class="headerlink" title></a></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import org.quartz.Job;</span><br><span class="line">import org.quartz.JobDataMap;</span><br><span class="line">import org.quartz.JobExecutionContext;</span><br><span class="line">import org.quartz.JobExecutionException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/11/27</span><br><span class="line"> */</span><br><span class="line">public class MyJop implements Job &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 如果在添加 .usingJobData(&quot;name&quot;, &quot;trigger3&quot;) 的时候，</span><br><span class="line">     * key 和 这里定义的属性名一样的话，就会给这里的属性赋值，下面就可以直接用了</span><br><span class="line">     */</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void execute(JobExecutionContext context) throws JobExecutionException &#123;</span><br><span class="line">//        System.out.println(&quot;MyJob execute:&quot; + new Date());</span><br><span class="line"></span><br><span class="line">        JobDataMap jobDetailMap = context.getJobDetail().getJobDataMap();</span><br><span class="line">        JobDataMap triggerMap = context.getTrigger().getJobDataMap();</span><br><span class="line">        // 获取 JobDetail 和 Trigger 合并，但如果存在相同的键值key,Trigger的会覆盖JobDetail的</span><br><span class="line">        JobDataMap mergeMap = context.getMergedJobDataMap();</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;jobDetailMap:&quot; + jobDetailMap.getString(&quot;job&quot;));</span><br><span class="line">        System.out.println(&quot;triggerMap:&quot; + triggerMap.getString(&quot;trigger&quot;));</span><br><span class="line">        System.out.println(&quot;——————————————————————————————————————————————————————————————————————————&quot;);</span><br><span class="line">        System.out.println(&quot;mergeMap:&quot; + mergeMap.getString(&quot;job&quot;));</span><br><span class="line">        System.out.println(&quot;mergeMap:&quot; + mergeMap.getString(&quot;trigger&quot;));</span><br><span class="line">        System.out.println(&quot;——————————————————————————————————————————————————————————————————————————&quot;);</span><br><span class="line">        System.out.println( &quot;name : &quot; + name );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package quartz.quartz;</span><br><span class="line"></span><br><span class="line">import org.quartz.*;</span><br><span class="line">import org.quartz.impl.StdSchedulerFactory;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/11/27</span><br><span class="line"> */</span><br><span class="line">public class TestJob &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        JobDetail jobDetail = JobBuilder.newJob(MyJop.class)</span><br><span class="line">                // name: 任务名称（在调度器里不能重复，唯一的） group : 组</span><br><span class="line">                .withIdentity(&quot;jop1&quot;, &quot;group1&quot;)</span><br><span class="line">                .usingJobData(&quot;job&quot;, &quot;jobDetail1&quot;)</span><br><span class="line">                .usingJobData(&quot;name&quot;, &quot;jobDetail2&quot;)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        // 触发器</span><br><span class="line">        Trigger trigger = TriggerBuilder.newTrigger()</span><br><span class="line">                .withIdentity(&quot;trigger1&quot;, &quot;trigger1&quot;)</span><br><span class="line">                .usingJobData(&quot;trigger&quot;, &quot;trigger&quot;)</span><br><span class="line">                // 会覆盖上面JobDetail中的name的值</span><br><span class="line">                .usingJobData(&quot;name&quot;, &quot;trigger2&quot;)</span><br><span class="line">                .startNow()</span><br><span class="line">                //                                                            时间间隔           永久重复执行</span><br><span class="line">                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        // 调度器</span><br><span class="line">        try &#123;</span><br><span class="line">            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();</span><br><span class="line">            scheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line">            // 启动</span><br><span class="line">            scheduler.start();</span><br><span class="line">        &#125; catch (SchedulerException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果</p>
-<p><img src="/../../images/image-20221128103703359.png" alt="image-20221128103703359"></p>
-<hr>
-<h2 id="Job-封装成JobDetail设置属性"><a href="#Job-封装成JobDetail设置属性" class="headerlink" title="Job : 封装成JobDetail设置属性"></a>Job : 封装成JobDetail设置属性</h2><p><img src="/../../images/image-20221128132915669.png" alt="image-20221128132915669"></p>
-<p><img src="/../../images/image-20221128104234972.png" alt="image-20221128104234972"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.quartz.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@DisallowConcurrentExecution</span> : 禁止并发地执行通过一个 job 定义（JobDetail定义的）的多个实例</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@DisallowConcurrentExecution</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyJop</span> <span class="keyword">implements</span> <span class="title class_">Job</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 如果在添加 .usingJobData(&quot;name&quot;, &quot;trigger3&quot;) 的时候，</span></span><br><span class="line"><span class="comment">     * key 和 这里定义的属性名一样的话，就会给这里的属性赋值，下面就可以直接用了</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">(JobExecutionContext context)</span> <span class="keyword">throws</span> JobExecutionException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 会发现，不加注解的情况下（@DisallowConcurrentExecution）</span></span><br><span class="line">        <span class="comment">// 下面的输出都是不一样的，证明不是同一个 Job 实例</span></span><br><span class="line">        System.out.println( <span class="string">&quot;jobDetail : &quot;</span> + System.identityHashCode(context.getJobDetail()) );</span><br><span class="line">        System.out.println( <span class="string">&quot;job : &quot;</span> + System.identityHashCode(context.getJobInstance()) );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不加上注解的话（@DisallowConcurrentExecution），</span></span><br><span class="line">        <span class="comment">// 我们想着是每隔次启动 job 实例之后等待sleep 3秒 之后再重复启动的</span></span><br><span class="line">        <span class="comment">// 但是实际发现，每隔一秒就又有启动了，证明不是同一个job实例，所以它们之间的启动不需要等待sleep的时间</span></span><br><span class="line">        System.out.println(<span class="string">&quot;execute : &quot;</span> + <span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<p><img src="/../../images/image-20221128110013728.png" alt="image-20221128110013728"></p>
-<hr>
-<p>测试count++</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.quartz.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@DisallowConcurrentExecution</span> : 禁止并发地执行通过一个 job 定义（JobDetail定义的）的多个实例</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@DisallowConcurrentExecution</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 持久化 JobDetail 中的 JobDataMap (对 trigger 中的 datamap 无效)</span></span><br><span class="line"><span class="comment"> * 如果一个任务不是持久化的，则当没有触发器关联它的时候，Quartz会从scheduler中删除它</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PersistJobDataAfterExecution</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyJop</span> <span class="keyword">implements</span> <span class="title class_">Job</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">execute</span><span class="params">(JobExecutionContext context)</span> <span class="keyword">throws</span> JobExecutionException &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">JobDataMap</span> <span class="variable">triggerMap</span> <span class="operator">=</span> context.getTrigger().getJobDataMap();</span><br><span class="line">        <span class="type">JobDataMap</span> <span class="variable">jobDetailMap</span> <span class="operator">=</span> context.getJobDetail().getJobDataMap();</span><br><span class="line">        triggerMap.put(<span class="string">&quot;count&quot;</span>, triggerMap.getInt(<span class="string">&quot;count&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">        jobDetailMap.put(<span class="string">&quot;count1&quot;</span>, jobDetailMap.getInt(<span class="string">&quot;count1&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">        System.out.println( <span class="string">&quot;triggerMap count : &quot;</span> + triggerMap.getInt(<span class="string">&quot;count&quot;</span>) );</span><br><span class="line">        System.out.println( <span class="string">&quot;jobDetailMap count : &quot;</span> + jobDetailMap.getInt(<span class="string">&quot;count1&quot;</span>) );</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.quartz.*;</span><br><span class="line"><span class="keyword">import</span> org.quartz.impl.StdSchedulerFactory;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/27</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestJob</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">JobDetail</span> <span class="variable">jobDetail</span> <span class="operator">=</span> JobBuilder.newJob(MyJop.class)</span><br><span class="line">                <span class="comment">// name: 任务名称（在调度器里不能重复，唯一的） group : 组</span></span><br><span class="line">                .withIdentity(<span class="string">&quot;jop1&quot;</span>, <span class="string">&quot;group1&quot;</span>)</span><br><span class="line">                .usingJobData(<span class="string">&quot;job&quot;</span>, <span class="string">&quot;jobDetail1&quot;</span>)</span><br><span class="line">                .usingJobData(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;jobDetail2&quot;</span>)</span><br><span class="line">                .usingJobData(<span class="string">&quot;count1&quot;</span>, <span class="number">0</span>)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 触发器</span></span><br><span class="line">        <span class="type">Trigger</span> <span class="variable">trigger</span> <span class="operator">=</span> TriggerBuilder.newTrigger()</span><br><span class="line">                .withIdentity(<span class="string">&quot;trigger1&quot;</span>, <span class="string">&quot;trigger1&quot;</span>)</span><br><span class="line">                .usingJobData(<span class="string">&quot;trigger&quot;</span>, <span class="string">&quot;trigger&quot;</span>)</span><br><span class="line">                <span class="comment">// 会覆盖上面JobDetail中的name的值</span></span><br><span class="line">                .usingJobData(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;trigger2&quot;</span>)</span><br><span class="line">                .usingJobData(<span class="string">&quot;count&quot;</span>, count)</span><br><span class="line">                .startNow()</span><br><span class="line">                <span class="comment">//                                                            时间间隔           永久重复执行</span></span><br><span class="line">                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(<span class="number">2</span>).repeatForever())</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调度器</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Scheduler</span> <span class="variable">scheduler</span> <span class="operator">=</span> StdSchedulerFactory.getDefaultScheduler();</span><br><span class="line">            scheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line">            <span class="comment">// 启动</span></span><br><span class="line">            scheduler.start();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SchedulerException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>结果图：</p>
-<p><img src="/../../images/image-20221128132552340.png" alt="image-20221128132552340"></p>
-<p>Springboot整合Quartz</p>
-<p><img src="/../../images/image-20221128143743504.png" alt="image-20221128143743504"></p>
-<p>Springboot整合Quartz</p>
-<p>使用Springboot里面的监听器，让项目在启动后也启动了调度器</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> quartz.bootquartz;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.quartz.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.quartz.QuartzJobBean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@DisallowConcurrentExecution</span> : 禁止并发地执行通过一个 job 定义（JobDetail定义的）的多个实例</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@DisallowConcurrentExecution</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 持久化 JobDetail 中的 JobDataMap (对 trigger 中的 datamap 无效)</span></span><br><span class="line"><span class="comment"> * 如果一个任务不是持久化的，则当没有触发器关联它的时候，Quartz会从scheduler中删除它</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PersistJobDataAfterExecution</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">QuartzJob</span> <span class="keyword">extends</span> <span class="title class_">QuartzJobBean</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">executeInternal</span><span class="params">(JobExecutionContext context)</span> <span class="keyword">throws</span> JobExecutionException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">            System.out.println(context.getScheduler().getSchedulerInstanceId());</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;taskname : &quot;</span> + context.getJobDetail().getKey().getName() );</span><br><span class="line">            System.out.println(<span class="string">&quot;执行时间 ：&quot;</span> + <span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> quartz.bootquartz;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.quartz.Scheduler;</span><br><span class="line"><span class="keyword">import</span> org.quartz.SchedulerException;</span><br><span class="line"><span class="keyword">import</span> org.quartz.impl.StdSchedulerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SchedulerConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Scheduler <span class="title function_">scheduler</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Scheduler</span> <span class="variable">scheduler1</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            scheduler1 = StdSchedulerFactory.getDefaultScheduler();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SchedulerException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> scheduler1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> quartz.bootquartz.listener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.quartz.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationListener;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.event.ContextRefreshedEvent;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> quartz.bootquartz.QuartzJob;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StartApplicationListener</span> <span class="keyword">implements</span> <span class="title class_">ApplicationListener</span>&lt;ContextRefreshedEvent&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注入调度器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Scheduler scheduler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onApplicationEvent</span><span class="params">(ContextRefreshedEvent event)</span> &#123;</span><br><span class="line">        <span class="type">TriggerKey</span> <span class="variable">triggerKey</span> <span class="operator">=</span> TriggerKey.triggerKey(<span class="string">&quot;trigger1&quot;</span>, <span class="string">&quot;group1&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Trigger</span> <span class="variable">trigger</span> <span class="operator">=</span> scheduler.getTrigger(triggerKey);</span><br><span class="line">            <span class="keyword">if</span> (trigger == <span class="literal">null</span>) &#123;</span><br><span class="line">                trigger = TriggerBuilder.newTrigger()</span><br><span class="line">                        .withIdentity(triggerKey)</span><br><span class="line">                        .withSchedule(CronScheduleBuilder.cronSchedule(<span class="string">&quot;0/5 * * * * ?&quot;</span>))</span><br><span class="line">                        .startNow()</span><br><span class="line">                        .build();</span><br><span class="line">                <span class="type">JobDetail</span> <span class="variable">jobDetail</span> <span class="operator">=</span> JobBuilder.newJob(QuartzJob.class)</span><br><span class="line">                        .withIdentity(<span class="string">&quot;job1&quot;</span>, <span class="string">&quot;group1&quot;</span>)</span><br><span class="line">                        .build();</span><br><span class="line"></span><br><span class="line">                scheduler.scheduleJob(jobDetail, trigger);</span><br><span class="line">                scheduler.start();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SchedulerException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>结果：</p>
-<p><img src="/../../images/image-20221128152834236.png" alt="image-20221128152834236"></p>
-<p><img src="/../../images/image-20221217151142631.png" alt="image-20221217151142631"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/27/Quartz/Quartz%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cldsgimzx000vesv6eghpejb4" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" rel="tag">定时任务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -3008,9 +1829,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>130</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>60</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>45</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
     </div>
 
 

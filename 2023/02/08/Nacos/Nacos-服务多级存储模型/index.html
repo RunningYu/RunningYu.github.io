@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Nacos-服务多级存储模式 &amp; 集群 &amp; 优先本地集群访问的负载均衡的实现 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​		之前我们有服务的概念，我们提供用户查询的userservice服务，还有提供订单查询的orderservice服务。然后，userservice还部署了多个实例，我们有8081 、8082、8083，这三个呢，都是userservice的实例，所以我们之前是有两层概念的，一层是服务，而第二层就是实例。一个服务，可以包含多个实例。不过呀，随着我们这个业务规模越来越扩大，那么我们就会考虑更多的问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nacos-服务多级存储模式 &amp; 集群 &amp; 优先本地集群访问的负载均衡的实现">
+<meta property="og:url" content="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="​		之前我们有服务的概念，我们提供用户查询的userservice服务，还有提供订单查询的orderservice服务。然后，userservice还部署了多个实例，我们有8081 、8082、8083，这三个呢，都是userservice的实例，所以我们之前是有两层概念的，一层是服务，而第二层就是实例。一个服务，可以包含多个实例。不过呀，随着我们这个业务规模越来越扩大，那么我们就会考虑更多的问">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20230208114620776.png">
+<meta property="og:image" content="http://example.com/images/image-20230208114536926.png">
+<meta property="og:image" content="http://example.com/images/image-20230208114842391.png">
+<meta property="og:image" content="http://example.com/images/image-20230208115409758.png">
+<meta property="og:image" content="http://example.com/images/image-20230208115731341.png">
+<meta property="og:image" content="http://example.com/images/image-20230208115947584.png">
+<meta property="og:image" content="http://example.com/images/image-20230208115826327.png">
+<meta property="og:image" content="http://example.com/images/image-20230208120609913.png">
+<meta property="og:image" content="http://example.com/images/image-20230208120553443.png">
+<meta property="og:image" content="http://example.com/images/image-20230208121356082.png">
+<meta property="og:image" content="http://example.com/images/image-20230208122809011.png">
+<meta property="og:image" content="http://example.com/images/image-20230208122900770.png">
+<meta property="og:image" content="http://example.com/images/image-20230208123816670.png">
+<meta property="article:published_time" content="2023-02-08T03:33:44.757Z">
+<meta property="article:modified_time" content="2023-02-08T04:40:05.371Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="Nacos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/image-20230208114620776.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-Nacos/Nacos-服务多级存储模型" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/" class="article-date">
+  <time class="post-time" datetime="2023-02-08T03:33:44.757Z" itemprop="datePublished">
+    <span class="post-month">2月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Nacos-服务多级存储模式 &amp; 集群 &amp; 优先本地集群访问的负载均衡的实现
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nacos/">Nacos</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​		之前我们有服务的概念，我们提供用户查询的userservice服务，还有提供订单查询的orderservice服务。然后，userservice还部署了多个实例，我们有8081 、8082、8083，这三个呢，都是userservice的实例，所以我们之前是有两层概念的，一层是服务，而第二层就是实例。一个服务，可以包含多个实例。不过呀，随着我们这个业务规模越来越扩大，那么我们就会考虑更多的问题了。比如说我们现在的，我们把所有的实力都部署在一个地方，就像你把鸡蛋都放在一个篮子里，哪天你不小心篮子翻了，那所有的鸡蛋不就都打碎了吗？<strong>那你的机房放在那里同一个地方，哪天天灾人祸出了问题，整个服务不就完了？</strong>所以呀，为了解决这个问l题，我们会将一个服务的多个实例部署到多个机房，特别是像阿里京东这些财大气粗的，哎，我给全国各地，上海、杭州、北京都整一个，这俩送到杭州，这俩到上海，再来几个给它扔到北京，这就像我们把鸡蛋分散开了，一个打了是不是还有好几栏儿呢，对不对？那这样呢，就能够做到一种叫容灾。而我们的那个服务分级存储模型，就是引入了这样一个机房的概念，或者叫地域的概念，把同在一个机房的多个实例称为一个集群。比方，杭州机房的两个userservice实例就称之为杭州的userservice集群，那北京的userservice实例就称为北京的userservice集群。所以呢，在Nacos的服务分级模型中啊，一级是服务，往下是集群，再往下是实例。</p>
+<p>​		那为什么Nacos要引入这样的一个服务分级的？我原来直接服务找实例不好吗？为什么要多加一个地域划分集群的一个概念？我们设想这么一种情况，比方说我有一个杭州的地方，里面有orderservice的集群，还有一个userservice集群，然后呢，我还有一个上海的地方，也是一样的配置，将来还有广东地方，这个北京地方等等。现在呢，我的orderservice需要访问userservice，那么它有两种选择，一种是在自己本地局域网内访问，另一种是去外边的机房访问。那你觉得他该选哪个呀？那不用说呀，肯定选本地啊，因为外边的野花不要采嘛。当然啦，还有更重要的原因，我们局域网内的访问呢，它的距离比较短，所以呢，速度比较快，延迟比较低，而你跨越了这种集群的访问，比如说你从杭州访问到广州或者北京，那么达到数百公里上千公里，那么这个时候延迟是非常高的，所以啊，在服务调用时，应该尽可能的去访问本地集群，只有在本地集群不可用的情况下，我们才会考虑去访问其集群。我们的Nacos引入这个集训概念，其实就是为了防止出现跨集群调用啊，尽可能的避免。</p>
+<p><img src="/../../images/image-20230208114620776.png" alt="image-20230208114620776"></p>
+<p><img src="/../../images/image-20230208114536926.png" alt="image-20230208114536926"></p>
+<p><img src="/../../images/image-20230208114842391.png" alt="image-20230208114842391"></p>
+<p>演示：</p>
+<p><img src="/../../images/image-20230208115409758.png" alt="image-20230208115409758"></p>
+<p><img src="/../../images/image-20230208115731341.png" alt="image-20230208115731341"></p>
+<p>然后去Nacos控制台就可以看到有两个集群，以及集群各自有的实例</p>
+<p><img src="/../../images/image-20230208115947584.png" alt="image-20230208115947584"></p>
+<p><img src="/../../images/image-20230208115826327.png" alt="image-20230208115826327"></p>
+<p>orderservice想访问本地集群HZ中的userservice的那两个实例服务，那么首先就需要将orderservice也注册到HZ集群</p>
+<p><img src="/../../images/image-20230208120609913.png" alt="image-20230208120609913"></p>
+<p><img src="/../../images/image-20230208120553443.png" alt="image-20230208120553443"></p>
+<p>到这个时候，如果orderservice去访问3次userservice服务时，userservice的三个实例都会被访问到，因为依然采用的是轮询的方式。服务在选择实例时的规则都是由负载均衡的规则来决定的，也就是Irule，因为还没有配置Irule，所以还是默认的轮询方式。所以要想实现优先同集群访问的这种负载均衡的规则，我们必须去修改负载均衡。</p>
+<p><img src="/../../images/image-20230208121356082.png" alt="image-20230208121356082"></p>
+<p>在orderservice的yml配置文件中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userservice: # 要做配置的微服务名称</span><br><span class="line">  ribbon:</span><br><span class="line">    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule  # 负载均衡规矩（优先同集群访问）</span><br></pre></td></tr></table></figure>
+
+<p>这样之后，orderservice去访问多次userservice服务，就会发现都是访问的是8081、8082的实例（在idea的控制台可以看各实例日志，8083是没有日志输出的）。</p>
+<ul>
+<li><p>那么有一个问题，本地同集群的8081、8082两个实例的被访问的比例是怎么的呢？</p>
+<ul>
+<li>其实是随机的，NacosRule的一个特点，优先使用本地同集群，在集群内的多个服务当中再采用随机方式来负载均衡</li>
+</ul>
+</li>
+<li><p>那么又有一个问题，如果我们把orderservice的同集群的userservice服务都停了，这样就只剩下不同集群的SH内的userservice实例，这个时候再去通过oerservice访问userservice时会怎样呢？</p>
+</li>
+</ul>
+<p><img src="/../../images/image-20230208122809011.png" alt="image-20230208122809011"></p>
+<p><img src="/../../images/image-20230208122900770.png" alt="image-20230208122900770"></p>
+<p>这是orderservice去访问userservice就会去跨集群访问了，即访问到8083端口的实例。idea，看一下日志。我们发现，这次请求是8083给承担了，那在order当中会出现一个警告信息什么，显示一次跨集群访问发生了，谁呀？就是userservice，那么你想问的是杭州，但是呢，实际上你访问的是上海。那通过这个啊，我们就知道了，NacosRule其实优先访问本地，本地没有，它才会跨境访问，跨域访问时，它会有一个警告，将来我们的运维人员如果看到了这样的警告信息，就能够清楚的知道发生了什么问题了，那么他就会及时的去重新启动我们的挂掉的服务，这样问题就能得到解决了</p>
+<p><img src="/../../images/image-20230208123816670.png" alt="image-20230208123816670"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/" data-id="cldv7hkso000820v68cc84am3" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/07/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign/Feign%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Feign的介绍和使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

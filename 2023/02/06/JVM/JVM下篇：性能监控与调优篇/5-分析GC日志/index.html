@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/0dcb239f0928bc374ac1b376b4189295.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7817f28a52c836d5ed08a4b992823f64.png">
 <meta property="article:published_time" content="2023-02-06T02:12:49.678Z">
-<meta property="article:modified_time" content="2023-02-06T06:51:32.772Z">
+<meta property="article:modified_time" content="2023-02-06T17:42:32.771Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="JVM下篇：性能监控与调优篇">
@@ -54,9 +54,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>130</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>60</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>45</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -132,6 +132,16 @@
 <li><p>混合收集（Mixed GC）：收集整个新生代以及部分老年代的垃圾收集。目前，只有 G1 GC 会有这种行为</p>
 </li>
 <li><p>整堆收集（Full GC）：收集整个 java 堆和方法区的垃圾收集。</p>
+<ul>
+<li>哪些情况会触发 Full GC ?<ul>
+<li>老年代空间不足</li>
+<li>方法区空间不足</li>
+<li>显示调用System.gc()</li>
+<li>Minor GC进入老年代的数据的平均大小 大于 老年代的可用内存</li>
+<li>大对象直接进入老年代，而老年代的可用空间不足</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="5-2-GC-日志分类"><a href="#5-2-GC-日志分类" class="headerlink" title="5.2. GC 日志分类"></a>5.2. GC 日志分类</h2><p><strong>MinorGC</strong></p>
@@ -205,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/5-%E5%88%86%E6%9E%90GC%E6%97%A5%E5%BF%97/" data-id="cldsgin1v006mesv60sz9euar" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/5-%E5%88%86%E6%9E%90GC%E6%97%A5%E5%BF%97/" data-id="cldv7hkvj006p20v6232na8us" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/" rel="tag">JVM下篇：性能监控与调优篇</a></li></ul>
@@ -215,6 +225,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2023/02/07/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign/Feign%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Feign的介绍和使用
+        
+      </div>
+    </a>
   
   
     <a href="/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/4-JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
@@ -272,9 +291,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>130</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>60</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>45</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>132</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
     </div>
 
 
