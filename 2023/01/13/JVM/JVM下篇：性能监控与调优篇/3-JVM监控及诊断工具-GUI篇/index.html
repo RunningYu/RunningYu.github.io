@@ -5,12 +5,12 @@
   
   <title>3-JVM监控及诊断工具-GUI篇 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[toc] 3. JVM 监控及诊断工具-GUI 篇3.1. 工具概述使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：  1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。 2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。 3．分析数据通过终端输出，结果展示不够">
+  <meta name="description" content="[toc]  3. JVM 监控及诊断工具-GUI 篇  3.1. 工具概述 使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：  1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。 2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。 3．分析数据通过终端输出，结果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3-JVM监控及诊断工具-GUI篇">
 <meta property="og:url" content="http://example.com/2023/01/13/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/3-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-GUI%E7%AF%87/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="[toc] 3. JVM 监控及诊断工具-GUI 篇3.1. 工具概述使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：  1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。 2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。 3．分析数据通过终端输出，结果展示不够">
+<meta property="og:description" content="[toc]  3. JVM 监控及诊断工具-GUI 篇  3.1. 工具概述 使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：  1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。 2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。 3．分析数据通过终端输出，结果">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/2a3da9e0684da25f3603859309a31002.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/01d1c91e8a41137321af9334a383eeda.png">
@@ -20,18 +20,18 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/5778843e25883aed6ee8591e7f57465a.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/750e766290dd3ce1c31bece436870f96.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/43a8b0745532825ab4a262a953aa5ffd.png">
-<meta property="og:image" content="http://example.com/images/image-20230115232529855.png">
-<meta property="og:image" content="http://example.com/images/image-20230115233142987.png">
-<meta property="og:image" content="http://example.com/images/image-20230115233917603.png">
-<meta property="og:image" content="http://example.com/images/image-20230115235544669.png">
-<meta property="og:image" content="http://example.com/images/image-20230115235106767.png">
-<meta property="og:image" content="http://example.com/images/image-20230116005955792.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230115232529855.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230115233142987.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230115233917603.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230115235544669.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230115235106767.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230116005955792.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/23d0ea8c73c4e7fb57f47fba7ee39f3f.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e5dad78d08ba1aee3a9583c33d83c53f.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b25b5cb539c1d5622f4855dffb1fd21e.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/0e41893c02f420e50d36c59acf3021b6.png">
-<meta property="og:image" content="http://example.com/images/image-20230116105849445.png">
-<meta property="og:image" content="http://example.com/images/image-20230116105921931.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230116105849445.png">
+<meta property="og:image" content="http://example.com/2023/01/13/images/image-20230116105921931.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b385d959623a0684d1a40700f4bc1243.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/aa57ab4a3183801e003546c177ab64ee.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/75200c0d6aeaaade33422d40bd64beb3.png">
@@ -94,9 +94,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>138</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>139</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>66</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>48</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -161,7 +161,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>[toc]</p>
-<h1 id="3-JVM-监控及诊断工具-GUI-篇"><a href="#3-JVM-监控及诊断工具-GUI-篇" class="headerlink" title="3. JVM 监控及诊断工具-GUI 篇"></a>3. JVM 监控及诊断工具-GUI 篇</h1><h2 id="3-1-工具概述"><a href="#3-1-工具概述" class="headerlink" title="3.1. 工具概述"></a>3.1. 工具概述</h2><p>使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：</p>
+<h1 id="3-jvm-监控及诊断工具-gui-篇"><a class="markdownIt-Anchor" href="#3-jvm-监控及诊断工具-gui-篇"></a> 3. JVM 监控及诊断工具-GUI 篇</h1>
+<h2 id="31-工具概述"><a class="markdownIt-Anchor" href="#31-工具概述"></a> 3.1. 工具概述</h2>
+<p>使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：</p>
 <ul>
 <li>1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。</li>
 <li>2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。</li>
@@ -170,31 +172,38 @@
 <p>为此，JDK 提供了一些内存泄漏的分析工具，如 jconsole，jvisualvm 等，用于辅助开发人员定位问题，但是这些工具很多时候并不足以满足快速定位的需求。所以这里我们介绍的工具相对多一些、丰富一些。</p>
 <p><strong>JDK 自带的工具</strong></p>
 <ul>
-<li><p>jconsole：JDK 自带的可视化监控工具。查看 Java 应用程序的运行概况、监控堆信息、永久区（或元空间）使用情况、类加载情况等</p>
+<li>
+<p>jconsole：JDK 自带的可视化监控工具。查看 Java 应用程序的运行概况、监控堆信息、永久区（或元空间）使用情况、类加载情况等</p>
 </li>
-<li><p>Visual VM：Visual VM 是一个工具，它提供了一个可视界面，用于查看 Java 虚拟机上运行的基于 Java 技术的应用程序的详细信息。</p>
+<li>
+<p>Visual VM：Visual VM 是一个工具，它提供了一个可视界面，用于查看 Java 虚拟机上运行的基于 Java 技术的应用程序的详细信息。</p>
 </li>
-<li><p>JMC：Java Mission Control，内置 Java Flight Recorder。能够以极低的性能开销收集 Java 虚拟机的性能数据。</p>
+<li>
+<p>JMC：Java Mission Control，内置 Java Flight Recorder。能够以极低的性能开销收集 Java 虚拟机的性能数据。</p>
 </li>
 </ul>
 <p><strong>第三方工具</strong></p>
 <ul>
-<li><p>MAT：MAT（Memory Analyzer Tool）是基于 Eclipse 的内存分析工具，是一个快速、功能丰富的 Java heap 分析工具，它可以帮助我们查找内存泄漏和减少内存消耗</p>
+<li>
+<p>MAT：MAT（Memory Analyzer Tool）是基于 Eclipse 的内存分析工具，是一个快速、功能丰富的 Java heap 分析工具，它可以帮助我们查找内存泄漏和减少内存消耗</p>
 </li>
-<li><p>JProfiler：商业软件，需要付费。功能强大。</p>
+<li>
+<p>JProfiler：商业软件，需要付费。功能强大。</p>
 </li>
 </ul>
-<h2 id="3-2-JConsole"><a href="#3-2-JConsole" class="headerlink" title="3.2. JConsole"></a>3.2. JConsole</h2><p>jconsole：从 Java5 开始，在 JDK 中自带的 java 监控和管理控制台。用于对 JVM 中内存、线程和类等的监控，是一个基于 JMX（java management extensions）的 GUI 性能监控工具。</p>
+<h2 id="32-jconsole"><a class="markdownIt-Anchor" href="#32-jconsole"></a> 3.2. JConsole</h2>
+<p>jconsole：从 Java5 开始，在 JDK 中自带的 java 监控和管理控制台。用于对 JVM 中内存、线程和类等的监控，是一个基于 JMX（java management extensions）的 GUI 性能监控工具。</p>
 <p>官方地址：<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html">https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html</a></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/2a3da9e0684da25f3603859309a31002.png" alt="image-20210505141631635"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/01d1c91e8a41137321af9334a383eeda.png" alt="image-20210505141726143"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/fd74276fd1dd7e4542994d1da5768bff.png" alt="image-20210505141924211"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/c590dbcfb21edbf73f9b7a4d4e342cb7.png" alt="image-20210505141950000"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/0394d3dec7f075f88d1321565e4b0c40.png" alt="image-20210505142050157"></p>
-<h2 id="3-3-Visual-VM"><a href="#3-3-Visual-VM" class="headerlink" title="3.3. Visual VM"></a>3.3. Visual VM</h2><p>Visual VM 是一个功能强大的多合一故障诊断和性能监控的可视化工具。它集成了多个 JDK 命令行工具，使用 Visual VM 可用于显示虚拟机进程及进程的配置和环境信息（jps，jinfo），监视应用程序的 CPU、GC、堆、方法区及线程的信息（jstat、jstack）等，甚至代替 JConsole。在 JDK 6 Update 7 以后，Visual VM 便作为 JDK 的一部分发布（VisualVM 在 JDK／bin 目录下）即：它完全免费。</p>
+<h2 id="33-visual-vm"><a class="markdownIt-Anchor" href="#33-visual-vm"></a> 3.3. Visual VM</h2>
+<p>Visual VM 是一个功能强大的多合一故障诊断和性能监控的可视化工具。它集成了多个 JDK 命令行工具，使用 Visual VM 可用于显示虚拟机进程及进程的配置和环境信息（jps，jinfo），监视应用程序的 CPU、GC、堆、方法区及线程的信息（jstat、jstack）等，甚至代替 JConsole。在 JDK 6 Update 7 以后，Visual VM 便作为 JDK 的一部分发布（VisualVM 在 JDK／bin 目录下）即：它完全免费。</p>
 <p><strong>主要功能：</strong></p>
 <ul>
-<li>1.生成&#x2F;读取堆内存&#x2F;线程快照</li>
+<li>1.生成/读取堆内存/线程快照</li>
 <li>2.查看 JVM 参数和系统属性</li>
 <li>3.查看运行中的虚拟机进程</li>
 <li>4.程序资源的实时监控</li>
@@ -204,15 +213,16 @@
 <p><img src="https://img-blog.csdnimg.cn/img_convert/5778843e25883aed6ee8591e7f57465a.png" alt="image-20210505143844282"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/750e766290dd3ce1c31bece436870f96.png" alt="image-20210505144716064"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/43a8b0745532825ab4a262a953aa5ffd.png" alt="image-20210505144805307"></p>
-<p><img src="/../../../images/image-20230115232529855.png" alt="image-20230115232529855"></p>
-<p><img src="/../../../images/image-20230115233142987.png" alt="image-20230115233142987"></p>
+<p><img src="../../../images/image-20230115232529855.png" alt="image-20230115232529855"></p>
+<p><img src="../../../images/image-20230115233142987.png" alt="image-20230115233142987"></p>
 <p>举例：生成和分析线程dump文件，可以监视线程死锁等问题</p>
-<p><img src="/../../../images/image-20230115233917603.png" alt="image-20230115233917603"></p>
-<p>当我们发现服务器性能急速地变慢，cpu占用率很高，我们就可以查看 抽样器–&gt;CPU–&gt;CPU样例&#x2F;快照&#x2F;线程CPU时间</p>
-<p><img src="/../../../images/image-20230115235544669.png" alt="image-20230115235544669"></p>
+<p><img src="../../../images/image-20230115233917603.png" alt="image-20230115233917603"></p>
+<p>当我们发现服务器性能急速地变慢，cpu占用率很高，我们就可以查看 抽样器–&gt;CPU–&gt;CPU样例/快照/线程CPU时间</p>
+<p><img src="../../../images/image-20230115235544669.png" alt="image-20230115235544669"></p>
 <p>没有发现OOM，但发现Full GC的次数比较多，这时候可以看看是不是存在内存溢出的问题，可以查看 抽样器–&gt;内存，可以看到哪些线程的相关的数据占有的比较多。且可以生成dump快照文件保存</p>
-<p><img src="/../../../images/image-20230115235106767.png" alt="image-20230115235106767"></p>
-<h2 id="3-4-Eclipse-MAT"><a href="#3-4-Eclipse-MAT" class="headerlink" title="3.4. Eclipse MAT"></a>3.4. Eclipse MAT</h2><p><strong>MAT（Memory Analyzer Tool）</strong>工具是一款功能强大的 <strong>Java 堆内存分析器</strong>。可以用于查找内存泄漏以及查看内存消耗情况。MAT 是基于 Eclipse 开发的，不仅可以单独使用，还可以作为插件的形式嵌入在 Eclipse 中使用。是一款免费的性能分析工具，使用起来非常方便。</p>
+<p><img src="../../../images/image-20230115235106767.png" alt="image-20230115235106767"></p>
+<h2 id="34-eclipse-mat"><a class="markdownIt-Anchor" href="#34-eclipse-mat"></a> 3.4. Eclipse MAT</h2>
+<p>**MAT（Memory Analyzer Tool）**工具是一款功能强大的 <strong>Java 堆内存分析器</strong>。可以用于查找内存泄漏以及查看内存消耗情况。MAT 是基于 Eclipse 开发的，不仅可以单独使用，还可以作为插件的形式嵌入在 Eclipse 中使用。是一款免费的性能分析工具，使用起来非常方便。</p>
 <p><mark>MAT 可以（主要）分析 heap dump 文件。</mark>在进行内存分析时，只要获得了反映当前设备内存映像的 hprof 文件，通过 MAT 打开就可以直观地看到当前的内存信息。一般说来，这些内存信息包含：</p>
 <ul>
 <li>所有的对象信息，包括对象实例、成员变量、存储于栈中的基本类型值和存储于堆中的其他对象的引用值。</li>
@@ -224,14 +234,15 @@
 <p><font color="red">最吸引人的还是能够快速为开发人员生成<mark><strong>内存泄漏报表</strong></mark>，方便定位问题和分析问题。</font>虽然 MAT 有如此强大的功能，但是内存分析也没有简单到一键完成的程度，很多内存问题还是需要我们从 MAT 展现给我们的信息当中通过经验和直觉来判断才能发现。</p>
 <p>官方地址： <a target="_blank" rel="noopener" href="https://www.eclipse.org/mat/downloads.php">https://www.eclipse.org/mat/downloads.php</a></p>
 <p>(回顾一下 获取dump文件的几种方式)</p>
-<p><img src="/../../../images/image-20230116005955792.png" alt="image-20230116005955792"></p>
+<p><img src="../../../images/image-20230116005955792.png" alt="image-20230116005955792"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/23d0ea8c73c4e7fb57f47fba7ee39f3f.png" alt="image-20210505145708567"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/e5dad78d08ba1aee3a9583c33d83c53f.png" alt="image-20210505145826442"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/b25b5cb539c1d5622f4855dffb1fd21e.png" alt="image-20210505145945951"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/0e41893c02f420e50d36c59acf3021b6.png" alt="image-20210505150039376"></p>
-<p><img src="/../../../images/image-20230116105849445.png" alt="image-20230116105849445"></p>
-<p><img src="/../../../images/image-20230116105921931.png" alt="image-20230116105921931"></p>
-<h2 id="3-5-JProfiler"><a href="#3-5-JProfiler" class="headerlink" title="3.5. JProfiler"></a>3.5. JProfiler</h2><p>在运行 Java 的时候有时候想测试运行时占用内存情况，这时候就需要使用测试工具查看了。在 eclipse 里面有 Eclipse Memory Analyzer tool（MAT）插件可以测试，而在 IDEA 中也有这么一个插件，就是 JProfiler。JProfiler 是由 ej-technologies 公司开发的一款 Java 应用性能诊断工具。功能强大，但是收费。</p>
+<p><img src="../../../images/image-20230116105849445.png" alt="image-20230116105849445"></p>
+<p><img src="../../../images/image-20230116105921931.png" alt="image-20230116105921931"></p>
+<h2 id="35-jprofiler"><a class="markdownIt-Anchor" href="#35-jprofiler"></a> 3.5. JProfiler</h2>
+<p>在运行 Java 的时候有时候想测试运行时占用内存情况，这时候就需要使用测试工具查看了。在 eclipse 里面有 Eclipse Memory Analyzer tool（MAT）插件可以测试，而在 IDEA 中也有这么一个插件，就是 JProfiler。JProfiler 是由 ej-technologies 公司开发的一款 Java 应用性能诊断工具。功能强大，但是收费。</p>
 <p><strong>特点：</strong></p>
 <ul>
 <li>使用方便、界面操作友好（简单且强大）</li>
@@ -318,7 +329,8 @@
 <li><strong>历史检测记录 Monitor History</strong>：显示重大的等待事件和阻塞事件的历史记录。</li>
 <li><strong>监控器使用统计 Monitor Usage Statistics</strong>：显示分组监测，线程和监测类的统计监测数据</li>
 </ul>
-<h2 id="3-6-Arthas"><a href="#3-6-Arthas" class="headerlink" title="3.6. Arthas"></a>3.6. Arthas</h2><p>上述工具都必须在服务端项目进程中配置相关的监控参数，然后工具通过远程连接到项目进程，获取相关的数据。这样就会带来一些不便，比如线上环境的网络是隔离的，本地的监控工具根本连不上线上环境。并且类似于 Jprofiler 这样的商业工具，是需要付费的。</p>
+<h2 id="36-arthas"><a class="markdownIt-Anchor" href="#36-arthas"></a> 3.6. Arthas</h2>
+<p>上述工具都必须在服务端项目进程中配置相关的监控参数，然后工具通过远程连接到项目进程，获取相关的数据。这样就会带来一些不便，比如线上环境的网络是隔离的，本地的监控工具根本连不上线上环境。并且类似于 Jprofiler 这样的商业工具，是需要付费的。</p>
 <p>那么有没有一款工具不需要远程连接，也不需要配置监控参数，同时也提供了丰富的性能监控数据呢？</p>
 <p>阿里巴巴开源的性能分析神器 Arthas 应运而生。</p>
 <p>Arthas 是 Alibaba 开源的 Java 诊断工具，深受开发者喜爱。在线排查问题，无需重启；动态跟踪 Java 代码；实时监控 JVM 状态。Arthas 支持 JDK 6 ＋，支持 Linux／Mac／Windows，采用命令行交互模式，同时提供丰富的 Tab 自动补全功能，进一步方便进行问题的定位和诊断。当你遇到以下类似问题而束手无策时，Arthas 可以帮助你解决：</p>
@@ -334,25 +346,20 @@
 <p>官方地址：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/quick-start.html">https://arthas.aliyun.com/doc/quick-start.html</a></p>
 <p>安装方式：如果速度较慢，可以尝试国内的码云 Gitee 下载。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://io/arthas/arthas-boot.jar</span><br><span class="line">wget https://arthas/gitee/io/arthas-boot.jar</span><br></pre></td></tr></table></figure>
-
 <p>Arthas 只是一个 java 程序，所以可以直接用 java -jar 运行。</p>
 <p>除了在命令行查看外，Arthas 目前还支持 Web Console。在成功启动连接进程之后就已经自动启动,可以直接访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:8563/">http://127.0.0.1:8563/</a> 访问，页面上的操作模式和控制台完全一样。</p>
 <p><strong>基础指令</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">quit/exit 退出当前 Arthas客户端，其他 Arthas喜户端不受影响</span><br><span class="line">stop/shutdown 关闭 Arthas服务端，所有 Arthas客户端全部退出</span><br><span class="line">help 查看命令帮助信息</span><br><span class="line">cat 打印文件内容，和linux里的cat命令类似</span><br><span class="line">echo 打印参数，和linux里的echo命令类似</span><br><span class="line">grep 匹配查找，和linux里的gep命令类似</span><br><span class="line">tee 复制标隹输入到标准输出和指定的文件，和linux里的tee命令类似</span><br><span class="line">pwd 返回当前的工作目录，和linux命令类似</span><br><span class="line">cls 清空当前屏幕区域</span><br><span class="line">session 查看当前会话的信息</span><br><span class="line">reset 重置增强类，将被 Arthas增强过的类全部还原, Arthas服务端关闭时会重置所有增强过的类</span><br><span class="line">version 输出当前目标Java进程所加载的 Arthas版本号</span><br><span class="line">history 打印命令历史</span><br><span class="line">keymap Arthas快捷键列表及自定义快捷键</span><br></pre></td></tr></table></figure>
-
 <p><strong>jvm 相关</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dashboard 当前系统的实时数据面板</span><br><span class="line">thread 查看当前JVM的线程堆栈信息</span><br><span class="line">jvm 查看当前JVM的信息</span><br><span class="line">sysprop 查看和修改JVM的系统属性</span><br><span class="line">sysem 查看JVM的环境变量</span><br><span class="line">vmoption 查看和修改JVM里诊断相关的option</span><br><span class="line">perfcounter 查看当前JVM的 Perf Counter信息</span><br><span class="line">logger 查看和修改logger</span><br><span class="line">getstatic 查看类的静态属性</span><br><span class="line">ognl 执行ognl表达式</span><br><span class="line">mbean 查看 Mbean的信息</span><br><span class="line">heapdump dump java heap，类似jmap命令的 heap dump功能</span><br></pre></td></tr></table></figure>
-
-<p><strong>class&#x2F;classloader 相关</strong></p>
+<p><strong>class/classloader 相关</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sc 查看JVM已加载的类信息</span><br><span class="line">	-d 输出当前类的详细信息，包括这个类所加载的原始文件来源、类的声明、加载的Classloader等详细信息。如果一个类被多个Classloader所加载，则会出现多次</span><br><span class="line">	-E 开启正则表达式匹配，默认为通配符匹配</span><br><span class="line">	-f 输出当前类的成员变量信息（需要配合参数-d一起使用）</span><br><span class="line">	-X 指定输出静态变量时属性的遍历深度，默认为0，即直接使用toString输出</span><br><span class="line">sm 查看已加载类的方法信息</span><br><span class="line">	-d 展示每个方法的详细信息</span><br><span class="line">	-E 开启正则表达式匹配,默认为通配符匹配</span><br><span class="line">jad 反编译指定已加载类的源码</span><br><span class="line">mc 内存编译器，内存编译.java文件为.class文件</span><br><span class="line">retransform 加载外部的.class文件, retransform到JVM里</span><br><span class="line">redefine 加载外部的.class文件，redefine到JVM里</span><br><span class="line">dump dump已加载类的byte code到特定目录</span><br><span class="line">classloader 查看classloader的继承树，urts，类加载信息，使用classloader去getResource</span><br><span class="line">	-t 查看classloader的继承树</span><br><span class="line">	-l 按类加载实例查看统计信息</span><br><span class="line">	-c 用classloader对应的hashcode来查看对应的 Jar urls</span><br></pre></td></tr></table></figure>
-
-<p><strong>monitor&#x2F;watch&#x2F;trace 相关</strong></p>
+<p><strong>monitor/watch/trace 相关</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">monitor 方法执行监控，调用次数、执行时间、失败率</span><br><span class="line">	-c 统计周期，默认值为120秒</span><br><span class="line">watch 方法执行观测，能观察到的范围为：返回值、抛出异常、入参，通过编写groovy表达式进行对应变量的查看</span><br><span class="line">	-b 在方法调用之前观察(默认关闭)</span><br><span class="line">	-e 在方法异常之后观察(默认关闭)</span><br><span class="line">	-s 在方法返回之后观察(默认关闭)</span><br><span class="line">	-f 在方法结束之后(正常返回和异常返回)观察(默认开启)</span><br><span class="line">	-x 指定输岀结果的属性遍历深度,默认为0</span><br><span class="line">trace 方法内部调用路径,并输出方法路径上的每个节点上耗时</span><br><span class="line">	-n 执行次数限制</span><br><span class="line">stack 输出当前方法被调用的调用路径</span><br><span class="line">tt 方法执行数据的时空隧道,记录下指定方法每次调用的入参和返回信息,并能对这些不同的时间下调用进行观测</span><br></pre></td></tr></table></figure>
-
 <p><strong>其他</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jobs 列出所有job</span><br><span class="line">kill 强制终止任务</span><br><span class="line">fg 将暂停的任务拉到前台执行</span><br><span class="line">bg 将暂停的任务放到后台执行</span><br><span class="line">grep 搜索满足条件的结果</span><br><span class="line">plaintext 将命令的结果去除ANSI颜色</span><br><span class="line">wc 按行统计输出结果</span><br><span class="line">options 查看或设置Arthas全局开关</span><br><span class="line">profiler 使用async-profiler对应用采样，生成火焰图</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-7-Java-Misssion-Control"><a href="#3-7-Java-Misssion-Control" class="headerlink" title="3.7. Java Misssion Control"></a>3.7. Java Misssion Control</h2><p>在 Oracle 收购 Sun 之前，Oracle 的 JRockit 虚拟机提供了一款叫做 JRockit Mission Control 的虚拟机诊断工具。</p>
+<h2 id="37-java-misssion-control"><a class="markdownIt-Anchor" href="#37-java-misssion-control"></a> 3.7. Java Misssion Control</h2>
+<p>在 Oracle 收购 Sun 之前，Oracle 的 JRockit 虚拟机提供了一款叫做 JRockit Mission Control 的虚拟机诊断工具。</p>
 <p>在 Oracle 收购 sun 之后，Oracle 公司同时拥有了 Hotspot 和 JRockit 两款虚拟机。根据 Oracle 对于 Java 的战略，在今后的发展中，会将 JRokit 的优秀特性移植到 Hotspot 上。其中一个重要的改进就是在 Sun 的 JDK 中加入了 JRockit 的支持。</p>
 <p>在 Oracle JDK 7u40 之后，Mission Control 这款工具己经绑定在 Oracle JDK 中发布。</p>
 <p>自 Java11 开始，本节介绍的 JFR 己经开源。但在之前的 Java 版本，JFR 属于 Commercial Feature 通过 Java 虚拟机参数-XX:+UnlockCommercialFeatures 开启。</p>
@@ -365,13 +372,17 @@
 <p>Java Flight Recorder 和 JDK Mission Control 共同创建了一个完整的工具链。JDK Mission Control 可对 Java Flight Recorder 连续收集低水平和详细的运行时信息进行高效、详细的分析。</p>
 <p>当启用时 JFR 将记录运行过程中发生的一系列事件。其中包括 Java 层面的事件如线程事件、锁事件，以及 Java 虚拟机内部的事件，如新建对象，垃圾回收和即时编译事件。按照发生时机以及持续时间来划分，JFR 的事件共有四种类型，它们分别为以下四种：</p>
 <ul>
-<li><p>瞬时事件（Instant Event) ，用户关心的是它们发生与否，例如异常、线程启动事件。</p>
+<li>
+<p>瞬时事件（Instant Event) ，用户关心的是它们发生与否，例如异常、线程启动事件。</p>
 </li>
-<li><p>持续事件(Duration Event) ，用户关心的是它们的持续时间，例如垃圾回收事件。</p>
+<li>
+<p>持续事件(Duration Event) ，用户关心的是它们的持续时间，例如垃圾回收事件。</p>
 </li>
-<li><p>计时事件(Timed Event) ，是时长超出指定阈值的持续事件。</p>
+<li>
+<p>计时事件(Timed Event) ，是时长超出指定阈值的持续事件。</p>
 </li>
-<li><p>取样事件（Sample Event)，是周期性取样的事件。</p>
+<li>
+<p>取样事件（Sample Event)，是周期性取样的事件。</p>
 </li>
 </ul>
 <p>取样事件的其中一个常见例子便是方法抽样（Method Sampling），即每隔一段时问统计各个线程的栈轨迹。如果在这些抽样取得的栈轨迹中存在一个反复出现的方法，那么我们可以推测该方法是热点方法</p>
@@ -382,7 +393,8 @@
 <p><img src="https://img-blog.csdnimg.cn/img_convert/0e8ab54b4fdc5cd2f4d7e1cda87dfe52.png" alt="image-20210505190037354"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/ef07d257c25f15fe7d6bfdbe6ee0f087.png" alt="image-20210505190052561"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/3f65159c21e0c6996588c90c7c5ca8e6.png" alt="image-20210505190106004"></p>
-<h2 id="3-8-其他工具"><a href="#3-8-其他工具" class="headerlink" title="3.8. 其他工具"></a>3.8. 其他工具</h2><p><strong>Flame Graphs（火焰图）</strong></p>
+<h2 id="38-其他工具"><a class="markdownIt-Anchor" href="#38-其他工具"></a> 3.8. 其他工具</h2>
+<p><strong>Flame Graphs（火焰图）</strong></p>
 <p>在追求极致性能的场景下，了解你的程序运行过程中 cpu 在干什么很重要，火焰图就是一种非常直观的展示 CPU 在程序整个生命周期过程中时间分配的工具。火焰图对于现代的程序员不应该陌生，这个工具可以非常直观的显示出调用找中的 CPU 消耗瓶颈。</p>
 <p>网上的关于 Java 火焰图的讲解大部分来自于 Brenden Gregg 的博客 <a target="_blank" rel="noopener" href="http://new.brendangregg.com/flamegraphs.html">http://new.brendangregg.com/flamegraphs.html </a></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/c2692cea072a29b00b420933892ae9f9.png" alt="image-20210505190823214"></p>
@@ -409,7 +421,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/13/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/3-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-GUI%E7%AF%87/" data-id="cldwxe0wz006wasv6ggle25qx" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/13/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/3-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-GUI%E7%AF%87/" data-id="cldxdaad6007jhov6eb0h3k4z" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/" rel="tag">JVM下篇：性能监控与调优篇</a></li></ul>
@@ -485,9 +497,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>138</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>63</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>47</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>139</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>66</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>48</strong><br>标签</div></a>
     </div>
 
 
