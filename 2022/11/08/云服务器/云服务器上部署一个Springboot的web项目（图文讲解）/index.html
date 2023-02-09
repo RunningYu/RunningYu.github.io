@@ -128,35 +128,35 @@
       
         <p><strong>（PS：在部署之前，</strong></p>
 <p><strong>1.你的虚拟机需要安装有jdk(这个Centos内部应该自带有，我的就是)和mysql（注意，如果你使用的数据库是8.0版本以上的，则需要安装mysql8.0以上的），没有安装到这两个的先自行去安装好</strong></p>
-<p><strong>2.Linux安装好mysql后，去用sqlyog（或是Navicat或其他）连接你虚拟机的数据库</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2296b37c16204c2c8d38359697a6918d~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
-<p>1.双击packege，打包项目。（注意，先鼠标选中Maven中的test然后跟着黄色箭头点击(让test被划掉)，使得在打包项目的时候跳过test步骤，不然会执行项目的测试，从而可能改动数据库的原有数据）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb4c2a5357143c2a45ccf285a6864d4~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><strong>2.Linux安装好mysql后，去用sqlyog（或是Navicat或其他）连接你虚拟机的数据库</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2296b37c16204c2c8d38359697a6918d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>1.双击packege，打包项目。（注意，先鼠标选中Maven中的test然后跟着黄色箭头点击(让test被划掉)，使得在打包项目的时候跳过test步骤，不然会执行项目的测试，从而可能改动数据库的原有数据） </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb4c2a5357143c2a45ccf285a6864d4~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>2.找到打包好的项目的所在目录</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eca7a429f81942b5b5f330fcc62ba0be~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eca7a429f81942b5b5f330fcc62ba0be~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>3.（这一步有多种方法，我习惯这一种）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae9faa9689464d1d83694d2b338b8e13~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae9faa9689464d1d83694d2b338b8e13~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>4.进入到Linux的相应目录，然后执行最后一条命令来启动springboot项目</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d901c9c4af4ee79a05bafd8bdbcd15~tplv-k3u1fbpfcp-zoom-1.image" alt><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5859ee35d0744080a9e7a7f867392dda~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d901c9c4af4ee79a05bafd8bdbcd15~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5859ee35d0744080a9e7a7f867392dda~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>5.启动成功，然后去根据虚拟机的ip端口去访问项目</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba0c92e9585a45c28b10ee909898c3f3~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba0c92e9585a45c28b10ee909898c3f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>(ps：如果访问超时，则需要去Linux关闭防火墙</p>
-<p>1.首先切换回到 /root/bin目录下</p>
+<p>1.首先切换回到 &#x2F;root&#x2F;bin目录下</p>
 <p>2.执行命令：systemctl stop firewalld.service（关闭防火墙)</p>
 <p>systemctl disable firewalld.service（关闭防火墙自动启动）</p>
 <p>4.查看防火墙状态：systemctl status firewalld.service（查看防火墙服务状态）</p>
 <p>看到这样就OK了：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ad7c29b91b74c32a0a6beb7cc2fbba6~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ad7c29b91b74c32a0a6beb7cc2fbba6~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>然后再去浏览器访问，便不会超时了</p>
 <p>）</p>
 <p>另一种启动方式，启动过程中不会显示出日志信息，还可用命令将日志信息存到server.log中，或是存到自己创建的文件中也行</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff1b88ebd29c4ba39150042f29a9cbcb~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff1b88ebd29c4ba39150042f29a9cbcb~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>这是我保存的日志信息</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/77676acd5dea48d28a875724cda4fe1b~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/77676acd5dea48d28a875724cda4fe1b~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" data-id="cldwx3hjk004f5kv6f01v3u3h" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" data-id="cldwx4nze004owcv6bqi8gpiy" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
