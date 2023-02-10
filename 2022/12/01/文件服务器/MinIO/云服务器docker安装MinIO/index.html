@@ -5,12 +5,12 @@
   
   <title>云服务器docker安装MinIO | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="执行命令 docker pull minio&#x2F;minio 下载稳定版本镜像   1docker pull minio&#x2F;minio    创建并启动minio容器  MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码 1docker run -p 9000:9000 -p 9001:9001 -d --name mi">
+  <meta name="description" content="执行命令 docker pull minio&#x2F;minio 下载稳定版本镜像   1docker pull minio&#x2F;minio    创建并启动minio容器   MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码 1docker run -p 9000:9000 -p 9001:9001 -d --name m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="云服务器docker安装MinIO">
 <meta property="og:url" content="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="执行命令 docker pull minio&#x2F;minio 下载稳定版本镜像   1docker pull minio&#x2F;minio    创建并启动minio容器  MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码 1docker run -p 9000:9000 -p 9001:9001 -d --name mi">
+<meta property="og:description" content="执行命令 docker pull minio&#x2F;minio 下载稳定版本镜像   1docker pull minio&#x2F;minio    创建并启动minio容器   MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码 1docker run -p 9000:9000 -p 9001:9001 -d --name m">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/fd189f85c8834e899f4b5e0284876ea7.png">
@@ -130,10 +130,11 @@
 <ol start="2">
 <li>创建并启动minio容器</li>
 </ol>
-<p>MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码</p>
+<p> MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9000:9000 -p 9001:9001 -d --name minio -v /opt/docker/minio/data:/data -v /opt/docker/minio/config:/root/.minio -e &quot;MINIO_ROOT_USER=minio&quot; -e &quot;MINIO_ROOT_PASSWORD=minio@123456&quot; minio/minio server /data --console-address &quot;:9000&quot; --address &quot;:9001&quot;</span><br></pre></td></tr></table></figure>
+
 <p>–console-address “:9000”  中的9000 是可视化界面的访问端口</p>
-<p>–address “:9001” 中的 9001是api端口，在springboot中整合是用到</p>
+<p> –address “:9001” 中的 9001是api端口，在springboot中整合是用到</p>
 <ol start="3">
 <li>开放9000端口</li>
 </ol>
@@ -151,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" data-id="cldxxmezr00aergv60oj9aw96" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" data-id="cldxxnbbn00aiqgv6fjce6aps" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
