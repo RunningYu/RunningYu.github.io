@@ -5,12 +5,12 @@
   
   <title>git 提交代码 到 gitee仓库指定文件夹中 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、创建一个空文件夹 二、将gitee仓库地址复制下来  三、在刚刚新建的空文件夹真打开 Git Bash Here 四、克隆 gitee 仓库   五、提交代码将想要提交的拖到克隆下来的目录下面 六、执行指令1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格 1git add 文件名   可能会出现如下报错，  则需要">
+  <meta name="description" content="一、创建一个空文件夹   二、将gitee仓库地址复制下来   三、在刚刚新建的空文件夹真打开 Git Bash Here   四、克隆 gitee 仓库    五、提交代码  将想要提交的拖到克隆下来的目录下面   六、执行指令 1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格 1git add 文件名 可能会出现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git 提交代码 到 gitee仓库指定文件夹中">
 <meta property="og:url" content="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="一、创建一个空文件夹 二、将gitee仓库地址复制下来  三、在刚刚新建的空文件夹真打开 Git Bash Here 四、克隆 gitee 仓库   五、提交代码将想要提交的拖到克隆下来的目录下面 六、执行指令1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格 1git add 文件名   可能会出现如下报错，  则需要">
+<meta property="og:description" content="一、创建一个空文件夹   二、将gitee仓库地址复制下来   三、在刚刚新建的空文件夹真打开 Git Bash Here   四、克隆 gitee 仓库    五、提交代码  将想要提交的拖到克隆下来的目录下面   六、执行指令 1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格 1git add 文件名 可能会出现">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image">
@@ -130,56 +130,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、创建一个空文件夹"><a href="#一、创建一个空文件夹" class="headerlink" title="一、创建一个空文件夹"></a><strong>一、创建一个空文件夹</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="二、将gitee仓库地址复制下来"><a href="#二、将gitee仓库地址复制下来" class="headerlink" title="二、将gitee仓库地址复制下来"></a><strong>二、将gitee仓库地址复制下来</strong></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="三、在刚刚新建的空文件夹真打开-Git-Bash-Here"><a href="#三、在刚刚新建的空文件夹真打开-Git-Bash-Here" class="headerlink" title="三、在刚刚新建的空文件夹真打开 Git Bash Here"></a><strong>三、在刚刚新建的空文件夹真打开 Git Bash Here</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="四、克隆-gitee-仓库"><a href="#四、克隆-gitee-仓库" class="headerlink" title="四、克隆 gitee 仓库"></a><strong>四、克隆 gitee 仓库</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="五、提交代码"><a href="#五、提交代码" class="headerlink" title="五、提交代码"></a><strong>五、提交代码</strong></h1><h2 id="将想要提交的拖到克隆下来的目录下面"><a href="#将想要提交的拖到克隆下来的目录下面" class="headerlink" title="将想要提交的拖到克隆下来的目录下面"></a>将想要提交的拖到克隆下来的目录下面</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="六、执行指令"><a href="#六、执行指令" class="headerlink" title="六、执行指令"></a><strong>六、执行指令</strong></h1><p><strong>1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格</strong></p>
+        <h1 id="一-创建一个空文件夹"><a class="markdownIt-Anchor" href="#一-创建一个空文件夹"></a> <strong>一、创建一个空文件夹</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="二-将gitee仓库地址复制下来"><a class="markdownIt-Anchor" href="#二-将gitee仓库地址复制下来"></a> <strong>二、将gitee仓库地址复制下来</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="三-在刚刚新建的空文件夹真打开-git-bash-here"><a class="markdownIt-Anchor" href="#三-在刚刚新建的空文件夹真打开-git-bash-here"></a> <strong>三、在刚刚新建的空文件夹真打开 Git Bash Here</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="四-克隆-gitee-仓库"><a class="markdownIt-Anchor" href="#四-克隆-gitee-仓库"></a> <strong>四、克隆 gitee 仓库</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="五-提交代码"><a class="markdownIt-Anchor" href="#五-提交代码"></a> <strong>五、提交代码</strong></h1>
+<h2 id="将想要提交的拖到克隆下来的目录下面"><a class="markdownIt-Anchor" href="#将想要提交的拖到克隆下来的目录下面"></a> 将想要提交的拖到克隆下来的目录下面</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<h1 id="六-执行指令"><a class="markdownIt-Anchor" href="#六-执行指令"></a> <strong>六、执行指令</strong></h1>
+<p><strong>1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
-
-
 <p>可能会出现如下报错，</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p>则需要输入 git init  然后回车就好了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-
-<p> 然后再重新执行添加文件就可以了（注意，一定要将目录切换到仓库目录，负责执行命令时会报fatal: pathspec ‘hotel-demo’ did not match any files）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>2.  执行git <strong><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=commit&spm=1001.2101.3001.7020" title="commit">commit</a></strong> -m “注释的内容”  （ 提交到本地仓库）</strong></p>
+<p>然后再重新执行添加文件就可以了（注意，一定要将目录切换到仓库目录，负责执行命令时会报fatal: pathspec ‘hotel-demo’ did not match any files）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><strong>2.  执行git <strong><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=commit&amp;spm=1001.2101.3001.7020" title="commit">commit</a></strong> -m “注释的内容”  （ 提交到本地仓库）</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;注释的内容&quot;</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>3. 提交代码到 gitee</strong></p>
 <p>执行命令: git remote add origin 远程项目的 Https 地址</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程项目的 Https 地址</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>可能有人会报如下错误（没有的话可以忽略） </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 解决：执行 git remote rm origin 删除关联的origin的远程库</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>可能有人会报如下错误（没有的话可以忽略）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>解决：执行 git remote rm origin 删除关联的origin的远程库</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 然后再重新执行 git remote add origin 远程项目的 Https 地址即可</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p>然后再重新执行 git remote add origin 远程项目的 Https 地址即可</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>4. git push -u origin master （ 最后这一步就可以推送到自己的仓库了）</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master </span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image" alt></p>
 <p><strong>完成 !!</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" data-id="cldxxlbsq0003w8v60r5bfz8h" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" data-id="cldxxmevg0007rgv68js3gbi8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
