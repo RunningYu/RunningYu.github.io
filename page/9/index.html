@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>139</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>66</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>48</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>141</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>71</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>54</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,244 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-SpringCloud微服务/缓存/（多级缓存）缓存同步" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T09:14:33.596Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/">（多级缓存）缓存同步</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/">多级缓存</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=157&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-04-缓存同步_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<h1 id="一、数据同步策略"><a href="#一、数据同步策略" class="headerlink" title="一、数据同步策略"></a>一、数据同步策略</h1><p>缓存数据同步的常见方式有三种：</p>
+<p>•<strong>设置有效期</strong>：给缓存设置有效期，到期后自动删除。再次查询时更新</p>
+<p>•优势：简单、方便</p>
+<p>•缺点：时效性差，缓存过期之前可能不一致</p>
+<p>•场景：更新频率较低，时效性要求低的业务</p>
+<p>•<strong>同步双写</strong>：在修改数据库的同时，直接修改缓存</p>
+<p>•优势：时效性强，缓存与数据库强一致</p>
+<p>•缺点：有代码侵入，耦合度高；</p>
+<p>•场景：对一致性、时效性要求较高的缓存数据</p>
+<p>•<strong>异步通知：</strong>修改数据库时发送事件通知，相关服务监听到通知后修改缓存数据</p>
+<p>•优势：低耦合，可以同时通知多个缓存服务</p>
+<p>•缺点：时效性一般，可能存在中间不一致状态</p>
+<p>•场景：时效性要求一般，有多个服务需要同步</p>
+<p><img src="https://img-blog.csdnimg.cn/bda8a839d8e3410aac0f850fcb0e4217.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/2a9abda92ecf43fbbe6d8bf07a0feedb.png" alt="img"></p>
+<h1 id="二、安装和配置Canal"><a href="#二、安装和配置Canal" class="headerlink" title="二、安装和配置Canal"></a>二、安装和配置Canal</h1><p><img src="https://img-blog.csdnimg.cn/e5131fff2fce4439be9a99a20f4dc213.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/25de1e7f4dc44d5db4105d32df986638.png" alt="img"></p>
+<p>下面我们就开启mysql的主从同步机制，让Canal来模拟salve</p>
+<h1 id="1-开启MySQL主从"><a href="#1-开启MySQL主从" class="headerlink" title="1.开启MySQL主从"></a>1.开启MySQL主从</h1><p>Canal是基于MySQL的主从同步功能，因此必须先开启MySQL的主从功能才可以。</p>
+<p>这里以之前用Docker运行的mysql为例：</p>
+<h2 id="1-1-开启binlog"><a href="#1-1-开启binlog" class="headerlink" title="1.1.开启binlog"></a>1.1.开启binlog</h2><p>打开mysql容器挂载的日志文件，我的在<code>/tmp/mysql/conf</code>目录:</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7I8WMYyf-1662205186188)(assets&#x2F;image-20210813153241537.png)]</p>
+<p>修改文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /tmp/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>添加内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">binlog-do-db=heima</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>配置解读：</p>
+<ul>
+<li><code>log-bin=/var/lib/mysql/mysql-bin</code>：设置binary log文件的存放地址和文件名，叫做mysql-bin</li>
+<li><code>binlog-do-db=heima</code>：指定对哪个database记录binary log events，这里记录heima这个库</li>
+</ul>
+<p>最终效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-name-resolve</span><br><span class="line">character_set_server=utf8</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">server-id=1000</span><br><span class="line">log-bin=/var/lib/mysql/mysql-bin</span><br><span class="line">binlog-do-db=heima</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="1-2-设置用户权限"><a href="#1-2-设置用户权限" class="headerlink" title="1.2.设置用户权限"></a>1.2.设置用户权限</h2><p>接下来添加一个仅用于数据同步的账户，出于安全考虑，这里仅提供对heima这个库的操作权限。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create user canal@&#x27;%&#x27; IDENTIFIED by &#x27;canal&#x27;;</span><br><span class="line">GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT,SUPER ON *.* TO &#x27;canal&#x27;@&#x27;%&#x27; identified by &#x27;canal&#x27;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>重启mysql容器即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart mysql</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>测试设置是否成功：在mysql控制台，或者Navicat中，输入命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-安装Canal"><a href="#2-安装Canal" class="headerlink" title="2.安装Canal"></a>2.安装Canal</h1><h2 id="2-1-创建网络"><a href="#2-1-创建网络" class="headerlink" title="2.1.创建网络"></a>2.1.创建网络</h2><p>我们需要创建一个网络，将MySQL、Canal、MQ放到同一个Docker网络中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create heima</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>让mysql加入这个网络：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network connect heima mysql</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="2-3-安装Canal"><a href="#2-3-安装Canal" class="headerlink" title="2.3.安装Canal"></a>2.3.安装Canal</h2><p>课前资料中提供了canal的镜像压缩包:</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-FvuASqcG-1662205186198)(assets&#x2F;image-20210813161804292.png)]</p>
+<p>大家可以上传到虚拟机，然后通过命令导入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i canal.tar</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>然后运行命令创建Canal容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 11111:11111 --name canal \</span><br><span class="line">-e canal.destinations=heima \</span><br><span class="line">-e canal.instance.master.address=mysql:3306  \</span><br><span class="line">-e canal.instance.dbUsername=canal  \</span><br><span class="line">-e canal.instance.dbPassword=canal  \</span><br><span class="line">-e canal.instance.connectionCharset=UTF-8 \</span><br><span class="line">-e canal.instance.tsdb.enable=true \</span><br><span class="line">-e canal.instance.gtidon=false  \</span><br><span class="line">-e canal.instance.filter.regex=heima\\..* \</span><br><span class="line">--network heima \</span><br><span class="line">-d canal/canal-server:v1.1.5</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>说明:</p>
+<ul>
+<li><code>-p 11111:11111</code>：这是canal的默认监听端口</li>
+<li><code>-e canal.instance.master.address=mysql:3306</code>：数据库地址和端口，如果不知道mysql容器地址，可以通过<code>docker inspect 容器id</code>来查看</li>
+<li><code>-e canal.instance.dbUsername=canal</code>：数据库用户名</li>
+<li><code>-e canal.instance.dbPassword=canal</code> ：数据库密码</li>
+<li><code>-e canal.instance.filter.regex=</code>：要监听的表名称</li>
+</ul>
+<p>表名称监听支持的语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql 数据解析关注的表，Perl正则表达式.</span><br><span class="line">多个正则之间以逗号(,)分隔，转义符需要双斜杠(\\) </span><br><span class="line">常见例子：</span><br><span class="line">1.  所有表：.*   or  .*\\..*</span><br><span class="line">2.  canal schema下所有表： canal\\..*</span><br><span class="line">3.  canal下的以canal打头的表：canal\\.canal.*</span><br><span class="line">4.  canal schema下的一张表：canal.test1</span><br><span class="line">5.  多个规则组合使用然后以逗号隔开：canal\\..*,mysql.test1,mysql.test2 </span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="三、监听Canal"><a href="#三、监听Canal" class="headerlink" title="三、监听Canal"></a>三、监听Canal</h1><p><img src="https://img-blog.csdnimg.cn/4f4e40a3a2e4469ca7836693c3db991d.png" alt="img"></p>
+<p> Canal提供了各种语言的客户端，当Canal监听到binlog变化时，会通知Canal的客户端。不过这里我们会使用GitHub上的第三方开源的canal-starter。地址：<a target="_blank" rel="noopener" href="https://github.com/NormanGyllenhaal/canal-client">GitHub - NormanGyllenhaal&#x2F;canal-client: spring boot canal starter 易用的canal 客户端 canal client</a></p>
+<p> <img src="https://img-blog.csdnimg.cn/b1b64382430e47e5b2be08b569e2cefa.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/1869924653994a95a7660b76b7823fa7.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/8f6d29940fc84098a92e02339632ff66.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" data-id="cle7ase4i009uhwv62zbm9a3n" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringCloud微服务/缓存/（多级缓存）多级缓存" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T09:09:28.079Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/">（多级缓存）多级缓存</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/">多级缓存</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<h1 id="对应的教程视频：-高级篇Day4-03-多级缓存-哔哩哔哩-bilibili"><a href="#对应的教程视频：-高级篇Day4-03-多级缓存-哔哩哔哩-bilibili" class="headerlink" title="对应的教程视频：  高级篇Day4-03-多级缓存_哔哩哔哩_bilibili"></a>对应的教程视频：  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=156&vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-03-多级缓存_哔哩哔哩_bilibili</a></h1></blockquote>
+<h1 id="一、安装OpenResty"><a href="#一、安装OpenResty" class="headerlink" title="一、安装OpenResty"></a>一、安装OpenResty</h1><p>OpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点：</p>
+<p>•具备Nginx的完整功能</p>
+<p>•基于Lua语言进行扩展，集成了大量精良的 Lua 库、第三方模块</p>
+<p>•允许使用Lua自定义业务逻辑、自定义库</p>
+<p>官方网站： <a target="_blank" rel="noopener" href="https://openresty.org/cn/">OpenResty® - 中文官方站</a></p>
+<p><img src="https://img-blog.csdnimg.cn/f9416bd0de8341369c0b577d3df4b841.png" alt="img"></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126669241?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126669241%22,%22source%22:%22QRLYLETITBE%22%7D">(74条消息) 安装OpenResty_其然乐衣的博客-CSDN博客</a></p>
+</blockquote>
+<p> 二、OpenResty快速入门</p>
+<p><img src="https://img-blog.csdnimg.cn/1177aa67f71b4cb681a56b665ee70f38.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/6d1a045a3e5244919257fec0d8c9d379.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/2adaa7fe0fc7467db3348e60c5274671.png" alt="img"></p>
+<p>三、请求参数处理</p>
+<p><img src="https://img-blog.csdnimg.cn/34ffb6ee962644a4ac3c71dee0165970.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/c204b371b5904ab4bc7bfee4232a859a.png" alt="img"></p>
+<p>四、查询Tomcat</p>
+<p><img src="https://img-blog.csdnimg.cn/9b8419f000b945048c5b528b1931a899.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/238474e6212f4a29a48245a579718bf6.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/444f4c49f7bf42319b3f6c24b8554ceb.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/2a2ed265a3774d5581b4a7a957d64151.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/a53b27c055cf4e8fa3b156b7f0fa8547.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/9c6cfac399744d52b367861934a0a62e.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/7d853f9f2b124bdb849f1829c94c5f34.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/6c84d9c5a634422894f205f2ccc03480.png" alt="img"></p>
+<p>五、Redis缓存预热</p>
+<p><img src="https://img-blog.csdnimg.cn/8f5fd7be4ed54c3f8f086bbe0bba17ca.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/b511678b54b541e1a75184e7ef236faa.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/ea58bc28593c4103994a8b585eaad613.png" alt="img"></p>
+<p>六、查询Redis缓存</p>
+<p><img src="https://img-blog.csdnimg.cn/1ecd62b73616428b89912bbe9cf51e37.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/dec61d13f74542cab29209d0391c786e.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/2b864644e92445c78c389d88989abb01.png" alt="img"></p>
+<p>七、Nginx本地缓存</p>
+<p><img src="https://img-blog.csdnimg.cn/6f672ee617a44863858ce5c6f2e82077.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/19fd546b225d4f89bf8a75f1f26f0263.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/1f24570d8c124c0ea3aa6bd0449580ec.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/43069c308a474c639503022aae4f2122.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/" data-id="cle7ase4h009thwv6bbkf952c" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-SpringCloud微服务/缓存/安装OpenResty" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -188,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/" data-id="cldxxnbb50096qgv64vqk1lm5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/" data-id="cle7ase4a009chwv67vdc1v2m" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -263,7 +501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="cldxxnbbg009oqgv62fhtdanp" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="cle7ase4f009lhwv651xy53i9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -332,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/" data-id="cldxxnbb8009dqgv6235y7d9q" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/" data-id="cle7ase4g009nhwv6fxbfbgqt" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -403,7 +641,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" data-id="cldxxnbb60097qgv6awmsaadn" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" data-id="cle7ase4b009ehwv6fczq82qr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -594,7 +832,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/" data-id="cldxxnbb3008yqgv6326h74p7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/" data-id="cle7ase490097hwv6bossg0hn" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -724,7 +962,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" data-id="cldxxnbb7009bqgv60i1q0lxk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" data-id="cle7ase4e009ihwv62dlr2u8m" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -887,7 +1125,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="cldxxnbbg009kqgv6a3euepei" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="cle7ase4c009hhwv6abc8gvuc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -993,7 +1231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="cldxxnbbb009iqgv6aznb5w6i" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="cle7ase4h009rhwv631lkha53" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -1007,127 +1245,10 @@
 
 
   
-    <article id="post-redis/Untitled" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/redis/Untitled/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T02:36:32.250Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/redis/Untitled/" data-id="cldxxnb990041qgv688hmhh93" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-redis/单机安装Redis" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T02:36:32.250Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/">单机安装Redis</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/redis/">redis</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="单机安装Redis"><a href="#单机安装Redis" class="headerlink" title="单机安装Redis"></a>单机安装Redis</h1><p>首先需要安装Redis所需要的依赖：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc tcl</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>然后将课前资料提供的Redis安装包上传到虚拟机的任意目录：</p>
-<p>例如，我放到了&#x2F;tmp目录：</p>
-<p>解压缩：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf redis-6.2.4.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>解压后：</p>
-<p>进入redis目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd redis-6.2.4</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>运行编译命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>如果没有出错，应该就安装成功了。</p>
-<p>然后修改redis.conf文件中的一些配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 绑定地址，默认是127.0.0.1，会导致只能在本地访问。修改为0.0.0.0则可以在任意IP访问</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"># 数据库数量，设置为1</span><br><span class="line">databases 1</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>启动Redis：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis.conf</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>停止redis服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli shutdown</span><br></pre></td></tr></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" data-id="cldxxnb9c004cqgv68j9hf86y" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/10/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/10/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -1172,9 +1293,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>139</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>66</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>48</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>141</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>71</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>54</strong><br>标签</div></a>
     </div>
 
 

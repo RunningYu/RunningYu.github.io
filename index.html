@@ -43,9 +43,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>139</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>66</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>48</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>141</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>71</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>54</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -74,6 +74,160 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-interview/编程语言" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/16/interview/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="article-date">
+  <time class="post-time" datetime="2023-02-16T02:05:01.805Z" itemprop="datePublished">
+    <span class="post-month">2月</span><br/>
+    <span class="post-day">16</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/16/interview/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>,<a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="请你说说多线程"><a href="#请你说说多线程" class="headerlink" title="请你说说多线程"></a><strong>请你说说多线程</strong></h2><p>**得分点 **   线程和进程的关系、为什么使用多线程 </p>
+<p><strong>标准回答</strong></p>
+<p>​		线程是操作系统调度的最小单元,它可以让一个进程并发地处理多个任务,也叫轻量级进程。所以,在一个进程里可以创建多个线程,这些线程都拥有各自的计数器、堆栈、局部变量,并且能够共享进程内的资源。由于共享资源,处理器便可以在这些线程之间快速切换,从而让使用者感觉这些线程在同时执行。 总的来说,<strong>操作系统可以同时执行多个任务,每个任务就是一个进程。进程可以同时执行多个任务,每个任务就是一个线程</strong>。<strong>一个程序运行之后至少有一个进程,而一个进程可以包含多个线程,但至少要包含一个线程</strong>。 使用多线程会给开发人员带来显著的好处,而使用多线程的原因主要有以下几点：</p>
+<ol>
+<li><p>更多的CPU核心 现代计算机处理器性能的提升方式,已经从追求更高的主频向追求更多的核心发展,所以<strong>处理器的核心数量会越来越多,充分地利用处理器的核心则会显著地提高程序的性能</strong>。**而程序使用多线程技术,就可以将计算逻辑分配到多个处理器核心上,显著减少程序的处理时间,**从而随着更多处理器核心的加入而变得更有效率。</p>
+</li>
+<li><p>更快的响应时间 我们经常要针对复杂的业务编写出复杂的代码,如果使用多线程技术,就可以将数据一致性不强的操作派发给其他线程处理（也可以是消息队列）,如上传图片、发送邮件、生成订单等。这样响应用户请求的线程就能够尽快地完成处理,大大地缩短了响应时间,从而提升了用户体验。 </p>
+</li>
+<li><p>更好的编程模型 Java为多线程编程提供了良好且一致的编程模型,使开发人员能够更加专注于问题的解决,开发者只需为此问题建立合适的业务模型,而无需绞尽脑汁地考虑如何实现多线程。一旦开发人员建立好了业务模型,稍作修改就可以将其方便地映射到Java提供的多线程编程模型上。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/16/interview/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" data-id="cle7ase2c003zhwv658dhg331" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-零碎知识&amp;笔记/运算符" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/15/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%AE%97%E7%AC%A6/" class="article-date">
+  <time class="post-time" datetime="2023-02-15T07:02:14.526Z" itemprop="datePublished">
+    <span class="post-month">2月</span><br/>
+    <span class="post-day">15</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/15/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%AE%97%E7%AC%A6/">运算符</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/">零碎知识&笔记</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="和-x3D-运算符-Null-合并操作符"><a href="#和-x3D-运算符-Null-合并操作符" class="headerlink" title="?? 和 ??&#x3D; 运算符 - Null 合并操作符"></a>?? 和 ??&#x3D; 运算符 - Null 合并操作符</h1><p>如果左操作数的值不为 <code>null</code>，则 null 合并运算符 <code>??</code> 返回该值；否则，它会计算右操作数并返回其结果。 如果左操作数的计算结果为非 null，则 <code>??</code> 运算符不会计算其右操作数。 仅当左操作数的计算结果为 <code>null</code> 时，Null 合并赋值运算符 <code>??=</code> 才会将其右操作数的值赋值给其左操作数。 如果左操作数的计算结果为非 null，则 <code>??=</code> 运算符不会计算其右操作数。</p>
+<p><code>??=</code> 运算符的左操作数必须是变量、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/properties">属性</a>或<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/indexers/">索引器</a>元素。</p>
+<p><code>??</code> 和 <code>??=</code> 运算符的左操作数的类型必须是可以为 null 的值类型。 特别是，可以使用具有无约束类型参数的 null 合并运算符：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Display</span>&lt;<span class="title">T</span>&gt;(<span class="params">T a, T backup</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(a ?? backup);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>null 合并运算符是右结合运算符。 也就是说，是窗体的表达式</p>
+<p>C#复制</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a ?? b ?? c</span><br><span class="line">d ??= e ??= f</span><br></pre></td></tr></table></figure>
+
+<p>会像这样求值</p>
+<p>C#复制</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a ?? (b ?? c)</span><br><span class="line">d ??= (e ??= f)</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><code>??</code> 和 <code>??=</code> 运算符在以下应用场景中很有用：</p>
+<ul>
+<li><p>在包含 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-">null 条件运算符 <code>?.</code> 和 <code>?[]</code></a> 的表达式中，当包含 null 条件运算的表达式结果为 <code>null</code> 时，可以使用 <code>??</code> 运算符来提供替代表达式用于求值：</p>
+<p>C#复制运行</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">double</span> <span class="title">SumNumbers</span>(<span class="params">List&lt;<span class="built_in">double</span>[]&gt; setsOfNumbers, <span class="built_in">int</span> indexOfSetToSum</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> setsOfNumbers?[indexOfSetToSum]?.Sum() ?? <span class="built_in">double</span>.NaN;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sum = SumNumbers(<span class="literal">null</span>, <span class="number">0</span>);</span><br><span class="line">Console.WriteLine(sum);  <span class="comment">// output: NaN</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当使用<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/builtin-types/nullable-value-types">可以为 null 值类型</a>并且需要提供基础值类型的值时，可以使用 <code>??</code> 运算符指定当可以为 null 的类型的值为 <code>null</code> 时要提供的值：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>? a = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">int</span> b = a ?? <span class="number">-1</span>;</span><br><span class="line">Console.WriteLine(b);  <span class="comment">// output: -1</span></span><br></pre></td></tr></table></figure>
+
+<p>如果可以为 null 的类型的值为 <code>null</code> 时要使用的值应为基础值类型的默认值，请使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/api/system.nullable-1.getvalueordefault#system-nullable-1-getvalueordefault">Nullable.GetValueOrDefault()</a> 方法。</p>
+</li>
+<li><p>可以使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/throw#the-throw-expression"><code>throw</code> 表达式</a>作为 <code>??</code> 运算符的右操作数，以使参数检查代码更简洁：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">string</span> Name</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">get</span> =&gt; name;</span><br><span class="line">    <span class="keyword">set</span> =&gt; name = <span class="keyword">value</span> ?? <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentNullException(<span class="keyword">nameof</span>(<span class="keyword">value</span>), <span class="string">&quot;Name cannot be null&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前面的示例还演示了如何使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members">expression-bodied 成员</a>来定义属性。</p>
+</li>
+<li><p>可以使用 <code>??=</code> 运算符替换窗体的代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (variable <span class="keyword">is</span> <span class="literal">null</span>)</span><br><span class="line">&#123;</span><br><span class="line">    variable = expression;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>替换为以下代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable ??= expression;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/15/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="cle7ase33005whwv6hng1easm" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-SpringCloud微服务/面试篇" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -152,7 +306,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%9D%A2%E8%AF%95%E7%AF%87/" data-id="cldxxnb87001tqgv67vwght8k" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%9D%A2%E8%AF%95%E7%AF%87/" data-id="cle7ase1e001khwv68r171sqf" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
@@ -204,6 +358,9 @@
       
         <h1 id="一、Feign介绍和简单基本使用流程"><a href="#一、Feign介绍和简单基本使用流程" class="headerlink" title="一、Feign介绍和简单基本使用流程"></a>一、Feign介绍和简单基本使用流程</h1><p><img src="/../../../../images/image-20230207213746760.png" alt="image-20230207213746760"></p>
 <p><img src="/../../../../images/image-20230207213755922.png" alt="image-20230207213755922"></p>
+<p>​		 Feign是一种负载均衡的HTTP客户端, 使用Feign调用API就像调用本地方法一样，从避免了调用目标微服务时，需要不断的解析&#x2F;封装json 数据的繁琐。Feign集成了Ribbon。Ribbon+eureka是面向微服务编程，而Feign是面向接口编程。</p>
+<pre><code>     Fegin是一个声明似的web服务客户端，它使得编写web服务客户端变得更加容易。使用Fegin创建一个接口并对它进行注解。它具有可插拔的注解支持包括Feign注解与JAX-RS注解，Feign还支持可插拔的编码器与解码器，Spring Cloud 增加了对 Spring MVC的注解，Spring Web 默认使用了HttpMessageConverters, Spring Cloud 集成 Ribbon 和 Eureka 提供的负载均衡的HTTP客户端 Feign。
+</code></pre>
 <p><img src="/../../../../images/image-20230207213838171.png" alt="image-20230207213838171"></p>
 <p><img src="/../../../../images/image-20230207213949255.png" alt="image-20230207213949255"></p>
 <p><img src="/../../../../images/image-20230207215026899.png" alt="image-20230207215026899"></p>
@@ -214,6 +371,31 @@
 <p><img src="/../../../../images/image-20230207215415792.png" alt="image-20230207215415792"></p>
 <p><img src="/../../../../images/image-20230207215550021.png" alt="image-20230207215550021"></p>
 <p>如果要调试的时候可以使用FULL，但平时建议一般使用BASIC或NONE，因为记录日志还是会消耗一定的性能的</p>
+<h1 id="设置超时："><a href="#设置超时：" class="headerlink" title="设置超时："></a>设置超时：</h1><ul>
+<li>设置openFeign的超时时间</li>
+<li>设置Ribbon的超时时间</li>
+</ul>
+<h3 id="1、设置Ribbon的超时时间（不推荐）"><a href="#1、设置Ribbon的超时时间（不推荐）" class="headerlink" title="1、设置Ribbon的超时时间（不推荐）"></a>1、设置Ribbon的超时时间（不推荐）</h3><p>设置很简单，在配置文件中添加如下设置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ribbon:</span></span><br><span class="line">  <span class="comment"># 值的是建立链接所用的时间，适用于网络状况正常的情况下， 两端链接所用的时间</span></span><br><span class="line">  <span class="attr">ReadTimeout:</span> <span class="number">5000</span></span><br><span class="line">  <span class="comment"># 指的是建立链接后从服务器读取可用资源所用的时间</span></span><br><span class="line">  <span class="attr">ConectTimeout:</span> <span class="number">5000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、设置openFeign的超时时间（推荐）"><a href="#2、设置openFeign的超时时间（推荐）" class="headerlink" title="2、设置openFeign的超时时间（推荐）"></a>2、设置openFeign的超时时间（推荐）</h3><p>openFeign设置超时时间非常简单，只需要在配置文件中配置，如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="comment">## default 设置的全局超时时间，指定服务名称可以设置单个服务的超时时间</span></span><br><span class="line">      <span class="attr">default:</span></span><br><span class="line">        <span class="attr">connectTimeout:</span> <span class="number">5000</span></span><br><span class="line">        <span class="attr">readTimeout:</span> <span class="number">5000</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>default设置的是全局超时时间，对所有的openFeign接口服务都生效</p>
+</blockquote>
+<p>但是正常的业务逻辑中可能涉及到多个openFeign接口的调用，如下图：</p>
+<p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/openFeign/7.png" alt="img"></p>
+<p>上图中的伪代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">invoke</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//1. 调用serviceA</span></span><br><span class="line">    serviceA();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2. 调用serviceA</span></span><br><span class="line">    serviceB();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3. 调用serviceA</span></span><br><span class="line">    serviceC();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么上面配置的全局超时时间能不能通过呢？很显然是<code>serviceA</code>、<code>serviceB</code>能够成功调用，但是<code>serviceC</code>并不能成功执行，肯定报超时。</p>
+<p>此时我们可以给<code>serviceC</code>这个服务单独配置一个超时时间，配置如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="comment">## default 设置的全局超时时间，指定服务名称可以设置单个服务的超时时间</span></span><br><span class="line">      <span class="attr">default:</span></span><br><span class="line">        <span class="attr">connectTimeout:</span> <span class="number">5000</span></span><br><span class="line">        <span class="attr">readTimeout:</span> <span class="number">5000</span></span><br><span class="line">      <span class="comment">## 为serviceC这个服务单独配置超时时间</span></span><br><span class="line">      <span class="attr">serviceC:</span></span><br><span class="line">        <span class="attr">connectTimeout:</span> <span class="number">30000</span></span><br><span class="line">        <span class="attr">readTimeout:</span> <span class="number">30000</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：单个配置的超时时间将会覆盖全局配置。</p>
+</blockquote>
 <h1 id="三、Feign的性能调优"><a href="#三、Feign的性能调优" class="headerlink" title="三、Feign的性能调优"></a>三、Feign的性能调优</h1><p>Feign是一个声明式客户端，它只是把我们的声明变成http请求，最后发送http请求时还是会应用到一些别的客户端</p>
 <p><img src="/../../../../images/image-20230207220231333.png" alt="image-20230207220231333"></p>
 <p><img src="/../../../../images/image-20230207220445237.png" alt="image-20230207220445237"></p>
@@ -227,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign/Feign%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-id="cldxxnbex00r6qgv60wjcbl4v" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign/Feign%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-id="cle7ase8100schwv6ckt6dbg8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Feign/" rel="tag">Feign</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" rel="tag">远程调用</a></li></ul>
@@ -326,7 +508,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BB%E5%92%8C%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7/" data-id="cldxxnbb0008oqgv6dgnd3l02" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BB%E5%92%8C%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7/" data-id="cle7ase41008vhwv6c1t26aqs" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -492,7 +674,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/09/Nacos/Nacos-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" data-id="cldxxnb7x0019qgv664h99oc2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/09/Nacos/Nacos-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/" data-id="cle7ase12000ohwv686n99umz" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
@@ -568,7 +750,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%B3%A8%E5%86%8C%E7%BB%86%E8%8A%82%E4%BB%A5%E5%8F%8A%E4%B8%8EEureka%E7%9A%84%E6%AF%94%E8%BE%83/" data-id="cldxxnb7v0012qgv64ihaas9t" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%B3%A8%E5%86%8C%E7%BB%86%E8%8A%82%E4%BB%A5%E5%8F%8A%E4%B8%8EEureka%E7%9A%84%E6%AF%94%E8%BE%83/" data-id="cle7ase13000rhwv6d9sgcvnr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
@@ -625,7 +807,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/" data-id="cldxxnb7q000oqgv69e6jcq6s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/" data-id="cle7ase0u000chwv6g65n9tz2" class="article-share-link">分享</a>
       
       
     </footer>
@@ -702,7 +884,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-namespace%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/" data-id="cldxxnb7w0015qgv6acx8d8tk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-namespace%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/" data-id="cle7ase0r0009hwv624ox38sy" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
@@ -761,242 +943,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%9D%83%E9%87%8D%E8%AE%BE%E7%BD%AE/" data-id="cldxxnb7u000yqgv65qykfh43" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%9D%83%E9%87%8D%E8%AE%BE%E7%BD%AE/" data-id="cle7ase10000jhwv62ni10qu2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Nacos/Nacos-服务多级存储模型" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/" class="article-date">
-  <time class="post-time" datetime="2023-02-08T03:33:44.757Z" itemprop="datePublished">
-    <span class="post-month">2月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/">Nacos-服务多级存储模式 &amp; 集群 &amp; 优先本地集群访问的负载均衡的实现</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Nacos/">Nacos</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​		之前我们有服务的概念，我们提供用户查询的userservice服务，还有提供订单查询的orderservice服务。然后，userservice还部署了多个实例，我们有8081 、8082、8083，这三个呢，都是userservice的实例，所以我们之前是有两层概念的，一层是服务，而第二层就是实例。一个服务，可以包含多个实例。不过呀，随着我们这个业务规模越来越扩大，那么我们就会考虑更多的问题了。比如说我们现在的，我们把所有的实力都部署在一个地方，就像你把鸡蛋都放在一个篮子里，哪天你不小心篮子翻了，那所有的鸡蛋不就都打碎了吗？<strong>那你的机房放在那里同一个地方，哪天天灾人祸出了问题，整个服务不就完了？</strong>所以呀，为了解决这个问l题，我们会将一个服务的多个实例部署到多个机房，特别是像阿里京东这些财大气粗的，哎，我给全国各地，上海、杭州、北京都整一个，这俩送到杭州，这俩到上海，再来几个给它扔到北京，这就像我们把鸡蛋分散开了，一个打了是不是还有好几栏儿呢，对不对？那这样呢，就能够做到一种叫容灾。而我们的那个服务分级存储模型，就是引入了这样一个机房的概念，或者叫地域的概念，把同在一个机房的多个实例称为一个集群。比方，杭州机房的两个userservice实例就称之为杭州的userservice集群，那北京的userservice实例就称为北京的userservice集群。所以呢，在Nacos的服务分级模型中啊，一级是服务，往下是集群，再往下是实例。</p>
-<p>​		那为什么Nacos要引入这样的一个服务分级的？我原来直接服务找实例不好吗？为什么要多加一个地域划分集群的一个概念？我们设想这么一种情况，比方说我有一个杭州的地方，里面有orderservice的集群，还有一个userservice集群，然后呢，我还有一个上海的地方，也是一样的配置，将来还有广东地方，这个北京地方等等。现在呢，我的orderservice需要访问userservice，那么它有两种选择，一种是在自己本地局域网内访问，另一种是去外边的机房访问。那你觉得他该选哪个呀？那不用说呀，肯定选本地啊，因为外边的野花不要采嘛。当然啦，还有更重要的原因，我们局域网内的访问呢，它的距离比较短，所以呢，速度比较快，延迟比较低，而你跨越了这种集群的访问，比如说你从杭州访问到广州或者北京，那么达到数百公里上千公里，那么这个时候延迟是非常高的，所以啊，在服务调用时，应该尽可能的去访问本地集群，只有在本地集群不可用的情况下，我们才会考虑去访问其集群。我们的Nacos引入这个集训概念，其实就是为了防止出现跨集群调用啊，尽可能的避免。</p>
-<p><img src="/../../images/image-20230208114620776.png" alt="image-20230208114620776"></p>
-<p><img src="/../../images/image-20230208114536926.png" alt="image-20230208114536926"></p>
-<p><img src="/../../images/image-20230208114842391.png" alt="image-20230208114842391"></p>
-<p>演示：</p>
-<p><img src="/../../images/image-20230208115409758.png" alt="image-20230208115409758"></p>
-<p><img src="/../../images/image-20230208115731341.png" alt="image-20230208115731341"></p>
-<p>然后去Nacos控制台就可以看到有两个集群，以及集群各自有的实例</p>
-<p><img src="/../../images/image-20230208115947584.png" alt="image-20230208115947584"></p>
-<p><img src="/../../images/image-20230208115826327.png" alt="image-20230208115826327"></p>
-<p>orderservice想访问本地集群HZ中的userservice的那两个实例服务，那么首先就需要将orderservice也注册到HZ集群</p>
-<p><img src="/../../images/image-20230208120609913.png" alt="image-20230208120609913"></p>
-<p><img src="/../../images/image-20230208120553443.png" alt="image-20230208120553443"></p>
-<p>到这个时候，如果orderservice去访问3次userservice服务时，userservice的三个实例都会被访问到，因为依然采用的是轮询的方式。服务在选择实例时的规则都是由负载均衡的规则来决定的，也就是Irule，因为还没有配置Irule，所以还是默认的轮询方式。所以要想实现优先同集群访问的这种负载均衡的规则，我们必须去修改负载均衡。</p>
-<p><img src="/../../images/image-20230208121356082.png" alt="image-20230208121356082"></p>
-<p>在orderservice的yml配置文件中：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userservice: # 要做配置的微服务名称</span><br><span class="line">  ribbon:</span><br><span class="line">    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule  # 负载均衡规矩（优先同集群访问）</span><br></pre></td></tr></table></figure>
-
-<p>这样之后，orderservice去访问多次userservice服务，就会发现都是访问的是8081、8082的实例（在idea的控制台可以看各实例日志，8083是没有日志输出的）。</p>
-<ul>
-<li><p>那么有一个问题，本地同集群的8081、8082两个实例的被访问的比例是怎么的呢？</p>
-<ul>
-<li>其实是随机的，NacosRule的一个特点，优先使用本地同集群，在集群内的多个服务当中再采用随机方式来负载均衡</li>
-</ul>
-</li>
-<li><p>那么又有一个问题，如果我们把orderservice的同集群的userservice服务都停了，这样就只剩下不同集群的SH内的userservice实例，这个时候再去通过oerservice访问userservice时会怎样呢？</p>
-</li>
-</ul>
-<p><img src="/../../images/image-20230208122809011.png" alt="image-20230208122809011"></p>
-<p><img src="/../../images/image-20230208122900770.png" alt="image-20230208122900770"></p>
-<p>这是orderservice去访问userservice就会去跨集群访问了，即访问到8083端口的实例。idea，看一下日志。我们发现，这次请求是8083给承担了，那在order当中会出现一个警告信息什么，显示一次跨集群访问发生了，谁呀？就是userservice，那么你想问的是杭州，但是呢，实际上你访问的是上海。那通过这个啊，我们就知道了，NacosRule其实优先访问本地，本地没有，它才会跨境访问，跨域访问时，它会有一个警告，将来我们的运维人员如果看到了这样的警告信息，就能够清楚的知道发生了什么问题了，那么他就会及时的去重新启动我们的挂掉的服务，这样问题就能得到解决了</p>
-<p><img src="/../../images/image-20230208123816670.png" alt="image-20230208123816670"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/" data-id="cldxxnb7t000vqgv616vq83kl" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM下篇：性能监控与调优篇/5-分析GC日志" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/5-%E5%88%86%E6%9E%90GC%E6%97%A5%E5%BF%97/" class="article-date">
-  <time class="post-time" datetime="2023-02-06T02:12:49.678Z" itemprop="datePublished">
-    <span class="post-month">2月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/5-%E5%88%86%E6%9E%90GC%E6%97%A5%E5%BF%97/">5-分析GC日志</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/">JVM下篇：性能监控与调优篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="5-分析-GC-日志"><a href="#5-分析-GC-日志" class="headerlink" title="5. 分析 GC 日志"></a>5. 分析 GC 日志</h1><h2 id="5-1-GC-分类"><a href="#5-1-GC-分类" class="headerlink" title="5.1. GC 分类"></a>5.1. GC 分类</h2><p>针对 HotSpot VM 的实现，它里面的 GC 按照回收区域又分为两大种类型：一种是部分收集（Partial GC），一种是整堆收集（Full GC）</p>
-<ul>
-<li><p>部分收集（Partial GC）：不是完整收集整个 Java 堆的垃圾收集。其中又分为：</p>
-<ul>
-<li>新生代收集（Minor GC &#x2F; Young GC）：只是新生代（Eden &#x2F; S0, S1）的垃圾收集</li>
-<li>老年代收集（Major GC &#x2F; Old GC）：只是老年代的垃圾收集。目前，只有 CMS GC 会有单独收集老年代的行为。<mark>注意，很多时候 Major GC 会和 Full GC 混淆使用，需要具体分辨是老年代回收还是整堆回收。</mark></li>
-</ul>
-</li>
-<li><p>混合收集（Mixed GC）：收集整个新生代以及部分老年代的垃圾收集。目前，只有 G1 GC 会有这种行为</p>
-</li>
-<li><p>整堆收集（Full GC）：收集整个 java 堆和方法区的垃圾收集。</p>
-<ul>
-<li>哪些情况会触发 Full GC ?<ul>
-<li>老年代空间不足</li>
-<li>方法区空间不足</li>
-<li>显示调用System.gc()</li>
-<li>Minor GC进入老年代的数据的平均大小 大于 老年代的可用内存</li>
-<li>大对象直接进入老年代，而老年代的可用空间不足</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-2-GC-日志分类"><a href="#5-2-GC-日志分类" class="headerlink" title="5.2. GC 日志分类"></a>5.2. GC 日志分类</h2><p><strong>MinorGC</strong></p>
-<p>MinorGC（或 young GC 或 YGC）日志：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GC (Allocation Failure) [PSYoungGen: 31744K-&gt;2192K (36864K) ] 31744K-&gt;2200K (121856K), <span class="number">0.0139308</span> secs] [Times: user=<span class="number">0.05</span> sys=<span class="number">0.01</span>, real=<span class="number">0.01</span> secs]</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/df81757685ca21a927d9335273f561c5.png" alt="image-20210506202126562"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/b9a7575380bcdb91b54c0556557d8ad9.png" alt="image-20210506202156090"></p>
-<p><strong>FullGC</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Full <span class="title function_">GC</span> <span class="params">(Metadata GC Threshold)</span> [PSYoungGen: 5104K-&gt;0K (132096K) ] [Par01dGen: 416K-&gt;5453K (50176K) ]5520K-&gt;5453K (182272K), [Metaspace: 20637K-&gt;20637K (1067008K) ], <span class="number">0.0245883</span> secs] [Times: user=<span class="number">0.06</span> sys=<span class="number">0.00</span>, real=<span class="number">0.02</span> secs]</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/0dcb239f0928bc374ac1b376b4189295.png" alt="image-20210506202330868"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/7817f28a52c836d5ed08a4b992823f64.png" alt="image-20210506202349072"></p>
-<h2 id="5-3-GC-日志结构剖析"><a href="#5-3-GC-日志结构剖析" class="headerlink" title="5.3. GC 日志结构剖析"></a>5.3. GC 日志结构剖析</h2><p><strong>透过日志看垃圾收集器</strong></p>
-<ul>
-<li><p>Serial 收集器：新生代显示 “[DefNew”，即 Default New Generation</p>
-</li>
-<li><p>ParNew 收集器：新生代显示 “[ParNew”，即 Parallel New Generation</p>
-</li>
-<li><p>Parallel Scavenge 收集器：新生代显示”[PSYoungGen”，JDK1.7 使用的即 PSYoungGen</p>
-</li>
-<li><p>Parallel Old 收集器：老年代显示”[ParoldGen”</p>
-</li>
-<li><p>G1 收集器：显示”garbage-first heap“</p>
-</li>
-</ul>
-<p><strong>透过日志看 GC 原因</strong></p>
-<ul>
-<li>Allocation Failure：表明本次引起 GC 的原因是因为新生代中没有足够的区域存放需要分配的数据</li>
-<li>Metadata GCThreshold：Metaspace 区不够用了</li>
-<li>FErgonomics：JVM 自适应调整导致的 GC</li>
-<li>System：调用了 System.gc()方法</li>
-</ul>
-<p><strong>透过日志看 GC 前后情况</strong></p>
-<p>通过图示，我们可以发现 GC 日志格式的规律一般都是：GC 前内存占用-＞ GC 后内存占用（该区域内存总大小）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[PSYoungGen: 5986K-&gt;696K (8704K) ] 5986K-&gt;704K (9216K)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>中括号内：GC 回收前年轻代堆大小，回收后大小，（年轻代堆总大小）</p>
-</li>
-<li><p>括号外：GC 回收前年轻代和老年代大小，回收后大小，（年轻代和老年代总大小）</p>
-</li>
-</ul>
-<p><mark>注意</mark>：Minor GC 堆内存总容量 &#x3D; 9&#x2F;10 年轻代 + 老年代。原因是 Survivor 区只计算 from 部分，而 JVM 默认年轻代中 Eden 区和 Survivor 区的比例关系，Eden:S0:S1&#x3D;8:1:1。</p>
-<p><strong>透过日志看 GC 时间</strong></p>
-<p>GC 日志中有三个时间：user，sys 和 real</p>
-<ul>
-<li>user：进程执行用户态代码（核心之外）所使用的时间。这是执行此进程所使用的实际 CPU 时间，其他进程和此进程阻塞的时间并不包括在内。在垃圾收集的情况下，表示 GC 线程执行所使用的 CPU 总时间。</li>
-<li>sys：进程在内核态消耗的 CPU 时间，即在内核执行系统调用或等待系统事件所使用的 CPU 时间</li>
-<li>real：程序从开始到结束所用的时钟时间。这个时间包括其他进程使用的时间片和进程阻塞的时间（比如等待 I&#x2F;O 完成）。对于并行 gc，这个数字应该接近（用户时间＋系统时间）除以垃圾收集器使用的线程数。</li>
-</ul>
-<p>由于多核的原因，一般的 GC 事件中，real time 是小于 sys time ＋ user time 的，因为一般是多个线程并发的去做 GC，所以 real time 是要小于 sys ＋ user time 的。如果 real ＞ sys ＋ user 的话，则你的应用可能存在下列问题：IO 负载非常重或 CPU 不够用。</p>
-<h2 id="5-4-GC-日志分析工具"><a href="#5-4-GC-日志分析工具" class="headerlink" title="5.4. GC 日志分析工具"></a>5.4. GC 日志分析工具</h2><p><strong>GCEasy</strong></p>
-<p>GCEasy 是一款在线的 GC 日志分析器，可以通过 GC 日志分析进行内存泄露检测、GC 暂停原因分析、JVM 配置建议优化等功能，大多数功能是免费的。</p>
-<p>官网地址：<a target="_blank" rel="noopener" href="https://gceasy.io/">https://gceasy.io/</a></p>
-<p><strong>GCViewer</strong></p>
-<p>GCViewer 是一款离线的 GC 日志分析器，用于可视化 Java VM 选项 -verbose:gc 和 .NET 生成的数据 -Xloggc:&lt;file&gt;。还可以计算与垃圾回收相关的性能指标（吞吐量、累积的暂停、最长的暂停等）。当通过更改世代大小或设置初始堆大小来调整特定应用程序的垃圾回收时，此功能非常有用。</p>
-<p>源码下载：<a target="_blank" rel="noopener" href="https://github.com/chewiebug/GCViewer">https://github.com/chewiebug/GCViewer</a></p>
-<p>运行版本下载：<a target="_blank" rel="noopener" href="https://github.com/chewiebug/GCViewer/wiki/Changelog">https://github.com/chewiebug/GCViewer/wiki/Changelog</a></p>
-<p><strong>GChisto</strong></p>
-<ul>
-<li>官网上没有下载的地方，需要自己从 SVN 上拉下来编译</li>
-<li>不过这个工具似乎没怎么维护了，存在不少 bug</li>
-</ul>
-<p><strong>HPjmeter</strong></p>
-<ul>
-<li>工具很强大，但是只能打开由以下参数生成的 GC log，-verbose:gc -Xloggc:gc.log。添加其他参数生成的 gc.log 无法打开</li>
-<li>HPjmeter 集成了以前的 HPjtune 功能，可以分析在 HP 机器上产生的垃圾回收日志文件</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/5-%E5%88%86%E6%9E%90GC%E6%97%A5%E5%BF%97/" data-id="cldxxnba5006fqgv65q9hh6ix" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/" rel="tag">JVM下篇：性能监控与调优篇</a></li></ul>
 
     </footer>
   </div>
@@ -1010,7 +960,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">next &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -1055,9 +1005,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>139</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>66</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>48</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>141</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>71</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>54</strong><br>标签</div></a>
     </div>
 
 
