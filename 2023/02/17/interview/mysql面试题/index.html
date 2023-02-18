@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mysql面试题 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSDN的博文：(9条消息) MySQL数据库面试题总结（2022最新版）_程序猿周周的博客-CSDN博客_mysql 面试题 稀土掘金的博文：MySQL面试题（总结最全面的面试题） - 掘金 (juejin.cn) 1. 数据库三大范式是什么？什么是范式？范式是数据库设计时遵循的一种规范，不同的规范要求遵循不同的范式。 最常用的三大范式  第一范式(1NF)：属性不可分割，即每个属性都是不可分割">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql面试题">
+<meta property="og:url" content="http://example.com/2023/02/17/interview/mysql%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="CSDN的博文：(9条消息) MySQL数据库面试题总结（2022最新版）_程序猿周周的博客-CSDN博客_mysql 面试题 稀土掘金的博文：MySQL面试题（总结最全面的面试题） - 掘金 (juejin.cn) 1. 数据库三大范式是什么？什么是范式？范式是数据库设计时遵循的一种规范，不同的规范要求遵循不同的范式。 最常用的三大范式  第一范式(1NF)：属性不可分割，即每个属性都是不可分割">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20230217143546366.png">
+<meta property="og:image" content="http://example.com/images/image-20230217143559491.png">
+<meta property="og:image" content="http://example.com/images/image-20230217143616904.png">
+<meta property="og:image" content="http://example.com/images/image-20230217143630898.png">
+<meta property="og:image" content="http://example.com/images/image-20230217143724321.png">
+<meta property="og:image" content="http://example.com/images/image-20230217143739281.png">
+<meta property="og:image" content="http://example.com/images/image-20230217143753961.png">
+<meta property="og:image" content="http://example.com/images/image-20230217143810165.png">
+<meta property="og:image" content="http://example.com/images/image-20230217144222018.png">
+<meta property="og:image" content="http://example.com/images/image-20230217192636216.png">
+<meta property="og:image" content="http://example.com/images/image-20230217214658212.png">
+<meta property="og:image" content="http://example.com/images/image-20230217214224766.png">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c7259992ab~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c725b21e8e~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c7300b465e~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c744498a9a~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c750f5b2cc~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp">
+<meta property="article:published_time" content="2023-02-17T05:23:49.183Z">
+<meta property="article:modified_time" content="2023-02-18T01:37:53.795Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/image-20230217143546366.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>142</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>72</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-interview/mysql面试题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/17/interview/mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
+  <time class="post-time" datetime="2023-02-17T05:23:49.183Z" itemprop="datePublished">
+    <span class="post-month">2月</span><br/>
+    <span class="post-day">17</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mysql面试题
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>,<a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/Mysql%E9%9D%A2%E8%AF%95%E9%A2%98/">Mysql面试题</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>CSDN的博文：<a target="_blank" rel="noopener" href="https://blog.csdn.net/adminpd/article/details/122910606">(9条消息) MySQL数据库面试题总结（2022最新版）_程序猿周周的博客-CSDN博客_mysql 面试题</a></p>
+<p>稀土掘金的博文：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127047139335#heading-17">MySQL面试题（总结最全面的面试题） - 掘金 (juejin.cn)</a></p>
+<h1 id="1-数据库三大范式是什么？"><a href="#1-数据库三大范式是什么？" class="headerlink" title="1. 数据库三大范式是什么？"></a>1. 数据库三大范式是什么？</h1><p><strong>什么是范式？</strong><br>范式是数据库设计时遵循的一种规范，不同的规范要求遵循不同的范式。</p>
+<p><strong>最常用的三大范式</strong></p>
+<ul>
+<li><p>第一范式(1NF)：<strong>属性不可分割</strong>，即每个属性都是不可分割的原子项。(实体的属性即表中的列)</p>
+</li>
+<li><p>第二范式(2NF)：<strong>满足第一范式；且不存在部分依赖</strong>，即非主属性必须完全依赖于主属性。(主属性即主键；完全依赖是针对于联合主键的情况，非主键列不能只依赖于主键的一部分)</p>
+</li>
+<li><p>第三范式(3NF)：<strong>满足第二范式；且不存在传递依赖</strong>，即非主属性不能与非主属性之间有依赖关系，非主属性必须直接依赖于主属性，不能间接依赖主属性。（A -&gt; B, B -&gt;C, A -&gt; C）</p>
+</li>
+</ul>
+<p><strong>举例说明3NF：</strong><br><strong>1NF</strong><br>属性不可再分，即表中的每个列都不可以再进行拆分。</p>
+<p>如下学生信息表(student)：</p>
+<p>id、name(姓名)、sex_code(性别代号)、sex_desc(性别描述)、contact(联系方式)</p>
+<p>primary key(id)</p>
+<p><img src="/../../images/image-20230217143546366.png" alt="image-20230217143546366"><br>如果在查询学生表时经常用到学生的电话号，则应该将联系方式(contact)这一列分为电话号(phone)和地址(address)两列，这样才符合第一范式。</p>
+<p>修改使表满足1NF后：</p>
+<p><img src="/../../images/image-20230217143559491.png" alt="image-20230217143559491"><br>判断表是否符合第一范式，列是否可以再分，得看需求，如果将电话号和地址分开才能满足查询等需求时，那之前的表设计就是不满足1NF的，如果电话号和地址拼接作为一个字段也可以满足查询、存储等需求时，那它就满足1NF。</p>
+<p><strong>2NF</strong><br>在满足1NF的前提下，表中不存在部分依赖，非主键列要完全依赖于主键。(主要是说在联合主键的情况下，非主键列不能只依赖于主键的一部分)</p>
+<p>如下学生成绩表(score)：</p>
+<p>stu_id(学生id)、kc_id(课程id)、score(分数)、kc_name(课程名)</p>
+<p>primary key(stu_id, kc_id)</p>
+<p><img src="/../../images/image-20230217143616904.png" alt="image-20230217143616904"><br>表中主键为stu_id和kc_id组成的联合主键。满足1NF；非主键列score完全依赖于主键，stu_id和kc_id两个值才能决定score的值；而kc_name只依赖于kc_id，与stu_id没有依赖关系，它不完全依赖于主键，只依赖于主键的一部分，不符合2NF。</p>
+<p>修改使表满足2NF后：</p>
+<p>成绩表(score)   primary key(stu_id)</p>
+<p><img src="/../../images/image-20230217143630898.png" alt="image-20230217143630898"><br>课程表(kc)   primary key(kc_id)</p>
+<p><img src="/../../images/image-20230217143724321.png" alt="image-20230217143724321"><br>将原来的成绩表(score)拆分为成绩表(score)和课程表(kc)，而且两个表都符合2NF。</p>
+<p><strong>3NF：</strong><br>在满足2NF的前提下，不存在传递依赖。(A -&gt; B, B -&gt; C, A-&gt;C)</p>
+<p>如下学生信息表(student)：</p>
+<p>primary key(id)</p>
+<p><img src="/../../images/image-20230217143739281.png" alt="image-20230217143739281"><br>表中sex_desc依赖于sex_code，而sex_code依赖于id(主键)，从而推出sex_desc依赖于id(主键)；sex_desc不直接依赖于主键，而是通过依赖于非主键列而依赖于主键，属于传递依赖，不符合3NF。</p>
+<p>修改表使满足3NF后：</p>
+<p>学生表(student)   primary key(id)</p>
+<p><img src="/../../images/image-20230217143753961.png" alt="image-20230217143753961"><br>性别代码表(sexcode)   primary key(sex_code)</p>
+<p><img src="/../../images/image-20230217143810165.png" alt="image-20230217143810165"><br>将原来的student表进行拆分后，两个表都满足3NF。</p>
+<p><strong>什么样的表越容易符合3NF？</strong><br>非主键列越少的表。(1NF强调列不可再分；2NF和3NF强调非主属性列和主属性列之间的关系)</p>
+<p>如代码表(sexcode)，非主键列只有一个sex_desc；</p>
+<p>或者将学生表的主键设计为primary key(id,name,sex_code,phone)，这样非主键列只有address，更容易符合3NF。</p>
+<p><strong>ps:</strong></p>
+<p><strong>除了三大范式外，还有BC范式和第四范式，但其规范过于严苛，在生产中往往使用不到。</strong></p>
+<h1 id="2-什么是范式和反范式，以及各自优缺点？"><a href="#2-什么是范式和反范式，以及各自优缺点？" class="headerlink" title="2. 什么是范式和反范式，以及各自优缺点？"></a>2. 什么是范式和反范式，以及各自优缺点？</h1><p>范式是符合某一种级别的关系模式的集合。构造数据库必须遵循一定的规则。在关系数据库中，这种规则就是范式。</p>
+<p><img src="/../../images/image-20230217144222018.png" alt="image-20230217144222018"><br>所以在平时工作中，我们通常是将范式和反范式相互结合使用。</p>
+<h1 id="3-索引"><a href="#3-索引" class="headerlink" title="3. 索引"></a>3. 索引</h1><h2 id="1、索引的几种类型或分类？"><a href="#1、索引的几种类型或分类？" class="headerlink" title="1、索引的几种类型或分类？"></a>1、索引的几种类型或分类？</h2><ul>
+<li><p>从<strong>物理结构</strong>上可以分为聚集索引和非聚集索引两类：</p>
+<ul>
+<li>聚簇索引指索引的键值的逻辑顺序与表中相应行的物理顺序一致，即每张表只能有一个聚簇索引，也就是我们常说的主键索引；</li>
+<li>非聚簇索引的逻辑顺序则与数据行的物理顺序不一致。</li>
+</ul>
+</li>
+<li><p>从<strong>应用</strong>上可以划分为一下几类：</p>
+<ul>
+<li><strong>普通索引</strong>：MySQL 中的基本索引类型，没有什么限制，允许在定义索引的列中插入重复值和空值，纯粹为了提高查询效率。通过<mark> ALTER TABLE table_name ADD INDEX index_name (column) </mark>创建；</li>
+<li><strong>唯一索引</strong>：索引列中的值必须是唯一的，但是允许为空值。通过 <mark>ALTER TABLE table_name ADD UNIQUE index_name (column)</mark> 创建；</li>
+<li><strong>主键索引</strong>：特殊的唯一索引，也成聚簇索引，不允许有空值，并由数据库帮我们自动创建；</li>
+<li><strong>组合索引</strong>：组合表中多个字段创建的索引，遵守最左前缀匹配规则；</li>
+<li><strong>全文索引</strong>：只有在 MyISAM 引擎上才能使用，同时只支持 CHAR、VARCHAR、TEXT 类型字段上使用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、索引的优缺点？"><a href="#2、索引的优缺点？" class="headerlink" title="2、索引的优缺点？"></a>2、索引的优缺点？</h2><p>先来说说<strong>优点：</strong>创建索引可以大大提高系统的性能。</p>
+<ul>
+<li><p>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。</p>
+</li>
+<li><p>可以大大加快数据的检索速度，这也是创建索引的最主要的原因。</p>
+</li>
+<li><p>可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义。</p>
+</li>
+<li><p>在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间。</p>
+</li>
+<li><p>通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。</p>
+</li>
+</ul>
+<p>既然增加索引有如此多的优点，为什么不对表中的每一个列都创建一个索引呢？这是因为索引也是有<strong>缺点</strong>的：</p>
+<ul>
+<li><p>创建和维护索引需要耗费时间，这种时间随着数据量的增加而增加，这样就降低了数据的维护速度。</p>
+</li>
+<li><p>索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间。如果要建立聚簇索引，那么需要的空间就会更大。</p>
+</li>
+</ul>
+<h2 id="3-索引设计的原则"><a href="#3-索引设计的原则" class="headerlink" title="3. 索引设计的原则"></a>3. 索引设计的原则</h2><ul>
+<li><p><strong>选择唯一性索引；</strong></p>
+<ul>
+<li>唯一性索引的值是唯一的，可以更快速的通过该索引来确定某条记录。</li>
+</ul>
+</li>
+<li><p><strong>为常作为查询条件的字段建立索引；</strong></p>
+<ul>
+<li>如果某个字段经常用来做查询条件，那么该字段的查询速度会影响整个表的查询速度。因此，为这样的字段建立索引，可以提高整个表的查询速度。</li>
+</ul>
+</li>
+<li><p><strong>为经常需要排序、分组和联合操作的字段建立索引；</strong></p>
+<ul>
+<li>经常需要 ORDER BY、GROUP BY、DISTINCT 和 UNION 等操作的字段，排序操作会浪费很多时间。如果为其建立索引，可以有效地避免排序操作。</li>
+</ul>
+</li>
+<li><p><strong>限制索引的数目；</strong></p>
+<ul>
+<li>每个索引都需要占⽤用磁盘空间，索引越多，需要的磁盘空间就越大，修改表时，对索引的重构和更新很麻烦。</li>
+</ul>
+</li>
+<li><p><strong>小表不建议索引（如数量级在百万以内）；</strong></p>
+<ul>
+<li>由于数据较小，查询花费的时间可能比遍历索引的时间还要短，索引可能不会产生优化效果。</li>
+</ul>
+</li>
+<li><p><strong>尽量使用数据量少的索引；</strong></p>
+<ul>
+<li>如果索引的值很长，那么查询的速度会受到影响。此时尽量使用前缀索引。</li>
+</ul>
+</li>
+<li><p><strong>删除不再使用或者很少使用的索引。</strong></p>
+</li>
+</ul>
+<h2 id="4-索引的数据结构？"><a href="#4-索引的数据结构？" class="headerlink" title="4. 索引的数据结构？"></a>4. 索引的数据结构？</h2><p>索引的数据结构和具体存储引擎的实现有关，MySQL中常用的是 <strong>Hash</strong> 和 <strong>B+树</strong> 索引。</p>
+<ul>
+<li><strong>Hash 索引</strong>底层就是 Hash 表，进行查询时调用 Hash 函数获取到相应的键值（对应地址），然后回表查询获得实际数据.</li>
+<li><strong>B+ 树索引</strong>底层实现原理是多路平衡查找树，对于每一次的查询都是从根节点出发，查询到叶子节点方可以获得所查键值，最后查询判断是否需要回表查询.</li>
+</ul>
+<h4 id="Hash-和-B-树索引的区别"><a href="#Hash-和-B-树索引的区别" class="headerlink" title="Hash 和 B+ 树索引的区别"></a>Hash 和 B+ 树索引的区别</h4><ul>
+<li><p>Hash</p>
+<ul>
+<li>Hash 进行等值查询更快，但无法进行范围查询。因为经过 Hash 函数建立索引之后，索引的顺序与原顺序无法保持一致，故不能支持范围查询。同理，也不支持使用索引进行排序。</li>
+<li>Hash 不支持模糊查询以及多列索引的最左前缀匹配,因为 Hash 函数的值不可预测，如 AA 和 AB 的算出的值没有相关性。</li>
+<li>Hash 任何时候都避免不了回表查询数据.</li>
+<li>虽然在等值上查询效率高，但性能不稳定，因为当某个键值存在大量重复时，产生 Hash 碰撞，此时查询效率反而可能降低。</li>
+</ul>
+</li>
+<li><p>B+ Tree</p>
+<ul>
+<li>B+ 树本质是一棵查找树，自然支持范围查询和排序。</li>
+<li>在符合某些条件（聚簇索引、覆盖索引等）时候可以只通过索引完成查询，不需要回表。</li>
+<li>查询效率比较稳定，因为每次查询都是从根节点到叶子节点，且为树的高度。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-为何使用-B-树而非-B-树做索引？"><a href="#5-为何使用-B-树而非-B-树做索引？" class="headerlink" title="5. 为何使用 B+ 树而非 B 树做索引？"></a>5. 为何使用 B+ 树而非 B 树做索引？</h2><h4 id="5-1-先来了解一下-B-树和-B-树的区别："><a href="#5-1-先来了解一下-B-树和-B-树的区别：" class="headerlink" title="5.1.  先来了解一下 B+ 树和 B 树的区别："></a>5.1.  先来了解一下 B+ 树和 B 树的区别：</h4><ul>
+<li><p>B 树非叶子结点和叶子结点都存储数据，因此查询数据时，时间复杂度最好为 O(1)，最坏为 O(log n)。而 <strong>B+ 树只在叶子结点存储数据，非叶子结点存储关键字</strong>，且不同非叶子结点的关键字可能重复，因此查询数据时，时间复杂度固定为 O(log n)。</p>
+</li>
+<li><p>B+ 树叶子结点之间用<strong>链表</strong>相互连接，因而只需扫描叶子结点的链表就可以完成一次遍历操作，B 树只能通过中序遍历。</p>
+</li>
+</ul>
+<h4 id="5-2-为什么-B-树比-B-树更适合应用于数据库索引？"><a href="#5-2-为什么-B-树比-B-树更适合应用于数据库索引？" class="headerlink" title="5.2. 为什么 B+ 树比 B 树更适合应用于数据库索引？"></a>5.2. 为什么 B+ 树比 B 树更适合应用于数据库索引？</h4><ul>
+<li><p>B+ 树减少了 IO 次数。</p>
+<ul>
+<li>由于索引文件很大因此索引文件存储在磁盘上，B+ 树的非叶子结点只存关键字不存数据，因而单个页可以存储更多的关键字，即一次性读入内存的需要查找的关键字也就越多，磁盘的随机 I&#x2F;O 读取次数相对就减少了。</li>
+</ul>
+</li>
+<li><p>B+ 树查询效率更稳定</p>
+<ul>
+<li>由于数据只存在在叶子结点上，所以查找效率固定为 O(log n)，所以 B+ 树的查询效率相比B树更加稳定。</li>
+</ul>
+</li>
+<li><p>B+ 树更加适合范围查找</p>
+<ul>
+<li>B+ 树叶子结点之间用链表有序连接，所以扫描全部数据只需扫描一遍叶子结点，利于扫库和范围查询；B 树由于非叶子结点也存数据，所以只能通过中序遍历按序来扫。也就是说，对于范围查询和有序遍历而言，B+ 树的效率更高。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-什么是覆盖索引？"><a href="#6-什么是覆盖索引？" class="headerlink" title="6. 什么是覆盖索引？"></a>6. 什么是覆盖索引？</h2><p>覆盖索引（covering index）指<strong>一个查询语句的执行只用从索引中就能够取得，不必从数据表中读取</strong>。 也可以称之为实现了索引覆盖。 如果一个索引包含了（或覆盖了）满足查询语句中字段与条件的数据就叫做覆盖索引。 <strong>当一条查询语句符合覆盖索引条件时，sql只需要通过索引就可以返回查询所需要的数据，这样避免了查到索引后再返回表操作，减少I&#x2F;O提高效率</strong></p>
+<h2 id="7-什么是索引下推？"><a href="#7-什么是索引下推？" class="headerlink" title="7. 什么是索引下推？"></a>7. 什么是索引下推？</h2><p><strong>索引下推（Index condition pushdown）</strong> 简称 ICP，在 Mysql 5.6 版本上推出的一项用于<mark>优化查询</mark>的技术。</p>
+<p>在不使用索引下推的情况下，在使用非主键索引进行查询时，存储引擎通过索引检索到数据，然后返回给 MySQL 服务器，服务器判断数据是否符合条件。</p>
+<p>而有了索引下推之后，如果存在某些被索引列的判断条件时，MySQL 服务器将这一部分判断条件传递给存储引擎，然后由存储引擎通过判断索引是否符合 MySQL 服务器传递的条件，只有当索引符合条件时才会将数据检索出来返回给 MySQL 服务器。</p>
+<p><strong>索引条件下推优化可以减少存储引擎查询基础表的次数，也可以减少 MySQL 服务器从存储引擎接收数据的次数。</strong></p>
+<h1 id="4-存储"><a href="#4-存储" class="headerlink" title="4. 存储"></a>4. 存储</h1><h2 id="4-1-有哪些常见的存储引擎？"><a href="#4-1-有哪些常见的存储引擎？" class="headerlink" title="4.1. 有哪些常见的存储引擎？"></a>4.1. 有哪些常见的存储引擎？</h2><ol>
+<li>MyISAM：这种引擎是mysql最早提供的。这种引擎又可以分为静态MyISAM、动态MyISAM 和压缩MyISAM三种，不管是何种MyISAM表，目前它都不支持事务，行级锁和外键约束的功能。</li>
+<li>MyISAM Merge引擎：这种类型是MyISAM类型的一种变种。合并表是将几个相同的MyISAM表合并为一个虚表。常应用于日志和数据仓库。</li>
+<li><strong>InnoDB</strong>：InnoDB表类型可以看作是对MyISAM的进一步更新产品，它提供了事务、行级锁机制和外键约束的功能，也是目前<strong>MySQL 默认 的存储引擎。</strong></li>
+<li>Memory(heap)：这种类型的数据表只存在于内存中。它使用散列索引，所以数据的存取速度非常快。因为是存在于内存中，所以这种类型常应用于临时表中。</li>
+<li>archive：这种类型只支持select 和 insert语句，而且不支持索引。常应用于日志记录和聚合分析方面。</li>
+</ol>
+<h2 id="4-2-MyISAM-和-InnoDB-的区别？"><a href="#4-2-MyISAM-和-InnoDB-的区别？" class="headerlink" title="4.2.  MyISAM 和 InnoDB 的区别？"></a>4.2.  MyISAM 和 InnoDB 的区别？</h2><p>1）InnoDB 支持事务，而 MyISAM 不支持。</p>
+<p>2）InnoDB 支持外键，而 MyISAM 不支持。因此将一个含有外键的 InnoDB 表 转为 MyISAM 表会失败。</p>
+<p>3）InnoDB 和 MyISAM 均支持 B+ Tree 数据结构的索引。但 InnoDB 是聚集索引，而 MyISAM 是非聚集索引。</p>
+<p>4）InnoDB 不保存表中数据行数，执行 select count(*) from table 时需要全表扫描。而 MyISAM 用一个变量记录了整个表的行数，速度相当快（注意不能有 WHERE 子句）。</p>
+<p><strong>那为什么 InnoDB 没有使用这样的变量呢？</strong>因为InnoDB的事务特性，在同一时刻表中的行数对于不同的事务而言是不一样的。</p>
+<p>5）InnoDB 支持表、行（默认）级锁，而 MyISAM 支持表级锁。</p>
+<p>InnoDB 的行锁是基于索引实现的，而不是物理行记录上。即访问如果没有命中索引，则也无法使用行锁，将要退化为表锁。</p>
+<p>6）InnoDB 必须有唯一索引（如主键），如果没有指定，就会自动寻找或生产一个隐藏列 Row_id 来充当默认主键，而 Myisam 可以没有主键。</p>
+<h2 id="4-3-InnoDB引擎四大特性"><a href="#4-3-InnoDB引擎四大特性" class="headerlink" title="4.3. InnoDB引擎四大特性"></a>4.3. InnoDB引擎四大特性</h2><ul>
+<li>插入缓冲insert buffer)</li>
+<li>二次写(double write)</li>
+<li>自适应哈希索引(ahi)</li>
+<li>预读(read ahead)</li>
+</ul>
+<h2 id="4-4-InnoDB为何推荐使用自增主键？"><a href="#4-4-InnoDB为何推荐使用自增主键？" class="headerlink" title="4.4. InnoDB为何推荐使用自增主键？"></a>4.4. InnoDB为何推荐使用自增主键？</h2><p>自增 ID 可以保证每次插入时 B+ 树索引是从右边扩展的，因此相比自定义 ID （如 UUID）可以避免 B+ 树的频繁合并和分裂。如果使用字符串主键和随机主键，会使得数据随机插入，效率比较差。</p>
+<h2 id="4-5-存储结构"><a href="#4-5-存储结构" class="headerlink" title="4.5. 存储结构"></a>4.5. 存储结构</h2><h3 id="4-5-1-什么是-InnoDB-的页、区、段？"><a href="#4-5-1-什么是-InnoDB-的页、区、段？" class="headerlink" title="4.5.1. 什么是 InnoDB 的页、区、段？"></a>4.5.1. 什么是 InnoDB 的页、区、段？</h3><ul>
+<li><p><strong>页（Page）</strong></p>
+<ul>
+<li>首先，InnoDB 将物理磁盘划分为页（page），每页的大小默认为 16 KB，页是最小的存储单位。页根据上层应用的需要，如索引、日志等，分为很多的格式。我们主要说数据页，也就是存储实际数据的页。</li>
+</ul>
+</li>
+<li><p><strong>区（Extent）</strong></p>
+<ul>
+<li>如果只有页这一个层次的话，页的个数是非常多的，存储空间的分配和回收都会很麻烦，因为要维护这么多的页的状态是非常麻烦的。</li>
+<li>所以，InnoDB 又引入了区（Extent) 的概念。一个区默认是 64 个连续的页组成的，也就是 1MB。通过 Extent 对存储空间的分配和回收就比较容易了。</li>
+</ul>
+</li>
+<li><p><strong>段（Segment）</strong></p>
+<ul>
+<li>为什么要引入段呢，这要从索引说起。我们都知道索引的目的是为了加快查找速度，是一种典型的用空间换时间的方法。</li>
+<li>B+ 树的叶子节点存放的是我们的具体数据，非叶子结点是索引页。所以 B+ 树将数据分为了两部分，叶子节点部分和非叶子节点部分，也就我们要介绍的段 Segment，也就是说 InnoBD 中每一个索引都会创建两个 Segment 来存放对应的两部分数据。</li>
+<li>Segment 是一种逻辑上的组织，其层次结构从上到下一次为 Segment、Extent、Page。</li>
+</ul>
+</li>
+</ul>
+<h1 id="5-事务"><a href="#5-事务" class="headerlink" title="5. 事务"></a>5. 事务</h1><h2 id="5-1-什么是事务的四大特性（ACID）？"><a href="#5-1-什么是事务的四大特性（ACID）？" class="headerlink" title="5.1.  什么是事务的四大特性（ACID）？"></a>5.1.  什么是事务的四大特性（ACID）？</h2><ul>
+<li>Atomicity（<strong>原子性</strong>）：一个事务（transaction）中的所有操作，<strong>要么全部完成，要么全部不完成</strong>，不会结束在中间某个环节。事务在执行过程中发生错误，会被恢复（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</li>
+<li>Consistency（<strong>一致性</strong>）：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</li>
+<li>Isolation（<strong>隔离性</strong>）：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</li>
+<li>Durability（<strong>持久性</strong>）：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
+</ul>
+<h3 id="5-2-事务的并发问题？"><a href="#5-2-事务的并发问题？" class="headerlink" title="5.2. 事务的并发问题？"></a>5.2. 事务的并发问题？</h3><p>脏读、幻读、不可重复读。</p>
+<h3 id="5-3-什么是脏读、幻读和不可重复读"><a href="#5-3-什么是脏读、幻读和不可重复读" class="headerlink" title="5.3. 什么是脏读、幻读和不可重复读"></a>5.3. 什么是脏读、幻读和不可重复读</h3><ul>
+<li><p><strong>脏读</strong>：一个事务读取到另一个事务尚未提交的数据。 事务 A 读取事务 B 更新的数据，然后 B 回滚操作，那么 A 读取到的数据是脏数据。</p>
+</li>
+<li><p><strong>不可重复读</strong>：一个事务中两次读取的数据的内容不一致。 事务 A 多次读取同一数据，事务 B 在事务 A 多次读取的过程中，对数据作了更新并提交，导致事务 A 多次读取同一数据时，结果 不一致。</p>
+</li>
+<li><p><strong>幻读</strong>：一个事务中两次读取的数据量不一致。 系统管理员 A 将数据库中所有学生的成绩从具体分数改为 ABCDE 等级，但是系统管理员 B 就在这个时候插入了一条具体分数的记录，当系统管理员 A 改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读。</p>
+</li>
+</ul>
+<p><strong>不可重复读和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除</strong>。解决不可重复读的问题只需要锁住满足条件的行，解决幻读需要锁表。</p>
+<h3 id="5-4-事务的隔离级别有哪些？"><a href="#5-4-事务的隔离级别有哪些？" class="headerlink" title="5.4. 事务的隔离级别有哪些？"></a>5.4. 事务的隔离级别有哪些？</h3><p><img src="/../../images/image-20230217192636216.png" alt="image-20230217192636216"></p>
+<p>串行化的隔离级别最高，读未提交的级别最低，级别越高，则执行效率就越低，所以在选择隔离级别时应该结合实际情况。</p>
+<p>MySQL 支持以上四种隔离级别，默认为 Repeatable read (可重复读)；而 Oracle 只支持 Serializeble(串行化) 级别和 Read committed(读已提交) 两种，其中默认为读已提交。</p>
+<h1 id="6-锁"><a href="#6-锁" class="headerlink" title="6. 锁"></a>6. 锁</h1><h2 id="6-1-数据库锁的作用以及有哪些锁？"><a href="#6-1-数据库锁的作用以及有哪些锁？" class="headerlink" title="6.1. 数据库锁的作用以及有哪些锁？"></a>6.1. 数据库锁的作用以及有哪些锁？</h2><p>当数据库有并发事务的时候，可能会产生数据的不一致，这时候需要一些机制来保证访问的次序，锁机制就是这样的一个机制。即锁的作用是解决并发问题。</p>
+<ul>
+<li><p>从<strong>锁的粒度</strong>划分，可以将锁分为表锁、行锁以及页锁。</p>
+<ul>
+<li><p><strong>行级锁</strong>：是锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。行级锁能大大减少数据库操作的冲突。其加锁粒度最小，但加锁的开销也最大。<br>行级锁开销大，加锁慢，且会出现死锁。但锁定粒度最小，发生锁冲突的概率最低，并发度也最高。</p>
+</li>
+<li><p><strong>表级锁</strong>：是粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。</p>
+</li>
+<li><p><strong>页级锁</strong>：是粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折中的页级，一次锁定相邻的一组记录。开销和加锁时间界于表锁和行锁之间，会出现死锁。锁定粒度界于表锁和行锁之间，并发度一般。</p>
+</li>
+</ul>
+</li>
+<li><p>从<strong>使用性质</strong>划分，可以分为共享锁、排它锁以及更新锁。</p>
+<ul>
+<li><p><strong>共享锁</strong>（Share Lock）：<strong>S 锁</strong>，又称<strong>读锁</strong>，用于所有的只读数据操作。<br>S 锁并非独占，允许多个并发事务对同一资源加锁，但加 S 锁的同时不允许加 X 锁，即资源不能被修改。S 锁通常读取结束后立即释放，无需等待事务结束。</p>
+</li>
+<li><p><strong>排他锁</strong>（Exclusive Lock）：<strong>X 锁</strong>，又称<strong>写锁</strong>，表示对数据进行写操作。<br>X 锁仅允许一个事务对同一资源加锁，且直到事务结束才释放，其他任何事务必须等到 X 锁被释放才能对该页进行访问。使用 <font color="red">select * from table_name for update;</font> 语句产生 X 锁。</p>
+</li>
+<li><p><strong>更新锁</strong>：U 锁，用来预定要对资源施加 X 锁，允许其他事务读，但不允许再施加 U 锁或 X 锁。<br>当被读取的页将要被更新时，则升级为 X 锁，U 锁一直到事务结束时才能被释放。故 U 锁用来避免使用共享锁造成的死锁现象。</p>
+</li>
+</ul>
+</li>
+<li><p>从<strong>主观</strong>上划分，又可以分为乐观锁和悲观锁。</p>
+<ul>
+<li><p><strong>乐观锁</strong>（Optimistic Lock）：顾名思义，从主观上认定资源是不会被修改的，所以不加锁读取数据，仅当更新时用版本号机制等确认资源是否被修改。<br>乐观锁适用于多读的应用类型，可以系统提高吞吐量。</p>
+</li>
+<li><p><strong>悲观锁</strong>（Pessimistic Lock）：正如其名，具有强烈的独占和排它特性，每次读取数据时都会认为会被其它事务修改，所以每次操作都需要加上锁</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-隔离级别和锁的关系？"><a href="#6-2-隔离级别和锁的关系？" class="headerlink" title="6.2. 隔离级别和锁的关系？"></a>6.2. 隔离级别和锁的关系？</h3><p>1）在 Read Uncommitted 级别下，读取数据不需要加共享锁，这样就不会跟被修改的数据上的排他锁冲突；</p>
+<p>2）在 Read Committed 级别下，读操作需要加共享锁，但是在语句执行完以后释放共享锁；</p>
+<p>3）在 Repeatable Read 级别下，读操作需要加共享锁，但是在事务提交之前并不释放共享锁，也就是必须等待事务执行完毕以后才释放共享锁；</p>
+<p>4）在 SERIALIZABLE 级别下，限制性最强，因为该级别锁定整个范围的键，并一直持有锁，直到事务完成。</p>
+<h3 id="6-3-InnoDB-中的锁算法？"><a href="#6-3-InnoDB-中的锁算法？" class="headerlink" title="6.3. InnoDB 中的锁算法？"></a>6.3. InnoDB 中的锁算法？</h3><ul>
+<li><strong>Record lock</strong>：单个行记录上的锁</li>
+<li><strong>Gap lock</strong>：间隙锁，锁定一个范围，不包括记录本身</li>
+<li><strong>Next-key lock</strong>：record + gap 锁定一个范围，包含记录本身</li>
+</ul>
+<h3 id="6-4-什么是快照读和当前读？"><a href="#6-4-什么是快照读和当前读？" class="headerlink" title="6.4. 什么是快照读和当前读？"></a>6.4. 什么是快照读和当前读？</h3><p><strong>快照读</strong> 就是读取的是快照数据，不加锁的简单 Select 都属于快照读。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> ...</span><br></pre></td></tr></table></figure>
+
+<p><strong>当前读</strong> 就是读的是最新数据，而不是历史的数据。加锁的 SELECT，或者对数据进行增删改都会进行当前读。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> player LOCK <span class="keyword">IN</span> SHARE MODE;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> player <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> player <span class="keyword">values</span> ...</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> ...</span><br><span class="line"><span class="keyword">UPDATE</span> player <span class="keyword">SET</span> ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-5-什么是MVCC以及实现？"><a href="#6-5-什么是MVCC以及实现？" class="headerlink" title="6.5. 什么是MVCC以及实现？"></a>6.5. 什么是MVCC以及实现？</h3><p>MVCC 的英文全称是 Multiversion Concurrency Control，中文意思是多版本并发控制，可以做到读写互相不阻塞，主要用于解决不可重复读和幻读问题时提高并发效率。</p>
+<p>其原理是通过数据行的多个版本管理来实现数据库的并发控制，简单来说就是保存数据的历史版本。可以通过比较版本号决定数据是否显示出来。读取数据的时候不需要加锁可以保证事务的隔离效果。</p>
+<h1 id="7-视图"><a href="#7-视图" class="headerlink" title="7. 视图"></a>7. 视图</h1><h3 id="7-1-为什么要使用视图？什么是视图？"><a href="#7-1-为什么要使用视图？什么是视图？" class="headerlink" title="7.1. 为什么要使用视图？什么是视图？"></a>7.1. 为什么要使用视图？什么是视图？</h3><ul>
+<li>为了提高复杂SQL语句的复用性和表操作的安全性，MySQL数据库管理系统提供了视图特性。所谓视图，本质上是一种虚拟表，在物理上是不存在的，其内容与真实的表相似，包含一系列带有名称的列和行数据。但是，视图并不在数据库中以储存的数据值形式存在。行和列数据来自定义视图的查询所引用基本表，并且在具体引用视图时动态生成。</li>
+<li>视图使开发者只关心感兴趣的某些特定数据和所负责的特定任务，只能看到视图中所定义的数据，而不是视图所引用表中的数据，从而提高了数据库中数据的安全性。</li>
+</ul>
+<h3 id="7-2-视图有哪些特点？"><a href="#7-2-视图有哪些特点？" class="headerlink" title="7.2. 视图有哪些特点？"></a>7.2. 视图有哪些特点？</h3><p><strong>视图的特点如下:</strong></p>
+<ul>
+<li>视图的列可以来自不同的表，是表的抽象和在逻辑意义上建立的新关系。</li>
+<li>视图是由基本表(实表)产生的表(虚表)。</li>
+<li>视图的建立和删除不影响基本表。</li>
+<li>对视图内容的更新(添加，删除和修改)直接影响基本表。</li>
+<li>当视图来自多个基本表时，不允许添加和删除数据。</li>
+</ul>
+<p>视图的操作包括创建视图，查看视图，删除视图和修改视图。</p>
+<h3 id="7-3-视图的使用场景有哪些？"><a href="#7-3-视图的使用场景有哪些？" class="headerlink" title="7.3. 视图的使用场景有哪些？"></a>7.3. 视图的使用场景有哪些？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">视图根本用途：简化sql查询，提高开发效率。如果说还有另外一个用途那就是兼容老的表结构。</span><br></pre></td></tr></table></figure>
+
+<p><strong>下面是视图的常见使用场景：</strong></p>
+<ul>
+<li>重用SQL语句；</li>
+<li>简化复杂的SQL操作。在编写查询后，可以方便的重用它而不必知道它的基本查询细节；</li>
+<li>使用表的组成部分而不是整个表；</li>
+<li>保护数据。可以给用户授予表的特定部分的访问权限而不是整个表的访问权限；</li>
+<li>更改数据格式和表示。视图可返回与底层表的表示和格式不同的数据。</li>
+</ul>
+<h3 id="7-4-视图的优点"><a href="#7-4-视图的优点" class="headerlink" title="7.4. 视图的优点"></a>7.4. 视图的优点</h3><ol>
+<li>查询简单化。视图能简化用户的操作</li>
+<li>数据安全性。视图使用户能以多种角度看待同一数据，能够对机密数据提供安全保护</li>
+<li>逻辑数据独立性。视图对重构数据库提供了一定程度的逻辑独立性</li>
+</ol>
+<h3 id="7-5-视图的缺点"><a href="#7-5-视图的缺点" class="headerlink" title="7.5. 视图的缺点"></a>7.5. 视图的缺点</h3><ol>
+<li><p>性能。数据库必须把视图的查询转化成对基本表的查询，如果这个视图是由一个复杂的多表查询所定义，那么，即使是视图的一个简单查询，数据库也把它变成一个复杂的结合体，需要花费一定的时间。</p>
+</li>
+<li><p>修改限制。当用户试图修改视图的某些行时，数据库必须把它转化为对基本表的某些行的修改。事实上，当从视图中插入或者删除时，情况也是这样。对于简单视图来说，这是很方便的，但是，对于比较复杂的视图，可能是不可修改的</p>
+<p>这些视图有如下特征：1.有UNIQUE等集合操作符的视图。2.有GROUP BY子句的视图。3.有诸如AVG\SUM\MAX等聚合函数的视图。 4.使用DISTINCT关键字的视图。5.连接表的视图（其中有些例外）</p>
+</li>
+</ol>
+<h3 id="7-6-什么是游标？"><a href="#7-6-什么是游标？" class="headerlink" title="7.6. 什么是游标？"></a>7.6. 什么是游标？</h3><ul>
+<li>游标是系统为用户开设的一个数据缓冲区，存放SQL语句的执行结果，每个游标区都有一个名字。用户可以通过游标逐一获取记录并赋给主变量，交由主语言进一步处理。</li>
+</ul>
+<h1 id="8-存储过程与函数"><a href="#8-存储过程与函数" class="headerlink" title="8. 存储过程与函数"></a>8. 存储过程与函数</h1><h2 id="什么是存储过程？"><a href="#什么是存储过程？" class="headerlink" title="什么是存储过程？"></a>什么是存储过程？</h2><ul>
+<li>存储过程是一个预编译的SQL语句，优点是允许模块化的设计，就是说只需要创建一次，以后在该程序中就可以调用多次。如果某次操作需要执行多次SQL，使用存储过程比单纯SQL语句执行要快。</li>
+</ul>
+<h2 id="有哪些优缺点？"><a href="#有哪些优缺点？" class="headerlink" title="有哪些优缺点？"></a>有哪些优缺点？</h2><p><strong>优点</strong></p>
+<ol>
+<li>存储过程是预编译过的，执行效率高。</li>
+<li>存储过程的代码直接存放于数据库中，通过存储过程名直接调用，减少网络通讯。</li>
+<li>安全性高，执行存储过程需要有一定权限的用户。</li>
+<li>存储过程可以重复使用，减少数据库开发人员的工作量。</li>
+</ol>
+<p><strong>缺点</strong></p>
+<ol>
+<li>调试麻烦，但是用 PL&#x2F;SQL Developer 调试很方便！弥补这个缺点。</li>
+<li>移植问题，数据库端代码当然是与数据库相关的。但是如果是做工程型项目，基本不存在移植问题。</li>
+<li>重新编译问题，因为后端代码是运行前编译的，如果带有引用关系的对象发生改变时，受影响的存储过程、包将需要重新编译（不过也可以设置成运行时刻自动编译）。</li>
+<li>如果在一个程序系统中大量的使用存储过程，到程序交付使用的时候随着用户需求的增加会导致数据结构的变化，接着就是系统的相关问题了，最后如果用户想维护该系统可以说是很难很难、而且代价是空前的，维护起来更麻烦。</li>
+</ol>
+<h1 id="9-触发器"><a href="#9-触发器" class="headerlink" title="9. 触发器"></a>9. 触发器</h1><h3 id="什么是触发器？触发器的使用场景有哪些？"><a href="#什么是触发器？触发器的使用场景有哪些？" class="headerlink" title="什么是触发器？触发器的使用场景有哪些？"></a>什么是触发器？触发器的使用场景有哪些？</h3><ul>
+<li>触发器是用户定义在关系表上的一类由事件驱动的特殊的存储过程。<strong>触发器是指一段代码，当触发某个事件时，自动执行这些代码。</strong></li>
+</ul>
+<p><strong>使用场景</strong></p>
+<ul>
+<li>可以通过数据库中的相关表实现级联更改。</li>
+<li>实时监控某张表中的某个字段的更改而需要做出相应的处理。</li>
+<li>例如可以生成某些业务的编号。</li>
+<li>注意不要滥用，否则会造成数据库及应用程序的维护困难。</li>
+<li>大家需要牢记以上基础知识点，重点是理解数据类型CHAR和VARCHAR的差异，表存储引擎InnoDB和MyISAM的区别。</li>
+</ul>
+<h3 id="MySQL中都有哪些触发器？"><a href="#MySQL中都有哪些触发器？" class="headerlink" title="MySQL中都有哪些触发器？"></a>MySQL中都有哪些触发器？</h3><p><strong>在MySQL数据库中有如下六种触发器：</strong></p>
+<ul>
+<li>Before Insert</li>
+<li>After Insert</li>
+<li>Before Update</li>
+<li>After Update</li>
+<li>Before Delete</li>
+<li>After Delete</li>
+</ul>
+<h1 id="10-常用的SQL语句"><a href="#10-常用的SQL语句" class="headerlink" title="10. 常用的SQL语句"></a>10. 常用的SQL语句</h1><h3 id="SQL语句主要分为哪几类"><a href="#SQL语句主要分为哪几类" class="headerlink" title="SQL语句主要分为哪几类"></a>SQL语句主要分为哪几类</h3><ul>
+<li><p>数据<strong>定义</strong>语言DDL（Data Ddefinition Language）CREATE，DROP，ALTER</p>
+<p>主要为以上操作 即对逻辑结构等有操作的，其中包括表结构，视图和索引。</p>
+</li>
+<li><p>数据<strong>查询</strong>语言DQL（Data Query Language）SELECT</p>
+<p>这个较为好理解 即查询操作，以select关键字。各种简单查询，连接查询等 都属于DQL。</p>
+</li>
+<li><p>数据<strong>操纵</strong>语言DML（Data Manipulation Language）INSERT，UPDATE，DELETE</p>
+<p>主要为以上操作 即对数据进行操作的，对应上面所说的查询操作 DQL与DML共同构建了多数初级程序员常用的增删改查操作。而查询是较为特殊的一种 被划分到DQL中。</p>
+</li>
+<li><p>数据<strong>控制</strong>功能DCL（Data Control Language）GRANT，REVOKE，COMMIT，ROLLBACK</p>
+<p>主要为以上操作 即对数据库安全性完整性等有操作的，可以简单的理解为权限控制等。</p>
+</li>
+</ul>
+<h3 id="SQL语句的语法顺序："><a href="#SQL语句的语法顺序：" class="headerlink" title="SQL语句的语法顺序："></a>SQL语句的语法顺序：</h3><ol>
+<li><p>SELECT</p>
+</li>
+<li><p>FROM</p>
+</li>
+<li><p>JOIN</p>
+</li>
+<li><p>ON</p>
+</li>
+<li><p>WHERE</p>
+</li>
+<li><p>GROUP BY</p>
+</li>
+<li><p>HAVING</p>
+</li>
+<li><p>UNION : 将多个查询结果合并（默认去掉重复的记录）</p>
+</li>
+<li><p>ORDER BY</p>
+</li>
+<li><p>LIMIT</p>
+<p><img src="/../../images/image-20230217214658212.png" alt="image-20230217214658212"></p>
+</li>
+</ol>
+<h3 id="超键、候选键、主键、外键分别是什么？"><a href="#超键、候选键、主键、外键分别是什么？" class="headerlink" title="超键、候选键、主键、外键分别是什么？"></a>超键、候选键、主键、外键分别是什么？</h3><ul>
+<li>超键：在关系中能唯一标识元组的属性集称为关系模式的超键。一个属性可以为作为一个超键，多个属性组合在一起也可以作为一个超键。超键包含候选键和主键。</li>
+<li>候选键：是最小超键，即没有冗余元素的超键。</li>
+<li>主键：数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合。一个数据列只能有一个主键，且主键的取值不能缺失，即不能为空值（Null）。</li>
+<li>外键：在一个表中存在的另一个表的主键称此表的外键。</li>
+</ul>
+<h3 id="SQL-约束有哪几种？"><a href="#SQL-约束有哪几种？" class="headerlink" title="SQL 约束有哪几种？"></a>SQL 约束有哪几种？</h3><blockquote>
+<p>SQL 约束有哪几种？</p>
+</blockquote>
+<ul>
+<li>NOT NULL: 用于控制字段的内容一定不能为空（NULL）。</li>
+<li>UNIQUE: 控件字段内容不能重复，一个表允许有多个 Unique 约束。</li>
+<li>PRIMARY KEY: 也是用于控件字段内容不能重复，但它在一个表只允许出现一个。</li>
+<li>FOREIGN KEY: 用于预防破坏表之间连接的动作，也能防止非法数据插入外键列，因为它必须是它指向的那个表中的值之一。</li>
+<li>CHECK: 用于控制字段的值范围。</li>
+</ul>
+<h3 id="六种关联查询"><a href="#六种关联查询" class="headerlink" title="六种关联查询"></a>六种关联查询</h3><ul>
+<li><p>交叉连接（CROSS JOIN）</p>
+</li>
+<li><p>内连接（INNER JOIN）</p>
+</li>
+<li><p>外连接（LEFT JOIN&#x2F;RIGHT JOIN）</p>
+</li>
+<li><p>联合查询（UNION与UNION ALL）</p>
+</li>
+<li><p>全连接（FULL JOIN）</p>
+</li>
+<li><p>交叉连接（CROSS JOIN）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A,B(,C)或者<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> B (<span class="keyword">CROSS</span> <span class="keyword">JOIN</span> C)</span><br><span class="line">#没有任何关联条件，结果是笛卡尔积，结果集会很大，没有意义，很少使用内连接（<span class="keyword">INNER</span> <span class="keyword">JOIN</span>）<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A,B <span class="keyword">WHERE</span> A.id<span class="operator">=</span>B.id或者<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">INNER</span> <span class="keyword">JOIN</span> B <span class="keyword">ON</span> A.id<span class="operator">=</span>B.id多表中同时符合某种条件的数据记录的集合，<span class="keyword">INNER</span> <span class="keyword">JOIN</span>可以缩写为<span class="keyword">JOIN</span>复制代码</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>内连接分为三类</strong></p>
+<ul>
+<li>等值连接：ON A.id&#x3D;B.id</li>
+<li>不等值连接：ON A.id &gt; B.id</li>
+<li>自连接：SELECT * FROM A T1 INNER JOIN A T2 ON T1.id&#x3D;T2.pid</li>
+</ul>
+<p><strong>外连接（LEFT JOIN&#x2F;RIGHT JOIN）</strong></p>
+<ul>
+<li>左外连接：LEFT OUTER JOIN, 以左表为主，先查询出左表，按照ON后的关联条件匹配右表，没有匹配到的用NULL填充，可以简写成LEFT JOIN</li>
+<li>右外连接：RIGHT OUTER JOIN, 以右表为主，先查询出右表，按照ON后的关联条件匹配左表，没有匹配到的用NULL填充，可以简写成RIGHT JOIN</li>
+</ul>
+<p><strong>联合查询（UNION与UNION ALL）</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> A <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> B <span class="keyword">UNION</span> </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>就是把多个结果集集中在一起，UNION前的结果为基准，需要注意的是联合查询的列数要相等，相同的记录行会合并</li>
+<li>如果使用UNION ALL，不会合并重复的记录行</li>
+<li>效率 UNION 高于 UNION ALL</li>
+</ul>
+<p><strong>全连接（FULL JOIN）</strong></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> A <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> B <span class="keyword">ON</span> A.id=B.id UNIONSELECT * <span class="keyword">FROM</span> A <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> B <span class="keyword">ON</span> A.id=B.id复制代码</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MySQL不支持全连接</li>
+<li>可以使用LEFT JOIN 和UNION和RIGHT JOIN联合使用</li>
+</ul>
+<h1 id="11-主从复制"><a href="#11-主从复制" class="headerlink" title="11. 主从复制"></a>11. 主从复制</h1><h2 id="1、什么是主从复制？"><a href="#1、什么是主从复制？" class="headerlink" title="1、什么是主从复制？"></a>1、什么是主从复制？</h2><p><strong>主从复制</strong>是用来建立一个与主数据库完全一样的数据库环境，即从数据库。主数据库一般是准实时的业务数据库。</p>
+<h2 id="2、主从复制的作用？"><a href="#2、主从复制的作用？" class="headerlink" title="2、主从复制的作用？"></a>2、主从复制的作用？</h2><ul>
+<li>读写分离，使数据库能支撑更大的并发。</li>
+<li>高可用，做数据的热备，作为后备数据库，主数据库服务器故障后，可切换到从数据库继续工作，避免数据丢失。</li>
+</ul>
+<h2 id="3、主从复制的架构？"><a href="#3、主从复制的架构？" class="headerlink" title="3、主从复制的架构？"></a>3、主从复制的架构？</h2><ul>
+<li><p><strong>一主一从或一主多从</strong><br>在主库的请求压力非常大时，可通过配置一主多从复制架构实现读写分离，把大量对实时性要求不是很高的请求通过负载均衡分发到多个从库上去读取数据，降低主库的读取压力。而且在主库出现宕机时，可将一个从库切换为主库继续提供服务。</p>
+</li>
+<li><p><strong>主主复制</strong><br>双主复制架构适用于需要进行主从切换的场景。 两个数据库互为主从，当主库宕机恢复后，由于它还是原来从库（现在主库）的从机，所以它还是会复制新的主库上的数据。那么无论主库的角色怎么切换，原来的主库都不会脱离复制环境。</p>
+</li>
+<li><p><strong>多主一从（</strong>5.7 开始支持）</p>
+</li>
+<li><p><strong>联级复制</strong><br>因为每个从库在主库上都会有一个独立的 Binlog Dump 线程来推送 binlog 日志，所以随着从库数量的增加，主库的 IO 压力和网络压力也会随之增加，这时，联级复制架构应运而生。</p>
+</li>
+</ul>
+<p>联级复制架构只是在一主多从的基础上，再主库和各个从库之间增加了一个二级主库 Master2，这个二级主库仅仅用来将一级主库推送给它的 Binlog 日志再推送给各个从库，以此来减轻一级主库的推送压力。</p>
+<p><img src="/../../images/image-20230217214224766.png" alt="image-20230217214224766"></p>
+<h2 id="4、主从复制的实现原理？"><a href="#4、主从复制的实现原理？" class="headerlink" title="4、主从复制的实现原理？"></a>4、主从复制的实现原理？</h2><p>数据库有个 binlog 二进制文件，记录了数据可执行的所有 SQL 语句。主从同步的目标就是把主数据库的 binlog 文件中的 SQL 语句复制到从数据库，让其在从数据的 relaylog 文件中再执行一次这些 SQL 语句即可。</p>
+<p><strong>具体实现需要三个线程：</strong></p>
+<ul>
+<li><p><strong>binlog 输出线程</strong>：每当有从库连接到主库的时候，主库都会创建一个线程然后发送 binlog内 容到从库。<br>在从库里，当复制开始的时候，从库就会创建两个线程进行处理：</p>
+</li>
+<li><p><strong>从库 IO 线程</strong>：当 START SLAVE 语句在从库开始执行之后，从库创建一个 IO 线程，该线程连接到主库并请求主库发送 binlog 里面的更新记录到从库上。从库 IO 线程读取主库的 binlog 输出线程发送的更新并拷贝这些更新到本地文件，其中包括 relaylog 文件。</p>
+</li>
+<li><p><strong>从库 SQL 线程</strong>：从库创建一个 SQL 线程，这个线程读取从库 IO 线程写到 relaylog 的更新事件并执行。</p>
+</li>
+</ul>
+<h2 id="5、什么是异步复制和半同步？"><a href="#5、什么是异步复制和半同步？" class="headerlink" title="5、什么是异步复制和半同步？"></a>5、什么是异步复制和半同步？</h2><p>MySQL 的主从复制有两种复制方式，分别是 <strong>异步复制</strong> 和 <strong>半同步复制</strong>：</p>
+<ul>
+<li><p><strong>异步复制</strong><br>MySQL <strong>默认</strong>的主从复制方式就是异步复制，因为 Master 根本不考虑数据是否达到了 Slave，或 Slave 是否成功执行。</p>
+<p>如过需要实现完全同步方式，即 Master 需要等待一个或所有 Slave 执行成功后才响应成功，那集群效率可想而知。故 MySQL 5.6 之后出现了一种折中的方式——半同步。</p>
+</li>
+<li><p><strong>半同步复制</strong><br>一主一从，一主多从情况下，Master 节点只要确认至少有一个 Slave 接受到了事务，即可向发起请求的客户端返回执行成功的操作。同时 Master 是不需要等待 Slave 成功执行完这个事务，<strong>Slave 节点接受到这个事务，并成功写入到本地 relay 日志中就算成功</strong>。</p>
+</li>
+</ul>
+<p>另外，在半同步复制时，如果主库的一个事务提交成功了，在推送到从库的过程当中，从库宕机了或网络故障，导致从库并没有接收到这个事务的Binlog，此时主库会等待一段时间（这个时间由rpl_semi_sync_master_timeout的毫秒数决定），如果这个时间过后还无法推送到从库，<strong>那 MySQL 会自动从半同步复制切换为异步复制，当从库恢复正常连接到主库后，主库又会自动切换回半同步复制。</strong></p>
+<p>半同步复制的“半”体现在，虽然主从库的Binlog是同步的，但主库不会等待从库执行完Relay-log后才返回，而是确认从库接收到Binlog，达到主从Binlog同步的目的后就返回了，所以从库的数据对于主库来说还是有延时的，这个延时就是从库执行Relay-log的时间。所以只能称为半同步。</p>
+<h2 id="6、主从中常见问题以及解决？"><a href="#6、主从中常见问题以及解决？" class="headerlink" title="6、主从中常见问题以及解决？"></a>6、主从中常见问题以及解决？</h2><p><strong>问题 :</strong><br>    1）主库宕机后，数据可能丢失。</p>
+<p>​	2）从库只有一个sql Thread，主库写压力大，复制很可能延时。</p>
+<p>**解决: **<br>    1）半同步复制：确保事务提交后 binlog 至少传输到一个从库 ，解决数据丢失的问题。</p>
+<p>​	2）并行复制：从库多线程apply binlog，解决从库复制延迟的问题。</p>
+<h1 id="12-调优"><a href="#12-调优" class="headerlink" title="12. 调优"></a>12. <font color="red">调优</font></h1><h3 id="说出一些数据库优化方面的经验"><a href="#说出一些数据库优化方面的经验" class="headerlink" title="说出一些数据库优化方面的经验?"></a>说出一些数据库优化方面的经验?</h3><ol>
+<li>有外键约束的话会影响增删改的性能，如果应用程序可以保证数据库的完整性那就去除外键</li>
+<li>Sql语句全部大写，特别是列名大写，因为数据库的机制是这样的，sql语句发送到数据库服务器，数据库首先就会把sql编译成大写在执行，如果一开始就编译成大写就不需要了把sql编译成大写这个步骤了</li>
+<li>如果应用程序可以保证数据库的完整性，可以不需要按照三大范式来设计数据库</li>
+<li>其实可以不必要创建很多索引，索引可以加快查询速度，但是索引会消耗磁盘空间</li>
+<li>如果是jdbc的话，使用PreparedStatement不使用Statement，来创建SQl，PreparedStatement的性能比Statement的速度要快，使用PreparedStatement对象SQL语句会预编译在此对象中，PreparedStatement对象可以多次高效的执行</li>
+</ol>
+<h3 id="怎么优化SQL查询语句吗"><a href="#怎么优化SQL查询语句吗" class="headerlink" title="怎么优化SQL查询语句吗"></a>怎么优化SQL查询语句吗</h3><ol>
+<li>对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引</li>
+<li>用索引可以提高查询</li>
+<li>SELECT子句中避免使用*号，尽量全部大写SQL</li>
+<li>应尽量避免在 where 子句中对字段进行 is null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，使用 IS NOT NULL</li>
+<li>where 子句中使用 or 来连接条件，也会导致引擎放弃使用索引而进行全表扫描</li>
+<li>in 和 not in 也要慎用，否则会导致全表扫描</li>
+</ol>
+<h3 id="你怎么知道SQL语句性能是高还是低"><a href="#你怎么知道SQL语句性能是高还是低" class="headerlink" title="你怎么知道SQL语句性能是高还是低"></a>你怎么知道SQL语句性能是高还是低</h3><ol>
+<li>查看SQL的执行时间</li>
+<li>使用explain关键字可以模拟优化器执行SQL查询语句，从而知道MYSQL是如何处理你的SQL语句的。分析你的查询语句或是表结构的性能瓶颈。</li>
+</ol>
+<h3 id="大表数据查询，怎么优化"><a href="#大表数据查询，怎么优化" class="headerlink" title="大表数据查询，怎么优化"></a>大表数据查询，怎么优化</h3><ol>
+<li>优化shema、sql语句+索引；</li>
+<li>第二加缓存，memcached, redis；</li>
+<li>主从复制，读写分离；</li>
+<li>垂直拆分，根据你模块的耦合度，将一个大的系统分为多个小的系统，也就是分布式系统；</li>
+<li>水平切分，针对数据量大的表，这一步最麻烦，最能考验技术水平，要选择一个合理的sharding key, 为了有好的查询效率，表结构也要改动，做一定的冗余，应用也要改，sql中尽量带sharding key，将数据定位到限定的表上去查，而不是扫描全部的表；</li>
+</ol>
+<h3 id="超大分页怎么处理？"><a href="#超大分页怎么处理？" class="headerlink" title="超大分页怎么处理？"></a>超大分页怎么处理？</h3><p><strong>超大的分页一般从两个方向上来解决.</strong></p>
+<ul>
+<li>数据库层面,这也是我们主要集中关注的(虽然收效没那么大),类似于<code>select * from table where age &gt; 20 limit 1000000,10</code>这种查询其实也是有可以优化的余地的. 这条语句需要load1000000数据然后基本上全部丢弃,只取10条当然比较慢. 当时我们可以修改为<code>select * from table where id in (select id from table where age &gt; 20 limit 1000000,10)</code>.这样虽然也load了一百万的数据,但是由于索引覆盖,要查询的所有字段都在索引中,所以速度会很快. 同时如果ID连续的好,我们还可以<code>select * from table where id &gt; 1000000 limit 10</code>,效率也是不错的,优化的可能性有许多种,但是核心思想都一样,就是减少load的数据.</li>
+<li>从需求的角度减少这种请求…主要是不做类似的需求(直接跳转到几百万页之后的具体某一页.只允许逐页查看或者按照给定的路线走,这样可预测,可缓存)以及防止ID泄漏且连续被人恶意攻击.</li>
+</ul>
+<p><strong>解决超大分页,其实主要是靠缓存,可预测性的提前查到内容,缓存至redis等k-V数据库中,直接返回即可</strong></p>
+<h3 id="为什么要尽量设定一个主键？"><a href="#为什么要尽量设定一个主键？" class="headerlink" title="为什么要尽量设定一个主键？"></a>为什么要尽量设定一个主键？</h3><ul>
+<li>主键是数据库确保数据行在整张表唯一性的保障，即使业务上本张表没有主键，也建议添加一个自增长的ID列作为主键。设定了主键之后，在后续的删改查的时候可能更加快速以及确保操作数据范围安全。</li>
+</ul>
+<h3 id="主键使用自增ID还是UUID？"><a href="#主键使用自增ID还是UUID？" class="headerlink" title="主键使用自增ID还是UUID？"></a>主键使用自增ID还是UUID？</h3><ul>
+<li>推荐使用自增ID，不要使用UUID。</li>
+<li>因为在InnoDB存储引擎中，主键索引是作为聚簇索引存在的，也就是说，主键索引的B+树叶子节点上存储了主键索引以及全部的数据(按照顺序)，如果主键索引是自增ID，那么只需要不断向后排列即可，如果是UUID，由于到来的ID与原来的大小不确定，会造成非常多的数据插入，数据移动，然后导致产生很多的内存碎片，进而造成插入性能的下降。</li>
+</ul>
+<p>总之，在数据量大一些的情况下，用自增主键性能会好一些。<br>关于主键是聚簇索引，如果没有主键，InnoDB会选择一个唯一键来作为聚簇索引，如果没有唯一键，会生成一个隐式的主键。</p>
+<h3 id="如果要存储用户的密码散列，应该使用什么字段进行存储？"><a href="#如果要存储用户的密码散列，应该使用什么字段进行存储？" class="headerlink" title="如果要存储用户的密码散列，应该使用什么字段进行存储？"></a>如果要存储用户的密码散列，应该使用什么字段进行存储？</h3><ul>
+<li>密码散列，盐，用户身份证号等固定长度的字符串应该使用char而不是varchar来存储，这样可以节省空间且提高检索效率。</li>
+</ul>
+<h3 id="如何优化查询过程中的数据访问"><a href="#如何优化查询过程中的数据访问" class="headerlink" title="如何优化查询过程中的数据访问"></a>如何优化查询过程中的数据访问</h3><ul>
+<li>访问数据太多导致查询性能下降</li>
+<li>确定应用程序是否在检索大量超过需要的数据，可能是太多行或列</li>
+<li>确认MySQL服务器是否在分析大量不必要的数据行</li>
+<li>避免犯如下SQL语句错误</li>
+<li>避免查询不需要的数据。解决办法：使用limit解决</li>
+<li>多表关联返回全部列。解决办法：指定列名</li>
+<li>总是返回全部列。解决办法：避免使用SELECT *</li>
+<li>重复查询相同的数据。解决办法：可以缓存数据，下次直接读取缓存</li>
+<li>使用explain进行分析，如果发现查询需要扫描大量的数据，但只返回少数的行，可以通过如下技巧去优化：</li>
+<li>使用索引覆盖扫描，把所有的列都放到索引中，这样存储引擎不需要回表获取对应行就可以返回结果。</li>
+<li>改变数据库和表的结构，修改数据表范式</li>
+<li>重写SQL语句，让优化器可以以更优的方式执行查询。</li>
+</ul>
+<h3 id="如何优化长难的查询语句"><a href="#如何优化长难的查询语句" class="headerlink" title="如何优化长难的查询语句"></a>如何优化长难的查询语句</h3><ul>
+<li>分析是一个复杂查询还是多个简单查询速度快</li>
+<li>MySQL内部每秒能扫描内存中上百万行数据，相比之下，响应数据给客户端就要慢得多</li>
+<li>使用尽可能小的查询是好的，但是有时将一个大的查询分解为多个小的查询是很有必要的。</li>
+<li>将一个大的查询分为多个小的相同的查询</li>
+<li>一次性删除1000万的数据要比一次删除1万，暂停一会的方案更加损耗服务器开销。</li>
+<li>分解关联查询，让缓存的效率更高。</li>
+<li>执行单个查询可以减少锁的竞争。</li>
+<li>在应用层做关联更容易对数据库进行拆分。</li>
+<li>查询效率会有大幅提升。</li>
+<li>较少冗余记录的查询。</li>
+</ul>
+<h3 id="优化特定类型的查询语句"><a href="#优化特定类型的查询语句" class="headerlink" title="优化特定类型的查询语句"></a>优化特定类型的查询语句</h3><ul>
+<li>count(*)会忽略所有的列，直接统计所有列数，不要使用count(列名)</li>
+<li>MyISAM中，没有任何where条件的count(*)非常快。</li>
+<li>当有where条件时，MyISAM的count统计不一定比其它引擎快。</li>
+<li>可以使用explain查询近似值，用近似值替代count(*)</li>
+<li>增加汇总表</li>
+<li>使用缓存</li>
+</ul>
+<h3 id="优化关联查询"><a href="#优化关联查询" class="headerlink" title="优化关联查询"></a>优化关联查询</h3><ul>
+<li>确定ON或者USING子句中是否有索引。</li>
+<li>确保GROUP BY和ORDER BY只有一个表中的列，这样MySQL才有可能使用索引。</li>
+</ul>
+<h3 id="优化子查询"><a href="#优化子查询" class="headerlink" title="优化子查询"></a>优化子查询</h3><ul>
+<li>用关联查询替代</li>
+<li>优化GROUP BY和DISTINCT</li>
+<li>这两种查询据可以使用索引来优化，是最有效的优化方法</li>
+<li>关联查询中，使用标识列分组的效率更高</li>
+<li>如果不需要ORDER BY，进行GROUP BY时加ORDER BY NULL，MySQL不会再进行文件排序。</li>
+<li>WITH ROLLUP超级聚合，可以挪到应用程序处理</li>
+</ul>
+<h3 id="优化LIMIT分页"><a href="#优化LIMIT分页" class="headerlink" title="优化LIMIT分页"></a>优化LIMIT分页</h3><ul>
+<li>LIMIT偏移量大的时候，查询效率较低</li>
+<li>可以记录上次查询的最大ID，下次查询时直接根据该ID来查询</li>
+</ul>
+<h3 id="优化UNION查询"><a href="#优化UNION查询" class="headerlink" title="优化UNION查询"></a>优化UNION查询</h3><ul>
+<li>UNION ALL的效率高于UNION</li>
+</ul>
+<h3 id="优化WHERE子句"><a href="#优化WHERE子句" class="headerlink" title="优化WHERE子句"></a>优化WHERE子句</h3><ul>
+<li>多数数据库都是从左往右的顺序处理条件的，把能够过滤更多数据的条件放到前面，把过滤少的条件放在后面</li>
+</ul>
+<h3 id="SQL语句优化的一些方法"><a href="#SQL语句优化的一些方法" class="headerlink" title="SQL语句优化的一些方法"></a>SQL语句优化的一些方法</h3><ul>
+<li><p>1.对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。</p>
+</li>
+<li><p>2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line">-- 可以在num上设置默认值<span class="number">0</span>，确保表中num列没有<span class="literal">null</span>值，然后这样查询：</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num=<span class="number">0</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.应尽量避免在 where 子句中使用!&#x3D;或&lt;&gt;操作符，否则引擎将放弃使用索引而进行全表扫描。</p>
+</li>
+<li><p>4.应尽量避免在 where 子句中使用or 来连接条件，否则将导致引擎放弃使用索引而进行全表扫描，如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">10</span> <span class="keyword">or</span> num<span class="operator">=</span><span class="number">20</span></span><br><span class="line"><span class="comment">-- 可以这样查询：</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">10</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">20</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5.in 和 not in 也要慎用，否则会导致全表扫描，如：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select <span class="built_in">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) </span><br><span class="line"><span class="comment">-- 对于连续的数值，能用 between 就不要用 in 了：</span></span><br><span class="line">select <span class="built_in">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">between</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">3</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>6.下面的查询也将导致全表扫描：select id from t where name like ‘%李%’若要提高效率，可以考虑全文检索。</p>
+</li>
+<li><p>7.如果在 where 子句中使用参数，也会导致全表扫描。因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。然 而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span></span><br><span class="line"><span class="comment">-- 可以改为强制查询使用索引：</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">with</span>(index(索引名)) <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>8.应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select <span class="built_in">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> num/<span class="number">2</span>=<span class="number">100</span></span><br><span class="line"><span class="comment">-- 应改为:</span></span><br><span class="line">select <span class="built_in">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> num=<span class="number">100</span>*<span class="number">2</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>9.应尽量避免在where子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> substring(<span class="type">name</span>,<span class="number">1</span>,<span class="number">3</span>)=’abc’</span><br><span class="line"><span class="comment">-- name以abc开头的id应改为:</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> <span class="type">name</span> <span class="keyword">like</span> ‘abc%’</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>10.不要在 where 子句中的“&#x3D;”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。</p>
+</li>
+</ul>
+<h2 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h2><h3 id="为什么要优化"><a href="#为什么要优化" class="headerlink" title="为什么要优化"></a>为什么要优化</h3><ul>
+<li>系统的吞吐量瓶颈往往出现在数据库的访问速度上</li>
+<li>随着应用程序的运行，数据库的中的数据会越来越多，处理时间会相应变慢</li>
+<li>数据是存放在磁盘上的，读写速度无法和内存相比</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">优化原则：减少系统瓶颈，减少资源占用，增加系统的反应速度。</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据库结构优化"><a href="#数据库结构优化" class="headerlink" title="数据库结构优化"></a>数据库结构优化</h3><ul>
+<li>一个好的数据库设计方案对于数据库的性能往往会起到事半功倍的效果。</li>
+<li>需要考虑数据冗余、查询和更新的速度、字段的数据类型是否合理等多方面的内容。</li>
+</ul>
+<p><strong>将字段很多的表分解成多个表</strong></p>
+<ul>
+<li>对于字段较多的表，如果有些字段的使用频率很低，可以将这些字段分离出来形成新表。</li>
+<li>因为当一个表的数据量很大时，会由于使用频率低的字段的存在而变慢。</li>
+</ul>
+<p><strong>增加中间表</strong></p>
+<ul>
+<li>对于需要经常联合查询的表，可以建立中间表以提高查询效率。</li>
+<li>通过建立中间表，将需要通过联合查询的数据插入到中间表中，然后将原来的联合查询改为对中间表的查询。</li>
+</ul>
+<p><strong>增加冗余字段</strong></p>
+<ul>
+<li>设计数据表时应尽量遵循范式理论的规约，尽可能的减少冗余字段，让数据库设计看起来精致、优雅。但是，合理的加入冗余字段可以提高查询速度。</li>
+<li>表的规范化程度越高，表和表之间的关系越多，需要连接查询的情况也就越多，性能也就越差。</li>
+</ul>
+<p><strong>注意：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">冗余字段的值在一个表中修改了，就要想办法在其他表中更新，否则就会导致数据不一致的问题。</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL数据库cpu飙升到500-的话他怎么处理？"><a href="#MySQL数据库cpu飙升到500-的话他怎么处理？" class="headerlink" title="MySQL数据库cpu飙升到500%的话他怎么处理？"></a>MySQL数据库cpu飙升到500%的话他怎么处理？</h3><ul>
+<li>当 cpu 飙升到 500%时，先用操作系统命令 top 命令观察是不是 mysqld 占用导致的，如果不是，找出占用高的进程，并进行相关处理。</li>
+<li>如果是 mysqld 造成的， show processlist，看看里面跑的 session 情况，是不是有消耗资源的 sql 在运行。找出消耗高的 sql，看看执行计划是否准确， index 是否缺失，或者实在是数据量太大造成。</li>
+<li>一般来说，肯定要 kill 掉这些线程(同时观察 cpu 使用率是否下降)，等进行相应的调整(比如说加索引、改 sql、改内存参数)之后，再重新跑这些 SQL。</li>
+<li>也有可能是每个 sql 消耗资源并不多，但是突然之间，有大量的 session 连进来导致 cpu 飙升，这种情况就需要跟应用一起来分析为何连接数会激增，再做出相应的调整，比如说限制连接数等</li>
+</ul>
+<h3 id="大表怎么优化？分库分表了是怎么做的？分表分库了有什么问题？有用到中间件么？他们的原理知道么？"><a href="#大表怎么优化？分库分表了是怎么做的？分表分库了有什么问题？有用到中间件么？他们的原理知道么？" class="headerlink" title="大表怎么优化？分库分表了是怎么做的？分表分库了有什么问题？有用到中间件么？他们的原理知道么？"></a>大表怎么优化？分库分表了是怎么做的？分表分库了有什么问题？有用到中间件么？他们的原理知道么？</h3><p>当MySQL单表记录数过大时，数据库的CRUD性能会明显下降，一些常见的优化措施如下：</p>
+<ol>
+<li><strong>限定数据的范围：</strong> 务必禁止不带任何限制数据范围条件的查询语句。比如：我们当用户在查询订单历史的时候，我们可以控制在一个月的范围内。；</li>
+<li><strong>读&#x2F;写分离：</strong> 经典的数据库拆分方案，主库负责写，从库负责读；</li>
+<li><strong>缓存：</strong> 使用MySQL的缓存，另外对重量级、更新少的数据可以考虑使用应用级别的缓存；</li>
+</ol>
+<p><strong>还有就是通过分库分表的方式进行优化，主要有垂直分区、垂直分表和水平分区、水平分表</strong></p>
+<h4 id="1、垂直分区"><a href="#1、垂直分区" class="headerlink" title="1、垂直分区"></a>1、垂直分区</h4><ul>
+<li><strong>根据数据库里面数据表的相关性进行拆分。</strong> 例如，用户表中既有用户的登录信息又有用户的基本信息，可以将用户表拆分成两个单独的表，甚至放到单独的库做分库。</li>
+<li><strong>简单来说垂直拆分是指数据表列的拆分，把一张列比较多的表拆分为多张表。</strong> 如下图所示，这样来说大家应该就更容易理解了。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c7259992ab~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>垂直拆分的优点：</strong> 可以使得行数据变小，在查询时减少读取的Block数，减少I&#x2F;O次数。此外，垂直分区可以简化表的结构，易于维护。</li>
+<li><strong>垂直拆分的缺点：</strong> 主键会出现冗余，需要管理冗余列，并会引起Join操作，可以通过在应用层进行Join来解决。此外，垂直分区会让事务变得更加复杂；</li>
+</ul>
+<h4 id="2、垂直分表"><a href="#2、垂直分表" class="headerlink" title="2、垂直分表"></a>2、垂直分表</h4><ul>
+<li>把主键和一些列放在一个表，然后把主键和另外的列放在另一个表中</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c725b21e8e~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" alt="在这里插入图片描述"></p>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>1、如果一个表中某些列常用，另外一些列不常用</li>
+<li>2、可以使数据行变小，一个数据页能存储更多数据，查询时减少I&#x2F;O次数</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>有些分表的策略基于应用层的逻辑算法，一旦逻辑算法改变，整个分表逻辑都会改变，扩展性较差</li>
+<li>对于应用层来说，逻辑算法增加开发成本</li>
+<li>管理冗余列，查询所有数据需要join操作</li>
+</ul>
+<h4 id="3、水平分区"><a href="#3、水平分区" class="headerlink" title="3、水平分区"></a>3、水平分区</h4><ul>
+<li><strong>保持数据表结构不变，通过某种策略存储数据分片。这样每一片数据分散到不同的表或者库中，达到了分布式的目的。 水平拆分可以支撑非常大的数据量。</strong></li>
+<li>水平拆分是指数据表行的拆分，表的行数超过200万行时，就会变慢，这时可以把一张的表的数据拆成多张表来存放。举个例子：我们可以将用户信息表拆分成多个用户信息表，这样就可以避免单一表数据量过大对性能造成影响。</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c7300b465e~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" alt="在这里插入图片描述"></p>
+<ul>
+<li>水品拆分可以支持非常大的数据量。需要注意的一点是:分表仅仅是解决了单一表数据过大的问题，但由于表的数据还是在同一台机器上，其实对于提升MySQL并发能力没有什么意义，所以 <strong>水平拆分最好分库</strong> 。</li>
+<li>水平拆分能够 <strong>支持非常大的数据量存储，应用端改造也少</strong>，但 <strong>分片事务难以解决</strong> ，跨界点Join性能较差，逻辑复杂。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">《Java工程师修炼之道》的作者推荐 尽量不要对数据进行分片，因为拆分会带来逻辑、部署、运维的各种复杂度 ，一般的数据表在优化得当的情况下支撑千万以下的数据量是没有太大问题的。如果实在要分片，尽量选择客户端分片架构，这样可以减少一次和中间件的网络I/O。</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、水平分表："><a href="#4、水平分表：" class="headerlink" title="4、水平分表："></a>4、水平分表：</h4><ul>
+<li>表很大，分割后可以降低在查询时需要读的数据和索引的页数，同时也降低了索引的层数，提高查询次数</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c744498a9a~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" alt="在这里插入图片描述"></p>
+<p><strong>适用场景</strong></p>
+<ul>
+<li>1、表中的数据本身就有独立性，例如表中分表记录各个地区的数据或者不同时期的数据，特别是有些数据常用，有些不常用。</li>
+<li>2、需要把数据存放在多个介质上。</li>
+</ul>
+<p><strong>水平切分的缺点</strong></p>
+<ul>
+<li>1、给应用增加复杂度，通常查询时需要多个表名，查询所有数据都需UNION操作</li>
+<li>2、在许多数据库应用中，这种复杂度会超过它带来的优点，查询时会增加读一个索引层的磁盘次数</li>
+</ul>
+<h4 id="数据库分片的两种常见方案："><a href="#数据库分片的两种常见方案：" class="headerlink" title="数据库分片的两种常见方案："></a>数据库分片的两种常见方案：</h4><ul>
+<li><strong>客户端代理：</strong> <strong>分片逻辑在应用端，封装在jar包中，通过修改或者封装JDBC层来实现。</strong> 当当网的 <strong>Sharding-JDBC</strong> 、阿里的TDDL是两种比较常用的实现。</li>
+<li><strong>中间件代理：</strong> <strong>在应用和数据中间加了一个代理层。分片逻辑统一维护在中间件服务中。</strong> 我们现在谈的 <strong>Mycat</strong> 、360的Atlas、网易的DDB等等都是这种架构的实现。</li>
+</ul>
+<h4 id="分库分表后面临的问题"><a href="#分库分表后面临的问题" class="headerlink" title="分库分表后面临的问题"></a>分库分表后面临的问题</h4><ul>
+<li><p><strong>事务支持</strong> 分库分表后，就成了分布式事务了。如果依赖数据库本身的分布式事务管理功能去执行事务，将付出高昂的性能代价； 如果由应用程序去协助控制，形成程序逻辑上的事务，又会造成编程方面的负担。</p>
+</li>
+<li><p><strong>跨库join</strong></p>
+<p>只要是进行切分，跨节点Join的问题是不可避免的。但是良好的设计和切分却可以减少此类情况的发生。解决这一问题的普遍做法是分两次查询实现。在第一次查询的结果集中找出关联数据的id,根据这些id发起第二次请求得到关联数据。 分库分表方案产品</p>
+</li>
+<li><p><strong>跨节点的count,order by,group by以及聚合函数问题</strong> 这些是一类问题，因为它们都需要基于全部数据集合进行计算。多数的代理都不会自动处理合并工作。解决方案：与解决跨节点join问题的类似，分别在各个节点上得到结果后在应用程序端进行合并。和join不同的是每个结点的查询可以并行执行，因此很多时候它的速度要比单一大表快很多。但如果结果集很大，对应用程序内存的消耗是一个问题。</p>
+</li>
+<li><p><strong>数据迁移，容量规划，扩容等问题</strong> 来自淘宝综合业务平台团队，它利用对2的倍数取余具有向前兼容的特性（如对4取余得1的数对2取余也是1）来分配数据，避免了行级别的数据迁移，但是依然需要进行表级别的迁移，同时对扩容规模和分表数量都有限制。总得来说，这些方案都不是十分的理想，多多少少都存在一些缺点，这也从一个侧面反映出了Sharding扩容的难度。</p>
+</li>
+<li><p><strong>ID问题</strong></p>
+</li>
+<li><p>一旦数据库被切分到多个物理结点上，我们将不能再依赖数据库自身的主键生成机制。一方面，某个分区数据库自生成的ID无法保证在全局上是唯一的；另一方面，应用程序在插入数据之前需要先获得ID,以便进行SQL路由. 一些常见的主键生成策略</p>
+<ul>
+<li>UUID 使用UUID作主键是最简单的方案，但是缺点也是非常明显的。由于UUID非常的长，除占用大量存储空间外，最主要的问题是在索引上，在建立索引和基于索引进行查询时都存在性能问题。 <strong>Twitter的分布式自增ID算法Snowflake</strong> 在分布式系统中，需要生成全局UID的场合还是比较多的，twitter的snowflake解决了这种需求，实现也还是很简单的，除去配置信息，核心代码就是毫秒级时间41位 机器ID 10位 毫秒内序列12位。</li>
+</ul>
+</li>
+<li><p><strong>跨分片的排序分页问题</strong></p>
+<p>一般来讲，分页时需要按照指定字段进行排序。当排序字段就是分片字段的时候，我们通过分片规则可以比较容易定位到指定的分片，而当排序字段非分片字段的时候，情况就会变得比较复杂了。为了最终结果的准确性，我们需要在不同的分片节点中将数据进行排序并返回，并将不同分片返回的结果集进行汇总和再次排序，最后再返回给用户。如下图所示：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c750f5b2cc~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/17/interview/mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="cle9ajvzr003sd4v64wbn4azy" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/16/interview/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">编程语言</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>142</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>72</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
