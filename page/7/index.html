@@ -43,8 +43,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>150</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -74,6 +74,313 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/7-8运行时数据区的总结以及常见大厂面试题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7-8%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E7%9A%84%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
+  <time class="post-time" datetime="2022-11-20T02:58:43.530Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">20</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7-8%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E7%9A%84%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98/">运行时数据区的总结以及常见大厂面试题</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/interview/">interview</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>,<a class="article-category-link" href="/categories/interview/">interview</a>,<a class="article-category-link" href="/categories/interview/JVM/">JVM</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="运行时数据区的总结以及常见大厂面试题"><a href="#运行时数据区的总结以及常见大厂面试题" class="headerlink" title="运行时数据区的总结以及常见大厂面试题"></a>运行时数据区的总结以及常见大厂面试题</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/f73315a70302396e391a532dcf87ce26.png" alt="image-20200708220303243"></p>
+<p>线程私有的：程序计数器、本地方法栈、虚拟机栈</p>
+<p>虚拟机栈里的栈帧的结构：返回值、局部变量表、操作数栈、动态链接（装着指向运行时常量池的当前方法的引用，知道当前方法是引用运行时常量池中的哪个方法）</p>
+<p><img src="/../../../images/image-20221120105434202.png" alt="image-20221120105434202"></p>
+<h2 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h2><blockquote>
+<p><mark>百度</mark>：</p>
+<h3 id="说一下-JVM-内存模型吧，有哪些区？分别干什么的？"><a href="#说一下-JVM-内存模型吧，有哪些区？分别干什么的？" class="headerlink" title="说一下 JVM 内存模型吧，有哪些区？分别干什么的？"></a>说一下 JVM 内存模型吧，有哪些区？分别干什么的？</h3><p><strong>答：</strong></p>
+<p>JVM内存区域主要包含：方法区 程序计数器 Java虚拟机栈 本地方法栈 Java堆</p>
+<p><strong>1、方法区：</strong></p>
+<p>方法区在JDK1.8之后把名字改成了“Metaspace”，可以翻译成”元数据空间”，这是一块<strong>线程共享</strong>的内存空间，主要用于存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。</p>
+<p>Java虚拟机规范将方法区描述为堆的一个逻辑部分，但它有一个别名”Non-Heap 非堆“ 用于与Java堆区分。</p>
+<p>很多人愿意把方法区成为”永久代“，本质上两者并不等价。HotSpot虚拟机 团队选择把GC分代收集扩展至方法区，或者说使用永久带实现方法区而已。</p>
+<p>方法区存在的<strong>问题</strong>：</p>
+<p>永久代容易遇到内存溢出问题（HotSpot永久代有-XX:MaxPermSize上限）当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常<strong>运行时常量池</strong>也是方法区的一个部分，主要用于存放编译器生成的各种字面量和符号引用。类加载后会进入方法区的运行时常量池</p>
+<p>运行时常量池存在的<strong>问题：</strong></p>
+<p>当常量池无法再申请到内存空间时会抛出OutOfMemoryError异常</p>
+<p><strong>2、虚拟机栈</strong></p>
+<p>虚拟机栈是<strong>线程私有</strong>的内存空间，其生命周期与线程相同，是用于Java方法执行的内存模型。方法执行时会创建栈帧，用于存储局部变量表，操作数栈，动态链接，方法出口等。</p>
+<p>虚拟机栈存在的<strong>问题：</strong></p>
+<p>线程请求的栈深度大于虚拟机所允许的深度，抛出StackOverflowError异常虚拟机栈动态扩展时无法申请到足够的内存，抛出OutOfMemoryError异常</p>
+<p><strong>3、本地方法栈</strong></p>
+<p>其发挥的作用和存在的问题与Java虚拟机栈类似，这里主要说一下其区别。其区别主要是虚拟机栈为虚拟机执行Java方法服务，而本地方法栈为虚拟机使用到Native方法服务。</p>
+<p><strong>知识点：</strong>Hotspot虚拟机中将本地方法栈与虚拟机栈合二为一。</p>
+<p><strong>4、Java堆</strong></p>
+<p>Java堆是虚拟机中占内存最大的一块内存空间，是所<strong>有线程共享</strong>的内存区域，当虚拟机启动的时候就会创建。它的作用主要是存放对象实例，几乎所有的对象实例都在这里分配内存。我们来看下Java虚拟机规范是怎么描述它的：</p>
+<p>所有的对象实例以及数组都要在堆上分配，但是随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化发生，所有的对象都分配到堆上也渐渐变得不是那么”绝对“了。</p>
+<p>这一块内存空间也是垃圾收集器管理的主要区域，所以有时候也被称为”GC堆“。</p>
+<p>Java堆存在的<strong>问题：</strong></p>
+<p>如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常。</p>
+<p><strong>5、程序计数器</strong></p>
+<p>程序计数器是<strong>线程私有</strong>的一块占用较小的内存空间，主要用于记录当前线程执行到哪里了。而且这也是<strong>唯一一个没有内存溢出</strong>的区域。</p>
+<p><strong>6、直接内存</strong></p>
+<p>除了以上几块内存空间外，还有一块内存空间就是直接内存，它不属于运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但是这部分频繁使用也可能导致OutOfMemoryError异常。NIO可以使用Native函数库直接分配堆外内存空间。</p>
+<p><strong>文末小结</strong></p>
+<p>关于jvm内存区域空间要重点关注<strong>方法区，程序计数器，Java虚拟机栈</strong>和<strong>Java堆</strong>这些内存区域的作用。只有在了解了虚拟机是怎么使用内存的之后，才能在出现内存溢出和泄漏时更快速的定位和排查解决问题。</p>
+<p><mark>蚂蚁金服</mark>：</p>
+<p>Java8 的内存分代改进 JVM 内存分哪几个区，每个区的作用是什么？</p>
+<p>一面：JVM 内存分布&#x2F;内存结构？栈和堆的区别？堆的结构？为什么两个 survivor 区？</p>
+<p><strong>二面：Eden 和 survior 的比例分配</strong></p>
+<p>答：8 : 1 : 1</p>
+<p><mark>小米</mark>：</p>
+<p>jvm 内存分区，为什么要有新生代和老年代</p>
+<p>答：</p>
+<p>其实不分代完全可以，分代的唯一理由就是优化 GC 性能。如果没有分代，那所有的对象都在一块，就如同把一个学校的人都关在一个教室。GC 的时候要找到哪些对象没用，这样就会对堆的所有区域进行扫描。而很多对象都是朝生夕死的，如果分代的话，把新创建的对象放到某一地方，当 GC 的时候先把这块存储“朝生夕死”对象的区域进行回收，这样就会腾出很大的空间出来。</p>
+<p>答案一：</p>
+<p>对于JVM而言，大部分对象都是属于一个朝生夕死的状态，这部分对象随着方法的调用而创建，方法的结束而消亡，只有少部分的对象会长久的留在JVM 内存中，所以根据这样的特性JVM 把内存分为了新生代 和老年代两个区，一般情况新创建的对象会放到新生代中，只有经过一定次数的GC后还没有被回收的对象，我们认为这部分对象在未来也会长时间存在，所以会把这部分的对象转移到老年代的区域中去。</p>
+<p>答案二：</p>
+<p>1）新生代(Young Gen)：年轻代主要存放新创建的对象，内存大小相对会比较小，垃圾回收会比较频繁。年轻代分成1个Eden Space和2个Suvivor Space（from 和to）。<br> 2）老年代(Tenured Gen)：年老代主要存放JVM认为生命周期比较长的对象（经过几次的Young Gen的垃圾回收后仍然存在），内存大小相对会比较大，垃圾回收也相对没有那么频繁。</p>
+</blockquote>
+<blockquote>
+<p><mark>字节跳动</mark>：</p>
+<p>二面：Java 的内存分区</p>
+<p>二面：讲讲 vm 运行时数据库区 什么时候对象会进入老年代？</p>
+<p>答：</p>
+<ol>
+<li><p>长期存活的对象:<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E8%99%9A%E6%8B%9F%E6%9C%BA&spm=1001.2101.3001.7020">虚拟机</a>给每个对象定义了一个对象年龄(Age)计数器,如果对象在Eden出生并经过第一次Minor GC后仍然存活,并且能被Survivor容纳的话,将被移动到Survivor空间中,并且对象年龄设为1,。对象在Survivor区中每熬过一次Minor GC,年龄就增加1,当他的年龄增加到一定程度(默认是15岁), 就将会被晋升到老年代中。对象晋升到老年代的年龄阈值,可以通过参数-XX:MaxTenuringThreshold设置。</p>
+</li>
+<li><p>当遇到超大对象时，发现新生代中的Eden区(即便进行了Minor GC)放不下，就会直接尝试放到老年代Tenured&#x2F;OId，如果老年代也放不下，就触发Major GC 或 Full GC，之后老年代区能放得下就放，不能的话就报OOM。大对象对虚拟机的内存分配就是坏消息,尤其是一些朝生夕灭的短命大对象,写程序时应避免。</p>
+</li>
+<li><p>动态对象年龄判定:为了能更好地适应不同程度的内存状况,虚拟机并不是永远地要求对象的年龄必须达到了MaxTenuringThreshold才能晋升到老年代,如果在Survivor空间中相同年龄的所有对象大小的总和大于Survivor空间的一半,年龄大于或等于年龄的对象就可以直接进入老年代,无须等到MaxTenuringThreshold中要求的年龄。</p>
+</li>
+</ol>
+<p><mark>京东</mark>：</p>
+<p><strong>JVM 的内存结构，Eden 和 Survivor 比例。</strong></p>
+<p><strong>JVM 内存为什么要分成新生代，老年代，持久代。</strong></p>
+<p><strong>新生代中为什么要分为 Eden 和 survivor。</strong></p>
+<p>答：</p>
+<ol>
+<li><p>如果没有Survivor，Eden区每进行一次Minor GC，存活的对象就会被送到老年代。老年代很快被填满，触发Major GC.老年代的内存空间远大于新生代，进行一次Full GC消耗的时间比Minor GC长得多，大概是Minor GC的十倍以上, 如果Major GC触发次数多的话，就会降低性能，所以要尽可能避免或减少老年代触发Major GC。因此需要分为Eden和Survivor。</p>
+</li>
+<li><p>Survivor的存在意义，就是减少被送到老年代的对象，进而减少Full GC的发生，Survivor的预筛选保证，只有经历16次Minor GC还能在新生代中存活的对象，才会被送到老年代。</p>
+</li>
+<li><p><strong>设置两个Survivor区最大的好处</strong>就是解决了碎片化，刚刚新建的对象在Eden中，经历一次Minor GC，Eden中的存活对象就会被移动到第一块survivor space S0，Eden被清空；等Eden区再满了，就再触发一次Minor GC，Eden和S0中的存活对象又会被复制送入第二块survivor spaceS1（这个过程非常重要，因为这种复制算法保证了S1中来自S0和Eden两部分的存活对象占用连续的内存空间，避免了碎片化的发生）</p>
+</li>
+</ol>
+<p><mark>天猫</mark>：</p>
+<p>一面：Jvm 内存模型以及分区，需要详细到每个区放什么。</p>
+<p>一面：JVM 的内存模型，Java8 做了什么改</p>
+<p>答：</p>
+<table>
+<thead>
+<tr>
+<th align="left">JDK1.6 及之前</th>
+<th align="left">有永久代（permanet），静态变量存储在永久代上</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>JDK1.7</strong></td>
+<td align="left"><strong>有永久代，但已经逐步 “去永久代”，字符串常量池，静态变量移除，保存在堆中</strong></td>
+</tr>
+<tr>
+<td align="left"><strong>JDK1.8</strong></td>
+<td align="left"><strong>无永久代，类型信息，字段，方法，常量保存在本地内存的元空间，但字符串常量池、静态变量仍然在堆中。</strong></td>
+</tr>
+</tbody></table>
+<p>其中，String Table之所以要调整位置：</p>
+<p>jdk7 中将 StringTable 放到了堆空间中。因为<strong>永久代的回收效率很低</strong>，在 full gc 的时候才会触发。而 full gc 是老年代的空间不足、永久代不足时才会触发。</p>
+<p>这就导致 StringTable 回收效率不高。而我们开发中会有大量的字符串被创建，回收效率低，导致永久代内存不足。放到堆里，能及时回收内存。</p>
+<p><mark>拼多多</mark>：</p>
+<p>JVM 内存分哪几个区，每个区的作用是什么？</p>
+<p><mark>美团</mark>：</p>
+<p>java 内存分配 jvm 的永久代中会发生垃圾回收吗？</p>
+<p>一面：jvm 内存分区，为什么要有新生代和老年代？</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7-8%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E7%9A%84%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="cleceoka6006vy0v635uo17e7" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-设计模式/结构型模式/代理模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="post-time" datetime="2022-11-19T14:02:15.163Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">19</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">代理模式</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>,<a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>,<a class="article-category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">原型模式</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h1><p>结构型模式描述如何将类或对象按某种布局组成更大的结构。它分为类结构型模式和对象结构型模式，前者采用继承机制来组织接口和类，后者釆用组合或聚合来组合对象。</p>
+<p>由于组合关系或聚合关系比继承关系耦合度低，满足“合成复用原则”，所以对象结构型模式比类结构型模式具有更大的灵活性。</p>
+<p>结构型模式分为以下 7 种：</p>
+<ul>
+<li>代理模式</li>
+<li>适配器模式</li>
+<li>装饰者模式</li>
+<li>桥接模式</li>
+<li>外观模式</li>
+<li>组合模式</li>
+<li>享元模式</li>
+</ul>
+<h2 id="1-代理模式"><a href="#1-代理模式" class="headerlink" title="1 代理模式"></a>1 代理模式</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h3><p>由于某些原因需要给某对象提供一个代理以控制对该对象的访问。这时，访问对象不适合或者不能直接引用目标对象，代理对象作为访问对象和目标对象之间的中介。</p>
+<p>Java中的代理按照代理类生成时机不同又分为静态代理和动态代理。静态代理代理类在编译期就生成，而动态代理代理类则是在Java运行时动态生成。动态代理又有JDK代理和CGLib代理两种。</p>
+<h3 id="2-结构"><a href="#2-结构" class="headerlink" title="2 结构"></a>2 结构</h3><p>代理（Proxy）模式分为三种角色：</p>
+<ul>
+<li>抽象主题（Subject）类： 通过接口或抽象类声明真实主题和代理对象实现的业务方法。</li>
+<li>真实主题（Real Subject）类： 实现了抽象主题中的具体业务，是代理对象所代表的真实对象，是最终要引用的对象。</li>
+<li>代理（Proxy）类 ： 提供了与真实主题相同的接口，其内部含有对真实主题的引用，它可以访问、控制或扩展真实主题的功能。</li>
+</ul>
+<h3 id="3-静态代理"><a href="#3-静态代理" class="headerlink" title="3 静态代理"></a>3 静态代理</h3><p>我们通过案例来感受一下静态代理。</p>
+<p>【例】火车站卖票</p>
+<p>如果要买火车票的话，需要去火车站买票，坐车到火车站，排队等一系列的操作，显然比较麻烦。而火车站在多个地方都有代售点，我们去代售点买票就方便很多了。这个例子其实就是典型的代理模式，火车站是目标对象，代售点是代理对象。类图如下：</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//卖票接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">SellTickets</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//火车站  火车站具有卖票功能，所以需要实现SellTickets接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TrainStation</span> <span class="keyword">implements</span> <span class="title class_">SellTickets</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;火车站卖票&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代售点</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyPoint</span> <span class="keyword">implements</span> <span class="title class_">SellTickets</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TrainStation</span> <span class="variable">station</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TrainStation</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;代理点收取一些服务费用&quot;</span>);</span><br><span class="line">        station.sell();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ProxyPoint</span> <span class="variable">pp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProxyPoint</span>();</span><br><span class="line">        pp.sell();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Copy to clipboardErrorCopied</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../../images/image-20221119220401804.png" alt="image-20221119220401804"></p>
+<p>从上面代码中可以看出测试类直接访问的是ProxyPoint类对象，也就是说ProxyPoint作为访问对象和目标对象的中介。同时也对sell方法进行了增强（代理点收取一些服务费用）。</p>
+<h3 id="4-JDK动态代理"><a href="#4-JDK动态代理" class="headerlink" title="4 JDK动态代理"></a>4 JDK动态代理</h3><p>接下来我们使用动态代理实现上面案例，先说说JDK提供的动态代理。Java中提供了一个动态代理类Proxy，Proxy并不是我们上述所说的代理对象的类，而是提供了一个创建代理对象的静态方法（newProxyInstance方法）来获取代理对象。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//卖票接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">SellTickets</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//火车站  火车站具有卖票功能，所以需要实现SellTickets接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TrainStation</span> <span class="keyword">implements</span> <span class="title class_">SellTickets</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;火车站卖票&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代理工厂，用来创建代理对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TrainStation</span> <span class="variable">station</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TrainStation</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> SellTickets <span class="title function_">getProxyObject</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//使用Proxy获取代理对象</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            newProxyInstance()方法参数说明：</span></span><br><span class="line"><span class="comment">                ClassLoader loader ： 类加载器，用于加载代理类，使用真实对象的类加载器即可</span></span><br><span class="line"><span class="comment">                Class&lt;?&gt;[] interfaces ： 真实对象所实现的接口，代理模式真实对象和代理对象实现相同的接口</span></span><br><span class="line"><span class="comment">                InvocationHandler h ： 代理对象的调用处理程序</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">SellTickets</span> <span class="variable">sellTickets</span> <span class="operator">=</span> (SellTickets) Proxy.newProxyInstance(station.getClass().getClassLoader(),</span><br><span class="line">                station.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvocationHandler</span>() &#123;</span><br><span class="line">                    <span class="comment">/*</span></span><br><span class="line"><span class="comment">                        InvocationHandler中invoke方法参数说明：</span></span><br><span class="line"><span class="comment">                            proxy ： 代理对象</span></span><br><span class="line"><span class="comment">                            method ： 对应于在代理对象上调用的接口方法的 Method 实例</span></span><br><span class="line"><span class="comment">                            args ： 代理对象调用接口方法时传递的实际参数</span></span><br><span class="line"><span class="comment">                     */</span></span><br><span class="line">                    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line"></span><br><span class="line">                        System.out.println(<span class="string">&quot;代理点收取一些服务费用(JDK动态代理方式)&quot;</span>);</span><br><span class="line">                        <span class="comment">//执行真实对象</span></span><br><span class="line">                        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(station, args);</span><br><span class="line">                        <span class="keyword">return</span> result;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">        <span class="keyword">return</span> sellTickets;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//获取代理对象</span></span><br><span class="line">        <span class="type">ProxyFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProxyFactory</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="type">SellTickets</span> <span class="variable">proxyObject</span> <span class="operator">=</span> factory.getProxyObject();</span><br><span class="line">        proxyObject.sell();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Copy to clipboardErrorCopied</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">使用了动态代理，我们思考下面问题：</font></p>
+<ul>
+<li><p>ProxyFactory是代理类吗？</p>
+<p>ProxyFactory不是代理模式中所说的代理类，而代理类是程序在运行过程中动态的在内存中生成的类。通过阿里巴巴开源的 Java 诊断工具（Arthas【阿尔萨斯】）查看代理类的结构：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sun.proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.proxy.dynamic.jdk.SellTickets;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.UndeclaredThrowableException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">$Proxy0</span> <span class="keyword">extends</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">SellTickets</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m1;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m2;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m3;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m0;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> $Proxy0(InvocationHandler invocationHandler) &#123;</span><br><span class="line">        <span class="built_in">super</span>(invocationHandler);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            m1 = Class.forName(<span class="string">&quot;java.lang.Object&quot;</span>).getMethod(<span class="string">&quot;equals&quot;</span>, Class.forName(<span class="string">&quot;java.lang.Object&quot;</span>));</span><br><span class="line">            m2 = Class.forName(<span class="string">&quot;java.lang.Object&quot;</span>).getMethod(<span class="string">&quot;toString&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>]);</span><br><span class="line">            m3 = Class.forName(<span class="string">&quot;com.itheima.proxy.dynamic.jdk.SellTickets&quot;</span>).getMethod(<span class="string">&quot;sell&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>]);</span><br><span class="line">            m0 = Class.forName(<span class="string">&quot;java.lang.Object&quot;</span>).getMethod(<span class="string">&quot;hashCode&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (NoSuchMethodException noSuchMethodException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NoSuchMethodError</span>(noSuchMethodException.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (ClassNotFoundException classNotFoundException) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NoClassDefFoundError</span>(classNotFoundException.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object object)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (Boolean)<span class="built_in">this</span>.h.invoke(<span class="built_in">this</span>, m1, <span class="keyword">new</span> <span class="title class_">Object</span>[]&#123;object&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Error | RuntimeException throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> throwable;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UndeclaredThrowableException</span>(throwable);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (String)<span class="built_in">this</span>.h.invoke(<span class="built_in">this</span>, m2, <span class="literal">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Error | RuntimeException throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> throwable;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UndeclaredThrowableException</span>(throwable);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (Integer)<span class="built_in">this</span>.h.invoke(<span class="built_in">this</span>, m0, <span class="literal">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Error | RuntimeException throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> throwable;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UndeclaredThrowableException</span>(throwable);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.h.invoke(<span class="built_in">this</span>, m3, <span class="literal">null</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Error | RuntimeException throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> throwable;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UndeclaredThrowableException</span>(throwable);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Copy to clipboardErrorCopied</span><br></pre></td></tr></table></figure>
+
+<p>从上面的类中，我们可以看到以下几个信息：</p>
+<ul>
+<li>代理类（$Proxy0）实现了SellTickets。这也就印证了我们之前说的真实类和代理类实现同样的接口。</li>
+<li>代理类（$Proxy0）将我们提供了的匿名内部类对象传递给了父类。</li>
+</ul>
+</li>
+<li><p>动态代理的执行流程是什么样？</p>
+<p>下面是摘取的重点代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序运行过程中动态生成的代理类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">$Proxy0</span> <span class="keyword">extends</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">SellTickets</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Method m3;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> $Proxy0(InvocationHandler invocationHandler) &#123;</span><br><span class="line">        <span class="built_in">super</span>(invocationHandler);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        m3 = Class.forName(<span class="string">&quot;com.itheima.proxy.dynamic.jdk.SellTickets&quot;</span>).getMethod(<span class="string">&quot;sell&quot;</span>, <span class="keyword">new</span> <span class="title class_">Class</span>[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.h.invoke(<span class="built_in">this</span>, m3, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Java提供的动态代理相关类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Proxy</span> <span class="keyword">implements</span> <span class="title class_">java</span>.io.Serializable &#123;</span><br><span class="line">    <span class="keyword">protected</span> InvocationHandler h;</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">protected</span> <span class="title function_">Proxy</span><span class="params">(InvocationHandler h)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.h = h;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代理工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TrainStation</span> <span class="variable">station</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TrainStation</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> SellTickets <span class="title function_">getProxyObject</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">SellTickets</span> <span class="variable">sellTickets</span> <span class="operator">=</span> (SellTickets) Proxy.newProxyInstance(station.getClass().getClassLoader(),</span><br><span class="line">                station.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">InvocationHandler</span>() &#123;</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line"></span><br><span class="line">                        System.out.println(<span class="string">&quot;代理点收取一些服务费用(JDK动态代理方式)&quot;</span>);</span><br><span class="line">                        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(station, args);</span><br><span class="line">                        <span class="keyword">return</span> result;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">        <span class="keyword">return</span> sellTickets;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//测试访问类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//获取代理对象</span></span><br><span class="line">        <span class="type">ProxyFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProxyFactory</span>();</span><br><span class="line">        <span class="type">SellTickets</span> <span class="variable">proxyObject</span> <span class="operator">=</span> factory.getProxyObject();</span><br><span class="line">        proxyObject.sell();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Copy to clipboardErrorCopied</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>执行流程如下：</p>
+<ol>
+<li>在测试类中通过代理对象调用sell()方法</li>
+<li>根据多态的特性，执行的是代理类（$Proxy0）中的sell()方法</li>
+<li>代理类（$Proxy0）中的sell()方法中又调用了InvocationHandler接口的子实现类对象的invoke方法</li>
+<li>invoke方法通过反射执行了真实对象所属类(TrainStation)中的sell()方法</li>
+</ol>
+<h3 id="5-1-5-CGLIB动态代理"><a href="#5-1-5-CGLIB动态代理" class="headerlink" title="5.1.5 CGLIB动态代理"></a>5.1.5 CGLIB动态代理</h3><p>同样是上面的案例，我们再次使用CGLIB代理实现。</p>
+<p>如果没有定义SellTickets接口，只定义了TrainStation(火车站类)。很显然JDK代理是无法使用了，因为JDK动态代理要求必须定义接口，对接口进行代理。</p>
+<p>CGLIB是一个功能强大，高性能的代码生成包。它为没有实现接口的类提供代理，为JDK的动态代理提供了很好的补充。</p>
+<p>CGLIB是第三方提供的包，所以需要引入jar包的坐标：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>cglib<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>Copy to clipboardErrorCopied</span><br></pre></td></tr></table></figure>
+
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//火车站</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TrainStation</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sell</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;火车站卖票&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//代理工厂</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyFactory</span> <span class="keyword">implements</span> <span class="title class_">MethodInterceptor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TrainStation</span> <span class="variable">target</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TrainStation</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> TrainStation <span class="title function_">getProxyObject</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//创建Enhancer对象，类似于JDK动态代理的Proxy类，下一步就是设置几个参数</span></span><br><span class="line">        <span class="type">Enhancer</span> <span class="variable">enhancer</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">Enhancer</span>();</span><br><span class="line">        <span class="comment">//设置父类的字节码对象</span></span><br><span class="line">        enhancer.setSuperclass(target.getClass());</span><br><span class="line">        <span class="comment">//设置回调函数</span></span><br><span class="line">        enhancer.setCallback(<span class="built_in">this</span>);</span><br><span class="line">        <span class="comment">//创建代理对象</span></span><br><span class="line">        <span class="type">TrainStation</span> <span class="variable">obj</span> <span class="operator">=</span> (TrainStation) enhancer.create();</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        intercept方法参数说明：</span></span><br><span class="line"><span class="comment">            o ： 代理对象</span></span><br><span class="line"><span class="comment">            method ： 真实对象中的方法的Method实例</span></span><br><span class="line"><span class="comment">            args ： 实际参数</span></span><br><span class="line"><span class="comment">            methodProxy ：代理对象中的方法的method实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> TrainStation <span class="title function_">intercept</span><span class="params">(Object o, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;代理点收取一些服务费用(CGLIB动态代理方式)&quot;</span>);</span><br><span class="line">        <span class="type">TrainStation</span> <span class="variable">result</span> <span class="operator">=</span> (TrainStation) methodProxy.invokeSuper(o, args);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建代理工厂对象</span></span><br><span class="line">        <span class="type">ProxyFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProxyFactory</span>();</span><br><span class="line">        <span class="comment">//获取代理对象</span></span><br><span class="line">        <span class="type">TrainStation</span> <span class="variable">proxyObject</span> <span class="operator">=</span> factory.getProxyObject();</span><br><span class="line"></span><br><span class="line">        proxyObject.sell();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Copy to clipboardErrorCopied</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-1-6-三种代理的对比"><a href="#5-1-6-三种代理的对比" class="headerlink" title="5.1.6 三种代理的对比"></a>5.1.6 三种代理的对比</h3><ul>
+<li><p>jdk代理和CGLIB代理</p>
+<p>使用CGLib实现动态代理，CGLib底层采用ASM字节码生成框架，使用字节码技术生成代理类，在JDK1.6之前比使用Java反射效率要高。唯一需要注意的是，CGLib不能对声明为final的类或者方法进行代理，因为CGLib原理是动态生成被代理类的子类。</p>
+<p>在JDK1.6、JDK1.7、JDK1.8逐步对JDK动态代理优化之后，在调用次数较少的情况下，JDK代理效率高于CGLib代理效率，只有当进行大量调用的时候，JDK1.6和JDK1.7比CGLib代理效率低一点，但是到JDK1.8的时候，JDK代理效率高于CGLib代理。所以如果有接口使用JDK动态代理，如果没有接口使用CGLIB代理。</p>
+</li>
+<li><p>动态代理和静态代理</p>
+<p>动态代理与静态代理相比较，最大的好处是接口中声明的所有方法都被转移到调用处理器一个集中的方法中处理（InvocationHandler.invoke）。这样，在接口方法数量比较多的时候，我们可以进行灵活处理，而不需要像静态代理那样每一个方法进行中转。</p>
+<p>如果接口增加一个方法，静态代理模式除了所有实现类需要实现这个方法外，所有代理类也需要实现此方法。增加了代码维护的复杂度。而动态代理不会出现该问题</p>
+</li>
+</ul>
+<h3 id="5-1-7-优缺点"><a href="#5-1-7-优缺点" class="headerlink" title="5.1.7 优缺点"></a>5.1.7 优缺点</h3><p><strong>优点：</strong></p>
+<ul>
+<li>代理模式在客户端与目标对象之间起到一个中介作用和保护目标对象的作用；</li>
+<li>代理对象可以扩展目标对象的功能；</li>
+<li>代理模式能将客户端与目标对象分离，在一定程度上降低了系统的耦合度；</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>增加了系统的复杂度；</li>
+</ul>
+<h3 id="5-1-8-使用场景"><a href="#5-1-8-使用场景" class="headerlink" title="5.1.8 使用场景"></a>5.1.8 使用场景</h3><ul>
+<li><p>远程（Remote）代理</p>
+<p>本地服务通过网络请求远程服务。为了实现本地到远程的通信，我们需要实现网络通信，处理其中可能的异常。为良好的代码设计和可维护性，我们将网络通信部分隐藏起来，只暴露给本地服务一个接口，通过该接口即可访问远程服务提供的功能，而不必过多关心通信部分的细节。</p>
+</li>
+<li><p>防火墙（Firewall）代理</p>
+<p>当你将浏览器配置成使用代理功能时，防火墙就将你的浏览器的请求转给互联网；当互联网返回响应时，代理服务器再把它转给你的浏览器。</p>
+</li>
+<li><p>保护（Protect or Access）代理</p>
+<p>控制对一个对象的访问，如果需要，可以给不同的用户提供不同级别的使用权限。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" data-id="cleceokbs00bfy0v6abq067vn" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/" rel="tag">结构型模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-设计模式/创建者模式/创建者模式对比" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -120,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F%E5%AF%B9%E6%AF%94/" data-id="clecal62p00axgsv6ev16093q" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F%E5%AF%B9%E6%AF%94/" data-id="cleceokbn00b3y0v6f6yjcf3t" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
@@ -205,7 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" data-id="clecal62q00b0gsv6gv1v009g" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" data-id="cleceokbq00b9y0v64thwfqx9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
@@ -538,7 +845,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/" data-id="clecal613006zgsv6bwtd0hal" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/" data-id="cleceoka7006xy0v615b38x2v" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -689,7 +996,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" data-id="clecal617007bgsv63jwb8ft7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" data-id="cleceokae0078y0v6hkv36ybg" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -1113,7 +1420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/" data-id="clecal60y006pgsv66r2qg2so" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/" data-id="cleceoka5006sy0v627fydb2s" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -1206,7 +1513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/" data-id="clecal610006tgsv67ymb7zh0" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/" data-id="cleceoka3006ny0v6arayhr1a" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -1278,7 +1585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clecal62s00b6gsv64wxncegm" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="cleceokbr00bay0v6au181miq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
@@ -1386,7 +1693,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clecal62t00b8gsv64vcg662p" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="cleceokbs00bey0v668sf8lhg" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
@@ -1400,504 +1707,10 @@
 
 
   
-    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/4. 虚拟机栈" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" class="article-date">
-  <time class="post-time" datetime="2022-11-16T09:42:58.146Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">16</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/">4. 虚拟机栈</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="4-虚拟机栈"><a href="#4-虚拟机栈" class="headerlink" title="4. 虚拟机栈"></a>4. 虚拟机栈</h1><h2 id="4-1-虚拟机栈概述"><a href="#4-1-虚拟机栈概述" class="headerlink" title="4.1. 虚拟机栈概述"></a>4.1. 虚拟机栈概述</h2><h3 id="4-1-1-虚拟机栈出现的背景"><a href="#4-1-1-虚拟机栈出现的背景" class="headerlink" title="4.1.1. 虚拟机栈出现的背景"></a>4.1.1. 虚拟机栈出现的背景</h3><p>由于跨平台性的设计，Java 的指令都是根据栈来设计的。不同平台 CPU 架构不同，所以不能设计为基于寄存器的。</p>
-<p><mark>优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令</mark>。</p>
-<h3 id="4-1-2-初步印象"><a href="#4-1-2-初步印象" class="headerlink" title="4.1.2. 初步印象"></a>4.1.2. 初步印象</h3><p>有不少 Java 开发人员一提到 Java 内存结构，就会非常粗粒度地将 JVM 中的内存区理解为仅有 Java 堆（heap）和 Java 栈（stack）？为什么？</p>
-<h3 id="4-1-3-内存中的栈与堆"><a href="#4-1-3-内存中的栈与堆" class="headerlink" title="4.1.3. 内存中的栈与堆"></a>4.1.3. 内存中的栈与堆</h3><p><mark>栈是运行时的单位，而堆是存储的单位</mark></p>
-<ul>
-<li>栈解决程序的运行问题，即程序如何执行，或者说如何处理数据。</li>
-<li>堆解决的是数据存储的问题，即数据怎么放，放哪里</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/2d195f3aafd8b1f426efad75f0a52478.png" alt="image-20200705163928652"></p>
-<h3 id="4-1-4-虚拟机栈基本内容"><a href="#4-1-4-虚拟机栈基本内容" class="headerlink" title="4.1.4. 虚拟机栈基本内容"></a>4.1.4. 虚拟机栈基本内容</h3><h4 id="Java-虚拟机栈是什么？"><a href="#Java-虚拟机栈是什么？" class="headerlink" title="Java 虚拟机栈是什么？"></a>Java 虚拟机栈是什么？</h4><p>Java 虚拟机栈（Java Virtual Machine Stack），早期也叫 Java 栈。每个线程在创建时都会创建一个虚拟机栈，其内部保存一个个的栈帧（Stack Frame），对应着一次次的 Java 方法调用，是线程私有的。</p>
-<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>生命周期和线程一致</p>
-<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>主管 Java 程序的运行，它保存方法的局部变量、部分结果，并参与方法的调用和返回。</p>
-<h4 id="栈的特点-优点"><a href="#栈的特点-优点" class="headerlink" title="栈的特点 ( 优点 )"></a>栈的特点 ( 优点 )</h4><p>栈是一种快速有效的分配存储方式，访问速度仅次于罹序计数器。</p>
-<p>JVM 直接对 Java 栈的操作只有两个：</p>
-<ul>
-<li>每个方法执行，伴随着进栈（入栈、压栈）</li>
-<li>执行结束后的出栈工作</li>
-</ul>
-<p>对于栈来说不存在垃圾回收问题（栈存在溢出的情况）</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/d4e4445f4faee685dc98d54129344bb3.png" alt="image-20200705165025382"></p>
-<h4 id><a href="#" class="headerlink" title></a></h4><p><img src="/../../../images/image-20221116180408869.png" alt="image-20221116180408869"></p>
-<h4 id="面试题：开发中遇到哪些异常？"><a href="#面试题：开发中遇到哪些异常？" class="headerlink" title="面试题：开发中遇到哪些异常？"></a>面试题：开发中遇到哪些异常？</h4><p><strong>栈中可能出现的异常</strong></p>
-<p>Java 虚拟机规范允许<mark>Java 栈的大小是动态的或者是固定不变的</mark>。</p>
-<ul>
-<li><p>如果采用固定大小的 Java 虚拟机栈，那每一个线程的 Java 虚拟机栈容量可以在线程创建的时候独立选定。如果线程请求分配的栈容量超过 Java 虚拟机栈允许的最大容量，Java 虚拟机将会抛出一个<mark>StackOverflowError </mark>异常。</p>
-</li>
-<li><p>如果 Java 虚拟机栈可以动态扩展，并且在尝试扩展的时候无法申请到足够的内存，或者在创建新的线程时没有足够的内存去创建对应的虚拟机栈，那 Java 虚拟机将会抛出一个<mark> OutOfMemoryError </mark>异常。</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    test();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span> &#123;</span><br><span class="line">    test();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//抛出异常：Exception in thread&quot;main&quot;java.lang.StackoverflowError</span></span><br><span class="line"><span class="comment">//程序不断的进行递归调用，而且没有退出条件，就会导致不断地进行压栈。</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>设置栈内存大小</strong></p>
-<p>我们可以使用参数 -Xss 选项来设置线程的最大栈空间，栈的大小直接决定了函数调用的最大可达深度</p>
-<p><img src="/../../../images/image-20221116184119213.png" alt="image-20221116184119213"></p>
-<h2 id="4-2-栈的存储单位"><a href="#4-2-栈的存储单位" class="headerlink" title="4.2. 栈的存储单位"></a>4.2. 栈的存储单位</h2><h3 id="4-2-1-栈中存储什么？"><a href="#4-2-1-栈中存储什么？" class="headerlink" title="4.2.1. 栈中存储什么？"></a>4.2.1. 栈中存储什么？</h3><p>每个线程都有自己的栈，栈中的数据都是以<mark>栈帧（Stack Frame）的格式存在</mark>。</p>
-<p>在这个线程上正在执行的每个方法都各自对应一个栈帧（Stack Frame）。</p>
-<p>栈帧是一个内存区块，是一个数据集，维系着方法执行过程中的各种数据信息。</p>
-<h3 id="4-2-2-栈运行原理"><a href="#4-2-2-栈运行原理" class="headerlink" title="4.2.2. 栈运行原理"></a>4.2.2. 栈运行原理</h3><p>JVM 直接对 Java 栈的操作只有两个，就是对<mark>栈帧的压栈和出栈，遵循“先进后出”&#x2F;“后进先出”原则</mark>。</p>
-<p>在一条活动线程中，一个时间点上，只会有一个活动的栈帧。即只有当前正在执行的方法的栈帧（栈顶栈帧）是有效的，这个栈帧被称为<mark>当前栈帧（Current Frame）</mark>，与当前栈帧相对应的方法就是<mark>当前方法（Current Method）</mark>，定义这个方法的类就是<mark>当前类（Current Class）</mark>。</p>
-<p>执行引擎运行的所有字节码指令只针对当前栈帧进行操作。</p>
-<p>如果在该方法中调用了其他方法，对应的新的栈帧会被创建出来，放在栈的顶端，成为新的当前帧。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/893126a7a33507917e11377fd3e4b639.png" alt="image-20200705203142545"></p>
-<p>不同线程中所包含的栈帧是不允许存在相互引用的，即不可能在一个栈帧之中引用另外一个线程的栈帧。</p>
-<p>如果当前方法调用了其他方法，方法返回之际，当前栈帧会传回此方法的执行结果给前一个栈帧，接着，虚拟机会丢弃当前栈帧，使得前一个栈帧重新成为当前栈帧。</p>
-<p>Java 方法有两种返回函数的方式，<mark>一种是正常的函数返回，使用 return 指令；另外一种是抛出异常。不管使用哪种方式，都会导致栈帧被弹出</mark>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CurrentFrameTest</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodA</span><span class="params">()</span>&#123;</span><br><span class="line">        system.out.println（<span class="string">&quot;当前栈帧对应的方法-&gt;methodA&quot;</span>);</span><br><span class="line">        methodB();</span><br><span class="line">        system.out.println（<span class="string">&quot;当前栈帧对应的方法-&gt;methodA&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methodB</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println（<span class="string">&quot;当前栈帧对应的方法-&gt;methodB&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-2-3-栈帧的内部结构"><a href="#4-2-3-栈帧的内部结构" class="headerlink" title="4.2.3. 栈帧的内部结构"></a>4.2.3. 栈帧的内部结构</h3><p>每个栈帧中存储着：</p>
-<ul>
-<li><mark>局部变量表（Local Variables）</mark></li>
-<li><mark>操作数栈（operand Stack）（或表达式栈）</mark></li>
-<li>动态链接（DynamicLinking）（或指向运行时常量池的方法引用）</li>
-<li>方法返回地址（Return Address）（或方法正常退出或者异常退出的定义）</li>
-<li>一些附加信息</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/0ed2029b435d547547f32540077bb082.png" alt="image-20200705204836977"></p>
-<p>虚拟机栈中的栈帧的数量取决于栈帧的大小，栈帧的大小主要取决于局部变量表和操作数栈的大小。</p>
-<p>并行每个线程下的栈都是私有的，因此每个线程都有自己各自的栈，并且每个栈里面都有很多栈帧，栈帧的大小主要由局部变量表 和 操作数栈决定的</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/2451fa6f061c426179e3674bb6813e46.png" alt="image-20200705205443993"></p>
-<h2 id="4-3-局部变量表-Local-Variables"><a href="#4-3-局部变量表-Local-Variables" class="headerlink" title="4.3. 局部变量表(Local Variables)"></a>4.3. 局部变量表(Local Variables)</h2><p>局部变量表也被称之为局部变量数组或本地变量表</p>
-<ul>
-<li><p><mark>定义为一个数字数组，主要用于存储方法参数和定义在方法体内的局部变量</mark>，这些数据类型包括各类基本数据类型、对象引用（reference），以及 returnAddress 类型。</p>
-</li>
-<li><p>由于局部变量表是建立在线程的栈上，是线程的私有数据，因此<mark>不存在数据安全问题</mark></p>
-</li>
-<li><p><mark>局部变量表所需的容量大小是在编译期确定下来的</mark>，并保存在方法的 Code 属性的 maximum local variables 数据项中。在方法运行期间是不会改变局部变量表的大小的。</p>
-</li>
-<li><p><mark>方法嵌套调用的次数由栈的大小决定</mark>。一般来说，栈越大，方法嵌套调用次数越多。对一个函数而言，它的参数和局部变量越多，使得局部变量表膨胀，它的栈帧就越大，以满足方法调用所需传递的信息增大的需求。进而函数调用就会占用更多的栈空间，导致其嵌套调用次数就会减少。</p>
-</li>
-<li><p><mark>局部变量表中的变量只在当前方法调用中有效</mark>。在方法执行时，虚拟机通过使用局部变量表完成参数值到参数变量列表的传递过程。当方法调用结束后，随着方法栈帧的销毁，局部变量表也会随之销毁。</p>
-</li>
-</ul>
-<h3 id="4-3-1-关于-Slot-的理解"><a href="#4-3-1-关于-Slot-的理解" class="headerlink" title="4.3.1. 关于 Slot 的理解"></a>4.3.1. 关于 Slot 的理解</h3><ul>
-<li><p>局部变量表，最基本的存储单元是 Slot（变量槽）</p>
-</li>
-<li><p>参数值的存放总是在局部变量数组的 index0 开始，到数组长度-1 的索引结束。</p>
-</li>
-<li><p>局部变量表中存放编译期可知的各种基本数据类型（8 种），引用类型（reference），returnAddress 类型的变量。</p>
-</li>
-<li><p>在局部变量表里，32 位以内的类型只占用一个 slot（包括 returnAddress 类型），64 位的类型（long 和 double）占用两个 slot。</p>
-</li>
-<li><p>byte、short、char 在存储前被转换为 int，boolean 也被转换为 int，0 表示 false，非 0 表示 true。</p>
-</li>
-<li><p>JVM 会为局部变量表中的每一个 Slot 都分配一个访问索引，通过这个索引即可成功访问到局部变量表中指定的局部变量值</p>
-</li>
-<li><p>当一个实例方法被调用的时候，它的方法参数和方法体内部定义的局部变量将会<mark>按照顺序被复制</mark>到局部变量表中的每一个 slot 上</p>
-</li>
-<li><p><mark>如果需要访问局部变量表中一个 64bit 的局部变量值时，只需要使用前一个索引即可</mark>。（比如：访问 long 或 doub1e 类型变量）</p>
-</li>
-<li><p>如果当前帧是由构造方法或者实例方法创建的，那么<mark>该对象引用 this 将会存放在 index 为 0 的 slot 处</mark>，其余的参数按照参数表顺序继续排列。</p>
-</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/866e014106701648c63c0b232066fced.png" alt="image-20200705212454445"></p>
-<h3 id="4-3-2-Slot-的重复利用"><a href="#4-3-2-Slot-的重复利用" class="headerlink" title="4.3.2. Slot 的重复利用"></a>4.3.2. Slot 的重复利用</h3><p><strong>栈帧中的局部变量表中的槽位是可以重用的</strong>，如果一个局部变量过了其作用域，那么在其作用域之后申明的新的局部变就很有可能会复用过期局部变量的槽位，从而达到节省资源的目的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SlotTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">localVarl</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">localVar2</span><span class="params">()</span> &#123;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            System.out.println(a);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//此时的就会复用a的槽位</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-3-3-静态变量与局部变量的对比"><a href="#4-3-3-静态变量与局部变量的对比" class="headerlink" title="4.3.3. 静态变量与局部变量的对比"></a>4.3.3. 静态变量与局部变量的对比</h3><p>参数表分配完毕之后，再根据方法体内定义的变量的顺序和作用域分配。</p>
-<p>我们知道类变量表有两次初始化的机会，第一次是在“<mark>准备阶段</mark>”，执行系统初始化，对类变量设置零值，另一次则是在“<mark>初始化</mark>”阶段，赋予程序员在代码中定义的初始值。</p>
-<p>和类变量初始化不同的是，局部变量表不存在系统初始化的过程，这意味着一旦定义了局部变量则必须人为的初始化，否则无法使用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    System. out. println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样的代码是错误的，没有赋值不能够使用。</p>
-<h3 id="4-3-4-补充说明"><a href="#4-3-4-补充说明" class="headerlink" title="4.3.4. 补充说明"></a>4.3.4. 补充说明</h3><p>在栈帧中，与性能调优关系最为密切的部分就是前面提到的局部变量表。在方法执行时，虚拟机使用局部变量表完成方法的传递。</p>
-<p><mark>局部变量表中的变量也是重要的垃圾回收根节点，只要被局部变量表中直接或间接引用的对象都不会被回收</mark>。</p>
-<h2 id="4-4-操作数栈（Operand-Stack）"><a href="#4-4-操作数栈（Operand-Stack）" class="headerlink" title="4.4. 操作数栈（Operand Stack）"></a>4.4. 操作数栈（Operand Stack）</h2><p>每一个独立的栈帧除了包含局部变量表以外，还包含一个后进先出（Last-In-First-Out）的 <mark>操作数栈</mark>，也可以称之为<mark>表达式栈（Expression Stack）</mark></p>
-<p><mark>操作数栈，在方法执行过程中，根据字节码指令，往栈中写入数据或提取数据，即入栈（push）和 出栈（pop）</mark></p>
-<ul>
-<li>某些字节码指令将值压入操作数栈，其余的字节码指令将操作数取出栈。使用它们后再把结果压入栈</li>
-<li>比如：执行复制、交换、求和等操作</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/7f911f276f834d820fa09f31dd63a74b.png" alt="image-20200706090618332"></p>
-<p>代码举例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAddOperation</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">byte</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">15</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">8</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> i + j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>字节码指令信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void testAddOperation();</span><br><span class="line">    Code:</span><br><span class="line">    0: bipush 15</span><br><span class="line">    2: istore_1</span><br><span class="line">    3: bipush 8</span><br><span class="line">    5: istore_2</span><br><span class="line">    6:iload_1</span><br><span class="line">    7:iload_2</span><br><span class="line">    8:iadd</span><br><span class="line">    9:istore_3</span><br><span class="line">    10:return</span><br></pre></td></tr></table></figure>
-
-<p>操作数栈，<mark>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间</mark>。</p>
-<p>操作数栈就是 JVM 执行引擎的一个工作区，当一个方法刚开始执行的时候，一个新的栈帧也会随之被创建出来，<mark>这个方法的操作数栈是空的</mark>。</p>
-<p>每一个操作数栈都会拥有一个明确的栈深度用于存储数值，其所需的最大深度在编译期就定义好了，保存在方法的 Code 属性中，为 max_stack 的值。</p>
-<p>栈中的任何一个元素都是可以任意的 Java 数据类型</p>
-<ul>
-<li>32bit 的类型占用一个栈单位深度</li>
-<li>64bit 的类型占用两个栈单位深度</li>
-</ul>
-<p>操作数栈<mark>并非采用访问索引的方式来进行数据访问</mark>的，而是只能通过标准的入栈和出栈操作来完成一次数据访问</p>
-<p><mark>如果被调用的方法带有返回值的话，其返回值将会被压入当前栈帧的操作数栈中</mark>，并更新 PC 寄存器中下一条需要执行的字节码指令。</p>
-<p>操作数栈中元素的数据类型必须与字节码指令的序列严格匹配，这由编译器在编译器期间进行验证，同时在类加载过程中的类检验阶段的数据流分析阶段要再次验证。</p>
-<p>另外，我们说 Java 虚拟机的<mark>解释引擎是基于栈的执行引擎</mark>，其中的栈指的就是操作数栈。</p>
-<h2 id="4-5-代码追踪"><a href="#4-5-代码追踪" class="headerlink" title="4.5. 代码追踪"></a>4.5. 代码追踪</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void testAddOperation() &#123;</span><br><span class="line">    byte i = 15;</span><br><span class="line">    int j = 8;</span><br><span class="line">    int k = i + j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用 javap 命令反编译 class 文件：<code> javap -v 类名.class</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testAddoperation</span><span class="params">()</span>; 		Code:	<span class="number">0</span>: bipush <span class="number">15</span> 	<span class="number">2</span>: istore_1 	<span class="number">3</span>: bipush <span class="number">8</span>	<span class="number">5</span>: istore_2	<span class="number">6</span>: iload_1	<span class="number">7</span>: iload_2	<span class="number">8</span>: iadd	<span class="number">9</span>: istore_3    <span class="number">10</span>: <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/da41b01ad08238a2c8065552aaa7d676.png" alt="image-20200706093131621"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/6867c7a53a4faff29318783b46aef097.png" alt="image-20200706093251302"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/f2d6c5d906914ebdca0a472fee33e047.png" alt="image-20200706093646406"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/6ef9c2eb8ac3395133950caf8ef80da3.png" alt="image-20200706093751711"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/28113c3dc724bbffe677ea61b49e7c56.png" alt="image-20200706093859191"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/f960c074fb4a6b1f35e862568ed23d04.png" alt="image-20200706093921573"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/73a07a0e10bef2537b6da97a5348fee2.png" alt="image-20200706094046782"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/17309b8150015a8b359f2cb2ef78cb60.png" alt="image-20200706094109629"></p>
-<p><init>就是我们的构造器，任何类方法都会有<init><img src="/../../../images/image-20221116214709319.png" alt="image-20221116214709319"></init></init></p>
-<p>就是我们定义的方法：<img src="/../../../images/image-20221116214722349.png" alt="image-20221116214722349"></p>
-<p><img src="/../../../images/image-20221116220618255.png" alt="image-20221116220618255"></p>
-<p>相当于8在byte范围内，一个字节能存，push之后，再istore，就是以int类型存储了</p>
-<p><img src="/../../../images/image-20221116220949208.png" alt="image-20221116220949208"></p>
-<p>程序员面试过程中，常见的 i++和++i 的区别，放到字节码篇章时再介绍。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 程序员面试过程中，常见的 i++ 和 ++i 的区别，放到字节码篇章时再介绍</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 第1类问题</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    i1 ++;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">i2</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    ++i2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第2类问题</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i3</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i4</span> <span class="operator">=</span> i3++;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">i5</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i6</span> <span class="operator">=</span> ++i5;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第3类问题</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i7</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    i7 = i7 ++;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">i8</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    i8 = ++i8;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第4类问题</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i9</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i10</span> <span class="operator">=</span> i9++ + ++i9;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-6-栈顶缓存技术（Top-Of-Stack-Cashing）技术"><a href="#4-6-栈顶缓存技术（Top-Of-Stack-Cashing）技术" class="headerlink" title="4.6. 栈顶缓存技术（Top Of Stack Cashing）技术"></a>4.6. 栈顶缓存技术（Top Of Stack Cashing）技术</h2><p>前面提过，基于栈式架构的虚拟机所使用的零地址指令更加紧凑，但完成一项操作的时候必然需要使用更多的入栈和出栈指令，这同时也就意味着将需要更多的指令分派（instruction dispatch）次数和内存读&#x2F;写次数。</p>
-<p>由于<strong>操作数是存储在内存中</strong>的，因此频繁地执行内存读&#x2F;写操作必然会影响执行速度。为了解决这个问题，HotSpot JVM 的设计者们提出了栈顶缓存（Tos，Top-of-Stack Cashing）技术，<mark>将<strong>栈顶元素</strong>全部<strong>缓存</strong>在<strong>物理 CPU 的寄存器</strong>中，以此降低对内存的读&#x2F;写次数，提升执行引擎的执行效率</mark>。</p>
-<h2 id="4-7-动态链接（Dynamic-Linking）"><a href="#4-7-动态链接（Dynamic-Linking）" class="headerlink" title="4.7. 动态链接（Dynamic Linking）"></a>4.7. 动态链接（Dynamic Linking）</h2><p>动态链接、方法返回地址、附加信息 ： 有些地方被称为帧数据区</p>
-<p>每一个栈帧内部都包含一个指向<mark>运行时常量池中该栈帧所属方法的引用</mark>。包含这个引用的目的就是为了支持当前方法的代码能够实现动态链接（Dynamic Linking）。比如：invokedynamic 指令</p>
-<p>在 Java 源文件被编译到字节码文件中时，所有的变量和方法引用都作为符号引用（Symbolic Reference）保存在 class 文件的<strong>常量池</strong>（Constant pool）里。比如：描述一个方法调用了另外的其他方法时，就是通过常量池中指向方法的符号引用来表示的，那么<mark><strong>动态链接的作用</strong>就是为了将这些符号引用转换为调用方法的直接引用</mark>。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/31f48e82748240d7694e542374e9d723.png" alt="image-20200706101251847"></p>
-<p><strong>为什么需要运行时常量池呢？</strong></p>
-<p>常量池的作用：就是为了提供一些符号和常量，便于指令的识别</p>
-<p>比如：编译一个java代码时，所有的结构其实都需要我们加载到内存当中，但我们不能在字节码文件里面直接把这些结构都全部写出来，不然会导致字节码文件会很大。我们可以通过符号引用的方式去引用相关的结构就可以了，因此字节码文件就可以比较小，要使用时，直接用指针来指向即可</p>
-<h2 id="4-8-方法的调用：解析与分配"><a href="#4-8-方法的调用：解析与分配" class="headerlink" title="4.8. 方法的调用：解析与分配"></a>4.8. 方法的调用：解析与分配</h2><p>在 JVM 中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关</p>
-<h3 id="4-8-1-静态链接"><a href="#4-8-1-静态链接" class="headerlink" title="4.8.1. 静态链接"></a>4.8.1. 静态链接</h3><p>当一个字节码文件被装载进 JVM 内部时，如果被调用的<mark>目标方法在编译期可知，且运行期保持不变时</mark>，这种情况下降调用方法的符号引用转换为直接引用的过程称之为静态链接</p>
-<h3 id="4-8-2-动态链接"><a href="#4-8-2-动态链接" class="headerlink" title="4.8.2. 动态链接"></a>4.8.2. 动态链接</h3><p>如果<mark>被调用的方法在编译期无法被确定下来，只能够在程序运行期将调用的方法的符号转换为直接引用</mark>，由于这种引用转换过程具备动态性，因此也被称之为动态链接。</p>
-<p><mark>静态链接和动态链接不是名词，而是动词，这是理解的关键。</mark></p>
-<hr>
-<p>对应的方法的绑定机制为：早期绑定（Early Binding）和晚期绑定（Late Binding）。<mark>绑定是一个字段、方法或者类在符号引用被替换为直接引用的过程，这仅仅发生一次。</mark></p>
-<h3 id="4-8-3-早期绑定"><a href="#4-8-3-早期绑定" class="headerlink" title="4.8.3. 早期绑定"></a>4.8.3. 早期绑定</h3><p>早期绑定就是指被调用的目标方法如果在编译期可知，且运行期保持不变时，即可将这个方法与所属的类型进行绑定，这样一来，由于明确了被调用的目标方法究竟是哪一个，因此也就可以使用静态链接的方式将符号引用转换为直接引用。</p>
-<h3 id="4-8-4-晚期绑定"><a href="#4-8-4-晚期绑定" class="headerlink" title="4.8.4. 晚期绑定"></a>4.8.4. 晚期绑定</h3><p>如果被调用的方法在编译期无法被确定下来，只能够在程序运行期根据实际的类型绑定相关的方法，这种绑定方式也就被称之为晚期绑定。</p>
-<hr>
-<p>随着高级语言的横空出世，类似于 Java 一样的基于面向对象的编程语言如今越来越多，尽管这类编程语言在语法风格上存在一定的差别，但是它们彼此之间始终保持着一个共性，那就是都支持封装、继承和多态等面向对象特性，既然<mark>这一类的编程语言具备多态特悄，那么自然也就具备早期绑定和晚期绑定两种绑定方式。</mark></p>
-<p>Java 中任何一个普通的方法其实都具备虚函数的特征，它们相当于 C++语言中的虚函数（C++中则需要使用关键字 virtual 来显式定义）。如果在 Java 程序中不希望某个方法拥有虚函数的特征时，则可以使用关键字 final 来标记这个方法。</p>
-<hr>
-<h3 id="4-8-5-虚方法和非虚方法"><a href="#4-8-5-虚方法和非虚方法" class="headerlink" title="4.8.5. 虚方法和非虚方法"></a>4.8.5. 虚方法和非虚方法</h3><p><strong>非虚方法：</strong>如果方法在编译期就确定了具体的调用版本，这个版本在运行时是不可变的。这样的方法称为非虚方法。</p>
-<p>静态方法、私有方法、final 方法、实例构造器、父类方法都是非虚方法。</p>
-<p><strong>虚方法：</strong>在编译期间没法确定下来的。除了上面的非虚方法包含的，其他方法称为虚方法。</p>
-<p>在类加载的解析阶段就可以进行解析，如下是非虚方法举例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Father</span>&#123;   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(String str)</span>&#123; </span><br><span class="line">        System. out. println(<span class="string">&quot;father &quot;</span>+str);</span><br><span class="line">    &#125;    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(String str)</span>&#123;      </span><br><span class="line">        System. out. println(<span class="string">&quot;father&quot;</span>+str);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_">Father</span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VirtualMethodTest</span>&#123;   </span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;   </span><br><span class="line">            Son.print(<span class="string">&quot;coder&quot;</span>);      </span><br><span class="line">            <span class="comment">//Father fa=new Father();      </span></span><br><span class="line">            <span class="comment">//fa.show(&quot;atguigu.com&quot;);      </span></span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>虚拟机中提供了以下几条方法调用指令：</p>
-<h4 id="普通调用指令："><a href="#普通调用指令：" class="headerlink" title="普通调用指令："></a>普通调用指令：</h4><ul>
-<li><mark>invokestatic：调用静态方法，解析阶段确定唯一方法版本</mark></li>
-<li><mark>invokespecial：调用方法、私有及父类方法，解析阶段确定唯一方法版本</mark></li>
-<li>invokevirtual：调用所有虚方法</li>
-<li>invokeinterface：调用接口方法</li>
-</ul>
-<h4 id="动态调用指令："><a href="#动态调用指令：" class="headerlink" title="动态调用指令："></a>动态调用指令：</h4><ul>
-<li>invokedynamic：动态解析出需要调用的方法，然后执行</li>
-</ul>
-<p>前四条指令固化在虚拟机内部，方法的调用执行不可人为干预，而 invokedynamic 指令则支持由用户确定方法版本。<mark>其中 invokestatic 指令和 invokespecial 指令调用的方法称为非虚方法，其余的（fina1 修饰的除外）称为虚方法。</mark></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 解析调用中非虚方法、虚方法的测试</span><br><span class="line"> * 其中 invokestatic 指令和 invokespecial 指令调用的方法称为非虚方法，其余的（fina1 修饰的除外）称为虚方法。</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/11/17</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">class Father &#123;</span><br><span class="line">    public Father() &#123;</span><br><span class="line">        System.out.println( &quot;father 的构造器&quot; );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void showStatic(String str) &#123;</span><br><span class="line">        System.out.println(&quot;father&quot; + str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final void showFinal() &#123;</span><br><span class="line">        System.out.println(&quot;father show final&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void showCommon() &#123;</span><br><span class="line">        System.out.println(&quot;father 普通方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Son extends Father &#123;</span><br><span class="line">    public Son() &#123;</span><br><span class="line">        // invokespecial #1 &lt;jvm/chapter04/Father.&lt;init&gt; : ()V&gt;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Son(int age) &#123;</span><br><span class="line">        // invokespecial #3 &lt;jvm/chapter04/Son.&lt;init&gt; : ()V&gt;</span><br><span class="line">        this();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 不是重写的静态方法，因为静态方法不能被重写</span><br><span class="line">     */</span><br><span class="line">    public static void showStatic(String str) &#123;</span><br><span class="line">        System.out.println(&quot;son &quot; + str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void showPrivate(String str) &#123;</span><br><span class="line">        System.out.println(&quot;son private &quot; +str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void show() &#123;</span><br><span class="line"></span><br><span class="line">        /*</span><br><span class="line">            非虚方法：</span><br><span class="line">         */</span><br><span class="line">        // 这showStatic 和 Father.showStatic(&quot;good&quot;) 两个都是调用的静态方法，所有都是非虚方法</span><br><span class="line">        // invokestatic #13 &lt;jvm/chapter04/Son.showStatic : (Ljava/lang/String;)V&gt;</span><br><span class="line">        showStatic(&quot;qrly.com&quot;);</span><br><span class="line">        //  invokestatic #15 &lt;jvm/chapter04/Father.showStatic : (Ljava/lang/String;)V&gt;</span><br><span class="line">        Father.showStatic(&quot;good&quot;);</span><br><span class="line">        // invokespecial #17 &lt;jvm/chapter04/Son.showPrivate : (Ljava/lang/String;)V&gt;</span><br><span class="line">        showPrivate(&quot;hello&quot;);</span><br><span class="line">        // invokespecial #18 &lt;jvm/chapter04/Father.showCommon : ()V&gt;</span><br><span class="line">        super.showCommon();</span><br><span class="line"></span><br><span class="line">        // invokevirtual #19 &lt;jvm/chapter04/Son.showFinal : ()V&gt;</span><br><span class="line">        // 因为此方法声明有final，不能被子类重写，所以也认为此方法是非虚方法</span><br><span class="line">        // 虚方法是编译期间没法确定下里的才是虚方法</span><br><span class="line">        showFinal();</span><br><span class="line">        // invokespecial #20 &lt;jvm/chapter04/Father.showFinal : ()V&gt;</span><br><span class="line">        super.showFinal();</span><br><span class="line"></span><br><span class="line">        /*</span><br><span class="line">          虚方法如下：</span><br><span class="line">         */</span><br><span class="line">        // invokevirtual #20 &lt;jvm/chapter04/Son.showCommon : ()V&gt;</span><br><span class="line">        // 由于没有加 super.来调用，且有可能这个方法会在子类里面重写，所以在编译期间是没法确定的，所以这个是虚方法</span><br><span class="line">        showCommon();</span><br><span class="line">        // invokevirtual #21 &lt;jvm/chapter04/Son.info : ()V&gt;</span><br><span class="line">        info();</span><br><span class="line"></span><br><span class="line">        MethodInterface in = null;</span><br><span class="line">        // invokeinterface #22 &lt;jvm/chapter04/MethodInterface.methodA : ()V&gt; count 1</span><br><span class="line">        // 要调用接口中的方法，在执行的时候肯定要被实现类里实现的</span><br><span class="line">        in.methodA();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void info() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void display(Father f) &#123;</span><br><span class="line">        f.showCommon();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Son so = new Son();</span><br><span class="line">        so.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface MethodInterface &#123;</span><br><span class="line">    void methodA();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/../../../images/image-20221117111404877.png" alt="image-20221117111404877"></p>
-<p><img src="/../../../images/image-20221117112919097.png" alt="image-20221117112919097"></p>
-<p><strong>关于 invokednamic 指令</strong></p>
-<ul>
-<li><p>JVM 字节码指令集一直比较稳定，一直到 Java7 中才增加了一个 invokedynamic 指令，这是<mark>Java 为了实现「动态类型语言」支持而做的一种改进。</mark></p>
-</li>
-<li><p>但是在 Java7 中并没有提供直接生成 invokedynamic 指令的方法，需要借助 ASM 这种底层字节码工具来产生 invokedynamic 指令。<mark>直到 Java8 的 Lambda 表达式的出现，invokedynamic 指令的生成，在 Java 中才有了直接的生成方式。</mark></p>
-</li>
-<li><p>Java7 中增加的动态语言类型支持的本质是对 Java 虚拟机规范的修改，而不是对 Java 语言规则的修改，这一块相对来讲比较复杂，增加了虚拟机中的方法调用，最直接的受益者就是运行在 Java 平台的动态语言的编译器。</p>
-</li>
-</ul>
-<h4 id="动态类型语言和静态类型语言"><a href="#动态类型语言和静态类型语言" class="headerlink" title="动态类型语言和静态类型语言"></a>动态类型语言和静态类型语言</h4><p>动态类型语言和静态类型语言两者的区别就在于对类型的检查是在编译期还是在运行期，满足前者就是静态类型语言，反之是动态类型语言。</p>
-<p>说的再直白一点就是，<mark>静态类型语言是判断<strong>变量</strong>自身的类型信息；动态类型语言是判断<strong>变量值</strong>的类型信息，变量没有类型信息，变量值才有类型信息</mark>，这是动态语言的一个重要特征。</p>
-<p>java主要的还是静态类型语言的特点，而Python 和 JS 是动态类型语言</p>
-<h3 id="4-8-6-方法重写的本质"><a href="#4-8-6-方法重写的本质" class="headerlink" title="4.8.6. 方法重写的本质"></a>4.8.6. 方法重写的本质</h3><p><strong>Java 语言中方法重写的本质：</strong></p>
-<ol>
-<li>找到操作数栈顶的第一个元素所执行的对象的实际类型，记作 C。</li>
-<li>如果在类型 C 中找到与常量中的描述符合简单名称都相符的方法，则进行访问权限校验，如果通过则返回这个方法的直接引用，查找过程结束；如果不通过，则返回 java.lang.IllegalAccessError 异常。</li>
-<li>否则，按照继承关系从下往上依次对 C 的各个父类进行第 2 步的搜索和验证过程。</li>
-<li>如果始终没有找到合适的方法，则抛出 java.1ang.AbstractMethodsrror 异常。</li>
-</ol>
-<p><strong>IllegalAccessError 介绍</strong></p>
-<p>程序试图访问或修改一个属性或调用一个方法，这个属性或方法，你没有权限访问。一般的，这个会引起编译器异常。这个错误如果发生在运行时，就说明一个类发生了不兼容的改变。</p>
-<h3 id="4-8-7-方法的调用：虚方法表"><a href="#4-8-7-方法的调用：虚方法表" class="headerlink" title="4.8.7. 方法的调用：虚方法表"></a>4.8.7. 方法的调用：虚方法表</h3><p>在面向对象的编程中，会很频繁的使用到动态分派，如果在每次动态分派的过程中都要重新在类的方法元数据中搜索合适的目标的话就可能影响到执行效率。<mark>因此，为了提高性能，JVM 采用在类的方法区建立一个虚方法表 （virtual method table）（非虚方法不会出现在表中）来实现。使用索引表来代替查找。</mark></p>
-<p>每个类中都有一个虚方法表，表中存放着各个方法的实际入口。</p>
-<p>虚方法表是什么时候被创建的呢？</p>
-<p>虚方法表会在类加载的链接阶段被创建并开始初始化，类的变量初始值准备完成之后，JVM 会把该类的方法表也初始化完毕。</p>
-<p>举例 1：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/79470fa420092e07a411e4e849f743b8.png" alt="image-20200706144954070"></p>
-<p>举例 2：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Friendly</span>&#123;   </span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span>;   </span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">sayGoodbye</span><span class="params">()</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>&#123;   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span>&#123;   </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">tostring</span><span class="params">()</span>&#123;     </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Dog&quot;</span>;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> <span class="keyword">implements</span> <span class="title class_">Friendly</span> &#123;   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;  </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123; </span><br><span class="line">    &#125;     </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayGoodbye</span><span class="params">()</span> &#123;   </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> &#123;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CockerSpaniel</span> <span class="keyword">extends</span> <span class="title class_">Dog</span> <span class="keyword">implements</span> <span class="title class_">Friendly</span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;      </span><br><span class="line">        <span class="built_in">super</span>.sayHello();  </span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayGoodbye</span><span class="params">()</span> &#123; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/2264627eaca3c5385a75101478565f5b.png" alt="image-20210509203351535"></p>
-<h2 id="4-9-方法返回地址（return-address）"><a href="#4-9-方法返回地址（return-address）" class="headerlink" title="4.9. 方法返回地址（return address）"></a>4.9. 方法返回地址（return address）</h2><p>存放调用该方法的 pc 寄存器的值。一个方法的结束，有两种方式：</p>
-<ul>
-<li>正常执行完成</li>
-<li>出现未处理的异常，非正常退出</li>
-</ul>
-<p>无论通过哪种方式退出，在方法退出后都返回到该方法被调用的位置。方法正常退出时，<mark>调用者的 pc 计数器的值作为返回地址，即调用该方法的指令的下一条指令的地址</mark>。而通过异常退出的，返回地址是要通过异常表来确定，栈帧中一般不会保存这部分信息。</p>
-<p>当一个方法开始执行后，只有两种方式可以退出这个方法：</p>
-<ol>
-<li>执行引擎遇到任意一个方法返回的字节码指令（return），会有返回值传递给上层的方法调用者，简称<mark>正常完成出口</mark>；<ul>
-<li>一个方法在正常调用完成之后，究竟需要使用哪一个返回指令，还需要根据方法返回值的实际数据类型而定。</li>
-<li>在字节码指令中，返回指令包含 ireturn（当返回值是 boolean，byte，char，short 和 int 类型时使用），lreturn（Long 类型），freturn（Float 类型），dreturn（Double 类型），areturn。另外还有一个 return 指令声明为 void 的方法，实例初始化方法，类和接口的初始化方法使用。</li>
-</ul>
-</li>
-<li>在方法执行过程中遇到异常（Exception），并且这个异常没有在方法内进行处理，也就是只要在本方法的异常表中没有搜索到匹配的异常处理器，就会导致方法退出，简称<mark>异常完成出口</mark>。</li>
-</ol>
-<p>方法执行过程中，抛出异常时的异常处理，存储在一个异常处理表，方便在发生异常的时候找到处理异常的代码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception table:</span><br><span class="line">from to   target type</span><br><span class="line">4	 16	  19   any	</span><br><span class="line">19	 21	  19   any</span><br></pre></td></tr></table></figure>
-
-<p>本质上，方法的退出就是当前栈帧出栈的过程。此时，需要恢复上层方法的局部变量表、操作数栈、将返回值压入调用者栈帧的操作数栈、设置 PC 寄存器值等，让调用者方法继续执行下去。</p>
-<p><mark>正常完成出口和异常完成出口的区别在于：通过异常完成出口退出的不会给他的上层调用者产生任何的返回值。</mark></p>
-<h2 id="4-10-一些附加信息"><a href="#4-10-一些附加信息" class="headerlink" title="4.10. 一些附加信息"></a>4.10. 一些附加信息</h2><p>栈帧中还允许携带与 Java 虚拟机实现相关的一些附加信息。例如：对程序调试提供支持的信息。</p>
-<h2 id="4-11-栈的相关面试题"><a href="#4-11-栈的相关面试题" class="headerlink" title="4.11. 栈的相关面试题"></a>4.11. 栈的相关面试题</h2><ul>
-<li><p>举例栈溢出的情况？（StackOverflowError）</p>
-<ul>
-<li>当栈空间不足的时候，就会导致栈溢出的情况，会报StackOverflowError</li>
-<li>通过 -Xss 设置栈的大小</li>
-</ul>
-</li>
-<li><p>调整栈大小，就能保证不出现溢出么？</p>
-<ul>
-<li>不能保证不溢出</li>
-</ul>
-</li>
-<li><p>分配的栈内存越大越好么？</p>
-<ul>
-<li>不是，一定时间内降低了 OOM 概率，但是会挤占其它的线程空间，因为整个空间是有限的。</li>
-</ul>
-</li>
-<li><p>垃圾回收是否涉及到虚拟机栈？</p>
-<ul>
-<li>不会</li>
-</ul>
-</li>
-<li><p>方法中定义的局部变量是否线程安全？</p>
-<ul>
-<li>具体问题具体分析。如果对象是在内部产生，并在内部消亡，没有返回到外部，那么它就是线程安全的，反之则是线程不安全的。</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="left">运行时数据区</th>
-<th align="left">是否存在 Error</th>
-<th align="left">是否存在 GC</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">程序计数器</td>
-<td align="left">否</td>
-<td align="left">否</td>
-</tr>
-<tr>
-<td align="left">虚拟机栈</td>
-<td align="left">是（SOE）</td>
-<td align="left">否</td>
-</tr>
-<tr>
-<td align="left">本地方法栈</td>
-<td align="left">是</td>
-<td align="left">否</td>
-</tr>
-<tr>
-<td align="left">方法区</td>
-<td align="left">是（OOM）</td>
-<td align="left">是</td>
-</tr>
-<tr>
-<td align="left">堆</td>
-<td align="left">是</td>
-<td align="left">是</td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/17</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 面试题：</span></span><br><span class="line"><span class="comment"> * 方法中定义的局部变量是否线程安全？具体情况具体分析</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">P62_StringBuilderTest</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * s1的声明方式是线程安全的</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// StringBuider:线程不安全的</span></span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        s1.append(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * sBuider的操作过程：是线程不安全的，发生逃逸</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">method2</span><span class="params">(StringBuilder sBuider)</span> &#123;</span><br><span class="line">        sBuider.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        sBuider.append(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * s1的操作：是线程不安全的</span></span><br><span class="line"><span class="comment">     * 因为StringBuilder被返回，发生逃逸，返回的话就可能会被其它线程拿去用，导致不安全</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title function_">method3</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        s1.append(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> s1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * s1的操作：是线程安全的</span></span><br><span class="line"><span class="comment">     * 因为s1在方法内部生命周期就结束了。没有发生逃逸</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">method4</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        s1.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        s1.append(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> s1.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            s.append(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">            s.append(<span class="string">&quot;b&quot;</span>);</span><br><span class="line">        &#125;).run();</span><br><span class="line"></span><br><span class="line">        method2(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" data-id="clecal60x006ngsv6efi90uab" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/3. 运行时数据区及程序计数器" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" class="article-date">
-  <time class="post-time" datetime="2022-11-16T00:40:57.094Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">16</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/">3. 运行时数据区及程序计数器</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-</blockquote>
-<p>[toc]</p>
-<h1 id="3-运行时数据区及程序计数器"><a href="#3-运行时数据区及程序计数器" class="headerlink" title="3. 运行时数据区及程序计数器"></a>3. 运行时数据区及程序计数器</h1><h2 id="3-1-运行时数据区"><a href="#3-1-运行时数据区" class="headerlink" title="3.1. 运行时数据区"></a>3.1. 运行时数据区</h2><h3 id="3-1-1-概述"><a href="#3-1-1-概述" class="headerlink" title="3.1.1. 概述"></a>3.1.1. 概述</h3><p>本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/b5d91ce04cfef9a681bbed216732511a.png" alt="image-20200705111640511"></p>
-<p>当我们通过前面的：类的加载-&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化 这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/b3cd82be688254afd263db9094e004a7.png" alt="image-20200705111843003"></p>
-<p>内存是非常重要的系统资源，是硬盘和 CPU 的中间仓库及桥梁，承载着操作系统和应用程序的实时运行 JVM 内存布局规定了 Java 在运行过程中内存申请、分配、管理的策略，保证了 JVM 的高效稳定运行。不同的 JVM 对于内存的划分方式和管理机制存在着部分差异。结合 JVM 虚拟机规范，来探讨一下经典的 JVM 内存布局。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/d6f0aac226ebab0c435b8fe79995eddc.png" alt="image-20210509174724223"></p>
-<p>我们把大厨后面的东西（切好的菜，刀，调料），比作是运行时数据区。而厨师可以类比于执行引擎，将通过准备的东西进行制作成精美的菜品</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/bbf59f2544890b06cdb69b2d7719c060.png" alt="image-20210509174543026"></p>
-<p>我们通过磁盘或者网络 IO 得到的数据，都需要先加载到内存中，然后 CPU 从内存中获取数据进行读取，也就是说内存充当了 CPU 和磁盘之间的桥梁</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/d9139f792f2d10eb03fb827da25b3b28.png" alt="image-20200705112416101"></p>
-<p>Java 虚拟机定义了若干种程序运行期间会使用到的运行时数据区，其中有一些会随着虚拟机启动而创建，随着虚拟机退出而销毁。另外一些则是与线程一一对应的，这些与线程对应的数据区域会随着线程开始和结束而创建和销毁。</p>
-<p>灰色的为单独线程私有的，红色的为多个线程共享的。即：</p>
-<ul>
-<li>每个线程：独立包括程序计数器、栈、本地栈。</li>
-<li>线程间共享：堆、堆外内存（永久代或元空间、代码缓存）</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/0f0cce71a35c12ef13e6482d0663dc21.png" alt="image-20200705112601211"></p>
-<p>每个 JVM 只有一个 Runtime 实例。即为运行时环境，相当于内存结构的中间的那个框框：运行时环境。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/efc4643bdd550c6ecacb9d764e71890e.png" alt="image-20210509173410373"></p>
-<h3 id><a href="#" class="headerlink" title></a></h3><hr>
-<h1 id="3-1-2-线程"><a href="#3-1-2-线程" class="headerlink" title="3.1.2. 线程"></a>3.1.2. 线程</h1><p>线程是一个程序里的运行单元。JVM 允许一个应用有多个线程并行的执行。 在 Hotspot JVM 里，每个线程都与操作系统的本地线程直接映射。</p>
-<p>当一个 Java 线程准备好执行以后，此时一个操作系统的本地线程也同时创建。Java 线程执行终止后，本地线程也会回收。</p>
-<p>操作系统负责所有线程的安排调度到任何一个可用的 CPU 上。一旦本地线程初始化成功，它就会调用 Java 线程中的 run()方法。</p>
-<p><img src="http://img10.360buyimg.com/n7/s523x355_jfs/t6595/305/70607884/742714/c76b7170/59390c8aNf12b52ac.bmp" alt="image"></p>
-<p>JVM 是否要终止还要取决于当前线程是不是最后一个非守护线程（线程分为 守护线程、非守护线程）。如果们内存中都只剩下守护线程的话，JVM就可以退出了。</p>
-<p>守护进程就是服务进程(例如GC进程,他们的存在不是必须的),当所有非守护进程执行结束了,守护就没有存在的意义了,自然jvm的运行就可以停止了</p>
-<h3 id="3-1-3-JVM-系统线程"><a href="#3-1-3-JVM-系统线程" class="headerlink" title="3.1.3. JVM 系统线程"></a>3.1.3. JVM 系统线程</h3><p>如果你使用 console 或者是任何一个调试工具，都能看到在后台有许多线程在运行。这些后台线程不包括调用<code>public static void main(String[] args)</code>的 main 线程以及所有这个 main 线程自己创建的线程。</p>
-<p>这些主要的后台系统线程在 Hotspot JVM 里主要是以下几个：</p>
-<ul>
-<li><mark>虚拟机线程</mark>：这种线程的操作是需要 JVM 达到安全点才会出现。这些操作必须在不同的线程中发生的原因是他们都需要 JVM 达到安全点，这样堆才不会变化。这种线程的执行类型包括”stop-the-world”的垃圾收集，线程栈收集，线程挂起以及偏向锁撤销。</li>
-<li><mark>周期任务线程</mark>：这种线程是时间周期事件的体现（比如中断），他们一般用于周期性操作的调度执行。</li>
-<li><mark>GC 线程</mark>：这种线程对在 JVM 里不同种类的垃圾收集行为提供了支持。</li>
-<li><mark>编译线程</mark>：这种线程在运行时会将字节码编译成到本地代码。</li>
-<li><mark>信号调度线程</mark>：这种线程接收信号并发送给 JVM，在它内部通过调用适当的方法进行处理。</li>
-</ul>
-<h2 id="3-2-程序计数器-PC-寄存器"><a href="#3-2-程序计数器-PC-寄存器" class="headerlink" title="3.2. 程序计数器(PC 寄存器)"></a>3.2. 程序计数器(PC 寄存器)</h2><p>JVM 中的程序计数寄存器（Program Counter Register）中，Register 的命名源于 CPU 的寄存器，寄存器存储指令相关的现场信息。CPU 只有把数据装载到寄存器才能够运行。这里，并非是广义上所指的物理寄存器，或许将其翻译为 PC 计数器（或指令计数器）会更加贴切（也称为程序钩子），并且也不容易引起一些不必要的误会。<mark>JVM 中的 PC 寄存器是对物理 PC 寄存器的一种抽象模拟</mark>。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/e6785d89d74d694f7cfe22ba74a164d9.png" alt="image-20200705155551919"></p>
-<p><strong>作用</strong></p>
-<p>PC 寄存器用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/998d864c026e5d6b565d1cfaecda2bb0.png" alt="image-20200705155728557"></p>
-<p>它是一块很小的内存空间，几乎可以忽略不记。也是<mark>运行速度最快的存储区域</mark>。</p>
-<p>在 JVM 规范中，<mark>每个线程都有它自己的程序计数器，是线程私有的，生命周期与线程的生命周期保持一致</mark>。</p>
-<p><mark>任何时间一个线程都只有一个方法在执行，也就是所谓的当前方法</mark>。程序计数器会存储当前线程正在执行的 Java 方法的 JVM 指令地址；或者，如果是在执行 native 方法，则是未指定值（undefined）。</p>
-<p>它是程序控制流的指示器，分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
-<p>字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令。</p>
-<p>它是唯一一个在 Java 虚拟机规范中没有规定任何 OutOfMemoryError 情况的区域。</p>
-<p>Stack Area、Native Method Stack 都没有GC垃圾回收，但是有可能发生OOM内存溢出</p>
-<p>Method Area 和 Head Area都有GC垃圾回收，也会发生OOM内存溢出</p>
-<p>PC寄存器既没有GC，也没有OOM (OutOfMemoryError )</p>
-<p><strong>举例说明</strong></p>
-<p><img src="/../../../images/image-20221116095436397.png" alt="image-20221116095436397"></p>
-<p>字节码文件分析：</p>
-<p><img src="/../../../images/image-20221116095326530.png" alt="image-20221116095326530"></p>
-<h1 id="PC寄存器面试问题"><a href="#PC寄存器面试问题" class="headerlink" title="PC寄存器面试问题"></a>PC寄存器面试问题</h1><p><strong>使用 PC 寄存器存储字节码指令地址有什么用呢？为什么使用 PC 寄存器记录当前线程的执行地址呢？</strong></p>
-<p>因为 CPU 需要不停的切换各个线程，这时候切换回来以后，就得知道接着从哪开始继续执行。</p>
-<p>JVM 的字节码解释器就需要通过改变 PC 寄存器的值来明确下一条应该执行什么样的字节码指令。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/68aa12d47725e4559e6b71489d91122e.png" alt="image-20200705161409533"></p>
-<p><strong>PC 寄存器为什么被设定为私有的？</strong></p>
-<p>我们都知道所谓的多线程在一个特定的时间段内只会执行其中某一个线程的方法，CPU 会不停地做任务切换，这样必然导致经常中断或恢复，如何保证分毫无差呢？<mark>为了能够准确地记录各个线程正在执行的当前字节码指令地址，最好的办法自然是为每一个线程都分配一个 PC 寄存器</mark>，这样一来各个线程之间便可以进行独立计算，从而不会出现相互干扰的情况。</p>
-<p>由于 CPU 时间片轮限制，众多线程在并发执行过程中，任何一个确定的时刻，一个处理器或者多核处理器中的一个内核，只会执行某个线程中的一条指令。</p>
-<p>这样必然导致经常中断或恢复，如何保证分毫无差呢？每个线程在创建后，都会产生自己的程序计数器和栈帧，程序计数器在各个线程之间互不影响。</p>
-<p><strong>CPU 时间片</strong></p>
-<p>CPU 时间片即 CPU 分配给各个程序的时间，每个线程被分配一个时间段，称作它的时间片。</p>
-<p>在宏观上：俄们可以同时打开多个应用程序，每个程序并行不悖，同时运行。</p>
-<p>但在微观上：由于只有一个 CPU，一次只能处理程序要求的一部分，如何处理公平，一种方法就是引入时间片，每个程序轮流执行。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/bbab7cdab74c493af70b423f06e6ff86.png" alt="image-20200705161849557"></p>
-<p>了解一下</p>
-<p>并行、串行</p>
-<p>并行、并发</p>
-<p>的概念和区别</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" data-id="clecal60w006kgsv6hcng8hci" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/8/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -1942,8 +1755,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>150</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
 
