@@ -43,8 +43,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>142</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>72</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>150</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -74,6 +74,630 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-redis/单机安装Redis" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T02:36:32.250Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/">单机安装Redis</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/redis/">redis</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="单机安装Redis"><a href="#单机安装Redis" class="headerlink" title="单机安装Redis"></a>单机安装Redis</h1><p>首先需要安装Redis所需要的依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc tcl</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>然后将课前资料提供的Redis安装包上传到虚拟机的任意目录：</p>
+<p>例如，我放到了&#x2F;tmp目录：</p>
+<p>解压缩：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf redis-6.2.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>解压后：</p>
+<p>进入redis目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd redis-6.2.4</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>运行编译命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>如果没有出错，应该就安装成功了。</p>
+<p>然后修改redis.conf文件中的一些配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 绑定地址，默认是127.0.0.1，会导致只能在本地访问。修改为0.0.0.0则可以在任意IP访问</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"># 数据库数量，设置为1</span><br><span class="line">databases 1</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>启动Redis：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>停止redis服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli shutdown</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" data-id="clecal5zz004wgsv6awrhhyro" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringCloud微服务/缓存/分布式缓存 Redis" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" class="article-date">
+  <time class="post-time" datetime="2022-11-10T02:31:24.218Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/">分布式缓存 Redis</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> <strong>单点Redis的问题</strong></p>
+<ul>
+<li><strong>数据丢失问题：</strong>Redis是内存存储，服务重启可能会丢失数据</li>
+<li><strong>并发能力问题：</strong>单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景</li>
+<li><strong>故障恢复问题</strong>：如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段</li>
+<li><strong>存储能力问题：</strong>Redis基于内存，单节点能存储的数据量难以满足海量数据需求</li>
+<li><img src="https://img-blog.csdnimg.cn/2de8a33a144b4c56b6356b88d9c01dd5.png" alt="img"></li>
+</ul>
+<p> <img src="https://img-blog.csdnimg.cn/b007d4c74b0b4a0fa96272eeb389bfff.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p> <img src="https://img-blog.csdnimg.cn/0c3be77c63b34ad0a2e03c6b1f624c6f.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/7908c6fa767f42b98ab8fd055c488a87.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><strong>解决问题</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/374954ff3bb44b2dab45ed463955b4c6.png" alt="img"></p>
+<p>一、Redis持久化</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126640334?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126640334%22,%22source%22:%22QRLYLETITBE%22%7D">(73条消息) （分布式缓存）Redis持久化_其然乐衣的博客-CSDN博客</a></p>
+</blockquote>
+<p>二、Redis主从</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126649510?spm=1001.2014.3001.5501">(73条消息) （分布式缓存）Redis主从_其然乐衣的博客-CSDN博客</a></p>
+</blockquote>
+<p>三、Redis哨兵</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126651375?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126651375%22,%22source%22:%22QRLYLETITBE%22%7D">(73条消息) （分布式缓存）Redis哨兵_其然乐衣的博客-CSDN博客</a></p>
+</blockquote>
+<p>四、Redis分片集群</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126656765?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126656765%22,%22source%22:%22QRLYLETITBE%22%7D">(74条消息) (分布式缓存)Redis分片集群_其然乐衣的博客-CSDN博客</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" data-id="clecal620009dgsv6hlo903xq" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-debug/【多余的@autowired】springboot异常：Consider defining a bean of type ‘java.lang.String‘ " class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:36:46.390Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/">【多余的@autowired】springboot异常：Consider defining a bean of type ‘java.lang.String‘</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/debug/">debug</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>报错：</strong>Consider defining a bean of type ‘java.lang.String’ in your configuration</p>
+<p>总结了网上的几种解决方案：</p>
+<p>1、多余的@autowired</p>
+<p>如：<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0886820a87b94873902e51a903ffc582~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>2、<strong>待实例化的类里必须有默认的构造方法（即没有参数的那种）</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" data-id="clecal5yp001tgsv60rmfd7qq" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringCloud微服务/Sentinel/微服务整合sentinel" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:35:34.467Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/">Sentinel-微服务整合sentinel</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.引入sentinel依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--引入sentinel依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-alibaba-sentinel&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置控制台地址（让微服务与控制台建立联系）：</li>
+</ol>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5149d3958b294d3e8f8bb82d4d1d5089~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    sentinel:</span><br><span class="line">      transport:</span><br><span class="line">        dashboard: localhost:8080    # sentinel控制台地址</span><br></pre></td></tr></table></figure>
+
+
+<p>（如果是在云服务器上安装的sentinel，localhost改为服务器的ip地址）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clecal61t008tgsv62gjx529n" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringCloud微服务/分布式事务/（分布式事务）XA模式、AT模式、TCC模式、SAGA模式" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:30:13.912Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/">【分布式事务】XA模式、AT模式、TCC模式、SAGA模式</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考B站黑马教程视频：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=149&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day2-03-动手实践_哔哩哔哩_bilibili">高级篇Day2-03-动手实践_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/745beeae3ca642c78aff91d85fe6628b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="一、XA模式"><a href="#一、XA模式" class="headerlink" title="一、XA模式"></a>一、XA模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c9130e3bdc64f0eb5852ca6c122a425~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bdcf55f4a9848f091776d531d062fda~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/470683757d404e9688dbaf17dde1edf0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/669714ab671d437985d27de4021fdfc0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a124dc1f7c8045d3bea64739f2191865~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二、-AT模式"><a href="#二、-AT模式" class="headerlink" title="二、 AT模式"></a>二、 AT模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/67a70e46700c4c9ab2bbc3cf614250eb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f3cc8ef1f0d4ee3b6b215befd90ac01~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1a15c92cce5547ba8e95cb162ec43bf7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d01d8f3820f24936bbd2b090f1ce2b55~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c36cdaa74c8a475c8c5b60e173b9f8e4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7824bc6efe3144aaad603f8dcc802cf6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1281ce856033497cb5d651d63b7c2f19~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94f0eedf792e47bb9839bfbef207fb54~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0339c27aa63c4370ab5b1513e108aa33~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="三、TCC模式"><a href="#三、TCC模式" class="headerlink" title="三、TCC模式"></a>三、TCC模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42b3538f29434d20b6954899bda76fd7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010912f002144482880661a46e39f59f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/858e90ef0cd9406da4779a8abaf33349~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3f0eb18dced54dff9f788ebd88b96b17~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0f398e2c9224bc3892c8489d3883fa9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05af9a60f4c34db79768a15dc95f5f5c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae608053977d442fbdd556e033fcda7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6fb7648df8b41db845dc0f146824dbb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4722208a42c0470983ca00f035de1504~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="四、Saga模式"><a href="#四、Saga模式" class="headerlink" title="四、Saga模式"></a>四、Saga模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/662bf331e424447dbefac8d90dbe8580~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/927441e650854e68a75aba60a260036d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="四、四种模式的对比"><a href="#四、四种模式的对比" class="headerlink" title="四、四种模式的对比"></a>四、四种模式的对比</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/acb1137e27d84003a2cccf18458e2a05~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clecal61w0096gsv6155y2ntg" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" rel="tag">分布式事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringCloud微服务/Sentinel/Feign整合Sentinel" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:26:49.245Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/">Sentinel-Feign整合Sentinel</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1368428c32d14d989f2fff60d3d0873f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>步骤一</strong>：在feing-api项目中定义类，实现FallbackFactory：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a9bbbbe20240416aaf9b469c521948e1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import cn.itcast.feign.clients.UserClient;</span><br><span class="line">import cn.itcast.feign.pojo.User;</span><br><span class="line">import feign.hystrix.FallbackFactory;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line">@Slf4j   //记录日志</span><br><span class="line">public class UserClientFallbackFactory implements FallbackFactory&lt;UserClient&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public UserClient create(Throwable throwable) &#123;</span><br><span class="line">        return new UserClient() &#123;</span><br><span class="line">            /*</span><br><span class="line">                在这个方法中编写降级的业务逻辑</span><br><span class="line">                    返回 友好提示、一个默认值...，都可以在这个方法里面写</span><br><span class="line">             */</span><br><span class="line">            @Override</span><br><span class="line">            public User findById(Long id) &#123;  //在这个方法中编写降级的逻辑</span><br><span class="line">                log.error(&quot;查询用户异常&quot;,throwable);</span><br><span class="line">                return new User();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>步骤二：</strong> 在feing-api项目中的DefaultFeignConfiguration类中将UserClientFallbackFactory注册为一个Bean：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fce1948b5d9b41c5b5f84446d65dccab~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//将UserClientFallbackFactory注册到bean</span><br><span class="line">    @Bean</span><br><span class="line">    public UserClientFallbackFactory userClientFallbackFactory()&#123;</span><br><span class="line">        return new UserClientFallbackFactory();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤三：</strong> 在feing-api项目中的UserClient接口中使用UserClientFallbackFactory：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c3138f6a45941ceb565802cbb3c0e45~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import cn.itcast.feign.clients.fallback.UserClientFallbackFactory;</span><br><span class="line">import cn.itcast.feign.pojo.User;</span><br><span class="line">import org.springframework.cloud.openfeign.FeignClient;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"></span><br><span class="line">@FeignClient(value = &quot;userservice&quot;, fallbackFactory = UserClientFallbackFactory.class)</span><br><span class="line">public interface UserClient &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;/user/&#123;id&#125;&quot;)</span><br><span class="line">    User findById(@PathVariable(&quot;id&quot;) Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" data-id="clecal61q008jgsv6ad2i8uge" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-数据封装/Java后端数据返回通用类" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:25:42.126Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/">Java后端数据返回通用类</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/">数据封装</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第一种（简单定义）"><a href="#第一种（简单定义）" class="headerlink" title="第一种（简单定义）"></a>第一种（简单定义）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">import lombok.Data;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 结果数据返回通用类</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/7/20</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">public class JsonResult&lt;T&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">     *  编码：200成功，500和其它数字为失败或其他异常情况</span><br><span class="line">     **/</span><br><span class="line">    private Integer code;</span><br><span class="line">    /**</span><br><span class="line">     * 返回描述信息</span><br><span class="line">     **/</span><br><span class="line">    private String msg;</span><br><span class="line">    /**</span><br><span class="line">     * 信息返回数据</span><br><span class="line">     **/</span><br><span class="line">    private T data;</span><br><span class="line">    /**</span><br><span class="line">     *  动态数据</span><br><span class="line">     **/</span><br><span class="line"></span><br><span class="line">    private Map map = new HashMap();</span><br><span class="line"></span><br><span class="line">    public JsonResult() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String msg) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg, T object) &#123;</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.data = object;</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg, Integer code) &#123;</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success( Integer code) &#123;</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg) &#123;</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success() &#123;</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(String msg, Integer code) &#123;</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code) &#123;</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error() &#123;</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = 500;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult&lt;T&gt; add(String key, Object value) &#123;</span><br><span class="line">        this.map.put(key, value);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h1><p>导入依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>编写结果数据通用类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import io.swagger.annotations.ApiModel;</span><br><span class="line">import io.swagger.annotations.ApiModelProperty;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * todo JsonInclude 注解忽略 null值 看业务需求添加</span><br><span class="line"> */</span><br><span class="line">@ApiModel(&quot;分页响应参数&quot;)</span><br><span class="line">@JsonInclude(value = JsonInclude.Include.NON_EMPTY)</span><br><span class="line">@Data</span><br><span class="line">public class JsonResult&lt;T&gt; implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(value = &quot;结果状态&quot;, example = &quot;200&quot;)</span><br><span class="line">    private Integer code = 200;</span><br><span class="line">    @ApiModelProperty(value = &quot;结果数据&quot;)</span><br><span class="line">    private T data;</span><br><span class="line">    @ApiModelProperty(value = &quot;结果描述&quot;, example = &quot;成功&quot;)</span><br><span class="line">    private String message = &quot;ok&quot;;</span><br><span class="line"></span><br><span class="line">    public JsonResult() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code) &#123;</span><br><span class="line">        this();</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, T data) &#123;</span><br><span class="line">        this(code);</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message) &#123;</span><br><span class="line">        this(code);</span><br><span class="line">        this.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message, T data) &#123;</span><br><span class="line">        this(code, message);</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success() &#123;</span><br><span class="line">        return new JsonResult(200);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(T data) &#123;</span><br><span class="line">        return new JsonResult(200, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String message, T data) &#123;</span><br><span class="line">        return new JsonResult(200, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(Integer code, String message, T data) &#123;</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static JsonResult&lt;String&gt; error() &#123;</span><br><span class="line">        return new JsonResult(500);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(String message) &#123;</span><br><span class="line">        return new JsonResult(500, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message) &#123;</span><br><span class="line">        return new JsonResult(code, message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message, T data) &#123;</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="clecal60g005qgsv6f55o7h6z" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/" rel="tag">数据封装</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringCloud微服务/Sentinel/授权规则及规则持久化" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:22:22.090Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/">Sentinel-授权规则及规则持久化</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、授权规则"><a href="#一、授权规则" class="headerlink" title="一、授权规则"></a>一、授权规则</h1><p><strong>第1步：添加判断来源逻辑</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class HeaderOriginParser implements RequestOriginParser &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String parseOrigin(HttpServletRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        //1.获取请求头</span><br><span class="line">        String origin = request.getHeader( &quot;origin&quot; );</span><br><span class="line">        //2.非空判断</span><br><span class="line">        if ( StringUtils.isEmpty( origin ) ) &#123;</span><br><span class="line">            origin = &quot;blank&quot;;   //如果是空的就返回一个默认值</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return origin;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>第2步：编写过滤器–&gt;给网关添加origin头</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>第3步：</strong> 重新启动，访问一个接口</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>第4步：</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>第5步：重新范访问上面的接口</p>
+<p>8088是直接范文oder服务的，也就是绕过了网关，但是现在我们已经设置了授权规则，所以直接访问是不行的，你报错如下</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 现在我们通过网关来访问，网关的端口设置的是10010，用10010来访问</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 因为网关做了权限的校验，所以需要把权限加上</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><strong>因此，通过上面的授权规则设置后，通过网关来访问的就可以，而通过浏览器直接访问的就不行</strong></p>
+<p>下面是黑马PPT的笔记</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<h1 id="二、自定义异常结果"><a href="#二、自定义异常结果" class="headerlink" title="二、自定义异常结果"></a>二、自定义异常结果</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <strong>第1步：</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.BlockException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.FlowException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class SentinelExceptionHandler implements BlockExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception &#123;</span><br><span class="line">        String msg = &quot;未知异常&quot;;</span><br><span class="line">        int status = 429;</span><br><span class="line"></span><br><span class="line">        if ( e instanceof FlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被限流了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof ParamFlowException ) &#123;</span><br><span class="line">            msg = &quot;请求被热点参数限流&quot;;</span><br><span class="line">        &#125; else if ( e instanceof DegradeException ) &#123;</span><br><span class="line">            msg = &quot;请求被降级了&quot;;</span><br><span class="line">        &#125; else if ( e instanceof AuthorityException ) &#123;</span><br><span class="line">            msg = &quot;没有权限访问&quot;;</span><br><span class="line">            status = 401;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        response.setContentType( &quot;application/json;charset=utf-8&quot; );</span><br><span class="line">        response.setStatus( status );</span><br><span class="line">        response.getWriter().println( &quot;&#123;&quot;msg&quot;: &quot; + msg +&quot;, &quot;status&quot;: &quot; + status + &quot;&#125;&quot; );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第2步：</strong> 重启微服务，然后浏览器访问接口</p>
+<p><strong>第3步：</strong> 在sentinel中给端口设置响应的规则进行测试</p>
+<p>（1）新增授权规则 </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p>（2）新增流控规则</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> 下面是黑马PPT笔记</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<h1 id="三、规则持久化"><a href="#三、规则持久化" class="headerlink" title="三、规则持久化"></a>三、规则持久化</h1><p>这一节知识就没有详细的操作笔记，需要观看黑马教程视频如下链接：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=146&spm_id_from=pageDriver&vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili">高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili</a></p>
+</blockquote>
+<p><strong>前言：</strong></p>
+<p><strong>当我们服务重启，我们所配的所有规则就会丢失，因为sentinel会默认把这些规则保存在内存里，重启就自然丢失了。而在生产的环境下 肯定是不能容忍这样的问题的。所以我们就需要学习怎么将****sentinel的规则持久化。</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<h3 id><a href="#" class="headerlink" title></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></h3><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clecal61v008ygsv64l99007e" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-SpringCloud微服务/Sentinel/认识和(本地)安装sentinel" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -125,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="cle9ajw1v008xd4v65cep2acz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="clecal61v0091gsv60pdd91kr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -208,640 +832,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" data-id="cle9ajw1r008hd4v6hawc1bmi" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" data-id="clecal61r008lgsv6byzlgq6x" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringCloud微服务/远程调用/RestTemplate远程调用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/RestTemplate%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:15:02.530Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/RestTemplate%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">RestTemplate远程调用</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">远程调用</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b15ec093f4414539b6d4c1d5b0b0c3cf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363d9e0f524245e8937672f4f6609239~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 步骤 1：注册RestTemplate</p>
-<p>在order-service的OrderApplication中注册RestTemplate</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/afb47de2b56a46dd8bc2621feac8c81e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class SquareApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SquareApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 创建RestTemplate 并注入Spring容器</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public RestTemplate restTemplate()&#123;</span><br><span class="line">        return new RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf012adbd3b9440d9d15dd2bbc763050~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/RestTemplate%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" data-id="cle9ajw27009td4v6ej8mcsxk" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" rel="tag">远程调用</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-GIt/用Git上传项目gitLab（简单笔记）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:13:00.461Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/">用Git上传项目gitLab（简单笔记）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb61fd3a0a2f4d70920108045b60da5b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5427111cce7342eab886c0563819500b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eaf04def88974008bdb8277f58e49fec~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>如果出错了，看下面：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebe9ad0d2ed7451b9bd50f3134e5256a~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/" data-id="cle9ajvyc0009d4v6fcpb0j83" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-GIt/git 提交代码 到 gitee仓库指定文件夹中" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:10:24.900Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/">git 提交代码 到 gitee仓库指定文件夹中</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、创建一个空文件夹"><a href="#一、创建一个空文件夹" class="headerlink" title="一、创建一个空文件夹"></a><strong>一、创建一个空文件夹</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="二、将gitee仓库地址复制下来"><a href="#二、将gitee仓库地址复制下来" class="headerlink" title="二、将gitee仓库地址复制下来"></a><strong>二、将gitee仓库地址复制下来</strong></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="三、在刚刚新建的空文件夹真打开-Git-Bash-Here"><a href="#三、在刚刚新建的空文件夹真打开-Git-Bash-Here" class="headerlink" title="三、在刚刚新建的空文件夹真打开 Git Bash Here"></a><strong>三、在刚刚新建的空文件夹真打开 Git Bash Here</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="四、克隆-gitee-仓库"><a href="#四、克隆-gitee-仓库" class="headerlink" title="四、克隆 gitee 仓库"></a><strong>四、克隆 gitee 仓库</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="五、提交代码"><a href="#五、提交代码" class="headerlink" title="五、提交代码"></a><strong>五、提交代码</strong></h1><h2 id="将想要提交的拖到克隆下来的目录下面"><a href="#将想要提交的拖到克隆下来的目录下面" class="headerlink" title="将想要提交的拖到克隆下来的目录下面"></a>将想要提交的拖到克隆下来的目录下面</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="六、执行指令"><a href="#六、执行指令" class="headerlink" title="六、执行指令"></a><strong>六、执行指令</strong></h1><p><strong>1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
-
-
-<p>可能会出现如下报错，</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>则需要输入 git init  然后回车就好了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-
-<p> 然后再重新执行添加文件就可以了（注意，一定要将目录切换到仓库目录，负责执行命令时会报fatal: pathspec ‘hotel-demo’ did not match any files）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>2.  执行git <strong><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=commit&spm=1001.2101.3001.7020" title="commit">commit</a></strong> -m “注释的内容”  （ 提交到本地仓库）</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;注释的内容&quot;</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>3. 提交代码到 gitee</strong></p>
-<p>执行命令: git remote add origin 远程项目的 Https 地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程项目的 Https 地址</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>可能有人会报如下错误（没有的话可以忽略） </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 解决：执行 git remote rm origin 删除关联的origin的远程库</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 然后再重新执行 git remote add origin 远程项目的 Https 地址即可</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>4. git push -u origin master （ 最后这一步就可以推送到自己的仓库了）</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master </span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>完成 !!</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" data-id="cle9ajvy90006d4v6b60137e8" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Docker/docker restart xxx重启容器报错：Error response from daemon Cannot restart container es" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:09:02.494Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/">docker restart xxx重启容器报错：Error response from daemon Cannot restart container es</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.报错：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/821e52df48964f178aa83dbc6157dbf4~tplv-k3u1fbpfcp-zoom-1.image" style="zoom:50%;"></p>
-<ol start="2">
-<li><p>原因：重启服务器后，我重启过网络 network 。我想大概是这个影响了 docker　的网络。</p>
-</li>
-<li><p>解决：　重启 docker 服务即可：</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
-
-
-<ol start="4">
-<li>重启容器即可成功</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart 容器名</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/396cbd693e724deaa7dfad44cf8a25f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/" data-id="cle9ajvyb0008d4v64jpaadic" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Docker/Docker镜像仓库" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/Docker/Docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:07:06.993Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/Docker/Docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/">Docker镜像仓库</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Docker镜像仓库</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/95f0ea430c0c49fbb0e02770a6547a1f~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd5290c4efc6463bbbe3142834794a72~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3a282dde2bd04742801d934133fd6d5d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/640c6c2974f547528709d0d546dbc8c7~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1a659c9d8444ebbba9da70932abef7b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d529023faf4417198f564653a97a54b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3acf7107043f48cd83de8f964de490d5~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>去网页进行访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0e7fe09df2c44584bea5fe9147325bde~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ef9a288e9fe4a6a9a718268d3777bbb~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/871a56c43a00445ba0f8147c02b34d42~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c28079d54474f54a99f8f90d0ccfee8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>删除镜像，之后再拉取回镜像</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/44ad2222b49b4ac29c77d278aab85f02~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5feba34a268347749d31de6d6bece1a4~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/Docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" data-id="cle9ajvy50003d4v67su9e1pt" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Docker/Docker删除镜像是报错Error response from daemon conflict unable to remove repository " class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/Docker/Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%98%AF%E6%8A%A5%E9%94%99Error%20response%20from%20daemon%20conflict%20unable%20to%20remove%20repository%20/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:04:40.234Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/Docker/Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%98%AF%E6%8A%A5%E9%94%99Error%20response%20from%20daemon%20conflict%20unable%20to%20remove%20repository%20/">Docker删除镜像是报错:Error response from daemon:conflict:unable to remove repository</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Error response from daemon: conflict: unable to remove repository reference “nginx:latest” (must force) - container 50a3d44fa9aa is using its referenced image 605c77e624dd</p>
-<p>翻译是：</p>
-<pre><code>    来自守护程序的错误响应：冲突：无法删除存储库引用“nginx：latest”（必须强制） - 容器 50a3d44fa9aa 正在使用其引用的映像 605c77e624dd  
-</code></pre>
-<p>错误原因是：</p>
-<pre><code>    因为在使用镜像的时候启动了容器，故得把前面使用的容器先给删除，才能继续删除镜像。
-</code></pre>
-<p>解决：</p>
-<pre><code>    直接将指令改为：docker rmi -f [镜像ID] 即可
-
-    -f 强制删除
-</code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3510b4b2e1ba4ac0ad6bca2ab322a9a3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%98%AF%E6%8A%A5%E9%94%99Error%20response%20from%20daemon%20conflict%20unable%20to%20remove%20repository%20/" data-id="cle9ajvy60004d4v6hbed8lza" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringSecurity/SpringSecurity微服务权限方案" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T12:58:57.142Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/">SpringSecurity微服务权限方案</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/../../images/image-20221109210902180.png" alt="image-20221109210902180"></p>
-<h1 id="1-认证授权过程分析"><a href="#1-认证授权过程分析" class="headerlink" title="1.认证授权过程分析"></a>1.认证授权过程分析</h1><h2 id="微服务本质："><a href="#微服务本质：" class="headerlink" title="微服务本质："></a>微服务本质：</h2><p><img src="/../../images/image-20221109210128213.png" alt="image-20221109210128213"></p>
-<p><img src="/../../images/image-20221109210445793.png" alt="image-20221109210445793"></p>
-<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p><img src="/../../images/image-20221109211556120.png" alt="image-20221109211556120"></p>
-<h2 id="数据模型介绍："><a href="#数据模型介绍：" class="headerlink" title="数据模型介绍："></a>数据模型介绍：</h2><p><img src="/../../images/image-20221109214015143.png" alt="image-20221109214015143"></p>
-<h2 id="使用技术说明："><a href="#使用技术说明：" class="headerlink" title="使用技术说明："></a>使用技术说明：</h2><p><img src="/../../images/image-20221110144805581.png" alt="image-20221110144805581"></p>
-<h2 id="搭建项目工程："><a href="#搭建项目工程：" class="headerlink" title="搭建项目工程："></a>搭建项目工程：</h2><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=25&vd_source=746b9336d739b80b11820809545b6604">25-尚硅谷-SpringSecurity-微服务权限案例-引入项目依赖_哔哩哔哩_bilibili</a></p>
-<p><img src="/../../images/image-20221110145058838.png" alt="image-20221110145058838"></p>
-<p><img src="/../../images/image-20221110150906119.png" alt="image-20221110150906119"></p>
-<h2 id="启动Redis和Nacos"><a href="#启动Redis和Nacos" class="headerlink" title="启动Redis和Nacos:"></a>启动Redis和Nacos:</h2><p><img src="/../../images/image-20221110180707351.png" alt="image-20221110180707351"></p>
-<h2 id="编写common工具类："><a href="#编写common工具类：" class="headerlink" title="编写common工具类："></a>编写common工具类：</h2><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=27&vd_source=746b9336d739b80b11820809545b6604">27-尚硅谷-SpringSecurity-微服务权限案例-编写common工具类_哔哩哔哩_bilibili</a></p>
-<p><img src="/../../images/image-20221110184003848.png" alt="image-20221110184003848"></p>
-<h2 id="编写security工具类："><a href="#编写security工具类：" class="headerlink" title="编写security工具类："></a>编写security工具类：</h2><p>对应教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP/?p=28&spm_id_from=333.851.header_right.history_list.click&vd_source=746b9336d739b80b11820809545b6604">28-尚硅谷-SpringSecurity-微服务权限案例-编写security工具类_哔哩哔哩_bilibili</a></p>
-<p><img src="/../../images/image-20221110205032587.png" alt="image-20221110205032587"></p>
-<h4 id="2-1-密码处理工具类"><a href="#2-1-密码处理工具类" class="headerlink" title="2.1 密码处理工具类"></a>2.1 密码处理工具类</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import atguigu.utils.utils.MD5;</span><br><span class="line">import org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/11/10</span><br><span class="line"> */</span><br><span class="line">@Component</span><br><span class="line">public class DefaultPasswordEncoder implements PasswordEncoder &#123;</span><br><span class="line"></span><br><span class="line">    public DefaultPasswordEncoder() &#123;</span><br><span class="line">        // 调用有参构造方法，传值 -1</span><br><span class="line">        this(-1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public DefaultPasswordEncoder(int strength) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 进行MD5加密</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public String encode(CharSequence charSequence) &#123;</span><br><span class="line">        return MD5.encrypt(charSequence.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 进行密码比对</span><br><span class="line">     * 比对一样的话返回 true，不一样的话返回false</span><br><span class="line">     * @param charSequence    加密后的密码</span><br><span class="line">     * @param encodedPassword 传入的密码</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public boolean matches(CharSequence charSequence, String encodedPassword) &#123;</span><br><span class="line">        return encodedPassword.equals(MD5.encrypt(charSequence.toString()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="2-2-token操作工具类"><a href="#2-2-token操作工具类" class="headerlink" title="2.2 token操作工具类"></a>2.2 token操作工具类</h4><p>先导入依赖：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;jjwt&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>使用jwt生成token代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.security.security;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.CompressionCodecs;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.Jwts;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.SignatureAlgorithm;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * token工具类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenManager</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * token有效时长</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> <span class="variable">tokenExpiration</span> <span class="operator">=</span> <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 编码密钥</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">tokenSignKey</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1. 使用 jwt 根据用户名生成token</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">createToken</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> Jwts.builder()</span><br><span class="line">                <span class="comment">// 设置主体信息</span></span><br><span class="line">                .setSubject(username)</span><br><span class="line">                <span class="comment">// 设置有效时长</span></span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + tokenExpiration))</span><br><span class="line">                .signWith(SignatureAlgorithm.HS512, tokenSignKey).compressWith(CompressionCodecs.GZIP).compact();</span><br><span class="line">        <span class="keyword">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2. 根据token字符串得到用户信息</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUserInfoFromToken</span><span class="params">(String token)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">userinfo</span> <span class="operator">=</span> Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token).getBody().getSubject();</span><br><span class="line">        <span class="keyword">return</span> userinfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3. 删除token</span></span><br><span class="line"><span class="comment">     * 但是这个删除方法其实不需要我们写，因为token不需要咱们删，客户端不携带 token 就可以了</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">removeToken</span><span class="params">(String token)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-3-退出处理器"><a href="#2-3-退出处理器" class="headerlink" title="2.3 退出处理器"></a>2.3 退出处理器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> atguigu.utils.utils.R;</span><br><span class="line"><span class="keyword">import</span> atguigu.utils.utils.ResponseUtil;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.logout.LogoutHandler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 退出处理器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenLogoutHandler</span> <span class="keyword">implements</span> <span class="title class_">LogoutHandler</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TokenManager tokenManager;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TokenLogoutHandler</span><span class="params">(TokenManager tokenManager, RedisTemplate redisTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.tokenManager = tokenManager;</span><br><span class="line">        <span class="built_in">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">logout</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Authentication authentication)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 从header里面获取token</span></span><br><span class="line">        <span class="comment">// 2. token不为空，移除token， 从redis删除token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (token != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 移除</span></span><br><span class="line">            tokenManager.removeToken(token);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从token获取用户名</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> tokenManager.getUserInfoFromToken(token);</span><br><span class="line">            <span class="comment">// key : username</span></span><br><span class="line">            redisTemplate.delete(username);</span><br><span class="line">        &#125;</span><br><span class="line">        ResponseUtil.out(response, R.ok());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-4-未授权统一处理类"><a href="#2-4-未授权统一处理类" class="headerlink" title="2.4 未授权统一处理类"></a>2.4 未授权统一处理类</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import atguigu.utils.utils.R;</span><br><span class="line">import atguigu.utils.utils.ResponseUtil;</span><br><span class="line">import org.springframework.security.core.AuthenticationException;</span><br><span class="line">import org.springframework.security.web.AuthenticationEntryPoint;</span><br><span class="line"></span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 未授权统一处理类</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/11/10</span><br><span class="line"> */</span><br><span class="line">public class UnauthEntryPoint implements AuthenticationEntryPoint &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException &#123;</span><br><span class="line">        ResponseUtil.out(response, R.error());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="编写security认证过滤器"><a href="#编写security认证过滤器" class="headerlink" title="编写security认证过滤器:"></a>编写security认证过滤器:</h2><p>对应教程视频;<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=29&vd_source=746b9336d739b80b11820809545b6604">29-尚硅谷-SpringSecurity-微服务权限案例-编写security认证过滤器_哔哩哔哩_bilibili</a></p>
-<h4 id="1-认证的过滤器"><a href="#1-认证的过滤器" class="headerlink" title="1. 认证的过滤器"></a>1. 认证的过滤器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> atguigu.utils.utils.R;</span><br><span class="line"><span class="keyword">import</span> atguigu.utils.utils.ResponseUtil;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.entity.SecurityUser;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.security.TokenManager;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.AuthenticationManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.UsernamePasswordAuthenticationToken;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.AuthenticationException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.util.matcher.AntPathRequestMatcher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenLoginFilter</span> <span class="keyword">extends</span> <span class="title class_">UsernamePasswordAuthenticationFilter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TokenManager tokenManager;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 由springsecurity封装的</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> AuthenticationManager authenticationManager;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TokenLoginFilter</span><span class="params">(AuthenticationManager authenticationManager, TokenManager tokenManager, RedisTemplate redisTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.authenticationManager = authenticationManager;</span><br><span class="line">        <span class="built_in">this</span>.tokenManager = tokenManager;</span><br><span class="line">        <span class="built_in">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">        <span class="comment">// 设置为不仅仅是post提交</span></span><br><span class="line">        <span class="built_in">this</span>.setPostOnly(<span class="literal">false</span>);</span><br><span class="line">        <span class="comment">// 设置登录路径，且匹配post提交</span></span><br><span class="line">        <span class="built_in">this</span>.setRequiresAuthenticationRequestMatcher(<span class="keyword">new</span> <span class="title class_">AntPathRequestMatcher</span>(<span class="string">&quot;/admin/acl/login&quot;</span>, <span class="string">&quot;POST&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1. 获取表单提交用户名和密码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Authentication <span class="title function_">attemptAuthentication</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> AuthenticationException &#123;</span><br><span class="line">        <span class="comment">// 获取表单提交数据</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>().readValue(request.getInputStream(), User.class);</span><br><span class="line">            <span class="keyword">return</span> authenticationManager.authenticate(<span class="keyword">new</span> <span class="title class_">UsernamePasswordAuthenticationToken</span>(user.getUsername(), user.getPassword(),</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2. 认证成功时会调用的方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">successfulAuthentication</span><span class="params">(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="comment">// 这个方法可以获取认证通过后的用户的信息，然后根据用户名生成token，再把它放到redis中</span></span><br><span class="line">        <span class="type">SecurityUser</span> <span class="variable">user</span> <span class="operator">=</span> (SecurityUser) authResult.getPrincipal();</span><br><span class="line">        <span class="comment">// 根据用户名生成token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> tokenManager.createToken(user.getCurrentUserInfo().getUsername());</span><br><span class="line">        <span class="comment">// 把用户名称和用户权限列表放到redis</span></span><br><span class="line">        redisTemplate.opsForValue().set(user.getCurrentUserInfo().getUsername(), user.getPermissionValueList());</span><br><span class="line">        <span class="comment">// 返回token</span></span><br><span class="line">        ResponseUtil.out(response, R.ok().data(<span class="string">&quot;token&quot;</span>, token));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3. 认证失败时会调用的方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">unsuccessfulAuthentication</span><span class="params">(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="comment">// 返回错误的提示</span></span><br><span class="line">        ResponseUtil.out(response, R.error());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-授权过滤器"><a href="#2-授权过滤器" class="headerlink" title="2.授权过滤器"></a>2.授权过滤器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.atguigu.security.security.TokenManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.AuthenticationManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.authentication.UsernamePasswordAuthenticationToken;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.SimpleGrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.context.SecurityContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.web.authentication.www.BasicAuthenticationFilter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenAuthFilter</span> <span class="keyword">extends</span> <span class="title class_">BasicAuthenticationFilter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> TokenManager tokenManager;</span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TokenAuthFilter</span><span class="params">(AuthenticationManager authenticationManager)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(authenticationManager);</span><br><span class="line">        <span class="built_in">this</span>.tokenManager = tokenManager;</span><br><span class="line">        <span class="built_in">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doFilterInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response, FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="comment">// 获取当前认证成功用户权限信息</span></span><br><span class="line">        <span class="type">UsernamePasswordAuthenticationToken</span> <span class="variable">authRequest</span> <span class="operator">=</span> getAuthentication(request);</span><br><span class="line">        <span class="comment">// 判断如果有权限信息，放到权限上下文中</span></span><br><span class="line">        <span class="keyword">if</span> (authRequest != <span class="literal">null</span>) &#123;</span><br><span class="line">            SecurityContextHolder.getContext().setAuthentication(authRequest);</span><br><span class="line">        &#125;</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> UsernamePasswordAuthenticationToken <span class="title function_">getAuthentication</span><span class="params">(HttpServletRequest request)</span> &#123;</span><br><span class="line">        <span class="comment">// 从header获取token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (token != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 从token获取用户</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> tokenManager.getUserInfoFromToken(token);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//从redis获取对应权限列表</span></span><br><span class="line">            List&lt;String&gt; permissionValueList = (List&lt;String&gt;) redisTemplate.opsForValue().get(username);</span><br><span class="line">            Collection&lt;GrantedAuthority&gt; authorities = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> ( String permissionValue : permissionValueList ) &#123;</span><br><span class="line">                <span class="type">SimpleGrantedAuthority</span> <span class="variable">auth</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleGrantedAuthority</span>(permissionValue);</span><br><span class="line">                authorities.add(auth);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UsernamePasswordAuthenticationToken</span>(username, token, authorities)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="编写entity"><a href="#编写entity" class="headerlink" title="编写entity:"></a>编写entity:</h1><p>SecurityUser实体类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.toolkit.StringUtils;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.SimpleGrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityUser</span> <span class="keyword">implements</span> <span class="title class_">UserDetails</span> &#123;</span><br><span class="line">    <span class="comment">//当前登录用户</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> User currentUserInfo;</span><br><span class="line">    <span class="comment">//当前权限</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; permissionValueList;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (user != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.currentUserInfo = user;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Collection&lt;? <span class="keyword">extends</span> <span class="title class_">GrantedAuthority</span>&gt; getAuthorities() &#123;</span><br><span class="line">        Collection&lt;GrantedAuthority&gt; authorities = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(String permissionValue : permissionValueList) &#123;</span><br><span class="line">            <span class="keyword">if</span>(StringUtils.isEmpty(permissionValue)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">SimpleGrantedAuthority</span> <span class="variable">authority</span> <span class="operator">=</span> <span class="keyword">new</span></span><br><span class="line">                    <span class="title class_">SimpleGrantedAuthority</span>(permissionValue);</span><br><span class="line">            authorities.add(authority);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> authorities;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPassword</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getPassword();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUsername</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getUsername();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonExpired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonLocked</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isCredentialsNonExpired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEnabled</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>User用户实体类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.security.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModel;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModelProperty;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel(description = &quot;用户实体类&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ApiModelProperty</span>用于swapper测试的</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;微信openid&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;密码&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;昵称&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String nickName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;用户头像&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String salt;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;用户签名&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String token;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="整合网关和前端："><a href="#整合网关和前端：" class="headerlink" title="整合网关和前端："></a>整合网关和前端：</h1><p>解决跨域配置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.reactive.CorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.reactive.CorsWebFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.util.pattern.PathPatternParser;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/11</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解决跨域</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CorsWebFilter <span class="title function_">corsWebFilter</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">CorsConfiguration</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorsConfiguration</span>();</span><br><span class="line">        <span class="comment">// 表示该服务器允许任何类型的请求</span></span><br><span class="line">        config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 允许任何域名来源的请求</span></span><br><span class="line">        config.addAllowedOrigin(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        <span class="comment">// 允许携带任何请求头</span></span><br><span class="line">        config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">UrlBasedCorsConfigurationSource</span> <span class="variable">source</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UrlBasedCorsConfigurationSource</span>(<span class="keyword">new</span> <span class="title class_">PathPatternParser</span>());</span><br><span class="line">        <span class="comment">// 表示所有路径都允许访问</span></span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, config);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CorsWebFilter</span>((CorsConfigurationSource) source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p><strong>配置文件：</strong></p>
-<p><strong>application.properties：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 端口号</span><br><span class="line">server.port=<span class="number">8222</span></span><br><span class="line"># 服务名</span><br><span class="line">spring.application.name=service-gateway</span><br><span class="line"># nacos服务地址</span><br><span class="line">spring.cloud.nacos.discovery.server-addr=<span class="number">222.177</span><span class="number">.66</span><span class="number">.230</span>:<span class="number">8848</span></span><br><span class="line"># 使服务发现路由</span><br><span class="line">spring.cloud.gateway.discovery.locator.enabled=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"># 配置路由规则</span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].id=service-acl</span><br><span class="line"># 设置路由uri  lb:<span class="comment">//注册服务名称</span></span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].uri=lb:<span class="comment">//service-acl</span></span><br><span class="line"># 具体路径规则</span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].predicates= path=<span class="comment">/*/acl/**</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>整合网关：</p>
-<p><img src="/../../images/image-20221111165948445.png" alt="image-20221111165948445"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="cle9ajvz60027d4v65qibf779" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-云服务器/云服务器上部署一个Springboot的web项目（图文讲解）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:52:39.210Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/">云服务器上部署一个Springboot的web项目（图文讲解）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>（PS：在部署之前，</strong></p>
-<p><strong>1.你的虚拟机需要安装有jdk(这个Centos内部应该自带有，我的就是)和mysql（注意，如果你使用的数据库是8.0版本以上的，则需要安装mysql8.0以上的），没有安装到这两个的先自行去安装好</strong></p>
-<p><strong>2.Linux安装好mysql后，去用sqlyog（或是Navicat或其他）连接你虚拟机的数据库</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2296b37c16204c2c8d38359697a6918d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>1.双击packege，打包项目。（注意，先鼠标选中Maven中的test然后跟着黄色箭头点击(让test被划掉)，使得在打包项目的时候跳过test步骤，不然会执行项目的测试，从而可能改动数据库的原有数据） </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb4c2a5357143c2a45ccf285a6864d4~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>2.找到打包好的项目的所在目录</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eca7a429f81942b5b5f330fcc62ba0be~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>3.（这一步有多种方法，我习惯这一种）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae9faa9689464d1d83694d2b338b8e13~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>4.进入到Linux的相应目录，然后执行最后一条命令来启动springboot项目</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d901c9c4af4ee79a05bafd8bdbcd15~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5859ee35d0744080a9e7a7f867392dda~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>5.启动成功，然后去根据虚拟机的ip端口去访问项目</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba0c92e9585a45c28b10ee909898c3f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>(ps：如果访问超时，则需要去Linux关闭防火墙</p>
-<p>1.首先切换回到 &#x2F;root&#x2F;bin目录下</p>
-<p>2.执行命令：systemctl stop firewalld.service（关闭防火墙)</p>
-<p>systemctl disable firewalld.service（关闭防火墙自动启动）</p>
-<p>4.查看防火墙状态：systemctl status firewalld.service（查看防火墙服务状态）</p>
-<p>看到这样就OK了：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ad7c29b91b74c32a0a6beb7cc2fbba6~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>然后再去浏览器访问，便不会超时了</p>
-<p>）</p>
-<p>另一种启动方式，启动过程中不会显示出日志信息，还可用命令将日志信息存到server.log中，或是存到自己创建的文件中也行</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff1b88ebd29c4ba39150042f29a9cbcb~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>这是我保存的日志信息</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/77676acd5dea48d28a875724cda4fe1b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" data-id="cle9ajw0h005id4v6cpj4695x" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
 
     </footer>
   </div>
@@ -900,8 +894,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>142</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>72</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>150</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>81</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
 
