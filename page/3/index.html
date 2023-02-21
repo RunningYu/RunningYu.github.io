@@ -120,7 +120,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%9D%83%E9%87%8D%E8%AE%BE%E7%BD%AE/" data-id="cleceok7n001by0v6arz8ful2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%9D%83%E9%87%8D%E8%AE%BE%E7%BD%AE/" data-id="cleebxr2t000xxwv697nz5jz2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
@@ -171,7 +171,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>​		之前我们有服务的概念，我们提供用户查询的userservice服务，还有提供订单查询的orderservice服务。然后，userservice还部署了多个实例，我们有8081 、8082、8083，这三个呢，都是userservice的实例，所以我们之前是有两层概念的，一层是服务，而第二层就是实例。一个服务，可以包含多个实例。不过呀，随着我们这个业务规模越来越扩大，那么我们就会考虑更多的问题了。比如说我们现在的，我们把所有的实力都部署在一个地方，就像你把鸡蛋都放在一个篮子里，哪天你不小心篮子翻了，那所有的鸡蛋不就都打碎了吗？<strong>那你的机房放在那里同一个地方，哪天天灾人祸出了问题，整个服务不就完了？</strong>所以呀，为了解决这个问l题，我们会将一个服务的多个实例部署到多个机房，特别是像阿里京东这些财大气粗的，哎，我给全国各地，上海、杭州、北京都整一个，这俩送到杭州，这俩到上海，再来几个给它扔到北京，这就像我们把鸡蛋分散开了，一个打了是不是还有好几栏儿呢，对不对？那这样呢，就能够做到一种叫容灾。而我们的那个服务分级存储模型，就是引入了这样一个机房的概念，或者叫地域的概念，把同在一个机房的多个实例称为一个集群。比方，杭州机房的两个userservice实例就称之为杭州的userservice集群，那北京的userservice实例就称为北京的userservice集群。所以呢，在Nacos的服务分级模型中啊，一级是服务，往下是集群，再往下是实例。</p>
-<p>​		那为什么Nacos要引入这样的一个服务分级的？我原来直接服务找实例不好吗？为什么要多加一个地域划分集群的一个概念？我们设想这么一种情况，比方说我有一个杭州的地方，里面有orderservice的集群，还有一个userservice集群，然后呢，我还有一个上海的地方，也是一样的配置，将来还有广东地方，这个北京地方等等。现在呢，我的orderservice需要访问userservice，那么它有两种选择，一种是在自己本地局域网内访问，另一种是去外边的机房访问。那你觉得他该选哪个呀？那不用说呀，肯定选本地啊，因为外边的野花不要采嘛。当然啦，还有更重要的原因，我们局域网内的访问呢，它的距离比较短，所以呢，速度比较快，延迟比较低，而你跨越了这种集群的访问，比如说你从杭州访问到广州或者北京，那么达到数百公里上千公里，那么这个时候延迟是非常高的，所以啊，在服务调用时，应该尽可能的去访问本地集群，只有在本地集群不可用的情况下，我们才会考虑去访问其集群。我们的Nacos引入这个集训概念，其实就是为了防止出现跨集群调用啊，尽可能的避免。</p>
+<p>​		<strong>那为什么Nacos要引入这样的一个服务分级的？</strong>我原来直接服务找实例不好吗？为什么要多加一个地域划分集群的一个概念？我们设想这么一种情况，比方说我有一个杭州的地方，里面有orderservice的集群，还有一个userservice集群，然后呢，我还有一个上海的地方，也是一样的配置，将来还有广东地方，这个北京地方等等。现在呢，我的orderservice需要访问userservice，那么它有两种选择，一种是在自己本地局域网内访问，另一种是去外边的机房访问。那你觉得他该选哪个呀？那不用说呀，肯定选本地啊，因为外边的野花不要采嘛。当然啦，还有更重要的原因，我们局域网内的访问呢，它的距离比较短，所以呢，速度比较快，延迟比较低，而你跨越了这种集群的访问，比如说你从杭州访问到广州或者北京，那么达到数百公里上千公里，那么这个时候延迟是非常高的，所以啊，在服务调用时，应该尽可能的去访问本地集群，只有在本地集群不可用的情况下，我们才会考虑去访问其集群。我们的Nacos引入这个集训概念，其实就是为了防止出现跨集群调用啊，尽可能的避免。</p>
 <p><img src="/../../images/image-20230208114620776.png" alt="image-20230208114620776"></p>
 <p><img src="/../../images/image-20230208114536926.png" alt="image-20230208114536926"></p>
 <p><img src="/../../images/image-20230208114842391.png" alt="image-20230208114842391"></p>
@@ -207,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/" data-id="cleceok7m0018y0v653xlda2h" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%A4%9A%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B/" data-id="cleebxr2u0011xwv61wlgchja" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
@@ -352,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/5-%E5%88%86%E6%9E%90GC%E6%97%A5%E5%BF%97/" data-id="cleceokam007wy0v68xl3b0v3" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/5-%E5%88%86%E6%9E%90GC%E6%97%A5%E5%BF%97/" data-id="cleebxr5a007qxwv61hxwew75" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/" rel="tag">JVM下篇：性能监控与调优篇</a></li></ul>
@@ -490,7 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/4-JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E6%95%B0/" data-id="cleceokal007sy0v64cpp9v1k" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/06/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/4-JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E6%95%B0/" data-id="cleebxr59007mxwv6gfa8197h" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/" rel="tag">JVM下篇：性能监控与调优篇</a></li></ul>
@@ -563,7 +563,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/04/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E6%9C%BA%E5%88%B6/%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/" data-id="cleceokbu00bky0v61z51emm2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/04/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E6%9C%BA%E5%88%B6/%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/" data-id="cleebxr6d00b5xwv6ggex3d70" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
@@ -959,7 +959,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/01/Netty/Netty04-%E4%BC%98%E5%8C%96%E4%B8%8E%E6%BA%90%E7%A0%81/" data-id="cleceok7j0011y0v6abpb9kh0" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/01/Netty/Netty04-%E4%BC%98%E5%8C%96%E4%B8%8E%E6%BA%90%E7%A0%81/" data-id="cleebxr2z001exwv6evi93mpd" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li></ul>
@@ -1324,7 +1324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/18/Netty/Netty03-%E8%BF%9B%E9%98%B6/" data-id="cleceok7h000vy0v6bd9nbnf4" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/18/Netty/Netty03-%E8%BF%9B%E9%98%B6/" data-id="cleebxr32001mxwv66o5h6cwu" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li></ul>
@@ -1422,7 +1422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/18/Netty/%E7%AC%94%E8%AE%B0%E6%8A%BD%E5%8F%96/%EF%BC%88netty%EF%BC%89Handler%20&%20Pipeline/" data-id="cleceokar008by0v698nv16m1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/18/Netty/%E7%AC%94%E8%AE%B0%E6%8A%BD%E5%8F%96/%EF%BC%88netty%EF%BC%89Handler%20&%20Pipeline/" data-id="cleebxr5o0092xwv69dfl8q9m" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li></ul>
@@ -2297,7 +2297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/15/Netty/Netty02-%E5%85%A5%E9%97%A8/" data-id="cleceok7g000ty0v6cdqn6z0j" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/15/Netty/Netty02-%E5%85%A5%E9%97%A8/" data-id="cleebxr30001hxwv69rwz3kjl" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li></ul>
@@ -2421,7 +2421,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/15/Netty/%E7%AC%94%E8%AE%B0%E6%8A%BD%E5%8F%96/%EF%BC%88nio%EF%BC%89Files%20%E8%AF%A6%E7%BB%86%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%A6%82%E5%88%A0%E9%99%A4%E3%80%81%E6%8B%B7%E8%B4%9D%EF%BC%88%E5%A4%9A%E7%BA%A7%EF%BC%89%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AD%89/" data-id="cleceokas008dy0v61nvqcoh2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/15/Netty/%E7%AC%94%E8%AE%B0%E6%8A%BD%E5%8F%96/%EF%BC%88nio%EF%BC%89Files%20%E8%AF%A6%E7%BB%86%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E6%BC%94%E7%A4%BA%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%A6%82%E5%88%A0%E9%99%A4%E3%80%81%E6%8B%B7%E8%B4%9D%EF%BC%88%E5%A4%9A%E7%BA%A7%EF%BC%89%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%AD%89/" data-id="cleebxr5m008wxwv62g1xfjw8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nio/" rel="tag">nio</a></li></ul>
