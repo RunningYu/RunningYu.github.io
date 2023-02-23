@@ -1,441 +1,91 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Category: JVM | Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo &amp; github">
-<meta property="og:url" content="http://example.com/categories/JVM/page/3/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="其然乐衣">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Haojen's blog</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>分类 · JVM</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/b802b35c3936900c290f8ad123e68b9b.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/b802b35c3936900c290f8ad123e68b9b.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/">7. 方法区</a></h2><time class="has-text-grey" datetime="2022-11-19T06:02:08.728Z">2022-11-19</time><p class="is-flex-grow-2 mt-2">[toc]
+7. 方法区
+从线程共享与否的角度来看
 
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+程序计数器 ： 不会报异常，没有GC
+虚拟机栈、方法栈：有异常，没有GC
+堆、元空间：有异常、有GC
+7.1. 栈、堆、方法区的交互关系
+7.2. 方法区的理解官方文档：Chapter 2. The Structure of the Java Virtual Machine (oracle.com)
 
-  
+7.2.1. 方法区在哪里？《Java 虚拟机规范》中明确说明：“尽管所有的方法区在逻辑上是属于堆的一部分，但一些简单的实现可能不会选择去进行垃圾收集或者进行压缩。”但对于 HotSpotJVM 而言，方法区还有一个别名叫做 Non-Heap（非堆），目的就是要和堆分开。
+所以，方法区看作是一块独立于 Java 堆的内存空间。
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
+7.2.2. 方法区的基本..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../../images/image-20221119094751459.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/"><img class="post-cover-img js-img-fadeIn" src="/../../../images/image-20221119094751459.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a><a href="/tags/interview"><i class="tag post-item-tag">interview</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/">(JVM)逃逸分析：代码优化</a></h2><time class="has-text-grey" datetime="2022-11-19T02:47:31.282Z">2022-11-19</time><p class="is-flex-grow-2 mt-2">堆是分配对象的唯一选择么？在《深入理解 Java 虚拟机》中关于 Java 堆内存有这样一段描述：
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
+随着 JIT 编译期的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化，所有的对象都分配到堆上也渐渐变得不那么“绝对”了。
 
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap animated rubberBand">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-19T06:02:08.728Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">19</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/">7. 方法区</a>
-    </h1>
-  
+在 Java 虚拟机中，对象是在 Java 堆中分配内存的，这是一个普遍的常识。但是，有一种特殊情况，那就是如果经过逃逸分析（Escape Analysis）后发现，一个对象并没有逃逸出方法的话，那么就可能被优化成栈上分配.。这样就无需在堆上分配内存，也无须进行垃圾回收了。这也是最常见的堆外存储技术。
+此外，前面提到的基于 OpenJDK 深度定制的 TaoBaoVM，其中创新的 GCIH（GC invisible heap）技术实现 off-heap，将..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/0be60cad417bedd46d651f710ae585ce.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/0be60cad417bedd46d651f710ae585ce.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/">6. 堆</a></h2><time class="has-text-grey" datetime="2022-11-18T01:52:51.021Z">2022-11-18</time><p class="is-flex-grow-2 mt-2">[toc]
+6. 堆6.1. 堆（Heap）的核心概述堆针对一个 JVM 进程来说是唯一的，也就是一个进程只有一个 JVM，但是进程包含多个线程，他们是共享同一堆空间的。
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-19T02:47:31.282Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">19</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/">(JVM)逃逸分析：代码优化</a>
-    </h1>
-  
+一个 JVM 实例只存在一个堆内存，堆也是 Java 内存管理的核心区域。
+Java 堆区在 JVM 启动的时候即被创建，其空间大小也就确定了。是 JVM 管理的最大一块内存空间。
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-18T01:52:51.021Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">18</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/">6. 堆</a>
-    </h1>
-  
+堆内存的大小是可以调节的。
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-18T00:51:33.638Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">18</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/">5. 本地方法接口和本地方法栈</a>
-    </h1>
-  
+《Java 虚拟机规范》规定，堆可以处于物理上不连续的内存空间中，但在逻辑上它应该被视为连续的。
+所有的线程共享 Java 堆，在这里还可以划分线程私有的缓冲区（Thread Local Allocation Buffer，TLAB）。
+《Java 虚拟机规范》中对 Java 堆的描述是：所有的对象实例以及数组都应当在运行时分..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/7b36a8321e4c955f06220775c9c2cf4c.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/7b36a8321e4c955f06220775c9c2cf4c.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/">5. 本地方法接口和本地方法栈</a></h2><time class="has-text-grey" datetime="2022-11-18T00:51:33.638Z">2022-11-18</time><p class="is-flex-grow-2 mt-2">[TOC]
+5. 本地方法接口和本地方法栈5.1. 什么是本地方法？简单地讲，一个 Native Method 是一个 Java 调用非 Java 代码的接囗。一个 Native Method 是这样一个 Java 方法：该方法的实现由非 Java 语言实现，比如 C。这个特征并非 Java 所特有，很多其它的编程语言都有这一机制，比如在 C++中，你可以用 extern “c” 告知 c++编译器去调用一个 c 的函数。
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-16T09:42:58.146Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">16</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/">4. 虚拟机栈</a>
-    </h1>
-  
+A native method is a Java method whose implementation is provided by non-java code.
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-16T00:40:57.094Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">16</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/">3. 运行时数据区及程序计数器</a>
-    </h1>
-  
+在定义一个 native method 时，并不提供实现体（有些像定义一个 Java interface），因为其实..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/2d195f3aafd8b1f426efad75f0a52478.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/2d195f3aafd8b1f426efad75f0a52478.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/">4. 虚拟机栈</a></h2><time class="has-text-grey" datetime="2022-11-16T09:42:58.146Z">2022-11-16</time><p class="is-flex-grow-2 mt-2">[toc]
+4. 虚拟机栈4.1. 虚拟机栈概述4.1.1. 虚拟机栈出现的背景由于跨平台性的设计，Java 的指令都是根据栈来设计的。不同平台 CPU 架构不同，所以不能设计为基于寄存器的。
+优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。
+4.1.2. 初步印象有不少 Java 开发人员一提到 Java 内存结构，就会非常粗粒度地将 JVM 中的内存区理解为仅有 Java 堆（heap）和 Java 栈（stack）？为什么？
+4.1.3. 内存中的栈与堆栈是运行时的单位，而堆是存储的单位
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-15T13:36:11.647Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">15</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">(JVM)双亲委派机制</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-12T13:04:00.571Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">12</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">1. 零碎笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+栈解决程序的运行问题，即程序如何执行，或者说如何处理数据。
+堆解决的是数据存储的问题，即数据怎么放，放哪里
 
 
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/categories/JVM/page/2/">&amp;laquo; pre</a><a class="page-number" href="/categories/JVM/">1</a><a class="page-number" href="/categories/JVM/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+4.1.4. 虚拟机栈基本内容Java 虚拟机栈是什么？Java..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/b5d91ce04cfef9a681bbed216732511a.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/b5d91ce04cfef9a681bbed216732511a.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/">3. 运行时数据区及程序计数器</a></h2><time class="has-text-grey" datetime="2022-11-16T00:40:57.094Z">2022-11-16</time><p class="is-flex-grow-2 mt-2">
 
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
+[toc]
+3. 运行时数据区 及 程序计数器3.1. 运行时数据区3.1.1. 概述本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段
 
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
+当我们通过前面的：类的加载-&amp;gt; 验证 -&amp;gt; 准备 -&amp;gt; 解析 -&amp;gt; 初始化 这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区
+
+内存是非常重要的系统资源，是硬盘和 CPU 的中间仓库及桥梁，承载着操作系统和应用程序的实时运行 JVM 内存布局规定了 Java 在运行过程中内存申请、分配、管理的策略，保证了 JVM 的高效稳定运行。不同的 JVM 对于内存的划分方式和管理机制存在着部分差异。结合 JVM 虚拟机规范，来探讨一下经典的 JVM 内存布局。
+
+我们把大厨后面的东西（切好..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a><a href="/tags/interview"><i class="tag post-item-tag">interview</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">(JVM)双亲委派机制</a></h2><time class="has-text-grey" datetime="2022-11-15T13:36:11.647Z">2022-11-15</time><p class="is-flex-grow-2 mt-2">双亲委派机制Java 虚拟机对 class 文件采用的是按需加载的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是双亲委派模式，即把请求交由父类处理，它是一种任务委派模式。
+工作原理
+1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；
+2）如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；
+3）如果父类加载器可以完成类加载任务，就成功返回（就不会由子类加载器去加载了），倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式。
+
+
+举例：
+1. 
+
+出于安全考虑，Bootstrap 启..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/.com//Typora\RunningYuBlog\source\images\image-20221112210028078.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/"><img class="post-cover-img js-img-fadeIn" src="/.com//Typora\RunningYuBlog\source\images\image-20221112210028078.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">1. 零碎笔记</a></h2><time class="has-text-grey" datetime="2022-11-12T13:04:00.571Z">2022-11-12</time><p class="is-flex-grow-2 mt-2">
 
 
 
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
+Java虚拟机不只是适用于java语言，也适用于其它语言，只要其它语言通过编译器生成的字节码文件遵循java虚拟机的规则，java虚拟机就可以运行
 
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
+1.5. 虚拟机与 Java 虚拟机虚拟机
+所谓虚拟机（Virtual Machine），就是一台虚拟的计算机。它是一款软件，用来执行一系列虚拟计算机指令。大体上，虚拟机可以分为系统虚拟机和程序虚拟机。
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
+大名鼎鼎的 Visual Box，Mware 就属于系统虚拟机，它们完全是对物理计算机的仿真，提供了一个可运行完整操作系统的软件平台。
+程序虚拟机的典型代表就是 Java 虚拟机，它专门为执行单个计算机程序而设计，在 Java 虚拟机中执行的指令我们称为 Java 字节码指令。
 
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
+无论是系统虚拟机还是程序虚拟机，在上面运行的软件都被限制于虚拟机提供的..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">更多</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap mt-5"><a class="extend prev" rel="prev" href="/categories/JVM/page/2/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/categories/JVM/">1</a><a class="page-number" href="/categories/JVM/page/2/">2</a><span class="page-number current">3</span></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container categories-widget category-page"><h3>分类</h3><section><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MQ/">MQ</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nacos/">Nacos</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Netty/">Netty</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringSecurity/">SpringSecurity</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debug/">debug</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2/">hexo博客</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/interview/">interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/juc/">juc</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatisplus/">mybatisplus</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/springboot/">springboot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/sql/">sql</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/token/">token</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%80%A7/">安全性</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">定时任务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/">异常or报错</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/">数据封装</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">远程调用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/">零碎知识&笔记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a><span class="category-list-count">13</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
 
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
 
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
 
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
 
-
-
-
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
-
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
-</script>
-
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></body></html>

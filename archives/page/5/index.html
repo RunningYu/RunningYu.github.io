@@ -1,483 +1,142 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>归档 | Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo &amp; github">
-<meta property="og:url" content="http://example.com/archives/page/5/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="其然乐衣">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Haojen's blog</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>归档 · 全部</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/b73db20eea59665fa3de67e1dec6d4e5.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/10/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/4-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%88%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89%E8%AF%A6%E8%A7%A3/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/b73db20eea59665fa3de67e1dec6d4e5.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><i class="tag post-item-tag">JVM中篇：字节码与类的加载器</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/10/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/4-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%88%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89%E8%AF%A6%E8%A7%A3/">4-类的加载过程（类的生命周期）详解</a></h2><time class="has-text-grey" datetime="2023-01-10T14:08:57.478Z">2023-01-10</time><p class="is-flex-grow-2 mt-2">[toc]
+1. 概述在 Java 中数据类型分为基本数据类型和引用数据类型。基本数据类型由虚拟机预先定义，引用数据类型则需要进行类的加载。
+按照 Java 虚拟机规范，从 class 文件到加载到内存中的类，到类卸载出内存为止，它的整个生命周期包括如下 7 个阶段：
 
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+其中，验证、准备、解析 3 个部分统称为链接（Linking）
+从程序中类的使用过程看
 
-  
-
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap animated rubberBand">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/" class="archive-article-date">
-  <time class="post-time" datetime="2023-01-09T14:34:18.875Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">leetcode-134.加油站</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  <time class="post-time" datetime="2023-01-09T07:12:26.476Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">02-javap使用</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/" class="archive-article-date">
-  <time class="post-time" datetime="2023-01-09T02:19:47.567Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/">03-字节码指令集</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/" class="archive-article-date">
-  <time class="post-time" datetime="2023-01-03T06:11:47.180Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">03</span>
-  </time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap animated rubberBand">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/" class="archive-article-date">
-  <time class="post-time" datetime="2022-12-20T16:46:49.635Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">21</span>
-  </time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/" class="archive-article-date">
-  <time class="post-time" datetime="2022-12-16T17:25:51.584Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">17</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/">java.lang.ClassNotFoundException lombok.Data</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" class="archive-article-date">
-  <time class="post-time" datetime="2022-12-12T09:06:59.689Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">12</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">数据同步</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" class="archive-article-date">
-  <time class="post-time" datetime="2022-12-03T12:27:01.326Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">03</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">Spring Boot事务回滚</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" class="archive-article-date">
-  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">01</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/">Minio设置文件永久访问和下载</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" class="archive-article-date">
-  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">01</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">云服务器docker安装MinIO</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+大厂面试题
+蚂蚁金服：
+描述一下 JVM 加载 Class 文件的原理机制？
+一面：类加载过程
+百度：
+类加载的时机
+java 类加载过程？
+简述 java 类加载机制？
+腾讯：
+JVM 中类加载机制，类加载过程？
+滴滴：
+JVM 类加载机制
+美团：
+Java 类加载过程
+描述一下 jvm 加载 class 文件的原理机制
+京东：
+什么是类的加载？
+哪..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/10/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/4-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%88%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89%E8%AF%A6%E8%A7%A3/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../../images/image-20230109224824634.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/"><img class="post-cover-img js-img-fadeIn" src="/../../../images/image-20230109224824634.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%88%B7%E9%A2%98"><i class="tag post-item-tag">刷题</i></a><a href="/tags/leetcode"><i class="tag post-item-tag">leetcode</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">leetcode-134.加油站</a></h2><time class="has-text-grey" datetime="2023-01-09T14:34:18.875Z">2023-01-09</time><p class="is-flex-grow-2 mt-2">题目：在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
+给定两个整数数组 gas 和 cost ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1 。如果存在解，则 保证 它是 唯一 的。
+示例 1:
+12345678910输入: gas = [1,2,3,4,5], cost = [3,4,5,1,2]输出: 3解释:从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油开往 0 号加油站，此时油箱有..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../../images/image-20230109105233604.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/"><img class="post-cover-img js-img-fadeIn" src="/../../../images/image-20230109105233604.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><i class="tag post-item-tag">JVM中篇：字节码与类的加载器</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">02-javap使用</a></h2><time class="has-text-grey" datetime="2023-01-09T07:12:26.476Z">2023-01-09</time><p class="is-flex-grow-2 mt-2">1、解析字节码的作用
+2、javac -g 操作
+3、javap的用法
 
 
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/archives/page/4/">&amp;laquo; pre</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/page/6/">6</a><a class="page-number" href="/archives/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/16/">16</a><a class="extend next" rel="next" href="/archives/page/6/">next &amp;raquo;</a>
-  </nav>
+注意：-v虽然包含的信息很全，但是不包含私有private的，用 **-v -p **才可以带上私有的，这样信息就是最全的了
+如：演示javap -s （输出内部类型签名）：
 
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
+演示 javap -l （输出行号和本地变量表（局部变量表））：
 
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
+-c 和 -v 的内容对比：
 
 
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+javap解析得到的文件结构的解读
 
 
 
 
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
 
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
 
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
-</script>
 
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-
-<script src="/js/script.js"></script>
+javap使用小结
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/630bca9b1bbeeeb4f772fea5f94d43fc.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/630bca9b1bbeeeb4f772fea5f94d43fc.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><i class="tag post-item-tag">JVM中篇：字节码与类的加载器</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/">03-字节码指令集</a></h2><time class="has-text-grey" datetime="2023-01-09T02:19:47.567Z">2023-01-09</time><p class="is-flex-grow-2 mt-2">[toc]
+1. 概述
+2. 加载与存储指令
 
 
 
 
-  </div>
-</body>
-</html>
+
+2.1. 局部变量压栈指令
+iload 从局部变量中装载int类型值
+lload 从局部变量中装载long类型值
+fload 从局部变量中装载float类型值
+dload 从局部变量中装载double类型值
+aload 从局部变量中装载引用类型值（refernce）
+iload_0 从局部变量0中装载int类型值
+iload_1 从局部变量1中装载int类型值
+iload_2 从局部变量2中装载int类型值
+iload_3 从局部变量3中装载int类型值
+lload_0 从局部变量0中装载long类型值
+lload_1 从局部变量1中装载long类型值
+lload_2 从局部变量2中装载long类型值
+lload_3 从局部变量3中装载long类型值
+..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../../images/image-20230103141407495.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/"><img class="post-cover-img js-img-fadeIn" src="/../../../images/image-20230103141407495.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><time class="has-text-grey" datetime="2023-01-03T06:11:47.180Z">2023-01-03</time><p class="is-flex-grow-2 mt-2">为什么学字节码文件的原因：
+
+
+
+
+java前端编译器
+
+一个程序的性能是否高效，其实跟语言是没太大的关系的，主要是编译器，比如java在早期的时候，没有编译器只有解释器，然后就很慢，后来又了JIT编译器后，就快很多了。
+前端编译器 vs 后端编译器
+
+透过字节码指令看代码执行细节：
+
+
+
+例子2：
+
+例子3：
+
+12* 成员变量（非静态的）赋值过程：1.默认初始化 - 2.显示初始化 / 代码块中初始化 - 3. 构造器中初始化 -*                         4.有了对象之后，可以“对象.属性” 或 “对象.方法” 的方式对成员变量进行赋值
+
+
+
+
+解读Class文件的三种方式
+
+
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221221005142575.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221221005142575.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><time class="has-text-grey" datetime="2022-12-20T16:46:49.635Z">2022-12-21</time><p class="is-flex-grow-2 mt-2">当你的实体类实现了序列化接口，当你去查询数据库的实体类时，有时候会报错，有时候又不会报，我也不知道为什么，报错如下：
+java.ang.ClassCastException: lass com.webloq.entity.User cannot be cast to class javaang,String (com.webloq,entity.User is in unnamed module of loader 
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/20191219191118357.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/20191219191118357.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99"><i class="tag post-item-tag">异常or报错</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/">java.lang.ClassNotFoundException lombok.Data</a></h2><time class="has-text-grey" datetime="2022-12-16T17:25:51.584Z">2022-12-17</time><p class="is-flex-grow-2 mt-2">springboot项目启动报错:
+
+原因：mysql datetime类型，实体类 写成了 Data
+
+把Data全部改为Date即可：
+
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221212170758302.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221212170758302.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">数据同步</a></h2><time class="has-text-grey" datetime="2022-12-12T09:06:59.689Z">2022-12-12</time><p class="is-flex-grow-2 mt-2">方案一：同步调用
+如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。
+方案二：异步通知
+利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。
+方案三：监听binlog
+总结：
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4b9858bcb9f4d22a5cc2931883efe1e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4b9858bcb9f4d22a5cc2931883efe1e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%AE%89%E5%85%A8%E6%80%A7"><i class="tag post-item-tag">安全性</i></a><a href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A"><i class="tag post-item-tag">事务回滚</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">Spring Boot事务回滚</a></h2><time class="has-text-grey" datetime="2022-12-03T12:27:01.326Z">2022-12-03</time><p class="is-flex-grow-2 mt-2">前言我们开发系统的时候经常会遇到一些关于交易的需求，交易的过程大多数都比较繁琐（会包括修改库存、修改余额、记录交易账单等等步骤），这时候我们就不得不考虑其中的潜在风险了，比如我们在交易的过程中修改了库存（库存 -1），接下来需要进行支付操作，但是此时系统突然宕机或者网络突然中断，这也就导致我们无法完成整个交易流程，虽然用户还没付钱，但是我们的库存变少了（商家肯定就不高兴了👿），所以我们就需要用到事务回滚来解决上述的问题。
+Spring Boot 事务回滚我们有两种方式可以实现事务回滚，第一种是自动回滚，第二种是手动回滚，这两种实现方式大同小异，二者都需要使用 @Transactional 注解来实现事务回滚，下面直接上代码，看看二者之间到底哪里不一样。
+在接口实现类中有一个插入会员信息的方法，咱们就对这个..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8"><i class="tag post-item-tag">文件服务器</i></a><a href="/tags/MinIO"><i class="tag post-item-tag">MinIO</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">云服务器docker安装MinIO</a></h2><time class="has-text-grey" datetime="2022-12-01T12:03:32.526Z">2022-12-01</time><p class="is-flex-grow-2 mt-2">
+执行命令 docker pull minio/minio 下载稳定版本镜像
+
+
+1docker pull minio/minio
+
+
+
+创建并启动minio容器
+
+ MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码
+1docker run -p 9000:9000 -p 9001:9001 -d --name minio -v /opt/docker/minio/data:/data -v /opt/docker/minio/config:/root/.minio -e &quot;MINIO_ROOT_USER=minio&quot; -e &quot;MINIO_ROOT_PASSWORD=minio@123456&quot; minio/minio ser..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">更多</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap mt-5"><a class="extend prev" rel="prev" href="/archives/page/4/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/page/6/">6</a><a class="page-number" href="/archives/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/16/">16</a><a class="extend next" rel="next" href="/archives/page/6/"><i class="iconfont icon-next has-text-grey"></i></a></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container archives-widget is-in-archive-page"><h3>归档</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">102</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></body></html>

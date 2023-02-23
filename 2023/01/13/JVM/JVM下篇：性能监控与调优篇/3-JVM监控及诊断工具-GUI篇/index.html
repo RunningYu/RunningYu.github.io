@@ -1,166 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>3-JVM监控及诊断工具-GUI篇 | Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[toc] 3. JVM 监控及诊断工具-GUI 篇3.1. 工具概述使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：  1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。 2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。 3．分析数据通过终端输出，结果展示不够">
-<meta property="og:type" content="article">
-<meta property="og:title" content="3-JVM监控及诊断工具-GUI篇">
-<meta property="og:url" content="http://example.com/2023/01/13/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/3-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-GUI%E7%AF%87/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="[toc] 3. JVM 监控及诊断工具-GUI 篇3.1. 工具概述使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：  1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。 2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。 3．分析数据通过终端输出，结果展示不够">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/2a3da9e0684da25f3603859309a31002.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/01d1c91e8a41137321af9334a383eeda.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/fd74276fd1dd7e4542994d1da5768bff.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/c590dbcfb21edbf73f9b7a4d4e342cb7.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/0394d3dec7f075f88d1321565e4b0c40.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/5778843e25883aed6ee8591e7f57465a.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/750e766290dd3ce1c31bece436870f96.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/43a8b0745532825ab4a262a953aa5ffd.png">
-<meta property="og:image" content="http://example.com/images/image-20230115232529855.png">
-<meta property="og:image" content="http://example.com/images/image-20230115233142987.png">
-<meta property="og:image" content="http://example.com/images/image-20230115233917603.png">
-<meta property="og:image" content="http://example.com/images/image-20230115235544669.png">
-<meta property="og:image" content="http://example.com/images/image-20230115235106767.png">
-<meta property="og:image" content="http://example.com/images/image-20230116005955792.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/23d0ea8c73c4e7fb57f47fba7ee39f3f.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e5dad78d08ba1aee3a9583c33d83c53f.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b25b5cb539c1d5622f4855dffb1fd21e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/0e41893c02f420e50d36c59acf3021b6.png">
-<meta property="og:image" content="http://example.com/images/image-20230116105849445.png">
-<meta property="og:image" content="http://example.com/images/image-20230116105921931.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b385d959623a0684d1a40700f4bc1243.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/aa57ab4a3183801e003546c177ab64ee.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/75200c0d6aeaaade33422d40bd64beb3.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/6342c78f10e0c8d96243ae69c280c742.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/eda04270592f6cf5cc53f6300f9f084a.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/944971c96b35f20aa4073a39ee8f678e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/983f44592d93befafdb1818ea9fb7603.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/49b08570bc68a4ccb1b76c610001160e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/12e4a0779da98da28310602aa727fe77.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/ffb0632996afc5ab68554c918c6ba5c5.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/9328465f8078d485d713866676fedddd.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/2d40f4905776b879b96ea26323b5437e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/054ba6962384453984936f4dc2fe5f64.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/18074c3907f5b0b197cd88802897a758.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/042f2d109ebcf51894f822706963e399.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/d96c890e6187bcfa8d4a558be64354e6.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/dbaae7f62c614ef03aebb267b4249650.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a0bc985fd0274fc17c9dc2e8e205a8a2.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/fe38780df6ccf1c3f3206baaa089ff1a.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/0e8ab54b4fdc5cd2f4d7e1cda87dfe52.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/ef07d257c25f15fe7d6bfdbe6ee0f087.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/3f65159c21e0c6996588c90c7c5ca8e6.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/c2692cea072a29b00b420933892ae9f9.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/8df058bdfb18387a90cd5dd87a2a2f04.png">
-<meta property="article:published_time" content="2023-01-13T02:54:04.032Z">
-<meta property="article:modified_time" content="2023-01-19T14:34:35.901Z">
-<meta property="article:author" content="其然乐衣">
-<meta property="article:tag" content="JVM">
-<meta property="article:tag" content="JVM下篇：性能监控与调优篇">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/2a3da9e0684da25f3603859309a31002.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>3-JVM监控及诊断工具-GUI篇</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="[toc]
+3. JVM 监控及诊断工具-GUI 篇3.1. 工具概述使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：
 
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。
+2．要求用户登录到目标 Java 应用所在的宿主机上，使用起来不是很方便。
+3．分析数据通过终端输出，结果展示不够直观。
 
-  
+为此，JDK 提供了一些内存泄漏的分析工具，如 jconsole，jvisualvm 等，用于辅助开发人员定位问题，但是这些工具很多时候并不足以满足快速定位的需求。所以这里我们介绍的工具相对多一些、丰富一些。
+JDK 自带的工具
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-        <section id="main"><article id="post-JVM/JVM下篇：性能监控与调优篇/3-JVM监控及诊断工具-GUI篇" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/01/13/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/3-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-GUI%E7%AF%87/" class="article-date">
-  <time class="post-time" datetime="2023-01-13T02:54:04.032Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">13</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      3-JVM监控及诊断工具-GUI篇
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/">JVM下篇：性能监控与调优篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
+jconsole：JDK 自带的可视化监控工具。查看 Java 应用程序的.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">3-JVM监控及诊断工具-GUI篇</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-JVM-%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-GUI-%E7%AF%87"><span class="toc-text">3. JVM 监控及诊断工具-GUI 篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%B7%A5%E5%85%B7%E6%A6%82%E8%BF%B0"><span class="toc-text">3.1. 工具概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-JConsole"><span class="toc-text">3.2. JConsole</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Visual-VM"><span class="toc-text">3.3. Visual VM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-Eclipse-MAT"><span class="toc-text">3.4. Eclipse MAT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-JProfiler"><span class="toc-text">3.5. JProfiler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-Arthas"><span class="toc-text">3.6. Arthas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-Java-Misssion-Control"><span class="toc-text">3.7. Java Misssion Control</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-%E5%85%B6%E4%BB%96%E5%B7%A5%E5%85%B7"><span class="toc-text">3.8. 其他工具</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87"><i class="tag post-item-tag">JVM下篇：性能监控与调优篇</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">3-JVM监控及诊断工具-GUI篇</h1><time class="has-text-grey" datetime="2023-01-13T02:54:04.032Z">2023-01-13</time><article class="mt-2 post-content"><p>[toc]</p>
 <h1 id="3-JVM-监控及诊断工具-GUI-篇"><a href="#3-JVM-监控及诊断工具-GUI-篇" class="headerlink" title="3. JVM 监控及诊断工具-GUI 篇"></a>3. JVM 监控及诊断工具-GUI 篇</h1><h2 id="3-1-工具概述"><a href="#3-1-工具概述" class="headerlink" title="3.1. 工具概述"></a>3.1. 工具概述</h2><p>使用上一章命令行工具或组合能帮您获取目标 Java 应用性能相关的基础信息，但它们存在下列局限：</p>
 <ul>
 <li>1．无法获取方法级别的分析数据，如方法间的调用关系、各方法的调用次数和调用时间等（这对定位应用性能瓶颈至关重要）。</li>
@@ -194,7 +46,7 @@
 <h2 id="3-3-Visual-VM"><a href="#3-3-Visual-VM" class="headerlink" title="3.3. Visual VM"></a>3.3. Visual VM</h2><p>Visual VM 是一个功能强大的多合一故障诊断和性能监控的可视化工具。它集成了多个 JDK 命令行工具，使用 Visual VM 可用于显示虚拟机进程及进程的配置和环境信息（jps，jinfo），监视应用程序的 CPU、GC、堆、方法区及线程的信息（jstat、jstack）等，甚至代替 JConsole。在 JDK 6 Update 7 以后，Visual VM 便作为 JDK 的一部分发布（VisualVM 在 JDK／bin 目录下）即：它完全免费。</p>
 <p><strong>主要功能：</strong></p>
 <ul>
-<li>1.生成&#x2F;读取堆内存&#x2F;线程快照</li>
+<li>1.生成/读取堆内存/线程快照</li>
 <li>2.查看 JVM 参数和系统属性</li>
 <li>3.查看运行中的虚拟机进程</li>
 <li>4.程序资源的实时监控</li>
@@ -208,7 +60,7 @@
 <p><img src="/../../../images/image-20230115233142987.png" alt="image-20230115233142987"></p>
 <p>举例：生成和分析线程dump文件，可以监视线程死锁等问题</p>
 <p><img src="/../../../images/image-20230115233917603.png" alt="image-20230115233917603"></p>
-<p>当我们发现服务器性能急速地变慢，cpu占用率很高，我们就可以查看 抽样器–&gt;CPU–&gt;CPU样例&#x2F;快照&#x2F;线程CPU时间</p>
+<p>当我们发现服务器性能急速地变慢，cpu占用率很高，我们就可以查看 抽样器–&gt;CPU–&gt;CPU样例/快照/线程CPU时间</p>
 <p><img src="/../../../images/image-20230115235544669.png" alt="image-20230115235544669"></p>
 <p>没有发现OOM，但发现Full GC的次数比较多，这时候可以看看是不是存在内存溢出的问题，可以查看 抽样器–&gt;内存，可以看到哪些线程的相关的数据占有的比较多。且可以生成dump快照文件保存</p>
 <p><img src="/../../../images/image-20230115235106767.png" alt="image-20230115235106767"></p>
@@ -333,24 +185,24 @@
 </ul>
 <p>官方地址：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/quick-start.html">https://arthas.aliyun.com/doc/quick-start.html</a></p>
 <p>安装方式：如果速度较慢，可以尝试国内的码云 Gitee 下载。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://io/arthas/arthas-boot.jar</span><br><span class="line">wget https://arthas/gitee/io/arthas-boot.jar</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://io/arthas/arthas-boot.jar</span><br><span class="line">wget https://arthas/gitee/io/arthas-boot.jar</span><br></pre></td></tr></tbody></table></figure>
 
 <p>Arthas 只是一个 java 程序，所以可以直接用 java -jar 运行。</p>
 <p>除了在命令行查看外，Arthas 目前还支持 Web Console。在成功启动连接进程之后就已经自动启动,可以直接访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:8563/">http://127.0.0.1:8563/</a> 访问，页面上的操作模式和控制台完全一样。</p>
 <p><strong>基础指令</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">quit/exit 退出当前 Arthas客户端，其他 Arthas喜户端不受影响</span><br><span class="line">stop/shutdown 关闭 Arthas服务端，所有 Arthas客户端全部退出</span><br><span class="line">help 查看命令帮助信息</span><br><span class="line">cat 打印文件内容，和linux里的cat命令类似</span><br><span class="line">echo 打印参数，和linux里的echo命令类似</span><br><span class="line">grep 匹配查找，和linux里的gep命令类似</span><br><span class="line">tee 复制标隹输入到标准输出和指定的文件，和linux里的tee命令类似</span><br><span class="line">pwd 返回当前的工作目录，和linux命令类似</span><br><span class="line">cls 清空当前屏幕区域</span><br><span class="line">session 查看当前会话的信息</span><br><span class="line">reset 重置增强类，将被 Arthas增强过的类全部还原, Arthas服务端关闭时会重置所有增强过的类</span><br><span class="line">version 输出当前目标Java进程所加载的 Arthas版本号</span><br><span class="line">history 打印命令历史</span><br><span class="line">keymap Arthas快捷键列表及自定义快捷键</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">quit/exit 退出当前 Arthas客户端，其他 Arthas喜户端不受影响</span><br><span class="line">stop/shutdown 关闭 Arthas服务端，所有 Arthas客户端全部退出</span><br><span class="line">help 查看命令帮助信息</span><br><span class="line">cat 打印文件内容，和linux里的cat命令类似</span><br><span class="line">echo 打印参数，和linux里的echo命令类似</span><br><span class="line">grep 匹配查找，和linux里的gep命令类似</span><br><span class="line">tee 复制标隹输入到标准输出和指定的文件，和linux里的tee命令类似</span><br><span class="line">pwd 返回当前的工作目录，和linux命令类似</span><br><span class="line">cls 清空当前屏幕区域</span><br><span class="line">session 查看当前会话的信息</span><br><span class="line">reset 重置增强类，将被 Arthas增强过的类全部还原, Arthas服务端关闭时会重置所有增强过的类</span><br><span class="line">version 输出当前目标Java进程所加载的 Arthas版本号</span><br><span class="line">history 打印命令历史</span><br><span class="line">keymap Arthas快捷键列表及自定义快捷键</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>jvm 相关</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dashboard 当前系统的实时数据面板</span><br><span class="line">thread 查看当前JVM的线程堆栈信息</span><br><span class="line">jvm 查看当前JVM的信息</span><br><span class="line">sysprop 查看和修改JVM的系统属性</span><br><span class="line">sysem 查看JVM的环境变量</span><br><span class="line">vmoption 查看和修改JVM里诊断相关的option</span><br><span class="line">perfcounter 查看当前JVM的 Perf Counter信息</span><br><span class="line">logger 查看和修改logger</span><br><span class="line">getstatic 查看类的静态属性</span><br><span class="line">ognl 执行ognl表达式</span><br><span class="line">mbean 查看 Mbean的信息</span><br><span class="line">heapdump dump java heap，类似jmap命令的 heap dump功能</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dashboard 当前系统的实时数据面板</span><br><span class="line">thread 查看当前JVM的线程堆栈信息</span><br><span class="line">jvm 查看当前JVM的信息</span><br><span class="line">sysprop 查看和修改JVM的系统属性</span><br><span class="line">sysem 查看JVM的环境变量</span><br><span class="line">vmoption 查看和修改JVM里诊断相关的option</span><br><span class="line">perfcounter 查看当前JVM的 Perf Counter信息</span><br><span class="line">logger 查看和修改logger</span><br><span class="line">getstatic 查看类的静态属性</span><br><span class="line">ognl 执行ognl表达式</span><br><span class="line">mbean 查看 Mbean的信息</span><br><span class="line">heapdump dump java heap，类似jmap命令的 heap dump功能</span><br></pre></td></tr></tbody></table></figure>
 
-<p><strong>class&#x2F;classloader 相关</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sc 查看JVM已加载的类信息</span><br><span class="line">	-d 输出当前类的详细信息，包括这个类所加载的原始文件来源、类的声明、加载的Classloader等详细信息。如果一个类被多个Classloader所加载，则会出现多次</span><br><span class="line">	-E 开启正则表达式匹配，默认为通配符匹配</span><br><span class="line">	-f 输出当前类的成员变量信息（需要配合参数-d一起使用）</span><br><span class="line">	-X 指定输出静态变量时属性的遍历深度，默认为0，即直接使用toString输出</span><br><span class="line">sm 查看已加载类的方法信息</span><br><span class="line">	-d 展示每个方法的详细信息</span><br><span class="line">	-E 开启正则表达式匹配,默认为通配符匹配</span><br><span class="line">jad 反编译指定已加载类的源码</span><br><span class="line">mc 内存编译器，内存编译.java文件为.class文件</span><br><span class="line">retransform 加载外部的.class文件, retransform到JVM里</span><br><span class="line">redefine 加载外部的.class文件，redefine到JVM里</span><br><span class="line">dump dump已加载类的byte code到特定目录</span><br><span class="line">classloader 查看classloader的继承树，urts，类加载信息，使用classloader去getResource</span><br><span class="line">	-t 查看classloader的继承树</span><br><span class="line">	-l 按类加载实例查看统计信息</span><br><span class="line">	-c 用classloader对应的hashcode来查看对应的 Jar urls</span><br></pre></td></tr></table></figure>
+<p><strong>class/classloader 相关</strong></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sc 查看JVM已加载的类信息</span><br><span class="line">	-d 输出当前类的详细信息，包括这个类所加载的原始文件来源、类的声明、加载的Classloader等详细信息。如果一个类被多个Classloader所加载，则会出现多次</span><br><span class="line">	-E 开启正则表达式匹配，默认为通配符匹配</span><br><span class="line">	-f 输出当前类的成员变量信息（需要配合参数-d一起使用）</span><br><span class="line">	-X 指定输出静态变量时属性的遍历深度，默认为0，即直接使用toString输出</span><br><span class="line">sm 查看已加载类的方法信息</span><br><span class="line">	-d 展示每个方法的详细信息</span><br><span class="line">	-E 开启正则表达式匹配,默认为通配符匹配</span><br><span class="line">jad 反编译指定已加载类的源码</span><br><span class="line">mc 内存编译器，内存编译.java文件为.class文件</span><br><span class="line">retransform 加载外部的.class文件, retransform到JVM里</span><br><span class="line">redefine 加载外部的.class文件，redefine到JVM里</span><br><span class="line">dump dump已加载类的byte code到特定目录</span><br><span class="line">classloader 查看classloader的继承树，urts，类加载信息，使用classloader去getResource</span><br><span class="line">	-t 查看classloader的继承树</span><br><span class="line">	-l 按类加载实例查看统计信息</span><br><span class="line">	-c 用classloader对应的hashcode来查看对应的 Jar urls</span><br></pre></td></tr></tbody></table></figure>
 
-<p><strong>monitor&#x2F;watch&#x2F;trace 相关</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">monitor 方法执行监控，调用次数、执行时间、失败率</span><br><span class="line">	-c 统计周期，默认值为120秒</span><br><span class="line">watch 方法执行观测，能观察到的范围为：返回值、抛出异常、入参，通过编写groovy表达式进行对应变量的查看</span><br><span class="line">	-b 在方法调用之前观察(默认关闭)</span><br><span class="line">	-e 在方法异常之后观察(默认关闭)</span><br><span class="line">	-s 在方法返回之后观察(默认关闭)</span><br><span class="line">	-f 在方法结束之后(正常返回和异常返回)观察(默认开启)</span><br><span class="line">	-x 指定输岀结果的属性遍历深度,默认为0</span><br><span class="line">trace 方法内部调用路径,并输出方法路径上的每个节点上耗时</span><br><span class="line">	-n 执行次数限制</span><br><span class="line">stack 输出当前方法被调用的调用路径</span><br><span class="line">tt 方法执行数据的时空隧道,记录下指定方法每次调用的入参和返回信息,并能对这些不同的时间下调用进行观测</span><br></pre></td></tr></table></figure>
+<p><strong>monitor/watch/trace 相关</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">monitor 方法执行监控，调用次数、执行时间、失败率</span><br><span class="line">	-c 统计周期，默认值为120秒</span><br><span class="line">watch 方法执行观测，能观察到的范围为：返回值、抛出异常、入参，通过编写groovy表达式进行对应变量的查看</span><br><span class="line">	-b 在方法调用之前观察(默认关闭)</span><br><span class="line">	-e 在方法异常之后观察(默认关闭)</span><br><span class="line">	-s 在方法返回之后观察(默认关闭)</span><br><span class="line">	-f 在方法结束之后(正常返回和异常返回)观察(默认开启)</span><br><span class="line">	-x 指定输岀结果的属性遍历深度,默认为0</span><br><span class="line">trace 方法内部调用路径,并输出方法路径上的每个节点上耗时</span><br><span class="line">	-n 执行次数限制</span><br><span class="line">stack 输出当前方法被调用的调用路径</span><br><span class="line">tt 方法执行数据的时空隧道,记录下指定方法每次调用的入参和返回信息,并能对这些不同的时间下调用进行观测</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>其他</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jobs 列出所有job</span><br><span class="line">kill 强制终止任务</span><br><span class="line">fg 将暂停的任务拉到前台执行</span><br><span class="line">bg 将暂停的任务放到后台执行</span><br><span class="line">grep 搜索满足条件的结果</span><br><span class="line">plaintext 将命令的结果去除ANSI颜色</span><br><span class="line">wc 按行统计输出结果</span><br><span class="line">options 查看或设置Arthas全局开关</span><br><span class="line">profiler 使用async-profiler对应用采样，生成火焰图</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jobs 列出所有job</span><br><span class="line">kill 强制终止任务</span><br><span class="line">fg 将暂停的任务拉到前台执行</span><br><span class="line">bg 将暂停的任务放到后台执行</span><br><span class="line">grep 搜索满足条件的结果</span><br><span class="line">plaintext 将命令的结果去除ANSI颜色</span><br><span class="line">wc 按行统计输出结果</span><br><span class="line">options 查看或设置Arthas全局开关</span><br><span class="line">profiler 使用async-profiler对应用采样，生成火焰图</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="3-7-Java-Misssion-Control"><a href="#3-7-Java-Misssion-Control" class="headerlink" title="3.7. Java Misssion Control"></a>3.7. Java Misssion Control</h2><p>在 Oracle 收购 Sun 之前，Oracle 的 JRockit 虚拟机提供了一款叫做 JRockit Mission Control 的虚拟机诊断工具。</p>
 <p>在 Oracle 收购 sun 之后，Oracle 公司同时拥有了 Hotspot 和 JRockit 两款虚拟机。根据 Oracle 对于 Java 的战略，在今后的发展中，会将 JRokit 的优秀特性移植到 Hotspot 上。其中一个重要的改进就是在 Sun 的 JDK 中加入了 JRockit 的支持。</p>
@@ -405,210 +257,4 @@
 <p><strong>JProbe</strong></p>
 <p><strong>Spring Insight</strong></p>
 <hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/13/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/3-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-GUI%E7%AF%87/" data-id="cleebxr57007gxwv63gpp83uf" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/" rel="tag">JVM下篇：性能监控与调优篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2023/01/14/Netty/Netty01-nio/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          （Netty）1-nio
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2023/01/12/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/2-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">2-JVM监控及诊断工具-命令行篇</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-
-
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
-
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
-</script>
-
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/14/Netty/Netty01-nio/" title="（Netty）1-nio"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: （Netty）1-nio</span></a><a class="button is-default" href="/2023/01/12/JVM/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87/2-JVM%E7%9B%91%E6%8E%A7%E5%8F%8A%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%AF%87/" title="2-JVM监控及诊断工具-命令行篇"><span class="has-text-weight-semibold">下一页: 2-JVM监控及诊断工具-命令行篇</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>

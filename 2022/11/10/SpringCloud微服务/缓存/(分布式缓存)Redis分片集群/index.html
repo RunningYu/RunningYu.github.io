@@ -1,139 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>(分布式缓存)Redis分片集群 | Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对应的教程视频: 高级篇Day3-04-Redis分片集群_哔哩哔哩_bilibili  一.搭建分片集群1.集群结构分片集群需要的节点数量较多，这里我们搭建一个最小的分片集群，包含3个master节点，每个master包含一个slave节点，结构如下：  这里我们会在同一台虚拟机中开启6个redis实例，模拟分片集群，信息如下：    IP PORT 角色    192.168.150.101">
-<meta property="og:type" content="article">
-<meta property="og:title" content="(分布式缓存)Redis分片集群">
-<meta property="og:url" content="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="对应的教程视频: 高级篇Day3-04-Redis分片集群_哔哩哔哩_bilibili  一.搭建分片集群1.集群结构分片集群需要的节点数量较多，这里我们搭建一个最小的分片集群，包含3个master节点，每个master包含一个slave节点，结构如下：  这里我们会在同一台虚拟机中开启6个redis实例，模拟分片集群，信息如下：    IP PORT 角色    192.168.150.101">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/40dc06a7246f4a4bb906d2a1a89880af.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/3996838a0a8d4aafa2ea27d77698a752.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/0cafdb419d7f4d9bbf88cb1c8b6c9932.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/f148a5f1708d4df3abd3e1653c5b0720.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/a5aa8344a1794085a9e75c0ac4c48606.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/d503adec7799441393c540a612fdbef5.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/738e30bb8e714accbef06e39f2bf613a.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/8f145bf6f2a6461f867b2c8315cba342.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/df3fb8a272a4440b932f010e61538637.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/332c72d8d02346628cafc7371fab76f7.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/bd0e6e29a53443da94cafe455398d9bd.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/4e7f4e57eaac4a6e81d9aab993567722.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/7556d8dd6e6e4d66a3b239b2919e4430.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/eca3551a35d94234913ee0f3d59fce93.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/a77acca140d34f6b85e4aa3d10dde209.png">
-<meta property="article:published_time" content="2022-11-10T02:54:10.870Z">
-<meta property="article:modified_time" content="2022-11-10T03:06:28.247Z">
-<meta property="article:author" content="其然乐衣">
-<meta property="article:tag" content="微服务">
-<meta property="article:tag" content="redis">
-<meta property="article:tag" content="缓存">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/40dc06a7246f4a4bb906d2a1a89880af.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>(分布式缓存)Redis分片集群</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="对应的教程视频:
+高级篇Day3-04-Redis分片集群_哔哩哔哩_bilibili
 
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+一.搭建分片集群1.集群结构分片集群需要的节点数量较多，这里我们搭建一个最小的分片集群，包含3个master节点，每个master包含一个slave节点，结构如下：
 
-  
+这里我们会在同一台虚拟机中开启6个redis实例，模拟分片集群，信息如下：
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
 
-        <section id="main"><article id="post-SpringCloud微服务/缓存/(分布式缓存)Redis分片集群" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T02:54:10.870Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      (分布式缓存)Redis分片集群
-    </h1>
-  
+IP
+PORT
+角色
 
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/">缓存</a>
-  </div>
 
-          
-              
 
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="对应的教程视频"><a href="#对应的教程视频" class="headerlink" title="对应的教程视频:"></a>对应的教程视频:</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=153&vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-04-Redis分片集群_哔哩哔哩_bilibili</a></p>
+192.168.150.101
+7001
+master
+
+
+192.168.150.101
+7002
+master
+
+
+192.168.150.101
+7003
+master
+
+
+192.168.150.101
+8001
+slave
+
+
+192.168.150.101
+8002
+slave
+
+
+192.168.150.101
+8003
+slave.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">(分布式缓存)Redis分片集群</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E5%BA%94%E7%9A%84%E6%95%99%E7%A8%8B%E8%A7%86%E9%A2%91"><span class="toc-text">对应的教程视频:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E6%90%AD%E5%BB%BA%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4"><span class="toc-text">一.搭建分片集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%9B%86%E7%BE%A4%E7%BB%93%E6%9E%84"><span class="toc-text">1.集群结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%87%86%E5%A4%87%E5%AE%9E%E4%BE%8B%E5%92%8C%E9%85%8D%E7%BD%AE"><span class="toc-text">2.准备实例和配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%90%AF%E5%8A%A8"><span class="toc-text">3.启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="toc-text">4.创建集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95"><span class="toc-text">5.测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-%E6%95%A3%E5%88%97%E6%8F%92%E6%A7%BD"><span class="toc-text">二.散列插槽</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-%E9%9B%86%E7%BE%A4%E4%BC%B8%E7%BC%A9"><span class="toc-text">三.集群伸缩</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B-%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="toc-text">四.故障转移</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94-RedisTemplate%E8%AE%BF%E9%97%AE%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4"><span class="toc-text">五.RedisTemplate访问分片集群</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/redis"><i class="tag post-item-tag">redis</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">(分布式缓存)Redis分片集群</h1><time class="has-text-grey" datetime="2022-11-10T02:54:10.870Z">2022-11-10</time><article class="mt-2 post-content"><h1 id="对应的教程视频"><a href="#对应的教程视频" class="headerlink" title="对应的教程视频:"></a>对应的教程视频:</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=153&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-04-Redis分片集群_哔哩哔哩_bilibili</a></p>
 </blockquote>
 <h1 id="一-搭建分片集群"><a href="#一-搭建分片集群" class="headerlink" title="一.搭建分片集群"></a><strong>一.搭建分片集群</strong></h1><h2 id="1-集群结构"><a href="#1-集群结构" class="headerlink" title="1.集群结构"></a>1.集群结构</h2><p>分片集群需要的节点数量较多，这里我们搭建一个最小的分片集群，包含3个master节点，每个master包含一个slave节点，结构如下：</p>
 <p><img src="https://img-blog.csdnimg.cn/40dc06a7246f4a4bb906d2a1a89880af.png" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-If9nMNjR-1662083428136)(assets/image-20210702164116027.png)]"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
@@ -178,53 +90,53 @@
 </tr>
 </tbody></table>
 <h2 id="2-准备实例和配置"><a href="#2-准备实例和配置" class="headerlink" title="2.准备实例和配置"></a>2.准备实例和配置</h2><p>删除之前的7001、7002、7003这几个目录，重新创建出7001、7002、7003、8001、8002、8003目录：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 删除旧的，避免配置干扰</span><br><span class="line">rm -rf 7001 7002 7003</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir 7001 7002 7003 8001 8002 8003</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 删除旧的，避免配置干扰</span><br><span class="line">rm -rf 7001 7002 7003</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir 7001 7002 7003 8001 8002 8003</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>在&#x2F;tmp下准备一个新的redis.conf文件，内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">port 6379</span><br><span class="line"># 开启集群功能</span><br><span class="line">cluster-enabled yes</span><br><span class="line"># 集群的配置文件名称，不需要我们创建，由redis自己维护</span><br><span class="line">cluster-config-file /tmp/6379/nodes.conf</span><br><span class="line"># 节点心跳失败的超时时间</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line"># 持久化文件存放目录</span><br><span class="line">dir /tmp/6379</span><br><span class="line"># 绑定地址</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"># 让redis后台运行</span><br><span class="line">daemonize yes</span><br><span class="line"># 注册的实例ip</span><br><span class="line">replica-announce-ip 192.168.150.101</span><br><span class="line"># 保护模式</span><br><span class="line">protected-mode no</span><br><span class="line"># 数据库数量</span><br><span class="line">databases 1</span><br><span class="line"># 日志</span><br><span class="line">logfile /tmp/6379/run.log</span><br></pre></td></tr></table></figure>
+<p>在/tmp下准备一个新的redis.conf文件，内容如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">port 6379</span><br><span class="line"># 开启集群功能</span><br><span class="line">cluster-enabled yes</span><br><span class="line"># 集群的配置文件名称，不需要我们创建，由redis自己维护</span><br><span class="line">cluster-config-file /tmp/6379/nodes.conf</span><br><span class="line"># 节点心跳失败的超时时间</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line"># 持久化文件存放目录</span><br><span class="line">dir /tmp/6379</span><br><span class="line"># 绑定地址</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"># 让redis后台运行</span><br><span class="line">daemonize yes</span><br><span class="line"># 注册的实例ip</span><br><span class="line">replica-announce-ip 192.168.150.101</span><br><span class="line"># 保护模式</span><br><span class="line">protected-mode no</span><br><span class="line"># 数据库数量</span><br><span class="line">databases 1</span><br><span class="line"># 日志</span><br><span class="line">logfile /tmp/6379/run.log</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>将这个文件拷贝到每个目录下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 执行拷贝</span><br><span class="line">echo 7001 7002 7003 8001 8002 8003 | xargs -t -n 1 cp redis.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 执行拷贝</span><br><span class="line">echo 7001 7002 7003 8001 8002 8003 | xargs -t -n 1 cp redis.conf</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>修改每个目录下的redis.conf，将其中的6379修改为与所在目录一致：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 修改配置文件</span><br><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 8001 8002 8003 | xargs -I&#123;&#125; -t sed -i &#x27;s/6379/&#123;&#125;/g&#x27; &#123;&#125;/redis.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 修改配置文件</span><br><span class="line">printf '%s\n' 7001 7002 7003 8001 8002 8003 | xargs -I{} -t sed -i 's/6379/{}/g' {}/redis.conf</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <h2 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动"></a>3.启动</h2><p>因为已经配置了后台启动模式，所以可以直接启动服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 一键启动所有服务</span><br><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 8001 8002 8003 | xargs -I&#123;&#125; -t redis-server &#123;&#125;/redis.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 一键启动所有服务</span><br><span class="line">printf '%s\n' 7001 7002 7003 8001 8002 8003 | xargs -I{} -t redis-server {}/redis.conf</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>通过ps查看状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>发现服务都已经正常启动：</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-ZSycAyBD-1662083428139)(assets&#x2F;image-20210702174255799.png)]</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-ZSycAyBD-1662083428139)(assets/image-20210702174255799.png)]</p>
 <p>如果要关闭所有进程，可以执行命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis | awk &#x27;&#123;print $2&#125;&#x27; | xargs kill</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis | awk '{print $2}' | xargs kill</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>或者（推荐这种方式）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf &#x27;%s\n&#x27; 7001 7002 7003 8001 8002 8003 | xargs -I&#123;&#125; -t redis-cli -p &#123;&#125; shutdown</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf '%s\n' 7001 7002 7003 8001 8002 8003 | xargs -I{} -t redis-cli -p {} shutdown</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <h2 id="4-创建集群"><a href="#4-创建集群" class="headerlink" title="4.创建集群"></a>4.创建集群</h2><p>虽然服务启动了，但是目前每个服务之间都是独立的，没有任何关联。</p>
 <p>我们需要执行命令来创建集群，在Redis5.0之前创建集群比较麻烦，5.0之后集群管理命令都集成到了redis-cli中。</p>
 <p>1）Redis5.0之前</p>
-<p>Redis5.0之前集群命令都是用redis安装包下的src&#x2F;redis-trib.rb来实现的。因为redis-trib.rb是有ruby语言编写的所以需要安装ruby环境。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 安装依赖</span><br><span class="line">yum -y install zlib ruby rubygems</span><br><span class="line">gem install redis</span><br></pre></td></tr></table></figure>
+<p>Redis5.0之前集群命令都是用redis安装包下的src/redis-trib.rb来实现的。因为redis-trib.rb是有ruby语言编写的所以需要安装ruby环境。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 安装依赖</span><br><span class="line">yum -y install zlib ruby rubygems</span><br><span class="line">gem install redis</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>然后通过命令来管理集群：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入redis的src目录</span><br><span class="line">cd /tmp/redis-6.2.4/src</span><br><span class="line"># 创建集群</span><br><span class="line">./redis-trib.rb create --replicas 1 192.168.150.101:7001 192.168.150.101:7002 192.168.150.101:7003 192.168.150.101:8001 192.168.150.101:8002 192.168.150.101:8003</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入redis的src目录</span><br><span class="line">cd /tmp/redis-6.2.4/src</span><br><span class="line"># 创建集群</span><br><span class="line">./redis-trib.rb create --replicas 1 192.168.150.101:7001 192.168.150.101:7002 192.168.150.101:7003 192.168.150.101:8001 192.168.150.101:8002 192.168.150.101:8003</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>2）Redis5.0以后</p>
 <p>我们使用的是Redis6.2.4版本，集群管理以及集成到了redis-cli中，格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create --cluster-replicas 1 192.168.150.101:7001 192.168.150.101:7002 192.168.150.101:7003 192.168.150.101:8001 192.168.150.101:8002 192.168.150.101:8003</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create --cluster-replicas 1 192.168.150.101:7001 192.168.150.101:7002 192.168.150.101:7003 192.168.150.101:8001 192.168.150.101:8002 192.168.150.101:8003</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>命令说明：</p>
@@ -238,17 +150,17 @@
 <p>这里输入yes，则集群开始创建：</p>
 <p><img src="https://img-blog.csdnimg.cn/0cafdb419d7f4d9bbf88cb1c8b6c9932.png" alt="在这里插入图片描述"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>通过命令可以查看集群状态：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 7001 cluster nodes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 7001 cluster nodes</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p><img src="https://img-blog.csdnimg.cn/f148a5f1708d4df3abd3e1653c5b0720.png" alt="在这里插入图片描述"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <h2 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h2><p>尝试连接7001节点，存储一个数据：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 连接</span><br><span class="line">redis-cli -p 7001</span><br><span class="line"># 存储数据</span><br><span class="line">set num 123</span><br><span class="line"># 读取数据</span><br><span class="line">get num</span><br><span class="line"># 再次存储</span><br><span class="line">set a 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 连接</span><br><span class="line">redis-cli -p 7001</span><br><span class="line"># 存储数据</span><br><span class="line">set num 123</span><br><span class="line"># 读取数据</span><br><span class="line">get num</span><br><span class="line"># 再次存储</span><br><span class="line">set a 1</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>结果悲剧了</p>
 <p>集群操作时，需要给<code>redis-cli</code>加上**<code>-c</code>**参数才可以：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c -p 7001</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c -p 7001</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p><img src="https://img-blog.csdnimg.cn/a5aa8344a1794085a9e75c0ac4c48606.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
@@ -261,7 +173,7 @@
 <p>如何将同一类数据固定的保存在同一个Redis实例？</p>
 <p>•这一类数据使用相同的有效部分，例如key都以{typeId}为前缀. 如:</p>
 <p> <img src="https://img-blog.csdnimg.cn/738e30bb8e714accbef06e39f2bf613a.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="三-集群伸缩"><a href="#三-集群伸缩" class="headerlink" title="三.集群伸缩"></a>三.集群伸缩</h1><p><img src="https://img-blog.csdnimg.cn/8f145bf6f2a6461f867b2c8315cba342.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="三-集群伸缩"><a href="#三-集群伸缩" class="headerlink" title="三.集群伸缩"></a>三.集群伸缩</h1><p><img src="https://img-blog.csdnimg.cn/8f145bf6f2a6461f867b2c8315cba342.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p> <img src="https://img-blog.csdnimg.cn/df3fb8a272a4440b932f010e61538637.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p> <img src="https://img-blog.csdnimg.cn/332c72d8d02346628cafc7371fab76f7.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <h1 id="四-故障转移"><a href="#四-故障转移" class="headerlink" title="四.故障转移"></a>四.故障转移</h1><p><img src="https://img-blog.csdnimg.cn/bd0e6e29a53443da94cafe455398d9bd.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
@@ -269,210 +181,4 @@
 <p> <img src="https://img-blog.csdnimg.cn/7556d8dd6e6e4d66a3b239b2919e4430.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <h1 id="五-RedisTemplate访问分片集群"><a href="#五-RedisTemplate访问分片集群" class="headerlink" title="五.RedisTemplate访问分片集群"></a>五.RedisTemplate访问分片集群</h1><p><img src="https://img-blog.csdnimg.cn/eca3551a35d94234913ee0f3d59fce93.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p> <strong>上面的第1和第3步和哨兵模式的1和3是一样的,主要差别是第2步</strong><img src="https://img-blog.csdnimg.cn/a77acca140d34f6b85e4aa3d10dde209.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/" data-id="cleebxr5s0099xwv66zoqgric" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          多级缓存 （亿级流量的缓存方案）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">（分布式缓存）Redis哨兵</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-
-
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
-
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
-</script>
-
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" title="多级缓存 （亿级流量的缓存方案）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 多级缓存 （亿级流量的缓存方案）</span></a><a class="button is-default" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" title="（分布式缓存）Redis哨兵"><span class="has-text-weight-semibold">下一页: （分布式缓存）Redis哨兵</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>

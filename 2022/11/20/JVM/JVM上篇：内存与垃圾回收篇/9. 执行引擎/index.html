@@ -1,148 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>9. 执行引擎 | Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[toc] 9. 执行引擎9.1. 执行引擎概述执行引擎属于 JVM 的下层，里面包括解释器、及时编译器、垃圾回收器  执行引擎是 Java 虚拟机核心的组成部分之一。 “虚拟机”是一个相对于“物理机”的概念，这两种机器都有代码执行能力，其区别是物理机的执行引擎是直接建立在处理器、缓存、指令集和操作系统层面上的，而虚拟机的执行引擎则是由软件自行实现的，因此可以不受物理条件制约地定制指令集与执行引擎">
-<meta property="og:type" content="article">
-<meta property="og:title" content="9. 执行引擎">
-<meta property="og:url" content="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/9.%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="[toc] 9. 执行引擎9.1. 执行引擎概述执行引擎属于 JVM 的下层，里面包括解释器、及时编译器、垃圾回收器  执行引擎是 Java 虚拟机核心的组成部分之一。 “虚拟机”是一个相对于“物理机”的概念，这两种机器都有代码执行能力，其区别是物理机的执行引擎是直接建立在处理器、缓存、指令集和操作系统层面上的，而虚拟机的执行引擎则是由软件自行实现的，因此可以不受物理条件制约地定制指令集与执行引擎">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/9c0459b0f80a1c9bb534418b8e5a4ddd.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b28ff1d82bc72999d1cbbae3f419673d.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a03c1910e508456b690ec9088300de5f.png">
-<meta property="og:image" content="http://example.com/images/image-20221120193453610.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e2a8ec10bc97a061e4b77abf63936ba1.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/93e5f0b67767b7d783ace2471447f449.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/bf1139f9652e2a1ac0cab00df869e23e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f10a353479e6d2bca99abd4781fd9940.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/c812403e1ebae81455d5276b884e5ca8.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/71d4298a250e724d64d78a2d8ec67cdc.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/cba8c417f20ae9f6671e64574d2e229a.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f1a9c57cf4b6b4197b85d6e2a48a045e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7f26fbc3a6ec701fe4f84eea99811540.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/26dc8459b4b31e3d9c40b3aec10b15cd.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/4de983636a290fde3fea83a6cd60d6a5.png">
-<meta property="og:image" content="http://example.com/images/image-20221120214349955.png">
-<meta property="og:image" content="http://example.com/images/image-20221120214924904.png">
-<meta property="og:image" content="http://example.com/images/image-20221120214714985.png">
-<meta property="og:image" content="http://example.com/images/image-20221120215856902.png">
-<meta property="article:published_time" content="2022-11-20T09:22:55.257Z">
-<meta property="article:modified_time" content="2023-02-15T12:27:36.299Z">
-<meta property="article:author" content="其然乐衣">
-<meta property="article:tag" content="JVM">
-<meta property="article:tag" content="内存与垃圾回收篇">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/9c0459b0f80a1c9bb534418b8e5a4ddd.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>9. 执行引擎</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="[toc]
+9. 执行引擎9.1. 执行引擎概述执行引擎属于 JVM 的下层，里面包括解释器、及时编译器、垃圾回收器
 
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+执行引擎是 Java 虚拟机核心的组成部分之一。
+“虚拟机”是一个相对于“物理机”的概念，这两种机器都有代码执行能力，其区别是物理机的执行引擎是直接建立在处理器、缓存、指令集和操作系统层面上的，而虚拟机的执行引擎则是由软件自行实现的，因此可以不受物理条件制约地定制指令集与执行引擎的结构体系，能够执行那些不被硬件直接支持的指令集格式。
+JVM 的主要任务是负责装载字节码到其内部，但字节码并不能够直接运行在操作系统之上，因为字节码指令并非等价于本地机器指令，它内部包含的仅仅只是一些能够被 JVM 所识别的字节码指令、符号表，以及其他辅助信息。
 
-  
-
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-        <section id="main"><article id="post-JVM/JVM上篇：内存与垃圾回收篇/9. 执行引擎" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/9.%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/" class="article-date">
-  <time class="post-time" datetime="2022-11-20T09:22:55.257Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">20</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      9. 执行引擎
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
+那么，如果想要让一个 Java 程序运行起来，执.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">9. 执行引擎</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#9-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E"><span class="toc-text">9. 执行引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E6%A6%82%E8%BF%B0"><span class="toc-text">9.1. 执行引擎概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">9.1.1. 执行引擎的工作流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-Java-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-text">9.2. Java 代码编译和执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%A7%A3%E9%87%8A%E5%99%A8%EF%BC%88Interpreter%EF%BC%89%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF-JIT-%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%9F"><span class="toc-text">9.2.1. 什么是解释器（Interpreter）？什么是 JIT 编译器？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-2-%E4%B8%BA%E4%BB%80%E4%B9%88-Java-%E6%98%AF%E5%8D%8A%E7%BC%96%E8%AF%91%E5%8D%8A%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80%EF%BC%9F"><span class="toc-text">9.2.2. 为什么 Java 是半编译半解释型语言？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-%E6%9C%BA%E5%99%A8%E7%A0%81%E3%80%81%E6%8C%87%E4%BB%A4%E3%80%81%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="toc-text">9.3. 机器码、指令、汇编语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-1-%E6%9C%BA%E5%99%A8%E7%A0%81"><span class="toc-text">9.3.1. 机器码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-2-%E6%8C%87%E4%BB%A4"><span class="toc-text">9.3.2. 指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-3-%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="toc-text">9.3.3. 指令集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-4-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="toc-text">9.3.4. 汇编语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-5-%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80"><span class="toc-text">9.3.5. 高级语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#C%E3%80%81C-%E6%BA%90%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-text">C、C++源程序执行过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-6-%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-text">9.3.6. 字节码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4-%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-text">9.4. 解释器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-1-%E8%A7%A3%E9%87%8A%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-text">9.4.1. 解释器工作机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-2-%E8%A7%A3%E9%87%8A%E5%99%A8%E5%88%86%E7%B1%BB"><span class="toc-text">9.4.2. 解释器分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-3-%E7%8E%B0%E7%8A%B6"><span class="toc-text">9.4.3. 现状</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-5-JIT-%E7%BC%96%E8%AF%91%E5%99%A8"><span class="toc-text">9.5. JIT 编译器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-1-Java-%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E5%88%86%E7%B1%BB"><span class="toc-text">9.5.1. Java 代码的执行分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-2-HotSpot-JVM-%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-text">9.5.2. HotSpot JVM 执行方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-3-%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A"><span class="toc-text">9.5.3. 概念解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-4-%E7%83%AD%E7%82%B9%E4%BB%A3%E7%A0%81%E5%8F%8A%E6%8E%A2%E6%B5%8B%E6%8A%80%E6%9C%AF"><span class="toc-text">9.5.4. 热点代码及探测技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-text">方法调用计数器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E7%82%B9%E8%A1%B0%E5%87%8F"><span class="toc-text">热点衰减</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E8%BE%B9%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-text">回边计数器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-5-HotSpotVM-%E5%8F%AF%E4%BB%A5%E8%AE%BE%E7%BD%AE%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%96%B9%E6%B3%95"><span class="toc-text">9.5.5. HotSpotVM 可以设置程序执行方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-5-6-HotSpotVM-%E4%B8%AD-JIT-%E5%88%86%E7%B1%BB"><span class="toc-text">9.5.6. HotSpotVM 中 JIT 分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#C1-%E5%92%8C-C2-%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5"><span class="toc-text">C1 和 C2 编译器不同的优化策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%88%B0%E6%9C%80%E5%90%8E-1"><span class="toc-text">写到最后 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%88%B0%E6%9C%80%E5%90%8E-2%EF%BC%9AAOT-%E7%BC%96%E8%AF%91%E5%99%A8"><span class="toc-text">写到最后 2：AOT 编译器</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">9. 执行引擎</h1><time class="has-text-grey" datetime="2022-11-20T09:22:55.257Z">2022-11-20</time><article class="mt-2 post-content"><p>[toc]</p>
 <h1 id="9-执行引擎"><a href="#9-执行引擎" class="headerlink" title="9. 执行引擎"></a>9. 执行引擎</h1><h2 id="9-1-执行引擎概述"><a href="#9-1-执行引擎概述" class="headerlink" title="9.1. 执行引擎概述"></a>9.1. 执行引擎概述</h2><p>执行引擎属于 JVM 的下层，里面包括<mark>解释器、及时编译器、垃圾回收器</mark></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/9c0459b0f80a1c9bb534418b8e5a4ddd.png" alt="image-20200710080707873"></p>
 <p>执行引擎是 Java 虚拟机核心的组成部分之一。</p>
 <p>“虚拟机”是一个相对于“物理机”的概念，这两种机器都有代码执行能力，其区别是物理机的执行引擎是直接建立在处理器、缓存、指令集和操作系统层面上的，而<mark>虚拟机的执行引擎则是由软件自行实现的</mark>，因此可以不受物理条件制约地定制指令集与执行引擎的结构体系，<mark>能够执行那些不被硬件直接支持的指令集格式</mark>。</p>
 <p>JVM 的主要任务是负责<mark>装载字节码到其内部</mark>，但字节码并不能够直接运行在操作系统之上，因为字节码指令并非等价于本地机器指令，它内部包含的仅仅只是一些能够被 JVM 所识别的字节码指令、符号表，以及其他辅助信息。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/b28ff1d82bc72999d1cbbae3f419673d.png" alt="image-20200710081118053"></p>
-<p>那么，如果想要让一个 Java 程序运行起来，执行引擎（Execution Engine）的任务就是<mark>将字节码指令解释&#x2F;编译为对应平台上的本地机器指令</mark>.才可以。简单来说，JVM 中的执行引擎充当了将高级语言翻译为机器语言的译者。</p>
+<p>那么，如果想要让一个 Java 程序运行起来，执行引擎（Execution Engine）的任务就是<mark>将字节码指令解释/编译为对应平台上的本地机器指令</mark>.才可以。简单来说，JVM 中的执行引擎充当了将高级语言翻译为机器语言的译者。</p>
 <p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-H3dqdi5T-1620741818957)(<a target="_blank" rel="noopener" href="https://gitee.com/vectorx/ImageCloud/raw/master/img/20210511090655.png)]">https://gitee.com/vectorx/ImageCloud/raw/master/img/20210511090655.png)]</a></p>
 <h3 id="9-1-1-执行引擎的工作流程"><a href="#9-1-1-执行引擎的工作流程" class="headerlink" title="9.1.1. 执行引擎的工作流程"></a>9.1.1. 执行引擎的工作流程</h3><ol>
 <li>执行引擎在执行的过程中究竟需要执行什么样的字节码指令完全依赖于 PC 寄存器。</li>
@@ -208,7 +82,7 @@
 <li>Interpreter 模块：实现了解释器的核心功能</li>
 <li>Code 模块：用于管理 HotSpot VM 在运行时生成的本地机器指令</li>
 </ul>
-<h3 id="9-4-3-现状"><a href="#9-4-3-现状" class="headerlink" title="9.4.3. 现状"></a>9.4.3. 现状</h3><p>由于解释器在设计和实现上非常简单，因此除了 Java 语言之外，还有许多高级语言同样也是基于解释器执行的，比如 Python、Perl、Ruby 等。但是在今天，<mark>基于解释器执行已经沦落为低效的代名词</mark>，并且时常被一些 C&#x2F;C++程序员所调侃。</p>
+<h3 id="9-4-3-现状"><a href="#9-4-3-现状" class="headerlink" title="9.4.3. 现状"></a>9.4.3. 现状</h3><p>由于解释器在设计和实现上非常简单，因此除了 Java 语言之外，还有许多高级语言同样也是基于解释器执行的，比如 Python、Perl、Ruby 等。但是在今天，<mark>基于解释器执行已经沦落为低效的代名词</mark>，并且时常被一些 C/C++程序员所调侃。</p>
 <p>为了解决这个问题，JVM 平台支持一种叫作即时编译的技术。即时编译的目的是避免函数被解释执行，而是<mark>将整个函数体编译成为机器码，每次函数执行时，只执行编译后的机器码即可</mark>，这种方式可以使执行效率大幅度提升。</p>
 <p>不过无论如何，基于解释器的执行模式仍然为中间语言的发展做出了不可磨灭的贡献。</p>
 <h2 id="9-5-JIT-编译器"><a href="#9-5-JIT-编译器" class="headerlink" title="9.5. JIT 编译器"></a>9.5. JIT 编译器</h2><h3 id="9-5-1-Java-代码的执行分类"><a href="#9-5-1-Java-代码的执行分类" class="headerlink" title="9.5.1. Java 代码的执行分类"></a>9.5.1. Java 代码的执行分类</h3><ul>
@@ -218,7 +92,7 @@
 </li>
 </ul>
 <p>HotSpot VM 是目前市面上高性能虚拟机的代表作之一。它采用<mark>解释器与即时编译器并存的架构</mark>。在 Java 虚拟机运行时，解释器和即时编译器能够相互协作，各自取长补短，尽力去选择最合适的方式来权衡编译本地代码的时间和直接解释执行代码的时间。</p>
-<p>在今天，Java 程序的运行性能早已脱胎换骨，已经达到了可以和 C&#x2F;C++ 程序一较高下的地步。</p>
+<p>在今天，Java 程序的运行性能早已脱胎换骨，已经达到了可以和 C/C++ 程序一较高下的地步。</p>
 <p><strong>问题来了</strong></p>
 <p>有些开发人员会感觉到诧异，<mark>既然 HotSpot VM 中已经内置 JIT 编译器了，那么为什么还需要再使用解释器来“拖累”程序的执行性能呢？</mark>比如 JRockit VM 内部就不包含解释器，字节码全部都依靠即时编译器编译后执行。</p>
 <p>首先明确： 当程序启动后，解释器可以马上发挥作用，省去编译的时间，立即执行。 编译器要想发挥作用，把代码编译成本地代码，需要一定的执行时间。但编译为本地代码后，执行效率高。</p>
@@ -228,7 +102,7 @@
 <p>当虚拟机启动的时候，<mark>解释器可以首先发挥作用</mark>，而不必等待即时编译器全部编译完成再执行，这样可以省去许多不必要的编译时间。并且随着程序运行时间的推移，即时编译器逐渐发挥作用，根据热点探测功能，<mark>将有价值的字节码编译为本地机器指令</mark>，以换取更高的程序执行效率。</p>
 <p><strong>案例来了</strong></p>
 <p>注意解释执行与编译执行在线上环境微妙的辩证关系。<mark>机器在热机状态可以承受的负载要大于冷机状态</mark>。如果以热机状态时的流量进行切流，可能使处于冷机状态的服务器因无法承载流量而假死。</p>
-<p>在生产环境发布过程中，以分批的方式进行发布，根据机器数量划分成多个批次，每个批次的机器数至多占到整个集群的 1&#x2F;8。曾经有这样的故障案例：某程序员在发布平台进行分批发布，在输入发布总批数时，误填写成分为两批发布。如果是热机状态，在正常情况下一半的机器可以勉强承载流量，但由于刚启动的 JVM 均是解释执行，还没有进行热点代码统计和 JIT 动态编译，导致机器启动之后，当前 1&#x2F;2 发布成功的服务器马上全部宕机，此故障说明了 JIT 的存在。—阿里团队</p>
+<p>在生产环境发布过程中，以分批的方式进行发布，根据机器数量划分成多个批次，每个批次的机器数至多占到整个集群的 1/8。曾经有这样的故障案例：某程序员在发布平台进行分批发布，在输入发布总批数时，误填写成分为两批发布。如果是热机状态，在正常情况下一半的机器可以勉强承载流量，但由于刚启动的 JVM 均是解释执行，还没有进行热点代码统计和 JIT 动态编译，导致机器启动之后，当前 1/2 发布成功的服务器马上全部宕机，此故障说明了 JIT 的存在。—阿里团队</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/7f26fbc3a6ec701fe4f84eea99811540.png" alt="image-20200710095417462"></p>
 <h3 id="9-5-3-概念解释"><a href="#9-5-3-概念解释" class="headerlink" title="9.5.3. 概念解释"></a>9.5.3. 概念解释</h3><p>Java 语言的“编译期”其实是一段“不确定”的操作过程，因为它可能是指一个<mark>前端编译器</mark>（其实叫“编译器的前端”更准确一些）把.java 文件转变成.class 文件的过程；</p>
 <p>也可能是指虚拟机的<mark>后端运行期编译器</mark>（JIT 编译器，Just In Time Compiler）把字节码转变成机器码的过程。</p>
@@ -308,210 +182,4 @@
 <li><mark>降低了 Java 链接过程的动态性</mark>，加载的代码在编译器就必须全部已知。</li>
 <li>还需要继续优化中，最初只支持 Linux X64 java base</li>
 </ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/9.%20%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/" data-id="cleebxr4y0074xwv6bzinfbv6" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/2.%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          2. 类加载子系统
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/8.%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">8. 对象实例化及直接内存</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-
-
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
-
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
-</script>
-
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/2.%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" title="2. 类加载子系统"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 2. 类加载子系统</span></a><a class="button is-default" href="/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/8.%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8F%8A%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98/" title="8. 对象实例化及直接内存"><span class="has-text-weight-semibold">下一页: 8. 对象实例化及直接内存</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>

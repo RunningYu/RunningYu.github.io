@@ -1,485 +1,265 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>归档: 2022/11 | Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo &amp; github">
-<meta property="og:url" content="http://example.com/archives/2022/11/page/5/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="其然乐衣">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Haojen's blog</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>归档 · 2022</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/rabbitmq"><i class="tag post-item-tag">rabbitmq</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/">rabbitmq的高级特性</a></h2><time class="has-text-grey" datetime="2022-11-10T09:17:35.388Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">MQ的一些常见问题
+消息可靠性问题：如何确保发送的消息至少被消费一次
+延迟消息问题：如何实现消息的延迟投递
+消息堆积问题：如何解决数百万消息堆积，无法及时消费的问题
+高可用问题：如何避免单点的MQ故障而导致的不可用问题
 
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+一、消息可靠性
 
-  
+(78条消息) （rabbitmq的高级特性）消息可靠性_其然乐衣的博客-CSDN博客
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
+二、死信交换机
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
+(18条消息) (rabbitmq的高级特性)死信交换机_其然乐衣的博客-CSDN博客
 
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap animated rubberBand">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T09:17:35.388Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/">rabbitmq的高级特性</a>
-    </h1>
-  
+三、惰性队列
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T09:14:33.596Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/">（多级缓存）缓存同步</a>
-    </h1>
-  
+(19条消息) （rabbitmq的高级特性）惰性队列_其然乐衣的博客-CSDN博客
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T09:09:28.079Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/">（多级缓存）多级缓存</a>
-    </h1>
-  
+四、MQ集群
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T09:08:21.490Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/">安装OpenResty</a>
-    </h1>
-  
+(19条消息) （rabbitmq的高级特性）MQ集群_其然乐衣的博客-CSDN博客
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T08:57:52.716Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/">（多级缓存）Lua语法入门</a>
-    </h1>
-  
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/MQ/rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/bda8a839d8e3410aac0f850fcb0e4217.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/bda8a839d8e3410aac0f850fcb0e4217.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/">（多级缓存）缓存同步</a></h2><time class="has-text-grey" datetime="2022-11-10T09:14:33.596Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的教程视频：
+高级篇Day4-04-缓存同步_哔哩哔哩_bilibili
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T08:54:17.279Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/">（多级缓存）JVM进程缓存</a>
-    </h1>
-  
+一、数据同步策略缓存数据同步的常见方式有三种：
+•设置有效期：给缓存设置有效期，到期后自动删除。再次查询时更新
+•优势：简单、方便
+•缺点：时效性差，缓存过期之前可能不一致
+•场景：更新频率较低，时效性要求低的业务
+•同步双写：在修改数据库的同时，直接修改缓存
+•优势：时效性强，缓存与数据库强一致
+•缺点：有代码侵入，耦合度高；
+•场景：对一致性、时效性要求较高的缓存数据
+•异步通知：修改数据库时发送事件通知，相关服务监听到通知后修改缓存数据
+•优势：低耦合，可以同时通知多个缓存服务
+•缺点：时效性一般，可能存在中间不一致状态
+•场景：时效性要求一般，有多个服务需要同步
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T08:21:36.954Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/">多级缓存 （亿级流量的缓存方案）</a>
-    </h1>
-  
+ 
+二、安装和配置Canal
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T02:54:10.870Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/">(分布式缓存)Redis分片集群</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T02:50:54.617Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/">（分布式缓存）Redis哨兵</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" class="archive-article-date">
-  <time class="post-time" datetime="2022-11-10T02:48:08.504Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/">（分布式缓存）Redis主从</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+下面我们就开启mysql..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E7%BC%93%E5%AD%98%E5%90%8C%E6%AD%A5/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/f9416bd0de8341369c0b577d3df4b841.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/f9416bd0de8341369c0b577d3df4b841.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/">（多级缓存）多级缓存</a></h2><time class="has-text-grey" datetime="2022-11-10T09:09:28.079Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">
+对应的教程视频：  高级篇Day4-03-多级缓存_哔哩哔哩_bilibili
+一、安装OpenRestyOpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点：
+•具备Nginx的完整功能
+•基于Lua语言进行扩展，集成了大量精良的 Lua 库、第三方模块
+•允许使用Lua自定义业务逻辑、自定义库
+官方网站： OpenResty® - 中文官方站
 
 
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/archives/2022/11/page/4/">&amp;laquo; pre</a><a class="page-number" href="/archives/2022/11/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/11/page/3/">3</a><a class="page-number" href="/archives/2022/11/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2022/11/page/6/">6</a><a class="page-number" href="/archives/2022/11/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/11/page/11/">11</a><a class="extend next" rel="next" href="/archives/2022/11/page/6/">next &amp;raquo;</a>
-  </nav>
+(74条消息) 安装OpenResty_其然乐衣的博客-CSDN博客
 
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
+ 二、OpenResty快速入门
 
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
+ 
+
+三、请求参数处理
+
+ 
+四、查询Tomcat
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+五、Redis缓存预热
+
+ 
+ 
+六、查询Redis缓..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/"><img class="post-cover-img js-img-fadeIn" src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/">安装OpenResty</a></h2><time class="has-text-grey" datetime="2022-11-10T09:08:21.490Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">安装OpenResty1.安装首先你的Linux虚拟机必须联网
+1）安装开发库首先要安装OpenResty的依赖开发库，执行命令：
+1yum install -y pcre-devel openssl-devel gcc --skip-broken
+
+
+2）安装OpenResty仓库你可以在你的 CentOS 系统中添加 openresty 仓库，这样就可以便于未来安装或更新我们的软件包（通过 yum check-update 命令）。运行下面的命令就可以添加我们的仓库：
+1yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo
+
+
+如果提示说命令不存在，则运行：
+1yum install -y yu..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%AE%89%E8%A3%85OpenResty/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/5e7cb6070b6e4341b1e6c428398130cd.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/5e7cb6070b6e4341b1e6c428398130cd.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/">（多级缓存）Lua语法入门</a></h2><time class="has-text-grey" datetime="2022-11-10T08:57:52.716Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的教程视频：
+高级篇Day4-02-Lua语法_哔哩哔哩_bilibili
+
+1、初识LuaLua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。官网：*The Programming Language Lua*
+ 
+2、变量和循环
+ 
+
+ 
+
+ 
+
+3、条件控制、函数3.1.函数
+
+ 定义一个函数，如 :
+ 定义好函数后，就可以调用了，如：
+3.2.条件控制
+
+3.3.案例
+
+
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89Lua%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/97fc0d8a62a24516ae8465c345947821.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/97fc0d8a62a24516ae8465c345947821.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/">（多级缓存）JVM进程缓存</a></h2><time class="has-text-grey" datetime="2022-11-10T08:54:17.279Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的教程视频 ：
+高级篇Day4-01-多级缓存意义及JVM进程缓存_哔哩哔哩_bilibili
+
+1.初识CaffeineCaffeine是一个基于Java8开发的，提供了近乎最佳命中率的高性能的本地缓存库。目前Spring内部的缓存使用的就是Caffeine。GitHub地址：GitHub - ben-manes/caffeine: A high performance caching library for Java
+
+ 
+ 
+2.实现进程缓存
+ 
+定义好缓存： 
+
+
+修改查询业务（实现 优先查缓存，不中标再查数据库）
+
+ 
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89JVM%E8%BF%9B%E7%A8%8B%E7%BC%93%E5%AD%98/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/238fc4c7fdeb4ebfb2311a793102d10b.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/238fc4c7fdeb4ebfb2311a793102d10b.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/">多级缓存 （亿级流量的缓存方案）</a></h2><time class="has-text-grey" datetime="2022-11-10T08:21:36.954Z">2022-11-10</time><p class="is-flex-grow-2 mt-2"> 
 
 
 
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
+1、JVM进程缓存
+(73条消息) （多级缓存）JVM进程缓存_其然乐衣的博客-CSDN博客
 
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
+2、Lua语法入门
+(74条消息) （多级缓存）Lua语法入门_其然乐衣的博客-CSDN博客
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
+3、多级缓存
+(75条消息) （多级缓存）多级缓存_其然乐衣的博客-CSDN博客
 
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
+4、缓存同步策略
+(75条消息) （多级缓存）缓存同步_其然乐衣的博客-CSDN博客
 
+总结：
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%20%EF%BC%88%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E7%BC%93%E5%AD%98%E6%96%B9%E6%A1%88%EF%BC%89/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/40dc06a7246f4a4bb906d2a1a89880af.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/40dc06a7246f4a4bb906d2a1a89880af.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/redis"><i class="tag post-item-tag">redis</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/">(分布式缓存)Redis分片集群</a></h2><time class="has-text-grey" datetime="2022-11-10T02:54:10.870Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的教程视频:
+高级篇Day3-04-Redis分片集群_哔哩哔哩_bilibili
 
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+一.搭建分片集群1.集群结构分片集群需要的节点数量较多，这里我们搭建一个最小的分片集群，包含3个master节点，每个master包含一个slave节点，结构如下：
 
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+这里我们会在同一台虚拟机中开启6个redis实例，模拟分片集群，信息如下：
 
 
 
-
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
-
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
-</script>
-
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-
-<script src="/js/script.js"></script>
+IP
+PORT
+角色
 
 
 
+192.168.150.101
+7001
+master
 
-  </div>
-</body>
-</html>
+
+192.168.150.101
+7002
+master
+
+
+192.168.150.101
+7003
+master
+
+
+192.168.150.101
+8001
+slave
+
+
+192.168.150.101
+8002
+slave
+
+
+192.168.150.101
+8003
+slave..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/(%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98)Redis%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/2b52c12b7a1b4d368a2b605873b82930.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/2b52c12b7a1b4d368a2b605873b82930.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/redis"><i class="tag post-item-tag">redis</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/">（分布式缓存）Redis哨兵</a></h2><time class="has-text-grey" datetime="2022-11-10T02:50:54.617Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的教程视频：
+高级篇Day3-03-Redis哨兵_哔哩哔哩_bilibili
+
+目录：
+哨兵的作用和原理
+搭建哨兵集群
+RedisTemplate的哨兵模式
+
+一、哨兵的作用和原理
+ 
+ 
+ 
+ 
+二、搭建哨兵集群1.集群结构这里我们搭建一个三节点形成的Sentinel集群，来监管之前的Redis主从集群。如图：
+[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-MOzScJfs-1662037549415)(assets/image-20210701215227018.png)]
+三个sentinel实例信息如下：
+
+
+
+节点
+IP
+PORT
+
+
+
+s1
+192.168.150.101
+27001
+
+
+s2
+192.168.150.101
+27002
+
+
+s3
+192.1..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E5%93%A8%E5%85%B5/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/760dffe18def4d9dbb5499bcc3cc2a4f.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/760dffe18def4d9dbb5499bcc3cc2a4f.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/redis"><i class="tag post-item-tag">redis</i></a><a href="/tags/%E7%BC%93%E5%AD%98"><i class="tag post-item-tag">缓存</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/">（分布式缓存）Redis主从</a></h2><time class="has-text-grey" datetime="2022-11-10T02:48:08.504Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的视频教程
+高级篇Day3-02-Redis主从_哔哩哔哩_bilibili
+
+一、搭建Redis主从集群1.集群结构我们搭建的主从集群结构如图：
+
+共包含三个节点，一个主节点，两个从节点。
+这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：
+
+
+
+IP
+PORT
+角色
+
+
+
+192.168.150.101
+7001
+master
+
+
+192.168.150.101
+7002
+slave
+
+
+192.168.150.101
+7003
+slave
+
+
+2.准备实例和配置要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。
+1）创建目录
+我们创建三个文件夹，名字分别叫7001、7002、7003：
+1234# 进入/tmp目录cd /tmp..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/">更多</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap mt-5"><a class="extend prev" rel="prev" href="/archives/2022/11/page/4/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/archives/2022/11/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/11/page/3/">3</a><a class="page-number" href="/archives/2022/11/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2022/11/page/6/">6</a><a class="page-number" href="/archives/2022/11/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/11/page/11/">11</a><a class="extend next" rel="next" href="/archives/2022/11/page/6/"><i class="iconfont icon-next has-text-grey"></i></a></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container archives-widget is-in-archive-page"><h3>归档</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">102</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></body></html>

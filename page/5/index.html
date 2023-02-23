@@ -1,1958 +1,271 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo &amp; github">
-<meta property="og:url" content="http://example.com/page/5/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="其然乐衣">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
-
-  
-
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-        <section id="main">
-  
-    <article id="post-刷题笔记/刷题记录/leetcode-134.加油站" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/" class="article-date">
-  <time class="post-time" datetime="2023-01-09T14:34:18.875Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">leetcode-134.加油站</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>,<a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/leetcode/">leetcode</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>在一条环路上有 <code>n</code> 个加油站，其中第 <code>i</code> 个加油站有汽油 <code>gas[i]</code> 升。</p>
-<p>你有一辆油箱容量无限的的汽车，从第 <code>i</code> 个加油站开往第 <code>i+1</code> 个加油站需要消耗汽油 <code>cost[i]</code> 升。你从其中的一个加油站出发，开始时油箱为空。</p>
-<p>给定两个整数数组 <code>gas</code> 和 <code>cost</code> ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 <code>-1</code> 。如果存在解，则 <strong>保证</strong> 它是 <strong>唯一</strong> 的。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: gas = [1,2,3,4,5], cost = [3,4,5,1,2]</span><br><span class="line">输出: 3</span><br><span class="line">解释:</span><br><span class="line">从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油</span><br><span class="line">开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油</span><br><span class="line">开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油</span><br><span class="line">开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油</span><br><span class="line">开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油</span><br><span class="line">开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。</span><br><span class="line">因此，3 可为起始索引。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入: gas = [2,3,4], cost = [3,4,3]</span><br><span class="line">输出: -1</span><br><span class="line">解释:</span><br><span class="line">你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。</span><br><span class="line">我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油</span><br><span class="line">开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油</span><br><span class="line">开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油</span><br><span class="line">你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。</span><br><span class="line">因此，无论怎样，你都不可能绕环路行驶一周。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示:</strong></p>
-<ul>
-<li><code>gas.length == n</code></li>
-<li><code>cost.length == n</code></li>
-<li><code>1 &lt;= n &lt;= 105</code></li>
-<li><code>0 &lt;= gas[i], cost[i] &lt;= 104</code></li>
-</ul>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>下图的 黑色折线图 即 总油量剩余值，若要满足题目的要求：跑完全程再回到起点，总油量剩余值 的任意部分都需要在 X 轴以上，且跑到终点时：总剩余汽油量 &gt;&#x3D; 0。</p>
-<p>为了让 黑色折线图 任意部分都在 X 轴以上，我们需要向上移动 黑色折线图，直到所有点都在 X 轴或 X 轴以上。此时，处在 X 轴的点即为出发点。即 黑色折线图 的最低值的位置：index &#x3D; 3。</p>
-<p><img src="/../../../images/image-20230109224824634.png" alt="image-20230109224824634"></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    思路：</span></span><br><span class="line"><span class="comment">        找到最后一个 sum 还是减小状态的下标即可，然后结果就是这个下标的下一个下标，即( index + 1 ) % len</span></span><br><span class="line"><span class="comment">        因为index 是最低点了，后面就是回升的了。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">canCompleteCircuit</span><span class="params">(<span class="type">int</span>[] gas, <span class="type">int</span>[] cost)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> gas.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ( <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i ++ ) &#123;</span><br><span class="line">            sum += gas[ i ] - cost[ i ];</span><br><span class="line">            <span class="comment">// System.out.println( sum + &quot; &quot; + i );</span></span><br><span class="line">            <span class="keyword">if</span> ( sum &lt; min ) &#123;</span><br><span class="line">                min = sum;</span><br><span class="line">                index = i + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum &lt; <span class="number">0</span> ? -<span class="number">1</span> : index % len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/" data-id="cleebxr6800atxwv6fkg24jgh" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM中篇：字节码与类的加载篇/2-javap使用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time class="post-time" datetime="2023-01-09T07:12:26.476Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">02-javap使用</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/">JVM中篇：字节码与类的加载器</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、解析字节码的作用"><a href="#1、解析字节码的作用" class="headerlink" title="1、解析字节码的作用"></a>1、解析字节码的作用</h2><p><img src="/../../../images/image-20230109105233604.png" alt="image-20230109105233604"></p>
-<h2 id="2、javac-g-操作"><a href="#2、javac-g-操作" class="headerlink" title="2、javac -g 操作"></a>2、javac -g 操作</h2><p><img src="/../../../images/image-20230109105203289.png" alt="image-20230109105203289"></p>
-<h2 id="3、javap的用法"><a href="#3、javap的用法" class="headerlink" title="3、javap的用法"></a>3、javap的用法</h2><p><img src="/../../../images/image-20230109105401609.png" alt="image-20230109105401609"></p>
-<p><img src="/../../../images/image-20230109111148023.png" alt="image-20230109111148023"></p>
-<p><img src="/../../../images/image-20230109111249850.png" alt="image-20230109111249850"></p>
-<p><mark>注意：-v虽然包含的信息很全，但是不包含私有private的，用 **-v -p **才可以带上私有的，这样信息就是最全的了</mark></p>
-<p>如：演示javap -s （输出内部类型签名）：</p>
-<p><img src="/../../../images/image-20230109110318593.png" alt="image-20230109110318593"></p>
-<p>演示 javap -l （输出行号和本地变量表（局部变量表））：</p>
-<p><img src="/../../../images/image-20230109110533368.png" alt="image-20230109110533368"></p>
-<p>-c 和 -v 的内容对比：</p>
-<p><img src="/../../../images/image-20230109111622323.png" alt="image-20230109111622323"></p>
-<p><img src="/../../../images/image-20230109111550389.png" alt="image-20230109111550389"></p>
-<h2 id="javap解析得到的文件结构的解读"><a href="#javap解析得到的文件结构的解读" class="headerlink" title="javap解析得到的文件结构的解读"></a>javap解析得到的文件结构的解读</h2><p><img src="/../../../images/image-20230109150619055.png" alt="image-20230109150619055"></p>
-<p><img src="/../../../images/image-20230109150710937.png" alt="image-20230109150710937"></p>
-<p><img src="/../../../images/image-20230109150838112.png" alt="image-20230109150838112"></p>
-<p><img src="/../../../images/image-20230109150909746.png" alt="image-20230109150909746"></p>
-<p><img src="/../../../images/image-20230109145505307.png" alt="image-20230109145505307"></p>
-<p><img src="/../../../images/image-20230109150257068.png" alt="image-20230109150257068"></p>
-<p><img src="/../../../images/image-20230109150459817.png" alt="image-20230109150459817"></p>
-<p><img src="/../../../images/image-20230109150441824.png" alt="image-20230109150441824"></p>
-<h2 id="javap使用小结"><a href="#javap使用小结" class="headerlink" title="javap使用小结"></a>javap使用小结</h2><p><img src="/../../../images/image-20230109151005736.png" alt="image-20230109151005736"></p>
-<h1 id><a href="#" class="headerlink" title></a></h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/" data-id="cleebxr5c007xxwv63jm28f0e" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM中篇：字节码与类的加载篇/3-字节码指令集" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/" class="article-date">
-  <time class="post-time" datetime="2023-01-09T02:19:47.567Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">09</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/">03-字节码指令集</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/">JVM中篇：字节码与类的加载器</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p><img src="https://img-blog.csdnimg.cn/img_convert/630bca9b1bbeeeb4f772fea5f94d43fc.png"><img src="https://img-blog.csdnimg.cn/img_convert/74bb5f23ad01f05a39f8eb171d205390.png"><img src="https://img-blog.csdnimg.cn/img_convert/bb3c57508713e377f3f4084409abaa30.png" alt="img"></p>
-<h1 id="2-加载与存储指令"><a href="#2-加载与存储指令" class="headerlink" title="2. 加载与存储指令"></a>2. 加载与存储指令</h1><p><img src="/../../../images/image-20230109154720979.png" alt="image-20230109154720979"></p>
-<p><img src="/../../../images/image-20230109155158364.png" alt="image-20230109155158364"></p>
-<hr>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/3585fe67d5d83aff5db707d8eedccbae.png" alt="0ca8044c-f78d-4787-aeac-c986a35f9cdf"><br><img src="https://gitee.com/vectorx/ImageCloud/raw/master/img/20210424190846.png" alt="16e3afaf-b7d8-4a23-8897-9fe02586aafd"><img src="https://img-blog.csdnimg.cn/img_convert/8e911caaa5c0502b038af324c16edce8.png" alt="08e01fd0-a33e-47e4-8fd2-34c2935db71d"></p>
-<hr>
-
-<h2 id="2-1-局部变量压栈指令"><a href="#2-1-局部变量压栈指令" class="headerlink" title="2.1. 局部变量压栈指令"></a>2.1. 局部变量压栈指令</h2><blockquote>
-<p>iload 从局部变量中装载int类型值</p>
-<p>lload 从局部变量中装载long类型值</p>
-<p>fload 从局部变量中装载float类型值</p>
-<p>dload 从局部变量中装载double类型值</p>
-<p>aload 从局部变量中装载引用类型值（refernce）</p>
-<p>iload_0 从局部变量0中装载int类型值</p>
-<p>iload_1 从局部变量1中装载int类型值</p>
-<p>iload_2 从局部变量2中装载int类型值</p>
-<p>iload_3 从局部变量3中装载int类型值</p>
-<p>lload_0 从局部变量0中装载long类型值</p>
-<p>lload_1 从局部变量1中装载long类型值</p>
-<p>lload_2 从局部变量2中装载long类型值</p>
-<p>lload_3 从局部变量3中装载long类型值</p>
-<p>fload_0 从局部变量0中装载float类型值</p>
-<p>fload_1 从局部变量1中装载float类型值</p>
-<p>fload_2 从局部变量2中装载float类型值</p>
-<p>fload_3 从局部变量3中装载float类型值</p>
-<p>dload_0 从局部变量0中装载double类型值</p>
-<p>dload_1 从局部变量1中装载double类型值</p>
-<p>dload_2 从局部变量2中装载double类型值</p>
-<p>dload_3 从局部变量3中装载double类型值</p>
-<p>aload_0 从局部变量0中装载引用类型值</p>
-<p>aload_1 从局部变量1中装载引用类型值</p>
-<p>aload_2 从局部变量2中装载引用类型值</p>
-<p>aload_3 从局部变量3中装载引用类型值</p>
-<p>iaload 从数组中装载int类型值</p>
-<p>laload 从数组中装载long类型值</p>
-<p>faload 从数组中装载float类型值</p>
-<p>daload 从数组中装载double类型值</p>
-<p>aaload 从数组中装载引用类型值</p>
-<p>baload 从数组中装载byte类型或boolean类型值</p>
-<p>caload 从数组中装载char类型值</p>
-<p>saload 从数组中装载short类型值</p>
-</blockquote>
-<h2 id="局部变量压栈常用指令集"><a href="#局部变量压栈常用指令集" class="headerlink" title="局部变量压栈常用指令集"></a>局部变量压栈常用指令集</h2><table>
-<thead>
-<tr>
-<th>xload_n</th>
-<th>xload_0</th>
-<th>xload_1</th>
-<th>xload_2</th>
-<th>xload_3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><b>iload_n</b></td>
-<td>iload_0</td>
-<td>iload_1</td>
-<td>iload_2</td>
-<td>iload_3</td>
-</tr>
-<tr>
-<td><b>lload_n</b></td>
-<td>lload_0</td>
-<td>lload_1</td>
-<td>lload_2</td>
-<td>lload_3</td>
-</tr>
-<tr>
-<td><b>fload_n</b></td>
-<td>fload_0</td>
-<td>fload_1</td>
-<td>fload_2</td>
-<td>fload_3</td>
-</tr>
-<tr>
-<td><b>dload_n</b></td>
-<td>dload_0</td>
-<td>dload_1</td>
-<td>dload_2</td>
-<td>dload_3</td>
-</tr>
-<tr>
-<td><b>aload_n</b></td>
-<td>aload_0</td>
-<td>aload_1</td>
-<td>aload_2</td>
-<td>aload_3</td>
-</tr>
-</tbody></table>
-<h2 id="局部变量压栈指令剖析"><a href="#局部变量压栈指令剖析" class="headerlink" title="局部变量压栈指令剖析"></a>局部变量压栈指令剖析</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/a34d465c4c8c83b3fcedc3ba31401732.png" alt="1"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">load</span><span class="params">(<span class="type">int</span> num, Object obj, <span class="type">long</span> count, <span class="type">boolean</span> flag, <span class="type">short</span>[] arr)</span> &#123;</span><br><span class="line">	System.out.println(num);</span><br><span class="line">    System.out.println(obj);</span><br><span class="line">    System.out.println(count);</span><br><span class="line">    System.out.println(flag);</span><br><span class="line">    System.out.println(arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/deb49e69ed62ed9d71c7059748299b59.png" alt="3"></p>
-<hr>
-
-<h2 id="2-2-常量入栈指令"><a href="#2-2-常量入栈指令" class="headerlink" title="2.2. 常量入栈指令"></a>2.2. 常量入栈指令</h2><blockquote>
-<p>aconst_null 将null对象引用压入栈</p>
-<p>iconst_m1 将int类型常量-1压入栈</p>
-<p>iconst_0 将int类型常量0压入栈</p>
-<p>iconst_1 将int类型常量1压入栈</p>
-<p>iconst_2 将int类型常量2压入栈</p>
-<p>iconst_3 将int类型常量3压入栈</p>
-<p>iconst_4 将int类型常量4压入栈</p>
-<p>iconst_5 将int类型常量5压入栈</p>
-<p>lconst_0 将long类型常量0压入栈</p>
-<p>lconst_1 将long类型常量1压入栈</p>
-<p>fconst_0 将float类型常量0压入栈</p>
-<p>fconst_1 将float类型常量1压入栈</p>
-<p>dconst_0 将double类型常量0压入栈</p>
-<p>dconst_1 将double类型常量1压入栈</p>
-<p>bipush 将一个8位带符号整数压入栈</p>
-<p>sipush 将16位带符号整数压入栈</p>
-<p>ldc 把常量池中的项压入栈</p>
-<p>ldc_w 把常量池中的项压入栈（使用宽索引）</p>
-<p>ldc2_w 把常量池中long类型或者double类型的项压入栈（使用宽索引）</p>
-</blockquote>
-<h2 id="常量入栈常用指令集"><a href="#常量入栈常用指令集" class="headerlink" title="常量入栈常用指令集"></a>常量入栈常用指令集</h2><table>
-<thead>
-<tr>
-<th align="center">xconst_n</th>
-<th>范围</th>
-<th>xconst_null</th>
-<th align="center">xconst_m1</th>
-<th align="center">xconst_0</th>
-<th align="center">xconst_1</th>
-<th align="center">xconst_2</th>
-<th align="center">xconst_3</th>
-<th align="center">xconst_4</th>
-<th align="center">xconst_5</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>iconst_n</strong></td>
-<td>[-1, 5]</td>
-<td></td>
-<td align="center">iconst_m1</td>
-<td align="center">iconst_0</td>
-<td align="center">iconst_1</td>
-<td align="center">iconst_2</td>
-<td align="center">iconst_3</td>
-<td align="center">iconst_4</td>
-<td align="center">iconst_5</td>
-</tr>
-<tr>
-<td align="center"><strong>lconst_n</strong></td>
-<td>0, 1</td>
-<td></td>
-<td align="center"></td>
-<td align="center">lconst_0</td>
-<td align="center">lconst_1</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>fconst_n</strong></td>
-<td>0, 1, 2</td>
-<td></td>
-<td align="center"></td>
-<td align="center">fconst_0</td>
-<td align="center">fconst_1</td>
-<td align="center">fconst_2</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>dconst_n</strong></td>
-<td>0, 1</td>
-<td></td>
-<td align="center"></td>
-<td align="center">dconst_0</td>
-<td align="center">dconst_1</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>aconst_n</strong></td>
-<td>null, String literal, Class literal</td>
-<td>aconst_null</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>bipush</strong></td>
-<td>一个字节，2^8^，[-2^7^, 2^7^ - 1]，即[-128, 127]</td>
-<td></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>sipush</strong></td>
-<td>两个字节，2^16^，[-2^15^, 2^15^ - 1]，即[-32768, 32767]</td>
-<td></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>ldc</strong></td>
-<td>四个字节，2^32^，[-2^31^, 2^31^ - 1]</td>
-<td></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>ldc_w</strong></td>
-<td>宽索引</td>
-<td></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><strong>ldc2_w</strong></td>
-<td>宽索引，long或double</td>
-<td></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<h2 id="常量入栈指令剖析"><a href="#常量入栈指令剖析" class="headerlink" title="常量入栈指令剖析"></a>常量入栈指令剖析</h2><p>范围：const &lt; push &lt; ldc</p>
-<hr>
-
-<p><img src="/../../../images/image-20230109164556416.png" alt="image-20230109164556416"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/fafa61a6702b5fc88179c404ba736029.png" alt="437a717e-98e2-4847-b52e-e6632d0745a4"><br><img src="https://img-blog.csdnimg.cn/img_convert/c0a6284e1deaf76669089e669916f440.png" alt="ffd7246e-2e46-41e0-9fd6-1e65ace5dbd1"></p>
-<table>
-    <tbody>  
-        <tr>
-            <th>类型</th> 
-            <th>常数指令</th> 
-            <th>范围</th> 
-       </tr>
-       <tr>
-            <td rowspan="4">int(boolean,byte,char,short)</td>
-            <td>iconst</td>
-            <td>[-1, 5]</td>
-       </tr>	
-       <tr>
-            <td>bipush</td>
-            <td>[-128, 127]</td>
-       </tr>
-       <tr>
-            <td>sipush</td>
-            <td>[-32768, 32767]</td>
-       </tr> 
-       <tr>
-            <td>ldc</td>
-            <td>any int value</td>
-       </tr>
-       <tr>
-            <td rowspan="2">long</td>
-            <td>lconst</td>
-            <td>0, 1</td>
-       </tr>	
-       <tr>
-            <td>ldc</td>
-            <td>any long value</td>
-       </tr>
-       <tr>
-            <td rowspan="2">float</td>
-            <td>fconst</td>
-            <td>0, 1, 2</td>
-       </tr>	
-       <tr>
-            <td>ldc</td>
-            <td>any float value</td>
-       </tr>
-       <tr>
-            <td rowspan="2">double</td>
-            <td>dconst</td>
-            <td>0, 1</td>
-       </tr>	
-       <tr>
-            <td>ldc</td>
-            <td>any double value</td>
-       </tr> 
-       <tr>
-            <td rowspan="2">reference</td>
-            <td>aconst</td>
-            <td>null</td>
-       </tr>
-       <tr>
-            <td>ldc</td>
-            <td>String literal, Class literal</td>
-       </tr>
-   <tbody> 
-</tbody></tbody></table>
-
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/59982d71dc70f7d7b873f50130281c21.png" alt="566b9397-5afe-4a3f-9e17-9ebf504dfc80"><br><img src="https://img-blog.csdnimg.cn/img_convert/cd990ebc801bf53b4f7b1966d9974345.png" alt="b59702d2-4c93-44df-87f1-01a5dfe53b61"></p>
-<h2 id="2-3-出栈装入局部变量表指令"><a href="#2-3-出栈装入局部变量表指令" class="headerlink" title="2.3. 出栈装入局部变量表指令"></a>2.3. 出栈装入局部变量表指令</h2><blockquote>
-<p>istore 将int类型值存入局部变量</p>
-<p>lstore 将long类型值存入局部变量</p>
-<p>fstore 将float类型值存入局部变量</p>
-<p>dstore 将double类型值存入局部变量</p>
-<p>astore 将将引用类型或returnAddress类型值存入局部变量</p>
-<p>istore_0 将int类型值存入局部变量0</p>
-<p>istore_1 将int类型值存入局部变量1</p>
-<p>istore_2 将int类型值存入局部变量2</p>
-<p>istore_3 将int类型值存入局部变量3</p>
-<p>lstore_0 将long类型值存入局部变量0</p>
-<p>lstore_1 将long类型值存入局部变量1</p>
-<p>lstore_2 将long类型值存入局部变量2</p>
-<p>lstore_3 将long类型值存入局部变量3</p>
-<p>fstore_0 将float类型值存入局部变量0</p>
-<p>fstore_1 将float类型值存入局部变量1</p>
-<p>fstore_2 将float类型值存入局部变量2</p>
-<p>fstore_3 将float类型值存入局部变量3</p>
-<p>dstore_0 将double类型值存入局部变量0</p>
-<p>dstore_1 将double类型值存入局部变量1</p>
-<p>dstore_2 将double类型值存入局部变量2</p>
-<p>dstore_3 将double类型值存入局部变量3</p>
-<p>astore_0 将引用类型或returnAddress类型值存入局部变量0</p>
-<p>astore_1 将引用类型或returnAddress类型值存入局部变量1</p>
-<p>astore_2 将引用类型或returnAddress类型值存入局部变量2</p>
-<p>astore_3 将引用类型或returnAddress类型值存入局部变量3</p>
-<p>iastore 将int类型值存入数组中</p>
-<p>lastore 将long类型值存入数组中</p>
-<p>fastore 将float类型值存入数组中</p>
-<p>dastore 将double类型值存入数组中</p>
-<p>aastore 将引用类型值存入数组中</p>
-<p>bastore 将byte类型或者boolean类型值存入数组中</p>
-<p>castore 将char类型值存入数组中</p>
-<p>sastore 将short类型值存入数组中</p>
-<p>wide指令</p>
-<p>wide 使用附加字节扩展局部变量索引</p>
-</blockquote>
-<h2 id="出栈装入局部变量表常用指令集"><a href="#出栈装入局部变量表常用指令集" class="headerlink" title="出栈装入局部变量表常用指令集"></a>出栈装入局部变量表常用指令集</h2><table>
-<thead>
-<tr>
-<th align="center">xstore_n</th>
-<th align="center">xstore_0</th>
-<th align="center">xstore_1</th>
-<th align="center">xstore_2</th>
-<th align="center">xstore_3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>istore_n</strong></td>
-<td align="center">istore_0</td>
-<td align="center">istore_1</td>
-<td align="center">istore_2</td>
-<td align="center">istore_3</td>
-</tr>
-<tr>
-<td align="center"><strong>lstore_n</strong></td>
-<td align="center">lstore_0</td>
-<td align="center">lstore_1</td>
-<td align="center">lstore_2</td>
-<td align="center">lstore_3</td>
-</tr>
-<tr>
-<td align="center"><strong>fstore_n</strong></td>
-<td align="center">fstore_0</td>
-<td align="center">fstore_1</td>
-<td align="center">fstore_2</td>
-<td align="center">fstore_3</td>
-</tr>
-<tr>
-<td align="center"><strong>dstore_n</strong></td>
-<td align="center">dstore_0</td>
-<td align="center">dstore_1</td>
-<td align="center">dstore_2</td>
-<td align="center">dstore_3</td>
-</tr>
-<tr>
-<td align="center"><strong>astore_n</strong></td>
-<td align="center">astore_0</td>
-<td align="center">astore_1</td>
-<td align="center">astore_2</td>
-<td align="center">astore_3</td>
-</tr>
-</tbody></table>
-<h2 id="出栈装入局部变量表指令剖析"><a href="#出栈装入局部变量表指令剖析" class="headerlink" title="出栈装入局部变量表指令剖析"></a>出栈装入局部变量表指令剖析</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/52b46ba6b57aa1ab8581cb022da7e58e.png" alt="1"><br><img src="https://img-blog.csdnimg.cn/img_convert/4adce45129332dd04b89f4aa8ffc6e28.png" alt="2"><br><img src="https://img-blog.csdnimg.cn/img_convert/e4665e8fc25e2d63bff2e8423b60b1dc.png" alt="3"></p>
-<hr>
-
-<h1 id="3-算术指令"><a href="#3-算术指令" class="headerlink" title="3. 算术指令"></a>3. 算术指令</h1><blockquote>
-<h2 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h2><p>iadd 执行int类型的加法</p>
-<p>ladd 执行long类型的加法</p>
-<p>isub 执行int类型的减法</p>
-<p>lsub 执行long类型的减法</p>
-<p>imul 执行int类型的乘法</p>
-<p>lmul 执行long类型的乘法</p>
-<p>idiv 执行int类型的除法</p>
-<p>ldiv 执行long类型的除法</p>
-<p>irem 计算int类型除法的余数</p>
-<p>lrem 计算long类型除法的余数</p>
-<p>ineg 对一个int类型值进行取反操作</p>
-<p>lneg 对一个long类型值进行取反操作</p>
-<p>iinc 把一个常量值加到一个int类型的局部变量上</p>
-<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><h3 id="移位操作"><a href="#移位操作" class="headerlink" title="移位操作"></a>移位操作</h3><p>ishl 执行int类型的向左移位操作</p>
-<p>lshl 执行long类型的向左移位操作</p>
-<p>ishr 执行int类型的向右移位操作</p>
-<p>lshr 执行long类型的向右移位操作</p>
-<p>iushr 执行int类型的向右逻辑移位操作</p>
-<p>lushr 执行long类型的向右逻辑移位操作</p>
-<h3 id="按位布尔运算"><a href="#按位布尔运算" class="headerlink" title="按位布尔运算"></a>按位布尔运算</h3><p>iand 对int类型值进行“逻辑与”操作</p>
-<p>land 对long类型值进行“逻辑与”操作</p>
-<p>ior 对int类型值进行“逻辑或”操作</p>
-<p>lor 对long类型值进行“逻辑或”操作</p>
-<p>ixor 对int类型值进行“逻辑异或”操作</p>
-<p>lxor 对long类型值进行“逻辑异或”操作</p>
-<h3 id="浮点运算"><a href="#浮点运算" class="headerlink" title="浮点运算"></a>浮点运算</h3><p>fadd 执行float类型的加法</p>
-<p>dadd 执行double类型的加法</p>
-<p>fsub 执行float类型的减法</p>
-<p>dsub 执行double类型的减法</p>
-<p>fmul 执行float类型的乘法</p>
-<p>dmul 执行double类型的乘法</p>
-<p>fdiv 执行float类型的除法</p>
-<p>ddiv 执行double类型的除法</p>
-<p>frem 计算float类型除法的余数</p>
-<p>drem 计算double类型除法的余数</p>
-<p>fneg 将一个float类型的数值取反</p>
-<p>dneg 将一个double类型的数值取反</p>
-</blockquote>
-<p><img src="/../../../images/image-20230110092705627.png" alt="image-20230110092705627"></p>
-<p><img src="/../../../images/image-20230110092628326.png" alt="image-20230110092628326"></p>
-<p><img src="/../../../images/image-20230110093117073.png" alt="image-20230110093117073"></p>
-<p><img src="/../../../images/image-20230110093414167.png" alt="image-20230110093414167"></p>
-<h2 id="算术指令集"><a href="#算术指令集" class="headerlink" title="算术指令集"></a>算术指令集</h2><table>
-    <tbody>  
-        <tr>
-            <th colspan="2">算数指令</th> 
-            <th>int(boolean,byte,char,short)</th> 
-            <th>long</th>
-            <th>float</th> 
-              <th>double</th> 
-       </tr>
-       <tr>
-            <td colspan="2">加法指令</td>
-            <td>iadd</td>
-            <td>ladd</td>
-            <td>fadd</td>
-            <td>dadd</td>
-       </tr>	
-       <tr>
-            <td colspan="2">减法指令</td>
-            <td>isub</td>
-            <td>lsub</td>
-            <td>fsub</td>
-            <td>dsub</td>
-       </tr> 
-       <tr>
-            <td colspan="2">乘法指令</td>
-            <td>imul</td>
-            <td>lmul</td>
-            <td>fmul</td>
-            <td>dmul</td>
-       </tr> 
-       <tr>
-            <td colspan="2">除法指令</td>
-            <td>idiv</td>
-            <td>ldiv</td>
-            <td>fdiv</td>
-            <td>ddiv</td>
-       </tr>
-       <tr>
-            <td colspan="2">求余指令</td>
-            <td>irem</td>
-            <td>lrem</td>
-            <td>frem</td>
-            <td>drem</td>
-       </tr>
-       <tr>
-            <td colspan="2">取反指令</td>
-            <td>ineg</td>
-            <td>lneg</td>
-            <td>fneg</td>
-            <td>dneg</td>
-       </tr>
-       <tr>
-            <td colspan="2">自增指令</td>
-            <td>iinc</td>
-            <td></td>
-            <td></td>
-            <td></td>
-       </tr>
-       <tr>
-            <td rowspan="4">位运算指令</td>
-            <td>按位或指令</td>
-            <td>ior</td>
-            <td>lor</td>
-            <td></td>
-            <td></td>
-       </tr> 
-       <tr>
-            <td>按位或指令</td>
-            <td>ior</td>
-            <td>lor</td>
-            <td></td>
-            <td></td>
-       </tr> 
-       <tr>
-            <td>按位与指令</td>
-            <td>iand</td>
-            <td>land</td>
-            <td></td>
-            <td></td>
-       </tr>
-       <tr>
-            <td>按位异或指令</td>
-            <td>ixor</td>
-            <td>lxor</td>
-            <td></td>
-            <td></td>
-       </tr> 
-       <tr>
-            <td colspan="2">比较指令</td>
-            <td></td>
-            <td>lcmp</td>
-            <td>fcmpg / fcmpl</td>
-            <td>dcmpg / dcmpl</td>
-       </tr> 
-   <tbody> 
-</tbody></tbody></table>
-
-
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/39ac5dc0cb406c2d75b50b10226322b0.png"></p>
-<blockquote>
-<p>注意：NaN(Not a Number)表示不是一个数字</p>
-</blockquote>
-<h2 id="算术指令举例"><a href="#算术指令举例" class="headerlink" title="算术指令举例"></a>算术指令举例</h2><h3 id="举例1"><a href="#举例1" class="headerlink" title="举例1"></a>举例1</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">bar</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> ((i + <span class="number">1</span>) - <span class="number">2</span>) * <span class="number">3</span> / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/256d8a8ec2309b6d396795e9a7e79959.png" alt="a54c2ac8-dd36-49f4-a49d-9afd725e8365"></p>
-<h3 id="举例2"><a href="#举例2" class="headerlink" title="举例2"></a>举例2</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">byte</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">15</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">8</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> i + j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/58c6064f2d2103610c6e2f9c9472f122.png" alt="image-20210424210710750"><br><img src="https://img-blog.csdnimg.cn/img_convert/d0257760ed00864d7e36421c2df971ca.png" alt="2"><br><img src="https://img-blog.csdnimg.cn/img_convert/df724aebb307c6dda0780bbf5d4e1f92.png" alt="3"></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/f2edaef3312398b63decea146718f2d6.gif" alt="img"></p>
-<h3 id="举例3"><a href="#举例3" class="headerlink" title="举例3"></a>举例3</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">500</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">	<span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> x / y;</span><br><span class="line">	<span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">50</span>;</span><br><span class="line">	System.out.println(a + b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/ce924815ec9c6ddc5cd98f18538c250e.png" alt="c43c0407-020f-4ec4-bd27-e4c109640b39"><br><img src="https://img-blog.csdnimg.cn/img_convert/918a9850ced5114086db35ce59e651af.png" alt="04282df1-4e52-4c3d-a47b-84023159b624"></p>
-<hr>
-
-<h3 id="测定搞定-运算符"><a href="#测定搞定-运算符" class="headerlink" title="测定搞定++运算符"></a>测定搞定++运算符</h3><p><strong>例子1：</strong></p>
-<p><img src="/../../../images/image-20230110103252540.png" alt="image-20230110103252540"></p>
-<p><strong>例子2：</strong></p>
-<p><img src="/../../../images/image-20230110104240767.png" alt="image-20230110104240767"></p>
-<p><img src="/../../../images/image-20230110103546598.png" alt="image-20230110103546598"></p>
-<h1 id="4-类型转换指令"><a href="#4-类型转换指令" class="headerlink" title="4. 类型转换指令"></a>4. 类型转换指令</h1><blockquote>
-<h2 id="宽化类型转换"><a href="#宽化类型转换" class="headerlink" title="宽化类型转换"></a>宽化类型转换</h2><p>i2l 把int类型的数据转化为long类型</p>
-<p>i2f 把int类型的数据转化为float类型</p>
-<p>i2d 把int类型的数据转化为double类型</p>
-<p>l2f 把long类型的数据转化为float类型</p>
-<p>l2d 把long类型的数据转化为double类型</p>
-<p>f2d 把float类型的数据转化为double类型</p>
-<h2 id="窄化类型转换"><a href="#窄化类型转换" class="headerlink" title="窄化类型转换"></a>窄化类型转换</h2><p>i2b 把int类型的数据转化为byte类型</p>
-<p>i2c 把int类型的数据转化为char类型</p>
-<p>i2s 把int类型的数据转化为short类型</p>
-<p>l2i 把long类型的数据转化为int类型</p>
-<p>f2i 把float类型的数据转化为int类型</p>
-<p>f2l 把float类型的数据转化为long类型</p>
-<p>d2i 把double类型的数据转化为int类型</p>
-<p>d2l 把double类型的数据转化为long类型</p>
-<p>d2f 把double类型的数据转化为float类型</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center"><strong>byte</strong></th>
-<th align="center"><strong>char</strong></th>
-<th align="center"><strong>short</strong></th>
-<th align="center"><strong>int</strong></th>
-<th align="center"><strong>long</strong></th>
-<th align="center"><strong>float</strong></th>
-<th align="center"><strong>double</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><strong>int</strong></td>
-<td align="center">i2b</td>
-<td align="center">i2c</td>
-<td align="center">i2s</td>
-<td align="center">○</td>
-<td align="center">i2l</td>
-<td align="center">i2f</td>
-<td align="center">i2d</td>
-</tr>
-<tr>
-<td align="center"><strong>long</strong></td>
-<td align="center">l2i i2b</td>
-<td align="center">l2i i2c</td>
-<td align="center">l2i i2s</td>
-<td align="center">l2i</td>
-<td align="center">○</td>
-<td align="center">l2f</td>
-<td align="center">l2d</td>
-</tr>
-<tr>
-<td align="center"><strong>float</strong></td>
-<td align="center">f2i i2b</td>
-<td align="center">f2i i2c</td>
-<td align="center">f2i i2s</td>
-<td align="center">f2i</td>
-<td align="center">f2l</td>
-<td align="center">○</td>
-<td align="center">f2d</td>
-</tr>
-<tr>
-<td align="center"><strong>double</strong></td>
-<td align="center">d2i i2b</td>
-<td align="center">d2i i2c</td>
-<td align="center">d2i i2s</td>
-<td align="center">d2i</td>
-<td align="center">d2l</td>
-<td align="center">d2f</td>
-<td align="center">○</td>
-</tr>
-</tbody></table>
-<p>类型转换指令可以将两种不同的数值类型进行相互转换。这些转换操作一般用于实现用户代码中的<strong>显式类型转換操作</strong>，或者用来处理字节码指令集中数据类型相关指令无法与<strong>数据类型</strong>一一对应的问题。</p>
-<h2 id="4-1-宽化类型转换剖析"><a href="#4-1-宽化类型转换剖析" class="headerlink" title="4.1. 宽化类型转换剖析"></a>4.1. 宽化类型转换剖析</h2><blockquote>
-<p>宽化类型转换( Widening Numeric Conversions)</p>
-<ol>
-<li>转换规则</li>
-</ol>
-<p>Java虚拟机直接支持以下数值的宽化类型转换（ widening numeric conversion,<strong>小范围类型向大范围类型的安全转换</strong>）。也就是说，并不需要指令执行，包括</p>
-<blockquote>
-<p>从int类型到long、float或者 double类型。对应的指令为：i21、i2f、i2d</p>
-<p>从long类型到float、 double类型。对应的指令为：i2f、i2d</p>
-<p>从float类型到double类型。对应的指令为：f2d </p>
-</blockquote>
-<p>简化为：int–&gt;long–&gt;float-&gt; double</p>
-<ol start="2">
-<li>精度损失问题</li>
-</ol>
-<blockquote>
-<p>2.1. 宽化类型转换是不会因为超过目标类型最大值而丢失信息的，例如，从int转换到long,或者从int转换到double,都不会丢失任何信息，转换前后的值是精确相等的。</p>
-<p>2.2. 从int、long类型数值转换到float,或者long类型数值转换到double时，将可能发生精度丢失一一可能丢失掉几个最低有效位上的值，转换后的浮点数值是根据IEEE754最接近含入模式所得到的正确整数值。</p>
-</blockquote>
-<p>尽管宽化类型转换实际上是<strong>可能发生精度丢失</strong>的，但是这种转换永远不会导致Java虚拟机抛出运行时异常</p>
-<ol start="3">
-<li>补充说明</li>
-</ol>
-<p><strong>从byte、char和 short类型到int类型的宽化类型转换实际上是不存在的。</strong>对于byte类型转为int,拟机并没有做实质性的转化处理，只是简单地通过操作数栈交換了两个数据。而将byte转为long时，使用的是i2l,可以看到在内部，byte在这里已经等同于int类型处理，类似的还有 short类型，这种处理方式有两个特点：</p>
-<p>一方面可以减少实际的数据类型，如果为 short和byte都准备一套指令，那么指令的数量就会大増，而<strong>虚拟机目前的设计上，只愿意使用一个字节表示指令，因此指令总数不能超过256个，为了节省指令资源，将 short和byte当做int处理也在情理之中。</strong></p>
-<p>另一方面，由于局部变量表中的槽位固定为32位，无论是byte或者 short存入局部变量表，都会占用32位空间。从这个角度说，也没有必要特意区分这几种数据类型。</p>
-</blockquote>
-<p>举例分析：</p>
-<p><img src="/../../../images/image-20230110110140222.png" alt="image-20230110110140222"></p>
-<p><img src="/../../../images/image-20230110110253180.png" alt="image-20230110110253180"></p>
-<h2 id="4-2-窄化类型转换剖析"><a href="#4-2-窄化类型转换剖析" class="headerlink" title="4.2. 窄化类型转换剖析"></a>4.2. 窄化类型转换剖析</h2><blockquote>
-<p>窄化类型转换( Narrowing Numeric Conversion)</p>
-<ol>
-<li>转换规则</li>
-</ol>
-<p>Java虚拟机也直接支持以下窄化类型转换：</p>
-<blockquote>
-<p>从主int类型至byte、 short或者char类型。对应的指令有：i2b、i2c、i2s</p>
-<p>从long类型到int类型。对应的指令有：l2i</p>
-<p>从float类型到int或者long类型。对应的指令有：f2i、f2l</p>
-<p>从double类型到int、long或者float类型。对应的指令有：d2i、d2l、d2f</p>
-</blockquote>
-<ol start="2">
-<li>精度损失问题</li>
-</ol>
-<p>窄化类型转换可能会导致转换结果具备不同的正负号、不同的数量级，因此，转换过程很可能会导致数值丢失精度。</p>
-<p>尽管数据类型窄化转换可能会发生上限溢出、下限溢出和精度丢失等情况，但是Java虚拟机规范中明确规定数值类型的窄化转换指令永远不可能导致虚拟机抛出运行时异常</p>
-<ol start="3">
-<li>补充说明</li>
-</ol>
-<blockquote>
-<p>3.1. 当将一个浮点值窄化转换为整数类型T(T限于int或long类型之一)的时候，将遵循以下转换规则：</p>
-<blockquote>
-<p>如果浮点值是NaN,那转换结果就是int或long类型的0.</p>
-<p>如果浮点值不是无穷大的话，浮点值使用IEEE754的向零含入模式取整，获得整数值Vv如果v在目标类型T(int或long)的表示范围之内，那转换结果就是v。否则，将根据v的符号，转换为T所能表示的最大或者最小正数</p>
-</blockquote>
-<p>3.2. 当将一个double类型窄化转换为float类型时，将遵循以下转换规则</p>
-<blockquote>
-<p>通过向最接近数舍入模式舍入一个可以使用float类型表示的数字。最后结果根据下面这3条规则判断</p>
-<p>如果转换结果的绝对值太小而无法使用float来表示，将返回float类型的正负零</p>
-<p>如果转换结果的绝对值太大而无法使用float来表示，将返回float类型的正负无穷大。</p>
-<p>对于double类型的NaN值将按规定转換为float类型的NaN值。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<hr>
-
-<p><img src="/../../../images/image-20230110115749195.png" alt="image-20230110115749195"></p>
-<p>精度损失的举例：</p>
-<p><img src="/../../../images/image-20230110120128649.png" alt="image-20230110120128649"></p>
-<p><strong>测试NaN，无穷大的情况：</strong></p>
-<p><img src="/../../../images/image-20230110120800053.png" alt="image-20230110120800053"></p>
-<h1 id="5-对象的创建与访问指令"><a href="#5-对象的创建与访问指令" class="headerlink" title="5. 对象的创建与访问指令"></a>5. 对象的创建与访问指令</h1><blockquote>
-<h2 id="对象操作指令"><a href="#对象操作指令" class="headerlink" title="对象操作指令"></a>对象操作指令</h2><p>new 创建一个新对象</p>
-<p>getfield 从对象中获取字段</p>
-<p>putfield 设置对象中字段的值</p>
-<p>getstatic 从类中获取静态字段</p>
-<p>putstatic 设置类中静态字段的值</p>
-<p>checkcast 确定对象为所给定的类型。后跟目标类，判断栈顶元素是否为目标类 &#x2F; 接口的实例。如果不是便抛出异常</p>
-<p>instanceof 判断对象是否为给定的类型。后跟目标类，判断栈顶元素是否为目标类 &#x2F; 接口的实例。是则压入 1，否则压入 0</p>
-<h2 id="数组操作指令"><a href="#数组操作指令" class="headerlink" title="数组操作指令"></a>数组操作指令</h2><p>newarray 分配数据成员类型为基本上数据类型的新数组</p>
-<p>anewarray 分配数据成员类型为引用类型的新数组</p>
-<p>arraylength 获取数组长度</p>
-<p>multianewarray 分配新的多维数组</p>
-</blockquote>
-<p>Java是面向对象的程序设计语言，虚拟机平台从字节码层面就对面向对象做了深层次的支持。有一系列指令专门用于对象操作，可进一步细分为创建指令、字段访问指令、数组操作指令、类型检查指令。</p>
-<h2 id="5-1-创建指令"><a href="#5-1-创建指令" class="headerlink" title="5.1. 创建指令"></a>5.1. 创建指令</h2><table>
-<thead>
-<tr>
-<th align="left">创建指令</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">new</td>
-<td align="left">创建类实例</td>
-</tr>
-<tr>
-<td align="left">newarray</td>
-<td align="left">创建基本类型数组</td>
-</tr>
-<tr>
-<td align="left">anewarray</td>
-<td align="left">创建引用类型数组</td>
-</tr>
-<tr>
-<td align="left">multilanewarra</td>
-<td align="left">创建多维数组</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/44ec8eda0028b78f02951aa5edc14751.png" alt="img"></p>
-<p><img src="/../../../images/image-20230110135551913.png" alt="image-20230110135551913"></p>
-<h2 id="5-2-字段访问指令"><a href="#5-2-字段访问指令" class="headerlink" title="5.2. 字段访问指令"></a>5.2. 字段访问指令</h2><table>
-<thead>
-<tr>
-<th align="left">字段访问指令</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">getstatic、putstatic</td>
-<td align="left">访问类字段（static字段，或者称为类变量）的指令</td>
-</tr>
-<tr>
-<td align="left">getfield、 putfield</td>
-<td align="left">访问类实例字段（非static字段，或者称为实例变量）的指令</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/c95da4b9bcb174f367617ca977451b14.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/6f7033f9caaf3216c6ca6795de12f6a4.png" alt="img"></p>
-<h2 id="5-3-数组操作指令"><a href="#5-3-数组操作指令" class="headerlink" title="5.3. 数组操作指令"></a>5.3. 数组操作指令</h2><table>
-<thead>
-<tr>
-<th>数组指令</th>
-<th>byte(boolean)</th>
-<th>char</th>
-<th>short</th>
-<th>long</th>
-<th>long</th>
-<th>float</th>
-<th>double</th>
-<th>reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>xaload</strong></td>
-<td>baload</td>
-<td>caload</td>
-<td>saload</td>
-<td>iaload</td>
-<td>laload</td>
-<td>faload</td>
-<td>daload</td>
-<td>aaload</td>
-</tr>
-<tr>
-<td><strong>xastore</strong></td>
-<td>bastore</td>
-<td>castore</td>
-<td>sastore</td>
-<td>iastore</td>
-<td>lastore</td>
-<td>fastore</td>
-<td>dastore</td>
-<td>aastore</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/a25e46492ce58084d3bb1ee9a4255ac4.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/4d55c1e67881b686d4dcb75118f257c5.png" alt="img"></p>
-<h2 id="5-4-类型检查指令"><a href="#5-4-类型检查指令" class="headerlink" title="5.4. 类型检查指令"></a>5.4. 类型检查指令</h2><table>
-<thead>
-<tr>
-<th>类型检查指令</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>instanceof</td>
-<td>检查类型强制转换是否可以进行</td>
-</tr>
-<tr>
-<td>checkcast</td>
-<td>判断给定对象是否是某一个类的实例</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/df1e056d6e977d38b6c5974a428a040a.png" alt="img"></p>
-<hr>
-
-<h1 id="6-方法调用与返回指令"><a href="#6-方法调用与返回指令" class="headerlink" title="6. 方法调用与返回指令"></a>6. 方法调用与返回指令</h1><blockquote>
-<h2 id="方法调用指令"><a href="#方法调用指令" class="headerlink" title="方法调用指令"></a>方法调用指令</h2><p>invokcvirtual 运行时按照对象的类来调用实例方法</p>
-<p>invokespecial 根据编译时类型来调用实例方法</p>
-<p>invokestatic 调用类（静态）方法</p>
-<p>invokcinterface 调用接口方法</p>
-<h2 id="方法返回指令"><a href="#方法返回指令" class="headerlink" title="方法返回指令"></a>方法返回指令</h2><p>ireturn 从方法中返回int类型的数据</p>
-<p>lreturn 从方法中返回long类型的数据</p>
-<p>freturn 从方法中返回float类型的数据</p>
-<p>dreturn 从方法中返回double类型的数据</p>
-<p>areturn 从方法中返回引用类型的数据</p>
-<p>return 从方法中返回，返回值为void</p>
-</blockquote>
-<h2 id="6-1-方法调用指令"><a href="#6-1-方法调用指令" class="headerlink" title="6.1. 方法调用指令"></a>6.1. 方法调用指令</h2><table>
-<thead>
-<tr>
-<th>方法调用指令</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>invokevirtual</td>
-<td>调用对象的实例方法</td>
-</tr>
-<tr>
-<td>invokeinterface</td>
-<td>调用接口方法</td>
-</tr>
-<tr>
-<td>invokespecial</td>
-<td>调用一些需要特殊处理的实例方法，包括实例初始化方法（构造器）、私有方法和父类方法</td>
-</tr>
-<tr>
-<td>invokestatic</td>
-<td>调用命名类中的类方法（static方法）</td>
-</tr>
-<tr>
-<td>invokedynamic</td>
-<td>调用动态绑定的方法</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/6b6c265e506611b1fa05134d7ede3f30.png" alt="img"></p>
-<p><img src="/../../../images/image-20230110161847552.png" alt="image-20230110161847552"></p>
-<p><img src="/../../../images/image-20230110162226479.png" alt="image-20230110162226479"></p>
-<p><img src="/../../../images/image-20230110162743637.png" alt="image-20230110162743637"></p>
-<p><img src="/../../../images/image-20230110162820017.png" alt="image-20230110162820017"></p>
-<h2 id="6-2-方法返回指令"><a href="#6-2-方法返回指令" class="headerlink" title="6.2. 方法返回指令"></a>6.2. 方法返回指令</h2><table>
-<thead>
-<tr>
-<th>方法返回指令</th>
-<th>void</th>
-<th>int</th>
-<th>long</th>
-<th>float</th>
-<th>double</th>
-<th>reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>xreturn</strong></td>
-<td>return</td>
-<td>ireturn</td>
-<td>lreturn</td>
-<td>freutrn</td>
-<td>dreturn</td>
-<td>areturn</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/8940d3d81dff02c08bf83cf0c66f3fea.png" alt="image-20210425222017858"><br><img src="https://img-blog.csdnimg.cn/img_convert/386375c9f516af716a5d8dec10177444.png" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">methodReturn</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">500</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">200</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">50</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (i + j) / k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/3fbd1f2ca9f4300eee5e0c4a0227a441.png" alt="image-20210425222245665"></p>
-<hr>
-
-<h1 id="7-操作数栈管理指令"><a href="#7-操作数栈管理指令" class="headerlink" title="7. 操作数栈管理指令"></a>7. 操作数栈管理指令</h1><blockquote>
-<h2 id="通用-无类型）栈操作"><a href="#通用-无类型）栈操作" class="headerlink" title="通用(无类型）栈操作"></a>通用(无类型）栈操作</h2><p>nop 不做任何操作</p>
-<p>pop 弹出栈顶端一个字长的内容</p>
-<p>pop2 弹出栈顶端两个字长的内容</p>
-<p>dup 复制栈顶部一个字长内容</p>
-<p>dup_x1 复制栈顶部一个字长的内容，然后将复制内容及原来弹出的两个字长的内容压入栈</p>
-<p>dup_x2 复制栈顶部一个字长的内容，然后将复制内容及原来弹出的三个字长的内容压入栈</p>
-<p>dup2 复制栈顶部两个字长内容</p>
-<p>dup2_x1 复制栈顶部两个字长的内容，然后将复制内容及原来弹出的三个字长的内容压入栈</p>
-<p>dup2_x2 复制栈顶部两个字长的内容，然后将复制内容及原来弹出的四个字长的内容压入栈</p>
-<p>swap 交换栈顶部两个字长内容</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/316306469dcd1360c16578931cd064fa.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/0d8d5d90fc84398f114eae5d1119cf6b.png" alt="img"></p>
-<hr>
-
-<h1 id="8-控制转移指令"><a href="#8-控制转移指令" class="headerlink" title="8. 控制转移指令"></a>8. 控制转移指令</h1><blockquote>
-<h2 id="比较指令"><a href="#比较指令" class="headerlink" title="比较指令"></a>比较指令</h2><p>lcmp 比较long类型值</p>
-<p>fcmpl 比较float类型值（当遇到NaN时，返回-1）</p>
-<p>fcmpg 比较float类型值（当遇到NaN时，返回1）</p>
-<p>dcmpl 比较double类型值（当遇到NaN时，返回-1）</p>
-<p>dcmpg 比较double类型值（当遇到NaN时，返回1）</p>
-<h2 id="条件分支指令"><a href="#条件分支指令" class="headerlink" title="条件分支指令"></a>条件分支指令</h2><p>ifeq 如果等于0，则跳转</p>
-<p>ifne 如果不等于0，则跳转</p>
-<p>iflt 如果小于0，则跳转</p>
-<p>ifge 如果大于等于0，则跳转</p>
-<p>ifgt 如果大于0，则跳转</p>
-<p>ifle 如果小于等于0，则跳转</p>
-<h2 id="比较条件分支指令"><a href="#比较条件分支指令" class="headerlink" title="比较条件分支指令"></a>比较条件分支指令</h2><p>if_icmpeq 如果两个int值相等，则跳转</p>
-<p>if_icmpne 如果两个int类型值不相等，则跳转</p>
-<p>if_icmplt 如果一个int类型值小于另外一个int类型值，则跳转</p>
-<p>if_icmpge 如果一个int类型值大于或者等于另外一个int类型值，则跳转</p>
-<p>if_icmpgt 如果一个int类型值大于另外一个int类型值，则跳转</p>
-<p>if_icmple 如果一个int类型值小于或者等于另外一个int类型值，则跳转</p>
-<p>ifnull 如果等于null，则跳转</p>
-<p>ifnonnull 如果不等于null，则跳转</p>
-<p>if_acmpeq 如果两个对象引用相等，则跳转</p>
-<p>if_acmpne 如果两个对象引用不相等，则跳转</p>
-<h2 id="多条件分支跳转指令"><a href="#多条件分支跳转指令" class="headerlink" title="多条件分支跳转指令"></a>多条件分支跳转指令</h2><p>tableswitch 通过索引访问跳转表，并跳转</p>
-<p>lookupswitch 通过键值匹配访问跳转表，并执行跳转操作</p>
-<h2 id="无条件跳转指令"><a href="#无条件跳转指令" class="headerlink" title="无条件跳转指令"></a>无条件跳转指令</h2><p>goto 无条件跳转</p>
-<p>goto_w 无条件跳转（宽索引）</p>
-</blockquote>
-<h2 id="8-1-比较指令"><a href="#8-1-比较指令" class="headerlink" title="8.1. 比较指令"></a>8.1. 比较指令</h2><blockquote>
-<p>比较指令的作用是比较占栈顶两个元素的大小，并将比较结果入栽。</p>
-<p>比较指令有： dcmpg,dcmpl、 fcmpg、fcmpl、lcmp</p>
-<p>与前面讲解的指令类似，首字符d表示double类型，f表示float,l表示long.</p>
-<p>对于double和float类型的数字，由于NaN的存在，各有两个版本的比较指令。以float为例，有fcmpg和fcmpl两个指令，它们的区别在于在数字比较时，若遇到NaN值，处理结果不同。</p>
-<p>指令dcmpl和 dcmpg也是类似的，根据其命名可以推测其含义，在此不再赘述。</p>
-<p>举例</p>
-<p>指令 fcmp和fcmpl都从中弹出两个操作数，并将它们做比较，设栈顶的元素为v2,顶顺位第2位的元素为v1,</p>
-<p><strong>若v1&#x3D;v2, 则压入0；若v1&gt;v2则压入1；若v1&lt;v2则压入-1.</strong></p>
-<p>两个指令的不同之处在于，如果遇到NaN值， fcmpg会压入1,而fcmpl会压入-1</p>
-</blockquote>
-<h2 id="8-2-条件跳转指令"><a href="#8-2-条件跳转指令" class="headerlink" title="8.2. 条件跳转指令"></a>8.2. 条件跳转指令</h2><table>
-<thead>
-<tr>
-<th>&lt;</th>
-<th>&lt;&#x3D;</th>
-<th>&#x3D;&#x3D;</th>
-<th>!&#x3D;</th>
-<th>&gt;&#x3D;</th>
-<th>&gt;</th>
-<th>null</th>
-<th>not null</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>iflt</td>
-<td>ifle</td>
-<td>ifeq</td>
-<td>ifng</td>
-<td>ifge</td>
-<td>ifgt</td>
-<td>ifnull</td>
-<td>ifnonnull</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/e59234f41d6946ead781b686455783d9.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/85374206e3cdbb00f45971b1429c6d34.png" alt="img"></p>
-<p><img src="/../../../images/image-20230110172437296.png" alt="image-20230110172437296"></p>
-<p><img src="/../../../images/image-20230110172558692.png" alt="image-20230110172558692"></p>
-<h2 id="8-3-比较条件跳转指令"><a href="#8-3-比较条件跳转指令" class="headerlink" title="8.3. 比较条件跳转指令"></a>8.3. 比较条件跳转指令</h2><table>
-<thead>
-<tr>
-<th>&lt;</th>
-<th>&lt;&#x3D;</th>
-<th>&#x3D;&#x3D;</th>
-<th>!&#x3D;</th>
-<th>&gt;&#x3D;</th>
-<th>&gt;</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>if_icmplt</td>
-<td>if_icmple</td>
-<td>if_icmpeq、if_acmpeq</td>
-<td>if_icmpne、if_acmpne</td>
-<td>if_icmpge</td>
-<td>if_icmpgt</td>
-</tr>
-</tbody></table>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/7ffa349a864e62f3e0298b63acb904ae.png" alt="img"></p>
-<h2 id="8-4-多条件分支跳转"><a href="#8-4-多条件分支跳转" class="headerlink" title="8.4. 多条件分支跳转"></a>8.4. 多条件分支跳转</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/f6f973613d257f1d172e0fcee504cd97.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/57c7b57b096f8a8cfcdcdd1b5d4e179b.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/a709c4fcd4bf627ad47d53ac062db47b.png" alt="img"></p>
-<p><img src="/../../../images/image-20230110210256624.png" alt="image-20230110210256624"></p>
-<p><img src="/../../../images/image-20230110210450102.png" alt="image-20230110210450102"></p>
-<p><img src="/../../../images/image-20230110210833352.png" alt="image-20230110210833352"></p>
-<h2 id="8-5-无条件跳转"><a href="#8-5-无条件跳转" class="headerlink" title="8.5. 无条件跳转"></a>8.5. 无条件跳转</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/9e86f7429623e68e353ce9d1962a1267.png" alt="img"></p>
-<hr>
-
-
-
-<p><img src="/../../../images/image-20230110211303331.png" alt="image-20230110211303331"></p>
-<h1 id="9-异常处理指令"><a href="#9-异常处理指令" class="headerlink" title="9. 异常处理指令"></a>9. 异常处理指令</h1><blockquote>
-<h2 id="异常处理指令"><a href="#异常处理指令" class="headerlink" title="异常处理指令"></a>异常处理指令</h2><p>athrow 抛出异常或错误。将栈顶异常抛出</p>
-<p>jsr 跳转到子例程</p>
-<p>jsr_w 跳转到子例程（宽索引）</p>
-<p>rct 从子例程返回</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/196b81557c33474cf2cfa2032aa65340.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/9e9883544cea41b6148e535da4417d78.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/daa25784fc259c12af58bb094d6ffc52.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/cba1429ffc09988d78008f5309a6374a.png" alt="img"></p>
-<hr>
-
-<h1 id="10-同步控制指令"><a href="#10-同步控制指令" class="headerlink" title="10. 同步控制指令"></a>10. 同步控制指令</h1><blockquote>
-<h3 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h3><p>montiorenter 进入并获取对象监视器。即：为栈顶对象加锁</p>
-<p>monitorexit 释放并退出对象监视器。即：为栈顶对象解锁</p>
-</blockquote>
-<p>Java虚拟机支持两种同步结构：<strong>方法级的同步</strong>（同步方法） 和 <strong>方法内部一段指令序列的同步</strong>（方法内使用的同步代码块），这两种同步都是使用monitor监听器来支持的</p>
-<h2 id="10-1-方法级的同步"><a href="#10-1-方法级的同步" class="headerlink" title="10.1. 方法级的同步"></a>10.1. 方法级的同步</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/20b7bf14a51e1be4f90dac5e305d2ea3.png" alt="img"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">()</span> &#123;</span><br><span class="line">	i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdnimg.cn/img_convert/098e9fef1897cf213d14f145db04c9f1.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/84ff4ef05baf1b5774f43b203d6a6e23.png" alt="img"></p>
-<h2 id="10-2-方法内指令指令序列的同步"><a href="#10-2-方法内指令指令序列的同步" class="headerlink" title="10.2. 方法内指令指令序列的同步"></a>10.2. 方法内指令指令序列的同步</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/697b683f5fba682a6ed9772950f719a7.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/71ab99d8f145e61b31daa03a233f2596.png" alt="img"><br><img src="https://img-blog.csdnimg.cn/img_convert/ac36b8a792107c77956ef642afba2154.png" alt="img"></p>
-<hr>
-
-<p><img src="/../../../images/image-20230110220327662.png" alt="image-20230110220327662"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/" data-id="cleebxr5e0087xwv6fbhff16a" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">JVM中篇：字节码与类的加载器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-JVM/JVM中篇：字节码与类的加载篇/Untitled" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/" class="article-date">
-  <time class="post-time" datetime="2023-01-03T06:11:47.180Z" itemprop="datePublished">
-    <span class="post-month">1月</span><br/>
-    <span class="post-day">03</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>为什么学字节码文件的原因：</strong></p>
-<p><img src="/../../../images/image-20230103141407495.png" alt="image-20230103141407495"></p>
-<p><img src="/../../../images/image-20230103141317313.png" alt="image-20230103141317313"></p>
-<p><img src="/../../../images/image-20230103141306367.png" alt="image-20230103141306367"></p>
-<p><img src="/../../../images/image-20230103141338248.png" alt="image-20230103141338248"></p>
-<p><strong>java前端编译器</strong></p>
-<p><img src="/../../../images/image-20230103142540075.png" alt="image-20230103142540075"></p>
-<p>一个程序的性能是否高效，其实跟语言是没太大的关系的，主要是编译器，比如java在早期的时候，没有编译器只有解释器，然后就很慢，后来又了JIT编译器后，就快很多了。</p>
-<p><strong>前端编译器 vs 后端编译器</strong></p>
-<p><img src="/../../../images/image-20230103144208971.png" alt="image-20230103144208971"></p>
-<p><strong>透过字节码指令看代码执行细节：</strong></p>
-<p><img src="/../../../images/image-20230103144413285.png" alt="image-20230103144413285"></p>
-<p><img src="/../../../images/image-20230103144716615.png" alt="image-20230103144716615"></p>
-<p><img src="/../../../images/image-20230103150037755.png" alt="image-20230103150037755"></p>
-<p>例子2：</p>
-<p><img src="/../../../images/image-20230103150626861.png" alt="image-20230103150626861"></p>
-<p>例子3：</p>
-<p><img src="/../../../images/image-20230105164434790.png" alt="image-20230105164434790"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* 成员变量（非静态的）赋值过程：1.默认初始化 - 2.显示初始化 / 代码块中初始化 - 3. 构造器中初始化 -</span><br><span class="line">*                         4.有了对象之后，可以“对象.属性” 或 “对象.方法” 的方式对成员变量进行赋值</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../../images/image-20230105162837668.png" alt="image-20230105162837668"></p>
-<p><img src="/../../../images/image-20230105163558835.png" alt="image-20230105163558835"></p>
-<p><img src="/../../../images/image-20230105164757916.png" alt="image-20230105164757916"></p>
-<h2 id="解读Class文件的三种方式"><a href="#解读Class文件的三种方式" class="headerlink" title="解读Class文件的三种方式"></a>解读Class文件的三种方式</h2><p><img src="/../../../images/image-20230106210715710.png" alt="image-20230106210715710"></p>
-<p><img src="/../../../images/image-20230106211249422.png" alt="image-20230106211249422"></p>
-<p><img src="/../../../images/image-20230106211233536.png" alt="image-20230106211233536"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/" data-id="cleebxr5f008cxwv64lp1639s" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-异常or报错/不明异常" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/" class="article-date">
-  <time class="post-time" datetime="2022-12-20T16:46:49.635Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">21</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>当你的实体类实现了序列化接口<img src="/../../images/image-20221221005142575.png" alt="image-20221221005142575">，当你去查询数据库的实体类时，有时候会报错，有时候又不会报，我也不知道为什么，报错如下：</p>
-<p>java.ang.ClassCastException: lass com.webloq.entity.User cannot be cast to class javaang,String (com.webloq,entity.User is in unnamed module of loader </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/" data-id="cleebxr4g005sxwv6grlbdl4l" class="article-share-link">分享</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-异常or报错/java.lang.ClassNotFoundException lombok.Data" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/" class="article-date">
-  <time class="post-time" datetime="2022-12-16T17:25:51.584Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">17</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/">java.lang.ClassNotFoundException lombok.Data</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/">异常or报错</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>springboot项目启动报错:</p>
-<p><img src="https://img-blog.csdnimg.cn/20191219191118357.png" alt="img"></p>
-<p>原因：mysql <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=datetime&spm=1001.2101.3001.7020">datetime</a>类型，实体类 写成了 Data</p>
-<p><img src="https://img-blog.csdnimg.cn/24af0326e2854017a42925a304442132.png" alt="img"></p>
-<p>把Data全部改为Date即可：</p>
-<p><img src="https://img-blog.csdnimg.cn/69878a80687c47238f29cc095bd52d5f.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/" data-id="cleebxr4f005qxwv6db5d71jk" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/" rel="tag">异常or报错</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-elasticsearch/数据同步" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" class="article-date">
-  <time class="post-time" datetime="2022-12-12T09:06:59.689Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">12</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">数据同步</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="方案一：同步调用"><a href="#方案一：同步调用" class="headerlink" title="方案一：同步调用"></a>方案一：同步调用</h3><p><img src="/../../images/image-20221212170758302.png" alt="image-20221212170758302"></p>
-<p>如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。</p>
-<h3 id="方案二：异步通知"><a href="#方案二：异步通知" class="headerlink" title="方案二：异步通知"></a>方案二：异步通知</h3><p><img src="/../../images/image-20221212171310763.png" alt="image-20221212171310763"></p>
-<p>利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。</p>
-<h3 id="方案三：监听binlog"><a href="#方案三：监听binlog" class="headerlink" title="方案三：监听binlog"></a>方案三：监听binlog</h3><p><img src="/../../images/image-20221212171812077.png" alt="image-20221212171812077"></p>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><img src="/../../images/image-20221212171713573.png" alt="image-20221212171713573"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="cleebxr3w0046xwv6dmjx10r1" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-安全性/事务回滚/Spring Boot事务回滚" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" class="article-date">
-  <time class="post-time" datetime="2022-12-03T12:27:01.326Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">03</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">Spring Boot事务回滚</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%85%A8%E6%80%A7/">安全性</a>,<a class="article-category-link" href="/categories/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">事务回滚</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们开发系统的时候经常会遇到一些关于交易的需求，交易的过程大多数都比较繁琐（会包括修改库存、修改余额、记录交易账单等等步骤），这时候我们就不得不考虑其中的潜在风险了，比如我们在交易的过程中修改了库存（库存 -1），接下来需要进行支付操作，但是此时系统突然宕机或者网络突然中断，这也就导致我们无法完成整个交易流程，虽然用户还没付钱，但是我们的库存变少了（商家肯定就不高兴了👿），所以我们就需要用到事务回滚来解决上述的问题。</p>
-<h1 id="Spring-Boot-事务回滚"><a href="#Spring-Boot-事务回滚" class="headerlink" title="Spring Boot 事务回滚"></a>Spring Boot 事务回滚</h1><p>我们有两种方式可以实现事务回滚，第一种是自动回滚，第二种是手动回滚，这两种实现方式大同小异，二者都需要使用 @Transactional 注解来实现事务回滚，下面直接上代码，看看二者之间到底哪里不一样。</p>
-<p>在接口实现类中有一个插入会员信息的方法，咱们就对这个方法进行改造，分别实现一下自动回滚和手动回滚👇</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">    cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">    SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">    <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h2 id="自动回滚"><a href="#自动回滚" class="headerlink" title="自动回滚"></a>自动回滚</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">    cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">    SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">    <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>我们可以看到方法上增加了一个注解 @Transactional(rollbackFor &#x3D; Exception.class) ，通过该注解可以对异常进行捕获，当发生异常时就可以进行回滚，从而撤销本次的入库操作。</p>
-<p>很多方法中都会用 try-catch 对异常进行处理，如果此时在 catch 中对可能出现的异常进行了处理，但是并没有再手动抛出（throw）异常，Spring 则会认为该方法成功执行，也就不会进行回滚👇。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4b9858bcb9f4d22a5cc2931883efe1e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="在这里插入图片描述"> 正解如下👇：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">        cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">        SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">        <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;方法出现异常：&quot;</span> + e);</span><br><span class="line">        <span class="comment">//手动抛出异常</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>P.S. 如果 try-catch 语句在 finally 语句块中进行了 return 操作，那么 catch 语句块中手动抛出的异常也会被覆盖，同样不会自动回滚。</p>
-<h2 id="手动回滚"><a href="#手动回滚" class="headerlink" title="手动回滚"></a>手动回滚</h2><p>手动回滚的实现方式也非常简单，只需要添加一句代码即可实现👇</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入会员信息</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cashierMember 会员信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional(rollbackFor = Exception.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">insertCashierMember</span><span class="params">(CashierMember cashierMember)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        cashierMember.setCreateTime(DateUtils.getNowDate());</span><br><span class="line">        cashierMember.setCreateBy(ShiroUtils.getLoginName());</span><br><span class="line">        SMSUtil.sendCreateMemberMessage(cashierMember.getPhonenumber());</span><br><span class="line">        <span class="keyword">return</span> cashierMemberMapper.insertCashierMember(cashierMember);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;方法出现异常：&quot;</span> + e);</span><br><span class="line">        <span class="comment">//实现手动回滚</span></span><br><span class="line">        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>P.S. 这里只是举个例子，手动回滚语句不一定要添加在 catch 代码块中，我们可以在任何一个地方使用手动回滚语句。<strong>需要注意的是，我们虽然可以在其他地方增加手动回滚语句，但是手动回滚语句后的代码还会继续执行，所以不建议在非 catch 代码块中使用手动回滚语句。</strong> 如果非要这么用的话，就一定要好好斟酌一下自己的业务逻辑是不是会有 BUG 了。</p>
-<h1 id="Spring-Boot-事务回滚注意事项"><a href="#Spring-Boot-事务回滚注意事项" class="headerlink" title="Spring Boot 事务回滚注意事项"></a>Spring Boot 事务回滚注意事项</h1><p>这里我们再简单说几句关于 Spring Boot 事务回滚中的注意事项：</p>
-<ol>
-<li>想实现回滚，首先要保证 Spring Boot 开启了事务（在启动类上增加 @EnableTransactionManagement 注解开启事务（其实 Spring Boot 默认就是开启事务的），其次就是实现回滚的方法必须是 public 的。</li>
-<li>@Transactional(rollbackFor&#x3D;Exception.class) 表示的是该方法无论抛出什么异常都会进行自动回滚；如果不加 (rollbackFor&#x3D;Exception.class) 的话，则代表了默认值，也就是只有当该方法抛出了非检查型异常（RuntimeException）时才会进行回滚。</li>
-<li>由于事务的四大特性（原子性、一致性、隔离性、持久性），所以 @Transactional 一般是要加在业务层（也就是接口实现类）中。</li>
-<li>如果将 @Transactional(rollbackFor&#x3D;Exception.class) 加在了接口实现类上，那么这个类下的所有方法都将会被加上事务管理，即所有方法都会在自己出现异常时进行回滚操作。</li>
-</ol>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本人经验有限，有些地方可能讲的没有特别到位，如果您在阅读的时候想到了什么问题，欢迎在评论区留言，我们后续再一一探讨🙇‍</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" data-id="cleebxr6900avxwv6ac1kbgpa" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/" rel="tag">事务回滚</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%80%A7/" rel="tag">安全性</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-文件服务器/MinIO/Minio设置文件永久访问和下载" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" class="article-date">
-  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">01</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/">Minio设置文件永久访问和下载</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a>,<a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/">MinIO</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1. </p>
-<blockquote>
-<p>docker pull minio&#x2F;mc</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/8c2815c4dfe14d15b74abcd173b9db9c.png" alt="img"></p>
-<p>2. </p>
-<blockquote>
-<p>docker run -it –entrypoint&#x3D;&#x2F;bin&#x2F;sh minio&#x2F;mc</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/a26767d7c9d74cc5bee45a1bffd745af.png" alt="img"></p>
-<p>3. </p>
-<blockquote>
-<p>mc config host add <ALIAS> <YOUR-S3-ENDPOINT> <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY> [–api API-SIGNATURE]</YOUR-SECRET-KEY></YOUR-ACCESS-KEY></YOUR-S3-ENDPOINT></ALIAS></p>
-</blockquote>
-<blockquote>
-<p> mc ls minio</p>
-</blockquote>
-<ul>
-<li>ALIAS: 别名就是给你的云存储服务起了一个短点的外号。</li>
-<li>S3 endpoint,access key和secret key是你的云存储服务提供的。 <ul>
-<li>endpoint  </li>
-<li>access key、secret key 到这里大家肯定都知道啦。</li>
-</ul>
-</li>
-<li>API签名是可选参数，默认情况下，它被设置为”S3v4”。</li>
-</ul>
-<p>例如：</p>
-<p><img src="https://img-blog.csdnimg.cn/8d4b5fb05f35420d8342b57906cde36b.png" alt="img"></p>
-<ol start="4">
-<li>通过下面命令分别设置永久下载和永久分享</li>
-</ol>
-<blockquote>
-<p>mc anonymous set download minio&#x2F;file</p>
-</blockquote>
-<blockquote>
-<p> mc anonymous set public minio&#x2F;file</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/db7e3502bffc4e729b9cde0ff25c31f3.png" alt="img"></p>
-<p>详细说明参考如下博文：</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6992467402877304868">Docker 安装最新Minio Client，还附带解决如何设置永久访问和永久下载链接！！（详图）有需求值得收藏的哈！！！！ - 掘金 (juejin.cn)</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/Minio%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B0%B8%E4%B9%85%E8%AE%BF%E9%97%AE%E5%92%8C%E4%B8%8B%E8%BD%BD/" data-id="cleebxr6a00azxwv65vare05b" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-文件服务器/MinIO/云服务器docker安装MinIO" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" class="article-date">
-  <time class="post-time" datetime="2022-12-01T12:03:32.526Z" itemprop="datePublished">
-    <span class="post-month">12月</span><br/>
-    <span class="post-day">01</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">云服务器docker安装MinIO</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a>,<a class="article-category-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/">MinIO</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>执行命令 <code>docker pull minio/minio</code> 下载稳定版本镜像</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull minio/minio</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png" alt="img"></p>
-<ol start="2">
-<li>创建并启动minio容器</li>
-</ol>
-<p> MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 9000:9000 -p 9001:9001 -d --name minio -v /opt/docker/minio/data:/data -v /opt/docker/minio/config:/root/.minio -e &quot;MINIO_ROOT_USER=minio&quot; -e &quot;MINIO_ROOT_PASSWORD=minio@123456&quot; minio/minio server /data --console-address &quot;:9000&quot; --address &quot;:9001&quot;</span><br></pre></td></tr></table></figure>
-
-<p>–console-address “:9000”  中的9000 是可视化界面的访问端口</p>
-<p> –address “:9001” 中的 9001是api端口，在springboot中整合是用到</p>
-<ol start="3">
-<li>开放9000端口</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/fd189f85c8834e899f4b5e0284876ea7.png" alt="img"></p>
-<p>9001端口也是像上面一样开放即可</p>
-<ol start="4">
-<li>访问登录，使用IP+9000 登录即可测试，然后输入自己在启动创建容器时设置的账号和密码</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/d6823c8747fb4b8ab196b9f3a892d18a.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/94216afbb986434c9934f8d7d1fe523f.png" alt="img"></p>
-<hr>
-<p>安装和使用，可以参照这个博文：</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7101581935486615559">SpringBoot 整合 Minio 上传文件 - 掘金 (juejin.cn)</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/" data-id="cleebxr6b00b2xwv6f7yw746l" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MinIO/" rel="tag">MinIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">文件服务器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/">next &amp;raquo;</a>
-  </nav>
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-
-
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
-
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Haojen's blog</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/b73db20eea59665fa3de67e1dec6d4e5.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/10/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/4-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%88%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89%E8%AF%A6%E8%A7%A3/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/b73db20eea59665fa3de67e1dec6d4e5.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><i class="tag post-item-tag">JVM中篇：字节码与类的加载器</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/10/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/4-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%88%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89%E8%AF%A6%E8%A7%A3/">4-类的加载过程（类的生命周期）详解</a></h2><time class="has-text-grey" datetime="2023-01-10T14:08:57.478Z">2023-01-10</time><p class="is-flex-grow-2 mt-2">[toc]
+1. 概述在 Java 中数据类型分为基本数据类型和引用数据类型。基本数据类型由虚拟机预先定义，引用数据类型则需要进行类的加载。
+按照 Java 虚拟机规范，从 class 文件到加载到内存中的类，到类卸载出内存为止，它的整个生命周期包括如下 7 个阶段：
+
+其中，验证、准备、解析 3 个部分统称为链接（Linking）
+从程序中类的使用过程看
+
+大厂面试题
+蚂蚁金服：
+描述一下 JVM 加载 Class 文件的原理机制？
+一面：类加载过程
+百度：
+类加载的时机
+java 类加载过程？
+简述 java 类加载机制？
+腾讯：
+JVM 中类加载机制，类加载过程？
+滴滴：
+JVM 类加载机制
+美团：
+Java 类加载过程
+描述一下 jvm 加载 class 文件的原理机制
+京东：
+什么是类的加载？
+哪..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/10/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/4-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%88%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89%E8%AF%A6%E8%A7%A3/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../../images/image-20230109224824634.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/"><img class="post-cover-img js-img-fadeIn" src="/../../../images/image-20230109224824634.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%88%B7%E9%A2%98"><i class="tag post-item-tag">刷题</i></a><a href="/tags/leetcode"><i class="tag post-item-tag">leetcode</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">leetcode-134.加油站</a></h2><time class="has-text-grey" datetime="2023-01-09T14:34:18.875Z">2023-01-09</time><p class="is-flex-grow-2 mt-2">题目：在一条环路上有 n 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
+你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
+给定两个整数数组 gas 和 cost ，如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1 。如果存在解，则 保证 它是 唯一 的。
+示例 1:
+12345678910输入: gas = [1,2,3,4,5], cost = [3,4,5,1,2]输出: 3解释:从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油开往 0 号加油站，此时油箱有..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../../images/image-20230109105233604.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/"><img class="post-cover-img js-img-fadeIn" src="/../../../images/image-20230109105233604.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><i class="tag post-item-tag">JVM中篇：字节码与类的加载器</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">02-javap使用</a></h2><time class="has-text-grey" datetime="2023-01-09T07:12:26.476Z">2023-01-09</time><p class="is-flex-grow-2 mt-2">1、解析字节码的作用
+2、javac -g 操作
+3、javap的用法
+
+
+注意：-v虽然包含的信息很全，但是不包含私有private的，用 **-v -p **才可以带上私有的，这样信息就是最全的了
+如：演示javap -s （输出内部类型签名）：
+
+演示 javap -l （输出行号和本地变量表（局部变量表））：
+
+-c 和 -v 的内容对比：
+
+
+javap解析得到的文件结构的解读
+
+
+
+
+
+
+
+javap使用小结
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/img_convert/630bca9b1bbeeeb4f772fea5f94d43fc.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/630bca9b1bbeeeb4f772fea5f94d43fc.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><i class="tag post-item-tag">JVM中篇：字节码与类的加载器</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/">03-字节码指令集</a></h2><time class="has-text-grey" datetime="2023-01-09T02:19:47.567Z">2023-01-09</time><p class="is-flex-grow-2 mt-2">[toc]
+1. 概述
+2. 加载与存储指令
+
+
+
+
+
+2.1. 局部变量压栈指令
+iload 从局部变量中装载int类型值
+lload 从局部变量中装载long类型值
+fload 从局部变量中装载float类型值
+dload 从局部变量中装载double类型值
+aload 从局部变量中装载引用类型值（refernce）
+iload_0 从局部变量0中装载int类型值
+iload_1 从局部变量1中装载int类型值
+iload_2 从局部变量2中装载int类型值
+iload_3 从局部变量3中装载int类型值
+lload_0 从局部变量0中装载long类型值
+lload_1 从局部变量1中装载long类型值
+lload_2 从局部变量2中装载long类型值
+lload_3 从局部变量3中装载long类型值
+..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../../images/image-20230103141407495.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/"><img class="post-cover-img js-img-fadeIn" src="/../../../images/image-20230103141407495.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><time class="has-text-grey" datetime="2023-01-03T06:11:47.180Z">2023-01-03</time><p class="is-flex-grow-2 mt-2">为什么学字节码文件的原因：
+
+
+
+
+java前端编译器
+
+一个程序的性能是否高效，其实跟语言是没太大的关系的，主要是编译器，比如java在早期的时候，没有编译器只有解释器，然后就很慢，后来又了JIT编译器后，就快很多了。
+前端编译器 vs 后端编译器
+
+透过字节码指令看代码执行细节：
+
+
+
+例子2：
+
+例子3：
+
+12* 成员变量（非静态的）赋值过程：1.默认初始化 - 2.显示初始化 / 代码块中初始化 - 3. 构造器中初始化 -*                         4.有了对象之后，可以“对象.属性” 或 “对象.方法” 的方式对成员变量进行赋值
+
+
+
+
+解读Class文件的三种方式
+
+
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221221005142575.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221221005142575.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><time class="has-text-grey" datetime="2022-12-20T16:46:49.635Z">2022-12-21</time><p class="is-flex-grow-2 mt-2">当你的实体类实现了序列化接口，当你去查询数据库的实体类时，有时候会报错，有时候又不会报，我也不知道为什么，报错如下：
+java.ang.ClassCastException: lass com.webloq.entity.User cannot be cast to class javaang,String (com.webloq,entity.User is in unnamed module of loader 
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/20191219191118357.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/20191219191118357.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99"><i class="tag post-item-tag">异常or报错</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/">java.lang.ClassNotFoundException lombok.Data</a></h2><time class="has-text-grey" datetime="2022-12-16T17:25:51.584Z">2022-12-17</time><p class="is-flex-grow-2 mt-2">springboot项目启动报错:
+
+原因：mysql datetime类型，实体类 写成了 Data
+
+把Data全部改为Date即可：
+
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/17/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/java.lang.ClassNotFoundException%20lombok.Data/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221212170758302.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221212170758302.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">数据同步</a></h2><time class="has-text-grey" datetime="2022-12-12T09:06:59.689Z">2022-12-12</time><p class="is-flex-grow-2 mt-2">方案一：同步调用
+如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。
+方案二：异步通知
+利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。
+方案三：监听binlog
+总结：
+</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4b9858bcb9f4d22a5cc2931883efe1e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4b9858bcb9f4d22a5cc2931883efe1e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E5%AE%89%E5%85%A8%E6%80%A7"><i class="tag post-item-tag">安全性</i></a><a href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A"><i class="tag post-item-tag">事务回滚</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">Spring Boot事务回滚</a></h2><time class="has-text-grey" datetime="2022-12-03T12:27:01.326Z">2022-12-03</time><p class="is-flex-grow-2 mt-2">前言我们开发系统的时候经常会遇到一些关于交易的需求，交易的过程大多数都比较繁琐（会包括修改库存、修改余额、记录交易账单等等步骤），这时候我们就不得不考虑其中的潜在风险了，比如我们在交易的过程中修改了库存（库存 -1），接下来需要进行支付操作，但是此时系统突然宕机或者网络突然中断，这也就导致我们无法完成整个交易流程，虽然用户还没付钱，但是我们的库存变少了（商家肯定就不高兴了👿），所以我们就需要用到事务回滚来解决上述的问题。
+Spring Boot 事务回滚我们有两种方式可以实现事务回滚，第一种是自动回滚，第二种是手动回滚，这两种实现方式大同小异，二者都需要使用 @Transactional 注解来实现事务回滚，下面直接上代码，看看二者之间到底哪里不一样。
+在接口实现类中有一个插入会员信息的方法，咱们就对这个..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/03/%E5%AE%89%E5%85%A8%E6%80%A7/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/Spring%20Boot%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/f3ce24819cf1437a959b0009e57124cd.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8"><i class="tag post-item-tag">文件服务器</i></a><a href="/tags/MinIO"><i class="tag post-item-tag">MinIO</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">云服务器docker安装MinIO</a></h2><time class="has-text-grey" datetime="2022-12-01T12:03:32.526Z">2022-12-01</time><p class="is-flex-grow-2 mt-2">
+执行命令 docker pull minio/minio 下载稳定版本镜像
+
+
+1docker pull minio/minio
+
+
+
+创建并启动minio容器
+
+ MINIO_ACCESS_KEY是登录的用户名，MINIO_SECRET_KEY是登陆的密码，根据自己的情况来设置登录的用户名和密码
+1docker run -p 9000:9000 -p 9001:9001 -d --name minio -v /opt/docker/minio/data:/data -v /opt/docker/minio/config:/root/.minio -e &quot;MINIO_ROOT_USER=minio&quot; -e &quot;MINIO_ROOT_PASSWORD=minio@123456&quot; minio/minio ser..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/01/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/MinIO/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8docker%E5%AE%89%E8%A3%85MinIO/">更多</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap mt-5"><a class="extend prev" rel="prev" href="/page/4/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/"><i class="iconfont icon-next has-text-grey"></i></a></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><style>.search-widget .search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--second-text-color);
+}
+.search-widget .search-content {
+    position: absolute;
+    left: 0;
+    top: calc(100% - 3px);
+    z-index: 2;
+
+    width: 100%;
+    height: 0;
+    max-height: 550px;
+
+    overflow: auto;
+    box-sizing: border-box;
+
+    background: var(--top-bar-bg-color);
+    backdrop-filter: blur(var(--backdropFilter));
+    -webkit-backdrop-filter: blur(var(--backdropFilter));
+
+    border-bottom-left-radius: var(--borderRadius);
+    border-bottom-right-radius: var(--borderRadius);
+    box-shadow: 0 12px 15px rgba(0, 0, 0, 0.08);
+}
+
+.search-widget .search-content a:hover h5 {
+    color: #3273dc!important;
+}
+</style><main class="aside-card-container search-widget is-relative"><label for="searchInput"><div class="is-flex px-4" id="searchButton"><i class="iconfont icon--search1 mr-1"></i><input class="search-input is-flex-grow-1" id="searchInput" placeholder="搜索内容.."></div></label><section class="search-content content" id="searchContent"></section></main><script>var searchDatabase = []
+var searchInputEl = document.getElementById('searchInput')
+var searchButtonEl = document.getElementById('searchButton')
+var searchResultEl = document.getElementById('searchContent')
+
+searchInputEl.oninput = function (evt) {
+    var searchValue = evt.srcElement.value
+    var haveSearchValue = Boolean(searchValue.trim())
+    if (!haveSearchValue) {
+        searchResultEl.style.height = 0
+        searchResultEl.innerHTML = null
+        return
+    }
+
+    var searchResults = searching(searchValue)
+
+    if (searchResults.length > 0) {
+        renderSearchResults(searchResults)
+    }
+}
+
+function renderSearchResults(results) {
+    searchResultEl.innerHTML = null
+    var fragment = document.createDocumentFragment()
+
+    results.forEach(function (item) {
+        var link = document.createElement('a')
+        var title = document.createElement('h5')
+        var content = document.createElement('p')
+
+        title.className = 'mb-1'
+        title.innerText = item.title
+        content.innerText = item.content
+
+        link.href = item.link
+        link.appendChild(title)
+        link.appendChild(content)
+        link.className = 'p-4 is-block'
+
+        fragment.appendChild(link)
     })
-  });
-</script>
 
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
+    searchResultEl.appendChild(fragment)
+    searchResultEl.style.height = 'auto'
+}
 
-<script src="/js/script.js"></script>
+function searching(inputText) {
+    var inputTexts = inputText.split(' ')
+    var searchResults = []
+    inputTexts.forEach(function (searchKey) {
+        var haveSearchValue = Boolean(searchKey.trim())
+        if (!haveSearchValue) return
 
+        var key = searchKey.toLowerCase()
 
+        for (var entry of searchDatabase) {
+            var title = entry.getElementsByTagName('title')[0].textContent
+            var link = entry.getElementsByTagName('link')[0].getAttribute('href')
+            var contentWithTags = entry.getElementsByTagName('content')[0].textContent
+            var rawContent = contentWithTags.trim().replace(/<[^>]+>/g, '').toLowerCase()
 
+            var LENGTH = 80
+            var finalContent = ''
+            var contentLength = rawContent.length
+            var searchResultIdx = rawContent.indexOf(key)
 
-  </div>
-</body>
-</html>
+            var startIdx = searchResultIdx - 20,
+                endIdx = startIdx + LENGTH
+
+            if (startIdx < 0) {
+                startIdx = 0
+                endIdx = 100
+            }
+
+            endIdx > contentLength && (endIdx = contentLength)
+
+            finalContent = rawContent.substring(startIdx, endIdx)
+
+            if (title.indexOf(key) > -1 || searchResultIdx > -1) {
+                searchResults.push({
+                    link: link,
+                    title: title,
+                    content: finalContent
+                })
+            }
+        }
+    })
+    return searchResults
+}
+
+searchButtonEl.onclick = function () {
+    if (searchDatabase.length > 0) return;
+
+    fetch(window.location.href + '/search.xml').then(res => res.text()).then(res => {
+        var domparser = new DOMParser
+        var doc = domparser.parseFromString(res, 'application/xml')
+        searchDatabase = doc.getElementsByTagName('search')[0].children
+    })
+}</script><main class="aside-card-container profile-widget"><!-- todo: 使用取色工具动态阴影--><section class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center"><section class="is-flex is-justify-content-center avatar is-clipped skeleton"><!-- debug images "https://api.ixiaowai.cn/gqapi/gqapi.php"--><img class="js-img-fadeIn" src="/images/avatar.jpg" alt="user avatar"></section><h3 class="user-name">Haojen</h3><blockquote class="has-text-centered is-relative"><span style="margin-bottom: 5px;">May the Force be with you</span></blockquote><address class="has-text-centered has-text-grey"><i class="iconfont icon-location" style="margin-right: 5px;"></i><span class="has-text-grey">In the dust</span></address></section><section class="sns-container is-flex is-justify-content-center is-align-items-center"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section></main><main class="aside-card-container recent-widget"><h3>最近</h3><ul><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/b73db20eea59665fa3de67e1dec6d4e5.png" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2023/01/10/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/4-%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%EF%BC%88%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%89%E8%AF%A6%E8%A7%A3/">4-类的加载过程（类的生命周期）详解</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2023-01-10T14:08:57.478Z">2023-01-10</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="/../../../images/image-20230109224824634.png" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2023/01/09/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/leetcode-134.%E5%8A%A0%E6%B2%B9%E7%AB%99/">leetcode-134.加油站</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2023-01-09T14:34:18.875Z">2023-01-09</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="/../../../images/image-20230109105233604.png" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/2-javap%E4%BD%BF%E7%94%A8/">02-javap使用</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2023-01-09T07:12:26.476Z">2023-01-09</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="https://img-blog.csdnimg.cn/img_convert/630bca9b1bbeeeb4f772fea5f94d43fc.png" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2023/01/09/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/3-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86/">03-字节码指令集</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2023-01-09T02:19:47.567Z">2023-01-09</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="/../../../images/image-20230103141407495.png" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2023/01/03/JVM/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E7%AF%87/Untitled/">标题</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2023-01-03T06:11:47.180Z">2023-01-03</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="/../../images/image-20221221005142575.png" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2022/12/21/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/%E4%B8%8D%E6%98%8E%E5%BC%82%E5%B8%B8/">标题</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2022-12-20T16:46:49.635Z">2022-12-21</time></section></li></ul></main><main class="aside-card-container categories-widget category-page"><h3>分类</h3><section><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MQ/">MQ</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nacos/">Nacos</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Netty/">Netty</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringSecurity/">SpringSecurity</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debug/">debug</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2/">hexo博客</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/interview/">interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/juc/">juc</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatisplus/">mybatisplus</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/springboot/">springboot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/sql/">sql</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/token/">token</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%80%A7/">安全性</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">定时任务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/">异常or报错</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/">数据封装</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">远程调用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/">零碎知识&笔记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a><span class="category-list-count">13</span></li></ul></section></main><main class="aside-card-container archives-widget"><h3>归档</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">102</span></li></ul></section></main><main class="aside-card-container tag-widget"><h3>标签</h3><section><a href="/tags/Docker"><span class="tag post-item-tag" style="margin-bottom: 5px;">Docker</span></a><a href="/tags/debug"><span class="tag post-item-tag" style="margin-bottom: 5px;">debug</span></a><a href="/tags/Git"><span class="tag post-item-tag" style="margin-bottom: 5px;">Git</span></a><a href="/tags/Nacos"><span class="tag post-item-tag" style="margin-bottom: 5px;">Nacos</span></a><a href="/tags/rabbitmq"><span class="tag post-item-tag" style="margin-bottom: 5px;">rabbitmq</span></a><a href="/tags/Netty"><span class="tag post-item-tag" style="margin-bottom: 5px;">Netty</span></a><a href="/tags/Quartz"><span class="tag post-item-tag" style="margin-bottom: 5px;">Quartz</span></a><a href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="tag post-item-tag" style="margin-bottom: 5px;">定时任务</span></a><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="tag post-item-tag" style="margin-bottom: 5px;">微服务</span></a><a href="/tags/%E9%9D%A2%E8%AF%95"><span class="tag post-item-tag" style="margin-bottom: 5px;">面试</span></a><a href="/tags/nio"><span class="tag post-item-tag" style="margin-bottom: 5px;">nio</span></a><a href="/tags/Elasticsearch"><span class="tag post-item-tag" style="margin-bottom: 5px;">Elasticsearch</span></a><a href="/tags/SpringSecurity"><span class="tag post-item-tag" style="margin-bottom: 5px;">SpringSecurity</span></a><a href="/tags/%E6%BA%90%E7%A0%81"><span class="tag post-item-tag" style="margin-bottom: 5px;">源码</span></a><a href="/tags/juc"><span class="tag post-item-tag" style="margin-bottom: 5px;">juc</span></a><a href="/tags/sql"><span class="tag post-item-tag" style="margin-bottom: 5px;">sql</span></a><a href="/tags/redis"><span class="tag post-item-tag" style="margin-bottom: 5px;">redis</span></a><a href="/tags/springboot"><span class="tag post-item-tag" style="margin-bottom: 5px;">springboot</span></a><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="tag post-item-tag" style="margin-bottom: 5px;">面试题</span></a><a href="/tags/mybatisplus"><span class="tag post-item-tag" style="margin-bottom: 5px;">mybatisplus</span></a><a href="/tags/Mysql"><span class="tag post-item-tag" style="margin-bottom: 5px;">Mysql</span></a><a href="/tags/%E6%B3%A8%E8%A7%A3"><span class="tag post-item-tag" style="margin-bottom: 5px;">注解</span></a><a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="tag post-item-tag" style="margin-bottom: 5px;">云服务器</span></a><a href="/tags/%E9%83%A8%E7%BD%B2"><span class="tag post-item-tag" style="margin-bottom: 5px;">部署</span></a><a href="/tags/%E5%88%B7%E9%A2%98"><span class="tag post-item-tag" style="margin-bottom: 5px;">刷题</span></a><a href="/tags/hexo%E5%8D%9A%E5%AE%A2"><span class="tag post-item-tag" style="margin-bottom: 5px;">hexo博客</span></a><a href="/tags/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99"><span class="tag post-item-tag" style="margin-bottom: 5px;">异常or报错</span></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85"><span class="tag post-item-tag" style="margin-bottom: 5px;">数据封装</span></a><a href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&amp;%E7%AC%94%E8%AE%B0"><span class="tag post-item-tag" style="margin-bottom: 5px;">零碎知识&amp;笔记</span></a><a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="tag post-item-tag" style="margin-bottom: 5px;">运算符</span></a><a href="/tags/token"><span class="tag post-item-tag" style="margin-bottom: 5px;">token</span></a><a href="/tags/JWT"><span class="tag post-item-tag" style="margin-bottom: 5px;">JWT</span></a><a href="/tags/JVM"><span class="tag post-item-tag" style="margin-bottom: 5px;">JVM</span></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><span class="tag post-item-tag" style="margin-bottom: 5px;">内存与垃圾回收篇</span></a><a href="/tags/interview"><span class="tag post-item-tag" style="margin-bottom: 5px;">interview</span></a><a href="/tags/JVM%E4%B8%8B%E7%AF%87%EF%BC%9A%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E4%B8%8E%E8%B0%83%E4%BC%98%E7%AF%87"><span class="tag post-item-tag" style="margin-bottom: 5px;">JVM下篇：性能监控与调优篇</span></a><a href="/tags/JVM%E4%B8%AD%E7%AF%87%EF%BC%9A%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="tag post-item-tag" style="margin-bottom: 5px;">JVM中篇：字节码与类的加载器</span></a><a href="/tags/Sentinel"><span class="tag post-item-tag" style="margin-bottom: 5px;">Sentinel</span></a><a href="/tags/%E7%BC%93%E5%AD%98"><span class="tag post-item-tag" style="margin-bottom: 5px;">缓存</span></a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="tag post-item-tag" style="margin-bottom: 5px;">分布式事务</span></a><a href="/tags/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="tag post-item-tag" style="margin-bottom: 5px;">远程调用</span></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="tag post-item-tag" style="margin-bottom: 5px;">计算机网络</span></a><a href="/tags/Redis"><span class="tag post-item-tag" style="margin-bottom: 5px;">Redis</span></a><a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="tag post-item-tag" style="margin-bottom: 5px;">中间件</span></a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="tag post-item-tag" style="margin-bottom: 5px;">数据库</span></a><a href="/tags/leetcode"><span class="tag post-item-tag" style="margin-bottom: 5px;">leetcode</span></a><a href="/tags/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="tag post-item-tag" style="margin-bottom: 5px;">文件服务器</span></a><a href="/tags/MinIO"><span class="tag post-item-tag" style="margin-bottom: 5px;">MinIO</span></a><a href="/tags/%E5%AE%89%E5%85%A8%E6%80%A7"><span class="tag post-item-tag" style="margin-bottom: 5px;">安全性</span></a><a href="/tags/%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A"><span class="tag post-item-tag" style="margin-bottom: 5px;">事务回滚</span></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="tag post-item-tag" style="margin-bottom: 5px;">设计模式</span></a><a href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="tag post-item-tag" style="margin-bottom: 5px;">创建者模式</span></a><a href="/tags/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="tag post-item-tag" style="margin-bottom: 5px;">结构型模式</span></a><a href="/tags/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="tag post-item-tag" style="margin-bottom: 5px;">适配器模式</span></a><a href="/tags/Feign"><span class="tag post-item-tag" style="margin-bottom: 5px;">Feign</span></a></section></main><main class="aside-card-container friend-widget"><h3>友链</h3><section><a target="_blank" rel="noopener" href="https://www.google.com/"><span class="tag post-item-tag" style="margin-bottom: 5px;">Google</span></a><a target="_blank" rel="noopener" href="https://www.github.com/"><span class="tag post-item-tag" style="margin-bottom: 5px;">Github</span></a><a target="_blank" rel="noopener" href="https://v2ex.com/"><span class="tag post-item-tag" style="margin-bottom: 5px;">V2EX</span></a><a target="_blank" rel="noopener" href="https://twitter.com/"><span class="tag post-item-tag" style="margin-bottom: 5px;">Twitter</span></a></section></main></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
+
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></body></html>

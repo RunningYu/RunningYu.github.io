@@ -1,166 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>7. 方法区 | Hexo &amp; github</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[toc] 7. 方法区 从线程共享与否的角度来看  程序计数器 ： 不会报异常，没有GC 虚拟机栈、方法栈：有异常，没有GC 堆、元空间：有异常、有GC 7.1. 栈、堆、方法区的交互关系 7.2. 方法区的理解官方文档：Chapter 2. The Structure of the Java Virtual Machine (oracle.com)  7.2.1. 方法区在哪里？《Java 虚">
-<meta property="og:type" content="article">
-<meta property="og:title" content="7. 方法区">
-<meta property="og:url" content="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/index.html">
-<meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="[toc] 7. 方法区 从线程共享与否的角度来看  程序计数器 ： 不会报异常，没有GC 虚拟机栈、方法栈：有异常，没有GC 堆、元空间：有异常、有GC 7.1. 栈、堆、方法区的交互关系 7.2. 方法区的理解官方文档：Chapter 2. The Structure of the Java Virtual Machine (oracle.com)  7.2.1. 方法区在哪里？《Java 虚">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b802b35c3936900c290f8ad123e68b9b.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f356e103d9f75e3c0086079bba2b28a9.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b9f11764ee47b28d37f7764dfd9c9f55.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/ec22e5d6086dd6219195b2d886118d65.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/6a7f2350e0f4e0cde0ac246225e2acdd.png">
-<meta property="og:image" content="http://example.com/images/image-20221119143002557.png">
-<meta property="og:image" content="http://example.com/images/image-20221119142804322.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/fb71df89c52f89d3b711e0b648de244c.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7d0789c206d53bfb4b6004052236197a.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/1c229dc39ffc79e8e4f3abf765378d3b.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/79ec6c83a9b6a4a7281c2ef5442f18ce.png">
-<meta property="og:image" content="http://example.com/images/image-20221119144559401.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/6d1f5d0e7f035df53d16a16451781677.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/8a5fcba10ccb773f185288ac22bde206.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/fbe3915506e7979c7d591d17c216fbb1.png">
-<meta property="og:image" content="http://example.com/images/image-20221119155721374.png">
-<meta property="og:image" content="http://example.com/images/image-20221119161339371.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7ec9b450764c623c89e7de7e0d3c8d19.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/be6d675673b353a266d48df43b0411f4.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/86cc8ce43ce5bcc9b2b167188b839a1b.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b5b9e7f8efd1cf8e889650cea5318b61.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/84396fa6be6164ffc54868e78c59dde6.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/2214af3dfe294eec73899c935589f569.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/64b6b95d37e97205b2f23a089addf321.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/692908400668791ac383561affed3520.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/885b0a628db8e5d96bd270b6c1073bc6.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/922d24be85f3ac3bf951e81bc1101e3d.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/67615b1384f553cab185a32460e607eb.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/4b80397e4e7a553cc7d7f0f9a8b38d1d.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/bcc93f31b5dc95f4676dbd49ecc095d7.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/dfba814e0c1b198df7175fe93284c3e0.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/35be7c27bee2aa8c0930cffbefa07cd8.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/5f2935ec0858f5a74f512018e582f19c.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f584ed9e2b6d99499b2a451a63f12449.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b4428f7f351048601296fe211c40185e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/bf50cc494594b4588794984df6448303.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/1a3aa55257c3150d78327542e5ca230e.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e0f65fc4228d9b6573ae1b23d9a1558b.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/c3ed969b0d2bad704c22481208e5dd10.png">
-<meta property="og:image" content="http://example.com/images/image-20221119175908561.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e8ced63603ee4a62c9eb7d4c48ae94dd.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e7c6b3dd5175466ee891da9e84577418.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f73315a70302396e391a532dcf87ce26.png">
-<meta property="og:image" content="http://example.com/images/image-20221120105434202.png">
-<meta property="article:published_time" content="2022-11-19T06:02:08.728Z">
-<meta property="article:modified_time" content="2022-11-21T01:53:17.217Z">
-<meta property="article:author" content="其然乐衣">
-<meta property="article:tag" content="JVM">
-<meta property="article:tag" content="内存与垃圾回收篇">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/b802b35c3936900c290f8ad123e68b9b.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>7. 方法区</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="[toc]
+7. 方法区
+从线程共享与否的角度来看
 
-  
-<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+程序计数器 ： 不会报异常，没有GC
+虚拟机栈、方法栈：有异常，没有GC
+堆、元空间：有异常、有GC
+7.1. 栈、堆、方法区的交互关系
+7.2. 方法区的理解官方文档：Chapter 2. The Structure of the Java Virtual Machine (oracle.com)
 
-  
+7.2.1. 方法区在哪里？《Java 虚拟机规范》中明确说明：“尽管所有的方法区在逻辑上是属于堆的一部分，但一些简单的实现可能不会选择去进行垃圾收集或者进行压缩。”但对于 HotSpotJVM 而言，方法区还有一个别名叫做 Non-Heap（非堆），目的就是要和堆分开。
+所以，方法区看作是一块独立于 Java 堆的内存空间。
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <div class="widget-wrap mobile-header">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-        <section id="main"><article id="post-JVM/JVM上篇：内存与垃圾回收篇/7. 方法区" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/" class="article-date">
-  <time class="post-time" datetime="2022-11-19T06:02:08.728Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">19</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      7. 方法区
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
+7.2.2. 方法区的基本.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">7. 方法区</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="toc-text">7. 方法区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E6%A0%88%E3%80%81%E5%A0%86%E3%80%81%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E4%BA%A4%E4%BA%92%E5%85%B3%E7%B3%BB"><span class="toc-text">7.1. 栈、堆、方法区的交互关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">7.2. 方法区的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-1-%E6%96%B9%E6%B3%95%E5%8C%BA%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="toc-text">7.2.1. 方法区在哪里？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-2-%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%90%86%E8%A7%A3"><span class="toc-text">7.2.2. 方法区的基本理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-3-HotSpot-%E4%B8%AD%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E6%BC%94%E8%BF%9B"><span class="toc-text">7.2.3. HotSpot 中方法区的演进</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%8E-OOM"><span class="toc-text">7.3. 设置方法区大小与 OOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-1-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%E5%8C%BA%E5%86%85%E5%AD%98%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="toc-text">7.3.1. 设置方法区内存的大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-2-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%BF%99%E4%BA%9B-OOM"><span class="toc-text">7.3.2. 如何解决这些 OOM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-text">7.4. 方法区的内部结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-1-%E6%96%B9%E6%B3%95%E5%8C%BA%EF%BC%88Method-Area%EF%BC%89%E5%AD%98%E5%82%A8%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">7.4.1. 方法区（Method Area）存储什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-2-%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-text">7.4.2. 方法区的内部结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="toc-text">类型信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%EF%BC%88Field%EF%BC%89%E4%BF%A1%E6%81%AF"><span class="toc-text">域（Field）信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%EF%BC%88Method%EF%BC%89%E4%BF%A1%E6%81%AF"><span class="toc-text">方法（Method）信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#non-final-%E7%9A%84%E7%B1%BB%E5%8F%98%E9%87%8F"><span class="toc-text">non-final 的类变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E%EF%BC%9A%E5%85%A8%E5%B1%80%E5%B8%B8%E9%87%8F%EF%BC%88static-final%EF%BC%89"><span class="toc-text">补充说明：全局常量（static final）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-3-%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0-VS-%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-text">7.4.3. 运行时常量池 VS 常量池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%B8%B8%E9%87%8F%E6%B1%A0%EF%BC%9F"><span class="toc-text">为什么需要常量池？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E6%B1%A0%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88"><span class="toc-text">常量池中有什么?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-4-%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-text">7.4.4. 运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-%E6%96%B9%E6%B3%95%E5%8C%BA%E4%BD%BF%E7%94%A8%E4%B8%BE%E4%BE%8B"><span class="toc-text">7.5. 方法区使用举例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-6-%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E6%BC%94%E8%BF%9B%E7%BB%86%E8%8A%82%EF%BC%88%E5%8F%AF%E8%83%BD%E6%98%AF%E9%9D%A2%E8%AF%95%E7%83%AD%E7%82%B9%EF%BC%89"><span class="toc-text">7.6. 方法区的演进细节（可能是面试热点）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B0%B8%E4%B9%85%E4%BB%A3%E8%A6%81%E8%A2%AB%E5%85%83%E7%A9%BA%E9%97%B4%E6%9B%BF%E4%BB%A3%EF%BC%9F"><span class="toc-text">7.6.1. 为什么永久代要被元空间替代？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6-2-StringTable-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%B0%83%E6%95%B4%E4%BD%8D%E7%BD%AE%EF%BC%9F"><span class="toc-text">7.6.2. StringTable 为什么要调整位置？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6-3-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E5%AD%98%E6%94%BE%E5%9C%A8%E9%82%A3%E9%87%8C%EF%BC%9F"><span class="toc-text">7.6.3. 静态变量存放在那里？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-7-%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">7.7. 方法区的垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E7%9A%84%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8A%E5%B8%B8%E8%A7%81%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">运行时数据区的总结以及常见大厂面试题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">常见面试题</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">7. 方法区</h1><time class="has-text-grey" datetime="2022-11-19T06:02:08.728Z">2022-11-19</time><article class="mt-2 post-content"><p>[toc]</p>
 <h1 id="7-方法区"><a href="#7-方法区" class="headerlink" title="7. 方法区"></a>7. 方法区</h1><p><img src="https://img-blog.csdnimg.cn/img_convert/b802b35c3936900c290f8ad123e68b9b.png" alt="image-20210510141044840"></p>
 <p>从线程共享与否的角度来看</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/f356e103d9f75e3c0086079bba2b28a9.png" alt="image-20210510141131860"></p>
@@ -187,7 +42,7 @@
 <p><img src="/../../../images/image-20221119142804322.png" alt="image-20221119142804322"></p>
 <h3 id="7-2-3-HotSpot-中方法区的演进"><a href="#7-2-3-HotSpot-中方法区的演进" class="headerlink" title="7.2.3. HotSpot 中方法区的演进"></a>7.2.3. HotSpot 中方法区的演进</h3><p>在 jdk7 及以前，习惯上把方法区，称为永久代。jdk8 开始，使用元空间取代了永久代。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/fb71df89c52f89d3b711e0b648de244c.png" alt="image-20210510142516373"></p>
-<p>本质上，方法区和永久代并不等价。仅是对 hotspot 而言的。《Java 虚拟机规范》对如何实现方法区，不做统一要求。例如：BEA JRockit &#x2F; IBM J9 中不存在永久代的概念。</p>
+<p>本质上，方法区和永久代并不等价。仅是对 hotspot 而言的。《Java 虚拟机规范》对如何实现方法区，不做统一要求。例如：BEA JRockit / IBM J9 中不存在永久代的概念。</p>
 <p>现在来看，当年使用永久代，不是好的 idea。导致 Java 程序更容易 OOM（超过<code>-XX:MaxPermsize</code>上限）</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/7d0789c206d53bfb4b6004052236197a.png" alt="image-20210510142656677"></p>
 <p>而到了 JDK8，终于完全废弃了永久代的概念，改用与 JRockit、J9 一样在本地内存中实现的元空间（Metaspace）来代替</p>
@@ -215,7 +70,7 @@
 <p><strong>举例 1：《深入理解 Java 虚拟机》的例子</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/6d1f5d0e7f035df53d16a16451781677.png" alt="image-20210510143959924"></p>
 <p><strong>举例 2</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * jdk8中：</span></span><br><span class="line"><span class="comment"> * -XX:MetaspaceSize=10m-XX:MaxMetaspaceSize=10m</span></span><br><span class="line"><span class="comment"> * jdk6中：</span></span><br><span class="line"><span class="comment"> * -XX:PermSize=10m-XX:MaxPermSize=10m</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OOMTest</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">OOMTest</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OOMTest</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++)&#123;</span><br><span class="line">                <span class="comment">//创建Classwriter对象，用于生成类的二进制字节码</span></span><br><span class="line">                <span class="type">ClassWriter</span> <span class="variable">classWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassWriter</span>(<span class="number">0</span>);</span><br><span class="line">                <span class="comment">//指明版本号，public，类名，包名，父类，接口</span></span><br><span class="line">                classWriter.visit(Opcodes.V1_6, Opcodes.ACC_PUBLIC, <span class="string">&quot;Class&quot;</span> + i, nu1l, <span class="string">&quot;java/lang/Object&quot;</span>, <span class="literal">null</span>);</span><br><span class="line">                <span class="comment">//返回byte[]</span></span><br><span class="line">                <span class="type">byte</span>[] code = classWriter.toByteArray();</span><br><span class="line">                <span class="comment">//类的加载</span></span><br><span class="line">                test.defineClass(<span class="string">&quot;Class&quot;</span> + i, code, <span class="number">0</span>, code.length); <span class="comment">//CLass对象</span></span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * jdk8中：</span></span><br><span class="line"><span class="comment"> * -XX:MetaspaceSize=10m-XX:MaxMetaspaceSize=10m</span></span><br><span class="line"><span class="comment"> * jdk6中：</span></span><br><span class="line"><span class="comment"> * -XX:PermSize=10m-XX:MaxPermSize=10m</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OOMTest</span> <span class="keyword">extends</span> <span class="title class_">ClassLoader</span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>{</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            <span class="type">OOMTest</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OOMTest</span>();</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10000</span>;i++){</span><br><span class="line">                <span class="comment">//创建Classwriter对象，用于生成类的二进制字节码</span></span><br><span class="line">                <span class="type">ClassWriter</span> <span class="variable">classWriter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassWriter</span>(<span class="number">0</span>);</span><br><span class="line">                <span class="comment">//指明版本号，public，类名，包名，父类，接口</span></span><br><span class="line">                classWriter.visit(Opcodes.V1_6, Opcodes.ACC_PUBLIC, <span class="string">"Class"</span> + i, nu1l, <span class="string">"java/lang/Object"</span>, <span class="literal">null</span>);</span><br><span class="line">                <span class="comment">//返回byte[]</span></span><br><span class="line">                <span class="type">byte</span>[] code = classWriter.toByteArray();</span><br><span class="line">                <span class="comment">//类的加载</span></span><br><span class="line">                test.defineClass(<span class="string">"Class"</span> + i, code, <span class="number">0</span>, code.length); <span class="comment">//CLass对象</span></span><br><span class="line">                j++;</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">finally</span>{</span><br><span class="line">            System.out.println(j);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="7-3-2-如何解决这些-OOM"><a href="#7-3-2-如何解决这些-OOM" class="headerlink" title="7.3.2. 如何解决这些 OOM"></a>7.3.2. 如何解决这些 OOM</h3><ol>
 <li><p>要解决 OOM 异常或 heap space 的异常，一般的手段是首先通过内存映像分析工具（如 Eclipse Memory Analyzer）对 dump 出来的堆转储快照进行分析，重点是确认内存中的对象是否是必要的，也就是要先分清楚到底是出现了内存泄漏（Memory Leak）还是内存溢出（Memory Overflow）</p>
@@ -233,7 +88,7 @@
 <p><img src="https://img-blog.csdnimg.cn/img_convert/fbe3915506e7979c7d591d17c216fbb1.png" alt="image-20200708161856504"></p>
 <h3 id="7-4-2-方法区的内部结构"><a href="#7-4-2-方法区的内部结构" class="headerlink" title="7.4.2. 方法区的内部结构"></a>7.4.2. 方法区的内部结构</h3><h4 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h4><p>对每个加载的类型（类 class、接口 interface、枚举 enum、注解 annotation），JVM 必须在方法区中存储以下类型信息：</p>
 <ol>
-<li>这个类型的完整有效名称（全名&#x3D;包名.类名）</li>
+<li>这个类型的完整有效名称（全名=包名.类名）</li>
 <li>这个类型直接父类的完整有效名（对于 interface 或是 java.lang.object，都没有父类）</li>
 <li>这个类型的修饰符（public，abstract，final 的某个子集）</li>
 <li>这个类型直接接口的一个有序列表</li>
@@ -258,7 +113,7 @@
 <li>静态变量和类关联在一起，随着类的加载而加载，他们成为类数据在逻辑上的一部分</li>
 <li><strong>类变量被类的所有实例共享，即使没有类实例时，你也可以访问它</strong></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Order</span>();</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Order</span>();</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hello</span><span class="params">()</span> {</span><br><span class="line">        System.out.println(<span class="string">"hello!"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="/../../../images/image-20221119155721374.png" alt="image-20221119155721374"></p>
 <h4 id="补充说明：全局常量（static-final）"><a href="#补充说明：全局常量（static-final）" class="headerlink" title="补充说明：全局常量（static final）"></a>补充说明：全局常量（static final）</h4><p>被声明为 final 的类变量的处理方法则不同，每个全局常量在编译的时候就会被分配了。</p>
@@ -276,16 +131,16 @@
 <p>一个有效的字节码文件中除了包含类的版本信息、字段、方法以及接口等描述符信息外，还包含一项信息就是常量池表（Constant Pool Table），包括各种字面量和对类型、域和方法的符号引用</p>
 <p>ps（</p>
 <p><strong>字面量：</strong></p>
-<p>是指由字母，数字等构成的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2&spm=1001.2101.3001.7020">字符串</a>或者数值，它只能作为右值出现，所谓右值是指等号右边的值，如：int a&#x3D;123这里的a为左值，123为右值。</p>
+<p>是指由字母，数字等构成的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2&amp;spm=1001.2101.3001.7020">字符串</a>或者数值，它只能作为右值出现，所谓右值是指等号右边的值，如：int a=123这里的a为左值，123为右值。</p>
 <p><strong>常量：</strong></p>
 <p>常量和变量都属于变量，只不过常量是赋过值后不能再改变的变量，而普通的变量可以再进行赋值操作</p>
 <p>在java中，常量必须使用final修饰，表示不可修改，而且通常会把常量的名称全部大写，用以区别变量</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">// a是变量，10是字面量</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">A</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">// A是常量，10是字面量，在java中，常量必须使用final修饰，表示不可修改，而且通常会把常量的名称全部大写，用以区别变量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">// a是变量，10是字面量</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">A</span> <span class="operator">=</span> <span class="number">10</span>;<span class="comment">// A是常量，10是字面量，在java中，常量必须使用final修饰，表示不可修改，而且通常会把常量的名称全部大写，用以区别变量</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>）</p>
 <h4 id="为什么需要常量池？"><a href="#为什么需要常量池？" class="headerlink" title="为什么需要常量池？"></a>为什么需要常量池？</h4><p>一个 java 源文件中的类、接口，编译后产生一个字节码文件。而 Java 中的字节码需要数据支持，通常这种数据会很大以至于不能直接存到字节码里，换另一种方式，可以存到常量池，这个字节码包含了指向常量池的引用。在动态链接的时候会用到运行时常量池，之前有介绍。</p>
 <p>比如：如下的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleClass</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleClass</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sayHello</span><span class="params">()</span> {</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>虽然只有 194 字节，但是里面却使用了 String、System、PrintStream 及 Object 等结构。这里的代码量其实很少了，如果代码多的话，引用的结构将会更多，这里就需要用到常量池了。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/86cc8ce43ce5bcc9b2b167188b839a1b.png" alt="image-20210510145947122"></p>
@@ -298,10 +153,10 @@
 <li>方法引用</li>
 </ul>
 <p>例如下面这段代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaTest2</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> {</span><br><span class="line">        <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>Object obj = new Object();</code>将会被翻译成如下字节码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>: <span class="keyword">new</span> #<span class="number">2</span>  <span class="comment">// Class java/lang/Object</span></span><br><span class="line"><span class="number">1</span>: dup</span><br><span class="line"><span class="number">2</span>: invokespecial <span class="comment">// Method java/lang/Object &quot;&lt;init&gt;&quot;() V</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>: <span class="keyword">new</span> #<span class="number">2</span>  <span class="comment">// Class java/lang/Object</span></span><br><span class="line"><span class="number">1</span>: dup</span><br><span class="line"><span class="number">2</span>: invokespecial <span class="comment">// Method java/lang/Object "&lt;init&gt;"() V</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>常量池、可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量等类型</p>
 <h3 id="7-4-4-运行时常量池"><a href="#7-4-4-运行时常量池" class="headerlink" title="7.4.4. 运行时常量池"></a>7.4.4. 运行时常量池</h3><ul>
@@ -314,7 +169,7 @@
 <li>运行时常量池类似于传统编程语言中的符号表（symboltable），但是它所包含的数据却比符号表要更加丰富一些。</li>
 <li>当创建类或接口的运行时常量池时，如果构造运行时常量池所需的内存空间超过了方法区所能提供的最大值，则 JVM 会抛 OutOfMemoryError 异常。</li>
 </ul>
-<h2 id="7-5-方法区使用举例"><a href="#7-5-方法区使用举例" class="headerlink" title="7.5. 方法区使用举例"></a>7.5. 方法区使用举例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">500</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> x / y;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">50</span>;</span><br><span class="line">        System.out.println(a+b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="7-5-方法区使用举例"><a href="#7-5-方法区使用举例" class="headerlink" title="7.5. 方法区使用举例"></a>7.5. 方法区使用举例</h2><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MethodAreaDemo</span> {</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> {</span><br><span class="line">        <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">500</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> x / y;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">50</span>;</span><br><span class="line">        System.out.println(a+b);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p><img src="https://img-blog.csdnimg.cn/img_convert/b5b9e7f8efd1cf8e889650cea5318b61.png" alt="image-20210510151436251"></p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/84396fa6be6164ffc54868e78c59dde6.png" alt="image-20210510151504259"></p>
@@ -366,7 +221,7 @@
 <ul>
 <li>在某些场景下，如果动态加载类过多，容易产生 Perm 区的 oom。比如某个实际 Web 工 程中，因为功能点比较多，在运行过程中，要不断动态加载很多类，经常出现致命错误。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Exception in thread &#x27;dubbo client x.x connector&#x27; java.lang.OutOfMemoryError:PermGen space&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Exception in thread 'dubbo client x.x connector' java.lang.OutOfMemoryError:PermGen space"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>而元空间和永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用本地内存。 因此，默认情况下，元空间的大小仅受本地内存限制。</p>
 </li>
@@ -377,9 +232,9 @@
 <p>方法区的垃圾收集主要回收两部分内容：常量池中废弃的常量和不再使用的类型</p>
 <h3 id="7-6-2-StringTable-为什么要调整位置？"><a href="#7-6-2-StringTable-为什么要调整位置？" class="headerlink" title="7.6.2. StringTable 为什么要调整位置？"></a>7.6.2. StringTable 为什么要调整位置？</h3><p>jdk7 中将 StringTable 放到了堆空间中。因为<strong>永久代的回收效率很低</strong>，在 full gc 的时候才会触发。而 full gc 是老年代的空间不足、永久代不足时才会触发。</p>
 <p>这就导致 StringTable 回收效率不高。而我们开发中会有大量的字符串被创建，回收效率低，导致永久代内存不足。放到堆里，能及时回收内存。</p>
-<h3 id="7-6-3-静态变量存放在那里？"><a href="#7-6-3-静态变量存放在那里？" class="headerlink" title="7.6.3. 静态变量存放在那里？"></a>7.6.3. 静态变量存放在那里？</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 静态引用对应的对象实体始终都存在堆空间</span></span><br><span class="line"><span class="comment"> * jdk7:</span></span><br><span class="line"><span class="comment"> * -Xms200m -Xmx200m -XX:PermSize=300m -XX:MaxPermSize=300m -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment"> * jdk8:</span></span><br><span class="line"><span class="comment"> * -Xms200m -Xmx200m-XX:MetaspaceSize=300m -XX:MaxMetaspaceSize=300m -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StaticFieldTest</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">byte</span>[] arr = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">100</span>];</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(StaticFieldTest.arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-6-3-静态变量存放在那里？"><a href="#7-6-3-静态变量存放在那里？" class="headerlink" title="7.6.3. 静态变量存放在那里？"></a>7.6.3. 静态变量存放在那里？</h3><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 静态引用对应的对象实体始终都存在堆空间</span></span><br><span class="line"><span class="comment"> * jdk7:</span></span><br><span class="line"><span class="comment"> * -Xms200m -Xmx200m -XX:PermSize=300m -XX:MaxPermSize=300m -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment"> * jdk8:</span></span><br><span class="line"><span class="comment"> * -Xms200m -Xmx200m-XX:MetaspaceSize=300m -XX:MaxMetaspaceSize=300m -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StaticFieldTest</span> {</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">byte</span>[] arr = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">100</span>];</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        System.out.println(StaticFieldTest.arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            Thread.sleep(<span class="number">1000000</span>);</span><br><span class="line">        } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * staticobj、instanceobj、Localobj存放在哪里？ */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StaticobjTest</span> &#123;   </span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;        </span><br><span class="line">        <span class="keyword">static</span> <span class="type">ObjectHolder</span> <span class="variable">staticobj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectHolder</span>();       </span><br><span class="line">        <span class="type">ObjectHolder</span> <span class="variable">instanceobj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectHolder</span>();     </span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">()</span>&#123;          </span><br><span class="line">            <span class="type">ObjectHolder</span> <span class="variable">localobj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectHolder</span>();     </span><br><span class="line">            System.out.println(<span class="string">&quot;done&quot;</span>);      </span><br><span class="line">        &#125;      </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ObjectHolder</span>&#123;      </span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;  </span><br><span class="line">            <span class="type">Test</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StaticobjTest</span>.Test();     </span><br><span class="line">            test.foo();      </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** * staticobj、instanceobj、Localobj存放在哪里？ */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StaticobjTest</span> {   </span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Test</span> {        </span><br><span class="line">        <span class="keyword">static</span> <span class="type">ObjectHolder</span> <span class="variable">staticobj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectHolder</span>();       </span><br><span class="line">        <span class="type">ObjectHolder</span> <span class="variable">instanceobj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectHolder</span>();     </span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">foo</span><span class="params">()</span>{          </span><br><span class="line">            <span class="type">ObjectHolder</span> <span class="variable">localobj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectHolder</span>();     </span><br><span class="line">            System.out.println(<span class="string">"done"</span>);      </span><br><span class="line">        }      </span><br><span class="line">    }  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ObjectHolder</span>{      </span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {  </span><br><span class="line">            <span class="type">Test</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StaticobjTest</span>.Test();     </span><br><span class="line">            test.foo();      </span><br><span class="line">        } </span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>使用 JHSDB 工具进行分析，这里细节略掉</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/e8ced63603ee4a62c9eb7d4c48ae94dd.png" alt="image-20200708215218078"></p>
@@ -419,7 +274,7 @@
 <p>说一下 JVM 内存模型吧，有哪些区？分别干什么的？</p>
 <p><mark>蚂蚁金服</mark>：</p>
 <p>Java8 的内存分代改进 JVM 内存分哪几个区，每个区的作用是什么？</p>
-<p>一面：JVM 内存分布&#x2F;内存结构？栈和堆的区别？堆的结构？为什么两个 survivor 区？</p>
+<p>一面：JVM 内存分布/内存结构？栈和堆的区别？堆的结构？为什么两个 survivor 区？</p>
 <p>二面：Eden 和 survior 的比例分配</p>
 <p><mark>小米</mark>：</p>
 <p>jvm 内存分区，为什么要有新生代和老年代</p>
@@ -439,210 +294,4 @@
 <p>java 内存分配 jvm 的永久代中会发生垃圾回收吗？</p>
 <p>一面：jvm 内存分区，为什么要有新生代和老年代？</p>
 </blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/" data-id="cleebxr4z0076xwv6gh6p29sk" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          工厂模式
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">(JVM)逃逸分析：代码优化</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <h1 class="blog-title">Hexo &amp; github</h1>
-    <h2 class="blog-subtitle"></h2>
-    <ul class="blog-link">
-     
-          <a href="/" title="Home">
-            <li>主页</li>
-          </a>
-        
-          <a href="/archives" title="Archives">
-            <li>归档</li>
-          </a>
-        
-          <a href="/categories" title="Categories">
-            <li>分类</li>
-          </a>
-        
-          <a href="/tags" title="Tags">
-            <li>标签</li>
-          </a>
-        
-          <a href="/about" title="About">
-            <li>关于</li>
-          </a>
-        
-    </ul>
-  </div>
-</div>
-
-  
-    <div class="widget-wrap">
-  <h3 class="widget-title"></h3>
-  <div class="widget">
-    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
-    <h2 class="author">其然乐衣</h2>
-    <h3 class="description"></h3>
-    <div class="count-box">
-      <a href="/archives"><div><strong>152</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
-    </div>
-
-
-
-    <div class="social-link">
-      
-        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
-          Github
-        </a>
-      
-    </div>
-
-    <div class="friend-link">
-      <h2>其它个人平台链接</h2>
-      
-        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
-          My_CSDN
-        </a>
-      
-        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
-          My_juejin
-        </a>
-      
-    </div>
-  </div>
-</div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy;2022 - 2023 其然乐衣<br>
-      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
-      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
-      
-    </div>
-    
-  </div>
-</footer>
-    </div>
-    
-
-<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
-<script>
-new WOW().init();
-</script>   
-
-
-  
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-
-  
-<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-  
-<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
-
-  
-<script src="/plugin/galmenu/GalMenu.js"></script>
-
-  <div class="GalMenu GalDropDown">
-      <div class="circle" id="gal">
-        <div class="ring">
-          
-            <a href="/" title="" class="menuItem">首页</a>
-          
-            <a href="/tags" title="" class="menuItem">标签</a>
-          
-            <a href="/categories" title="" class="menuItem">分类</a>
-          
-            <a href="/" title="" class="menuItem">归档</a>
-          
-            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
-          
-            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
-          
-        </div>
-        
-          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
-        
-      </div> 
-</div>
-<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
-  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
-    for (var i = 0,
-    l = items.length; i < l; i++) {
-      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
-      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
-    }</script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('body').GalMenu({
-      'menu': 'GalDropDown'
-    })
-  });
-</script>
-
-  <section class="hidden-xs"> 
-  <ul class="cb-slideshow"> 
-    <li><span>苟利</span></li> 
-    <li><span>国家</span></li> 
-    <li><span>生死以</span></li> 
-    <li><span>岂能</span></li> 
-    <li><span>祸福</span></li> 
-    <li><span>趋避之</span></li> 
-  </ul>
-</section>
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/19/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" title="工厂模式"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 工厂模式</span></a><a class="button is-default" href="/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" title="(JVM)逃逸分析：代码优化"><span class="has-text-weight-semibold">下一页: (JVM)逃逸分析：代码优化</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
