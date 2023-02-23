@@ -1,11 +1,187 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Sentinel-授权规则及规则持久化</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="一、授权规则第1步：添加判断来源逻辑
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sentinel-授权规则及规则持久化 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、授权规则第1步：添加判断来源逻辑  代码： 12345678910111213141516171819202122232425package cn.itcast.order.sentinel;import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;import org.apache.c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sentinel-授权规则及规则持久化">
+<meta property="og:url" content="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="一、授权规则第1步：添加判断来源逻辑  代码： 12345678910111213141516171819202122232425package cn.itcast.order.sentinel;import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;import org.apache.c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="http://example.com/.com//">
+<meta property="article:published_time" content="2022-11-09T16:22:22.090Z">
+<meta property="article:modified_time" content="2023-02-09T08:59:39.997Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="微服务">
+<meta property="article:tag" content="Sentinel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-代码：
-12345678910111213141516171819202122232425package cn.itcast.order.sentinel;import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;import org.apache.commons.lang.StringUtils;import org.springframework.stereotype.Component;import javax.servlet.http.HttpServletRequest;@Componentpublic class HeaderOriginParser.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Sentinel-授权规则及规则持久化</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99"><span class="toc-text">一、授权规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8%E7%BB%93%E6%9E%9C"><span class="toc-text">二、自定义异常结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">三、规则持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1"><i class="tag post-item-tag">微服务</i></a><a href="/tags/Sentinel"><i class="tag post-item-tag">Sentinel</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Sentinel-授权规则及规则持久化</h1><time class="has-text-grey" datetime="2022-11-09T16:22:22.090Z">2022-11-10</time><article class="mt-2 post-content"><h1 id="一、授权规则"><a href="#一、授权规则" class="headerlink" title="一、授权规则"></a>一、授权规则</h1><p><strong>第1步：添加判断来源逻辑</strong></p>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-SpringCloud微服务/Sentinel/授权规则及规则持久化" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" class="article-date">
+  <time class="post-time" datetime="2022-11-09T16:22:22.090Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sentinel-授权规则及规则持久化
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、授权规则"><a href="#一、授权规则" class="headerlink" title="一、授权规则"></a>一、授权规则</h1><p><strong>第1步：添加判断来源逻辑</strong></p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>代码：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class HeaderOriginParser implements RequestOriginParser {</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String parseOrigin(HttpServletRequest request) {</span><br><span class="line"></span><br><span class="line">        //1.获取请求头</span><br><span class="line">        String origin = request.getHeader( "origin" );</span><br><span class="line">        //2.非空判断</span><br><span class="line">        if ( StringUtils.isEmpty( origin ) ) {</span><br><span class="line">            origin = "blank";   //如果是空的就返回一个默认值</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        return origin;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -64,4 +240,225 @@
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
 <p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
 <p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" title="Java后端数据返回通用类"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: Java后端数据返回通用类</span></a><a class="button is-default" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" title="Sentinel-认识和(本地)安装sentinel"><span class="has-text-weight-semibold">下一页: Sentinel-认识和(本地)安装sentinel</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clehbbkaq008ruwv617as27yt" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Java后端数据返回通用类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Sentinel-认识和(本地)安装sentinel</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

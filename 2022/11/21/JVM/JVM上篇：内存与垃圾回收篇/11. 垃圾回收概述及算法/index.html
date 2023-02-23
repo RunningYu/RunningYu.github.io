@@ -1,24 +1,149 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>11. 垃圾回收概述及算法</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="[toc]
-11. 垃圾回收概述及算法11.1. 垃圾回收概述11.1.1. 什么是垃圾？
-垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。
-关于垃圾收集有三个经典问题：
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>11. 垃圾回收概述及算法 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[toc] 11. 垃圾回收概述及算法11.1. 垃圾回收概述11.1.1. 什么是垃圾？ 垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。 关于垃圾收集有三个经典问题：  哪些内存需要回收？ 什么时候回收？ 如何回收？  垃圾收集机制是 Java 的招牌能力，极大地提高了开发效率。如今，垃圾收集几乎成为现代语言的标配，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11. 垃圾回收概述及算法">
+<meta property="og:url" content="http://example.com/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/11.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="[toc] 11. 垃圾回收概述及算法11.1. 垃圾回收概述11.1.1. 什么是垃圾？ 垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。 关于垃圾收集有三个经典问题：  哪些内存需要回收？ 什么时候回收？ 如何回收？  垃圾收集机制是 Java 的招牌能力，极大地提高了开发效率。如今，垃圾收集几乎成为现代语言的标配，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7d77b6d955e70ac268b08593078fbbdd.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/309e92079f207b99ecb61e0e61f59933.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/c3e4606c5878ad5ae19f878e2585ee9f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/1367a58058e6653d53afdea83b937af3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/010896600bb4483f35d004dce60cc58b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/071039dcf30672f55dfe8e5dab5e8081.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/d1ce4b570439851d57973a00684c6410.png">
+<meta property="og:image" content="http://example.com/images/image-20221122223605544.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f8cc8bd3ef9526b497bcc4335e84e639.png">
+<meta property="og:image" content="http://example.com/images/image-20221123091417318.png">
+<meta property="og:image" content="http://example.com/images/image-20221123093811032.png">
+<meta property="og:image" content="http://example.com/images/image-20221123093839170.png">
+<meta property="og:image" content="http://example.com/images/image-20221123094354023.png">
+<meta property="og:image" content="http://example.com/images/image-20221123094522918.png">
+<meta property="og:image" content="http://example.com/images/image-20221123094721985.png">
+<meta property="og:image" content="http://example.com/images/image-20221123095009723.png">
+<meta property="og:image" content="http://example.com/images/image-20221123095352781.png">
+<meta property="og:image" content="http://example.com/images/image-20221123092829645.png">
+<meta property="og:image" content="http://example.com/images/image-20221123093245549.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/8ea506a5c45c10410418ff0403e2b3a8.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b508a12ff6282839b65f8be9a683e04b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/3a911b5f7d17bd00fda883623e4d831a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/aac06de20fada1a602f1955010bd969d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/cdb03d2691d80ca89da2805015ad31e9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/34de5a2cce0c5e9c88f76652b674877d.png">
+<meta property="article:published_time" content="2022-11-21T12:37:10.393Z">
+<meta property="article:modified_time" content="2022-11-23T09:44:50.263Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="内存与垃圾回收篇">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/7d77b6d955e70ac268b08593078fbbdd.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-哪些内存需要回收？
-什么时候回收？
-如何回收？
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
 
-垃圾收集机制是 Java 的招牌能力，极大地提高了开发效率。如今，垃圾收集几乎成为现代语言的标配，即使经过如此长时间的发展，Java 的垃圾收集机制仍然在不断的演进中，不同大小的设备、不同特征的应用场景，对垃圾收集提出了新的挑战，这当然也是面试的热点。
-大厂面试题
+  
 
-蚂蚁金服
-
-你知道哪几种垃圾回收器，各自的优缺点，重点讲一下 cms 和 G1？
-
-JVM GC 算法有哪些，目前的 JDK 版本采用什么回收算法.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">11. 垃圾回收概述及算法</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#11-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%AE%97%E6%B3%95"><span class="toc-text">11. 垃圾回收概述及算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0"><span class="toc-text">11.1. 垃圾回收概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE%EF%BC%9F"><span class="toc-text">11.1.1. 什么是垃圾？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE%EF%BC%9F"><span class="toc-text">什么是垃圾？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-GC"><span class="toc-text">11.1.2. 为什么需要 GC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-3-%E6%97%A9%E6%9C%9F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">11.1.3. 早期垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-4-Java-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">11.1.4. Java 垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%85%E5%BF%A7"><span class="toc-text">担忧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GC-%E4%B8%BB%E8%A6%81%E5%85%B3%E6%B3%A8%E7%9A%84%E5%8C%BA%E5%9F%9F"><span class="toc-text">GC 主要关注的区域</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95%EF%BC%88%E9%9D%A2%E8%AF%95%E7%9A%84%E6%A6%82%E7%8E%87%E6%AF%94%E8%BE%83%E9%AB%98%EF%BC%89"><span class="toc-text">11.2. 垃圾回收相关算法（面试的概率比较高）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-1-%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="toc-text">11.2.1. 标记阶段：引用计数算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="toc-text">方式一：引用计数算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8"><span class="toc-text">循环引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-2-%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-text">11.2.2. 标记阶段：可达性分析算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95%EF%BC%88%E6%A0%B9%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%E3%80%81%E8%BF%BD%E8%B8%AA%E6%80%A7%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%89"><span class="toc-text">方式二：可达性分析算法（根搜索算法、追踪性垃圾收集）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-text">基本思路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-3-%E5%AF%B9%E8%B1%A1%E7%9A%84-finalization-%E6%9C%BA%E5%88%B6"><span class="toc-text">11.2.3. 对象的 finalization 机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E5%AD%98%E8%BF%98%E6%98%AF%E6%AD%BB%E4%BA%A1%EF%BC%9F"><span class="toc-text">生存还是死亡？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E8%BF%87%E7%A8%8B"><span class="toc-text">具体过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-4-MAT-%E4%B8%8E-JProfiler-%E7%9A%84-GC-Roots-%E6%BA%AF%E6%BA%90"><span class="toc-text">11.2.4. MAT 与 JProfiler 的 GC Roots 溯源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MAT-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">MAT 是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96-dump-%E6%96%87%E4%BB%B6"><span class="toc-text">获取 dump 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8-jmap"><span class="toc-text">方式一：命令行使用 jmap</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8-JVisualVM-%E5%AF%BC%E5%87%BA"><span class="toc-text">方式二：使用 JVisualVM 导出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%89%EF%BC%9A%E4%BD%BF%E7%94%A8-MAT-%E6%89%93%E5%BC%80-Dump-%E6%96%87%E4%BB%B6"><span class="toc-text">方式三：使用 MAT 打开 Dump 文件</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JProfiler-%E7%9A%84-GC-Roots-%E6%BA%AF%E6%BA%90"><span class="toc-text">JProfiler 的 GC Roots 溯源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-5-%E6%B8%85%E9%99%A4%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="toc-text">11.2.5. 清除阶段：标记-清除算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%EF%BC%88Mark-Sweep%EF%BC%89%E7%AE%97%E6%B3%95"><span class="toc-text">标记-清除（Mark-Sweep）算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-text">执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%95%E4%B8%BA%E6%B8%85%E9%99%A4%EF%BC%9F"><span class="toc-text">何为清除？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-6-%E6%B8%85%E9%99%A4%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="toc-text">11.2.6. 清除阶段：复制算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%EF%BC%88Copying%EF%BC%89%E7%AE%97%E6%B3%95"><span class="toc-text">复制（Copying）算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%88%AB%E7%9A%84"><span class="toc-text">特别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">应用场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-7-%E6%B8%85%E9%99%A4%E9%98%B6%E6%AE%B5%EF%BC%9A%E6%A0%87%E8%AE%B0-%E5%8E%8B%E7%BC%A9%EF%BC%88%E6%95%B4%E7%90%86%EF%BC%89%E7%AE%97%E6%B3%95"><span class="toc-text">11.2.7. 清除阶段：标记-压缩（整理）算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0-%E5%8E%8B%E7%BC%A9%EF%BC%88%E6%88%96%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E3%80%81Mark-Compact%EF%BC%89%E7%AE%97%E6%B3%95"><span class="toc-text">标记-压缩（或标记-整理、Mark-Compact）算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B-1"><span class="toc-text">执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E7%A2%B0%E6%92%9E%EF%BC%88Bump-the-Pointer%EF%BC%89"><span class="toc-text">指针碰撞（Bump the Pointer）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9-1"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-2"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-8-%E5%B0%8F%E7%BB%93"><span class="toc-text">11.2.8. 小结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-9-%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="toc-text">11.2.9. 分代收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B4%E8%BD%BB%E4%BB%A3%EF%BC%88Young-Gen%EF%BC%89"><span class="toc-text">年轻代（Young Gen）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%80%81%E5%B9%B4%E4%BB%A3%EF%BC%88Tenured-Gen%EF%BC%89"><span class="toc-text">老年代（Tenured Gen）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-X-%E5%A2%9E%E9%87%8F%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95%E3%80%81%E5%88%86%E5%8C%BA%E7%AE%97%E6%B3%95"><span class="toc-text">11.2.X. 增量收集算法、分区算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="toc-text">增量收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="toc-text">基本思想</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9-3"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%8C%BA%E7%AE%97%E6%B3%95"><span class="toc-text">分区算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%88%B0%E6%9C%80%E5%90%8E"><span class="toc-text">写到最后</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">11. 垃圾回收概述及算法</h1><time class="has-text-grey" datetime="2022-11-21T12:37:10.393Z">2022-11-21</time><article class="mt-2 post-content"><p>[toc]</p>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-JVM/JVM上篇：内存与垃圾回收篇/11. 垃圾回收概述及算法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/11.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="post-time" datetime="2022-11-21T12:37:10.393Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">21</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      11. 垃圾回收概述及算法
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[toc]</p>
 <h1 id="11-垃圾回收概述及算法"><a href="#11-垃圾回收概述及算法" class="headerlink" title="11. 垃圾回收概述及算法"></a>11. 垃圾回收概述及算法</h1><h2 id="11-1-垃圾回收概述"><a href="#11-1-垃圾回收概述" class="headerlink" title="11.1. 垃圾回收概述"></a>11.1. 垃圾回收概述</h2><h3 id="11-1-1-什么是垃圾？"><a href="#11-1-1-什么是垃圾？" class="headerlink" title="11.1.1. 什么是垃圾？"></a>11.1.1. 什么是垃圾？</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/7d77b6d955e70ac268b08593078fbbdd.png" alt="image-20200712085456113"></p>
 <p>垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。</p>
 <p>关于垃圾收集有三个经典问题：</p>
@@ -387,4 +512,225 @@ JVM GC 算法有哪些，目前的 JDK 版本采用什么回收算法.."><script
 <p>每一个小区间都独立使用，独立回收。这种算法的好处是可以控制一次回收多少个小区间。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/34de5a2cce0c5e9c88f76652b674877d.png" alt="image-20200712165318590"></p>
 <h4 id="写到最后"><a href="#写到最后" class="headerlink" title="写到最后"></a>写到最后</h4><p>注意，这些只是基本的算法思路，实际 GC 实现过程要复杂的多，目前还在发展中的前沿 GC 都是复合算法，并且并行和并发兼备。</p>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="适配器模式"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 适配器模式</span></a><a class="button is-default" href="/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/10.%20StringTable/" title="10. StringTable"><span class="has-text-weight-semibold">下一页: 10. StringTable</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/11.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%AE%97%E6%B3%95/" data-id="clehbbk9r006buwv6f9sicyss" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          适配器模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/21/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/10.%20StringTable/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">10. StringTable</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

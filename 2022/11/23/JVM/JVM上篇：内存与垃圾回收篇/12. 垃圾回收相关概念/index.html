@@ -1,12 +1,134 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>12. 垃圾回收相关概念</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="[toc]
-12. 垃圾回收相关概念12.1. System.gc()的理解在默认情况下，通过 system.gc()或者 Runtime.getRuntime().gc() 的调用，会显式触发 Full GC，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。
-然而 System.gc() 调用附带一个免责声明，无法保证对垃圾收集器的调用。(不能确保立即生效)
-JVM 实现者可以通过 System.gc() 调用来决定 JVM 的 GC 行为。而一般情况下，垃圾回收应该是自动进行的，无须手动触发，否则就太过于麻烦了。在一些特殊情况下，如我们正在编写一个性能基准，我们可以在运行之间调用 System.gc()
-123456789101112131415public class SystemGCTe.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>12. 垃圾回收相关概念 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[toc] 12. 垃圾回收相关概念12.1. System.gc()的理解在默认情况下，通过 system.gc()或者 Runtime.getRuntime().gc() 的调用，会显式触发 Full GC，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。 然而 System.gc() 调用附带一个免责声明，无法保证对垃圾收集器的调用。(不能确保立即生效) JVM 实现者可以通过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12. 垃圾回收相关概念">
+<meta property="og:url" content="http://example.com/2022/11/23/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/12.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="[toc] 12. 垃圾回收相关概念12.1. System.gc()的理解在默认情况下，通过 system.gc()或者 Runtime.getRuntime().gc() 的调用，会显式触发 Full GC，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。 然而 System.gc() 调用附带一个免责声明，无法保证对垃圾收集器的调用。(不能确保立即生效) JVM 实现者可以通过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20221123174631209.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/5e4a10263a26cb7aa87f1a6615b5b833.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/7ea1ebdd0fd0bc3a27c0d745c9bcdff7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/fd2b4f4ece3976fbd73c1039666cf7d7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/48a4190f4d2ff4b7c8963a75ba2e6182.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/1ef8adfbf9082acacc9db47ae48f5b47.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/34ad0a72d2fce1fd6c06b5965c354712.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/baf5d789fc28868dfb983adc7265461c.png">
+<meta property="og:image" content="http://example.com/images/image-20221124152020225.png">
+<meta property="og:image" content="http://example.com/images/image-20221124153725910.png">
+<meta property="article:published_time" content="2022-11-23T09:44:11.240Z">
+<meta property="article:modified_time" content="2022-11-24T09:07:05.414Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="内存与垃圾回收篇">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/image-20221123174631209.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">12. 垃圾回收相关概念</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#12-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-text">12. 垃圾回收相关概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-System-gc-%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">12.1. System.gc()的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E4%B8%8E%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="toc-text">12.2. 内存溢出与内存泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%88OOM%EF%BC%89"><span class="toc-text">内存溢出（OOM）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%EF%BC%88Memory-Leak%EF%BC%89"><span class="toc-text">内存泄漏（Memory Leak）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-3-Stop-The-World"><span class="toc-text">12.3. Stop The World</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-4-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91"><span class="toc-text">12.4. 垃圾回收的并行与并发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%EF%BC%88Concurrent%EF%BC%89"><span class="toc-text">并发（Concurrent）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%EF%BC%88Parallel%EF%BC%89"><span class="toc-text">并行（Parallel）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91-vs-%E5%B9%B6%E8%A1%8C"><span class="toc-text">并发 vs 并行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C"><span class="toc-text">垃圾回收的并发与并行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%EF%BC%88Parallel%EF%BC%89-1"><span class="toc-text">并行（Parallel）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%EF%BC%88Serial%EF%BC%89"><span class="toc-text">串行（Serial）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%EF%BC%88Concurrent%EF%BC%89-1"><span class="toc-text">并发（Concurrent）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-5-%E5%AE%89%E5%85%A8%E7%82%B9%E4%B8%8E%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F"><span class="toc-text">12.5. 安全点与安全区域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E7%82%B9"><span class="toc-text">安全点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A2%E5%85%88%E5%BC%8F%E4%B8%AD%E6%96%AD%EF%BC%9A%EF%BC%88%E7%9B%AE%E5%89%8D%E6%B2%A1%E6%9C%89%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%87%87%E7%94%A8%E4%BA%86%EF%BC%89"><span class="toc-text">抢先式中断：（目前没有虚拟机采用了）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E5%8A%A8%E5%BC%8F%E4%B8%AD%E6%96%AD"><span class="toc-text">主动式中断</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F%EF%BC%88Safe-Resion%EF%BC%89"><span class="toc-text">安全区域（Safe Resion）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E6%89%A7%E8%A1%8C%E6%97%B6%EF%BC%9A"><span class="toc-text">实际执行时：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-6-%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E5%BC%BA%E5%BC%95%E7%94%A8"><span class="toc-text">12.6. 再谈引用：强引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8%EF%BC%88Strong-Reference%EF%BC%89%E2%80%94%E2%80%94%E4%B8%8D%E5%9B%9E%E6%94%B6"><span class="toc-text">强引用（Strong Reference）——不回收</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-8-%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A-%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="toc-text">12.8. 再谈引用： 软引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8%EF%BC%88Soft-Reference%EF%BC%89%E2%80%94%E2%80%94%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E5%8D%B3%E5%9B%9E%E6%94%B6"><span class="toc-text">软引用（Soft Reference）——内存不足即回收</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-9-%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="toc-text">12.9. 再谈引用：弱引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8%EF%BC%88Weak-Reference%EF%BC%89%E2%80%94%E2%80%94%E5%8F%91%E7%8E%B0%E5%8D%B3%E5%9B%9E%E6%94%B6"><span class="toc-text">弱引用（Weak Reference）——发现即回收</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-X-%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E8%99%9A%E5%BC%95%E7%94%A8"><span class="toc-text">12.X. 再谈引用：虚引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8%EF%BC%88Phantom-Reference%EF%BC%89%E2%80%94%E2%80%94%E5%AF%B9%E8%B1%A1%E5%9B%9E%E6%94%B6%E8%B7%9F%E8%B8%AA"><span class="toc-text">虚引用（Phantom Reference）——对象回收跟踪</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-11-%E7%BB%88%E7%BB%93%E5%99%A8%E5%BC%95%E7%94%A8"><span class="toc-text">12.11. 终结器引用</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/JVM"><i class="tag post-item-tag">JVM</i></a><a href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87"><i class="tag post-item-tag">内存与垃圾回收篇</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">12. 垃圾回收相关概念</h1><time class="has-text-grey" datetime="2022-11-23T09:44:11.240Z">2022-11-23</time><article class="mt-2 post-content"><p>[toc]</p>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-JVM/JVM上篇：内存与垃圾回收篇/12. 垃圾回收相关概念" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/23/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/12.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time class="post-time" datetime="2022-11-23T09:44:11.240Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">23</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      12. 垃圾回收相关概念
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[toc]</p>
 <h1 id="12-垃圾回收相关概念"><a href="#12-垃圾回收相关概念" class="headerlink" title="12. 垃圾回收相关概念"></a>12. 垃圾回收相关概念</h1><h2 id="12-1-System-gc-的理解"><a href="#12-1-System-gc-的理解" class="headerlink" title="12.1. System.gc()的理解"></a>12.1. System.gc()的理解</h2><p>在默认情况下，通过 system.gc()或者 Runtime.getRuntime().gc() 的调用，<mark>会显式触发 Full GC</mark>，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。</p>
 <p>然而 System.gc() 调用附带一个免责声明，无法保证对垃圾收集器的调用。(不能确保立即生效)</p>
 <p>JVM 实现者可以通过 System.gc() 调用来决定 JVM 的 GC 行为。而一般情况下，垃圾回收应该是自动进行的，<mark>无须手动触发，否则就太过于麻烦了</mark>。在一些特殊情况下，如我们正在编写一个性能基准，我们可以在运行之间调用 System.gc()</p>
@@ -176,4 +298,225 @@ JVM 实现者可以通过 System.gc() 调用来决定 JVM 的 GC 行为。而一
 
 <h2 id="12-11-终结器引用"><a href="#12-11-终结器引用" class="headerlink" title="12.11. 终结器引用"></a>12.11. 终结器引用</h2><p>它用于实现对象的 finalize() 方法，也可以称为终结器引用。无需手动编码，其内部配合引用队列使用。</p>
 <p>在 GC 时，终结器引用入队。由 Finalizer 线程通过终结器引用找到被引用对象调用它的 finalize()方法，第二次 GC 时才回收被引用的对象</p>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/24/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/13.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" title="13. 垃圾回收器"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 13. 垃圾回收器</span></a><a class="button is-default" href="/2022/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="适配器模式"><span class="has-text-weight-semibold">下一页: 适配器模式</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/23/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/12.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" data-id="clehbbk9t006juwv6h8a88sbm" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/24/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/13.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          13. 垃圾回收器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">适配器模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,60 +1,476 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Haojen's blog</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 6.3.0">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Category: java | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo &amp; github">
+<meta property="og:url" content="http://example.com/categories/Elasticsearch/java/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="其然乐衣">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>分类 · java</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221212170758302.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221212170758302.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">数据同步</a></h2><time class="has-text-grey" datetime="2022-12-12T09:06:59.689Z">2022-12-12</time><p class="is-flex-grow-2 mt-2">方案一：同步调用
-如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。
-方案二：异步通知
-利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。
-方案三：监听binlog
-总结：
-</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&amp;%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&amp;%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/">mapping索引属性 &amp; 创建索的操作</a></h2><time class="has-text-grey" datetime="2022-11-07T01:33:17.980Z">2022-11-07</time><p class="is-flex-grow-2 mt-2">概念对比
+</head>
 
-一. mapping索引属性
-二. 索引库的操作1. 创建索引库
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
 
-实例：
-123456789101112131415161718192021222324252627#创建索引库PUT /heima{  &quot;mappings&quot;: {    &quot;properties&quot;: {      &quot;info&quot;: {        &quot;type&quot;: &quot;text&quot;,        &quot;analyzer&quot;: &quot;ik_smart&quot;      },      &quot;email&quot;: {        &quot;type&quot;: &quot;keyword&quot;,        &quot;index&quot;: false      },      &quot;name&quot;: {        &quot;type&quot;: &quot;object&quot;,        &quot;properties&quot;: {       ..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&amp;%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/">RestClient操作索引库-初始化RestClient</a></h2><time class="has-text-grey" datetime="2022-11-07T01:32:05.788Z">2022-11-07</time><p class="is-flex-grow-2 mt-2">1.引入es的RestHighLevelClient依赖：
-123456&amp;lt;!--elasticsearch--&amp;gt;&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.elasticsearch.client&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;elasticsearch-rest-high-level-client&amp;lt;/artifactId&amp;gt;     &amp;lt;version&amp;gt;7.12.1&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;
+        <section id="main">
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap animated rubberBand">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" class="archive-article-date">
+  <time class="post-time" datetime="2022-12-12T09:06:59.689Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">数据同步</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-07T01:33:17.980Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/">mapping索引属性 &amp; 创建索的操作</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-07T01:32:05.788Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/">RestClient操作索引库-初始化RestClient</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-07T01:29:24.978Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/">RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-07T01:24:15.702Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-07T01:22:10.641Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/">RestClient-多条件聚合</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-07T01:18:02.256Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/">RestAPI实现聚合</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-06T01:12:39.239Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">RestClient查询文档</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-06T01:12:39.233Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/">javaRestClient操作索引库和文档</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
 
 
 
-2.因为SpringBoot默认的ES版本是7.6.2，所以我们需要覆盖默认的ES版本： 
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
 
-3.初始化RestHighLevelClient：
-12..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/691a87ed40d74802b9a828ac3e6d9143~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&amp;%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/691a87ed40d74802b9a828ac3e6d9143~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&amp;%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/">RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）</a></h2><time class="has-text-grey" datetime="2022-11-07T01:29:24.978Z">2022-11-07</time><p class="is-flex-grow-2 mt-2">一、RestAPI实现自动补全查询（代码讲解） 
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
 
 
-代码：
-123456789101112131415161718192021222324252627282930313233    @Autowired    private RestHighLevelClient client;    @Test    void testSuggestion() throws IOException {        //1.准备Request        SearchRequest request = new SearchRequest(&quot;hotel&quot;);        //2.准备DSL        request.source().suggest(new SuggestBuilder().addSuggesti..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&amp;%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&amp;%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&amp;%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&amp;%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&amp;%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项</a></h2><time class="has-text-grey" datetime="2022-11-07T01:24:15.702Z">2022-11-07</time><p class="is-flex-grow-2 mt-2">自动补全：
-要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.
-用初始化的拼音分词器进行分词：
-为了实现得到的分词有中文也有拼音，我门需要
-自定义拼音分词器（中文 + 拼音）
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
 
-123456789101112131415161718192021222324252627282930313233// 自定义拼音分词器PUT /test{  &quot;settings&quot;: {    &quot;..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&amp;%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&amp;%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/706377c31d5a4e9b8c4e7f6d2e0c52be~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/706377c31d5a4e9b8c4e7f6d2e0c52be~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/">RestClient-多条件聚合</a></h2><time class="has-text-grey" datetime="2022-11-07T01:22:10.641Z">2022-11-07</time><p class="is-flex-grow-2 mt-2">
-在对应的service层里面写：
-
- 
- HotelService里的代码如下：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071@Override    public Map&amp;lt;String, List&amp;lt;String&amp;gt;&amp;gt; filters()  {        try {            //1. 准备Request            SearchRequest request = new SearchRequest(&quot;hotel&quot;);           ..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/570bde95e90d44658df8da0c790f6586~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/"><img class="post-cover-img js-img-fadeIn" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/570bde95e90d44658df8da0c790f6586~tplv-k3u1fbpfcp-zoom-1.image" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/">RestAPI实现聚合</a></h2><time class="has-text-grey" datetime="2022-11-07T01:18:02.256Z">2022-11-07</time><p class="is-flex-grow-2 mt-2">
- 
-
-1234567891011121314151617181920212223242526272829303132@Test    void testAggredation() throws IOException {        //1. 准备Request        SearchRequest request = new SearchRequest(&quot;hotel&quot;);        //2. 准备DSL        //2.1 设置size        request.source().size(0);        //2.2 聚合        request.source().aggregation(AggregationBuilders                .terms(..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">RestClient查询文档</a></h2><time class="has-text-grey" datetime="2022-11-06T01:12:39.239Z">2022-11-06</time><p class="is-flex-grow-2 mt-2">快速入门：编辑
-match_all查询：1234567891011121314151617181920212223242526272829303132333435//match_all查询    @Test    void testMatchAll() throws IOException {        String index  = &quot;tb_disable_date_diary&quot;;        //1.准备Request        SearchRequest request = new SearchRequest(index);        //2.准备DSL        request.source().query(QueryBuilders.matchAllQuery());      ..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/0fb9368cceef43ddbd2bb17ed8d24088.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/0fb9368cceef43ddbd2bb17ed8d24088.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Elasticsearch"><i class="tag post-item-tag">Elasticsearch</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/">javaRestClient操作索引库和文档</a></h2><time class="has-text-grey" datetime="2022-11-06T01:12:39.233Z">2022-11-06</time><p class="is-flex-grow-2 mt-2">1. 创建索引库：
-12345678910//创建索引库   @Test   void createHotelIndex() throws IOException {       //1.创建Request对象       CreateIndexRequest request = new CreateIndexRequest(&quot;hotel&quot;);       //2.准备请求的参数：DSL语句       request.source(MAPPING_TEMPLATE, XContentType.JSON);       //3.发送请求       client.indices().create(request,RequestOptions.DEFAULT);   }
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
 
 
-12345678910111213..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/">更多</a></section></article></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container categories-widget category-page"><h3>分类</h3><section><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MQ/">MQ</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nacos/">Nacos</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Netty/">Netty</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringSecurity/">SpringSecurity</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/debug/">debug</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2/">hexo博客</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/interview/">interview</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/juc/">juc</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatisplus/">mybatisplus</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/springboot/">springboot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/sql/">sql</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/token/">token</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E6%80%A7/">安全性</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">定时任务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%82%E5%B8%B8or%E6%8A%A5%E9%94%99/">异常or报错</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/">数据封装</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/">文件服务器</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">远程调用</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/">零碎知识&笔记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a><span class="category-list-count">13</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
 
-window.addEventListener('resize', $claudia.throttle(function () {
-    var images = document.querySelectorAll('.js-img-fadeIn')
 
-    images.forEach($claudia.blurBackdropImg)
-}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
 
-window.addEventListener('resize', $claudia.throttle(function () {
-    var images = document.querySelectorAll('.js-img-fadeIn')
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
 
-    images.forEach($claudia.blurBackdropImg)
-}, 150))</script></body></html>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

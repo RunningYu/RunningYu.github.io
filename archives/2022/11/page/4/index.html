@@ -1,107 +1,502 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Haojen's blog</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 6.3.0">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>归档: 2022/11 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo &amp; github">
+<meta property="og:url" content="http://example.com/archives/2022/11/page/4/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="其然乐衣">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>归档 · 2022</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221112151022771.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&amp;%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221112151022771.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&amp;%E7%AC%94%E8%AE%B0"><i class="tag post-item-tag">零碎知识&amp;笔记</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&amp;%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">test测试注意事项</a></h2><time class="has-text-grey" datetime="2022-11-12T07:09:51.307Z">2022-11-12</time><p class="is-flex-grow-2 mt-2">非void返回类型的test是不能独立自己进行运行的，否则会报下面的错误“No tests were found”
+</head>
 
-但可以通过其它的测试类来调用运行，比如：
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
 
-</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&amp;%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://picd.zhimg.com/v2-9ab1736c4be73705dc1010ed438c33c2_720w.jpg?source=172ae18b" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/"><img class="post-cover-img js-img-fadeIn" src="https://picd.zhimg.com/v2-9ab1736c4be73705dc1010ed438c33c2_720w.jpg?source=172ae18b" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/SpringSecurity"><i class="tag post-item-tag">SpringSecurity</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/">Spring Security-安全管理框架</a></h2><time class="has-text-grey" datetime="2022-11-12T03:52:05.923Z">2022-11-12</time><p class="is-flex-grow-2 mt-2">Spring Security-安全管理框架 - 知乎 (zhihu.com)
+        <section id="main">
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap animated rubberBand">
+        <div class="archive-year-wrap">
+          <a href="/archives/2022" class="archive-year">2022</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-12T07:09:51.307Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">test测试注意事项</a>
+    </h1>
+  
 
-Spring Security-安全管理框架主要内容
-Spring Security 简介
-第一个Spring Security项目
-UserDetailsService详解
-PasswordEncoder密码解析器详解
-自定义登录逻辑
-自定义登录逻辑（数据库访问方式）
-自定义登录页面
-认证过程其他常用配置
-完整认证流程
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-12T03:52:05.923Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/">Spring Security-安全管理框架</a>
+    </h1>
+  
 
-【尚学堂】SpringSecurity安全管理框架_spring security框架从入门到实战_Spring Security源码解析_哔哩哔哩 (゜-゜)つロ 干杯~-bilibiliwww.bilibili.com/video/BV1R54y1a7Cv
-一、Spring Security简介1、概括..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221111211841097.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221111211841097.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/SpringSecurity"><i class="tag post-item-tag">SpringSecurity</i></a><a href="/tags/%E6%BA%90%E7%A0%81"><i class="tag post-item-tag">源码</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity 请求间共享认证信息（源码剖析）</a></h2><time class="has-text-grey" datetime="2022-11-11T13:03:53.265Z">2022-11-11</time><p class="is-flex-grow-2 mt-2">SpringSecurity 请求间共享认证信息对应教程视频：39-尚硅谷-SpringSecurity-源码剖析-认证信息共享详解_哔哩哔哩_bilibili
-一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 Spring Security 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-11T13:03:53.265Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity 请求间共享认证信息（源码剖析）</a>
+    </h1>
+  
 
-⚫ 在前面讲解认证成功的处理方法 successfulAuthentication() 时，有以下代码：
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-11T12:45:44.574Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity权限访问流程（源码剖析）</a>
+    </h1>
+  
 
-⚫ 查 看 SecurityContext 接 口 及 其 实 现 类 SecurityContextImpl ， 该 类 其 实 就 是 对Authentication 的封装：
-⚫ 查 看 SecurityContextHold..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221111205806671.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221111205806671.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/SpringSecurity"><i class="tag post-item-tag">SpringSecurity</i></a><a href="/tags/%E6%BA%90%E7%A0%81"><i class="tag post-item-tag">源码</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity权限访问流程（源码剖析）</a></h2><time class="has-text-grey" datetime="2022-11-11T12:45:44.574Z">2022-11-11</time><p class="is-flex-grow-2 mt-2">ExceptionTranslationFilter 过滤器该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-11T09:45:24.188Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity 认证流程（源码剖析）</a>
+    </h1>
+  
 
-FilterSecurityInterceptor 过滤器FilterSecurityInterceptor 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器ExceptionTranslationFilter 进行捕获和处理。具体源码如下：
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-11T06:32:01.405Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">11</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/">相关注解的使用</a>
+    </h1>
+  
 
-需要注意，Spring Security 的过滤器链是配置在 SpringMVC 的核心组件DispatcherServlet 运行之前..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/../../images/image-20221111185833955.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/"><img class="post-cover-img js-img-fadeIn" src="/../../images/image-20221111185833955.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/SpringSecurity"><i class="tag post-item-tag">SpringSecurity</i></a><a href="/tags/%E6%BA%90%E7%A0%81"><i class="tag post-item-tag">源码</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">SpringSecurity 认证流程（源码剖析）</a></h2><time class="has-text-grey" datetime="2022-11-11T09:45:24.188Z">2022-11-11</time><p class="is-flex-grow-2 mt-2">ps:硅谷老师的笔记(代码背景白色)
-SpringSecurity 基本流程上：对应教程视频：36-尚硅谷-SpringSecurity-源码剖析-认证流程详解上_哔哩哔哩_bilibili
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-10T09:26:17.420Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/">活跃性-定位死锁 （如何查看、定位死锁）</a>
+    </h1>
+  
 
-绿色部分是认证过滤器，需要我们自己配置，可以配置多个认证过滤器。认证过滤器可以使用 Spring Security 提供的认证过滤器，也可以自定义过滤器（例如：短信验证）。认证过滤器要在 **configure(HttpSecurity http)**方法中配置，没有配置不生效。下面会重点介绍以下三个过滤器：
-UsernamePasswordAuthenticationFilter 过滤器：该过滤器会拦截前端提交的 POST 方式的登录表单请求，并进行身份认证。
-ExceptionTranslationFilter ..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/springboot"><i class="tag post-item-tag">springboot</i></a><a href="/tags/%E6%B3%A8%E8%A7%A3"><i class="tag post-item-tag">注解</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/">相关注解的使用</a></h2><time class="has-text-grey" datetime="2022-11-11T06:32:01.405Z">2022-11-11</time><p class="is-flex-grow-2 mt-2">1. @Autowired@Autowired 写在构造方法上 - x_jingxin - 博客园 (cnblogs.com)
-</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/98cd05b7a9ac4db1a434dd16cedf747f.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/98cd05b7a9ac4db1a434dd16cedf747f.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/juc"><i class="tag post-item-tag">juc</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/">活跃性-定位死锁 （如何查看、定位死锁）</a></h2><time class="has-text-grey" datetime="2022-11-10T09:26:17.420Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">
- 参考视频教程：04.067-活跃性-定位死锁_哔哩哔哩_bilibili
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-10T09:24:31.842Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/">（rabbitmq的高级特性）MQ集群</a>
+    </h1>
+  
 
-方式1 ：jstack工具
- 通过终端命令：jstack 进程号 （图上面写错了，不是进程的端口号，是进程号）
-编辑通过上面的运行后可以看到下面的 线程信息：
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-10T09:23:29.728Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/">（rabbitmq的高级特性）惰性队列</a>
+    </h1>
+  
 
-方式1的jstack工具可以查看死锁的位置（哪一行），然后让我们去修改相应的代码 
- 方式2：jconsole工具 
-   
- 
- 点击之后
-</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/a9ebe4585fd54ed8b699e315a6141c1b.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/a9ebe4585fd54ed8b699e315a6141c1b.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/rabbitmq"><i class="tag post-item-tag">rabbitmq</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/">（rabbitmq的高级特性）MQ集群</a></h2><time class="has-text-grey" datetime="2022-11-10T09:24:31.842Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的教程视频：
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/" class="archive-article-date">
+  <time class="post-time" datetime="2022-11-10T09:19:27.933Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">10</span>
+  </time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/">(rabbitmq的高级特性)死信交换机</a>
+    </h1>
+  
 
-高级篇Day5-04-MQ集群_哔哩哔哩_bilibili
-
-1.集群分类
-
-因为比较推荐使用仲裁队列，所以 普通集群和镜像集群就不做笔记的记录了
-2.普通集群3.镜像集群3.仲裁队列仲裁队列：仲裁队列是3.8版本以后才有的新功能，用来替代镜像队列，具备下列特征：
-•与镜像队列一样，都是主从模式，支持主从数据同步
-•使用非常简单，没有复杂的配置
-•主从同步基于Raft协议，强一致
-搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：在任意控制台添加一个队列，一定要选择队列类型为Quorum类型
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
 
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/2022/11/page/3/">&amp;laquo; pre</a><a class="page-number" href="/archives/2022/11/">1</a><a class="page-number" href="/archives/2022/11/page/2/">2</a><a class="page-number" href="/archives/2022/11/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/2022/11/page/5/">5</a><a class="page-number" href="/archives/2022/11/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/11/page/11/">11</a><a class="extend next" rel="next" href="/archives/2022/11/page/5/">next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
 
 
-</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/b99d3d1549204d588c14889ef1d9c246.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/b99d3d1549204d588c14889ef1d9c246.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/rabbitmq"><i class="tag post-item-tag">rabbitmq</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/">（rabbitmq的高级特性）惰性队列</a></h2><time class="has-text-grey" datetime="2022-11-10T09:23:29.728Z">2022-11-10</time><p class="is-flex-grow-2 mt-2">对应的教程视频：
-高级篇Day5-03-消息堆积及惰性队列_哔哩哔哩_bilibili
 
-1.消息堆积问题
- 当出现高并发的时候，一如说有一百万条，这些消息都扔到内存当中，显然是不合适的，所以需要学习 队形队列
-2.惰性队列 
-使用第一种Bean方式方式显然方便些
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
 
- 
-</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/">更多</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="https://img-blog.csdnimg.cn/2689f1bfc1eb42778182145abfcf6675.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/"><img class="post-cover-img js-img-fadeIn" src="https://img-blog.csdnimg.cn/2689f1bfc1eb42778182145abfcf6675.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/rabbitmq"><i class="tag post-item-tag">rabbitmq</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/">(rabbitmq的高级特性)死信交换机</a></h2><time class="has-text-grey" datetime="2022-11-10T09:19:27.933Z">2022-11-10</time><p class="is-flex-grow-2 mt-2"> 对应的教程视频：
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
 
-高级篇Day5-02-死信交换机_哔哩哔哩_bilibili
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
 
-1.初始死信交换机
-总结：什么样的消息会成为死信？
-•消息被消费者reject或者返回nack
-•消息超时未消费
-•队列满了
-如何给队列绑定死信交换机？
-•给队列设置dead-letter-exchange属性，指定一个交换机
-•给队列设置dead-letter-routing-key属性，设置死信交换机与死信队列的RoutingKey
-2.TTL
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
 
- 总结：消息超时的两种方式是？
-•给队列设置ttl属性，进入队列后超过ttl时间的消息变为死信
-•给消息设置ttl属性，队列接收到消息超过ttl时间后变为死信
-•两者共存时，以时间短的ttl为准
-如何实现发送一个消息20秒后消费者才收到消息？
-•给消息的目标队列指定死信交换机..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/10/MQ/(rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7)%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA/">更多</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap mt-5"><a class="extend prev" rel="prev" href="/archives/2022/11/page/3/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/archives/2022/11/">1</a><a class="page-number" href="/archives/2022/11/page/2/">2</a><a class="page-number" href="/archives/2022/11/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/2022/11/page/5/">5</a><a class="page-number" href="/archives/2022/11/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/11/page/11/">11</a><a class="extend next" rel="next" href="/archives/2022/11/page/5/"><i class="iconfont icon-next has-text-grey"></i></a></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container archives-widget is-in-archive-page"><h3>归档</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">102</span></li></ul></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
 
-window.addEventListener('resize', $claudia.throttle(function () {
-    var images = document.querySelectorAll('.js-img-fadeIn')
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
 
-    images.forEach($claudia.blurBackdropImg)
-}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
 
-window.addEventListener('resize', $claudia.throttle(function () {
-    var images = document.querySelectorAll('.js-img-fadeIn')
 
-    images.forEach($claudia.blurBackdropImg)
-}, 150))</script></body></html>
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

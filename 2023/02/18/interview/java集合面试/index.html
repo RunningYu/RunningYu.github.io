@@ -1,28 +1,135 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>java集合面试</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="1. 集合容器概述什么是集合
-集合就是一个放数据的容器，准确的说是放数据对象引用的容器
-集合类存放的都是对象的引用，而不是对象的本身
-集合类型主要有3种：set(集）、list(列表）和map(映射)。
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java集合面试 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 集合容器概述什么是集合 集合就是一个放数据的容器，准确的说是放数据对象引用的容器 集合类存放的都是对象的引用，而不是对象的本身 集合类型主要有3种：set(集）、list(列表）和map(映射)。  集合的特点 集合的特点主要有如下两点： 集合用于存储对象的容器，对象是用来封装数据，对象多了也需要存储集中式管理。 和数组对比对象的大小不确定。因为集合是可变长度的。数组需要提前定义大小">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java集合面试">
+<meta property="og:url" content="http://example.com/2023/02/18/interview/java%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="1. 集合容器概述什么是集合 集合就是一个放数据的容器，准确的说是放数据对象引用的容器 集合类存放的都是对象的引用，而不是对象的本身 集合类型主要有3种：set(集）、list(列表）和map(映射)。  集合的特点 集合的特点主要有如下两点： 集合用于存储对象的容器，对象是用来封装数据，对象多了也需要存储集中式管理。 和数组对比对象的大小不确定。因为集合是可变长度的。数组需要提前定义大小">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173551e70de4bd~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173551e6f6342b~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173551e72891e5~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173551e73f80b0~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173551e78f59a7~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173551e7c6af15~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735521c92dc84~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735521ca71b79~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735521de4886d~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735522b19186a~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735524c5089b8~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173552564c22be~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+<meta property="article:published_time" content="2023-02-18T01:49:10.870Z">
+<meta property="article:modified_time" content="2023-02-21T07:59:04.744Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173551e70de4bd~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-集合的特点
-集合的特点主要有如下两点：
-集合用于存储对象的容器，对象是用来封装数据，对象多了也需要存储集中式管理。
-和数组对比对象的大小不确定。因为集合是可变长度的。数组需要提前定义大小
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
 
+  
 
-
-集合和数组的区别
-数组是固定长度的；集合可变长度的。
-数组可以存储基本数据类型，也可以存储引用数据类型；集合 只能存储 引用数据类型。
-数组存储的元素必须是同一个数据类型；集合存储的对象可以是不同数据类型。
-
-使用集合框架的好处
-容量自增长；
-提供了高性能的数据结构和算法，使编码更轻松，提高了程序速度和质量；
-可以.."><script src="//unpkg.com/valine/dist/Valine.min.js"></script><meta name="generator" content="Hexo 6.3.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Hexo & github" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Haojen's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">java集合面试</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%9B%86%E5%90%88%E5%AE%B9%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="toc-text">1. 集合容器概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9B%86%E5%90%88"><span class="toc-text">什么是集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">集合的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">集合和数组的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">使用集合框架的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">常用的集合类有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List%EF%BC%8CSet%EF%BC%8CMap%E4%B8%89%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">List，Set，Map三者的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">集合框架底层数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%E7%B1%BB%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F"><span class="toc-text">哪些集合类是线程安全的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E9%9B%86%E5%90%88%E7%9A%84%E5%BF%AB%E9%80%9F%E5%A4%B1%E8%B4%A5%E6%9C%BA%E5%88%B6-%E2%80%9Cfail-fast%E2%80%9D%EF%BC%9F"><span class="toc-text">Java集合的快速失败机制 “fail-fast”？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E7%A1%AE%E4%BF%9D%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88%E4%B8%8D%E8%83%BD%E8%A2%AB%E4%BF%AE%E6%94%B9%EF%BC%9F"><span class="toc-text">怎么确保一个集合不能被修改？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Collection%E6%8E%A5%E5%8F%A3"><span class="toc-text">2. Collection接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List%E6%8E%A5%E5%8F%A3"><span class="toc-text">List接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8-Iterator-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">迭代器 Iterator 是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Iterator-%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="toc-text">Iterator 怎么使用？有什么特点？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BE%B9%E9%81%8D%E5%8E%86%E8%BE%B9%E7%A7%BB%E9%99%A4-Collection-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%9F"><span class="toc-text">如何边遍历边移除 Collection 中的元素？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Iterator-%E5%92%8C-ListIterator-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">Iterator 和 ListIterator 有什么区别？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E4%B8%80%E4%B8%AA-List-%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9F%E6%AF%8F%E7%A7%8D%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9FJava-%E4%B8%AD-List-%E9%81%8D%E5%8E%86%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">遍历一个 List 有哪些不同的方式？每种方法的实现原理是什么？Java 中 List 遍历的最佳实践是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-ArrayList-%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">说一下 ArrayList 的优缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%92%8C-List-%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%9F"><span class="toc-text">如何实现数组和 List 之间的转换？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList-%E5%92%8C-LinkedList-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">ArrayList 和 LinkedList 的区别是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList-%E5%92%8C-Vector-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">ArrayList 和 Vector 的区别是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E6%97%B6%EF%BC%8CArrayList%E3%80%81LinkedList%E3%80%81Vector%E8%B0%81%E9%80%9F%E5%BA%A6%E8%BE%83%E5%BF%AB%EF%BC%9F%E9%98%90%E8%BF%B0-ArrayList%E3%80%81Vector%E3%80%81LinkedList-%E7%9A%84%E5%AD%98%E5%82%A8%E6%80%A7%E8%83%BD%E5%92%8C%E7%89%B9%E6%80%A7%EF%BC%9F"><span class="toc-text">插入数据时，ArrayList、LinkedList、Vector谁速度较快？阐述 ArrayList、Vector、LinkedList 的存储性能和特性？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9C%BA%E6%99%AF%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-ArrayList%EF%BC%9F"><span class="toc-text">多线程场景下如何使用 ArrayList？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-ArrayList-%E7%9A%84-elementData-%E5%8A%A0%E4%B8%8A-transient-%E4%BF%AE%E9%A5%B0%EF%BC%9F"><span class="toc-text">为什么 ArrayList 的 elementData 加上 transient 修饰？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List-%E5%92%8C-Set-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">List 和 Set 的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set%E6%8E%A5%E5%8F%A3"><span class="toc-text">Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-HashSet-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">说一下 HashSet 的实现原理？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashSet%E5%A6%82%E4%BD%95%E6%A3%80%E6%9F%A5%E9%87%8D%E5%A4%8D%EF%BC%9FHashSet%E6%98%AF%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E7%9A%84%EF%BC%9F"><span class="toc-text">HashSet如何检查重复？HashSet是如何保证数据不可重复的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashSet%E4%B8%8EHashMap%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">HashSet与HashMap的区别</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Map%E6%8E%A5%E5%8F%A3"><span class="toc-text">3. Map接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHash%E7%AE%97%E6%B3%95"><span class="toc-text">什么是Hash算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%93%BE%E8%A1%A8"><span class="toc-text">什么是链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8BHashMap%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">说一下HashMap的实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap%E5%9C%A8JDK1-7%E5%92%8CJDK1-8%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%EF%BC%9FHashMap%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-text">HashMap在JDK1.7和JDK1.8中有哪些不同？HashMap的底层实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap-JDK1-8%E4%B9%8B%E5%89%8D"><span class="toc-text">HashMap JDK1.8之前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap-JDK1-8%E4%B9%8B%E5%90%8E"><span class="toc-text">HashMap JDK1.8之后</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JDK1-7-VS-JDK1-8-%E6%AF%94%E8%BE%83"><span class="toc-text">JDK1.7 VS JDK1.8 比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-text">什么是红黑树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B4%E9%81%93%E7%BA%A2%E9%BB%91%E6%A0%91%E5%85%88%E8%AE%B2%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">说道红黑树先讲什么是二叉树</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap%E7%9A%84%E6%89%A9%E5%AE%B9%E6%93%8D%E4%BD%9C%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="toc-text">HashMap的扩容操作是怎么实现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81%E7%9A%84%EF%BC%9F"><span class="toc-text">HashMap是怎么解决哈希冲突的？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%88%E5%B8%8C%EF%BC%9F"><span class="toc-text">什么是哈希？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81%EF%BC%9F"><span class="toc-text">什么是哈希冲突？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">HashMap的数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hash-%E5%87%BD%E6%95%B0"><span class="toc-text">hash()函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E5%90%A6%E4%BD%BF%E7%94%A8%E4%BB%BB%E4%BD%95%E7%B1%BB%E4%BD%9C%E4%B8%BA-Map-%E7%9A%84-key%EF%BC%9F"><span class="toc-text">能否使用任何类作为 Map 的 key？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E4%B8%ADString%E3%80%81Integer%E8%BF%99%E6%A0%B7%E7%9A%84%E5%8C%85%E8%A3%85%E7%B1%BB%E9%80%82%E5%90%88%E4%BD%9C%E4%B8%BAK%EF%BC%9F"><span class="toc-text">为什么HashMap中String、Integer这样的包装类适合作为K？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8Object%E4%BD%9C%E4%B8%BAHashMap%E7%9A%84Key%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%E5%91%A2%EF%BC%9F"><span class="toc-text">如果使用Object作为HashMap的Key，应该怎么办呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8hashCode-%E5%A4%84%E7%90%86%E5%90%8E%E7%9A%84%E5%93%88%E5%B8%8C%E5%80%BC%E7%9B%B4%E6%8E%A5%E4%BD%9C%E4%B8%BAtable%E7%9A%84%E4%B8%8B%E6%A0%87%EF%BC%9F"><span class="toc-text">HashMap为什么不直接使用hashCode()处理后的哈希值直接作为table的下标？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap-%E7%9A%84%E9%95%BF%E5%BA%A6%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF2%E7%9A%84%E5%B9%82%E6%AC%A1%E6%96%B9"><span class="toc-text">HashMap 的长度为什么是2的幂次方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap-%E4%B8%8E-HashTable-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">HashMap 与 HashTable 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFTreeMap-%E7%AE%80%E4%BB%8B"><span class="toc-text">什么是TreeMap 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%86%B3%E5%AE%9A%E4%BD%BF%E7%94%A8-HashMap-%E8%BF%98%E6%98%AF-TreeMap%EF%BC%9F"><span class="toc-text">如何决定使用 HashMap 还是 TreeMap？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap-%E5%92%8C-ConcurrentHashMap-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">HashMap 和 ConcurrentHashMap 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentHashMap-%E5%92%8C-Hashtable-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">ConcurrentHashMap 和 Hashtable 的区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81HashTable"><span class="toc-text">1、HashTable:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81-JDK1-7%E7%9A%84ConcurrentHashMap%EF%BC%9A"><span class="toc-text">2、 JDK1.7的ConcurrentHashMap：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81JDK1-8%E7%9A%84ConcurrentHashMap%EF%BC%88TreeBin-%E7%BA%A2%E9%BB%91%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9-Node-%E9%93%BE%E8%A1%A8%E8%8A%82%E7%82%B9%EF%BC%89%EF%BC%9A"><span class="toc-text">3、JDK1.8的ConcurrentHashMap（TreeBin: 红黑二叉树节点 Node: 链表节点）：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentHashMap-%E5%BA%95%E5%B1%82%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">ConcurrentHashMap 底层具体实现知道吗？实现原理是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JDK1-7"><span class="toc-text">JDK1.7</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JDK1-8"><span class="toc-text">JDK1.8</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="toc-text">4. 辅助工具类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-%E5%92%8C-ArrayList-%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">Array 和 ArrayList 有何区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-Array-%E5%92%8C-List-%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%9F"><span class="toc-text">如何实现 Array 和 List 之间的转换？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#comparable-%E5%92%8C-comparator%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">comparable 和 comparator的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection-%E5%92%8C-Collections-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">Collection 和 Collections 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap-%E5%92%8C-TreeSet-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%97%B6%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E5%85%83%E7%B4%A0%EF%BC%9FCollections-%E5%B7%A5%E5%85%B7%E7%B1%BB%E4%B8%AD%E7%9A%84-sort-%E6%96%B9%E6%B3%95%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E5%85%83%E7%B4%A0%EF%BC%9F"><span class="toc-text">TreeMap 和 TreeSet 在排序时如何比较元素？Collections 工具类中的 sort()方法如何比较元素？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection-%E5%92%8C-Collections-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F-1"><span class="toc-text">Collection 和 Collections 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TreeMap-%E5%92%8C-TreeSet-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%97%B6%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E5%85%83%E7%B4%A0%EF%BC%9FCollections-%E5%B7%A5%E5%85%B7%E7%B1%BB%E4%B8%AD%E7%9A%84-sort-%E6%96%B9%E6%B3%95%E5%A6%82%E4%BD%95%E6%AF%94%E8%BE%83%E5%85%83%E7%B4%A0%EF%BC%9F-1"><span class="toc-text">TreeMap 和 TreeSet 在排序时如何比较元素？Collections 工具类中的 sort()方法如何比较元素？</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98"><i class="tag post-item-tag">面试题</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">java集合面试</h1><time class="has-text-grey" datetime="2023-02-18T01:49:10.870Z">2023-02-18</time><article class="mt-2 post-content"><h1 id="1-集合容器概述"><a href="#1-集合容器概述" class="headerlink" title="1. 集合容器概述"></a>1. 集合容器概述</h1><h3 id="什么是集合"><a href="#什么是集合" class="headerlink" title="什么是集合"></a>什么是集合</h3><ul>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-interview/java集合面试" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/02/18/interview/java%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95/" class="article-date">
+  <time class="post-time" datetime="2023-02-18T01:49:10.870Z" itemprop="datePublished">
+    <span class="post-month">2月</span><br/>
+    <span class="post-day">18</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java集合面试
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>,<a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/java%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95/">java集合面试</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-集合容器概述"><a href="#1-集合容器概述" class="headerlink" title="1. 集合容器概述"></a>1. 集合容器概述</h1><h3 id="什么是集合"><a href="#什么是集合" class="headerlink" title="什么是集合"></a>什么是集合</h3><ul>
 <li>集合就是一个放数据的容器，准确的说是放数据对象引用的容器</li>
 <li>集合类存放的都是对象的引用，而不是对象的本身</li>
 <li>集合类型主要有3种：set(集）、list(列表）和map(映射)。</li>
@@ -633,4 +740,225 @@
 </ul>
 </li>
 </ul>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/02/18/interview/java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95/" title="java核心基础面试"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: java核心基础面试</span></a><a class="button is-default" href="/2023/02/17/interview/mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Mysql面试题"><span class="has-text-weight-semibold">下一页: Mysql面试题</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Haojen/RunningYu" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article><article class="mt-6 comment-container" id="vcomments"></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><a title="twitter" target="_blank" rel="noopener nofollow" href="//twitter.com//"><i class="iconfont icon-twitter"></i></a><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/haojen"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com//"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--><a title="facebook" target="_blank" rel="noopener nofollow" href="//www.facebook.com//"><i class="iconfont icon-tian7_facebook"></i></a></section><p><span>Copyright ©</span><span> Haojen 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/18/interview/java%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95/" data-id="clehbbk8w0044uwv65humgefw" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/18/interview/java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          java核心基础面试
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/17/interview/mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Mysql面试题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
