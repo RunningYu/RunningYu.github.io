@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RestClient查询文档 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="快速入门：编辑 match_all查询：1234567891011121314151617181920212223242526272829303132333435&#x2F;&#x2F;match_all查询    @Test    void testMatchAll() throws IOException {        String index  &#x3D; &quot;tb_disable_date_diary&quot;;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RestClient查询文档">
+<meta property="og:url" content="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="快速入门：编辑 match_all查询：1234567891011121314151617181920212223242526272829303132333435&#x2F;&#x2F;match_all查询    @Test    void testMatchAll() throws IOException {        String index  &#x3D; &quot;tb_disable_date_diary&quot;;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/48392c3346d746448e7109a3c8d960c0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/84cfb92b326c4ff18403e7089b76f7a9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8b969709155446f48b193ac2e9fa59f7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e569b9e6eae2472cb508245fe942dd15.png">
+<meta property="article:published_time" content="2022-11-06T01:12:39.239Z">
+<meta property="article:modified_time" content="2022-11-07T01:45:01.231Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="Elasticsearch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-elasticsearch/RestClient查询文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" class="article-date">
+  <time class="post-time" datetime="2022-11-06T01:12:39.239Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RestClient查询文档
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="快速入门："><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h1><p><img src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h1 id="match-all查询："><a href="#match-all查询：" class="headerlink" title="match_all查询："></a>match_all查询：</h1><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//match_all查询</span><br><span class="line">    @Test</span><br><span class="line">    void testMatchAll() throws IOException {</span><br><span class="line">        String index  = "tb_disable_date_diary";</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(index);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //解析响应</span><br><span class="line">        handleResponce(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    //解析响应</span><br><span class="line">    private void handleResponce(SearchResponse response) {</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println("共搜索到"+total+"条数据");</span><br><span class="line">        //4.2文档数据</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits){</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            Diary diary = JSON.parseObject(json,Diary.class);</span><br><span class="line">            System.out.println("diary = "+diary);</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/48392c3346d746448e7109a3c8d960c0.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//分页和排序</span><br><span class="line">   @Test</span><br><span class="line">   void restPageAndSort() throws IOException {</span><br><span class="line">       //页码，每页大小</span><br><span class="line">       int page = 2,size = 5;</span><br><span class="line"></span><br><span class="line">       //1.准备Request</span><br><span class="line">       SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">       //2.准备DSL</span><br><span class="line">       //2.1 query</span><br><span class="line">       request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">       //2.2 排序 sort</span><br><span class="line">       request.source().sort("price", SortOrder.ASC);</span><br><span class="line">       //2.3 分页from，size</span><br><span class="line">       request.source().from((page - 1) * size).size(5);</span><br><span class="line"></span><br><span class="line">       //3.发送请求</span><br><span class="line">       SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">       handleResponce(response);</span><br><span class="line"></span><br><span class="line">       System.out.println(response);</span><br><span class="line">   }</span><br><span class="line"></span><br><span class="line">   private void handleResponce(SearchResponse response) {</span><br><span class="line">       //4.解析响应</span><br><span class="line">       SearchHits searchHits = response.getHits();</span><br><span class="line">       //4.1获取总条数</span><br><span class="line">       long total = searchHits.getTotalHits().value;</span><br><span class="line">       System.out.println("共搜索到"+total+"条数据");</span><br><span class="line">       //4.2文档数据</span><br><span class="line">       SearchHit[] hits = searchHits.getHits();</span><br><span class="line">       //4.3遍历</span><br><span class="line">       for(SearchHit hit : hits){</span><br><span class="line">           //获取文档source</span><br><span class="line">           String json = hit.getSourceAsString();</span><br><span class="line">           //反序列化</span><br><span class="line">           HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">           System.out.println("hotelDoc = "+hotelDoc);</span><br><span class="line">       }</span><br><span class="line">   }</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a><strong>高亮</strong></h2><p><img src="https://img-blog.csdnimg.cn/84cfb92b326c4ff18403e7089b76f7a9.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/8b969709155446f48b193ac2e9fa59f7.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//高亮</span><br><span class="line">    @Test</span><br><span class="line">    void testHighlight() throws IOException {</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        //2.1 query</span><br><span class="line">        request.source().query(QueryBuilders.matchQuery("all","如家"));</span><br><span class="line">        //2.2 高亮</span><br><span class="line">        request.source().highlighter(new HighlightBuilder().field("name").requireFieldMatch(false));</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        handleResponce1(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    private void handleResponce1(SearchResponse response) {</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println("共搜索到"+total+"条数据");</span><br><span class="line">        //4.2文档数组</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits){</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line"></span><br><span class="line">            //获取高亮结果</span><br><span class="line">            Map&lt;String, HighlightField&gt; highlightFields = hit.getHighlightFields();</span><br><span class="line">            if(!CollectionUtils.isEmpty(highlightFields)){</span><br><span class="line">                //根据各字段名获取高亮结果</span><br><span class="line">                HighlightField highlightField = highlightFields.get("name");</span><br><span class="line">                if(highlightField != null){</span><br><span class="line">                    //获取高亮</span><br><span class="line">                    String name = highlightField.getFragments()[0].string();</span><br><span class="line">                    //覆盖非高亮结果</span><br><span class="line">                    hotelDoc.setName(name);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            System.out.println("hotelDoc = "+hotelDoc);</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/e569b9e6eae2472cb508245fe942dd15.png" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="clejmgmhk0045xkv6az6dhf2l" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          索引库中的文档的操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/11/06/elasticsearch/javaRestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93%E5%92%8C%E6%96%87%E6%A1%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">javaRestClient操作索引库和文档</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
