@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://example.com/images/image-20221124152020225.png">
 <meta property="og:image" content="http://example.com/images/image-20221124153725910.png">
 <meta property="article:published_time" content="2022-11-23T09:44:11.240Z">
-<meta property="article:modified_time" content="2022-11-24T09:07:05.414Z">
+<meta property="article:modified_time" content="2023-03-01T12:39:31.601Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="内存与垃圾回收篇">
@@ -62,7 +62,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>154</strong><br>文章</div></a>
       <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
@@ -166,7 +166,7 @@
 <ul>
 <li>比如，我们去分配一个超大对象，类似一个超大数组超过堆的最大值，JVM 可以判断出垃圾收集并不能解决这个问题，所以直接抛出 OutOfMemoryError。</li>
 </ul>
-<h3 id="内存泄漏（Memory-Leak）"><a href="#内存泄漏（Memory-Leak）" class="headerlink" title="内存泄漏（Memory Leak）"></a>内存泄漏（Memory Leak）</h3><p>也称作“存储渗漏”。严格来说，<mark>只有对象不会再被程序用到了，但是 GC 又不能回收他们的情况，才叫内存泄漏</mark>。</p>
+<h3 id="内存泄漏（Memory-Leak）"><a href="#内存泄漏（Memory-Leak）" class="headerlink" title="内存泄漏（Memory Leak）"></a>内存泄漏（Memory Leak）</h3><p>也称作“存储渗漏”。严格来说，<mark><strong>只有对象不会再被程序用到了，但是 GC 又不能回收他们的情况，才叫内存泄漏</strong></mark>。</p>
 <p>但实际情况很多时候一些不太好的实践（或疏忽）会导致对象的生命周期变得很长甚至导致 OOM，也可以叫做<mark>宽泛意义上的“内存泄漏”</mark>。详说如下：</p>
 <p>（一个类里面的方法，把一个变量定义到方法内，作为一个局部变量，那么这个变量出了这个方法它就被回收了。但是你把它定义成成员变量了，生命周期就会长一些，甚至还把这个成员变量定义成了 static ，那么这个静态变量的变量或是类变量就会随着类的加载而加载，随着类的消亡而消亡，这个变量的生命周期就会非常长。如果程序当中出现大量的生命周期很长的对象的时候，加上那些没办法回收的数据的存在，最后导致 OOM 。所以我们把那些生命周期本很长的对象，本来没必要那么长而我们又申明了那么长的对象，也可以理解为<strong>宽泛意义的“内存泄露”</strong>）</p>
 <p>尽管内存泄漏并不会立刻引起程序崩溃，但是一旦发生内存泄漏，程序中的可用内存就会被逐步蚕食，直至耗尽所有内存，最终出现 OutOfMemory 异常，导致程序崩溃。</p>
@@ -192,7 +192,7 @@
 <p>STW 事件和采用哪款 GC 无关，所有的 GC 都有这个事件。</p>
 <p>哪怕是 G1 也不能完全避免 Stop-the-World 情况发生，只能说垃圾回收器越来越优秀，回收效率越来越高，尽可能地缩短了暂停时间。</p>
 <p>STW 是 JVM 在<mark>后台自动发起和自动完成</mark>的。在用户不可见的情况下，把用户正常的工作线程全部停掉。</p>
-<p>开发中不要用 System.gc() 会导致 Stop-the-World 的发生。</p>
+<p>开发中不要用 System.gc()，否则 会导致 Stop-the-World 的发生。</p>
 <h2 id="12-4-垃圾回收的并行与并发"><a href="#12-4-垃圾回收的并行与并发" class="headerlink" title="12.4. 垃圾回收的并行与并发"></a>12.4. 垃圾回收的并行与并发</h2><h3 id="并发（Concurrent）"><a href="#并发（Concurrent）" class="headerlink" title="并发（Concurrent）"></a>并发（Concurrent）</h3><p>在操作系统中，是指一个时间段中有几个程序都处于已启动运行到运行完毕之间，且这几个程序都是在同一个处理器上运行。</p>
 <p>并发不是真正意义上的“同时进行”，只是 CPU 把一个时间段划分成几个时间片段（时间区间），然后在这几个时间区间之间来回切换，由于 CPU 处理的速度非常快，只要时间间隔处理得当，即可让用户感觉是多个应用程序同时在进行。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/5e4a10263a26cb7aa87f1a6615b5b833.png" alt="image-20200712202522051"></p>
@@ -215,13 +215,13 @@
 </li>
 </ul>
 <h3 id="垃圾回收的并发与并行"><a href="#垃圾回收的并发与并行" class="headerlink" title="垃圾回收的并发与并行"></a>垃圾回收的并发与并行</h3><p>并发和并行，在谈论垃圾收集器的上下文语境中，它们可以解释如下：</p>
-<h4 id="并行（Parallel）-1"><a href="#并行（Parallel）-1" class="headerlink" title="并行（Parallel）"></a>并行（Parallel）</h4><p>指多条垃圾收集线程并行工作，但此时用户线程仍处于等待状态。如 ParNew、Parallel Scavenge、Parallel Old；</p>
+<h4 id="并行（Parallel）-1"><a href="#并行（Parallel）-1" class="headerlink" title="并行（Parallel）"></a>并行（Parallel）</h4><p>指<strong>多条垃圾收集线程</strong>并行工作，但此时用户线程仍处于等待状态。如 ParNew、Parallel Scavenge、Parallel Old；</p>
 <h4 id="串行（Serial）"><a href="#串行（Serial）" class="headerlink" title="串行（Serial）"></a>串行（Serial）</h4><p>相较于并行的概念，单线程执行。如果内存不够，则程序暂停，启动 JM 垃圾回收器进行垃圾回收。回收完，再启动程序的线程。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/fd2b4f4ece3976fbd73c1039666cf7d7.png" alt="image-20210512112822896"></p>
-<h4 id="并发（Concurrent）-1"><a href="#并发（Concurrent）-1" class="headerlink" title="并发（Concurrent）"></a>并发（Concurrent）</h4><p>指用户线程与垃圾收集线程同时执行（但不一定是并行的，可能会交替执行），垃圾回收线程在执行时不会停顿用户程序的运行。用户程序在继续运行，而垃圾收集程序线程运行于另一个 CPU 上；如：CMS、G1</p>
+<h4 id="并发（Concurrent）-1"><a href="#并发（Concurrent）-1" class="headerlink" title="并发（Concurrent）"></a>并发（Concurrent）</h4><p>指<mark>用户线程与垃圾收集线程同时执行</mark>（但不一定是并行的，可能会交替执行），<mark>垃圾回收线程在执行时不会停顿用户程序的运行</mark>。用户程序在继续运行，而垃圾收集程序线程运行于<strong>另一个 CPU 上</strong>；如：CMS、G1</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/48a4190f4d2ff4b7c8963a75ba2e6182.png" alt="image-20200712203815517"></p>
 <h2 id="12-5-安全点与安全区域"><a href="#12-5-安全点与安全区域" class="headerlink" title="12.5. 安全点与安全区域"></a>12.5. 安全点与安全区域</h2><h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><p>程序执行时并非在所有地方都能停顿下来开始 GC，只有在特定的位置才能停顿下来开始 GC，这些位置称为“安全点（Safepoint）”。</p>
-<p>Safe Point 的选择很重要，<mark>如果太少可能导致 GC 等待的时间太长，如果太频繁可能导致运行时的性能问题</mark>。大部分指令的执行时间都非常短暂，通常会根据“<mark>是否具有让程序长时间执行的特征</mark>”为标准。比如：选择一些执行时间较长的指令作为 Safe Point，如<mark>方法调用、循环跳转和异常跳转等</mark>。</p>
+<p>Safe Point 的选择很重要，<mark>如果太少可能导致 GC 等待的时间太长，如果太频繁可能导致运行时的性能问题</mark>。大部分指令的执行时间都非常短暂，通常会根据“<mark>是否具有让程序长时间执行的特征</mark>”为标准。比如：选择一些<strong>执行时间较长</strong>的指令作为 Safe Point，如<mark>方法调用、循环跳转和异常跳转等</mark>。</p>
 <p>如何在 GC 发生时，检查所有线程都跑到最近的安全点停顿下来呢？</p>
 <h4 id="抢先式中断：（目前没有虚拟机采用了）"><a href="#抢先式中断：（目前没有虚拟机采用了）" class="headerlink" title="抢先式中断：（目前没有虚拟机采用了）"></a>抢先式中断：（目前没有虚拟机采用了）</h4><ul>
 <li>首先中断所有线程。如果还有线程不在安全点，就恢复线程，让线程跑到安全点。\</li>
@@ -269,7 +269,7 @@
 </ul>
 <h2 id="12-8-再谈引用：-软引用"><a href="#12-8-再谈引用：-软引用" class="headerlink" title="12.8. 再谈引用： 软引用"></a>12.8. 再谈引用： 软引用</h2><h3 id="软引用（Soft-Reference）——内存不足即回收"><a href="#软引用（Soft-Reference）——内存不足即回收" class="headerlink" title="软引用（Soft Reference）——内存不足即回收"></a>软引用（Soft Reference）——内存不足即回收</h3><p>（内存足够 –&gt; 不会回收软引用的可达对象； 内存不够 –&gt; 会回收软引用的可达对象）</p>
 <p>软引用是用来描述一些还有用，但非必需的对象（必须对象由强引用描述）。<mark>只被软引用关联着的对象，在系统将要发生内存溢出异常前，会把这些对象列进回收范围之中进行第二次回收</mark>（一次回收是不可达对象），如果这次回收还没有足够的内存，才会抛出内存溢出异常。</p>
-<p>软引用通常用来实现内存敏感的缓存。比如：<mark>高速缓存</mark>就有用到软引用。如果还有空闲内存，就可以暂时保留缓存，当内存不足时清理掉，这样就保证了使用缓存的同时，不会耗尽内存。</p>
+<p>软引用通常用来实现内存敏感的<strong>缓存</strong>。比如：<mark>高速缓存</mark>就有用到软引用。如果还有空闲内存，就可以暂时保留缓存，当内存不足时清理掉，这样就保证了使用缓存的同时，不会耗尽内存。</p>
 <p>垃圾回收器在某个时刻决定回收软可达的对象的时候，会清理软引用，并可选地把引用存放到一个引用队列（Reference Queue）。</p>
 <p>类似弱引用，只不过 Java 虚拟机会尽量让软引用的存活时间长一些，迫不得已才清理。</p>
 <p>在 JDK1.2 版之后提供了 java.lang.ref.SoftReference 类来实现软引用</p>
@@ -279,7 +279,7 @@
 <h2 id="12-9-再谈引用：弱引用"><a href="#12-9-再谈引用：弱引用" class="headerlink" title="12.9. 再谈引用：弱引用"></a>12.9. 再谈引用：弱引用</h2><h3 id="弱引用（Weak-Reference）——发现即回收"><a href="#弱引用（Weak-Reference）——发现即回收" class="headerlink" title="弱引用（Weak Reference）——发现即回收"></a>弱引用（Weak Reference）——发现即回收</h3><p>弱引用也是用来描述那些非必需对象，<mark>只被弱引用关联的对象只能生存到下一次垃圾收集发生为止</mark>。在系统 GC 时，只要发现弱引用，不管系统堆空间使用是否充足，都会回收掉只被弱引用关联的对象。</p>
 <p>但是，由于垃圾回收器的线程通常优先级很低，因此，并不一定能很快地发现持有弱引用的对象。在这种情况下，<mark>弱引用对象可以存在较长的时间</mark>。</p>
 <p>弱引用和软引用一样，在构造弱引用时，也可以指定一个引用队列，当弱引用对象被回收时，就会加入指定的引用队列，通过这个队列可以跟踪对象的回收情况。</p>
-<p><mark>软引用、弱引用都非常适合来保存那些可有可无的缓存数据</mark>。如果这么做，当系统内存不足时，这些缓存数据会被回收，不会导致内存溢出。而当内存资源充足时，这些缓存数据又可以存在相当长的时间，从而起到加速系统的作用。</p>
+<p><mark>软引用、弱引用都非常适合来保存那些可有可无的缓存数据</mark>。如果这么做，当系统内存不足时，这些缓存数据会被回收，不会导致内存溢出。<strong>而当内存资源充足时，这些缓存数据又可以存在相当长的时间，从而起到加速系统的作用。</strong></p>
 <p>在 JDK1.2 版之后提供了 WeakReference 类来实现弱引用</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>(); <span class="comment">// 声明强引用</span></span><br><span class="line">WeakReference&lt;Object&gt; sf = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;&gt;(obj);</span><br><span class="line">obj = <span class="literal">null</span>; <span class="comment">//销毁强引用</span></span><br></pre></td></tr></tbody></table></figure>
 
@@ -302,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/23/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/12.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" data-id="clejmgmi9006bxkv68h40cr0f" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/23/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/12.%20%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" data-id="cleqdl4rt008fycv6bvhb3mp0" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -378,7 +378,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>154</strong><br>文章</div></a>
       <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>

@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://example.com/images/image-20221119095719657.png">
 <meta property="og:image" content="http://example.com/images/image-20221119102333407.png">
 <meta property="article:published_time" content="2022-11-18T01:52:51.021Z">
-<meta property="article:modified_time" content="2023-02-23T13:57:51.228Z">
+<meta property="article:modified_time" content="2023-02-25T14:26:38.119Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="内存与垃圾回收篇">
@@ -86,7 +86,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>154</strong><br>文章</div></a>
       <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
@@ -523,7 +523,7 @@
 <li>参数<code>-XX:+EliminateAllocations</code>：开启了标量替换（默认打开），允许将对象打散分配在栈上，比如对象拥有 id 和 name 两个字段，那么这两个字段将会被视为两个独立的局部变量进行分配</li>
 </ul>
 <h3 id="6-X-3-逃逸分析小结：逃逸分析并不成熟"><a href="#6-X-3-逃逸分析小结：逃逸分析并不成熟" class="headerlink" title="6.X.3. 逃逸分析小结：逃逸分析并不成熟"></a>6.X.3. 逃逸分析小结：逃逸分析并不成熟</h3><p>关于逃逸分析的论文在 1999 年就已经发表了，但直到 JDK1.6 才有实现，而且这项技术到如今也并不是十分成熟。</p>
-<p>其根本原因就是<mark>无法保证逃逸分析的性能消耗一定能高于他的消耗。虽然经过逃逸分析可以做标量替换、栈上分配、和锁消除。但是逃逸分析自身也是需要进行一系列复杂的分析的，这其实也是一个相对耗时的过程。 </mark></p>
+<p>其根本原因就是<mark>无法保证逃逸分析的性能消耗一定能高于他的消耗。虽然经过<strong>逃逸分析</strong>可以做<strong>标量替换、栈上分配、和锁消除</strong>。但是逃逸分析自身也是需要进行一系列复杂的分析的，这其实也是一个相对耗时的过程。 </mark></p>
 <p>一个极端的例子，就是经过逃逸分析之后，发现没有一个对象是不逃逸的。那这个逃逸分析的过程就白白浪费掉了。</p>
 <p>虽然这项技术并不十分成熟，但是它也<mark>是即时编译器优化技术中一个十分重要的手段</mark>。</p>
 <p>注意到有一些观点，认为通过逃逸分析，JVM 会在栈上分配那些不会逃逸的对象，这在理论上是可行的，但是取决于 JVM 设计者的选择。据我所知，<strong>Oracle Hotspot JVM 中并未这么做</strong>，这一点在逃逸分析相关的文档里已经说明，所以可以明确<mark>所有的对象实例都是创建在堆上</mark>。</p>
@@ -535,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/" data-id="clejmgmie006sxkv66p8gchta" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/" data-id="cleqdl4ry008wycv6gt0ue2h0" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -611,7 +611,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>153</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>154</strong><br>文章</div></a>
       <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
