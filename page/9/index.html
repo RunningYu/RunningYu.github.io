@@ -45,7 +45,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>154</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
       <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
@@ -77,6 +77,73 @@
 
         <section id="main">
   
+    <article id="post-SpringSecurity/UserDetailsServiceImpl" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" class="article-date">
+  <time class="post-time" datetime="2022-11-12T10:24:46.189Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/12/SpringSecurity/UserDetailsServiceImpl/">自定义UserDetailsServiceImpl</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当什么也没有配置的时候，账号和密码是由Spring Security定义生成的。而在实际项目中账号和密码都是从数据库中查询出来的。 所以我们要通过自定义逻辑控制认证逻辑。</p>
+<p>如果需要自定义逻辑时，只需要实现UserDetailsService接口即可。接口定义如下：</p>
+<h3 id="UserDetailsServiceImpl"><a href="#UserDetailsServiceImpl" class="headerlink" title="UserDetailsServiceImpl"></a>UserDetailsServiceImpl</h3><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.aclservice.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.atguigu.aclservice.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.aclservice.service.PermissionService;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.aclservice.service.UserService;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.entity.SecurityUser;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.BeanUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UsernameNotFoundException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/11</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 当什么也没有配置的时候，账号和密码是由Spring Security定义生成的。而在实际项目中账号和密码都是从数据库中查询出来的。 所以</span></span><br><span class="line"><span class="comment"> * 我们要通过自定义逻辑控制认证逻辑。</span></span><br><span class="line"><span class="comment"> * 如果需要自定义逻辑时，只需要实现UserDetailsService接口即可。接口定义如下：</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDetailsServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDetailsService</span> {</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PermissionService permissionService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDetails <span class="title function_">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException {</span><br><span class="line">        <span class="comment">// 根据用户名查询数据</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userService.selectByUsername(username);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断</span></span><br><span class="line">        <span class="keyword">if</span> (user == <span class="literal">null</span>) {</span><br><span class="line">            <span class="comment">// 抛出用户名没有发现异常，系统就知道用户名没有查询到</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UsernameNotFoundException</span>(<span class="string">"用户不存在"</span>);</span><br><span class="line">        }</span><br><span class="line">        com.atguigu.security.entity.<span class="type">User</span> <span class="variable">curUser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">com</span>.atguigu.security.entity.User();</span><br><span class="line">        BeanUtils.copyProperties(user, curUser);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据用户查询用户权限列表</span></span><br><span class="line">        List&lt;String&gt; permissionValueList = permissionService.selectPermissionValueByUserId(user.getId());</span><br><span class="line">        <span class="type">SecurityUser</span> <span class="variable">securityUser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecurityUser</span>();</span><br><span class="line">        <span class="type">UserDetails</span> <span class="variable">userDetails</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecurityUser</span>();</span><br><span class="line">        securityUser.setPermissionValueList(permissionValueList);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> securityUser;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="SecurityUser"><a href="#SecurityUser" class="headerlink" title="SecurityUser"></a>SecurityUser</h3><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.security.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.toolkit.StringUtils;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.SimpleGrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityUser</span> <span class="keyword">implements</span> <span class="title class_">UserDetails</span> {</span><br><span class="line">    <span class="comment">//当前登录用户</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> User currentUserInfo;</span><br><span class="line">    <span class="comment">//当前权限</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; permissionValueList;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">()</span> {</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">(User user)</span> {</span><br><span class="line">        <span class="keyword">if</span> (user != <span class="literal">null</span>) {</span><br><span class="line">            <span class="built_in">this</span>.currentUserInfo = user;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Collection&lt;? <span class="keyword">extends</span> <span class="title class_">GrantedAuthority</span>&gt; getAuthorities() {</span><br><span class="line">        Collection&lt;GrantedAuthority&gt; authorities = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(String permissionValue : permissionValueList) {</span><br><span class="line">            <span class="keyword">if</span>(StringUtils.isEmpty(permissionValue)) {</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="type">SimpleGrantedAuthority</span> <span class="variable">authority</span> <span class="operator">=</span> <span class="keyword">new</span></span><br><span class="line">                    <span class="title class_">SimpleGrantedAuthority</span>(permissionValue);</span><br><span class="line">            authorities.add(authority);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> authorities;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPassword</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getPassword();</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUsername</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getUsername();</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonExpired</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonLocked</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isCredentialsNonExpired</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEnabled</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>User</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModel;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModelProperty;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel(description = "用户实体类")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ApiModelProperty</span>用于swapper测试的</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "微信openid")</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "密码")</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "昵称")</span></span><br><span class="line">    <span class="keyword">private</span> String nickName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "用户头像")</span></span><br><span class="line">    <span class="keyword">private</span> String salt;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "用户签名")</span></span><br><span class="line">    <span class="keyword">private</span> String token;</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" data-id="clesl9j3q002paov6034icd15" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-SpringSecurity/总结分析" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" class="article-date">
@@ -96,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="cleqdl4pq0020ycv6b5m0dkej" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="clesl9j3s002saov6ev0w7kz8" class="article-share-link">分享</a>
       
       
     </footer>
@@ -155,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="cleqdl4r0005vycv65swb1wy1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="clesl9j4r005maov67127ezaq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/token/" rel="tag">token</a></li></ul>
@@ -213,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="cleqdl4r2005xycv669312wi1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clesl9j4v005waov611wmaqze" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
@@ -443,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="cleqdl4pr0024ycv6ah22auc2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clesl9j3t002yaov66cya7ijw" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -513,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cleqdl4pj001mycv66fb4c2fj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clesl9j3m002faov6f78eb5gb" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -572,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cleqdl4pp001yycv69k6ca04i" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clesl9j3p002maov6ewpyavx2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -684,7 +751,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="cleqdl4pm001pycv6euc8afu7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clesl9j3l002baov6bqc0hot3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -739,7 +806,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cleqdl4qq0054ycv6hy2e0lwk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="clesl9j4l0057aov6d3x76yfr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li></ul>
@@ -805,80 +872,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" data-id="cleqdl4qn004sycv6fw4v4h02" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" data-id="clesl9j40003iaov63zxg22tr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-MQ/（rabbitmq的高级特性）MQ集群" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T09:24:31.842Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/">（rabbitmq的高级特性）MQ集群</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对应的教程视频：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=161&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-04-MQ集群_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<p>1.集群分类</p>
-<p><img src="https://img-blog.csdnimg.cn/a9ebe4585fd54ed8b699e315a6141c1b.png" alt="img"></p>
-<p>因为比较推荐使用仲裁队列，所以 普通集群和镜像集群就不做笔记的记录了</p>
-<h1 id="2-普通集群"><a href="#2-普通集群" class="headerlink" title="2.普通集群"></a>2.普通集群</h1><h1 id="3-镜像集群"><a href="#3-镜像集群" class="headerlink" title="3.镜像集群"></a>3.镜像集群</h1><h1 id="3-仲裁队列"><a href="#3-仲裁队列" class="headerlink" title="3.仲裁队列"></a>3.仲裁队列</h1><p>仲裁队列：仲裁队列是3.8版本以后才有的新功能，用来替代镜像队列，具备下列特征：</p>
-<p>•与镜像队列一样，都是主从模式，支持主从数据同步</p>
-<p>•使用非常简单，没有复杂的配置</p>
-<p>•主从同步基于Raft协议，强一致</p>
-<h3 id="搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）："><a href="#搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：" class="headerlink" title="搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）："></a>搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：</h3><p>在任意控制台添加一个队列，一定要选择队列类型为Quorum类型</p>
-<p><img src="https://img-blog.csdnimg.cn/b9b16bfc723f4178b04c1d8b1e857991.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/59c23da4cec14f29b409ba7141f30431.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/ad2ce48988004e1f889af46c0b63ba20.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/c55881b2175f4ace9b41b616877e7a38.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" data-id="cleqdl4oz000dycv6bxf3huo3" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
 
     </footer>
   </div>
@@ -937,7 +934,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>154</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
       <a href="/categories"><div><strong>83</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>

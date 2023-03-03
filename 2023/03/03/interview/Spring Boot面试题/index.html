@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Spring Boot面试题 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring Boot面试题（总结最全面的面试题！！！）2020年04月13日  Java面试总结汇总，整理了包括Java重点知识，以及常用开源框架，欢迎大家阅读。文章可能有错误的地方，因为个人知识有限，欢迎各位大佬指出！文章持续更新中……      ID 标题 地址    1 设计模式面试题（总结最全面的面试题） juejin.cn&#x2F;post&#x2F;684490…   2 Java基础知识面试题（总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot面试题">
+<meta property="og:url" content="http://example.com/2023/03/03/interview/Spring%20Boot%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="Spring Boot面试题（总结最全面的面试题！！！）2020年04月13日  Java面试总结汇总，整理了包括Java重点知识，以及常用开源框架，欢迎大家阅读。文章可能有错误的地方，因为个人知识有限，欢迎各位大佬指出！文章持续更新中……      ID 标题 地址    1 设计模式面试题（总结最全面的面试题） juejin.cn&#x2F;post&#x2F;684490…   2 Java基础知识面试题（总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-03T11:20:43.310Z">
+<meta property="article:modified_time" content="2023-03-03T13:41:43.996Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-interview/Spring Boot面试题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/03/interview/Spring%20Boot%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
+  <time class="post-time" datetime="2023-03-03T11:20:43.310Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring Boot面试题
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-Boot面试题（总结最全面的面试题！！！）"><a href="#Spring-Boot面试题（总结最全面的面试题！！！）" class="headerlink" title="Spring Boot面试题（总结最全面的面试题！！！）"></a>Spring Boot面试题（总结最全面的面试题！！！）</h1><p>2020年04月13日</p>
+<blockquote>
+<p>Java面试总结汇总，整理了包括Java重点知识，以及常用开源框架，欢迎大家阅读。文章可能有错误的地方，因为个人知识有限，欢迎各位大佬指出！文章持续更新中……</p>
+</blockquote>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>标题</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>设计模式面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125721772039">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Java基础知识面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059738631">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Java集合面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125939843079">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>JavaIO、BIO、NIO、AIO、Netty面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125700784136">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Java并发编程面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125755293710">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Java异常面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904128959741965">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Java虚拟机（JVM）面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125696573448">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Spring面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127051513864">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Spring MVC面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059722253">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Spring Boot面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125709156359">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Spring Cloud面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125717544973">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Redis面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127055527950">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>MyBatis面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125935648776">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>MySQL面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127047139335">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>TCP、UDP、Socket、HTTP面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125692379143">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Nginx面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125784653837">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>ElasticSearch面试题</td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>kafka面试题</td>
+<td></td>
+</tr>
+<tr>
+<td>19</td>
+<td>RabbitMQ面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125935665160">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>20</td>
+<td>Dubbo面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127076499463">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>21</td>
+<td>ZooKeeper面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127076499464">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>22</td>
+<td>Netty面试题（总结最全面的面试题）</td>
+<td></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Tomcat面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059722247">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>Linux面试题（总结最全面的面试题）</td>
+<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059738637">juejin.cn/post/684490…</a></td>
+</tr>
+<tr>
+<td>25</td>
+<td>互联网相关面试题（总结最全面的面试题）</td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td>互联网安全面试题（总结最全面的面试题）</td>
+<td></td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="什么是-Spring-Boot？"><a href="#什么是-Spring-Boot？" class="headerlink" title="什么是 Spring Boot？"></a>什么是 Spring Boot？</h3><ul>
+<li>Spring Boot 是 Spring 开源组织下的子项目，是 Spring 组件一站式解决方案，主要是简化了使用 Spring 的难度，简省了繁重的配置，提供了各种启动器，使开发者能快速上手。</li>
+</ul>
+<h3 id="为什么要用SpringBoot"><a href="#为什么要用SpringBoot" class="headerlink" title="为什么要用SpringBoot"></a>为什么要用SpringBoot</h3><ul>
+<li>快速开发，快速整合，配置简化、内嵌服务容器</li>
+</ul>
+<h3 id="SpringBoot与SpringCloud-区别"><a href="#SpringBoot与SpringCloud-区别" class="headerlink" title="SpringBoot与SpringCloud 区别"></a>SpringBoot与SpringCloud 区别</h3><ul>
+<li>SpringBoot是快速开发的Spring框架，SpringCloud是完整的微服务框架，SpringCloud依赖于SpringBoot。</li>
+</ul>
+<h3 id="Spring-Boot-有哪些优点？"><a href="#Spring-Boot-有哪些优点？" class="headerlink" title="Spring Boot 有哪些优点？"></a>Spring Boot 有哪些优点？</h3><ul>
+<li>Spring Boot 主要有如下优点：<ol>
+<li>容易上手，提升开发效率，为 Spring 开发提供一个更快、更简单的开发框架。</li>
+<li>开箱即用，远离繁琐的配置。</li>
+<li>提供了一系列大型项目通用的非业务性功能，例如：内嵌服务器、安全管理、运行数据监控、运行状况检查和外部化配置等。</li>
+<li>SpringBoot总结就是使编码变简单、配置变简单、部署变简单、监控变简单等等</li>
+<li>快速轻松地开发基于 Spring 的应用程序；</li>
+<li>无需部署war文件；</li>
+<li>创建独立应用程序的能力；</li>
+<li>帮助将 Tomcat、Jetty 或 Undertow 直接嵌入到应用程序中；</li>
+<li>无需XML配置；</li>
+<li>减少源代码数量；</li>
+<li>额外的开箱即用功能；</li>
+<li>轻松启动；</li>
+<li>简单的设置和管理；</li>
+</ol>
+</li>
+</ul>
+<h3 id="Spring-Boot-的核心注解是哪个？它主要由哪几个注解组成的？"><a href="#Spring-Boot-的核心注解是哪个？它主要由哪几个注解组成的？" class="headerlink" title="Spring Boot 的核心注解是哪个？它主要由哪几个注解组成的？"></a>Spring Boot 的核心注解是哪个？它主要由哪几个注解组成的？</h3><ul>
+<li>启动类上面的注解是@SpringBootApplication，它也是 Spring Boot 的核心注解，主要组合包含了以下 3 个注解：<ul>
+<li>@SpringBootConfiguration：组合了 @Configuration 注解，实现配置文件的功能。</li>
+<li>@EnableAutoConfiguration：打开自动配置的功能，也可以关闭某个自动配置的选项， 例如：<code>java 如关闭数据源自动配置功能： @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })。</code></li>
+<li>@ComponentScan：Spring组件扫描。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Spring-Boot-支持哪些日志框架？推荐和默认的日志框架是哪个？"><a href="#Spring-Boot-支持哪些日志框架？推荐和默认的日志框架是哪个？" class="headerlink" title="Spring Boot 支持哪些日志框架？推荐和默认的日志框架是哪个？"></a>Spring Boot 支持哪些日志框架？推荐和默认的日志框架是哪个？</h3><ul>
+<li>Spring Boot 支持 Java Util Logging, Log4j2, Lockback 作为日志框架，如果你使用 Starters 启动器，Spring Boot 将使用 Logback 作为默认日志框架，但是不管是那种日志框架他都支持将配置文件输出到控制台或者文件中。</li>
+</ul>
+<h3 id="SpringBoot-Starter的工作原理"><a href="#SpringBoot-Starter的工作原理" class="headerlink" title="SpringBoot Starter的工作原理"></a>SpringBoot Starter的工作原理</h3><ul>
+<li><code>我个人理解SpringBoot就是由各种Starter组合起来的，我们自己也可以开发Starter</code></li>
+<li>在sprinBoot启动时由@SpringBootApplication注解会自动去maven中读取每个starter中的spring.factories文件,该文件里配置了所有需要被创建spring容器中的bean，并且进行自动配置把bean注入SpringContext中 //（SpringContext是Spring的配置文件）</li>
+</ul>
+<h3 id="Spring-Boot-2-X-有什么新特性？与-1-X-有什么区别？"><a href="#Spring-Boot-2-X-有什么新特性？与-1-X-有什么区别？" class="headerlink" title="Spring Boot 2.X 有什么新特性？与 1.X 有什么区别？"></a>Spring Boot 2.X 有什么新特性？与 1.X 有什么区别？</h3><ul>
+<li>配置变更</li>
+<li>JDK 版本升级</li>
+<li>第三方类库升级</li>
+<li>响应式 Spring 编程支持</li>
+<li>HTTP/2 支持</li>
+<li>配置属性绑定</li>
+<li>更多改进与加强</li>
+</ul>
+<h3 id="SpringBoot支持什么前端模板，"><a href="#SpringBoot支持什么前端模板，" class="headerlink" title="SpringBoot支持什么前端模板，"></a>SpringBoot支持什么前端模板，</h3><ul>
+<li>thymeleaf，freemarker，jsp，官方不推荐JSP会有限制</li>
+</ul>
+<h3 id="SpringBoot的缺点"><a href="#SpringBoot的缺点" class="headerlink" title="SpringBoot的缺点"></a>SpringBoot的缺点</h3><p>尽管 Spring Boot 有很多优点，但它仍然有一些缺点需要牢记：</p>
+<ul>
+<li>由于不用自己做的配置，<mark>报错时很难定位</mark>。</li>
+<li>缺乏控制。 Spring Boot 会<mark>创建大量未使用的依赖项，导致部署文件很大</mark>；</li>
+<li>将遗留或现有 Spring 项目转换为 Spring Boot 应用程序的复杂且耗时的过程；</li>
+<li>不适合大型项目。 尽管它非常适合使用微服务，但许多开发人员声称 Spring Boot 不适合构建单体应用程序。</li>
+</ul>
+<h3 id="运行-Spring-Boot-有哪几种方式？"><a href="#运行-Spring-Boot-有哪几种方式？" class="headerlink" title="运行 Spring Boot 有哪几种方式？"></a>运行 Spring Boot 有哪几种方式？</h3><ol>
+<li>打包用命令或者放到容器中运行</li>
+<li>用 Maven/ Gradle 插件运行</li>
+<li>直接执行 main 方法运行</li>
+</ol>
+<h3 id="Spring-Boot-需要独立的容器运行吗？"><a href="#Spring-Boot-需要独立的容器运行吗？" class="headerlink" title="Spring Boot 需要独立的容器运行吗？"></a>Spring Boot 需要独立的容器运行吗？</h3><ul>
+<li>可以不需要，内置了 Tomcat/ Jetty 等容器。</li>
+</ul>
+<h3 id="开启-Spring-Boot-特性有哪几种方式？"><a href="#开启-Spring-Boot-特性有哪几种方式？" class="headerlink" title="开启 Spring Boot 特性有哪几种方式？"></a>开启 Spring Boot 特性有哪几种方式？</h3><h4 id="1-继承spring-boot-starter-parent项目"><a href="#1-继承spring-boot-starter-parent项目" class="headerlink" title="1. 继承spring-boot-starter-parent项目"></a>1. 继承spring-boot-starter-parent项目</h4><parent>
+    <groupid>org.springframework.boot</groupid>
+    <artifactid>spring-boot-starter-parent</artifactid>
+    <version>2.2.6.RELEASE</version>
+</parent>
+
+<p>这个时候再导入我们需要的springboot starter时，就可以忽略版本号：</p>
+<dependencies>
+    <dependency>
+        <groupid>org.springframework.boot</groupid>
+        <artifactid>spring-boot-starter</artifactid>
+    </dependency>
+</dependencies>
+
+<h4 id="2-导入spring-boot-dependencies项目依赖"><a href="#2-导入spring-boot-dependencies项目依赖" class="headerlink" title="2. 导入spring-boot-dependencies项目依赖"></a>2. 导入spring-boot-dependencies项目依赖</h4><dependencymanagement>
+    <dependencies>
+      <dependency>
+        <groupid>org.springframework.boot</groupid>
+        <artifactid>spring-boot-dependencies</artifactid>
+        <version>1.5.4.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+</dependencymanagement>
+
+<p>这个时候再导入我们需要的springboot starter时，就可以忽略版本号：</p>
+<dependencies>
+    <dependency>
+        <groupid>org.springframework.boot</groupid>
+        <artifactid>spring-boot-starter</artifactid>
+    </dependency>
+</dependencies>
+
+<h3 id="SpringBoot-实现热部署有哪几种方式？"><a href="#SpringBoot-实现热部署有哪几种方式？" class="headerlink" title="SpringBoot 实现热部署有哪几种方式？"></a>SpringBoot 实现热部署有哪几种方式？</h3><ul>
+<li>热部署就是可以不用重新运行SpringBoot项目可以实现操作后台代码自动更新到以运行的项目中</li>
+<li>主要有两种方式：<ul>
+<li>Spring Loaded</li>
+<li>Spring-boot-devtools</li>
+</ul>
+</li>
+</ul>
+<h3 id="SpringBoot事务的使用"><a href="#SpringBoot事务的使用" class="headerlink" title="SpringBoot事务的使用"></a>SpringBoot事务的使用</h3><ul>
+<li>SpringBoot的事务很简单，首先使用注解@EnableTransactionManagement开启事务之后，然后在Service方法上添加注解@Transactional便可。</li>
+</ul>
+<h3 id="Async异步调用方法"><a href="#Async异步调用方法" class="headerlink" title="Async异步调用方法"></a>Async异步调用方法</h3><ul>
+<li>在SpringBoot中使用异步调用是很简单的，只需要在方法上使用@Async注解即可实现方法的异步调用。 注意：需要在启动类加入**@EnableAsync<strong>使异步调用</strong>@Async**注解生效。</li>
+</ul>
+<h3 id="如何在-Spring-Boot-启动的时候运行一些特定的代码？"><a href="#如何在-Spring-Boot-启动的时候运行一些特定的代码？" class="headerlink" title="如何在 Spring Boot 启动的时候运行一些特定的代码？"></a>如何在 Spring Boot 启动的时候运行一些特定的代码？</h3><p>可以实现接口 ApplicationRunner 或者 CommandLineRunner，这两个接口实现方式一样，它们都只提供了一个 run 方法</p>
+<h4 id="1-ApplicationRunner"><a href="#1-ApplicationRunner" class="headerlink" title="1. ApplicationRunner"></a>1. ApplicationRunner</h4><ul>
+<li>在项目中，可能会遇到这样一个问题：在项目启动完成之后，紧接着执行一段代码。<br>在SpringBoot中，提供了一个接口：ApplicationRunner。该接口中，只有一个run方法，他执行的时机是：spring容器启动完成之后，就会紧接着执行这个接口实现类的run方法。</li>
+<li>实现了ApplicationRunner接口的类，并重写run方法，在springBoot项目启动后就是调用执行一次run方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestImplApplicationRunner</span> <span class="keyword">implements</span> <span class="title class_">ApplicationRunner</span> {</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">        System.out.println(<span class="string">"测试ApplicationRunner接口1"</span>);</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>@Component注解<br>这个实现类，要注入到spring容器中，这里使用了@Component注解；<br>在同一个项目中，可以定义多个ApplicationRunner的实现类，他们的执行顺序通过注解@Order注解或者再实现Ordered接口来实现。</p>
+</li>
+<li><p>run方法的参数：ApplicationArguments可以获取到当前项目执行的命令参数。（比如把这个项目打成jar执行的时候，带的参数可以通过ApplicationArguments获取到）；由于该方法是在容器启动完成之后，才执行的，所以，这里可以从spring容器中拿到其他已经注入的bean。</p>
+</li>
+<li><p>@Order注解<br>如果有多个实现类，而你需要他们按一定顺序执行的话，可以在实现类上加上@Order注解。@Order(value=整数值)。SpringBoot会按照@Order中的value值从小到大依次执行。<br>@order，使用注解方式使bean的加载顺序得到控制,@Order标记定义了组件的加载顺序，值越小拥有越高的优先级，可为负数。值越小，越先被加载。</p>
+</li>
+<li><p>@Order(-1)优先于@Order(0)<br>@Order(1)优先于@Order(2)</p>
+</li>
+</ul>
+<h4 id="2-CommandLineRunner"><a href="#2-CommandLineRunner" class="headerlink" title="2. CommandLineRunner"></a>2. CommandLineRunner</h4><p><strong>背景</strong></p>
+<p>项目启动之前，预先加载数据。比如，权限容器、特殊用户数据等。通常我们可以使用监听器、事件来操作。但是，springboot提供了一个简单的方式来实现此类需求，即，CommandLineRunner。</p>
+<p>先了解一下这个类</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.core.Ordered;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Interface used to indicate that a bean should &lt;em&gt;run&lt;/em&gt; when it is contained within</span></span><br><span class="line"><span class="comment"> * a {<span class="doctag">@link</span> SpringApplication}. Multiple {<span class="doctag">@link</span> CommandLineRunner} beans can be defined</span></span><br><span class="line"><span class="comment"> * within the same application context and can be ordered using the {<span class="doctag">@link</span> Ordered}</span></span><br><span class="line"><span class="comment"> * interface or {<span class="doctag">@link</span> Order <span class="doctag">@Order</span>} annotation.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * If you need access to {<span class="doctag">@link</span> ApplicationArguments} instead of the raw String array</span></span><br><span class="line"><span class="comment"> * consider using {<span class="doctag">@link</span> ApplicationRunner}.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Dave Syer</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> ApplicationRunner</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CommandLineRunner</span> {</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Callback used to run the bean.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> args incoming main method arguments</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception on error</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception;</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>文档中，我们可以知道以下几点。</p>
+<ul>
+<li>这是一个接口，用户可以自定义实现该接口，具体实现run方法</li>
+<li>任何在上下文容器之内的bean都可以实现run方法</li>
+<li>如果在上下文中，存在多个该接口实现类，可以通过@order注解，指定加载顺序</li>
+</ul>
+<p>所以我们基本上大概已经了解了这个接口的作用以及用法。</p>
+<p><strong>案例说明</strong><br>分别定义一个数据加载类MyStartupRunner1，排序为2；另一个数据加载类MyStartupRunner2,排序为1。看看它们记载数据的顺序。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(value = 2)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyStartupRunner1</span> <span class="keyword">implements</span> <span class="title class_">CommandLineRunner</span>{</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">       System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;服务启动执行，执行加载数据等操作 MyStartupRunner1 order 2 &lt;&lt;&lt;&lt;"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(value = 1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyStartupRunner2</span> <span class="keyword">implements</span> <span class="title class_">CommandLineRunner</span> {</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">   		System.out.println(<span class="string">"&gt;&gt;&gt;&gt;服务启动执行，执行加载数据等操作 MyStartupRunner2 order 1 &lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span>);</span><br><span class="line">   	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="Spring-Boot-有哪几种读取配置的方式？"><a href="#Spring-Boot-有哪几种读取配置的方式？" class="headerlink" title="Spring Boot 有哪几种读取配置的方式？"></a>Spring Boot 有哪几种读取配置的方式？</h3><ul>
+<li>Spring Boot 可以通过 @PropertySource,@Value,@Environment, @ConfigurationPropertie注解来绑定变量</li>
+</ul>
+<h3 id="什么是-JavaConfig？"><a href="#什么是-JavaConfig？" class="headerlink" title="什么是 JavaConfig？"></a>什么是 JavaConfig？</h3><ul>
+<li>Spring JavaConfig 是 Spring 社区的产品，Spring 3.0引入了他，它提供了配置 Spring IOC 容器的纯Java 方法。因此它有助于避免使用 XML 配置。使用 JavaConfig 的优点在于：<ul>
+<li>面向对象的配置。由于配置被定义为 JavaConfig 中的类，因此用户可以充分利用 Java 中的面向对象功能。一个配置类可以继承另一个，重写它的@Bean 方法等。</li>
+<li>减少或消除 XML 配置。基于依赖注入原则的外化配置的好处已被证明。但是，许多开发人员不希望在 XML 和 Java 之间来回切换。JavaConfig 为开发人员提供了一种纯 Java 方法来配置与 XML 配置概念相似的 Spring 容器。从技术角度来讲，只使用 JavaConfig 配置类来配置容器是可行的，但实际上很多人认为将JavaConfig 与 XML 混合匹配是理想的。</li>
+<li>类型安全和重构友好。JavaConfig 提供了一种类型安全的方法来配置 Spring容器。由于 Java 5.0 对泛型的支持，现在可以按类型而不是按名称检索 bean，不需要任何强制转换或基于字符串的查找。</li>
+</ul>
+</li>
+<li>常用的Java config：<ul>
+<li>@Configuration：在类上打上写下此注解，表示这个类是配置类</li>
+<li>@ComponentScan：在配置类上添加 @ComponentScan 注解。该注解默认会扫描该类所在的包下所有的配置类，相当于之前的 &lt;context:component-scan &gt;。</li>
+<li>@Bean：bean的注入：相当于以前的&lt; bean id=”objectMapper” class=”org.codehaus.jackson.map.ObjectMapper” /&gt;</li>
+<li>@EnableWebMvc：相当于xml的&lt;mvc:annotation-driven &gt;</li>
+<li>@ImportResource： 相当于xml的 &lt; import resource=”applicationContext-cache.xml”&gt;</li>
+</ul>
+</li>
+</ul>
+<h3 id="SpringBoot的自动配置原理是什么"><a href="#SpringBoot的自动配置原理是什么" class="headerlink" title="SpringBoot的自动配置原理是什么"></a>SpringBoot的自动配置原理是什么</h3><ul>
+<li>主要是Spring Boot的启动类上的核心注解SpringBootApplication注解主配置类，有了这个主配置类启动时就会为SpringBoot开启一个@EnableAutoConfiguration注解自动配置功能。</li>
+<li>有了这个EnableAutoConfiguration的话就会：<ol>
+<li>从配置文件META_INF/Spring.factories加载可能用到的自动配置类</li>
+<li>去重，并将exclude和excludeName属性携带的类排除</li>
+<li>过滤，将满足条件（@Conditional）的自动配置类返回</li>
+</ol>
+</li>
+</ul>
+<h3 id="你如何理解-Spring-Boot-配置加载顺序？"><a href="#你如何理解-Spring-Boot-配置加载顺序？" class="headerlink" title="你如何理解 Spring Boot 配置加载顺序？"></a>你如何理解 Spring Boot 配置加载顺序？</h3><ul>
+<li><p>在 Spring Boot 里面，可以使用以下几种方式来加载配置。</p>
+<ul>
+<li>1.properties文件；</li>
+<li>2.YAML文件；</li>
+<li>3.系统环境变量；</li>
+<li>4.命令行参数；</li>
+<li>等等……</li>
+</ul>
+<p>常用配置文件中读取配置的结论：config配置中心 =&gt; jvm参数 =&gt; 系统环境变量 =&gt; 项目内的application-xxx.yaml =&gt; 项目内的application.yaml =&gt; bootstrap.yaml</p>
+</li>
+</ul>
+<h3 id="什么是-YAML？"><a href="#什么是-YAML？" class="headerlink" title="什么是 YAML？"></a>什么是 YAML？</h3><ul>
+<li>YAML 是一种<mark>人类可读的数据序列化语言</mark>。它通常用于配置文件。与属性文件相比，如果我们想要在配置文件中添加复杂的属性，YAML 文件就更加结构化，而且更少混淆。可以看出 YAML 具有分层配置数据。</li>
+<li>YAML 的语法比较简洁直观，特点是使用空格来表达层次结构，其最大优势在于<strong>数据结构</strong>方面的表达，所以 YAML 更多应用于<strong>编写配置文件</strong>，其文件一般以 <strong>.yml</strong> 为后缀。</li>
+</ul>
+<h3 id="YAML-配置的优势在哪里"><a href="#YAML-配置的优势在哪里" class="headerlink" title="YAML 配置的优势在哪里 ?"></a>YAML 配置的优势在哪里 ?</h3><ul>
+<li>YAML 现在可以算是非常流行的一种配置文件格式了，无论是前端还是后端，都可以见到 YAML 配置。那么 YAML 配置和传统的 properties 配置相比到底有哪些优势呢？<ul>
+<li>配置有序，在一些特殊的场景下，配置有序很关键</li>
+<li>简洁明了，他还支持数组，数组中的元素可以是基本数据类型也可以是对象</li>
+<li>相比 properties 配置文件，YAML 还有一个缺点，就是不支持 @PropertySource 注解导入自定义的 YAML 配置。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Spring-Boot-是否可以使用-XML-配置"><a href="#Spring-Boot-是否可以使用-XML-配置" class="headerlink" title="Spring Boot 是否可以使用 XML 配置 ?"></a>Spring Boot 是否可以使用 XML 配置 ?</h3><ul>
+<li>Spring Boot 推荐使用 Java 配置而非 XML 配置，但是 Spring Boot 中也可以使用 XML 配置，通过 @ImportResource 注解可以引入一个 XML 配置。</li>
+</ul>
+<h3 id="spring-boot-核心配置文件是什么？bootstrap-properties-和-application-properties-有何区别"><a href="#spring-boot-核心配置文件是什么？bootstrap-properties-和-application-properties-有何区别" class="headerlink" title="spring boot 核心配置文件是什么？bootstrap.properties 和 application.properties 有何区别 ?"></a>spring boot 核心配置文件是什么？bootstrap.properties 和 application.properties 有何区别 ?</h3><ul>
+<li>单纯做 Spring Boot 开发，可能不太容易遇到 bootstrap.properties 配置文件，但是在结合 Spring Cloud 时，这个配置就会经常遇到了，特别是在需要加载一些远程配置文件的时侯。</li>
+<li>spring boot 核心的两个配置文件：<ul>
+<li>bootstrap (. yml 或者 . properties)：boostrap 由父 ApplicationContext 加载的，比 applicaton 优先加载，配置在应用程序上下文的引导阶段生效。一般来说我们在 Spring Cloud 配置就会使用这个文件。且 boostrap 里面的属性不能被覆盖；</li>
+<li>application (. yml 或者 . properties)： 由ApplicatonContext 加载，用于 <mark>spring boot 项目的<strong>自动化配置</strong></mark>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么是-Spring-Profiles？"><a href="#什么是-Spring-Profiles？" class="headerlink" title="什么是 Spring Profiles？"></a>什么是 Spring Profiles？</h3><ul>
+<li>在项目的开发中，有些配置文件在开发、测试或者生产等不同环境中可能是不同的，例如数据库连接、redis的配置等等。那我们如何在不同环境中自动实现配置的切换呢？Spring给我们提供了profiles机制给我们提供的就是来回切换配置文件的功能</li>
+<li>Spring Profiles 允许用户根据配置文件（dev，test，prod 等）来注册 bean。因此，当应用程序在开发中运行时，只有某些 bean 可以加载，而在 PRODUCTION中，某些其他 bean 可以加载。假设我们的要求是 Swagger 文档仅适用于 QA 环境，并且禁用所有其他文档。这可以使用配置文件来完成。Spring Boot 使得使用配置文件非常简单。</li>
+</ul>
+<h3 id="SpringBoot多数据源拆分的思路"><a href="#SpringBoot多数据源拆分的思路" class="headerlink" title="SpringBoot多数据源拆分的思路"></a>SpringBoot多数据源拆分的思路</h3><ul>
+<li>先在properties配置文件中配置两个数据源，创建分包mapper，使用@ConfigurationProperties读取properties中的配置，使用@MapperScan注册到对应的mapper包中</li>
+</ul>
+<h3 id="SpringBoot多数据源事务如何管理"><a href="#SpringBoot多数据源事务如何管理" class="headerlink" title="SpringBoot多数据源事务如何管理"></a>SpringBoot多数据源事务如何管理</h3><ul>
+<li>第一种方式是在service层的@TransactionManager中使用transactionManager指定DataSourceConfig中配置的事务</li>
+<li>第二种是使用jta-atomikos实现分布式事务管理</li>
+</ul>
+<h3 id="保护-Spring-Boot-应用有哪些方法？"><a href="#保护-Spring-Boot-应用有哪些方法？" class="headerlink" title="保护 Spring Boot 应用有哪些方法？"></a>保护 Spring Boot 应用有哪些方法？</h3><ul>
+<li>在生产中使用HTTPS</li>
+<li>使用Snyk检查你的依赖关系</li>
+<li>升级到最新版本</li>
+<li>启用CSRF保护</li>
+<li>使用内容安全策略防止XSS攻击</li>
+</ul>
+<h3 id="如何实现-Spring-Boot-应用程序的安全性？"><a href="#如何实现-Spring-Boot-应用程序的安全性？" class="headerlink" title="如何实现 Spring Boot 应用程序的安全性？"></a>如何实现 Spring Boot 应用程序的安全性？</h3><ul>
+<li>为了实现 Spring Boot 的安全性，我们使用 spring-boot-starter-security 依赖项，并且必须添加安全配置。它只需要很少的代码。配置类将必须扩展WebSecurityConfigurerAdapter 并覆盖其方法。</li>
+</ul>
+<h3 id="比较一下-Spring-Security-和-Shiro-各自的优缺点"><a href="#比较一下-Spring-Security-和-Shiro-各自的优缺点" class="headerlink" title="比较一下 Spring Security 和 Shiro 各自的优缺点 ?"></a>比较一下 Spring Security 和 Shiro 各自的优缺点 ?</h3><ul>
+<li>由于 Spring Boot 官方提供了大量的非常方便的开箱即用的 Starter ，包括 Spring Security 的 Starter ，使得在 Spring Boot 中使用 Spring Security 变得更加容易，甚至只需要添加一个依赖就可以保护所有的接口，所以，如果是 Spring Boot 项目，一般选择 Spring Security 。当然这只是一个建议的组合，单纯从技术上来说，无论怎么组合，都是没有问题的。Shiro 和 Spring Security 相比，主要有如下一些特点：<ul>
+<li>Spring Security 是一个重量级的安全管理框架；Shiro 则是一个轻量级的安全管理框架</li>
+<li>Spring Security 概念复杂，配置繁琐；Shiro 概念简单、配置简单</li>
+<li>Spring Security 功能强大；Shiro 功能简单</li>
+</ul>
+</li>
+</ul>
+<h3 id="Spring-Boot-中如何解决跨域问题"><a href="#Spring-Boot-中如何解决跨域问题" class="headerlink" title="Spring Boot 中如何解决跨域问题 ?"></a>Spring Boot 中如何解决跨域问题 ?</h3><ul>
+<li>跨域可以在前端通过 JSONP 来解决，但是 JSONP 只可以发送 GET 请求，无法发送其他类型的请求，在 RESTful 风格的应用中，就显得非常鸡肋，因此我们推荐在后端通过 （CORS，Cross-origin resource sharing） 来解决跨域问题。这种解决方案并非 Spring Boot 特有的，在传统的 SSM 框架中，就可以通过 CORS 来解决跨域问题，只不过之前我们是在 XML 文件中配置 CORS ，现在可以通过实现WebMvcConfigurer接口然后重写addCorsMappings方法解决跨域问题。</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfig</span> <span class="keyword">extends</span> <span class="title class_">WebMvcConfigurerAdapter</span> {</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> {</span><br><span class="line">        registry.addMapping(<span class="string">"/**"</span>) 		<span class="comment">//可以被跨域的路径</span></span><br><span class="line">            .allowedOrigins(<span class="string">"*"</span>) 		<span class="comment">//域名的白名单</span></span><br><span class="line">            .allowedMethods(<span class="string">"*"</span>)		<span class="comment">/*"GET", "POST", "DELETE", "PUT"*/</span></span><br><span class="line">            .allowedHeaders(<span class="string">"*"</span>) 		<span class="comment">//允许所有的请求header访问，可以自定义设置任意请求头信息</span></span><br><span class="line">            .maxAge(<span class="number">3600</span>); 				<span class="comment">//这个复杂请求是预检用的，设置预检多久失效</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Spring-Boot-中的监视器是什么？"><a href="#Spring-Boot-中的监视器是什么？" class="headerlink" title="Spring Boot 中的监视器是什么？"></a>Spring Boot 中的监视器是什么？</h3><ul>
+<li>Spring boot actuator 是 spring 启动框架中的重要功能之一。Spring boot 监视器可帮助您访问生产环境中正在运行的应用程序的当前状态。有几个指标必须在生产环境中进行检查和监控。即使一些外部应用程序可能正在使用这些服务来向相关人员触发警报消息。监视器模块公开了一组可直接作为 HTTP URL 访问的REST 端点来检查状态。</li>
+</ul>
+<h3 id="如何使用-Spring-Boot-实现全局异常处理？"><a href="#如何使用-Spring-Boot-实现全局异常处理？" class="headerlink" title="如何使用 Spring Boot 实现全局异常处理？"></a>如何使用 Spring Boot 实现全局异常处理？</h3><ul>
+<li>Spring 提供了一种使用 ControllerAdvice 处理异常的非常有用的方法。 我们通过实现一个 ControlerAdvice 类，来处理控制器类抛出的所有异常。</li>
+</ul>
+<h3 id="我们如何监视所有-Spring-Boot-微服务？"><a href="#我们如何监视所有-Spring-Boot-微服务？" class="headerlink" title="我们如何监视所有 Spring Boot 微服务？"></a>我们如何监视所有 Spring Boot 微服务？</h3><ul>
+<li>Spring Boot 提供监视器端点以监控各个微服务的度量。这些端点对于获取有关应用程序的信息（如它们是否已启动）以及它们的组件（如数据库等）是否正常运行很有帮助。但是，使用监视器的一个主要缺点或困难是，我们必须单独打开应用程序的知识点以了解其状态或健康状况。想象一下涉及 50 个应用程序的微服务，管理员将不得不击中所有 50 个应用程序的执行终端。为了帮助我们处理这种情况，我们将使用位于的开源项目。 它建立在 Spring Boot Actuator 之上，它提供了一个 Web UI，使我们能够可视化多个应用程序的度量。</li>
+</ul>
+<h3 id="SpringBoot性能如何优化"><a href="#SpringBoot性能如何优化" class="headerlink" title="SpringBoot性能如何优化"></a>SpringBoot性能如何优化</h3><ul>
+<li>如果项目比较大，类比较多，不使用@SpringBootApplication，采用@Compoment指定扫包范围</li>
+<li>在项目启动时设置JVM初始内存和最大内存相同</li>
+<li>将springboot内置服务器由tomcat设置为undertow</li>
+</ul>
+<h3 id="如何重新加载-Spring-Boot-上的更改，而无需重新启动服务器？Spring-Boot项目如何热部署？"><a href="#如何重新加载-Spring-Boot-上的更改，而无需重新启动服务器？Spring-Boot项目如何热部署？" class="headerlink" title="如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？Spring Boot项目如何热部署？"></a>如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？Spring Boot项目如何热部署？</h3><ul>
+<li>这可以使用 DEV 工具来实现。通过这种依赖关系，您可以节省任何更改，嵌入式tomcat 将重新启动。Spring Boot 有一个开发工具（DevTools）模块，它有助于提高开发人员的生产力。Java 开发人员面临的一个主要挑战是将文件更改自动部署到服务器并自动重启服务器。开发人员可以重新加载 Spring Boot 上的更改，而无需重新启动服务器。这将消除每次手动部署更改的需要。Spring Boot 在发布它的第一个版本时没有这个功能。这是开发人员最需要的功能。DevTools 模块完全满足开发人员的需求。该模块将在生产环境中被禁用。它还提供 H2 数据库控制台以更好地测试应用程序。</li>
+</ul>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">复制代码</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="SpringBoot微服务中如何实现-session-共享"><a href="#SpringBoot微服务中如何实现-session-共享" class="headerlink" title="SpringBoot微服务中如何实现 session 共享 ?"></a>SpringBoot微服务中如何实现 session 共享 ?</h3><ul>
+<li>在微服务中，一个完整的项目被拆分成多个不相同的独立的服务，各个服务独立部署在不同的服务器上，各自的 session 被从物理空间上隔离开了，但是经常，我们需要在不同微服务之间共享 session ，常见的方案就是 Spring Session + Redis 来实现 session 共享。将所有微服务的 session 统一保存在 Redis 上，当各个微服务对 session 有相关的读写操作时，都去操作 Redis 上的 session 。这样就实现了 session 共享，Spring Session 基于 Spring 中的代理过滤器实现，使得 session 的同步操作对开发人员而言是透明的，非常简便。</li>
+</ul>
+<h3 id="您使用了哪些-starter-maven-依赖项？"><a href="#您使用了哪些-starter-maven-依赖项？" class="headerlink" title="您使用了哪些 starter maven 依赖项？"></a>您使用了哪些 starter maven 依赖项？</h3><ul>
+<li>使用了下面的一些依赖项<ul>
+<li>spring-boot-starter-web 嵌入tomcat和web开发需要servlet与jsp支持</li>
+<li>spring-boot-starter-data-jpa 数据库支持</li>
+<li>spring-boot-starter-data-redis redis数据库支持</li>
+<li>spring-boot-starter-data-solr solr支持</li>
+<li>mybatis-spring-boot-starter 第三方的mybatis集成starter</li>
+<li>自定义的starter(如果自己开发过就可以说出来)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Spring-Boot-中的-starter-到底是什么"><a href="#Spring-Boot-中的-starter-到底是什么" class="headerlink" title="Spring Boot 中的 starter 到底是什么 ?"></a>Spring Boot 中的 starter 到底是什么 ?</h3><ul>
+<li>首先，这个 Starter 并非什么新的技术点，基本上还是基于 Spring 已有功能来实现的。首先它提供了一个自动化配置类，一般命名为 <code>XXXAutoConfiguration</code> ，在这个配置类中通过条件注解来决定一个配置是否生效（条件注解就是 Spring 中原本就有的），然后它还会提供一系列的默认配置，也允许开发者根据实际情况自定义相关配置，然后通过类型安全的属性(spring.factories)注入将这些配置属性注入进来，新注入的属性会代替掉默认属性。正因为如此，很多第三方框架，我们只需要引入依赖就可以直接使用了。当然，开发者也可以自定义 Starter</li>
+</ul>
+<h3 id="Spring-Boot-中如何实现定时任务"><a href="#Spring-Boot-中如何实现定时任务" class="headerlink" title="Spring Boot 中如何实现定时任务 ?"></a>Spring Boot 中如何实现定时任务 ?</h3><ul>
+<li>在 Spring Boot 中使用定时任务主要有两种不同的方式，一个就是使用 Spring 中的 @Scheduled 注解，另一-个则是使用第三方框架 Quartz。</li>
+<li>使用 Spring 中的 @Scheduled 的方式主要通过 @Scheduled 注解来实现。</li>
+</ul>
+<h3 id="spring-boot-starter-parent-有什么用"><a href="#spring-boot-starter-parent-有什么用" class="headerlink" title="spring-boot-starter-parent 有什么用 ?"></a>spring-boot-starter-parent 有什么用 ?</h3><ul>
+<li>我们都知道，新创建一个 Spring Boot 项目，默认都是有 parent 的，这个 parent 就是 spring-boot-starter-parent ，spring-boot-starter-parent 主要有如下作用：<ol>
+<li>定义了 Java 编译版本为 1.8 。</li>
+<li>使用 UTF-8 格式编码。</li>
+<li>继承自 spring-boot-dependencies，这个里边定义了依赖的版本，也正是因为继承了这个依赖，所以我们在写依赖时才不需要写版本号。</li>
+<li>执行打包操作的配置。</li>
+<li>自动化的资源过滤。</li>
+<li>自动化的插件配置。</li>
+<li>针对 application.properties 和 application.yml 的资源过滤，包括通过 profile 定义的不同环境的配置文件，例如 application-dev.properties 和 application-dev.yml。</li>
+</ol>
+</li>
+<li>总结就是打包用的</li>
+</ul>
+<h3 id="SpringBoot如何实现打包"><a href="#SpringBoot如何实现打包" class="headerlink" title="SpringBoot如何实现打包"></a>SpringBoot如何实现打包</h3><ul>
+<li>进入项目目录在控制台输入mvn clean package，clean是清空已存在的项目包，package进行打包</li>
+<li>或者点击左边选项栏中的Mavne，先点击clean在点击package</li>
+</ul>
+<h3 id="Spring-Boot-打成的-jar-和普通的-jar-有什么区别"><a href="#Spring-Boot-打成的-jar-和普通的-jar-有什么区别" class="headerlink" title="Spring Boot 打成的 jar 和普通的 jar 有什么区别 ?"></a>Spring Boot 打成的 jar 和普通的 jar 有什么区别 ?</h3><ul>
+<li>Spring Boot 项目最终打包成的 jar 是可执行 jar ，这种 jar 可以直接通过 <code>java -jar xxx.jar</code> 命令来运行，这种 jar 不可以作为普通的 jar 被其他项目依赖，即使依赖了也无法使用其中的类。</li>
+<li>Spring Boot 的 jar 无法被其他项目依赖，主要还是他和普通 jar 的结构不同。普通的 jar 包，解压后直接就是包名，包里就是我们的代码，而 Spring Boot 打包成的可执行 jar 解压后，在 <code>\BOOT-INF\classes</code> 目录下才是我们的代码，因此无法被直接引用。如果非要引用，可以在 pom.xml 文件中增加配置，将 Spring Boot 项目打包成两个 jar ，一个可执行，一个可引用。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/03/interview/Spring%20Boot%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clesl9j3s002waov6d4vp6h32" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/26/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E9%99%90%E6%B5%81%E8%A7%84%E5%88%99(%E6%B5%81%E6%8E%A7%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%9B%B4%E6%8E%A5%E3%80%81%E5%85%B3%E8%81%94%E3%80%81%E9%93%BE%E8%B7%AF)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Sentinel-限流规则(流控模式：直接、关联、链路)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
