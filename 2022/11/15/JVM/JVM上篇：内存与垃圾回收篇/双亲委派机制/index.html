@@ -5,19 +5,19 @@
   
   <title>(JVM)双亲委派机制 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="双亲委派机制 Java 虚拟机对 class 文件采用的是按需加载的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是双亲委派模式，即把请求交由父类处理，它是一种任务委派模式。  工作原理  1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；">
+  <meta name="description" content="双亲委派机制Java 虚拟机对 class 文件采用的是按需加载的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是双亲委派模式，即把请求交由父类处理，它是一种任务委派模式。 工作原理 1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行； 2）如果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(JVM)双亲委派机制">
 <meta property="og:url" content="http://example.com/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="双亲委派机制 Java 虚拟机对 class 文件采用的是按需加载的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是双亲委派模式，即把请求交由父类处理，它是一种任务委派模式。  工作原理  1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；">
+<meta property="og:description" content="双亲委派机制Java 虚拟机对 class 文件采用的是按需加载的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是双亲委派模式，即把请求交由父类处理，它是一种任务委派模式。 工作原理 1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行； 2）如果">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png">
-<meta property="og:image" content="http://example.com/2022/11/15/images/image-20221115204949307.png">
-<meta property="og:image" content="http://example.com/2022/11/15/images/image-20221115205956137.png">
-<meta property="og:image" content="http://example.com/2022/11/15/images/image-20221115210219781.png">
+<meta property="og:image" content="http://example.com/images/image-20221115204949307.png">
+<meta property="og:image" content="http://example.com/images/image-20221115205956137.png">
+<meta property="og:image" content="http://example.com/images/image-20221115210219781.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/bed320014f52bb27c8f3d795b3dc3b4a.png">
-<meta property="og:image" content="http://example.com/2022/11/15/images/image-20221115212723174.png">
+<meta property="og:image" content="http://example.com/images/image-20221115212723174.png">
 <meta property="article:published_time" content="2022-11-15T13:36:11.647Z">
 <meta property="article:modified_time" content="2023-02-21T13:42:57.599Z">
 <meta property="article:author" content="其然乐衣">
@@ -125,57 +125,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="双亲委派机制"><a class="markdownIt-Anchor" href="#双亲委派机制"></a> 双亲委派机制</h1>
-<p>Java 虚拟机对 class 文件采用的是<mark>按需加载</mark>的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是<mark>双亲委派模式</mark>，即把请求交由父类处理，它是一种任务委派模式。</p>
-<h2 id="工作原理"><a class="markdownIt-Anchor" href="#工作原理"></a> <strong>工作原理</strong></h2>
-<ul>
+        <h1 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h1><p>Java 虚拟机对 class 文件采用的是<mark>按需加载</mark>的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是<mark>双亲委派模式</mark>，即把请求交由父类处理，它是一种任务委派模式。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a><strong>工作原理</strong></h2><ul>
 <li>1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；</li>
 <li>2）如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；</li>
 <li>3）<strong>如果父类加载器可以完成类加载任务，就成功返回</strong>（就不会由子类加载器去加载了），倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式。</li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png" alt="image-20200705105151258"></p>
 <p>举例：</p>
-<ol>
-<li></li>
-</ol>
-<p><img src="../../../images/image-20221115204949307.png" alt="image-20221115204949307"></p>
+<p>1. </p>
+<p><img src="/../../../images/image-20221115204949307.png" alt="image-20221115204949307"></p>
 <p>出于安全考虑，Bootstrap 启动类加载器只加载包名为 java、javax、sun 等开头的类。一看你是java开头的，引导类加载就说了。这是归我管我来加载String（核心API里的String）。因此有父类来加载后，就不会再向下委托了，所以我们new 的这个String对象就是核心API里面的String类对象，而不是我们自定义的String，因此就没有打印出自定义String里的static静态资源里的语句</p>
-<ol start="2">
-<li></li>
-</ol>
-<p><img src="../../../images/image-20221115205956137.png" alt="image-20221115205956137"></p>
+<p>2. </p>
+<p><img src="/../../../images/image-20221115205956137.png" alt="image-20221115205956137"></p>
 <p>委托到引导类加载器，它发现你这个包是jvm开头的，不归引导类加载管，就向下委托，也不归扩展类加载器管，所以最后回到系统类加载器来加载，因此最后输出结果就是系统类加载来进行的加载</p>
-<ol start="3">
-<li></li>
-</ol>
-<p><img src="../../../images/image-20221115210219781.png" alt="image-20221115210219781"></p>
+<p>3. </p>
+<p><img src="/../../../images/image-20221115210219781.png" alt="image-20221115210219781"></p>
 <p>一直往上委托，就交给到了引导类加载器，它加载了String类以后，然后就想去执行main方法，但是核心API的String里面是没有main方法的，所以就报了 <mark>错误: 在类 java.lang.String 中找不到 main 方法</mark>. 可知，根本就没有试着想去加载我们自定义的String类，完全忽略掉你了</p>
-<ol start="4">
-<li></li>
-</ol>
+<p>4. </p>
 <p>当我们加载 jdbc.jar 用于实现数据库连接的时候，首先我们需要知道的是 jdbc.jar 是基于 SPI 接口进行实现的，所以在加载的时候，会进行双亲委派，最终从根加载器中加载 SPI 核心类，然后在加载 SPI 接口类，接着在进行反向委派，通过线程上下文类加载器进行实现类 jdbc.jar 的加载。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/bed320014f52bb27c8f3d795b3dc3b4a.png" alt="image-20200705105810107"></p>
-<h2 id="优势"><a class="markdownIt-Anchor" href="#优势"></a> <strong>优势</strong></h2>
-<ul>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h2><ul>
 <li><strong>避免类的重复加载</strong></li>
-<li><strong>保护程序安全，防止核心 API 被随意篡改</strong>
-<ul>
+<li><strong>保护程序安全，防止核心 API 被随意篡改</strong><ul>
 <li>自定义类：java.lang.String</li>
 <li>自定义类：java.lang.ShkStart（报错：阻止创建 java.lang 开头的类）</li>
 </ul>
 </li>
 </ul>
-<p><img src="../../../images/image-20221115212723174.png" alt="image-20221115212723174"></p>
+<p><img src="/../../../images/image-20221115212723174.png" alt="image-20221115212723174"></p>
 <p>引导类加载器看到是 java.lang开头的，就表示这是归它管，于是就要去加载这个ShkStart类了，但直接直接给它报错了，相当于，要加载java.lang这个包，要想访问是要有权限的，现在报错就是阻止我们去直接用这个java.lang包来自定义这个ShkStart类。其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个类，加载成功的话，就会导致对引导类加载器本身造成影响，所以这里是直接把引导类加载器给整挂了。所以我们也禁止去用java.lang这样的包名去命名</p>
 <p>其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个种自定义的类，加载成功的话，但里面可能会有一些<strong>恶意代码</strong>，就可能会会对现有的项目和程序进行破坏</p>
-<h2 id="沙箱安全机制"><a class="markdownIt-Anchor" href="#沙箱安全机制"></a> <strong>沙箱安全机制</strong></h2>
-<p>自定义 String 类，但是在加载自定义 String 类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载 jdk 自带的文件（rt.jar 包中 java\lang\String.class），报错信息说没有 main 方法，就是因为加载的是 rt.jar 包中的 string 类。这样可以保证对 java 核心源代码的保护，这就是沙箱安全机制。</p>
-<h1 id=""><a class="markdownIt-Anchor" href="#"></a> </h1>
-
+<h2 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a><strong>沙箱安全机制</strong></h2><p>自定义 String 类，但是在加载自定义 String 类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载 jdk 自带的文件（rt.jar 包中 java\lang\String.class），报错信息说没有 main 方法，就是因为加载的是 rt.jar 包中的 string 类。这样可以保证对 java 核心源代码的保护，这就是沙箱安全机制。</p>
+<h1 id><a href="#" class="headerlink" title></a></h1>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="clexi3nve008uakv65kbuhn6t" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="clexi5gxr007884v63d412g1f" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
