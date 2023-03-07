@@ -5,12 +5,12 @@
   
   <title>DSL实现Bucket聚合 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类： 桶（Bucket）聚合：用来对文档做分组     •TermAggregation：按照文档字段值分组      •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组  1、DSL实现Bucket聚合我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。 类型为term类">
+  <meta name="description" content="聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类： 桶（Bucket）聚合：用来对文档做分组     •TermAggregation：按照文档字段值分组      •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组   1、DSL实现Bucket聚合 我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。 类型为ter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DSL实现Bucket聚合">
 <meta property="og:url" content="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类： 桶（Bucket）聚合：用来对文档做分组     •TermAggregation：按照文档字段值分组      •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组  1、DSL实现Bucket聚合我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。 类型为term类">
+<meta property="og:description" content="聚合（aggregations）可以实现对文档数据的统计、分析、运算。聚合常见的有三类： 桶（Bucket）聚合：用来对文档做分组     •TermAggregation：按照文档字段值分组      •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组   1、DSL实现Bucket聚合 我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。 类型为ter">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image">
@@ -53,8 +53,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -125,30 +125,25 @@
 
     •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组
 </code></pre>
-<h1 id="1、DSL实现Bucket聚合"><a href="#1、DSL实现Bucket聚合" class="headerlink" title="1、DSL实现Bucket聚合"></a><strong>1、DSL</strong>实现Bucket聚合</h1><p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
+<h1 id="1-dsl实现bucket聚合"><a class="markdownIt-Anchor" href="#1-dsl实现bucket聚合"></a> <strong>1、DSL</strong>实现Bucket聚合</h1>
+<p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
 <p>类型为term类型，DSL示例：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "size": 0,  // 设置size为0，结果中不包含文档，只包含聚合结果</span><br><span class="line">  "aggs": { // 定义聚合</span><br><span class="line">    "brandAgg": { //给聚合起个名字</span><br><span class="line">      "terms": { // 聚合的类型，按照品牌值聚合，所以选择term</span><br><span class="line">        "field": "brand", // 参与聚合的字段</span><br><span class="line">        "size": 20 // 希望获取的聚合结果数量</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="2、-Bucket聚合聚合结果排序"><a href="#2、-Bucket聚合聚合结果排序" class="headerlink" title="2、 Bucket聚合聚合结果排序"></a><strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1><p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
+<h1 id="2-bucket聚合聚合结果排序"><a class="markdownIt-Anchor" href="#2-bucket聚合聚合结果排序"></a> <strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1>
+<p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
 <p>我们可以修改结果排序方式：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能,自定义排序规则</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "size":0,</span><br><span class="line">  "aggs": {</span><br><span class="line">    "brandAgg": {</span><br><span class="line">      "terms": {</span><br><span class="line">        "field": "brand.keyword",</span><br><span class="line">        "size": 20,</span><br><span class="line">        "order": {</span><br><span class="line">          "_count": "asc"  // 按照_count升序排列</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="3、Bucket聚合限定聚合范围"><a href="#3、Bucket聚合限定聚合范围" class="headerlink" title="3、Bucket聚合限定聚合范围"></a><strong>3、Bucket</strong>聚合限定聚合范围</h1><p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h1 id="3-bucket聚合限定聚合范围"><a class="markdownIt-Anchor" href="#3-bucket聚合限定聚合范围"></a> <strong>3、Bucket</strong>聚合限定聚合范围</h1>
+<p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能，限定聚合范围</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "query": {</span><br><span class="line">    "range": {</span><br><span class="line">      "price": {</span><br><span class="line">        "lte": 200   // 只对200元以下的文档聚合</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }, </span><br><span class="line">  </span><br><span class="line">  "size":0,</span><br><span class="line">  "aggs": {</span><br><span class="line">    "brandAgg": {</span><br><span class="line">      "terms": {</span><br><span class="line">        "field": "brand.keyword",</span><br><span class="line">        "size": 20</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="4-、总结"><a href="#4-、总结" class="headerlink" title="4 、总结"></a><strong>4 、总结</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="4-总结"><a class="markdownIt-Anchor" href="#4-总结"></a> <strong>4 、总结</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clesnkvr2002w0gv6ej6d9g6n" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clexi3nt3002iakv61qprgch4" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -224,8 +219,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
 

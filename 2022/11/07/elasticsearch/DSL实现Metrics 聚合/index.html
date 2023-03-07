@@ -52,8 +52,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -124,13 +124,12 @@
     我们可以利用stats聚合：
 </code></pre>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 嵌套聚合metric</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "size":0,</span><br><span class="line">  "aggs": {</span><br><span class="line">    "brandAgg": {</span><br><span class="line">      "terms": {</span><br><span class="line">        "field": "brand.keyword",</span><br><span class="line">        "size": 20,</span><br><span class="line">        "order": {</span><br><span class="line">          "scoreAgg.avg": "desc"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "aggs": {                 // 是brands聚合的子聚合，也就是分组后对每组分别计算</span><br><span class="line">        "scoreAgg": {           // 聚合名称</span><br><span class="line">          "stats": {            // 聚合类型，这里stats可以计算min、max、avg等</span><br><span class="line">            "field": "score"    // 聚合字段，这里是score</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c4d58b87fb14cec86b17ff1adba0b35~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c4d58b87fb14cec86b17ff1adba0b35~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clesnkvr400320gv66cbdgipk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clexi3nt5002pakv66exma8q7" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -206,8 +205,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
 

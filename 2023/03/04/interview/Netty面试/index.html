@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Netty面试题 | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 基本概念  1、什么是 Netty？ Netty 是由 JBOSS 提供的一个 Java 开源框架。Netty 提供异步的、基于事件驱动的网络应用程序框架，用以快速开发高性能、高可靠性的网络 IO 程序,是目前最流行的 NIO 框架，Netty 在互联网领域、大数据分布式计算领域、游戏行业、通信行业等获得了广泛的应用，知名的 Elasticsearch 、Dubbo 框架内部都采用了 Net">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty面试题">
+<meta property="og:url" content="http://example.com/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="1 基本概念  1、什么是 Netty？ Netty 是由 JBOSS 提供的一个 Java 开源框架。Netty 提供异步的、基于事件驱动的网络应用程序框架，用以快速开发高性能、高可靠性的网络 IO 程序,是目前最流行的 NIO 框架，Netty 在互联网领域、大数据分布式计算领域、游戏行业、通信行业等获得了广泛的应用，知名的 Elasticsearch 、Dubbo 框架内部都采用了 Net">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/03/04/images/image-20230304103657806.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1d2358f8e6484e0db5a574a4701960bf.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/993566982c15443eb242cf628adc4d9b.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1ed6fd9de8a64328806c5225edfc6bdb.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/6e67b9fbe3fa41e5b087e648a74c3af3.png#pic_center">
+<meta property="article:published_time" content="2023-03-04T02:25:13.345Z">
+<meta property="article:modified_time" content="2023-03-04T03:21:59.901Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="面试题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/03/04/images/image-20230304103657806.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-interview/Netty面试" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/" class="article-date">
+  <time class="post-time" datetime="2023-03-04T02:25:13.345Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">04</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Netty面试题
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-基本概念"><a class="markdownIt-Anchor" href="#1-基本概念"></a> 1 基本概念</h1>
+<h2 id="1-什么是-netty"><a class="markdownIt-Anchor" href="#1-什么是-netty"></a> 1、什么是 Netty？</h2>
+<p>Netty 是由 JBOSS 提供的一个 Java 开源框架。Netty 提供异步的、基于事件驱动的网络应用程序框架，用以快速开发高性能、高可靠性的网络 IO 程序,是目前最流行的 NIO 框架，Netty 在互联网领域、大数据分布式计算领域、游戏行业、通信行业等获得了广泛的应用，知名的 Elasticsearch 、Dubbo 框架内部都采用了 Netty。</p>
+<h2 id="2-netty-的优势"><a class="markdownIt-Anchor" href="#2-netty-的优势"></a> 2、Netty 的优势？</h2>
+<ul>
+<li>
+<p>使用简单：封闭了 Java 原生 NIO 类库繁琐的 API，使用起来更加高效；</p>
+</li>
+<li>
+<p>功能强大：预置多种编码能力，支持多种主流协议。同时通过 ChannelHandler 可以进行灵活的拓展，支持很强的定制能力；</p>
+</li>
+<li>
+<p>高性能：与其它业界主流 NIO 框架相比，Netty 综合更优。主要体现在吞吐量更高、延迟更低、减少资源消耗以及最小化不必要的内存复制；</p>
+</li>
+<li>
+<p>社区活跃与稳定：版本更新周期短，BUG 修复速度快，让开发者可以专注业务本身。</p>
+</li>
+</ul>
+<h2 id="3-netty-有什么特点"><a class="markdownIt-Anchor" href="#3-netty-有什么特点"></a> 3、Netty 有什么特点？</h2>
+<ul>
+<li>
+<p><strong>高并发</strong>：Netty 是一款基于 NIO（Nonblocking I/O，非阻塞IO）开发的网络通信框架。</p>
+</li>
+<li>
+<p><strong>传输快</strong>：Netty 使用零拷贝特性，尽量减少不必要的内存拷贝，实现更快的传输效率。</p>
+</li>
+<li>
+<p><strong>封装好</strong>：Netty 封装了 NIO 操作的很多细节，提供易于使用的 API。</p>
+</li>
+</ul>
+<h2 id="4-netty-有哪些应用场景"><a class="markdownIt-Anchor" href="#4-netty-有哪些应用场景"></a> 4、Netty 有哪些应用场景？</h2>
+<p>理论上来说，NIO 可以做的事情，Netty 都可以做并且更好。Netty 主要用来做网络通信：</p>
+<ul>
+<li>RPC 框架的网络通信工具；</li>
+<li>实现一个 HTTP 服务器；</li>
+<li>实现一个即时通讯系统；</li>
+<li>实现消息推送系统。</li>
+</ul>
+<h2 id="5-netty-的高性能体现在"><a class="markdownIt-Anchor" href="#5-netty-的高性能体现在"></a> 5、Netty 的高性能体现在？</h2>
+<ul>
+<li><strong>IO 线程模型</strong>：同步非阻塞；</li>
+<li><strong>零拷贝</strong>：尽量做到不必要的内存拷贝：</li>
+<li><strong>内存池设计</strong>：使用直接内存，并且可重复利用；</li>
+<li><strong>串行化处理读写</strong>：避免使用锁带来的额外开销；</li>
+<li><strong>高性能序列化协议</strong>：支持 protobuf 等高性能序列化协议。</li>
+</ul>
+<h2 id="6-相比原生-nio-的优势"><a class="markdownIt-Anchor" href="#6-相比原生-nio-的优势"></a> 6、相比原生 NIO 的优势？</h2>
+<p>1）易用性：Netty 在 NIO 基础上封装了更加人性化的 API，大大降低开发人员的学习成本，同时还提供了很多开箱即用的工具。</p>
+<p>2）稳定性：Netty 修复了 Java NIO 较多已知问题，如 select 空转导致 CPU 100%，TCP 断线重连，Keep-alive 检测等问题。</p>
+<p>3）高性能：对象池复用（通过对象复用避免频繁创建和销毁带来的开销）和零拷贝技术。</p>
+<h2 id="7-netty-和-tomcat-的区别"><a class="markdownIt-Anchor" href="#7-netty-和-tomcat-的区别"></a> 7、Netty 和 Tomcat 的区别？</h2>
+<p>Netty 和 Tomcat 最大的区别在于对通信协议的支持：</p>
+<ul>
+<li>
+<p>Tomcat 是基于 Http 协议的，本质是一个基于 http 协议的 web 容器，而 Netty 不仅支持 HTTP，还能通过编程自定义各种协议，通过 codec 自定义编码/解码字节流，完成数据传输。</p>
+</li>
+<li>
+<p>Tomcat 需要遵循 Servlet 规范（HTTP 协议的请求-响应模型），而 Netty 不需要受到 Servlet 规范约束，可以发挥 NIO 最大特性。</p>
+</li>
+</ul>
+<h2 id="8-bio-nio-aio-分别是什么"><a class="markdownIt-Anchor" href="#8-bio-nio-aio-分别是什么"></a> 8、BIO. NIO. AIO 分别是什么？</h2>
+<ul>
+<li>
+<p><strong>BIO（同步阻塞 IO）</strong><br>
+服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK 1.4 以前的唯一选择，但程序直观简单易理解。</p>
+</li>
+<li>
+<p><strong>NIO（同步非阻塞 IO）</strong><br>
+服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 IO 请求时才启动一个线程进行处理。NIO 方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK 1.4 开始支持。</p>
+</li>
+<li>
+<p><strong>AIO（异步非阻塞 IO）</strong><br>
+服务器实现模式为一个有效请求一个线程，客户端的 IO 请求都是由 OS 先完成了再通知服务器应用去启动线程进行处理。 AIO 方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用 OS 参与并发操作，编程比较复杂，JDK 1.7 开始支持。</p>
+</li>
+</ul>
+<h2 id="9-select-poll-epoll-的区别"><a class="markdownIt-Anchor" href="#9-select-poll-epoll-的区别"></a> 9、Select、Poll、Epoll 的区别？</h2>
+<p>ref</p>
+<h2 id="10-什么是-reactor-模型"><a class="markdownIt-Anchor" href="#10-什么是-reactor-模型"></a> 10、什么是 Reactor 模型？</h2>
+<h1 id="2-架构组件"><a class="markdownIt-Anchor" href="#2-架构组件"></a> 2 架构组件</h1>
+<h2 id="1-netty-有哪些核心组件"><a class="markdownIt-Anchor" href="#1-netty-有哪些核心组件"></a> 1、Netty 有哪些核心组件？</h2>
+<ul>
+<li>
+<p><strong>Channel</strong><br>
+基础的 IO 操作，如绑定、连接、读写等都依赖于底层网络传输所提供的原语，在 Java 的网络编程中，基础核心类是 Socket，而 Netty 的 Channel 提供了一组 API，极大地简化了直接与 Socket 进行操作的复杂性，并且 Channel 是很多类的父类，如 EmbeddedChannel、LocalServerChannel、NioDatagramChannel、NioSctpChannel、NioSocketChannel 等。</p>
+</li>
+<li>
+<p><strong>EventLoop</strong><br>
+EventLoop 定义了处理在连接过程中发生的事件的核心抽象。</p>
+</li>
+</ul>
+<p>​		说白了，EventLoop 的主要作用实际就是负责监听网络事件并调用事件处理器进行相关 IO 操作的处理。</p>
+<p>​		<strong>那 Channel 和 EventLoop 直接有啥联系呢？</strong></p>
+<p>​		Channel 为 Netty 网络操作（读写等操作）抽象类，EventLoop 负责处理注册到其上的 Channel 处理 IO 操作，两者配合参与 IO 操作。</p>
+<ul>
+<li>
+<p><strong>ChannelFuture</strong></p>
+<ul>
+<li>由于 Netty 是异步非阻塞的，所有的 IO 操作也都为异步的，我们不能立刻得到操作是否执行成功，因此 Netty 提供 ChannelFuture 接口，使用其 addListener() 方法注册一个 ChannelFutureListener，当操作执行成功或者失败时，监听就会自动触发返回结果。</li>
+<li>并且，我们还可以通过 ChannelFuture 的 channel() 方法获取关联的Channel，甚至使用 sync() 方法让异步的操作变成同步的。</li>
+</ul>
+</li>
+<li>
+<p><strong>ChannelHandler 和 ChannelPipeline</strong></p>
+<ul>
+<li>从应用开发者看来，ChannelHandler 是最重要的组件，其中存放用来处理进站和出站数据的用户逻辑。ChannelHandler 的方法被网络事件触发，可以用于几乎任何类型的操作，如将数据从一种格式转换为另一种格式或处理抛出的异常。如其子接口ChannelInboundHandler，接受进站的事件和数据以便被用户定义的逻辑处理，或者当响应所连接的客户端时刷新ChannelInboundHandler的数据。</li>
+<li>ChannelPipeline为ChannelHandler 链提供了一个容器并定义了用于沿着链传播入站和出站事件流的 API。当创建 Channel 时，会自动创建一个附属的 ChannelPipeline。</li>
+</ul>
+</li>
+<li>
+<p><strong>Bootstrap 和 ServerBootstrap</strong><br>
+Netty 的引导类应用程序网络层配置提供容器，其涉及将进程绑定到给定端口或连接一个进程到在指定主机上指定端口上运行的另一进程。引导类分为客户端引导 Bootstrap 和服务端引导 ServerBootstrap。</p>
+</li>
+</ul>
+<h2 id="2-什么是-eventloop-和-eventloopgroup"><a class="markdownIt-Anchor" href="#2-什么是-eventloop-和-eventloopgroup"></a> 2、什么是 EventLoop 和 EventLoopGroup？</h2>
+<p>EventLoopGroup 包含多个 EventLoop（每一个 EventLoop 通常内部包含一个线程），上面我们已经说了 EventLoop 的主要作用实际就是负责监听网络事件并调用事件处理器进行相关 I/O 操作的处理。</p>
+<p>并且 EventLoop 处理的 I/O 事件都将在它专有的 Thread 上被处理，即 Thread 和 EventLoop 属于 1 : 1 的关系，从而保证线程安全。</p>
+<p>上图是一个服务端对 EventLoopGroup 使用的大致模块图，其中 Boss EventloopGroup 用于接收连接，Worker EventloopGroup 用于具体的处理（消息的读写以及其他逻辑处理）。</p>
+<p><img src="../../images/image-20230304103657806.png" alt="image-20230304103657806"></p>
+<p>从上图可以看出：当客户端通过 connect 方法连接服务端时，bossGroup 处理客户端连接请求。当客户端处理完成后，会将这个连接提交给 workerGroup 来处理，然后 workerGroup 负责处理其 IO 相关操作。</p>
+<h2 id="3-说说-netty-的线程模型"><a class="markdownIt-Anchor" href="#3-说说-netty-的线程模型"></a> 3、说说 Netty 的线程模型？</h2>
+<p>Netty 通过 Reactor 模型基于多路复用器接收并处理用户请求，内部实现了两个线程池，boss 线程池和 work 线程池，其中 boss 线程池的线程负责处理请求的 accept 事件，当接收到 accept 事件的请求时，把对应的 socket 封装到一个 NioSocketChannel 中，并交给 work 线程池，其中 work 线程池负责请求的 read 和 write 事件，由对应的 Handler 处理。</p>
+<ul>
+<li><strong>单线程模型</strong><br>
+所有 IO 操作都由一个线程完成，即多路复用、事件分发和处理都是在一个 Reactor 线程上完成的。既要接收客户端的连接请求，向服务端发起连接，又要发送、读取请求或应答、响应消息。一个 NIO 线程同时处理成百上千的链路，性能上无法支撑，速度慢，若线程进入死循环，整个程序不可用，对于高负载、高并发的应用场景不合适。</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.eventGroup既用于处理客户端连接，又负责具体的处理。 </span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">eventGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>); </span><br><span class="line"><span class="comment">//2.创建服务端启动引导/辅助类：</span></span><br><span class="line">ServerBootstrap <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">boobtstrap.group(eventGroup, eventGroup) </span><br><span class="line"><span class="comment">//......</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><strong>多线程模型</strong><br>
+有一个 NIO 线程（Acceptor） 只负责监听服务端，接收客户端的 TCP 连接请求；NIO 线程池负责网络 IO 的操作，即消息的读取、解码、编码和发送；1 个 NIO 线程可以同时处理 N 条链路，但是 1 个链路只对应 1 个 NIO 线程，这是为了防止发生并发操作问题。但在并发百万客户端连接或需要安全认证时，一个 Acceptor 线程可能会存在性能不足问题。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/1d2358f8e6484e0db5a574a4701960bf.png#pic_center" alt="在这里插入图片描述"></p>
+<p>对于代码：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理</span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>();</span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：</span></span><br><span class="line">    ServerBootstrap <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup) </span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li><strong>主从多线程模型</strong><br>
+Acceptor 线程用于绑定监听端口，接收客户端连接，将 SocketChannel 从主线程池的 Reactor 线程的多路复用器上移除，重新注册到 Sub 线程池的线程上，用于处理 IO 的读写等操作，从而保证主 Reactor 只负责接入认证、握手等操作。如果多线程模型无法满足你的需求的时候，可以考虑使用主从多线程模型 。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/993566982c15443eb242cf628adc4d9b.png#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理</span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>();</span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>();</span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：</span></span><br><span class="line">    ServerBootstrap <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup) </span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="4-netty-服务端的启动过程"><a class="markdownIt-Anchor" href="#4-netty-服务端的启动过程"></a> 4、Netty 服务端的启动过程？</h2>
+<p>先来看一段代码实现：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理 </span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>); </span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(); </span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：ServerBootstrap </span></span><br><span class="line">    <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup) <span class="comment">// (非必备)打印日志 </span></span><br><span class="line">    .handler(<span class="keyword">new</span> <span class="title class_">LoggingHandler</span>(LogLevel.INFO)) <span class="comment">// 4.指定 IO 模型 </span></span><br><span class="line">    .channel(NioServerSocketChannel.class) </span><br><span class="line">    .childHandler(<span class="keyword">new</span> <span class="title class_">ChannelInitializer</span>&lt;SocketChannel&gt;() {</span><br><span class="line">         <span class="meta">@Override</span> </span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initChannel</span><span class="params">(SocketChannel ch)</span> {</span><br><span class="line">             <span class="type">ChannelPipeline</span> <span class="variable">p</span> <span class="operator">=</span> ch.pipeline(); </span><br><span class="line">             <span class="comment">//5.可以自定义客户端消息的业务处理逻辑 </span></span><br><span class="line">             p.addLast(<span class="keyword">new</span> <span class="title class_">HelloServerHandler</span>()); </span><br><span class="line">        } </span><br><span class="line">    }); </span><br><span class="line">    <span class="comment">// 6.绑定端口,调用 sync 方法阻塞知道绑定完成 </span></span><br><span class="line">    <span class="type">ChannelFuture</span> <span class="variable">f</span> <span class="operator">=</span> b.bind(port).sync();</span><br><span class="line">    <span class="comment">// 7.阻塞等待直到服务器Channel关闭(closeFuture()方法获取Channel 的CloseFuture对象,然后调用sync()方法) </span></span><br><span class="line">    f.channel().closeFuture().sync(); </span><br><span class="line">} <span class="keyword">finally</span> { </span><br><span class="line">    <span class="comment">//8.优雅关闭相关线程组资源 </span></span><br><span class="line">    bossGroup.shutdownGracefully(); </span><br><span class="line">    workerGroup.shutdownGracefully(); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="3-具体实现"><a class="markdownIt-Anchor" href="#3-具体实现"></a> 3 具体实现</h1>
+<h2 id="1-netty-的无锁化体现在哪里"><a class="markdownIt-Anchor" href="#1-netty-的无锁化体现在哪里"></a> 1、Netty 的无锁化体现在哪里？</h2>
+<p>Netty 采用了串行无锁化设计，在 IO 线程内部进行串行操作，避免多线程竞争导致的性能下降。表面上看，串行化设计似乎 CPU 利用率不高，并发程度不够。但是，通过调整 NIO 线程池的线程参数，可以同时启动多个串行化的线程并行运行，这种局部无锁化的串行线程设计相比一个队列-多个工作线程模型性能更优。</p>
+<p><img src="https://img-blog.csdnimg.cn/1ed6fd9de8a64328806c5225edfc6bdb.png#pic_center" alt="在这里插入图片描述"></p>
+<p>Netty 的 NioEventLoop 读取到消息后，直接调用 ChannelPipeline 的 fireChannelRead（Object msg），只要用户不主动切换线程，一直会由 NioEventLoop 调用到用户的 handler，期间不进行线程切换，这种串行化处理方式避免了多线程操作导致的锁竞争，从性能角度看是最优的。</p>
+<h2 id="2-如何解决-jdk-epoll-空轮询问题"><a class="markdownIt-Anchor" href="#2-如何解决-jdk-epoll-空轮询问题"></a> 2、如何解决 JDK epoll 空轮询问题？</h2>
+<p>这个 BUG 是指 Java 的 NIO 在 Linux 下进行 selector.select() 时，本来如果轮询的结果为空并且不调用 wakeup 方法的话，这个 selector.select() 应该是一直阻塞的，但是 Java 却会打破阻塞，继续执行，导致程序无限空转，造成 CPU 使用率 100%。（这个问题只存在 Linux 是因为 Linux 的 NIO 是基于 epoll 实现的，而 Java 实现的 epoll 存在 BUG，windows 下 NIO 基于 poll 就不存在此问题）</p>
+<p><strong>Netty 的解决方案：</strong></p>
+<p>为 Selector 的 select 操作设置超时时间，同时定义可以跳出阻塞的四种情况：</p>
+<ul>
+<li>有事件发生</li>
+<li>wakeup</li>
+<li>超时</li>
+<li>空轮询 BUG</li>
+</ul>
+<p>而前两种返回值不为 0，可以跳出循环，超时有时间戳记录，所以每次空轮询，有专门的计数器进行 +1，如果空轮询的次数超过了 512 次（默认），就认为其触发了空轮询 BUG。</p>
+<p>当触发 BUG 后，Netty 直接重建一个 Selector，将原来的 Channel 重新注册到新的 Selector 上，并将旧的 Selector 关掉。</p>
+<h2 id="3-什么是拆包和粘包"><a class="markdownIt-Anchor" href="#3-什么是拆包和粘包"></a> 3、什么是拆包和粘包？</h2>
+<p>TCP 是一个面向流的传输协议，所谓流，就是没有界限的一串数据。TCP 底层并不了解上层业务数据的具体含义，它会根据 TCP 缓冲区的实际情况进行包的划分，所以在业务上认为，一个完整的包可能会被 TCP 拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送，这就是所谓的 TCP <strong>粘包和拆包问题</strong>。</p>
+<p>粘包和拆包是 TCP 网络编程中不可避免的，无论是服务端还是客户端，当我们读取或者发送消息的时候，都需要考虑 TCP 底层的粘包/拆包机制。</p>
+<p><img src="https://img-blog.csdnimg.cn/6e67b9fbe3fa41e5b087e648a74c3af3.png#pic_center" alt="在这里插入图片描述"></p>
+<p>数据从发送方到接收方需要经过操作系统的缓冲区，而造成粘包和拆包的主要原因就在这个缓冲区上。粘包可以理解为缓冲区数据堆积，导致多个请求数据粘在一起，而拆包可以理解为发送的数据大于缓冲区，进行拆分处理。</p>
+<p>详细来说，造成粘包和拆包的原因主要有以下三个：</p>
+<p>1）应用程序 write 写入的字节大小大于套接口发送缓冲区大小；</p>
+<p>2）进行 MSS 大小的 TCP 分段；</p>
+<p>3）以太网帧的 payload 大于 MTU 进行 IP 分片。</p>
+<h2 id="4-拆包粘包的解决方案"><a class="markdownIt-Anchor" href="#4-拆包粘包的解决方案"></a> 4、拆包粘包的解决方案？</h2>
+<p>由于底层的 TCP 无法理解上层的业务数据，所以在底层是无法保证数据包不被拆分和重组的，这个问题只能通过上层的应用协议栈设计来解决，根据业界的主流协议可以归纳出以下解决方案：</p>
+<p>1）消息长度固定，累计读取到长度和为定长LEN的报文后，就认为读取到了一个完整的信息。</p>
+<p>2）将特殊的分隔符作为消息的结束标志，如回车换行符。</p>
+<p>3）通过在消息头中定义长度字段来标识消息的总长度。</p>
+<h2 id="5-netty-如何解决拆包粘包"><a class="markdownIt-Anchor" href="#5-netty-如何解决拆包粘包"></a> 5、Netty 如何解决拆包粘包？</h2>
+<p>相比粘包，拆包问题比较简单，用户可以自己定义自己的编码器进行处理，Netty 并没有提供相应的组件。对于粘包的问题，代码比较繁琐，Netty 提供了 4 种解码器来解决，分别如下：</p>
+<ul>
+<li><strong>固定长度的拆包器</strong>（FixedLengthFrameDecoder），每个应用层数据包的都拆分成都是固定长度的大小；</li>
+<li><strong>行拆包器</strong>（LineBasedFrameDecoder），每个应用层数据包都以换行符作为分隔符，进行分割拆分；</li>
+<li>**分隔符拆包器(**DelimiterBasedFrameDecoder），每个应用层数据包，都通过自定义的分隔符，进行分割拆分；</li>
+<li><strong>基于数据包长度的拆包器</strong>（LengthFieldBasedFrameDecoder），将应用层数据包的长度，作为接收端应用层数据包的拆分依据。按照应用层数据包的大小，拆包。这个拆包器，有一个要求，就是应用层协议中包含数据包的长度。</li>
+</ul>
+<h2 id="6-netty-零拷贝体现在哪里"><a class="markdownIt-Anchor" href="#6-netty-零拷贝体现在哪里"></a> 6、Netty 零拷贝体现在哪里？</h2>
+<p>Zero-copy 就是在操作数据时, 不需要将数据 buffer从 一个内存区域拷贝到另一个内存区域。 少了一次内存的拷贝，CPU 效率就得到的提升。</p>
+<ul>
+<li>
+<p>接收和发送 ByteBuffer 采用 DIRECT BUFFERS，使用堆外直接内存进行 Socket 读写，不需要进行字节缓冲区的二次拷贝；</p>
+</li>
+<li>
+<p>提供了组合 Buffer 对象，可以聚合多个 ByteBuffer 对象，用户可以像操作一个 Buffer 那样方便的对组合 Buffer 进行操作；</p>
+</li>
+<li>
+<p>文件传输采用了 transferTo 方法，它可以直接将文件缓冲区的数据发送到目标 Channel，避免了传统通过循环 write 方式导致的内存拷贝问题。</p>
+</li>
+</ul>
+<p><strong>和操作系统上的零拷贝的区别？</strong></p>
+<p>Netty 的 Zero-copy 完全是在用户态（Java 应用层）的, 更多的偏向于优化数据操作。而在 OS 层面上的 Zero-copy 通常指避免在用户态（User-space）与内核态（Kernel-space）之间来回拷贝数据。</p>
+<h2 id="7-tcp-的长连接和短连接"><a class="markdownIt-Anchor" href="#7-tcp-的长连接和短连接"></a> 7、TCP 的长连接和短连接？</h2>
+<p>我们知道 TCP 在进行读写之前，server 与 client 之间必须提前建立一个连接。建立连接的过程，需要我们常说的三次握手，释放/关闭连接的话需要四次挥手。这个过程是比较消耗网络资源并且有时间延迟的。</p>
+<p>所谓，短连接说的就是 server 端 与 client 端建立连接之后，读写完成之后就关闭掉连接，如果下一次再要互相发送消息，就要重新连接。短连接的有点很明显，就是管理和实现都比较简单，缺点也很明显，每一次的读写都要建立连接必然会带来大量网络资源的消耗，并且连接的建立也需要耗费时间。</p>
+<p>长连接说的就是 client 向 server 双方建立连接之后，即使 client 与 server 完成一次读写，它们之间的连接并不会主动关闭，后续的读写操作会继续使用这个连接。长连接的可以省去较多的 TCP 建立和关闭的操作，降低对网络资源的依赖，节约时间。对于频繁请求资源的客户来说，非常适用长连接。</p>
+<h2 id="8-netty-长连接-心跳机制了解么"><a class="markdownIt-Anchor" href="#8-netty-长连接-心跳机制了解么"></a> 8、Netty 长连接、心跳机制了解么？</h2>
+<p>在 TCP 保持长连接的过程中，可能会出现断网等网络异常出现，异常发生的时候， client 与 server 之间如果没有交互的话，它们是无法发现对方已经掉线的。为了解决这个问题, 我们就需要引入<strong>心跳机制</strong>。</p>
+<p>心跳机制的工作原理是: 在 client 与 server 之间在一定时间内没有数据交互（即处于 idle 状态）时, 客户端或服务器就会发送一个特殊的数据包给对方, 当接收方收到这个数据报文后, 也立即发送一个特殊的数据报文, 回应发送方, 此即一个 <font color="red">PING-PONG</font> 交互。所以, 当某一端收到心跳消息后, 就知道了对方仍然在线, 这就确保 TCP 连接的有效性。</p>
+<p>TCP 实际上自带的就有长连接选项，本身是也有心跳包机制，也就是 TCP 的选项：<font color="red">SO_KEEPALIVE</font>。但 TCP 协议层面的长连接灵活性不够，所以，一般情况下我们都是在应用层协议上实现自定义心跳机制的，也就是在 Netty 层面通过编码实现。通过 Netty 实现心跳机制的话，核心类是 IdleStateHandler 。</p>
+<h2 id="9-说说-netty-的对象池技术"><a class="markdownIt-Anchor" href="#9-说说-netty-的对象池技术"></a> 9、说说 Netty 的对象池技术？</h2>
+<p>对象池其实就是缓存一些对象从而避免大量创建同一个类型的对象，类似线程池的概念。对象池缓存了一些已经创建好的对象，避免需要时才创建对象，同时限制了实例的个数。池化技术最终要的就是重复的使用池内已经创建的对象。从上面的内容就可以看出对象池适用于以下几个场景：</p>
+<ul>
+<li>创建对象的开销大；</li>
+<li>会创建大量的实例；</li>
+<li>限制一些资源的使用。</li>
+</ul>
+<p>Netty 自己实现了一套轻量级的对象池。在 Netty 中，通常会有多个 IO 线程独立工作（基于 NioEventLoop 实现）。每个 IO 线程轮询单独的 Selector 实例来检索 IO 事件，并在 IO 来临时开始处理。最常见的 IO 操作就是读写，具体到 NIO 就是从内核缓冲区拷贝数据到用户缓冲区或者从用户缓冲区拷贝数据到内核缓冲区。这里会涉及到大量的创建和回收 Buffer， Netty 对 Buffer 进行了池化从而降低系统开销。</p>
+<p>ref</p>
+<h2 id="10-有哪些序列化协议"><a class="markdownIt-Anchor" href="#10-有哪些序列化协议"></a> 10 有哪些序列化协议？</h2>
+<p><strong>序列化</strong>（编码）是将对象序列化为二进制形式（字节数组），主要用于网络传输、数据持久化等；而反序列化（解码）则是将从网络、磁盘等读取的字节数组还原成原始对象，主要用于网络传输对象的解码，以便完成远程调用。</p>
+<p>影响序列化性能的关键因素：序列化后的码流大小（网络带宽的占用）、序列化的性能（CPU资源占用）；是否支持跨语言（异构系统的对接和开发语言切换）。</p>
+<p><strong>目前几种主流协议</strong></p>
+<ul>
+<li>
+<p><strong>Java 默认提供的序列化</strong><br>
+无法跨语言、序列化后的码流太大、序列化的性能差。</p>
+</li>
+<li>
+<p><strong>XML</strong><br>
+优点是人机可读性好，可指定元素或特性的名称。缺点：序列化数据只包含数据本身以及类的结构，不包括类型标识和程序集信息；只能序列化公共属性和字段；不能序列化方法；文件庞大，文件格式复杂，传输占带宽。适用场景：当做配置文件存储数据，实时数据转换。</p>
+</li>
+<li>
+<p><strong>JSON</strong><br>
+是一种轻量级的数据交换格式，优点：兼容性高、数据格式比较简单，易于读写、序列化后数据较小，可扩展性好，兼容性好、与XML相比，其协议比较简单，解析速度比较快。缺点：数据的描述性比XML差、不适合性能要求为ms级别的情况、额外空间开销比较大。适用场景（可替代ＸＭＬ）：跨防火墙访问、可调式性要求高、基于Web browser的Ajax请求、传输数据量相对小，实时性要求相对低（例如秒级别）的服务。</p>
+</li>
+<li>
+<p><strong>Fastjson</strong><br>
+采用一种“假定有序快速匹配”的算法。优点：接口简单易用、目前java语言中最快的json库。缺点：过于注重快，而偏离了“标准”及功能性、代码质量不高，文档不全。适用场景：协议交互、Web输出、Android客户端。</p>
+</li>
+<li>
+<p><strong>Thrift</strong><br>
+不仅是序列化协议，还是一个RPC框架。优点：序列化后的体积小, 速度快、支持多种语言和丰富的数据类型、对于数据字段的增删具有较强的兼容性、支持二进制压缩编码。缺点：使用者较少、跨防火墙访问时，不安全、不具有可读性，调试代码时相对困难、不能与其他传输层协议共同使用（例如HTTP）、无法支持向持久层直接读写数据，即不适合做数据持久化序列化协议。适用场景：分布式系统的RPC解决方案。</p>
+</li>
+<li>
+<p><strong>Avro</strong><br>
+Hadoop的一个子项目，解决了JSON的冗长和没有IDL的问题。优点：支持丰富的数据类型、简单的动态语言结合功能、具有自我描述属性、提高了数据解析速度、快速可压缩的二进制数据形式、可以实现远程过程调用RPC、支持跨编程语言实现。缺点：对于习惯于静态类型语言的用户不直观。适用场景：在Hadoop中做Hive、Pig和MapReduce的持久化数据格式。</p>
+</li>
+<li>
+<p><strong>Protobuf</strong><br>
+将数据结构以.proto文件进行描述，通过代码生成工具可以生成对应数据结构的POJO对象和Protobuf相关的方法和属性。优点：序列化后码流小，性能高、结构化数据存储格式（XML JSON等）、通过标识字段的顺序，可以实现协议的前向兼容、结构化的文档更容易管理和维护。缺点：需要依赖于工具生成代码、支持的语言相对较少，官方只支持Java 、C++ 、python。适用场景：对性能要求高的RPC调用、具有良好的跨防火墙的访问属性、适合应用层对象的持久化。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/" data-id="clexi3nto003yakv64kf9ev1n" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/03/05/interview/Elasticsearch%E9%9D%A2%E8%AF%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/03/interview/Spring%20Boot%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Spring Boot面试题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

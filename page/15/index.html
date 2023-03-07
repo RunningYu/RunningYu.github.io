@@ -45,8 +45,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -76,6 +76,216 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-elasticsearch/自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:24:15.702Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动补全"><a class="markdownIt-Anchor" href="#自动补全"></a> 自动补全：</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p>要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-pinyin" title="GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.">GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.</a></p>
+<h2 id="用初始化的拼音分词器进行分词"><a class="markdownIt-Anchor" href="#用初始化的拼音分词器进行分词"></a> 用初始化的拼音分词器进行分词：</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20550059a1414aeba684b69474dbd00f~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p>为了实现得到的分词有中文也有拼音，我门需要</p>
+<h1 id="自定义拼音分词器中文-拼音"><a class="markdownIt-Anchor" href="#自定义拼音分词器中文-拼音"></a> 自定义拼音分词器（中文 + 拼音）</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54b101fabd25411aada38a0d4bf707f7~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97823625e9e74820b861218b2a14d764~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">{</span><br><span class="line">  "settings": {</span><br><span class="line">    "analysis": {</span><br><span class="line">      "analyzer": { </span><br><span class="line">        "my_analyzer": { </span><br><span class="line">          "tokenizer": "ik_max_word",</span><br><span class="line">          "filter": "py"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "filter": {</span><br><span class="line">        "py": { </span><br><span class="line">          "type": "pinyin",</span><br><span class="line">          "keep_full_pinyin": false,</span><br><span class="line">          "keep_joined_full_pinyin": true,</span><br><span class="line">          "keep_original": true,</span><br><span class="line">          "limit_first_letter_length": 16,</span><br><span class="line">          "remove_duplicated_term": true,</span><br><span class="line">          "none_chinese_pinyin_tokenize": false</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "name":{</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "my_analyzer"</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="测试方式1"><a class="markdownIt-Anchor" href="#测试方式1"></a> 测试方式1：</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image" alt=""><img src="" alt="" title="点击并拖拽以移动"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式1</span><br><span class="line">POST /test/_analyze</span><br><span class="line">{</span><br><span class="line">  "text": ["如家酒店还不错"],</span><br><span class="line">  "analyzer": "my_analyzer"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段-后搜索"><a class="markdownIt-Anchor" href="#测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段-后搜索"></a> <strong>测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b83a41a21ac44b8ba1bb160d05dfb0ad~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式2</span><br><span class="line">#先添加两个 拼音相同的 字段， 后搜索</span><br><span class="line">POST /test/_doc/1</span><br><span class="line">{</span><br><span class="line">  "id": 1,</span><br><span class="line">  "name": "狮子"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">POST /test/_doc/2</span><br><span class="line">{</span><br><span class="line">  "id": 2,</span><br><span class="line">  "name": "虱子"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">GET /test/_search</span><br><span class="line">{</span><br><span class="line">  "query": {</span><br><span class="line">    "match": {</span><br><span class="line">      "name": "shizi"</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项：</h1>
+<pre><code>    问题：当我用自定义的拼音分词器去搜索一段又狮子的中文时，却也搜出了库里面的的虱子，因为“狮子”和“虱子”有着相同的拼音，而拼音分词器就是可以将相同拼音的中文都搜出来
+</code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a08f04fd4074946bc7e792a8722dc6d~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<pre><code> ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f77f4d4864aa4be4b88d785d04561117~tplv-k3u1fbpfcp-zoom-1.image)![](&lt;&gt; "点击并拖拽以移动")
+</code></pre>
+<p>解决：</p>
+<pre><code>  为了避免搜索到同拼音字，搜索时不要用拼音分词器
+</code></pre>
+<p>​</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2687fedd3364fabbefedb2c55c6289a~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><strong>删库，重设置和重建索引库，再重新测试上面的测试方式2就可以了</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5c99ca9c04e4707a474d6acbaaf1aa9~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><strong>代码：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//删除库</span><br><span class="line">DELETE /test</span><br><span class="line"></span><br><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">{</span><br><span class="line">  "settings": {</span><br><span class="line">    "analysis": {</span><br><span class="line">      "analyzer": { </span><br><span class="line">        "my_analyzer": { </span><br><span class="line">          "tokenizer": "ik_max_word",</span><br><span class="line">          "filter": "py"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "filter": {</span><br><span class="line">        "py": { </span><br><span class="line">          "type": "pinyin",</span><br><span class="line">          "keep_full_pinyin": false,</span><br><span class="line">          "keep_joined_full_pinyin": true,</span><br><span class="line">          "keep_original": true,</span><br><span class="line">          "limit_first_letter_length": 16,</span><br><span class="line">          "remove_duplicated_term": true,</span><br><span class="line">          "none_chinese_pinyin_tokenize": false</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "name":{</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "my_analyzer",</span><br><span class="line">        "search_analyzer": "ik_smart"</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>测试（和上面的测试方式2一样）：</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ab02a4a307ec45f888e27b2cda2a30f6~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p>总结：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4aabf0e2fdbe468b9434e69eda633850~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h1 id="dsl实现自动补全查询"><a class="markdownIt-Anchor" href="#dsl实现自动补全查询"></a> DSL实现自动补全查询：</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/125784439?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22125784439%22%2C%22source%22%3A%22QRLYLETITBE%22%7D&amp;ctrtid=H8ap4" title="(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客">(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clexi3ntm003sakv63sa90vzm" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/RestClient-多条件聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:22:10.641Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/">RestClient-多条件聚合</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/706377c31d5a4e9b8c4e7f6d2e0c52be~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p>在对应的service层里面写：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/327ec6a5daef4bfd9070a4611fae8b4c~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6e9cf3f32805433283776afded9729d7~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p>HotelService里的代码如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public Map&lt;String, List&lt;String&gt;&gt; filters()  {</span><br><span class="line"></span><br><span class="line">        try {</span><br><span class="line">            //1. 准备Request</span><br><span class="line">            SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">            //2. 准备DSL</span><br><span class="line">            //2.1 设置size</span><br><span class="line">            request.source().size(0);</span><br><span class="line">            //2.2 聚合</span><br><span class="line">            buildAggretgaion(request);</span><br><span class="line"></span><br><span class="line">            //3. 发出请求</span><br><span class="line">            SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">            //4. 解析结果</span><br><span class="line">            Map&lt;String,List&lt;String&gt;&gt; result = new HashMap&lt;String, List&lt;String&gt;&gt;();</span><br><span class="line">            Aggregations aggregations = response.getAggregations();</span><br><span class="line">            //4.1 根据品牌（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; brandList = getAddByName(aggregations,"brandAgg");</span><br><span class="line">            result.put("品牌",brandList); //放入map</span><br><span class="line">            //4.2 根据城市（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; cityList = getAddByName(aggregations,"cityList");</span><br><span class="line">            result.put("城市",cityList); //放入map</span><br><span class="line">            //4.3 根据星级（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; starList = getAddByName(aggregations,"starList");</span><br><span class="line">            result.put("星级",starList); //放入map</span><br><span class="line"></span><br><span class="line">            return result;</span><br><span class="line"></span><br><span class="line">        } catch (IOException e) {</span><br><span class="line">            throw new RuntimeException();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    //(抽取出来的) 根据名称获取品牌的结果</span><br><span class="line">    private List&lt;String&gt; getAddByName(Aggregations aggregations, String aggName) {</span><br><span class="line">        //4.1 根据聚合名称获取聚合结果</span><br><span class="line">        Terms brandTerms = aggregations.get(aggName);</span><br><span class="line">        //4.2 获取buckets</span><br><span class="line">        List&lt;? extends Terms.Bucket&gt; buckets = brandTerms.getBuckets();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        List&lt;String&gt; brandList = new ArrayList&lt;String&gt;();</span><br><span class="line">        for(Terms.Bucket bucket : buckets){</span><br><span class="line">            //4.4 获取key</span><br><span class="line">            String key = bucket.getKeyAsString();</span><br><span class="line">            brandList.add(key);</span><br><span class="line"></span><br><span class="line">            System.out.println(key);</span><br><span class="line">        }</span><br><span class="line">        return brandList;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    //抽取出来的 聚合</span><br><span class="line">    private void buildAggretgaion(SearchRequest request) {</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms("brandAgg")</span><br><span class="line">                .field("brand")</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms("cityAgg")</span><br><span class="line">                .field("city")</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms("starAgg")</span><br><span class="line">                .field("starName.keyword")</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" data-id="clexi3ntb0038akv6aa13dgk4" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/RestAPI实现聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:18:02.256Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/">RestAPI实现聚合</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/570bde95e90d44658df8da0c790f6586~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d513b0401de41e39c3596a888c18b17~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d0e18347de8447ef8b03ecf8d9f6ef10~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    void testAggredation() throws IOException {</span><br><span class="line">        //1. 准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">        //2. 准备DSL</span><br><span class="line">        //2.1 设置size</span><br><span class="line">        request.source().size(0);</span><br><span class="line">        //2.2 聚合</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms("brandAgg")</span><br><span class="line">                .field("brand")</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        //3. 发出请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line">        //4. 解析结果</span><br><span class="line">        Aggregations aggregations = response.getAggregations();</span><br><span class="line">        //4.1 根据聚合名称获取聚合结果</span><br><span class="line">        Terms brandTerms = aggregations.get("brandAgg");</span><br><span class="line">        //4.2 获取buckets</span><br><span class="line">        List&lt;? extends Terms.Bucket&gt; buckets = brandTerms.getBuckets();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        for(Terms.Bucket bucket : buckets){</span><br><span class="line">            //4.4 获取key</span><br><span class="line">            String key = bucket.getKeyAsString();</span><br><span class="line"></span><br><span class="line">            System.out.println(key);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>ps:</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94d360f6ab8944398727066af9c9263e~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%81%9A%E5%90%88/" data-id="clexi3nt8002wakv6hpaien9d" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-elasticsearch/DSL实现Metrics 聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -119,13 +329,12 @@
     我们可以利用stats聚合：
 </code></pre>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 嵌套聚合metric</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "size":0,</span><br><span class="line">  "aggs": {</span><br><span class="line">    "brandAgg": {</span><br><span class="line">      "terms": {</span><br><span class="line">        "field": "brand.keyword",</span><br><span class="line">        "size": 20,</span><br><span class="line">        "order": {</span><br><span class="line">          "scoreAgg.avg": "desc"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "aggs": {                 // 是brands聚合的子聚合，也就是分组后对每组分别计算</span><br><span class="line">        "scoreAgg": {           // 聚合名称</span><br><span class="line">          "stats": {            // 聚合类型，这里stats可以计算min、max、avg等</span><br><span class="line">            "field": "score"    // 聚合字段，这里是score</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c4d58b87fb14cec86b17ff1adba0b35~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c4d58b87fb14cec86b17ff1adba0b35~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clesnkvr400320gv66cbdgipk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Metrics%20%E8%81%9A%E5%90%88/" data-id="clexi3nt5002pakv66exma8q7" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -175,37 +384,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-基本原理："><a href="#1-基本原理：" class="headerlink" title="1. 基本原理："></a>1. 基本原理：</h1><ol>
-<li><p><img src="/../../images/image-20221106162517079.png" alt="image-20221106162517079"></p>
+        <h1 id="1-基本原理"><a class="markdownIt-Anchor" href="#1-基本原理"></a> 1. 基本原理：</h1>
+<ol>
+<li>
+<p><img src="../../images/image-20221106162517079.png" alt="image-20221106162517079"></p>
 </li>
-<li><p><img src="/../../images/image-20221106163157990.png" alt="image-20221106163157990"></p>
+<li>
+<p><img src="../../images/image-20221106163157990.png" alt="image-20221106163157990"></p>
 </li>
-<li><p><img src="/../../images/image-20221106163919356.png" alt="image-20221106163919356"></p>
+<li>
+<p><img src="../../images/image-20221106163919356.png" alt="image-20221106163919356"></p>
 </li>
 </ol>
-<h1 id="2-web权限方案-用户认证（设置用户名密码）"><a href="#2-web权限方案-用户认证（设置用户名密码）" class="headerlink" title="2 .web权限方案-用户认证（设置用户名密码）"></a>2 .web权限方案-用户认证（设置用户名密码）</h1><ol>
-<li><p>设置登录用户名和密码</p>
+<h1 id="2-web权限方案-用户认证设置用户名密码"><a class="markdownIt-Anchor" href="#2-web权限方案-用户认证设置用户名密码"></a> 2 .web权限方案-用户认证（设置用户名密码）</h1>
+<ol>
+<li>
+<p>设置登录用户名和密码</p>
 <ol>
 <li>方式一：通过配置文件</li>
 </ol>
-<p>   properties为例<br>   </p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.port=<span class="number">8111</span></span><br><span class="line">spring.security.user.name=atguigu</span><br><span class="line">spring.security.user.password=atguigu</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>properties为例</p>
+   <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.port=<span class="number">8111</span></span><br><span class="line">spring.security.user.name=atguigu</span><br><span class="line">spring.security.user.password=atguigu</span><br></pre></td></tr></tbody></table></figure>
 <ol start="2">
-<li><p>方式二：通过配置类</p>
+<li>
+<p>方式二：通过配置类</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfig</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> {</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">        <span class="type">BCryptPasswordEncoder</span> <span class="variable">passwordEncoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">        <span class="comment">// 加密</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> passwordEncoder.encode(<span class="string">"123"</span>);</span><br><span class="line">        auth.inMemoryAuthentication().withUser(<span class="string">"lucy"</span>).password(password).roles(<span class="string">"admin"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    PasswordEncoder <span class="title function_">password</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-
 </li>
-<li><p>方式三：自定义编写实体类</p>
+<li>
+<p>方式三：自定义编写实体类</p>
 <p>在验证过程中，它会首先去找你的配置文件、配置类，如果发现其中有用户名和密码，那么它就会去找这个用户名和密码。但如果没有设置，它就会去找一个接口<strong>UserDetailsService</strong>，到这个接口你可以找通过表单提交或是查数据库或是其它方式设置的密码，然后去验证</p>
 <p>到UserDetailsService中找到你返回的用户名和密码和权限</p>
 <p>第一步：创建配置类，设置使用哪个userDetailsService实现类</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.springsecurity.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfigTest</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> {</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDetailsService userDetailsService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">        auth.userDetailsService(userDetailsService).passwordEncoder(password());</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    PasswordEncoder <span class="title function_">password</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
 <p>第二步：编写实现类，返回User对象，User对象有用户名、密码和操作权限</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.springsecurity.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.AuthorityUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UsernameNotFoundException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/6</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyUserDetailsService</span> <span class="keyword">implements</span> <span class="title class_">UserDetailsService</span> {</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDetails <span class="title function_">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException {</span><br><span class="line">        List&lt;GrantedAuthority&gt; auths = AuthorityUtils.commaSeparatedStringToAuthorityList(<span class="string">"role"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">"mary"</span>, <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>().encode(<span class="string">"123"</span>), auths);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <p><strong>引用场景：</strong></p>
 <p>一般实际开发中用的比较多的是第三种方式</p>
 <p>第一、二种方式：比如要超级管理员的时候，就只能用admin这个用户来登录，这个时候就而已用第一或第二种方式来配置。</p>
@@ -214,64 +426,68 @@
 </ol>
 </li>
 </ol>
-<h1 id="3-自定义登录页面："><a href="#3-自定义登录页面：" class="headerlink" title="3.  自定义登录页面："></a><strong>3.  自定义登录页面：</strong></h1><p><img src="/../../images/image-20221109105645708.png" alt="image-20221109105645708"></p>
-<h1 id="4-用户授权（基于权限-访问控制）"><a href="#4-用户授权（基于权限-访问控制）" class="headerlink" title="4. 用户授权（基于权限  访问控制）"></a>4. 用户授权（基于权限  访问控制）</h1><p><img src="/../../images/image-20221109110430894.png" alt="image-20221109110430894"></p>
-<p><img src="/../../images/image-20221109112842988.png" alt="image-20221109112842988"></p>
-<p><img src="/../../images/image-20221109112951312.png" alt="image-20221109112951312"></p>
-<p><img src="/../../images/image-20221109112800334.png" alt="image-20221109112800334"></p>
-<h1 id="5-自定义403页面"><a href="#5-自定义403页面" class="headerlink" title="5. 自定义403页面"></a>5. 自定义403页面</h1><p><img src="/../../images/image-20221109113727226.png" alt="image-20221109113727226"></p>
-<p><img src="/../../images/image-20221109113838590.png" alt="image-20221109113838590"></p>
-<h1 id="6-用户授权（注解使用）"><a href="#6-用户授权（注解使用）" class="headerlink" title="6. 用户授权（注解使用）"></a>6. 用户授权（注解使用）</h1><p><img src="/../../images/image-20221109113927963.png" alt="image-20221109113927963"></p>
-<p><img src="/../../images/image-20221109114120340.png" alt="image-20221109114120340"></p>
-<p><img src="/../../images/image-20221109115959853.png" alt="image-20221109115959853"></p>
-<p><img src="/../../images/image-20221109120027475.png" alt="image-20221109120027475"></p>
-<p><img src="/../../images/image-20221109120049901.png" alt="image-20221109120049901"></p>
-<p><img src="/../../images/image-20221109120114195.png" alt="image-20221109120114195"></p>
-<h1 id="7-web权限方案—用户注销"><a href="#7-web权限方案—用户注销" class="headerlink" title="7.web权限方案—用户注销"></a>7.web权限方案—用户注销</h1><p><img src="/../../images/image-20221109172751444.png" alt="image-20221109172751444"></p>
-<h1 id="8"><a href="#8" class="headerlink" title="**8. **"></a>**8. **</h1><h1 id="8-1-web权限方案—自动登录（原理分析）"><a href="#8-1-web权限方案—自动登录（原理分析）" class="headerlink" title="8.1 web权限方案—自动登录（原理分析）"></a><strong>8.1 web权限方案—自动登录</strong>（原理分析）</h1><p>对应的教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=17&amp;vd_source=746b9336d739b80b11820809545b6604">17-尚硅谷-SpringSecurity-web权限方案-自动登录（原理分析）_哔哩哔哩_bilibili</a></p>
-<p><img src="/../../images/image-20221109184845677.png" alt="image-20221109184845677"></p>
-<h2 id="8-1-1"><a href="#8-1-1" class="headerlink" title="8.1.1"></a>8.1.1</h2><p><img src="/../../images/image-20221109181738239.png" alt="image-20221109181738239"></p>
+<h1 id="3-自定义登录页面"><a class="markdownIt-Anchor" href="#3-自定义登录页面"></a> <strong>3.  自定义登录页面：</strong></h1>
+<p><img src="../../images/image-20221109105645708.png" alt="image-20221109105645708"></p>
+<h1 id="4-用户授权基于权限-访问控制"><a class="markdownIt-Anchor" href="#4-用户授权基于权限-访问控制"></a> 4. 用户授权（基于权限  访问控制）</h1>
+<p><img src="../../images/image-20221109110430894.png" alt="image-20221109110430894"></p>
+<p><img src="../../images/image-20221109112842988.png" alt="image-20221109112842988"></p>
+<p><img src="../../images/image-20221109112951312.png" alt="image-20221109112951312"></p>
+<p><img src="../../images/image-20221109112800334.png" alt="image-20221109112800334"></p>
+<h1 id="5-自定义403页面"><a class="markdownIt-Anchor" href="#5-自定义403页面"></a> 5. 自定义403页面</h1>
+<p><img src="../../images/image-20221109113727226.png" alt="image-20221109113727226"></p>
+<p><img src="../../images/image-20221109113838590.png" alt="image-20221109113838590"></p>
+<h1 id="6-用户授权注解使用"><a class="markdownIt-Anchor" href="#6-用户授权注解使用"></a> 6. 用户授权（注解使用）</h1>
+<p><img src="../../images/image-20221109113927963.png" alt="image-20221109113927963"></p>
+<p><img src="../../images/image-20221109114120340.png" alt="image-20221109114120340"></p>
+<p><img src="../../images/image-20221109115959853.png" alt="image-20221109115959853"></p>
+<p><img src="../../images/image-20221109120027475.png" alt="image-20221109120027475"></p>
+<p><img src="../../images/image-20221109120049901.png" alt="image-20221109120049901"></p>
+<p><img src="../../images/image-20221109120114195.png" alt="image-20221109120114195"></p>
+<h1 id="7web权限方案用户注销"><a class="markdownIt-Anchor" href="#7web权限方案用户注销"></a> 7.web权限方案—用户注销</h1>
+<p><img src="../../images/image-20221109172751444.png" alt="image-20221109172751444"></p>
+<h1 id="8"><a class="markdownIt-Anchor" href="#8"></a> **8. **</h1>
+<h1 id="81-web权限方案自动登录原理分析"><a class="markdownIt-Anchor" href="#81-web权限方案自动登录原理分析"></a> <strong>8.1 web权限方案—自动登录</strong>（原理分析）</h1>
+<p>对应的教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=17&amp;vd_source=746b9336d739b80b11820809545b6604">17-尚硅谷-SpringSecurity-web权限方案-自动登录（原理分析）_哔哩哔哩_bilibili</a></p>
+<p><img src="../../images/image-20221109184845677.png" alt="image-20221109184845677"></p>
+<h2 id="811"><a class="markdownIt-Anchor" href="#811"></a> 8.1.1</h2>
+<p><img src="../../images/image-20221109181738239.png" alt="image-20221109181738239"></p>
 <p>上图红框过程的原理和源码如下：</p>
 <p>通过<strong>UsernamePasswordAuthenticationFilter</strong>来获取用户名和密码，之后验证验证成功后，在调用父类<strong>AbsxtractAuthenticationProcessingFilter</strong>里的<strong>successfulAuthentication</strong>方法，然后<strong>successfulAuthentication</strong>方法里面有<strong>RememberMeServices</strong>对象，在里面先用<strong>TokenRepository</strong>生成Token，然后把值放到浏览器Cookies中，并且用<strong>JdbcTokenRepositoryImpl</strong>里面封装的方法把生成的Token值写到数据库中</p>
-<p><img src="/../../images/image-20221109180628066.png" alt="image-20221109180628066"></p>
-<p><img src="/../../images/image-20221109180549961.png" alt="image-20221109180549961"></p>
-<p><img src="/../../images/image-20221109181409113.png" alt="image-20221109181409113"></p>
-<h2 id="8-1-2"><a href="#8-1-2" class="headerlink" title="8.1.2"></a>8.1.2</h2><p><img src="/../../images/image-20221109182017954.png" alt="image-20221109182017954"></p>
+<p><img src="../../images/image-20221109180628066.png" alt="image-20221109180628066"></p>
+<p><img src="../../images/image-20221109180549961.png" alt="image-20221109180549961"></p>
+<p><img src="../../images/image-20221109181409113.png" alt="image-20221109181409113"></p>
+<h2 id="812"><a class="markdownIt-Anchor" href="#812"></a> 8.1.2</h2>
+<p><img src="../../images/image-20221109182017954.png" alt="image-20221109182017954"></p>
 <p>浏览器发送请求，就会调用这个<strong>RememberMeAuthenticationFilter</strong>过滤器，里面有<strong>dofilter</strong>里面的<strong>RememberMeServices</strong>对象的<strong>autoLogin</strong>方法进行自动登录</p>
-<p><img src="/../../images/image-20221109183735806.png" alt="image-20221109183735806"></p>
-<p><img src="/../../images/image-20221109184615969.png" alt="image-20221109184615969"></p>
+<p><img src="../../images/image-20221109183735806.png" alt="image-20221109183735806"></p>
+<p><img src="../../images/image-20221109184615969.png" alt="image-20221109184615969"></p>
 <p>上图check方法的判断过程源码：</p>
-<p><img src="/../../images/image-20221109184412419.png" alt="image-20221109184412419"></p>
-<h1 id="8-2-web权限方案—自动登录（功能实现）"><a href="#8-2-web权限方案—自动登录（功能实现）" class="headerlink" title="8.2 web权限方案—自动登录（功能实现）"></a><strong>8.2 web权限方案—自动登录</strong>（功能实现）</h1><p>对应的教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=18&amp;vd_source=746b9336d739b80b11820809545b6604">18-尚硅谷-SpringSecurity-web权限方案-自动登录（功能实现）_哔哩哔哩_bilibili</a></p>
-<p><img src="/../../images/image-20221109191135868.png" alt="image-20221109191135868"></p>
-<p><img src="/../../images/image-20221109191228869.png" alt="image-20221109191228869"></p>
-<p>注意：<img src="/../../images/image-20221109191528085.png" alt="image-20221109191528085"></p>
-<h4 id="第一步：创建表"><a href="#第一步：创建表" class="headerlink" title="第一步：创建表"></a>第一步：创建表</h4><p>表不一定要我们自己创建，它可以自动我们生成，但是为了看得方便，所以自己可以创建一下，建表语句它里面有提供，可以自己去源码里面复制出来即可，如下：</p>
-<p><img src="/../../images/image-20221109185400076.png" alt="image-20221109185400076"></p>
+<p><img src="../../images/image-20221109184412419.png" alt="image-20221109184412419"></p>
+<h1 id="82-web权限方案自动登录功能实现"><a class="markdownIt-Anchor" href="#82-web权限方案自动登录功能实现"></a> <strong>8.2 web权限方案—自动登录</strong>（功能实现）</h1>
+<p>对应的教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15a411A7kP?p=18&amp;vd_source=746b9336d739b80b11820809545b6604">18-尚硅谷-SpringSecurity-web权限方案-自动登录（功能实现）_哔哩哔哩_bilibili</a></p>
+<p><img src="../../images/image-20221109191135868.png" alt="image-20221109191135868"></p>
+<p><img src="../../images/image-20221109191228869.png" alt="image-20221109191228869"></p>
+<p>注意：<img src="../../images/image-20221109191528085.png" alt="image-20221109191528085"></p>
+<h4 id="第一步创建表"><a class="markdownIt-Anchor" href="#第一步创建表"></a> 第一步：创建表</h4>
+<p>表不一定要我们自己创建，它可以自动我们生成，但是为了看得方便，所以自己可以创建一下，建表语句它里面有提供，可以自己去源码里面复制出来即可，如下：</p>
+<p><img src="../../images/image-20221109185400076.png" alt="image-20221109185400076"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table persistent_logins (</span><br><span class="line">	username varchar(64) not null, </span><br><span class="line">	series varchar(64) primary key, </span><br><span class="line">	token varchar(64) not null, </span><br><span class="line">	last_used timestamp not null</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-
-<p><img src="/../../images/image-20221109185839379.png" alt="image-20221109185839379"></p>
-<p><img src="/../../images/image-20221109190502459.png" alt="image-20221109190502459"></p>
+<p><img src="../../images/image-20221109185839379.png" alt="image-20221109185839379"></p>
+<p><img src="../../images/image-20221109190502459.png" alt="image-20221109190502459"></p>
 <p>代码：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注入数据源</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置对象</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> PersistentTokenRepository <span class="title function_">persistentTokenRepository</span><span class="params">()</span> {</span><br><span class="line">        <span class="type">JdbcTokenRepositoryImpl</span> <span class="variable">jdbcTokenRepository</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JdbcTokenRepositoryImpl</span>();</span><br><span class="line">        jdbcTokenRepository.setDataSource(dataSource);</span><br><span class="line">        <span class="comment">// 下面语句表示在使用时把表创建，而我们以及自己创建了，就不用了</span></span><br><span class="line">        <span class="comment">// jdbcTokenRepository.setCreateTableOnStartup(true);</span></span><br><span class="line">        <span class="keyword">return</span> jdbcTokenRepository;</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="9-CSRF的功能"><a href="#9-CSRF的功能" class="headerlink" title="9. CSRF的功能"></a>9. CSRF的功能</h1><p>CSRF的详解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/398601816">Web漏洞之CSRF(跨站请求伪造漏洞）详解 - 知乎 (zhihu.com)</a></p>
-<p><img src="/../../images/image-20221109203052376.png" alt="image-20221109203052376"></p>
+<h1 id="9-csrf的功能"><a class="markdownIt-Anchor" href="#9-csrf的功能"></a> 9. CSRF的功能</h1>
+<p>CSRF的详解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/398601816">Web漏洞之CSRF(跨站请求伪造漏洞）详解 - 知乎 (zhihu.com)</a></p>
+<p><img src="../../images/image-20221109203052376.png" alt="image-20221109203052376"></p>
 <p>在源码中的过程：就是验证之后，生成<strong>csrfToken</strong>，token存在session里面，每次携带token进行请求，然后拿着<strong>csrfToken</strong>跟session中的内容作比较，如果它们相同就可以访问，不相同就不能访问。主要代码就是在<strong>CsrfFilter</strong>里面：</p>
-<p><img src="/../../images/image-20221109204032040.png" alt="image-20221109204032040"></p>
+<p><img src="../../images/image-20221109204032040.png" alt="image-20221109204032040"></p>
 <p>在配置类中如果添加下面这个语句就是关闭CSRF保护，不加上的话，springsecurity是默认开启CSRF保护的</p>
-<p><img src="/../../images/image-20221109205622267.png" alt="image-20221109205622267"></p>
+<p><img src="../../images/image-20221109205622267.png" alt="image-20221109205622267"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clesnkvqr001x0gv6bn00dub5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/SpringSecurity/SpringSecurity%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86&web%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clexi3nsu001takv64bho17hq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -321,15 +537,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>直接上代码，解决 “如何让每周四 18:00:00 定时执行任务 ？”类似问题</p>
+        <p>直接上代码，解决 "如何让每周四 18:00:00 定时执行任务 ？"类似问题</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import java.time.DayOfWeek;</span><br><span class="line">import java.time.Duration;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line">import java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/10/15</span><br><span class="line"> */</span><br><span class="line">public class TestSchedule {</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *如何让每周四 18:00:00 定时执行任务 ？</span><br><span class="line">     */</span><br><span class="line">    public static void main(String[] args) {</span><br><span class="line">        // 获取当前时间</span><br><span class="line">        LocalDateTime now = LocalDateTime.now();</span><br><span class="line">        System.out.println( now );</span><br><span class="line"></span><br><span class="line">        // 获取周四时间</span><br><span class="line">        LocalDateTime time = now.withHour(18).withMinute(0).withSecond(0).withNano(0).with(DayOfWeek.THURSDAY);</span><br><span class="line">        // 如果 当前时间 &gt; 本周四时间，必须找到下周周四</span><br><span class="line">        if ( now.compareTo( time ) &gt;0 ) {</span><br><span class="line">            // 加一周</span><br><span class="line">            time = time.plusWeeks( 1 );</span><br><span class="line">        }</span><br><span class="line">        System.out.println( time );</span><br><span class="line"></span><br><span class="line">        // initialDelay 代表当前时间和周四的时间差</span><br><span class="line">        // period 一周的间隔时间</span><br><span class="line">        long initialDelay = Duration.between(now, time).toMillis();</span><br><span class="line">        long period = 1000 * 60 * 60 * 24 * 7;</span><br><span class="line">        ScheduledExecutorService pool = Executors.newScheduledThreadPool( 1 );</span><br><span class="line">        pool.scheduleAtFixedRate( () -&gt; {</span><br><span class="line">            System.out.println( "running..." );</span><br><span class="line">        }, initialDelay, period, TimeUnit.MILLISECONDS );</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <p>Duration类专门用于做时间间隔运算的，如Duration.between( 时间1，时间2 ).toMillis()</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="clesnkvri004f0gv6f664b8u3" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/juc/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%BA%94%E7%94%A8_%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1/" data-id="clexi3ntz004qakv6c2xibdqh" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -385,30 +600,25 @@
 
     •Date Histogram：按照日期阶梯分组，例如一周为一组，或者一月为一组
 </code></pre>
-<h1 id="1、DSL实现Bucket聚合"><a href="#1、DSL实现Bucket聚合" class="headerlink" title="1、DSL实现Bucket聚合"></a><strong>1、DSL</strong>实现Bucket聚合</h1><p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
+<h1 id="1-dsl实现bucket聚合"><a class="markdownIt-Anchor" href="#1-dsl实现bucket聚合"></a> <strong>1、DSL</strong>实现Bucket聚合</h1>
+<p>我们要统计所有数据中的品牌有几种，此时可以根据品牌的名称做聚合。</p>
 <p>类型为term类型，DSL示例：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "size": 0,  // 设置size为0，结果中不包含文档，只包含聚合结果</span><br><span class="line">  "aggs": { // 定义聚合</span><br><span class="line">    "brandAgg": { //给聚合起个名字</span><br><span class="line">      "terms": { // 聚合的类型，按照品牌值聚合，所以选择term</span><br><span class="line">        "field": "brand", // 参与聚合的字段</span><br><span class="line">        "size": 20 // 希望获取的聚合结果数量</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="2、-Bucket聚合聚合结果排序"><a href="#2、-Bucket聚合聚合结果排序" class="headerlink" title="2、 Bucket聚合聚合结果排序"></a><strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1><p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
+<h1 id="2-bucket聚合聚合结果排序"><a class="markdownIt-Anchor" href="#2-bucket聚合聚合结果排序"></a> <strong>2、</strong> <strong>Bucket</strong>聚合聚合结果排序</h1>
+<p>默认情况下，Bucket聚合会统计Bucket内的文档数量，记为 <strong>_count</strong>，并且按照_count降序排序。</p>
 <p>我们可以修改结果排序方式：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能,自定义排序规则</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "size":0,</span><br><span class="line">  "aggs": {</span><br><span class="line">    "brandAgg": {</span><br><span class="line">      "terms": {</span><br><span class="line">        "field": "brand.keyword",</span><br><span class="line">        "size": 20,</span><br><span class="line">        "order": {</span><br><span class="line">          "_count": "asc"  // 按照_count升序排列</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="3、Bucket聚合限定聚合范围"><a href="#3、Bucket聚合限定聚合范围" class="headerlink" title="3、Bucket聚合限定聚合范围"></a><strong>3、Bucket</strong>聚合限定聚合范围</h1><p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bd76668c3da4a2bb1c21f680b2800f8~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h1 id="3-bucket聚合限定聚合范围"><a class="markdownIt-Anchor" href="#3-bucket聚合限定聚合范围"></a> <strong>3、Bucket</strong>聚合限定聚合范围</h1>
+<p>默认情况下，Bucket聚合是对索引库的所有文档做聚合的（当数据过于庞大时，会严重影响性能），我们可以限定要聚合的文档范围，只要添加<strong>query</strong>条件即可</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 聚合功能，限定聚合范围</span><br><span class="line">GET /hotel/_search</span><br><span class="line">{</span><br><span class="line">  "query": {</span><br><span class="line">    "range": {</span><br><span class="line">      "price": {</span><br><span class="line">        "lte": 200   // 只对200元以下的文档聚合</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }, </span><br><span class="line">  </span><br><span class="line">  "size":0,</span><br><span class="line">  "aggs": {</span><br><span class="line">    "brandAgg": {</span><br><span class="line">      "terms": {</span><br><span class="line">        "field": "brand.keyword",</span><br><span class="line">        "size": 20</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="4-、总结"><a href="#4-、总结" class="headerlink" title="4 、总结"></a><strong>4 、总结</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="4-总结"><a class="markdownIt-Anchor" href="#4-总结"></a> <strong>4 、总结</strong></h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/43800f552eb747088e5c6abc3164a30a~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clesnkvr2002w0gv6ej6d9g6n" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/elasticsearch/DSL%E5%AE%9E%E7%8E%B0Bucket%E8%81%9A%E5%90%88/" data-id="clexi3nt3002iakv61qprgch4" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -459,7 +669,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="clesnkvs600670gv63vroetx1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="clexi3nug0061akv61nq85jmi" class="article-share-link">分享</a>
       
       
     </footer>
@@ -517,21 +727,17 @@
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cy0628/p/15164994.html">Swagger注释API :@ApiModel - Chen洋 - 博客园 (cnblogs.com)</a></p>
 <p>导入swagger依赖：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
-
 <figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@ApiModel这个注解</span><br><span class="line">  这个注解的是作用在类上面的，是用来描述类的一些基本信息的。下面，我们会逐个的进行讲解。</span><br><span class="line"></span><br><span class="line">value属性</span><br><span class="line">  这个属性，提供的是类的一个备用名。如果我们不设置，那么默认情况下，将使用的是class类的名字。</span><br><span class="line"></span><br><span class="line">description属性</span><br><span class="line">  对于类，提供一个详细的描述信息</span><br><span class="line"></span><br><span class="line">parent属性</span><br><span class="line">  这个属性，描述的是类的一些父类的信息。</span><br><span class="line"></span><br><span class="line">discriminator属性</span><br><span class="line">  这个属性解释起来有些麻烦，因为这个类主要是体现出了断言当中。</span><br><span class="line"></span><br><span class="line">subTypes属性</span><br><span class="line">  举个实例，如果我们此时有一个父类Animal。同时，对于这个父类，我们的系统中有这个类的子类Cat、Dog、Pig等。如果我们在我们的父类上，通过这个属性，指定了我们想要使用的子类的话，那么在生成Swagger的文档的话，会自动的展示的是Animal这个属性，但是在属性的字段中，会显示出子类的一些独有的属性，其实在这里，是不推荐使用的。因为这样会让别人认为，这些子类独有的属性，也是父类才有的。</span><br></pre></td></tr></tbody></table></figure>
-
-
-
 <ol start="3">
 <li>? 泛型通配符</li>
 </ol>
-<p>   ？泛型通配符的特性：只能从泛型容器种取值，而不能向其中设置值（唯独null特许地可以设置）</p>
-<p>   <img src="/../../images/image-20230204161656614.png" alt="image-20230204161656614"></p>
+<p>？泛型通配符的特性：只能从泛型容器种取值，而不能向其中设置值（唯独null特许地可以设置）</p>
+<p><img src="../../images/image-20230204161656614.png" alt="image-20230204161656614"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clesnkvs400610gv6ayl2blwk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clexi3nuj006eakv62e3e9vlj" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
@@ -578,262 +784,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>transient表示当加序列化时，不会被序列化</p>
-<p><img src="/.com//Users\其然乐衣Letitbe\AppData\Roaming\Typora\typora-user-images\image-20221010191347950.png" alt="image-20221010191347950"></p>
+<p><img src="/.com//C:%5CUsers%5C%E5%85%B6%E7%84%B6%E4%B9%90%E8%A1%A3Letitbe%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20221010191347950.png" alt="image-20221010191347950"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="clesnkvrq005a0gv6evqb99i5" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/06/%E5%85%B3%E9%94%AE%E5%AD%97/java%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="clexi3nuc005nakv64mz5g8ca" class="article-share-link">分享</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-刷题笔记/刷题总结" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:14:39.821Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">刷题总结</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Java的split方法使用多种分隔符切分字符串"><a href="#1-Java的split方法使用多种分隔符切分字符串" class="headerlink" title="1. Java的split方法使用多种分隔符切分字符串"></a>1. Java的split方法使用多种分隔符切分字符串</h1><p><strong>方法一：</strong><br>多个分隔符使用**’|’**分开，例如：</p>
-<pre><code>      String str = "abc;123,456?999|haha";
-      String[] strs=str.split(";|,");
-      for(String s : strs){
-          System.out.println(s);
-      }
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">123</span><br><span class="line">456?999|haha</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>方法二：</strong><br>使用中括号括起来**[“…”]**，例如:</p>
-<pre><code>    String str = "abc;123,456?999|haha";
-    String[] strs = str.split("[;,?|25]");
-    for(String s : strs){
-        System.out.println(s);
-    }
-</code></pre>
-<p>输出：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abc</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">6</span><br><span class="line">999</span><br><span class="line">haha</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="2-位运算"><a href="#2-位运算" class="headerlink" title="2.位运算"></a>2.位运算</h1><figure class="highlight arduino"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">重要的 位运算 算法公式</span><br><span class="line"></span><br><span class="line">num1 &amp;= num1 - <span class="number">1</span>; <span class="comment">// 最低的 1 变成 0</span></span><br><span class="line"></span><br><span class="line">num1 |= num1 + <span class="number">1</span>; <span class="comment">// 最低的 0 变成 1</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-
-
-
-<p>双指针：</p>
-<p><img src="/../../images/image-20221122120748208.png" alt="image-20221122120748208"></p>
-<p>例子1：<img src="/../../images/image-20221122120312644.png" alt="image-20221122120312644"></p>
-<p>例子2：</p>
-<p><img src="/../../images/image-20221122120556570.png" alt="image-20221122120556570"></p>
-<p><img src="/../../images/image-20221122120612009.png" alt="image-20221122120612009"></p>
-<p>滑动窗口：</p>
-<h1 id="滑动窗口法的大体框架"><a href="#滑动窗口法的大体框架" class="headerlink" title="滑动窗口法的大体框架"></a>滑动窗口法的大体框架</h1><p>在介绍滑动窗口的框架时候，大家先从字面理解下：</p>
-<ul>
-<li><strong>滑动：</strong>说明这个窗口是移动的，也就是移动是按照一定方向来的。</li>
-<li><strong>窗口：</strong>窗口大小并不是固定的，可以不断扩容直到满足一定的条件；也可以不断缩小，直到找到一个满足条件的最小窗口；当然也可以是固定大小。</li>
-</ul>
-<p>为了便于理解，这里采用的是字符串来讲解。但是对于数组其实也是一样的。滑动窗口算法的思路是这样：</p>
-<ol>
-<li>我们在字符串 S 中使用双指针中的左右指针技巧，初始化 left = right = 0，把索引闭区间 [left, right] 称为一个「窗口」。</li>
-<li>我们先不断地增加 right 指针扩大窗口 [left, right]，直到窗口中的字符串符合要求（包含了 T 中的所有字符）。</li>
-<li>此时，我们停止增加 right，转而不断增加 left 指针缩小窗口 [left, right]，直到窗口中的字符串不再符合要求（不包含 T 中的所有字符了）。同时，每次增加 left，我们都要更新一轮结果。</li>
-<li>重复第 2 和第 3 步，直到 right 到达字符串 S 的尽头。</li>
-</ol>
-<p>这个思路其实也不难，第 2 步相当于在寻找一个「可行解」，然后第 3 步在优化这个「可行解」，最终找到最优解。左右指针轮流前进，窗口大小增增减减，窗口不断向右滑动。</p>
-<p>下面画图理解一下，needs 和 window 相当于计数器，分别记录 T 中字符出现次数和窗口中的相应字符的出现次数。</p>
-<p>初始状态：<br><img src="https://img-blog.csdnimg.cn/2019101621574345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RieV9mcmVlZG9t,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>增加 right，直到窗口 [left, right] 包含了 T 中所有字符：<br><img src="https://img-blog.csdnimg.cn/20191016215752186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RieV9mcmVlZG9t,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>现在开始增加 left，缩小窗口 [left, right]。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191016215807735.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RieV9mcmVlZG9t,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>直到窗口中的字符串不再符合要求，left 不再继续移动。</p>
-<p><img src="https://img-blog.csdnimg.cn/20191016215824468.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0RieV9mcmVlZG9t,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>之后重复上述过程，先移动 right，再移动 left…… 直到 right 指针到达字符串 S 的末端，算法结束。</p>
-<p>如果你能够理解上述过程，恭喜，你已经完全掌握了滑动窗口算法思想。至于如何具体到问题，如何得出此题的答案，都是编程问题，等会提供一套模板，理解一下就会了。</p>
-<p><strong><font color="greanjj">持续更新…</font></strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="clesnkvrr005f0gv60xovhj3z" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-elasticsearch/索引库中的文档操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.243Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/">索引库中的文档的操作</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="索引库中的文档的操作"><a href="#索引库中的文档的操作" class="headerlink" title="索引库中的文档的操作"></a>索引库中的文档的操作</h1><p><img src="https://img-blog.csdnimg.cn/31cfbf19cd1941909e0aaa594f2bd5d0.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/41a470384f02452a8565ca97a2681702.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/264b09d6e2a94a8a87ac5527907b8c25.png" alt="img"><img src="https://img-blog.csdnimg.cn/9839abedff6b41709b41fdbf1d021320.png" alt="img"></p>
-<p>（实例）代码：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 插入文档</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">{</span><br><span class="line">  "info": "黑马程序员java讲师",</span><br><span class="line">  "email": "zy@itcast.cn",</span><br><span class="line">  "name": {</span><br><span class="line">    "firstname": "云",</span><br><span class="line">    "lastname": "赵"</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># 查询文档</span><br><span class="line">GET /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 删除文档</span><br><span class="line">DELETE /heima/_doc/1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式1：全量修改文档，如果存在则删除旧的，新的覆盖旧的，如果原先没有，则新增该文档（所以放修改方式相当于也是一种插入文档的方法）</span><br><span class="line">POST /heima/_doc/1</span><br><span class="line">{</span><br><span class="line">  "info": "黑马程序员java讲师",</span><br><span class="line">  "email": "zhaoyun@itcast.cn",</span><br><span class="line">  "name": {</span><br><span class="line">    "firstname": "云",</span><br><span class="line">    "lastname": "赵"</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 修改文档，方式2: 局部修改文档字段</span><br><span class="line">POST /heima/_update/1</span><br><span class="line">{</span><br><span class="line">  "doc":{</span><br><span class="line">    "email": "ZY@itcast.cn"</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p>运行截图：</p>
-<p><img src="https://img-blog.csdnimg.cn/069e55bbd4ec47308b0147aa38adab91.png" alt="img"><img src="https://img-blog.csdnimg.cn/6e1212cd2f794a579424363b32fb9adc.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/640be243e52d45a18b47ef5dfe0b3095.png" alt="img"><img src="https://img-blog.csdnimg.cn/4aa5f5fd7ce74a6a814f9338b68beae5.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e7ddbb1bb05f40078872f81abe3e60c9.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/06615bad2d7942acb41706e51cc56bdc.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/%E7%B4%A2%E5%BC%95%E5%BA%93%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" data-id="clesnkvrb003t0gv68aobdwp8" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-elasticsearch/RestClient查询文档" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" class="article-date">
-  <time class="post-time" datetime="2022-11-06T01:12:39.239Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">06</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">RestClient查询文档</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="快速入门："><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h1><p><img src="https://img-blog.csdnimg.cn/65c0ab898d754d8e97699b41931b2426.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
-<h1 id="match-all查询："><a href="#match-all查询：" class="headerlink" title="match_all查询："></a>match_all查询：</h1><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//match_all查询</span><br><span class="line">    @Test</span><br><span class="line">    void testMatchAll() throws IOException {</span><br><span class="line">        String index  = "tb_disable_date_diary";</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest(index);</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //解析响应</span><br><span class="line">        handleResponce(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    //解析响应</span><br><span class="line">    private void handleResponce(SearchResponse response) {</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println("共搜索到"+total+"条数据");</span><br><span class="line">        //4.2文档数据</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits){</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            Diary diary = JSON.parseObject(json,Diary.class);</span><br><span class="line">            System.out.println("diary = "+diary);</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/48392c3346d746448e7109a3c8d960c0.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">//分页和排序</span><br><span class="line">   @Test</span><br><span class="line">   void restPageAndSort() throws IOException {</span><br><span class="line">       //页码，每页大小</span><br><span class="line">       int page = 2,size = 5;</span><br><span class="line"></span><br><span class="line">       //1.准备Request</span><br><span class="line">       SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">       //2.准备DSL</span><br><span class="line">       //2.1 query</span><br><span class="line">       request.source().query(QueryBuilders.matchAllQuery());</span><br><span class="line">       //2.2 排序 sort</span><br><span class="line">       request.source().sort("price", SortOrder.ASC);</span><br><span class="line">       //2.3 分页from，size</span><br><span class="line">       request.source().from((page - 1) * size).size(5);</span><br><span class="line"></span><br><span class="line">       //3.发送请求</span><br><span class="line">       SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">       handleResponce(response);</span><br><span class="line"></span><br><span class="line">       System.out.println(response);</span><br><span class="line">   }</span><br><span class="line"></span><br><span class="line">   private void handleResponce(SearchResponse response) {</span><br><span class="line">       //4.解析响应</span><br><span class="line">       SearchHits searchHits = response.getHits();</span><br><span class="line">       //4.1获取总条数</span><br><span class="line">       long total = searchHits.getTotalHits().value;</span><br><span class="line">       System.out.println("共搜索到"+total+"条数据");</span><br><span class="line">       //4.2文档数据</span><br><span class="line">       SearchHit[] hits = searchHits.getHits();</span><br><span class="line">       //4.3遍历</span><br><span class="line">       for(SearchHit hit : hits){</span><br><span class="line">           //获取文档source</span><br><span class="line">           String json = hit.getSourceAsString();</span><br><span class="line">           //反序列化</span><br><span class="line">           HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line">           System.out.println("hotelDoc = "+hotelDoc);</span><br><span class="line">       }</span><br><span class="line">   }</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a><strong>高亮</strong></h2><p><img src="https://img-blog.csdnimg.cn/84cfb92b326c4ff18403e7089b76f7a9.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/8b969709155446f48b193ac2e9fa59f7.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">//高亮</span><br><span class="line">    @Test</span><br><span class="line">    void testHighlight() throws IOException {</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        //2.1 query</span><br><span class="line">        request.source().query(QueryBuilders.matchQuery("all","如家"));</span><br><span class="line">        //2.2 高亮</span><br><span class="line">        request.source().highlighter(new HighlightBuilder().field("name").requireFieldMatch(false));</span><br><span class="line"></span><br><span class="line">        //3.发送请求</span><br><span class="line">        SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        handleResponce1(response);</span><br><span class="line"></span><br><span class="line">        System.out.println(response);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    private void handleResponce1(SearchResponse response) {</span><br><span class="line">        //4.解析响应</span><br><span class="line">        SearchHits searchHits = response.getHits();</span><br><span class="line">        //4.1获取总条数</span><br><span class="line">        long total = searchHits.getTotalHits().value;</span><br><span class="line">        System.out.println("共搜索到"+total+"条数据");</span><br><span class="line">        //4.2文档数组</span><br><span class="line">        SearchHit[] hits = searchHits.getHits();</span><br><span class="line">        //4.3遍历</span><br><span class="line">        for(SearchHit hit : hits){</span><br><span class="line">            //获取文档source</span><br><span class="line">            String json = hit.getSourceAsString();</span><br><span class="line">            //反序列化</span><br><span class="line">            HotelDoc hotelDoc = JSON.parseObject(json,HotelDoc.class);</span><br><span class="line"></span><br><span class="line">            //获取高亮结果</span><br><span class="line">            Map&lt;String, HighlightField&gt; highlightFields = hit.getHighlightFields();</span><br><span class="line">            if(!CollectionUtils.isEmpty(highlightFields)){</span><br><span class="line">                //根据各字段名获取高亮结果</span><br><span class="line">                HighlightField highlightField = highlightFields.get("name");</span><br><span class="line">                if(highlightField != null){</span><br><span class="line">                    //获取高亮</span><br><span class="line">                    String name = highlightField.getFragments()[0].string();</span><br><span class="line">                    //覆盖非高亮结果</span><br><span class="line">                    hotelDoc.setName(name);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            System.out.println("hotelDoc = "+hotelDoc);</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/e569b9e6eae2472cb508245fe942dd15.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/06/elasticsearch/RestClient%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" data-id="clesnkvra003p0gv61cvyf25z" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
-
     </footer>
   </div>
   
@@ -891,8 +849,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
 

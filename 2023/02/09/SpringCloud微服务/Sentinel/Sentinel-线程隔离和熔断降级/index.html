@@ -5,28 +5,28 @@
   
   <title>Sentinel-线程隔离和熔断降级 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、线程隔离   总结 线程隔离的两种手段是？  信号量隔离  线程池隔离    信号量隔离的特点是？  基于计数器模式，简单，开销小   线程池隔离的特点是？  基于线程池模式，有额外开销，但隔离控制更强    二、熔断降级​		Sentinel如何来去实现熔断降级？融合降级，它其实就是用一个断路器去统计服务调用时的一个异常比例、慢请求比例，如果说在做服务调用的时候，异常的比例过高，触发了阈值，">
+  <meta name="description" content="一、线程隔离     总结   线程隔离的两种手段是？   信号量隔离   线程池隔离     信号量隔离的特点是？  基于计数器模式，简单，开销小    线程池隔离的特点是？  基于线程池模式，有额外开销，但隔离控制更强     二、熔断降级 ​		**Sentinel如何来去实现熔断降级？**融合降级，它其实就是用一个断路器去统计服务调用时的一个异常比例、慢请求比例，如果说在做服务调用的时候">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sentinel-线程隔离和熔断降级">
 <meta property="og:url" content="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BB%E5%92%8C%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="一、线程隔离   总结 线程隔离的两种手段是？  信号量隔离  线程池隔离    信号量隔离的特点是？  基于计数器模式，简单，开销小   线程池隔离的特点是？  基于线程池模式，有额外开销，但隔离控制更强    二、熔断降级​		Sentinel如何来去实现熔断降级？融合降级，它其实就是用一个断路器去统计服务调用时的一个异常比例、慢请求比例，如果说在做服务调用的时候，异常的比例过高，触发了阈值，">
+<meta property="og:description" content="一、线程隔离     总结   线程隔离的两种手段是？   信号量隔离   线程池隔离     信号量隔离的特点是？  基于计数器模式，简单，开销小    线程池隔离的特点是？  基于线程池模式，有额外开销，但隔离控制更强     二、熔断降级 ​		**Sentinel如何来去实现熔断降级？**融合降级，它其实就是用一个断路器去统计服务调用时的一个异常比例、慢请求比例，如果说在做服务调用的时候">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20230209154610011.png">
-<meta property="og:image" content="http://example.com/images/image-20230209154514001.png">
-<meta property="og:image" content="http://example.com/images/image-20230209154637624.png">
-<meta property="og:image" content="http://example.com/images/image-20230209161221875.png">
-<meta property="og:image" content="http://example.com/images/image-20230209164421742.png">
-<meta property="og:image" content="http://example.com/images/image-20230209164715829.png">
-<meta property="og:image" content="http://example.com/images/image-20230209165230617.png">
-<meta property="og:image" content="http://example.com/images/image-20230209165608275.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209154610011.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209154514001.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209154637624.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209161221875.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209164421742.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209164715829.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209165230617.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230209165608275.png">
 <meta property="article:published_time" content="2023-02-09T07:44:22.686Z">
 <meta property="article:modified_time" content="2023-02-10T07:48:00.028Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="微服务">
 <meta property="article:tag" content="Sentinel">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20230209154610011.png">
+<meta name="twitter:image" content="http://example.com/2023/02/09/images/image-20230209154610011.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -60,8 +60,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -126,56 +126,72 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、线程隔离"><a href="#一、线程隔离" class="headerlink" title="一、线程隔离"></a>一、线程隔离</h1><p><img src="/../../../images/image-20230209154610011.png" alt="image-20230209154610011"></p>
-<p><img src="/../../../images/image-20230209154514001.png" alt="image-20230209154514001"></p>
-<p><img src="/../../../images/image-20230209154637624.png" alt="image-20230209154637624"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>线程隔离的两种手段是？</p>
+        <h1 id="一-线程隔离"><a class="markdownIt-Anchor" href="#一-线程隔离"></a> 一、线程隔离</h1>
+<p><img src="../../../images/image-20230209154610011.png" alt="image-20230209154610011"></p>
+<p><img src="../../../images/image-20230209154514001.png" alt="image-20230209154514001"></p>
+<p><img src="../../../images/image-20230209154637624.png" alt="image-20230209154637624"></p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
 <ul>
-<li><p>信号量隔离</p>
+<li>
+<p>线程隔离的两种手段是？</p>
+<ul>
+<li>
+<p>信号量隔离</p>
 </li>
-<li><p>线程池隔离</p>
+<li>
+<p>线程池隔离</p>
 </li>
 </ul>
 </li>
-<li><p>信号量隔离的特点是？</p>
+<li>
+<p>信号量隔离的特点是？</p>
 <ul>
 <li>基于计数器模式，简单，开销小</li>
 </ul>
 </li>
-<li><p>线程池隔离的特点是？</p>
+<li>
+<p>线程池隔离的特点是？</p>
 <ul>
 <li>基于线程池模式，有额外开销，但隔离控制更强</li>
 </ul>
 </li>
 </ul>
-<h1 id="二、熔断降级"><a href="#二、熔断降级" class="headerlink" title="二、熔断降级"></a>二、熔断降级</h1><p>​		<strong>Sentinel如何来去实现熔断降级？</strong>融合降级，它其实就是用一个断路器去统计服务调用时的一个异常比例、慢请求比例，如果说在做服务调用的时候，异常的比例过高，触发了阈值，就会熔断该服务，拦截访问该服务的一切请求。那这样呢，就会把这个故障服务隔离开了，不会让它影响到我们正常的服务。（就像古代啊，这个武侠人士是吧，这手被毒蛇咬了，赶紧手起刀落，把这个手砍掉，那脚还中毒了呢，卡，把脚砍掉，防止这个毒扩散到全身啊。所以壮士断腕就是一种自我保护）。当然，你把手砍了不算本事啊，你要是能接回来才算本事。所以呢，<strong>服务熔断很好做，将来服务如果恢复了，还应该去恢复对该服务的访问。那这个我们的断路器怎么去做呢？</strong></p>
+<h1 id="二-熔断降级"><a class="markdownIt-Anchor" href="#二-熔断降级"></a> 二、熔断降级</h1>
+<p>​		**Sentinel如何来去实现熔断降级？**融合降级，它其实就是用一个断路器去统计服务调用时的一个异常比例、慢请求比例，如果说在做服务调用的时候，异常的比例过高，触发了阈值，就会熔断该服务，拦截访问该服务的一切请求。那这样呢，就会把这个故障服务隔离开了，不会让它影响到我们正常的服务。（就像古代啊，这个武侠人士是吧，这手被毒蛇咬了，赶紧手起刀落，把这个手砍掉，那脚还中毒了呢，卡，把脚砍掉，防止这个毒扩散到全身啊。所以壮士断腕就是一种自我保护）。当然，你把手砍了不算本事啊，你要是能接回来才算本事。所以呢，<strong>服务熔断很好做，将来服务如果恢复了，还应该去恢复对该服务的访问。那这个我们的断路器怎么去做呢？</strong></p>
 <p>​		它是由内部的一个<strong>状态机</strong>来实现的，这个状态机，包含三个状态，分别是Close、Open、Half-Open。Open绿色代表走，这种状态下，断路器不会拦截任何请求，不管请求是正常的还是异常的，都可以访问，但是我们的断路器会统计这个调用的异常比例，如果统计过程中发现异常的比例过高，达到了阈值，它就会从Closed状态切换到Open状态，红色代表停止，那这个时候他就会拦截进入该服务的一些请求了，也就相当于是垄断，但是你不能一直是垄断状态（因为万一这个服务它又恢复了），那因此我们这个熔断的状态会有一个持续的时间，当这个熔断时间结束时，它会从Open状态切换到Half-Open状态，在这个状态下它会放行一次请求，然后根据这次请求的结果来判断接下来干嘛，比如说Half-Open放行了一次请求，结果发现这个请求依然是失败的，那会再次进入Open状态，拦截一切请求，进入熔断，当然同样是持续一段熔断时间，然后再进入Half-Open，那如果放行的这个请求它执行完了，发现是成功的，那么就会从Half-Open切换到Cloesd，这个时候，就等于我们的登录器又开始放行了，那大家随便，然后又开始做数据统计了。那么这三个状态啊，就可以按照这种方式进行一个切换，因此呢，我们不仅能够熔断，还能恢复，就是靠这个来实现的。那在这里面啊，比较关键的两个东西。第一，就是熔断的持续时间（这个将来肯定有我们去配置），第二，失败的阈值，什么情况下你要去熔断。而这个达成熔断的条件啊，在Sentinel里面就叫做熔断的策略。</p>
-<p><img src="/../../../images/image-20230209161221875.png" alt="image-20230209161221875"></p>
-<h2 id="熔断策略"><a href="#熔断策略" class="headerlink" title="熔断策略"></a>熔断策略</h2><p>熔断策略到底有哪些呢？</p>
-<h4 id="断路器熔断策略有三种：慢调用、异常比例、异常数"><a href="#断路器熔断策略有三种：慢调用、异常比例、异常数" class="headerlink" title="断路器熔断策略有三种：慢调用、异常比例、异常数"></a><strong>断路器熔断策略有三种：慢调用、异常比例、异常数</strong></h4><h3 id="慢调用"><a href="#慢调用" class="headerlink" title="慢调用"></a>慢调用</h3><ul>
+<p><img src="../../../images/image-20230209161221875.png" alt="image-20230209161221875"></p>
+<h2 id="熔断策略"><a class="markdownIt-Anchor" href="#熔断策略"></a> 熔断策略</h2>
+<p>熔断策略到底有哪些呢？</p>
+<h4 id="断路器熔断策略有三种慢调用-异常比例-异常数"><a class="markdownIt-Anchor" href="#断路器熔断策略有三种慢调用-异常比例-异常数"></a> <strong>断路器熔断策略有三种：慢调用、异常比例、异常数</strong></h4>
+<h3 id="慢调用"><a class="markdownIt-Anchor" href="#慢调用"></a> 慢调用</h3>
+<ul>
 <li><strong>慢调用</strong>：业务的响应时长（RT）大于指定时长的请求认定为慢调用请求。在指定时间内，如果请求数量超过设定的最小数量，慢调用比例大于设定的阈值，则触发熔断。例如：</li>
 </ul>
-<p><img src="/../../../images/image-20230209164421742.png" alt="image-20230209164421742"></p>
+<p><img src="../../../images/image-20230209164421742.png" alt="image-20230209164421742"></p>
 <p>上面降级规则配置的解读：RT超过500ms的调用是慢调用，统计最近10000ms内的请求，如果请求量超过10次，并且慢调用比例不低于0.5，则触发熔断，熔断时长为5秒。然后进入half-open状态，放行一次请求做测试。</p>
 <p><strong>案例：</strong></p>
-<p><img src="/../../../images/image-20230209164715829.png" alt="image-20230209164715829"></p>
-<p><img src="/../../../images/image-20230209165230617.png" alt="image-20230209165230617"></p>
-<h3 id="异常比例、异常数"><a href="#异常比例、异常数" class="headerlink" title="异常比例、异常数"></a>异常比例、异常数</h3><p><img src="/../../../images/image-20230209165608275.png" alt="image-20230209165608275"></p>
-<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>Sentinel熔断降级的策略有哪些？</p>
+<p><img src="../../../images/image-20230209164715829.png" alt="image-20230209164715829"></p>
+<p><img src="../../../images/image-20230209165230617.png" alt="image-20230209165230617"></p>
+<h3 id="异常比例-异常数"><a class="markdownIt-Anchor" href="#异常比例-异常数"></a> 异常比例、异常数</h3>
+<p><img src="../../../images/image-20230209165608275.png" alt="image-20230209165608275"></p>
+<h2 id="总结-2"><a class="markdownIt-Anchor" href="#总结-2"></a> 总结</h2>
+<p>Sentinel熔断降级的策略有哪些？</p>
 <ul>
-<li><p>慢调用比例：超过指定时长的调用为慢调用，统计单位时长内慢调用的比例，超过阈值则熔断</p>
+<li>
+<p>慢调用比例：超过指定时长的调用为慢调用，统计单位时长内慢调用的比例，超过阈值则熔断</p>
 </li>
-<li><p>异常比例：统计单位时长内异常调用的比例，超过阈值则熔断</p>
+<li>
+<p>异常比例：统计单位时长内异常调用的比例，超过阈值则熔断</p>
 </li>
-<li><p>异常数：统计单位时长内异常调用的次数，超过阈值则熔断</p>
+<li>
+<p>异常数：统计单位时长内异常调用的次数，超过阈值则熔断</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BB%E5%92%8C%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7/" data-id="clesnkvsz00940gv66nk9bvme" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E7%BA%BF%E7%A8%8B%E9%9A%94%E7%A6%BB%E5%92%8C%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7/" data-id="clexi3nvm009nakv669894zhj" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -251,8 +267,8 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>155</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>83</strong><br>分类</div></a>
+      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
       <a href="/tags"><div><strong>55</strong><br>标签</div></a>
     </div>
 
