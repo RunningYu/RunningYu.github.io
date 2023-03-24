@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>九方智投（上海） | Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="九方智投（上海）技术一面日期：2023.3.17 13:00~13:30 时长：30分钟 面试官： 自我介绍 介绍一下你这个ES自动补全组件？ 说一下ES的倒排索引？ 说一下你比较熟悉的排序算法，他们之间有什么区别？ 详细说一种排序的实现过程 让你删除一个链表中的倒数第n个结点，你怎么做？ 说一下并发编程？ 你用过锁吗？说一下ThreadLocal 说一下MySQL数据库三范式 说一下数据库的事务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="九方智投（上海）">
+<meta property="og:url" content="http://example.com/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/7-%E4%B9%9D%E6%96%B9%E6%99%BA%E6%8A%95%E3%80%90oc%E3%80%91/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="九方智投（上海）技术一面日期：2023.3.17 13:00~13:30 时长：30分钟 面试官： 自我介绍 介绍一下你这个ES自动补全组件？ 说一下ES的倒排索引？ 说一下你比较熟悉的排序算法，他们之间有什么区别？ 详细说一种排序的实现过程 让你删除一个链表中的倒数第n个结点，你怎么做？ 说一下并发编程？ 你用过锁吗？说一下ThreadLocal 说一下MySQL数据库三范式 说一下数据库的事务">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-17T05:57:37.420Z">
+<meta property="article:modified_time" content="2023-03-24T01:40:15.923Z">
+<meta property="article:author" content="其然乐衣">
+<meta property="article:tag" content="实习面试">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-interview/工作面试/7-九方智投【oc】" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/7-%E4%B9%9D%E6%96%B9%E6%99%BA%E6%8A%95%E3%80%90oc%E3%80%91/" class="article-date">
+  <time class="post-time" datetime="2023-03-17T05:57:37.420Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">17</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      九方智投（上海）
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/">实习面试</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="九方智投（上海）技术一面"><a href="#九方智投（上海）技术一面" class="headerlink" title="九方智投（上海）技术一面"></a>九方智投（上海）技术一面</h1><p>日期：2023.3.17 13:00~13:30</p>
+<p>时长：30分钟</p>
+<h2 id="面试官："><a href="#面试官：" class="headerlink" title="面试官："></a>面试官：</h2><ul>
+<li>自我介绍</li>
+<li>介绍一下你这个ES自动补全组件？</li>
+<li>说一下ES的倒排索引？</li>
+<li>说一下你比较熟悉的排序算法，他们之间有什么区别？</li>
+<li>详细说一种排序的实现过程</li>
+<li>让你删除一个链表中的倒数第n个结点，你怎么做？</li>
+<li>说一下并发编程？</li>
+<li>你用过锁吗？说一下ThreadLocal</li>
+<li>说一下MySQL数据库三范式</li>
+<li>说一下数据库的事务？</li>
+<li>数据库的事务可以传递吗？</li>
+<li>数据库的有哪些隔离？默认是哪一种？</li>
+<li>java中集合，如HashMap，HashTable，Vector，ConcurrentHashMap等这些有什么区别？</li>
+<li>假如要你用java的类来实现用户的排名，你怎么弄？</li>
+<li>说一下TCP创建连接的过程（三次握手）</li>
+<li>你了解java虚拟机吗，java创建对象的方式有哪几种？</li>
+<li>说一下垃圾回收器有哪些？</li>
+<li>对象什么时候会被垃圾回收？</li>
+<li>说一下双亲委派机制？</li>
+<li>双亲委派机制的优缺点？</li>
+<li>PC计数器的作用？</li>
+<li>线程跟进程的区别？</li>
+<li>线程之间上下文切换的过程是怎样的？</li>
+<li>Redis 的一般用在哪些场景？(我回答完后)…除了用来做缓存和中间件，你还有用过在其它的场景吗？</li>
+<li>布隆过滤器你有了解吗？</li>
+</ul>
+<h2 id="反问环节："><a href="#反问环节：" class="headerlink" title="反问环节："></a>反问环节：</h2><ul>
+<li>该岗位的负责的业务是怎样的？</li>
+<li>根据我的简历以及结合我这次面试中的情况，面试官你有觉得我哪些存在不足或是有什么建议吗？<ul>
+<li>面试官：你在应用技术上算是比较广了，不过基础这一块其实也是很重要的。我看你的简历，对于一些框架、技术进行了较多的包装，但是基础方面的包装不多，所以我建议你，在技术上的提升的同时，基础也一定要抓牢</li>
+</ul>
+</li>
+<li>略。。。</li>
+</ul>
+<h2 id="九方智投（上海）技术二面"><a href="#九方智投（上海）技术二面" class="headerlink" title="九方智投（上海）技术二面"></a>九方智投（上海）技术二面</h2><p>日期：2023.3.17 16：00 ~ 16：30</p>
+<p>时长：30分钟</p>
+<h2 id="面试官：-1"><a href="#面试官：-1" class="headerlink" title="面试官："></a>面试官：</h2><ul>
+<li><p>自我介绍</p>
+</li>
+<li><p>你在学校加入的实验室除了学习，还有什么？</p>
+</li>
+<li><p>你这个实验室大概有多少人？</p>
+</li>
+<li><p>你们实验室一般会接什么项目，或是老师一般给你带什么项目？</p>
+</li>
+<li><p>你挑一个比较熟悉的项目来介绍一下？</p>
+</li>
+<li><p>为什么考虑到要用ES搜索引擎 ？</p>
+</li>
+<li><p>数据同步用消息队列是吧，那你这个数据一致性你有保证吗？</p>
+</li>
+<li><p>你怎么保证那个RabbitMQ消息队列的消息能被消费者消费到？</p>
+</li>
+<li><p>审核是怎么的？是人工审核对吧？</p>
+</li>
+<li><p>我看到你用Sentinel，你的限流策略是怎样？</p>
+</li>
+<li><p>你用MQ除了用来做数据同步场景之外，还有用到什么其他场景？</p>
+</li>
+<li><p>你们实验室的团队，在做老师项目的时候，功能模块你们是怎么定，怎么分配的，是你分配的还是老师分配的，还是怎样？</p>
+</li>
+<li><p>平时你是在哪里学习？如果你踏入社会了，你有什么学习方式，在技术上的学习和提升怎么去做？</p>
+</li>
+</ul>
+<h2 id="反问："><a href="#反问：" class="headerlink" title="反问："></a>反问：</h2><ul>
+<li>根据我的简历以及结合我这次面试中的情况，面试官你有觉得我哪些存在不足或是有什么建议吗？<ul>
+<li>面试官：我再筛选你的简历的时候，就是看到你会的比较多，也有一定的项目经验这些，所以就选你了。这次我也没有问你基础方面的，不是很了解，但是建议的话，肯定是基础方面也一定要去抓好，其中java基础最重要…</li>
+</ul>
+</li>
+<li>略。。。</li>
+<li></li>
+</ul>
+<h2 id="HR面-谈薪资"><a href="#HR面-谈薪资" class="headerlink" title="HR面 谈薪资"></a>HR面 谈薪资</h2><ul>
+<li>薪资：200/天+ 25餐补/天   <font color="red">【破防】</font><ul>
+<li>破防</li>
+</ul>
+</li>
+<li>工作时间：965</li>
+<li>有节假日礼品赠送，但是实习生和转正员工不太一样，如转正员工500的礼品或是红包，那么实习生就是两三百</li>
+<li>到岗时间：4月3</li>
+<li>实习生offer签约1年，但是中途如果找到更好的了，可以走正常的离职流程就行</li>
+<li>关于转正：<ul>
+<li>应届生或是社招：实习三四个月可以申请转正</li>
+<li>24届实习生：实习12个月可申请转正</li>
+<li>无论是哪一类，到最后转正都主要看能力和实习表现</li>
+</ul>
+</li>
+<li>公司环境：<ul>
+<li>4400平米的健身房<ul>
+<li>常见的健身器材</li>
+<li>桌球</li>
+<li>乒乓球</li>
+<li>篮球</li>
+<li>羽毛球</li>
+</ul>
+</li>
+<li>500平米图书馆</li>
+<li>游泳馆</li>
+</ul>
+</li>
+<li></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/7-%E4%B9%9D%E6%96%B9%E6%99%BA%E6%8A%95%E3%80%90oc%E3%80%91/" data-id="clflvriyk00c1v4v6fzzs70um" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/" rel="tag">实习面试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/03/19/interview/java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E6%80%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          多态
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/8-%E5%8C%97%E4%BA%AC%E4%B8%AD%E7%A7%91%E5%85%A8%E5%AE%89%EF%BC%88%E5%9B%BD%E4%BC%81%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/1ed6fd9de8a64328806c5225edfc6bdb.png#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/6e67b9fbe3fa41e5b087e648a74c3af3.png#pic_center">
 <meta property="article:published_time" content="2023-03-04T02:25:13.345Z">
-<meta property="article:modified_time" content="2023-03-04T03:21:59.901Z">
+<meta property="article:modified_time" content="2023-03-08T11:47:06.866Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -56,9 +56,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -126,9 +126,9 @@
 <h2 id="2、Netty-的优势？"><a href="#2、Netty-的优势？" class="headerlink" title="2、Netty 的优势？"></a>2、Netty 的优势？</h2><ul>
 <li><p>使用简单：封闭了 Java 原生 NIO 类库繁琐的 API，使用起来更加高效；</p>
 </li>
-<li><p>功能强大：预置多种编码能力，支持多种主流协议。同时通过 ChannelHandler 可以进行灵活的拓展，支持很强的定制能力；</p>
+<li><p>功能强大：预置多种编码能力，支持多种主流协议。同时通过 <mark>ChannelHandler</mark> 可以进行灵活的拓展，支持很强的定制能力；</p>
 </li>
-<li><p>高性能：与其它业界主流 NIO 框架相比，Netty 综合更优。主要体现在吞吐量更高、延迟更低、减少资源消耗以及最小化不必要的内存复制；</p>
+<li><p>高性能：与其它业界主流 NIO 框架相比，Netty 综合更优。主要体现在<mark>吞吐量更高、延迟更低、减少资源消耗以及最小化不必要的内存复制；</mark></p>
 </li>
 <li><p>社区活跃与稳定：版本更新周期短，BUG 修复速度快，让开发者可以专注业务本身。</p>
 </li>
@@ -182,7 +182,7 @@
 </ul>
 <p>​		说白了，EventLoop 的主要作用实际就是负责监听网络事件并调用事件处理器进行相关 IO 操作的处理。</p>
 <p>​		<strong>那 Channel 和 EventLoop 直接有啥联系呢？</strong></p>
-<p>​		Channel 为 Netty 网络操作（读写等操作）抽象类，EventLoop 负责处理注册到其上的 Channel 处理 IO 操作，两者配合参与 IO 操作。</p>
+<p>​		Channel 为 Netty 网络操作（<strong>读写</strong>等操作）抽象类，EventLoop 负责处理注册到其上的 Channel 处理 IO 操作，两者配合参与 IO 操作。</p>
 <ul>
 <li><p><strong>ChannelFuture</strong></p>
 <ul>
@@ -226,7 +226,7 @@
 
 
 <h2 id="4、Netty-服务端的启动过程？"><a href="#4、Netty-服务端的启动过程？" class="headerlink" title="4、Netty 服务端的启动过程？"></a>4、Netty 服务端的启动过程？</h2><p>先来看一段代码实现：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理 </span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>); </span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(); </span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：ServerBootstrap </span></span><br><span class="line">    <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup) <span class="comment">// (非必备)打印日志 </span></span><br><span class="line">    .handler(<span class="keyword">new</span> <span class="title class_">LoggingHandler</span>(LogLevel.INFO)) <span class="comment">// 4.指定 IO 模型 </span></span><br><span class="line">    .channel(NioServerSocketChannel.class) </span><br><span class="line">    .childHandler(<span class="keyword">new</span> <span class="title class_">ChannelInitializer</span>&lt;SocketChannel&gt;() {</span><br><span class="line">         <span class="meta">@Override</span> </span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initChannel</span><span class="params">(SocketChannel ch)</span> {</span><br><span class="line">             <span class="type">ChannelPipeline</span> <span class="variable">p</span> <span class="operator">=</span> ch.pipeline(); </span><br><span class="line">             <span class="comment">//5.可以自定义客户端消息的业务处理逻辑 </span></span><br><span class="line">             p.addLast(<span class="keyword">new</span> <span class="title class_">HelloServerHandler</span>()); </span><br><span class="line">        } </span><br><span class="line">    }); </span><br><span class="line">    <span class="comment">// 6.绑定端口,调用 sync 方法阻塞知道绑定完成 </span></span><br><span class="line">    <span class="type">ChannelFuture</span> <span class="variable">f</span> <span class="operator">=</span> b.bind(port).sync();</span><br><span class="line">    <span class="comment">// 7.阻塞等待直到服务器Channel关闭(closeFuture()方法获取Channel 的CloseFuture对象,然后调用sync()方法) </span></span><br><span class="line">    f.channel().closeFuture().sync(); </span><br><span class="line">} <span class="keyword">finally</span> { </span><br><span class="line">    <span class="comment">//8.优雅关闭相关线程组资源 </span></span><br><span class="line">    bossGroup.shutdownGracefully(); </span><br><span class="line">    workerGroup.shutdownGracefully(); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理 </span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>); </span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(); </span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：ServerBootstrap </span></span><br><span class="line">    <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup)</span><br><span class="line">    .handler(<span class="keyword">new</span> <span class="title class_">LoggingHandler</span>(LogLevel.INFO))  <span class="comment">// (非必备)打印日志  </span></span><br><span class="line">    .channel(NioServerSocketChannel.class) <span class="comment">// 4.指定 IO 模型 </span></span><br><span class="line">    .childHandler(<span class="keyword">new</span> <span class="title class_">ChannelInitializer</span>&lt;SocketChannel&gt;() {</span><br><span class="line">         <span class="meta">@Override</span> </span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initChannel</span><span class="params">(SocketChannel ch)</span> {</span><br><span class="line">             <span class="type">ChannelPipeline</span> <span class="variable">p</span> <span class="operator">=</span> ch.pipeline(); </span><br><span class="line">             <span class="comment">//5.可以自定义客户端消息的业务处理逻辑 </span></span><br><span class="line">             p.addLast(<span class="keyword">new</span> <span class="title class_">HelloServerHandler</span>()); </span><br><span class="line">        } </span><br><span class="line">    }); </span><br><span class="line">    <span class="comment">// 6.绑定端口,调用 sync 方法阻塞知道绑定完成 </span></span><br><span class="line">    <span class="type">ChannelFuture</span> <span class="variable">f</span> <span class="operator">=</span> b.bind(port).sync();</span><br><span class="line">    <span class="comment">// 7.阻塞等待直到服务器Channel关闭(closeFuture()方法获取Channel 的CloseFuture对象,然后调用sync()方法) </span></span><br><span class="line">    f.channel().closeFuture().sync(); </span><br><span class="line">} <span class="keyword">finally</span> { </span><br><span class="line">    <span class="comment">//8.优雅关闭相关线程组资源 </span></span><br><span class="line">    bossGroup.shutdownGracefully(); </span><br><span class="line">    workerGroup.shutdownGracefully(); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 
@@ -311,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/" data-id="clexi5gwl004284v613fyehph" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/" data-id="clflvriw8003zv4v67g470jmu" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -387,9 +387,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
 
 

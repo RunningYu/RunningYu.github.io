@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png">
 <meta property="article:published_time" content="2022-11-10T02:48:08.504Z">
-<meta property="article:modified_time" content="2022-11-10T02:50:27.345Z">
+<meta property="article:modified_time" content="2023-03-17T04:42:55.956Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="微服务">
 <meta property="article:tag" content="redis">
@@ -70,9 +70,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -173,7 +173,7 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir 7001 7002 7003</span><br></pre></td></tr></tbody></table></figure>
 
 <p>如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/4cf724d39ef5484a9eab3d9b064fe44f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/4cf724d39ef5484a9eab3d9b064fe44f.png" alt="img"></p>
 <p>2）恢复原始配置</p>
 <p>修改redis-6.2.4/redis.conf文件，将其中的持久化模式改为默认的RDB模式，AOF保持关闭状态。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启RDB</span><br><span class="line"># save ""</span><br><span class="line">save 3600 1</span><br><span class="line">save 300 100</span><br><span class="line">save 60 10000</span><br><span class="line"></span><br><span class="line"># 关闭AOF</span><br><span class="line">appendonly no</span><br></pre></td></tr></tbody></table></figure>
@@ -204,9 +204,9 @@
 <h2 id="4-开启主从关系"><a href="#4-开启主从关系" class="headerlink" title="4.开启主从关系"></a>4.开启主从关系</h2><p>现在三个实例还没有任何关系，要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。</p>
 <p>有临时和永久两种模式：</p>
 <ul>
-<li><p>修改配置文件（永久生效）</p>
+<li><p>修改配置文件（<mark>永久生效</mark>）</p>
 <ul>
-<li>在redis.conf中添加一行配置：<code>slaveof &lt;masterip&gt; &lt;masterport&gt;</code></li>
+<li>在redis.conf中添加一行配置：<font color="blue"><code>slaveof &lt;masterip&gt; &lt;masterport&gt;</code></font></li>
 </ul>
 </li>
 <li><p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
@@ -244,12 +244,12 @@
 <p><img src="https://img-blog.csdnimg.cn/5cb9aa1893bb409c8a65259d8dd094da.png" alt="img"></p>
 <p> <img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p> <img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clexi5gyn00a384v63t7uaoyz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clflvriy600apv4v60etq7v8i" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -325,9 +325,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
 
 

@@ -5,24 +5,28 @@
   
   <title>Sentinel-认识和(本地)安装sentinel | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：https:&#x2F;&#x2F;sentinelguard.io&#x2F;zh-cn&#x2F;index.html Sentinel 具有以下特征: •丰富的应用场景：Sentinel 承接了阿里巴巴近 10 年的双十一大促流量的核心场景，例如秒杀（即突发流量控制在系统容量可以承受的范围）、消息削峰填谷、集群流量控制、实时熔断下游不可用应用等。 •完备的实时监控：">
+  <meta name="description" content="首先先了解一下雪崩问题：   如何避免因服务故障引起的雪崩问题？  超时处理：  我们会给业务设置超时时间，如果一个业务执行时超过了这个时间还是没有给出响应，我们就立即释放资源，返回异常信息，从而避免无休止的等待导致资源耗尽，避免雪崩   线程隔离：  将每一个服务隔离开，设置单独一个线程池，这样呢，一旦一个业务出现了故障，它也只是把这一个线程池里的资源耗尽，而不会导致整个tomcat资源耗尽">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sentinel-认识和(本地)安装sentinel">
 <meta property="og:url" content="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：https:&#x2F;&#x2F;sentinelguard.io&#x2F;zh-cn&#x2F;index.html Sentinel 具有以下特征: •丰富的应用场景：Sentinel 承接了阿里巴巴近 10 年的双十一大促流量的核心场景，例如秒杀（即突发流量控制在系统容量可以承受的范围）、消息削峰填谷、集群流量控制、实时熔断下游不可用应用等。 •完备的实时监控：">
+<meta property="og:description" content="首先先了解一下雪崩问题：   如何避免因服务故障引起的雪崩问题？  超时处理：  我们会给业务设置超时时间，如果一个业务执行时超过了这个时间还是没有给出响应，我们就立即释放资源，返回异常信息，从而避免无休止的等待导致资源耗尽，避免雪崩   线程隔离：  将每一个服务隔离开，设置单独一个线程池，这样呢，一旦一个业务出现了故障，它也只是把这一个线程池里的资源耗尽，而不会导致整个tomcat资源耗尽">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1139e40162ce4a62bcadc2a186bcb714.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/886685dbe38a4d42b6057d9cf4887350.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/88671edda4e64363919a6273c6805780.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cf6b35737bc24c509745f945d9fe8772.png">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20237b6177d541998fa970b5b2fb9ba1~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae2fa1d0ac60466a92186098af87f490~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2083e797b72e41a69fbc5e52b3077951~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/676c94cd816c4b2d95f99b8a3572d2ac~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="article:published_time" content="2022-11-09T16:20:33.017Z">
-<meta property="article:modified_time" content="2023-02-09T08:59:42.908Z">
+<meta property="article:modified_time" content="2023-03-08T13:32:47.795Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="微服务">
 <meta property="article:tag" content="Sentinel">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20237b6177d541998fa970b5b2fb9ba1~tplv-k3u1fbpfcp-zoom-1.image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/1139e40162ce4a62bcadc2a186bcb714.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -56,9 +60,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -122,11 +126,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：<a target="_blank" rel="noopener" href="https://sentinelguard.io/zh-cn/index.html" title="https://sentinelguard.io/zh-cn/index.html">https://sentinelguard.io/zh-cn/index.html</a></p>
+        <h3 id="首先先了解一下雪崩问题："><a href="#首先先了解一下雪崩问题：" class="headerlink" title="首先先了解一下雪崩问题："></a>首先先了解一下雪崩问题：</h3><p><img src="https://img-blog.csdnimg.cn/1139e40162ce4a62bcadc2a186bcb714.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/886685dbe38a4d42b6057d9cf4887350.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/88671edda4e64363919a6273c6805780.png" alt="img"></p>
+<p>如何避免因服务故障引起的雪崩问题？</p>
+<ul>
+<li><p>超时处理：</p>
+<ul>
+<li>我们会给业务设置超时时间，如果一个业务执行时超过了这个时间还是没有给出响应，我们就立即释放资源，返回异常信息，从而避免无休止的等待导致资源耗尽，避免雪崩</li>
+</ul>
+</li>
+<li><p>线程隔离：</p>
+<ul>
+<li>将每一个服务隔离开，设置单独一个线程池，这样呢，一旦一个业务出现了故障，它也只是把这一个线程池里的资源耗尽，而不会导致整个tomcat资源耗尽</li>
+</ul>
+</li>
+<li><p>降级熔断：</p>
+<ul>
+<li>我们会去统计一个业务的正常请求和异常请求的比例，如果异常请求的比例过高，我们会认为，这个请求或业务会比较危险，我们就可以阻止这个业务的请求，快速失败，释放资源，从而避免雪崩问题发生。在这个业务恢复正常以后，我才会放心访问这个业务的请求</li>
+</ul>
+</li>
+</ul>
+<h3 id="服务保护技术对比"><a href="#服务保护技术对比" class="headerlink" title="服务保护技术对比"></a>服务保护技术对比</h3><p><img src="https://img-blog.csdnimg.cn/cf6b35737bc24c509745f945d9fe8772.png" alt="img"></p>
+<p>Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：<a target="_blank" rel="noopener" href="https://sentinelguard.io/zh-cn/index.html" title="https://sentinelguard.io/zh-cn/index.html">https://sentinelguard.io/zh-cn/index.html</a></p>
 <p>Sentinel 具有以下特征:</p>
 <p>•<strong>丰富的应用场景</strong>：Sentinel 承接了阿里巴巴近 10 年的双十一大促流量的核心场景，例如秒杀（即突发流量控制在系统容量可以承受的范围）、消息削峰填谷、集群流量控制、实时熔断下游不可用应用等。</p>
 <p>•<strong>完备的实时监控</strong>：Sentinel 同时提供实时的监控功能。您可以在控制台中看到接入应用的单台机器秒级数据，甚至 500 台以下规模的集群的汇总运行情况。</p>
-<p>•<strong>广泛的开源生态</strong>：Sentinel 提供开箱即用的与其它开源框架/库的整合模块，例如与 Spring Cloud、Dubbo、gRPC 的整合。您只需要引入相应的依赖并进行简单的配置即可快速地接入 Sentinel。</p>
+<p>•<strong>广泛的开源生态</strong>：Sentinel 提供<strong>开箱即用</strong>的与其它开源框架/库的整合模块，例如与 Spring Cloud、Dubbo、gRPC 的整合。您只需要引入相应的依赖并进行简单的配置即可快速地接入 Sentinel。</p>
 <p>•<strong>完善的</strong> <strong>SPI</strong> <strong>扩展点</strong>：Sentinel 提供简单易用、完善的 SPI 扩展接口。您可以通过实现扩展接口来快速地定制逻辑。例如定制规则管理、适配动态数据源等。</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20237b6177d541998fa970b5b2fb9ba1~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae2fa1d0ac60466a92186098af87f490~tplv-k3u1fbpfcp-zoom-1.image"></p>
@@ -136,7 +162,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="clexi5gyg009d84v6chfa1nb2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="clflvriy000a4v4v60re53d0t" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -212,9 +238,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
 
 

@@ -17,7 +17,6 @@
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54b101fabd25411aada38a0d4bf707f7~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97823625e9e74820b861218b2a14d764~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="og:image" content="http://example.com/.com//">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b83a41a21ac44b8ba1bb160d05dfb0ad~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a08f04fd4074946bc7e792a8722dc6d~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2687fedd3364fabbefedb2c55c6289a~tplv-k3u1fbpfcp-zoom-1.image">
@@ -25,7 +24,7 @@
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ab02a4a307ec45f888e27b2cda2a30f6~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4aabf0e2fdbe468b9434e69eda633850~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="article:published_time" content="2022-11-07T01:24:15.702Z">
-<meta property="article:modified_time" content="2022-11-07T01:26:05.004Z">
+<meta property="article:modified_time" content="2023-03-10T04:35:47.257Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="Elasticsearch">
 <meta name="twitter:card" content="summary">
@@ -63,9 +62,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -138,7 +137,7 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">{</span><br><span class="line">  "settings": {</span><br><span class="line">    "analysis": {</span><br><span class="line">      "analyzer": { </span><br><span class="line">        "my_analyzer": { </span><br><span class="line">          "tokenizer": "ik_max_word",</span><br><span class="line">          "filter": "py"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "filter": {</span><br><span class="line">        "py": { </span><br><span class="line">          "type": "pinyin",</span><br><span class="line">          "keep_full_pinyin": false,</span><br><span class="line">          "keep_joined_full_pinyin": true,</span><br><span class="line">          "keep_original": true,</span><br><span class="line">          "limit_first_letter_length": 16,</span><br><span class="line">          "remove_duplicated_term": true,</span><br><span class="line">          "none_chinese_pinyin_tokenize": false</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "name":{</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "my_analyzer"</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
-<h1 id="测试方式1："><a href="#测试方式1：" class="headerlink" title="测试方式1："></a>测试方式1：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
+<h1 id="测试方式1："><a href="#测试方式1：" class="headerlink" title="测试方式1："></a>测试方式1：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式1</span><br><span class="line">POST /test/_analyze</span><br><span class="line">{</span><br><span class="line">  "text": ["如家酒店还不错"],</span><br><span class="line">  "analyzer": "my_analyzer"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
@@ -150,8 +149,6 @@
 <h1 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h1><pre><code>    问题：当我用自定义的拼音分词器去搜索一段又狮子的中文时，却也搜出了库里面的的虱子，因为“狮子”和“虱子”有着相同的拼音，而拼音分词器就是可以将相同拼音的中文都搜出来
 </code></pre>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a08f04fd4074946bc7e792a8722dc6d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<pre><code> ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f77f4d4864aa4be4b88d785d04561117~tplv-k3u1fbpfcp-zoom-1.image)![](&lt;&gt; "点击并拖拽以移动")
-</code></pre>
 <p>解决：</p>
 <pre><code>  为了避免搜索到同拼音字，搜索时不要用拼音分词器
 </code></pre>
@@ -171,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clexi5gwd003f84v681lf3bpt" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clflvriw5003pv4v6de511nfq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -247,9 +244,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
 
 

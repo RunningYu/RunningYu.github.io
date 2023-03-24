@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://example.com/images/image-20230208162844861.png">
 <meta property="og:image" content="http://example.com/images/image-20230208163704237.png">
 <meta property="article:published_time" content="2023-02-08T07:29:48.506Z">
-<meta property="article:modified_time" content="2023-02-08T09:25:56.180Z">
+<meta property="article:modified_time" content="2023-03-09T00:47:17.920Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="Nacos">
 <meta name="twitter:card" content="summary">
@@ -53,9 +53,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -119,7 +119,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="先分析为何要用权重设置："><a href="#先分析为何要用权重设置：" class="headerlink" title="先分析为何要用权重设置："></a>先分析为何要用权重设置：</h2><p>​		集群优先的负载均衡，不过呢，我们部署的时候啊，可能会存在这么一种情况，因为企业里服务器设备啊，会更新迭代，有一些机器呢，性能比较好，还有一些属于是祖传设备了，性能非常的差，可以说是老弱病残，这个时候呢，我们肯定是希望这些性能好的机器，它承担更多的用户请求，而那些性能差一点的，自然是承担少一点的请求，正所谓能者多劳嘛。但是我们目前看来，NacosRule做到的是集群优先，而后做随机，当用户请求来了以后，它可不管你是性格好的还是差，这个身强力壮的还是老弱病残拉过来就一顿造，那这个时候那些性能差的肯定就会出问题。那么我们该怎样去控制不同服务它的一个请求量呢？哎，Nacos，给我们提供了一个权重的配置，通过修改服务实力的权重，可以控制访问频率，权重越大，访问到的频率就越高，那我们就可以把性能好的机器全都设得大一点，性能差一些呢，设置的小一点。</p>
+        <h2 id="先分析为何要用权重设置："><a href="#先分析为何要用权重设置：" class="headerlink" title="先分析为何要用权重设置："></a>先分析为何要用权重设置：</h2><p>​		集群优先的负载均衡，不过呢，我们部署的时候啊，可能会存在这么一种情况，因为企业里服务器设备啊，会更新迭代，有一些机器呢，性能比较好，还有一些属于是祖传设备了，性能非常的差，可以说是老弱病残，这个时候呢，我们肯定是希望这些性能好的机器，它承担更多的用户请求，而那些性能差一点的，自然是承担少一点的请求，正所谓能者多劳嘛。但是我们目前看来，NacosRule做到的是集群优先，而后做随机，当用户请求来了以后，它可不管你是性格好的还是差，这个身强力壮的还是老弱病残拉过来就一顿造，那这个时候那些性能差的肯定就会出问题。那么我们该怎样去控制不同服务它的一个请求量呢？哎，Nacos，给我们提供了一个权重的配置，通过修改服务实力的权重，可以控制访问频率，权重越大，访问到的频率就越高，那我们就可以<mark>把性能好的机器全都设得大一点，性能差一些呢，设置的小一点。</mark></p>
 <p><img src="/../../images/image-20230208162844861.png" alt="image-20230208162844861"></p>
 <p><strong>权重设置为0时</strong>，该实例就不会被访问了，也就是说权重调整0时，它压根儿就不会被访问。</p>
 <h2 id="那设置权重为0有什么作用？"><a href="#那设置权重为0有什么作用？" class="headerlink" title="那设置权重为0有什么作用？"></a><font color="red">那设置权重为0有什么作用？</font></h2><p>​		我们以前一个服务，我们想要对它做一个版本的升级，我们该怎么办？我们是不是要把它重启啊，但是你光天化日之下，你去重启个服务器，是不好的，因为用户都还在访问，你一重启别人就反应不了“哎，你这服务怎么挂了？”，就有问题了！对不对，所以说呢，我们是不能随便重启的。往往呀，每次版本升级都是搞得跟那个什么谍战片一样，要找一个月黑风高无人之夜是吧，然后等用户都下线儿了，我们偷偷的把服务停机，然后呢，去做版本的一个升级。但是你想看，如果现在有了这个权重，我可不可以这么做？我有多个服务器，8081、8082、8083各自部署，我先将8081这个服务的权重调成零。然后呢，大白天也没事儿啊，这个时候呢，渐渐的8081就不承担用户请求了，那这个时候我对它做停机，用户就不会有感知了，那么这个时候对8081停机完了以后，就可以去做一些这个版本的升级，升级完成以后我再重启，我给它权重先不着急调太大，先调小一点，调到零点多，0.01什么之类的，这个时候呢，我们放出少数用户进来做个测试，看看行不行，如果没什么问题，我们就可以逐渐扩大比例，一次升级，这个时候用户是无感知的，你可以做到平滑升级。非常优雅，那么这样呢，这种升级方式啊，其实就是比较比较顺滑这种方式了，你就不用去大半夜去加班的去搞了。所以呢，这是我们这个权重的一些作用。</p>
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%9D%83%E9%87%8D%E8%AE%BE%E7%BD%AE/" data-id="clexi5gve000z84v63ik8f9f6" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E6%9D%83%E9%87%8D%E8%AE%BE%E7%BD%AE/" data-id="clflvriuz000hv4v6d7jpgu6g" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
@@ -204,9 +204,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
 
 

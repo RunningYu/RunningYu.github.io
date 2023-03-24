@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://example.com/images/image-20230219162554595.png">
 <meta property="og:image" content="http://example.com/images/image-20230219162329199.png">
 <meta property="article:published_time" content="2023-02-19T08:22:52.808Z">
-<meta property="article:modified_time" content="2023-02-22T08:53:41.517Z">
+<meta property="article:modified_time" content="2023-03-09T13:41:40.336Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -57,9 +57,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -137,12 +137,12 @@
 <ol start="3">
 <li><strong>回收资源</strong></li>
 </ol>
-<p>如果业务代码打开了某个资源，比如数据库连接、网络连接、磁盘文件等，则需要在这段业务代码执行完毕后关闭这项资源。并且，无论是否发生异常，都要尝试关闭这项资源。将关闭资源的代码写在finally块内，可以满足这种需求，即无论是否发生异常，finally块内的代码总会被执行。</p>
+<p>如果业务代码打开了某个资源，比如<mark>数据库连接、网络连接、磁盘文件</mark>等，则需要在这段业务代码执行完毕后关闭这项资源。并且，无论是否发生异常，都要尝试关闭这项资源。将关闭资源的代码写在finally块内，可以满足这种需求，即无论是否发生异常，finally块内的代码总会被执行。</p>
 <h2 id="说一说Java的异常机制？"><a href="#说一说Java的异常机制？" class="headerlink" title="说一说Java的异常机制？"></a>说一说Java的异常机制？</h2><p><strong>参考答案</strong></p>
 <p><strong>关于异常的处理：</strong></p>
-<p>在Java中，处理异常的语句由try、catch、finally三部分组成。其中，try块用于包裹业务代码，catch块用于捕获并处理某个类型的异常，finally块则用于回收资源。当业务代码发生异常时，系统会创建一个异常对象，然后由JVM寻找可以处理这个异常的catch块，并将异常对象交给这个catch块处理。若业务代码打开了某项资源，则可以在finally块中关闭这项资源，因为无论是否发生异常，finally块一定会执行。</p>
+<p>在Java中，处理异常的语句由try、catch、finally三部分组成。其中，<strong>try块用于包裹业务代码，catch块用于捕获并处理某个类型的异常，finally块则用于回收资源</strong>。当业务代码发生异常时，系统会创建一个异常对象，然后由JVM寻找可以处理这个异常的catch块，并将异常对象交给这个catch块处理。若业务代码打开了某项资源，则可以在finally块中关闭这项资源，因为无论是否发生异常，finally块一定会执行。</p>
 <p><strong>关于抛出异常：</strong></p>
-<p>当程序出现错误时，系统会自动抛出异常。除此以外，Java也允许程序主动抛出异常。当业务代码中，判断某项错误的条件成立时，可以使用throw关键字向外抛出异常。在这种情况下，如果当前方法不知道该如何处理这个异常，可以在方法签名上通过throws关键字声明抛出异常，则该异常将交给JVM处理。</p>
+<p>当程序出现错误时，系统会自动抛出异常。除此以外，Java也允许程序主动抛出异常。当业务代码中，判断某项错误的条件成立时，可以使用throw关键字向外抛出异常。在这种情况下，如果当前方法不知道该如何处理这个异常，可以在方法签名上<strong>通过throws关键字声明抛出异常，则该异常将交给JVM处理</strong>。</p>
 <p><strong>关于异常跟踪栈：</strong></p>
 <p>程序运行时，经常会发生一系列方法调用，从而形成方法调用栈。异常机制会导致异常在这些方法之间传播，而异常传播的顺序与方法的调用相反。异常从发生异常的方法向外传播，首先传给该方法的调用者，再传给上层调用者，以此类推。最终会传到main方法，若依然没有得到处理，则JVM会终止程序，并打印异常跟踪栈的信息</p>
 <h2 id="finally是无条件执行的吗？"><a href="#finally是无条件执行的吗？" class="headerlink" title="finally是无条件执行的吗？"></a>finally是无条件执行的吗？</h2><p><strong>参考答案</strong></p>
@@ -184,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/19/interview/%E7%89%9B%E5%AE%A2%E7%BD%91java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clexi5gwn004884v6cp7f7xzn" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/19/interview/%E7%89%9B%E5%AE%A2%E7%BD%91java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clflvriwc004dv4v60hp4afs1" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -260,9 +260,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
 
 

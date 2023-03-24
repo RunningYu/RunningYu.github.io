@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://example.com/2023/01/18/images/0031.jpg">
 <meta property="og:image" content="http://example.com/images/image-20230127095922011.png">
 <meta property="article:published_time" content="2023-01-18T13:41:36.865Z">
-<meta property="article:modified_time" content="2023-02-01T12:35:38.355Z">
+<meta property="article:modified_time" content="2023-03-08T11:52:54.171Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="Netty">
 <meta name="twitter:card" content="summary">
@@ -55,9 +55,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -145,27 +145,28 @@
 <p><strong>注意</strong></p>
 <p>serverBootstrap.option(ChannelOption.SO_RCVBUF, 10) 影响的底层接收缓冲区（即滑动窗口）大小，仅决定了 netty 读取的最小单位，netty 实际每次读取的一般是它的整数倍</p>
 </blockquote>
-<h3 id="1-3-现象分析"><a href="#1-3-现象分析" class="headerlink" title="1.3 现象分析"></a>1.3 现象分析</h3><p>粘包</p>
-<ul>
+<h3 id="1-3-现象分析"><a href="#1-3-现象分析" class="headerlink" title="1.3 现象分析"></a>1.3 现象分析</h3><h4 id="粘包"><a href="#粘包" class="headerlink" title="粘包"></a>粘包</h4><ul>
 <li>现象，发送 abc def，接收 abcdef</li>
 <li>原因<ul>
-<li>应用层：接收方 ByteBuf 设置太大（Netty 默认 1024）  [ 接收方的ByteBuf比较大，但发送的包比较小，容易产生黏包 ]</li>
-<li>滑动窗口：假设发送方 256 bytes 表示一个完整报文，但由于接收方处理不及时且窗口大小足够大，这 256 bytes 字节就会缓冲在接收方的滑动窗口中，<strong>当滑动窗口中缓冲了多个报文就会粘包</strong></li>
-<li>Nagle 算法：会造成粘包   [ Nagle算法 就是想尽多的去发送数据，攒够了一批才发，不想因为数据太少就发送这样速率比较低 ]</li>
+<li>应用层：接收方 ByteBuf 设置太大（Netty 默认 1024）  [ <mark>接收方的ByteBuf比较大，但发送的包比较小，容易产生黏包</mark> ]</li>
+<li>滑动窗口：假设发送方 256 bytes 表示一个完整报文，但由于接收方处理不及时且窗口大小足够大，这 256 bytes 字节就会缓冲在接收方的滑动窗口中，<mark><strong>当滑动窗口中缓冲了多个报文就会粘包</strong></mark></li>
+<li>Nagle 算法：会造成粘包   [<mark> Nagle算法 就是想尽多的去发送数据，攒够了一批才发，不想因为数据太少就发送这样速率比较低</mark> ]</li>
 </ul>
 </li>
 </ul>
-<p>半包</p>
-<ul>
+<h4 id="半包"><a href="#半包" class="headerlink" title="半包"></a>半包</h4><ul>
 <li>现象，发送 abcdef，接收 abc def</li>
 <li>原因<ul>
 <li>应用层：接收方 ByteBuf 小于实际发送数据量</li>
 <li>滑动窗口：假设接收方的窗口只剩了 128 bytes，发送方的报文大小是 256 bytes，这时放不下了，只能先发送前 128 bytes，等待 ack 后才能发送剩余部分，这就造成了半包</li>
-<li>MSS 限制：当发送的数据超过 MSS 限制后，会将数据切分发送，就会造成半包</li>
+<li>MSS 限制：当发送的数据超过 MSS 限制后，会将数据切分发送，就会造成半包<ul>
+<li>MSS 是TCP用来限制<strong>application层最大的发送字节数</strong>，是tcp能发送的分组的最大长度。 MSS 是系统默认的，就是系统TCP / IP栈所能允许的最大包。</li>
 </ul>
 </li>
 </ul>
-<p>综上所述，产生这个黏包、半包，跟网络和应用层都有关系，所以这是TCP编程时不要可回避的问题</p>
+</li>
+</ul>
+<p>综上所述，产生这个黏包、半包，跟网络和应用层都有关系，所以这是TCP编程时不可回避的问题</p>
 <p>本质是因为 <font color="red">TCP 是流式协议，消息无边界</font></p>
 <blockquote>
 <p>滑动窗口</p>
@@ -176,7 +177,7 @@
 <li><p>为了解决此问题，引入了<strong>窗口概念</strong>，窗口大小即决定了无需等待应答而可以继续发送的数据最大值</p>
 <p><img src="/../../images/0051.png"></p>
 </li>
-<li><p>窗口实际就起到一个缓冲区的作用，同时也能起到流量控制的作用</p>
+<li><p>窗口实际就起到一个<mark>缓冲区</mark>的作用，同时也能起到<mark>流量控制</mark>的作用</p>
 <ul>
 <li>图中深色的部分即要发送的数据，高亮的部分即窗口</li>
 <li>窗口内的数据才允许被发送，当应答未到达前，窗口必须停止滑动</li>
@@ -223,7 +224,7 @@
 </li>
 </ul>
 </blockquote>
-<h3 id="1-4-解决方案"><a href="#1-4-解决方案" class="headerlink" title="1.4 解决方案"></a>1.4 解决方案</h3><ol>
+<h3 id="1-4-半包黏包解决方案"><a href="#1-4-半包黏包解决方案" class="headerlink" title="1.4 半包黏包解决方案"></a>1.4 半包黏包解决方案</h3><ol>
 <li>短链接，发一个包建立一次连接，这样连接建立到连接断开之间就是消息的边界，缺点效率太低</li>
 <li>每一条消息采用固定长度，缺点浪费空间</li>
 <li>每一条消息采用分隔符，例如 \n，缺点需要转义</li>
@@ -436,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/18/Netty/Netty03-%E8%BF%9B%E9%98%B6/" data-id="clexi5gvi001c84v69eb14sxm" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/01/18/Netty/Netty03-%E8%BF%9B%E9%98%B6/" data-id="clflvriv9001cv4v61k4m269e" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li></ul>
@@ -512,9 +513,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>159</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>74</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>55</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
     </div>
 
 
