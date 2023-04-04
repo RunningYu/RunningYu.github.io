@@ -45,9 +45,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>75</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -76,508 +76,6 @@
 </div>
 
         <section id="main">
-  
-    <article id="post-云服务器/云服务器上部署一个Springboot的web项目（图文讲解）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:52:39.210Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/">云服务器上部署一个Springboot的web项目（图文讲解）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>（PS：在部署之前，</strong></p>
-<p><strong>1.你的虚拟机需要安装有jdk(这个Centos内部应该自带有，我的就是)和mysql（注意，如果你使用的数据库是8.0版本以上的，则需要安装mysql8.0以上的），没有安装到这两个的先自行去安装好</strong></p>
-<p><strong>2.Linux安装好mysql后，去用sqlyog（或是Navicat或其他）连接你虚拟机的数据库</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2296b37c16204c2c8d38359697a6918d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>1.双击packege，打包项目。（注意，先鼠标选中Maven中的test然后跟着黄色箭头点击(让test被划掉)，使得在打包项目的时候跳过test步骤，不然会执行项目的测试，从而可能改动数据库的原有数据） </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb4c2a5357143c2a45ccf285a6864d4~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>2.找到打包好的项目的所在目录</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eca7a429f81942b5b5f330fcc62ba0be~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>3.（这一步有多种方法，我习惯这一种）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae9faa9689464d1d83694d2b338b8e13~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>4.进入到Linux的相应目录，然后执行最后一条命令来启动springboot项目</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d901c9c4af4ee79a05bafd8bdbcd15~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5859ee35d0744080a9e7a7f867392dda~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>5.启动成功，然后去根据虚拟机的ip端口去访问项目</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba0c92e9585a45c28b10ee909898c3f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>(ps：如果访问超时，则需要去Linux关闭防火墙</p>
-<p>1.首先切换回到 /root/bin目录下</p>
-<p>2.执行命令：systemctl stop firewalld.service（关闭防火墙)</p>
-<p>systemctl disable firewalld.service（关闭防火墙自动启动）</p>
-<p>4.查看防火墙状态：systemctl status firewalld.service（查看防火墙服务状态）</p>
-<p>看到这样就OK了：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ad7c29b91b74c32a0a6beb7cc2fbba6~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>然后再去浏览器访问，便不会超时了</p>
-<p>）</p>
-<p>另一种启动方式，启动过程中不会显示出日志信息，还可用命令将日志信息存到server.log中，或是存到自己创建的文件中也行</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff1b88ebd29c4ba39150042f29a9cbcb~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>这是我保存的日志信息</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/77676acd5dea48d28a875724cda4fe1b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" data-id="clflvriwq005qv4v69p4a905s" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-debug/(实体类没有写get和set方法若的祸啦)No serializer found for class com.example.domain" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:51:20.162Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/">(实体类没有写get和set方法若的祸啦)No serializer found for class com.example.domain</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/debug/">debug</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>报错：<br>No serializer found for class com.example.domain.Men and no properties discovered to create Bean…</p>
-<p>springboot中使用@RestController注解前台页面返回不到对象数据异常<br>异常信息<br>首页控制台会打印如下异常：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/905ba06e04a44e4d9804fc48b3b66b5b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>红色框里详细如下</p>
-<p> No serializer found for class com.example.domain.Men and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: java.util.ArrayList[0])</p>
-<p>原因：实体类没有写有对应的get()和set方法</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0cf9ba46ba3240a8b14b445a75e9b3f2~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>在实体类写上set() 和 get() 方法即可，并在其方法前要有public</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6689833168ec45f58c52a4ec13892692~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/" data-id="clflvrivm002bv4v60cpwejkp" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-debug/service层传来的总是null" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:50:20.353Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/">service层传来的总是null?</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/debug/">debug</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>开始写了四个接口，都没有问题，但是在写第五个接口时不行了，然后更可恶的是，前面的四个也都不行了！这这倒到底是怎么回事呢？接下来给大家分享我的情况：</p>
-<p>报错如下图：在postman中访问接口出现报错</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/090908c0b8c145a68847eb624ad2852d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>上图表示dataSectionService返回是空，问题原因是因为上头注入DataSectionService时定义成了static，切记是这样是不能的，否则就是会报异常，即便你的dao层的返回是正常的，但是在中间service层返回给controller层时是空的了。</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39ddf278b52948f09394d44e41096353~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00f4a73faacc4bfcb329fa07794e4c9d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" data-id="clflvrivo002gv4v6clv4h024" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-debug/Field restTemplate in cn.itcast.order.service.OrderService required a bean of ty" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:49:12.388Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/">Field restTemplate in cn.itcast.order.service.OrderService required a bean of ty</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/debug/">debug</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>错误</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e0b2b4cf586a493bb7762b9241059196~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>这个错说明没有找到<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=restTemplate&amp;spm=1001.2101.3001.7020" title="restTemplate">restTemplate</a>模板，说明没有注入到spring容器中去</p>
-<p>解决：再Applocation上注入即可 </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e68b5eeebb5b4b968a824854ef7f8efa~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/" data-id="clflvrivp002kv4v64zgz8lai" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-springboot/将maven项目改造成springboot项目" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:44:59.004Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/">将maven项目改造成springboot项目</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/springboot/">springboot</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>pom.xml配置之springboot<br>1.1 继承springboot父项目依赖</li>
-</ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.7.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>1.2  插件依赖</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ol start="2">
-<li>启动类配置</li>
-</ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class SquareApplication {</span><br><span class="line">    public static void main(String[] args) {</span><br><span class="line">        SpringApplication.run(SquareApplication.class,args);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ol start="3">
-<li>application.yml</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" data-id="clflvriwn005lv4v6hl8dcrrh" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-云服务器/nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:42:30.851Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/">nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>（本博文的方法对于阿里云和腾讯与服务器都适用 ）</strong></p>
-<p><strong>场景：</strong></p>
-<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： </p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>上图表示项目部署成功，便可以在浏览器上进行访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image">但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
-<p>而我们想项目程序在关闭退出终端后，也一样继续运行，</p>
-<p>这时候需要使用 <strong>nohup</strong> 命令启动（该命令可以在你退出帐户/关闭终端之后继续运行相应的进程）</p>
-<p><strong>输入如下命令：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p> 但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>1、原因</strong></p>
-<p>是因为使用 nohup 会产生日志文件，默认写入到 nohup.out</p>
-<p><strong>2、解决</strong></p>
-<p>将 nohup 的日志输出到 /dev/null，这个目录会让所有到它这的信息自动消失</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &gt; /dev/null 2&gt; /dev/null &amp;</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>其它解决方法：</strong><br>就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &amp; </span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><strong>停止进程</strong></p>
-<p>如果想停止进程运行的话，可通过命令（kill -9 进程号PID）进程号来杀死</p>
-<p>另外也可以使用 ps -def | grep “进程名” 命令来查找PID。</p>
-<p>找到 PID 后，就可以使用 kill PID 来删除。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9  进程号PID</span><br></pre></td></tr></tbody></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="clflvriwm005hv4v66uipfobq" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-springboot/Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
-  <time class="post-time" datetime="2022-11-08T02:39:44.181Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">08</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/mybatisplus/">mybatisplus</a>,<a class="article-category-link" href="/categories/springboot/">springboot</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>问题描述<br>MyBatis无法查询出属性名和数据库字段名不完全相同的数据。</p>
-<p>即：属性名和数据库字段名分别为驼峰命名和下划线命名时查出的数据为NULL。</p>
-<p>问题分析<br>MyBatis默认是属性名和数据库字段名一一对应的，即 </p>
-<blockquote>
-<p>数据库表列：user_name </p>
-<p>实体类属性：user_name</p>
-</blockquote>
-<p>但是java中一般使用驼峰命名 </p>
-<blockquote>
-<p>数据库表列：user_name </p>
-<p>实体类属性：userName</p>
-</blockquote>
-<p>实体类属性：userName</p>
-<p><strong>解决方案 (开启驼峰命名转换)</strong><br>在Spring Boot中，可以通过设置<strong>map-underscore-to-camel-case</strong>属性为true来开启驼峰功能。  </p>
-<p>MyBatis配置： </p>
-<p><strong>application.properties中：</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.configuration.map-underscore-to-camel-case=true</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<p><strong>application.yml中：</strong> </p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  configuration:</span><br><span class="line">    map-underscore-to-camel-case: true</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="clflvriwk005bv4v68qkqgrrn" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
   
     <article id="post-springboot/mybatisplus + 数据库 相关注解" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -625,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" data-id="clflvriwl005ev4v67lqp612e" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/springboot/mybatisplus%20+%20%E6%95%B0%E6%8D%AE%E5%BA%93%20%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/" data-id="clg2epkta005r08v65lw75t2k" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li></ul>
@@ -756,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" data-id="clflvriv60013v4v64ool43f8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/" data-id="clg2epkr7000k08v6gvplcqb4" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
@@ -837,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" data-id="clflvriws005xv4v6fdsf936q" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3/hexo%E4%B8%8A%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" data-id="clg2epktf006808v6eykh860l" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2/" rel="tag">hexo博客</a></li></ul>
@@ -851,10 +349,505 @@
 
 
   
+    <article id="post-elasticsearch/mapping索引属性 &amp; 创建索的操作" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:33:17.980Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/">mapping索引属性 &amp; 创建索的操作</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>概念对比</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="一-mapping索引属性"><a href="#一-mapping索引属性" class="headerlink" title="一. mapping索引属性"></a>一. mapping索引属性</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d5c03e735ed4dcd83fba915c066cdb3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二-索引库的操作"><a href="#二-索引库的操作" class="headerlink" title="二. 索引库的操作"></a>二. 索引库的操作</h1><h2 id="1-创建索引库"><a href="#1-创建索引库" class="headerlink" title="1. 创建索引库"></a>1. 创建索引库</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8c0a579dbdb483a84a112d0f1e0db78~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe320ace6ee740d3b1c269b71a2becad~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>实例：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#创建索引库</span><br><span class="line">PUT /heima</span><br><span class="line">{</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "info": {</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "ik_smart"</span><br><span class="line">      },</span><br><span class="line">      "email": {</span><br><span class="line">        "type": "keyword",</span><br><span class="line">        "index": false</span><br><span class="line">      },</span><br><span class="line">      "name": {</span><br><span class="line">        "type": "object",</span><br><span class="line">        "properties": {</span><br><span class="line">          "firstname": {</span><br><span class="line">            "type": "keyword"</span><br><span class="line">          },</span><br><span class="line">          "lastname": {</span><br><span class="line">            "type": "keyword"</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f29631d07cc4265b1c347cea62657f9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="2-索引库的其他操作（查看，删除，修改（只能添加新的字段））："><a href="#2-索引库的其他操作（查看，删除，修改（只能添加新的字段））：" class="headerlink" title="2. 索引库的其他操作（查看，删除，修改（只能添加新的字段））："></a>2. 索引库的其他操作（<strong>查看，删除，修改（只能添加新的字段</strong>））：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a19018b3b804d24875641aba2283dfe~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9adc29f8d9a74cfebce28a884ff52f8f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>ps:索引库创建好后</p>
+<pre><code>    理论上是可以进行修改的
+
+    但是实际开发中，是**禁止去修改**原有的字段的（**但可以添加新的字段**），因为修改会**对性能的影响是很大**的，可能会导致整个库都不可用
+</code></pre>
+<p>​        </p>
+<p>（实例）代码：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 查询</span><br><span class="line">GET /heima</span><br><span class="line"></span><br><span class="line"># 修改索引库，添加新字段</span><br><span class="line">PUT /heima/_mapping</span><br><span class="line">{</span><br><span class="line">  "properties": {</span><br><span class="line">    "age": {</span><br><span class="line">      "type": "integer"</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># 删除</span><br><span class="line">DELETE /heima</span><br></pre></td></tr></tbody></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="clg2epks8002v08v642tpb879" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/RestClient操作索引库-初始化RestClient" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:32:05.788Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/">RestClient操作索引库-初始化RestClient</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.引入es的RestHighLevelClient依赖：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--elasticsearch--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;7.12.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>2.因为SpringBoot默认的ES版本是7.6.2，所以我们需要覆盖默认的ES版本： </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e5786c69065043e093ba25dbd976d6d7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>3.初始化RestHighLevelClient：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return new RestHighLevelClient(RestClient.builder(</span><br><span class="line">                HttpHost.create("http://192.168.150.101:9200")</span><br><span class="line">));</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef0bee698bbd4d65a9ae016cd3db8af6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient%E6%93%8D%E4%BD%9C%E7%B4%A2%E5%BC%95%E5%BA%93-%E5%88%9D%E5%A7%8B%E5%8C%96RestClient/" data-id="clg2epks3002k08v61tj4fhyj" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:29:24.978Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/">RestAPI实现自动补全 &amp; 案例实现（搜索框输入进行自动补全）</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、RestAPI实现自动补全查询（代码讲解）"><a href="#一、RestAPI实现自动补全查询（代码讲解）" class="headerlink" title="一、RestAPI实现自动补全查询（代码讲解）"></a>一、RestAPI实现自动补全查询（代码讲解）</h1><h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/691a87ed40d74802b9a828ac3e6d9143~tplv-k3u1fbpfcp-zoom-1.image"></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9c9b7ccedcac4942bf81110db9feb355~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/11c56098294b43ef8f5d0e973ba0f217~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b93f6065a15a48209cd50596642890b6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>代码：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">    @Autowired</span><br><span class="line">    private RestHighLevelClient client;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void testSuggestion() throws IOException {</span><br><span class="line">        //1.准备Request</span><br><span class="line">        SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">        //2.准备DSL</span><br><span class="line">        request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                "suggestions",</span><br><span class="line">                SuggestBuilders.completionSuggestion("suggestion")</span><br><span class="line">                        .prefix("hm")</span><br><span class="line">                        .skipDuplicates(true)</span><br><span class="line">                        .size(10)</span><br><span class="line">        ));</span><br><span class="line">        //3.发起请求</span><br><span class="line">        SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">        //4.解析结果</span><br><span class="line">        Suggest suggest = response.getSuggest();</span><br><span class="line">        //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">        CompletionSuggestion suggestions = suggest.getSuggestion("suggestions");</span><br><span class="line">        //4,2 获取options</span><br><span class="line">        List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        for( CompletionSuggestion.Entry.Option option : options){</span><br><span class="line">            String text = option.getText().toString();</span><br><span class="line">            System.out.println(text);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">//        System.out.println(response);</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>其中：</p>
+<p> @Autowired<br>    private RestHighLevelClient client;</p>
+<p>要在项目启动方法里面注入到bean里</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f87a3158ddd345dd91aef1107db73bbd~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二、以下进行黑马旅游网的案例实现自动补全功能："><a href="#二、以下进行黑马旅游网的案例实现自动补全功能：" class="headerlink" title="二、以下进行黑马旅游网的案例实现自动补全功能："></a>二、以下进行黑马旅游网的案例实现自动补全功能：</h1><p>开始时，输入x，不能自动补全</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa557cad6c04bf59cc42408b716f3aa~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>RestAPI实现自动补全：</p>
+<h2 id="（1）在controller层写好接口"><a href="#（1）在controller层写好接口" class="headerlink" title="（1）在controller层写好接口"></a>（1）在controller层写好接口</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e106fbadcc474ebab6cece2e59aa5f68~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping("suggestion")</span><br><span class="line">    public List&lt;String&gt; getSuggestions(@RequestParam("key") String predix){</span><br><span class="line">        return hotelService.getSuggestions(predix);</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="（2）在service层写好"><a href="#（2）在service层写好" class="headerlink" title="（2）在service层写好"></a>（2）在service层写好</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb71b469d2954c14a6c1bbc199626447~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public List&lt;String&gt; getSuggestions(String predix) {</span><br><span class="line">       try {</span><br><span class="line">           //1.准备Request</span><br><span class="line">           SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">           //2.准备DSL</span><br><span class="line">           request.source().suggest(new SuggestBuilder().addSuggestion(</span><br><span class="line">                   "suggestions",</span><br><span class="line">                   SuggestBuilders.completionSuggestion("suggestion")</span><br><span class="line">                           .prefix(predix)</span><br><span class="line">                           .skipDuplicates(true)</span><br><span class="line">                           .size(10)</span><br><span class="line">           ));</span><br><span class="line">           //3.发起请求</span><br><span class="line">           SearchResponse response = client.search(request, RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">           //4.解析结果</span><br><span class="line">           Suggest suggest = response.getSuggest();</span><br><span class="line">           //4.1 根据补全查询名称，获取更全的结果</span><br><span class="line">           CompletionSuggestion suggestions = suggest.getSuggestion("suggestions");</span><br><span class="line">           //4,2 获取options</span><br><span class="line">           List&lt;CompletionSuggestion.Entry.Option&gt; options = suggestions.getOptions();</span><br><span class="line">           //4.3 遍历</span><br><span class="line">           List&lt;String&gt; list = new ArrayList&lt;String&gt;(options.size());</span><br><span class="line">           for( CompletionSuggestion.Entry.Option option : options){</span><br><span class="line">               String text = option.getText().toString();</span><br><span class="line">               System.out.println(text);</span><br><span class="line">               list.add(text);</span><br><span class="line">           }</span><br><span class="line">           return list;</span><br><span class="line">       } catch (IOException e) {</span><br><span class="line">           throw  new RuntimeException();</span><br><span class="line">       }</span><br><span class="line">   }</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="3-重新启动项目"><a href="#3-重新启动项目" class="headerlink" title="(3)重新启动项目"></a>(3)重新启动项目</h2><p>便可以进行自动补全了</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec50f82380f64659a212c21acf7788e9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestAPI%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%90%9C%E7%B4%A2%E6%A1%86%E8%BE%93%E5%85%A5%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%EF%BC%89/" data-id="clg2epks1002f08v65gh8687u" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:28:24.978Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/">设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去"><a href="#设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去" class="headerlink" title="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去"></a>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</h2><p><img src="/../../images/image-20230313225514389.png" alt="image-20230313225514389"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="若business有多个sss值，可进行切割"><a href="#若business有多个sss值，可进行切割" class="headerlink" title="若business有多个sss值，可进行切割"></a>若business有多个sss值，可进行切割</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="进行切割"><a href="#进行切割" class="headerlink" title="进行切割"></a>进行切割</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains("/")){</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split("/");</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       }else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>切割成功</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="clg2epksf003a08v63qa47t2i" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/DSL实现自动补全查询" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:26:59.320Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/">DSL实现自动补全查询</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/DSL/">DSL</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>elasticsearch提供了<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.6/search-suggesters.html" title="Completion Suggester">Completion Suggester</a>查询来实现自动补全功能。这个查询会匹配以用户输入内容开头的词条并返回。为了提高补全查询的效率，对于文档中字段的类型有一些约束：</p>
+<p>• 参与补全查询的字段必须是<strong>completion</strong>类型。</p>
+<pre><code>   • 字段的内容一般是用来补全的多个词条形成的**数组**。
+</code></pre>
+<p>查询语法如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 自动补全查询</span><br><span class="line">GET /test/_search</span><br><span class="line">{</span><br><span class="line">  "suggest": {</span><br><span class="line">    "title_suggest": {</span><br><span class="line">      "text": "s", // 关键字</span><br><span class="line">      "completion": {</span><br><span class="line">        "field": "title", // 补全查询的字段</span><br><span class="line">        "skip_duplicates": true, // 跳过重复的</span><br><span class="line">        "size": 10 // 获取前10条结果</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>测试：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebc7c2dd979d46109816b3b5e157e466~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/DSL%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E6%9F%A5%E8%AF%A2/" data-id="clg2epkrz002608v6dzs2c9mm" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:24:15.702Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="自动补全："><a href="#自动补全：" class="headerlink" title="自动补全："></a>自动补全：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-pinyin" title="GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.">GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.</a></p>
+<h2 id="用初始化的拼音分词器进行分词："><a href="#用初始化的拼音分词器进行分词：" class="headerlink" title="用初始化的拼音分词器进行分词："></a>用初始化的拼音分词器进行分词：</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20550059a1414aeba684b69474dbd00f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>为了实现得到的分词有中文也有拼音，我门需要</p>
+<h1 id="自定义拼音分词器（中文-拼音）"><a href="#自定义拼音分词器（中文-拼音）" class="headerlink" title="自定义拼音分词器（中文 + 拼音）"></a>自定义拼音分词器（中文 + 拼音）</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54b101fabd25411aada38a0d4bf707f7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97823625e9e74820b861218b2a14d764~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">{</span><br><span class="line">  "settings": {</span><br><span class="line">    "analysis": {</span><br><span class="line">      "analyzer": { </span><br><span class="line">        "my_analyzer": { </span><br><span class="line">          "tokenizer": "ik_max_word",</span><br><span class="line">          "filter": "py"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "filter": {</span><br><span class="line">        "py": { </span><br><span class="line">          "type": "pinyin",</span><br><span class="line">          "keep_full_pinyin": false,</span><br><span class="line">          "keep_joined_full_pinyin": true,</span><br><span class="line">          "keep_original": true,</span><br><span class="line">          "limit_first_letter_length": 16,</span><br><span class="line">          "remove_duplicated_term": true,</span><br><span class="line">          "none_chinese_pinyin_tokenize": false</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "name":{</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "my_analyzer"</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h1 id="测试方式1："><a href="#测试方式1：" class="headerlink" title="测试方式1："></a>测试方式1：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式1</span><br><span class="line">POST /test/_analyze</span><br><span class="line">{</span><br><span class="line">  "text": ["如家酒店还不错"],</span><br><span class="line">  "analyzer": "my_analyzer"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h1 id="测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段，-后搜索"><a href="#测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段，-后搜索" class="headerlink" title="测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索"></a><strong>测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b83a41a21ac44b8ba1bb160d05dfb0ad~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式2</span><br><span class="line">#先添加两个 拼音相同的 字段， 后搜索</span><br><span class="line">POST /test/_doc/1</span><br><span class="line">{</span><br><span class="line">  "id": 1,</span><br><span class="line">  "name": "狮子"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">POST /test/_doc/2</span><br><span class="line">{</span><br><span class="line">  "id": 2,</span><br><span class="line">  "name": "虱子"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">GET /test/_search</span><br><span class="line">{</span><br><span class="line">  "query": {</span><br><span class="line">    "match": {</span><br><span class="line">      "name": "shizi"</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h1><pre><code>    问题：当我用自定义的拼音分词器去搜索一段又狮子的中文时，却也搜出了库里面的的虱子，因为“狮子”和“虱子”有着相同的拼音，而拼音分词器就是可以将相同拼音的中文都搜出来
+</code></pre>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a08f04fd4074946bc7e792a8722dc6d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>解决：</p>
+<pre><code>  为了避免搜索到同拼音字，搜索时不要用拼音分词器
+</code></pre>
+<p>​    </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2687fedd3364fabbefedb2c55c6289a~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>删库，重设置和重建索引库，再重新测试上面的测试方式2就可以了</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5c99ca9c04e4707a474d6acbaaf1aa9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>代码：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//删除库</span><br><span class="line">DELETE /test</span><br><span class="line"></span><br><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">{</span><br><span class="line">  "settings": {</span><br><span class="line">    "analysis": {</span><br><span class="line">      "analyzer": { </span><br><span class="line">        "my_analyzer": { </span><br><span class="line">          "tokenizer": "ik_max_word",</span><br><span class="line">          "filter": "py"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "filter": {</span><br><span class="line">        "py": { </span><br><span class="line">          "type": "pinyin",</span><br><span class="line">          "keep_full_pinyin": false,</span><br><span class="line">          "keep_joined_full_pinyin": true,</span><br><span class="line">          "keep_original": true,</span><br><span class="line">          "limit_first_letter_length": 16,</span><br><span class="line">          "remove_duplicated_term": true,</span><br><span class="line">          "none_chinese_pinyin_tokenize": false</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "name":{</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "my_analyzer",</span><br><span class="line">        "search_analyzer": "ik_smart"</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>测试（和上面的测试方式2一样）：</strong></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ab02a4a307ec45f888e27b2cda2a30f6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>总结：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4aabf0e2fdbe468b9434e69eda633850~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="DSL实现自动补全查询："><a href="#DSL实现自动补全查询：" class="headerlink" title="DSL实现自动补全查询："></a>DSL实现自动补全查询：</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/125784439?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22125784439%22,%22source%22:%22QRLYLETITBE%22%7D&amp;ctrtid=H8ap4" title="(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客">(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clg2epkse003808v67xexbiy1" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-elasticsearch/RestClient-多条件聚合" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-07T01:22:10.641Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/">RestClient-多条件聚合</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>,<a class="article-category-link" href="/categories/Elasticsearch/java/">java</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/706377c31d5a4e9b8c4e7f6d2e0c52be~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>在对应的service层里面写：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/327ec6a5daef4bfd9070a4611fae8b4c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6e9cf3f32805433283776afded9729d7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> HotelService里的代码如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public Map&lt;String, List&lt;String&gt;&gt; filters()  {</span><br><span class="line"></span><br><span class="line">        try {</span><br><span class="line">            //1. 准备Request</span><br><span class="line">            SearchRequest request = new SearchRequest("hotel");</span><br><span class="line">            //2. 准备DSL</span><br><span class="line">            //2.1 设置size</span><br><span class="line">            request.source().size(0);</span><br><span class="line">            //2.2 聚合</span><br><span class="line">            buildAggretgaion(request);</span><br><span class="line"></span><br><span class="line">            //3. 发出请求</span><br><span class="line">            SearchResponse response = client.search(request,RequestOptions.DEFAULT);</span><br><span class="line"></span><br><span class="line">            //4. 解析结果</span><br><span class="line">            Map&lt;String,List&lt;String&gt;&gt; result = new HashMap&lt;String, List&lt;String&gt;&gt;();</span><br><span class="line">            Aggregations aggregations = response.getAggregations();</span><br><span class="line">            //4.1 根据品牌（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; brandList = getAddByName(aggregations,"brandAgg");</span><br><span class="line">            result.put("品牌",brandList); //放入map</span><br><span class="line">            //4.2 根据城市（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; cityList = getAddByName(aggregations,"cityList");</span><br><span class="line">            result.put("城市",cityList); //放入map</span><br><span class="line">            //4.3 根据星级（聚合名称）名称获取品牌的结果</span><br><span class="line">            List&lt;String&gt; starList = getAddByName(aggregations,"starList");</span><br><span class="line">            result.put("星级",starList); //放入map</span><br><span class="line"></span><br><span class="line">            return result;</span><br><span class="line"></span><br><span class="line">        } catch (IOException e) {</span><br><span class="line">            throw new RuntimeException();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    //(抽取出来的) 根据名称获取品牌的结果</span><br><span class="line">    private List&lt;String&gt; getAddByName(Aggregations aggregations, String aggName) {</span><br><span class="line">        //4.1 根据聚合名称获取聚合结果</span><br><span class="line">        Terms brandTerms = aggregations.get(aggName);</span><br><span class="line">        //4.2 获取buckets</span><br><span class="line">        List&lt;? extends Terms.Bucket&gt; buckets = brandTerms.getBuckets();</span><br><span class="line">        //4.3 遍历</span><br><span class="line">        List&lt;String&gt; brandList = new ArrayList&lt;String&gt;();</span><br><span class="line">        for(Terms.Bucket bucket : buckets){</span><br><span class="line">            //4.4 获取key</span><br><span class="line">            String key = bucket.getKeyAsString();</span><br><span class="line">            brandList.add(key);</span><br><span class="line"></span><br><span class="line">            System.out.println(key);</span><br><span class="line">        }</span><br><span class="line">        return brandList;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    //抽取出来的 聚合</span><br><span class="line">    private void buildAggretgaion(SearchRequest request) {</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms("brandAgg")</span><br><span class="line">                .field("brand")</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms("cityAgg")</span><br><span class="line">                .field("city")</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">        request.source().aggregation(AggregationBuilders</span><br><span class="line">                .terms("starAgg")</span><br><span class="line">                .field("starName.keyword")</span><br><span class="line">                .size(10)</span><br><span class="line">        );</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/07/elasticsearch/RestClient-%E5%A4%9A%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88/" data-id="clg2epks5002q08v67kp64xbo" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/16/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/16/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -899,9 +892,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>75</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
 
 

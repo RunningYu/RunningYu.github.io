@@ -45,9 +45,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>75</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
      
@@ -76,580 +76,6 @@
 </div>
 
         <section id="main">
-  
-    <article id="post-SpringCloud微服务/Sentinel/授权规则及规则持久化" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:22:22.090Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/">Sentinel-授权规则及规则持久化</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、授权规则"><a href="#一、授权规则" class="headerlink" title="一、授权规则"></a>一、授权规则</h1><p><strong>第1步：添加判断来源逻辑</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b5b579c658f74e349cf4a46b3c6dc291~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>代码：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;</span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class HeaderOriginParser implements RequestOriginParser {</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String parseOrigin(HttpServletRequest request) {</span><br><span class="line"></span><br><span class="line">        //1.获取请求头</span><br><span class="line">        String origin = request.getHeader( "origin" );</span><br><span class="line">        //2.非空判断</span><br><span class="line">        if ( StringUtils.isEmpty( origin ) ) {</span><br><span class="line">            origin = "blank";   //如果是空的就返回一个默认值</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        return origin;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><strong>第2步：编写过滤器–&gt;给网关添加origin头</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9540b33304404f328b31c9161b8ef9a1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>第3步：</strong> 重新启动，访问一个接口</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a5e2e9dc8a4639b95a7c0b97da66c4~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>第4步：</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/851bce58ceb2456db41b0144dcda074b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80eb3929081f4aefba30e4206ede04a8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>第5步：重新范访问上面的接口</p>
-<p>8088是直接范文oder服务的，也就是绕过了网关，但是现在我们已经设置了授权规则，所以直接访问是不行的，你报错如下</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/482f2a45e56343aca62c0b82d30f2881~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 现在我们通过网关来访问，网关的端口设置的是10010，用10010来访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d18b1f049f0417ab4ef1c2734f607b7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 因为网关做了权限的校验，所以需要把权限加上</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f737346485e41babc766c33ce4a48f7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><strong>因此，通过上面的授权规则设置后，通过网关来访问的就可以，而通过浏览器直接访问的就不行</strong></p>
-<p>下面是黑马PPT的笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b351bf12a5fe43b6b588b532968e1d7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/850f51aaa13d41c1b19cb3c7b87b9c9e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eab592a0aed4910971e3c9ba636c0d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id="二、自定义异常结果"><a href="#二、自定义异常结果" class="headerlink" title="二、自定义异常结果"></a>二、自定义异常结果</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b44de8fe5e834c19a60748e8662f26dd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <strong>第1步：</strong> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4e133292990e4c6fb15e1210d175886f~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 代码：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package cn.itcast.order.sentinel;</span><br><span class="line"></span><br><span class="line">import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.BlockException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.FlowException;</span><br><span class="line">import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class SentinelExceptionHandler implements BlockExceptionHandler {</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception {</span><br><span class="line">        String msg = "未知异常";</span><br><span class="line">        int status = 429;</span><br><span class="line"></span><br><span class="line">        if ( e instanceof FlowException ) {</span><br><span class="line">            msg = "请求被限流了";</span><br><span class="line">        } else if ( e instanceof ParamFlowException ) {</span><br><span class="line">            msg = "请求被热点参数限流";</span><br><span class="line">        } else if ( e instanceof DegradeException ) {</span><br><span class="line">            msg = "请求被降级了";</span><br><span class="line">        } else if ( e instanceof AuthorityException ) {</span><br><span class="line">            msg = "没有权限访问";</span><br><span class="line">            status = 401;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        response.setContentType( "application/json;charset=utf-8" );</span><br><span class="line">        response.setStatus( status );</span><br><span class="line">        response.getWriter().println( "{"msg": " + msg +", "status": " + status + "}" );</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p><strong>第2步：</strong> 重启微服务，然后浏览器访问接口</p>
-<p><strong>第3步：</strong> 在sentinel中给端口设置响应的规则进行测试</p>
-<p>（1）新增授权规则 </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/240faee0e7694cf7947401b226d8c933~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p>（2）新增流控规则</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef7c802314174e49a213ef23bdb29528~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> 下面是黑马PPT笔记</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/76ca017f596d4f24be8956443191ce4a~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/099ca98c8d5b4bbfa6773e99791b1357~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40a2dc2084784278b7327691475f6347~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3de8bab8500d4a97b2490d67c276d691~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h1 id="三、规则持久化"><a href="#三、规则持久化" class="headerlink" title="三、规则持久化"></a>三、规则持久化</h1><p>这一节知识就没有详细的操作笔记，需要观看黑马教程视频如下链接：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=146&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili">高级篇Day1-04-授权规则及规则持久化_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<p><strong>前言：</strong></p>
-<p><strong>当我们服务重启，我们所配的所有规则就会丢失，因为sentinel会默认把这些规则保存在内存里，重启就自然丢失了。而在生产的环境下 肯定是不能容忍这样的问题的。所以我们就需要学习怎么将****sentinel的规则持久化。</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9fee22491fb24e4790646e3160c4450b~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21f7ae7d47244927a44627937b075cb6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/456e266b724743aa8a2ed42b70c57bf7~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5144409040ff4be2af188f8c376082bb~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e50c75a61c044a8b4f0c51ba43a1bdd~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/763c66ee38ef4265bfaef1619a950931~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1794f451b3e247ceba1104df2869efe6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></h3><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93b5c98c80e245b6b31ece62385982b6~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5cb43090984314a238cd2ad2507edf~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a936beac99946e6a3afb2669ff052d9~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/37820802305143d5b38febbda0ff5aa1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7762b122a81e4381a4be27d88581eda0~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/525f945958194209835152ba1c4f188e~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf6c39ffdf904508ad6e409a5d8b85b1~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f5b1ce4ac9840ccac06ec19e94f2e02~tplv-k3u1fbpfcp-zoom-1.image"><img src="/.com//" title="点击并拖拽以移动"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E6%8E%88%E6%9D%83%E8%A7%84%E5%88%99%E5%8F%8A%E8%A7%84%E5%88%99%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clflvrixy009yv4v67z6895iz" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringCloud微服务/Sentinel/认识和(本地)安装sentinel" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:20:33.017Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/">Sentinel-认识和(本地)安装sentinel</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="首先先了解一下雪崩问题："><a href="#首先先了解一下雪崩问题：" class="headerlink" title="首先先了解一下雪崩问题："></a>首先先了解一下雪崩问题：</h3><p><img src="https://img-blog.csdnimg.cn/1139e40162ce4a62bcadc2a186bcb714.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/886685dbe38a4d42b6057d9cf4887350.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/88671edda4e64363919a6273c6805780.png" alt="img"></p>
-<p>如何避免因服务故障引起的雪崩问题？</p>
-<ul>
-<li><p>超时处理：</p>
-<ul>
-<li>我们会给业务设置超时时间，如果一个业务执行时超过了这个时间还是没有给出响应，我们就立即释放资源，返回异常信息，从而避免无休止的等待导致资源耗尽，避免雪崩</li>
-</ul>
-</li>
-<li><p>线程隔离：</p>
-<ul>
-<li>将每一个服务隔离开，设置单独一个线程池，这样呢，一旦一个业务出现了故障，它也只是把这一个线程池里的资源耗尽，而不会导致整个tomcat资源耗尽</li>
-</ul>
-</li>
-<li><p>降级熔断：</p>
-<ul>
-<li>我们会去统计一个业务的正常请求和异常请求的比例，如果异常请求的比例过高，我们会认为，这个请求或业务会比较危险，我们就可以阻止这个业务的请求，快速失败，释放资源，从而避免雪崩问题发生。在这个业务恢复正常以后，我才会放心访问这个业务的请求</li>
-</ul>
-</li>
-</ul>
-<h3 id="服务保护技术对比"><a href="#服务保护技术对比" class="headerlink" title="服务保护技术对比"></a>服务保护技术对比</h3><p><img src="https://img-blog.csdnimg.cn/cf6b35737bc24c509745f945d9fe8772.png" alt="img"></p>
-<p>Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：<a target="_blank" rel="noopener" href="https://sentinelguard.io/zh-cn/index.html" title="https://sentinelguard.io/zh-cn/index.html">https://sentinelguard.io/zh-cn/index.html</a></p>
-<p>Sentinel 具有以下特征:</p>
-<p>•<strong>丰富的应用场景</strong>：Sentinel 承接了阿里巴巴近 10 年的双十一大促流量的核心场景，例如秒杀（即突发流量控制在系统容量可以承受的范围）、消息削峰填谷、集群流量控制、实时熔断下游不可用应用等。</p>
-<p>•<strong>完备的实时监控</strong>：Sentinel 同时提供实时的监控功能。您可以在控制台中看到接入应用的单台机器秒级数据，甚至 500 台以下规模的集群的汇总运行情况。</p>
-<p>•<strong>广泛的开源生态</strong>：Sentinel 提供<strong>开箱即用</strong>的与其它开源框架/库的整合模块，例如与 Spring Cloud、Dubbo、gRPC 的整合。您只需要引入相应的依赖并进行简单的配置即可快速地接入 Sentinel。</p>
-<p>•<strong>完善的</strong> <strong>SPI</strong> <strong>扩展点</strong>：Sentinel 提供简单易用、完善的 SPI 扩展接口。您可以通过实现扩展接口来快速地定制逻辑。例如定制规则管理、适配动态数据源等。</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20237b6177d541998fa970b5b2fb9ba1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae2fa1d0ac60466a92186098af87f490~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2083e797b72e41a69fbc5e52b3077951~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/676c94cd816c4b2d95f99b8a3572d2ac~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E8%AE%A4%E8%AF%86%E5%92%8C(%E6%9C%AC%E5%9C%B0)%E5%AE%89%E8%A3%85sentinel/" data-id="clflvriy000a4v4v60re53d0t" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringCloud微服务/Sentinel/Sentinel-流控效果" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:16:59.292Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/">Sentinel-流控效果</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/">Sentinel</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>流控效果</strong>是指请求达到流控阈值时应该采取的措施，包括三种：</p>
-<p>• 快速失败：达到阈值后，新的请求会被立即拒绝并抛出FlowException异常。是默认的处理方式。</p>
-<p>• warm up：预热模式，对超出阈值的请求同样是拒绝并抛出异常。但这种模式阈值会动态变化,从一个较小值逐渐增加到最大阈值。</p>
-<p>• 排队等待：让所有的请求按照先后次序排队执行，两个请求的间隔不能小于指定时长</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf2acabbe42c4d59ba57ac1746efbe72~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="流控效果-warm-up"><a href="#流控效果-warm-up" class="headerlink" title="流控效果-warm up"></a>流控效果-<strong>warm up</strong></h1><p>warm up也叫<strong>预热</strong>模式，是应对服务冷启动的一种方案。请求阈值初始值是 threshold / coldFactor，持续指定时长后，逐渐提高到threshold值。而coldFactor的默认值是3.</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7cb643747de42fbbf07e67f66382752~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>添加规则：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b2b9033602f45ac80923d9c44f32ec2~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efa48b598b3b40febf2cf3b23e062901~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>借助JMeter测试：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b936da7ff482473bbf59c37958f964dc~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>启动后，通过的会随着预热过程而逐渐变多，拒绝逐渐变少</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97ec69f1667246329b926dcebb2f1b09~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3f8c537aff846ee9ac14d8f6d72fdea~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebe8e5b42e8e4420b84bb1d71852b5f8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>实时监控显示：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ac3aa62e175b4712875072a5b42607fb~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="流控效果-排队等待"><a href="#流控效果-排队等待" class="headerlink" title="流控效果-排队等待"></a>流控效果-排队等待</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2161a4aaf7084c7c94e1d76f620307a0~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/22c88521614944c7bb83341b85a84793~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/238bc1dae1384083b0a05f9b14304147~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d1d18095a7446a8924b68bc99f118a0~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7d27a74a69d34b1b9f866058691107cf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10c1f225aef84934abcc8aa2751928cd~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ba02ec011c24ec7a4c5c5c608f20e36~tplv-k3u1fbpfcp-zoom-1.image"> 排队等待的有点：</p>
-<pre><code>   （1） 发出的QPS是15，但大多数是通过的（10）而其它有的都是放到队列里面去了，小部分是拒绝的。
-
-   （2）而且不管你发出QPS的波动有多么剧烈，我放出的永远是均衡的，同过的都是10。这样对于微服务来说，波动的肯定不比均衡的好，所以这样的作用也是起到了流量整形的作用
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E6%B5%81%E6%8E%A7%E6%95%88%E6%9E%9C/" data-id="clflvrixu009iv4v6h5uu1ujt" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-SpringCloud微服务/远程调用/RestTemplate远程调用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/RestTemplate%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:15:02.530Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/RestTemplate%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">RestTemplate远程调用</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>,<a class="article-category-link" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">远程调用</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b15ec093f4414539b6d4c1d5b0b0c3cf~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363d9e0f524245e8937672f4f6609239~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 步骤 1：注册RestTemplate</p>
-<p>在order-service的OrderApplication中注册RestTemplate</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/afb47de2b56a46dd8bc2621feac8c81e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class SquareApplication {</span><br><span class="line">    public static void main(String[] args) {</span><br><span class="line">        SpringApplication.run(SquareApplication.class,args);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 创建RestTemplate 并注入Spring容器</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Bean</span><br><span class="line">    public RestTemplate restTemplate(){</span><br><span class="line">        return new RestTemplate();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf012adbd3b9440d9d15dd2bbc763050~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/RestTemplate%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" data-id="clflvriyd00bfv4v6fsc79naw" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" rel="tag">远程调用</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-GIt/用Git上传项目gitLab（简单笔记）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:13:00.461Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/">用Git上传项目gitLab（简单笔记）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb61fd3a0a2f4d70920108045b60da5b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5427111cce7342eab886c0563819500b~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eaf04def88974008bdb8277f58e49fec~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>如果出错了，看下面：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebe9ad0d2ed7451b9bd50f3134e5256a~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/GIt/%E7%94%A8Git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AEgitLab%EF%BC%88%E7%AE%80%E5%8D%95%E7%AC%94%E8%AE%B0%EF%BC%89/" data-id="clflvriuu000av4v69jg0gjrd" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-GIt/git 提交代码 到 gitee仓库指定文件夹中" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:10:24.900Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/">git 提交代码 到 gitee仓库指定文件夹中</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、创建一个空文件夹"><a href="#一、创建一个空文件夹" class="headerlink" title="一、创建一个空文件夹"></a><strong>一、创建一个空文件夹</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b9fc3c90c93a4adc8e3dc78322e30129~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="二、将gitee仓库地址复制下来"><a href="#二、将gitee仓库地址复制下来" class="headerlink" title="二、将gitee仓库地址复制下来"></a><strong>二、将gitee仓库地址复制下来</strong></h1><p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2464b99947454e96bfe6a00054780a41~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="三、在刚刚新建的空文件夹真打开-Git-Bash-Here"><a href="#三、在刚刚新建的空文件夹真打开-Git-Bash-Here" class="headerlink" title="三、在刚刚新建的空文件夹真打开 Git Bash Here"></a><strong>三、在刚刚新建的空文件夹真打开 Git Bash Here</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/99969c86e67544a7b9d216bd9a52270e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="四、克隆-gitee-仓库"><a href="#四、克隆-gitee-仓库" class="headerlink" title="四、克隆 gitee 仓库"></a><strong>四、克隆 gitee 仓库</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06b6dc19ab3b4d649ef82bddd14d8b91~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/057d656f48ad4b148314963894e33d04~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="五、提交代码"><a href="#五、提交代码" class="headerlink" title="五、提交代码"></a><strong>五、提交代码</strong></h1><h2 id="将想要提交的拖到克隆下来的目录下面"><a href="#将想要提交的拖到克隆下来的目录下面" class="headerlink" title="将想要提交的拖到克隆下来的目录下面"></a>将想要提交的拖到克隆下来的目录下面</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b126314b4374036abd2c31894e19fb1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="六、执行指令"><a href="#六、执行指令" class="headerlink" title="六、执行指令"></a><strong>六、执行指令</strong></h1><p><strong>1. 执行 git add 文件名    （如果是git add .    表示当前目录下的所有内容），注意，add后要一个空格</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>可能会出现如下报错，</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/941d8084850446b697719e9e2f5f472e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>则需要输入 git init  然后回车就好了</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p> 然后再重新执行添加文件就可以了（注意，一定要将目录切换到仓库目录，负责执行命令时会报fatal: pathspec ‘hotel-demo’ did not match any files）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13ae7146357d46df8dc579c28bce7b71~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>2.  执行git <strong><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=commit&amp;spm=1001.2101.3001.7020" title="commit">commit</a></strong> -m “注释的内容”  （ 提交到本地仓库）</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m "注释的内容"</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ad1bbba49ec64fdfb17e0358353c2d1e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>3. 提交代码到 gitee</strong></p>
-<p>执行命令: git remote add origin 远程项目的 Https 地址</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远程项目的 Https 地址</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/21db2300c57e41dd8dcc87632479577e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p>可能有人会报如下错误（没有的话可以忽略） </p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dfcbfdc4a73545c29858ea2ed8b30b3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 解决：执行 git remote rm origin 删除关联的origin的远程库</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9fa0139624d420ab5a298a92f816250~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p> 然后再重新执行 git remote add origin 远程项目的 Https 地址即可</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b306387bd5304e05a851187d6a87c9ea~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>4. git push -u origin master （ 最后这一步就可以推送到自己的仓库了）</strong></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master </span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/789bb4e8738f4111a0e278d2f2deb6b8~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0665d6efe4eb48cb84474db680e01ea1~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>完成 !!</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/GIt/git%20%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%20%E5%88%B0%20gitee%E4%BB%93%E5%BA%93%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD/" data-id="clflvriut0009v4v6gmty484p" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-Docker/docker restart xxx重启容器报错：Error response from daemon Cannot restart container es" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/" class="article-date">
-  <time class="post-time" datetime="2022-11-09T16:09:02.494Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/">docker restart xxx重启容器报错：Error response from daemon Cannot restart container es</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.报错：<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/821e52df48964f178aa83dbc6157dbf4~tplv-k3u1fbpfcp-zoom-1.image" style="zoom:50%;"></p>
-<ol start="2">
-<li><p>原因：重启服务器后，我重启过网络 network 。我想大概是这个影响了 docker　的网络。</p>
-</li>
-<li><p>解决：　重启 docker 服务即可：</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ol start="4">
-<li>重启容器即可成功</li>
-</ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart 容器名</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/396cbd693e724deaa7dfad44cf8a25f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/docker%20restart%20xxx%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%E6%8A%A5%E9%94%99%EF%BC%9AError%20response%20from%20daemon%20Cannot%20restart%20container%20es/" data-id="clflvriuq0005v4v68iio82qb" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
   
     <article id="post-Docker/Docker镜像仓库" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -704,7 +130,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/Docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" data-id="clflvrius0007v4v66ps20hbe" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/Docker/Docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/" data-id="clg2epkqu000308v6eb4ee46h" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li></ul>
@@ -771,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/Docker/Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%98%AF%E6%8A%A5%E9%94%99Error%20response%20from%20daemon%20conflict%20unable%20to%20remove%20repository%20/" data-id="clflvriuo0003v4v6hkz68zq0" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/Docker/Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E6%98%AF%E6%8A%A5%E9%94%99Error%20response%20from%20daemon%20conflict%20unable%20to%20remove%20repository%20/" data-id="clg2epkqx000508v69uuv9b2a" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
@@ -895,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clflvrivj0020v4v6h8izegwv" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/09/SpringSecurity/SpringSecurity%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88/" data-id="clg2epksk003l08v6fvfzdg0w" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -909,10 +335,512 @@
 
 
   
+    <article id="post-云服务器/云服务器上部署一个Springboot的web项目（图文讲解）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:52:39.210Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/">云服务器上部署一个Springboot的web项目（图文讲解）</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>（PS：在部署之前，</strong></p>
+<p><strong>1.你的虚拟机需要安装有jdk(这个Centos内部应该自带有，我的就是)和mysql（注意，如果你使用的数据库是8.0版本以上的，则需要安装mysql8.0以上的），没有安装到这两个的先自行去安装好</strong></p>
+<p><strong>2.Linux安装好mysql后，去用sqlyog（或是Navicat或其他）连接你虚拟机的数据库</strong><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2296b37c16204c2c8d38359697a6918d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>1.双击packege，打包项目。（注意，先鼠标选中Maven中的test然后跟着黄色箭头点击(让test被划掉)，使得在打包项目的时候跳过test步骤，不然会执行项目的测试，从而可能改动数据库的原有数据） </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ebb4c2a5357143c2a45ccf285a6864d4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>2.找到打包好的项目的所在目录</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eca7a429f81942b5b5f330fcc62ba0be~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>3.（这一步有多种方法，我习惯这一种）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae9faa9689464d1d83694d2b338b8e13~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>4.进入到Linux的相应目录，然后执行最后一条命令来启动springboot项目</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d901c9c4af4ee79a05bafd8bdbcd15~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5859ee35d0744080a9e7a7f867392dda~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>5.启动成功，然后去根据虚拟机的ip端口去访问项目</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba0c92e9585a45c28b10ee909898c3f3~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>(ps：如果访问超时，则需要去Linux关闭防火墙</p>
+<p>1.首先切换回到 /root/bin目录下</p>
+<p>2.执行命令：systemctl stop firewalld.service（关闭防火墙)</p>
+<p>systemctl disable firewalld.service（关闭防火墙自动启动）</p>
+<p>4.查看防火墙状态：systemctl status firewalld.service（查看防火墙服务状态）</p>
+<p>看到这样就OK了：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ad7c29b91b74c32a0a6beb7cc2fbba6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>然后再去浏览器访问，便不会超时了</p>
+<p>）</p>
+<p>另一种启动方式，启动过程中不会显示出日志信息，还可用命令将日志信息存到server.log中，或是存到自己创建的文件中也行</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff1b88ebd29c4ba39150042f29a9cbcb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>这是我保存的日志信息</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/77676acd5dea48d28a875724cda4fe1b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AASpringboot%E7%9A%84web%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%EF%BC%89/" data-id="clg2epkt8005o08v68xm20z2b" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-debug/(实体类没有写get和set方法若的祸啦)No serializer found for class com.example.domain" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:51:20.162Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/">(实体类没有写get和set方法若的祸啦)No serializer found for class com.example.domain</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/debug/">debug</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>报错：<br>No serializer found for class com.example.domain.Men and no properties discovered to create Bean…</p>
+<p>springboot中使用@RestController注解前台页面返回不到对象数据异常<br>异常信息<br>首页控制台会打印如下异常：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/905ba06e04a44e4d9804fc48b3b66b5b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>红色框里详细如下</p>
+<p> No serializer found for class com.example.domain.Men and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: java.util.ArrayList[0])</p>
+<p>原因：实体类没有写有对应的get()和set方法</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0cf9ba46ba3240a8b14b445a75e9b3f2~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>在实体类写上set() 和 get() 方法即可，并在其方法前要有public</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6689833168ec45f58c52a4ec13892692~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/debug/(%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%86%99get%E5%92%8Cset%E6%96%B9%E6%B3%95%E8%8B%A5%E7%9A%84%E7%A5%B8%E5%95%A6)No%20serializer%20found%20for%20class%20com.example.domain/" data-id="clg2epkro001o08v6ggn324ta" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-debug/service层传来的总是null" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:50:20.353Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/">service层传来的总是null?</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/debug/">debug</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开始写了四个接口，都没有问题，但是在写第五个接口时不行了，然后更可恶的是，前面的四个也都不行了！这这倒到底是怎么回事呢？接下来给大家分享我的情况：</p>
+<p>报错如下图：在postman中访问接口出现报错</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/090908c0b8c145a68847eb624ad2852d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>上图表示dataSectionService返回是空，问题原因是因为上头注入DataSectionService时定义成了static，切记是这样是不能的，否则就是会报异常，即便你的dao层的返回是正常的，但是在中间service层返回给controller层时是空的了。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39ddf278b52948f09394d44e41096353~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00f4a73faacc4bfcb329fa07794e4c9d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" data-id="clg2epkrt001t08v69d8r3bzl" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-debug/Field restTemplate in cn.itcast.order.service.OrderService required a bean of ty" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:49:12.388Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/">Field restTemplate in cn.itcast.order.service.OrderService required a bean of ty</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/debug/">debug</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>错误</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e0b2b4cf586a493bb7762b9241059196~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>这个错说明没有找到<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=restTemplate&amp;spm=1001.2101.3001.7020" title="restTemplate">restTemplate</a>模板，说明没有注入到spring容器中去</p>
+<p>解决：再Applocation上注入即可 </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e68b5eeebb5b4b968a824854ef7f8efa~tplv-k3u1fbpfcp-zoom-1.image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/debug/Field%20restTemplate%20in%20cn.itcast.order.service.OrderService%20required%20a%20bean%20of%20ty/" data-id="clg2epkrr001r08v62ioh4xn9" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-springboot/将maven项目改造成springboot项目" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:44:59.004Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/">将maven项目改造成springboot项目</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/springboot/">springboot</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>pom.xml配置之springboot<br>1.1 继承springboot父项目依赖</li>
+</ol>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;2.7.0&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>1.2  插件依赖</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ol start="2">
+<li>启动类配置</li>
+</ol>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class SquareApplication {</span><br><span class="line">    public static void main(String[] args) {</span><br><span class="line">        SpringApplication.run(SquareApplication.class,args);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ol start="3">
+<li>application.yml</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/springboot/%E5%B0%86maven%E9%A1%B9%E7%9B%AE%E6%94%B9%E9%80%A0%E6%88%90springboot%E9%A1%B9%E7%9B%AE/" data-id="clg2epktc005w08v6cku99kz3" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-云服务器/nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:42:30.851Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/">nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">云服务器</a>,<a class="article-category-link" href="/categories/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/%E9%83%A8%E7%BD%B2/">部署</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>（本博文的方法对于阿里云和腾讯与服务器都适用 ）</strong></p>
+<p><strong>场景：</strong></p>
+<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： </p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>上图表示项目部署成功，便可以在浏览器上进行访问</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image">但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
+<p>而我们想项目程序在关闭退出终端后，也一样继续运行，</p>
+<p>这时候需要使用 <strong>nohup</strong> 命令启动（该命令可以在你退出帐户/关闭终端之后继续运行相应的进程）</p>
+<p><strong>输入如下命令：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p> 但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>1、原因</strong></p>
+<p>是因为使用 nohup 会产生日志文件，默认写入到 nohup.out</p>
+<p><strong>2、解决</strong></p>
+<p>将 nohup 的日志输出到 /dev/null，这个目录会让所有到它这的信息自动消失</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &gt; /dev/null 2&gt; /dev/null &amp;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>其它解决方法：</strong><br>就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &amp; </span><br></pre></td></tr></tbody></table></figure>
+
+
+<p><strong>停止进程</strong></p>
+<p>如果想停止进程运行的话，可通过命令（kill -9 进程号PID）进程号来杀死</p>
+<p>另外也可以使用 ps -def | grep “进程名” 命令来查找PID。</p>
+<p>找到 PID 后，就可以使用 kill PID 来删除。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9  进程号PID</span><br></pre></td></tr></tbody></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="clg2epktb005t08v62ji10an7" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-springboot/Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="post-time" datetime="2022-11-08T02:39:44.181Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">08</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Spring Boot-MyBatis配置带下划线命名的字段自动转换驼峰命名解决方案</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/mybatisplus/">mybatisplus</a>,<a class="article-category-link" href="/categories/springboot/">springboot</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>问题描述<br>MyBatis无法查询出属性名和数据库字段名不完全相同的数据。</p>
+<p>即：属性名和数据库字段名分别为驼峰命名和下划线命名时查出的数据为NULL。</p>
+<p>问题分析<br>MyBatis默认是属性名和数据库字段名一一对应的，即 </p>
+<blockquote>
+<p>数据库表列：user_name </p>
+<p>实体类属性：user_name</p>
+</blockquote>
+<p>但是java中一般使用驼峰命名 </p>
+<blockquote>
+<p>数据库表列：user_name </p>
+<p>实体类属性：userName</p>
+</blockquote>
+<p>实体类属性：userName</p>
+<p><strong>解决方案 (开启驼峰命名转换)</strong><br>在Spring Boot中，可以通过设置<strong>map-underscore-to-camel-case</strong>属性为true来开启驼峰功能。  </p>
+<p>MyBatis配置： </p>
+<p><strong>application.properties中：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.configuration.map-underscore-to-camel-case=true</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<p><strong>application.yml中：</strong> </p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  configuration:</span><br><span class="line">    map-underscore-to-camel-case: true</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/springboot/Spring%20Boot-MyBatis%E9%85%8D%E7%BD%AE%E5%B8%A6%E4%B8%8B%E5%88%92%E7%BA%BF%E5%91%BD%E5%90%8D%E7%9A%84%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-id="clg2epkt8005l08v66jctbdoe" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatisplus/" rel="tag">mybatisplus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/15/">next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/13/">&amp;laquo; pre</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/15/">next &amp;raquo;</a>
   </nav>
 </section>
         
@@ -957,9 +885,9 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>76</strong><br>分类</div></a>
-      <a href="/tags"><div><strong>57</strong><br>标签</div></a>
+      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>75</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
 
 

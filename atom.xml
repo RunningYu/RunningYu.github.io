@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-23T09:12:20.433Z</updated>
+  <updated>2023-03-27T13:31:01.516Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -18,23 +18,17 @@
   
   <entry>
     <title></title>
-    <link href="http://example.com/2023/03/23/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/other/%E7%94%A8%E5%8F%8B/"/>
-    <id>http://example.com/2023/03/23/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/other/%E7%94%A8%E5%8F%8B/</id>
-    <published>2023-03-23T07:28:32.417Z</published>
-    <updated>2023-03-23T09:12:20.433Z</updated>
+    <link href="http://example.com/2023/03/27/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/QPS/"/>
+    <id>http://example.com/2023/03/27/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/QPS/</id>
+    <published>2023-03-27T13:13:31.090Z</published>
+    <updated>2023-03-27T13:31:01.516Z</updated>
     
-    <content type="html"><![CDATA[<ul><li><p>实习内同，亮点</p></li><li><p>Spring 事务实现</p><ul><li><p>AOP代理</p><p>Spring的事务管理是通过<strong>AOP代理</strong>实现的，对被代理对象的每个方法进行拦截，在方法执行前启动事务，在方法执行完成后根据是否有异常及异常的类型进行提交或回滚。</p></li></ul></li><li><p>cglib，jdk</p></li><li><p>项目用到的异步、高并发 、线程池</p></li><li><p>对IO密集型和计算密集型的理解，如何和线程池的参数搭配</p><ul><li><strong>IO 密集型：</strong>系统运作，大部分的状况是CPU 在等I/O (硬盘/内存)的读/写。 </li><li><strong>CPU 密集型：</strong>大部份时间用来做计算、逻辑判断等CPU 动作的程序称之CPU 密集型。</li></ul></li><li><p>讲垃圾回收器</p></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="性能测试-峰值QPS和计算公式"><a href="#性能测试-峰值QPS和计算公式" class="headerlink" title="性能测试-峰值QPS和计算公式"></a>性能测试-峰值QPS和计算公式</h1><p><strong>峰值QPS和计算公式</strong><br><strong>概述</strong><br>因特网上，经常用每秒查询率来衡量域名系统服务器的机器的性能，其即为QPS。 对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。</p><p>计算关系： QPS = 并发量 / 平均响应时间 并发量 = QPS * 平均响应时间</p><p>通常QPS用来表达和衡量当前系统的负载，也可以用RPS来表示， 我们形容当前系统的运行状态时可以说当前QPS已经达到多少多少了， 在系统环境不变的情况下存在支持的最大QPS，但并不应该用来形容机器的性能。 可以通过提高TPS来提升当前系统的处理能力，来增加最大QPS的支持。 TPS用来形容机器的性能。</p><p><strong>QPS计算原理</strong><br>QPS = req/sec = 请求数/秒</p><p>原理:每天80%的访问集中在20%的时间里，这20%时间叫做峰值时间<br>公式:( 总PV数 * 80% ) / ( 每天秒数 * 20% ) = 峰值时间每秒请求数&gt;(QPS)<br>机器:峰值时间每秒QPS / 单台机器的QPS = 需要的机器<br><strong>实例</strong><br>问:每天300w PV 的在单台机器上，这台机器需要多少QPS？</p><p>答:( 3000000 * 0.8 ) / (86400 * 0.2 ) = 139 (QPS)</p><p>问:如果一台机器的QPS是58，需要几台机器来支持？</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;实习内同，亮点&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Spring 事务实现&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;AOP代理&lt;/p&gt;
-&lt;p&gt;Spring的事务管理是通过&lt;strong&gt;AOP代理&lt;/strong&gt;实现的，对被代理对象的每个方法进行拦截，在方法执行前</summary>
+    <summary type="html">&lt;h1 id=&quot;性能测试-峰值QPS和计算公式&quot;&gt;&lt;a href=&quot;#性能测试-峰值QPS和计算公式&quot; class=&quot;headerlink&quot; title=&quot;性能测试-峰值QPS和计算公式&quot;&gt;&lt;/a&gt;性能测试-峰值QPS和计算公式&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;峰值QPS和计算公式</summary>
       
     
     
@@ -43,26 +37,24 @@
   </entry>
   
   <entry>
-    <title>北京创梦天下科技（游戏）技术一面</title>
-    <link href="http://example.com/2023/03/20/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/9-%E5%8C%97%E4%BA%AC%E5%88%9B%E6%A2%A6%E5%A4%A9%E4%B8%8B%E7%A7%91%E6%8A%80%EF%BC%88%E6%B8%B8%E6%88%8F%EF%BC%89%E6%8A%80%E6%9C%AF%E4%B8%80%E9%9D%A2/"/>
-    <id>http://example.com/2023/03/20/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/9-%E5%8C%97%E4%BA%AC%E5%88%9B%E6%A2%A6%E5%A4%A9%E4%B8%8B%E7%A7%91%E6%8A%80%EF%BC%88%E6%B8%B8%E6%88%8F%EF%BC%89%E6%8A%80%E6%9C%AF%E4%B8%80%E9%9D%A2/</id>
-    <published>2023-03-20T12:29:26.439Z</published>
-    <updated>2023-03-24T01:44:15.994Z</updated>
+    <title></title>
+    <link href="http://example.com/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://example.com/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/</id>
+    <published>2023-03-27T10:14:46.027Z</published>
+    <updated>2023-03-27T11:49:29.811Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="北京创梦天下科技（游戏）技术一面"><a href="#北京创梦天下科技（游戏）技术一面" class="headerlink" title="北京创梦天下科技（游戏）技术一面"></a>北京创梦天下科技（游戏）技术一面</h1><p>时间：2023.3.20 19：30~20:35</p><p>时长：35分钟（视频）</p><h2 id="面试官："><a href="#面试官：" class="headerlink" title="面试官："></a>面试官：</h2><ul><li>自我介绍</li><li>说一下java的数据类型有哪些？</li><li>说一下java基本数据类型的范围</li><li>说一下你对进程和线程的理解</li><li>线程有哪几种状态？</li><li>线程的状态之间是怎么转换的？</li><li>说一下你对HTTP的理解</li><li>HTTP的常见状态码</li><li>HTTP的XX格式（忘了是问什么格式了，没回答上）</li><li>TCP 和 UDP 的区别</li><li>说一下你对黏包的理解</li><li>说一下BIO 和 NIO</li><li>阻塞 和 非阻塞</li><li>一个长度为奇数的数组里，只有一个数是单个的，怎么用O(n)的时间复杂读找出那个数</li><li>怎么乱序输出1到100</li></ul><h2 id="反问："><a href="#反问：" class="headerlink" title="反问："></a>反问：</h2><ul><li>是否是KPI面？</li></ul>]]></content>
+    <content type="html"><![CDATA[<hr><hr><h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。</p><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0pvdXJXb24vaW1hZ2UvbWFzdGVyL0phdmElRTUlQjklQjYlRTUlOEYlOTElRTclQkMlOTYlRTclQTglOEItJUU1JTlGJUJBJUU3JUExJTgwJUU3JTlGJUE1JUU4JUFGJTg2LyVFNCVCQiVCQiVFNSU4QSVBMSVFNyVBRSVBMSVFNyU5MCU4NiVFNSU5OSVBOC5wbmc?x-oss-process=image/format,png" alt="任务管理器"></p><h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。</p><p>与进程不同的是同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p><p>Java 程序天生就是多线程程序，我们可以通过 JMX 来看一下一个普通的 Java 程序有哪些线程，代码如下。</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiThread</span> {</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line"><span class="comment">// 获取 Java 线程管理 MXBean</span></span><br><span class="line"><span class="type">ThreadMXBean</span> <span class="variable">threadMXBean</span> <span class="operator">=</span> ManagementFactory.getThreadMXBean();</span><br><span class="line"><span class="comment">// 不需要获取同步的 monitor 和 synchronizer 信息，仅获取线程和线程堆栈信息</span></span><br><span class="line">ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(<span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">// 遍历线程信息，仅打印线程 ID 和线程名称信息</span></span><br><span class="line"><span class="keyword">for</span> (ThreadInfo threadInfo : threadInfos) {</span><br><span class="line">System.out.println(<span class="string">"["</span> + threadInfo.getThreadId() + <span class="string">"] "</span> + threadInfo.getThreadName());</span><br><span class="line">}</span><br><span class="line">}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>上述程序输出如下（输出内容可能不同，不用太纠结下面每个线程的作用，只用知道 main 线程执行 main 方法即可）：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[6] Monitor Ctrl-Break //监听线程转储或“线程堆栈跟踪”的线程</span><br><span class="line">[5] Attach Listener //负责接收到外部的命令，而对该命令进行执行的并且把结果返回给发送者</span><br><span class="line">[4] Signal Dispatcher // 分发处理给 JVM 信号的线程</span><br><span class="line">[3] Finalizer //在垃圾收集前，调用对象 finalize 方法的线程</span><br><span class="line">[2] Reference Handler //用于处理引用对象本身（软引用、弱引用、虚引用）的垃圾回收的线程</span><br><span class="line">[1] main //main 线程,程序入口</span><br></pre></td></tr></tbody></table></figure><p>从上面的输出内容可以看出：一个 Java 程序的运行是 main 线程和多个其他线程同时运行。</p><h2 id="进程与线程的区别总结"><a href="#进程与线程的区别总结" class="headerlink" title="进程与线程的区别总结"></a>进程与线程的区别总结</h2><p>线程具有许多传统进程所具有的特征，故又称为轻型进程(Light—Weight Process)或进程元；而把传统的进程称为重型进程(Heavy—Weight Process)，它相当于只有一个线程的任务。在引入了线程的操作系统中，通常一个进程都有若干个线程，至少包含一个线程。</p><ul><li><p><strong>根本区别：</strong>进程是操作系统资源分配的基本单位，而线程是处理器任务调度和执行的基本单位</p></li><li><p><strong>资源开销</strong>：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p></li><li><p><strong>包含关系：</strong>如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p></li><li><p><strong>内存分配：</strong>同一进程的线程共享本进程的地址空间和资源，而进程之间的地址空间和资源是相互独立的</p></li><li><p><strong>影响关系：</strong>一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮。</p></li><li><p><strong>执行过程：</strong>每个独立的进程有程序运行的入口、顺序执行序列和程序出口。但是线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</p></li></ul><h2 id="从-JVM-角度说进程和线程之间的关系（重要）"><a href="#从-JVM-角度说进程和线程之间的关系（重要）" class="headerlink" title="从 JVM 角度说进程和线程之间的关系（重要）"></a>从 JVM 角度说进程和线程之间的关系（重要）</h2><h3 id="图解进程和线程的关系"><a href="#图解进程和线程的关系" class="headerlink" title="图解进程和线程的关系"></a>图解进程和线程的关系</h3><p>下图是 Java 内存区域，通过下图我们从 JVM 的角度来说一下线程和进程之间的关系。</p><p><img src="https://img-blog.csdnimg.cn/20191105205545651.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的堆和方法区 (JDK1.8 之后的元空间)资源，但是每个线程有自己的程序计数器、虚拟机栈 和 本地方法栈。</p><h2 id="程序计数器为什么是私有的"><a href="#程序计数器为什么是私有的" class="headerlink" title="程序计数器为什么是私有的?"></a>程序计数器为什么是私有的?</h2><p>程序计数器主要有下面两个作用：</p><ol><li>字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制，如：顺序执行、选择、循环、异常处理。</li><li>在多线程的情况下，程序计数器用于记录当前线程执行的位置，从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了。</li></ol><p>需要注意的是，如果执行的是 native 方法，那么程序计数器记录的是 undefined 地址，只有执行的是 Java 代码时程序计数器记录的才是下一条指令的地址。</p><p>所以，程序计数器私有主要是为了线程切换后能恢复到正确的执行位置。</p><h3 id="虚拟机栈和本地方法栈为什么是私有的"><a href="#虚拟机栈和本地方法栈为什么是私有的" class="headerlink" title="虚拟机栈和本地方法栈为什么是私有的?"></a>虚拟机栈和本地方法栈为什么是私有的?</h3><ul><li><strong>虚拟机栈：</strong>每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表、操作数栈、常量池引用等信息。从方法调用直至执行完成的过程，就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。</li><li><strong>本地方法栈：</strong>和虚拟机栈所发挥的作用非常相似，区别是： 虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务。 在 HotSpot 虚拟机中和 Java 虚拟机栈合二为一。<br>所以，为了保证线程中的局部变量不被别的线程访问到，虚拟机栈和本地方法栈是线程私有的。</li></ul><h2 id="一句话简单了解堆和方法区"><a href="#一句话简单了解堆和方法区" class="headerlink" title="一句话简单了解堆和方法区"></a>一句话简单了解堆和方法区</h2><p>堆和方法区是所有线程共享的资源，其中堆是进程中最大的一块内存，主要用于存放新创建的对象 (所有对象都在这里分配内存)，方法区主要用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p><h2 id="多进程和多线程区别"><a href="#多进程和多线程区别" class="headerlink" title="多进程和多线程区别"></a>多进程和多线程区别</h2><p>多进程：操作系统中同时运行的多个程序</p><p>多线程：在同一个进程中同时运行的多个任务</p><p>举个例子，多线程下载软件，可以同时运行多个线程，但是通过程序运行的结果发现，每一次结果都不一致。 因为多线程存在一个特性：随机性。造成的原因：CPU在瞬间不断切换去处理各个线程而导致的，可以理解成多个线程在抢CPU资源。</p><p>多线程提高CPU使用率</p><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0pvdXJXb24vaW1hZ2UvbWFzdGVyL0phdmElRTUlQjklQjYlRTUlOEYlOTElRTclQkMlOTYlRTclQTglOEItJUU1JTlGJUJBJUU3JUExJTgwJUU3JTlGJUE1JUU4JUFGJTg2LyVFNSVBNCU5QSVFNyVCQSVCRiVFNyVBOCU4Qi5wbmc?x-oss-process=image/format,png" alt="多线程"></p><p>多线程并不能提高运行速度，但可以提高运行效率，让CPU的使用率更高。但是如果多线程有安全问题或出现频繁的上下文切换时，运算速度可能反而更低。</p><h2 id="Java中的多线程"><a href="#Java中的多线程" class="headerlink" title="Java中的多线程"></a>Java中的多线程</h2><p>Java程序的进程里有几个线程：主线程，垃圾回收线程(后台线程)等</p><p>在 Java 中，当我们启动 main 函数时其实就是启动了一个 JVM 的进程，而 main 函数所在的线程就是这个进程中的一个线程，也称主线程。</p><p>Java支持多线程，当Java程序执行main方法的时候，就是在执行一个名字叫做main的线程，可以在main方法执行时，开启多个线程A,B,C，多个线程 main,A,B,C同时执行，相互抢夺CPU，Thread类是java.lang包下的一个常用类,每一个Thread类的对象，就代表一个处于某种状态的线程</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;北京创梦天下科技（游戏）技术一面&quot;&gt;&lt;a href=&quot;#北京创梦天下科技（游戏）技术一面&quot; class=&quot;headerlink&quot; title=&quot;北京创梦天下科技（游戏）技术一面&quot;&gt;&lt;/a&gt;北京创梦天下科技（游戏）技术一面&lt;/h1&gt;&lt;p&gt;时间：2023.3.20 1</summary>
+    <summary type="html">&lt;hr&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;进程和线程&quot;&gt;&lt;a href=&quot;#进程和线程&quot; class=&quot;headerlink&quot; title=&quot;进程和线程&quot;&gt;&lt;/a&gt;进程和线程&lt;/h1&gt;&lt;h2 id=&quot;进程&quot;&gt;&lt;a href=&quot;#进程&quot; class=&quot;headerlink&quot; title=</summary>
       
     
     
     
-    <category term="实习面试" scheme="http://example.com/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="实习面试" scheme="http://example.com/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -87,52 +79,6 @@
     
     
     <category term="java基础" scheme="http://example.com/tags/java%E5%9F%BA%E7%A1%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>九方智投（上海）</title>
-    <link href="http://example.com/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/7-%E4%B9%9D%E6%96%B9%E6%99%BA%E6%8A%95%E3%80%90oc%E3%80%91/"/>
-    <id>http://example.com/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/7-%E4%B9%9D%E6%96%B9%E6%99%BA%E6%8A%95%E3%80%90oc%E3%80%91/</id>
-    <published>2023-03-17T05:57:37.420Z</published>
-    <updated>2023-03-24T01:40:15.923Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="九方智投（上海）技术一面"><a href="#九方智投（上海）技术一面" class="headerlink" title="九方智投（上海）技术一面"></a>九方智投（上海）技术一面</h1><p>日期：2023.3.17 13:00~13:30</p><p>时长：30分钟</p><h2 id="面试官："><a href="#面试官：" class="headerlink" title="面试官："></a>面试官：</h2><ul><li>自我介绍</li><li>介绍一下你这个ES自动补全组件？</li><li>说一下ES的倒排索引？</li><li>说一下你比较熟悉的排序算法，他们之间有什么区别？</li><li>详细说一种排序的实现过程</li><li>让你删除一个链表中的倒数第n个结点，你怎么做？</li><li>说一下并发编程？</li><li>你用过锁吗？说一下ThreadLocal</li><li>说一下MySQL数据库三范式</li><li>说一下数据库的事务？</li><li>数据库的事务可以传递吗？</li><li>数据库的有哪些隔离？默认是哪一种？</li><li>java中集合，如HashMap，HashTable，Vector，ConcurrentHashMap等这些有什么区别？</li><li>假如要你用java的类来实现用户的排名，你怎么弄？</li><li>说一下TCP创建连接的过程（三次握手）</li><li>你了解java虚拟机吗，java创建对象的方式有哪几种？</li><li>说一下垃圾回收器有哪些？</li><li>对象什么时候会被垃圾回收？</li><li>说一下双亲委派机制？</li><li>双亲委派机制的优缺点？</li><li>PC计数器的作用？</li><li>线程跟进程的区别？</li><li>线程之间上下文切换的过程是怎样的？</li><li>Redis 的一般用在哪些场景？(我回答完后)…除了用来做缓存和中间件，你还有用过在其它的场景吗？</li><li>布隆过滤器你有了解吗？</li></ul><h2 id="反问环节："><a href="#反问环节：" class="headerlink" title="反问环节："></a>反问环节：</h2><ul><li>该岗位的负责的业务是怎样的？</li><li>根据我的简历以及结合我这次面试中的情况，面试官你有觉得我哪些存在不足或是有什么建议吗？<ul><li>面试官：你在应用技术上算是比较广了，不过基础这一块其实也是很重要的。我看你的简历，对于一些框架、技术进行了较多的包装，但是基础方面的包装不多，所以我建议你，在技术上的提升的同时，基础也一定要抓牢</li></ul></li><li>略。。。</li></ul><h2 id="九方智投（上海）技术二面"><a href="#九方智投（上海）技术二面" class="headerlink" title="九方智投（上海）技术二面"></a>九方智投（上海）技术二面</h2><p>日期：2023.3.17 16：00 ~ 16：30</p><p>时长：30分钟</p><h2 id="面试官：-1"><a href="#面试官：-1" class="headerlink" title="面试官："></a>面试官：</h2><ul><li><p>自我介绍</p></li><li><p>你在学校加入的实验室除了学习，还有什么？</p></li><li><p>你这个实验室大概有多少人？</p></li><li><p>你们实验室一般会接什么项目，或是老师一般给你带什么项目？</p></li><li><p>你挑一个比较熟悉的项目来介绍一下？</p></li><li><p>为什么考虑到要用ES搜索引擎 ？</p></li><li><p>数据同步用消息队列是吧，那你这个数据一致性你有保证吗？</p></li><li><p>你怎么保证那个RabbitMQ消息队列的消息能被消费者消费到？</p></li><li><p>审核是怎么的？是人工审核对吧？</p></li><li><p>我看到你用Sentinel，你的限流策略是怎样？</p></li><li><p>你用MQ除了用来做数据同步场景之外，还有用到什么其他场景？</p></li><li><p>你们实验室的团队，在做老师项目的时候，功能模块你们是怎么定，怎么分配的，是你分配的还是老师分配的，还是怎样？</p></li><li><p>平时你是在哪里学习？如果你踏入社会了，你有什么学习方式，在技术上的学习和提升怎么去做？</p></li></ul><h2 id="反问："><a href="#反问：" class="headerlink" title="反问："></a>反问：</h2><ul><li>根据我的简历以及结合我这次面试中的情况，面试官你有觉得我哪些存在不足或是有什么建议吗？<ul><li>面试官：我再筛选你的简历的时候，就是看到你会的比较多，也有一定的项目经验这些，所以就选你了。这次我也没有问你基础方面的，不是很了解，但是建议的话，肯定是基础方面也一定要去抓好，其中java基础最重要…</li></ul></li><li>略。。。</li><li></li></ul><h2 id="HR面-谈薪资"><a href="#HR面-谈薪资" class="headerlink" title="HR面 谈薪资"></a>HR面 谈薪资</h2><ul><li>薪资：200/天+ 25餐补/天   <font color="red">【破防】</font><ul><li>破防</li></ul></li><li>工作时间：965</li><li>有节假日礼品赠送，但是实习生和转正员工不太一样，如转正员工500的礼品或是红包，那么实习生就是两三百</li><li>到岗时间：4月3</li><li>实习生offer签约1年，但是中途如果找到更好的了，可以走正常的离职流程就行</li><li>关于转正：<ul><li>应届生或是社招：实习三四个月可以申请转正</li><li>24届实习生：实习12个月可申请转正</li><li>无论是哪一类，到最后转正都主要看能力和实习表现</li></ul></li><li>公司环境：<ul><li>4400平米的健身房<ul><li>常见的健身器材</li><li>桌球</li><li>乒乓球</li><li>篮球</li><li>羽毛球</li></ul></li><li>500平米图书馆</li><li>游泳馆</li></ul></li><li></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;九方智投（上海）技术一面&quot;&gt;&lt;a href=&quot;#九方智投（上海）技术一面&quot; class=&quot;headerlink&quot; title=&quot;九方智投（上海）技术一面&quot;&gt;&lt;/a&gt;九方智投（上海）技术一面&lt;/h1&gt;&lt;p&gt;日期：2023.3.17 13:00~13:30&lt;/p&gt;
-&lt;</summary>
-      
-    
-    
-    
-    <category term="实习面试" scheme="http://example.com/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="实习面试" scheme="http://example.com/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://example.com/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/8-%E5%8C%97%E4%BA%AC%E4%B8%AD%E7%A7%91%E5%85%A8%E5%AE%89%EF%BC%88%E5%9B%BD%E4%BC%81%EF%BC%89/"/>
-    <id>http://example.com/2023/03/17/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/8-%E5%8C%97%E4%BA%AC%E4%B8%AD%E7%A7%91%E5%85%A8%E5%AE%89%EF%BC%88%E5%9B%BD%E4%BC%81%EF%BC%89/</id>
-    <published>2023-03-17T05:57:37.420Z</published>
-    <updated>2023-03-20T13:04:55.322Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="北京中科全安（国企）小一面"><a href="#北京中科全安（国企）小一面" class="headerlink" title="北京中科全安（国企）小一面"></a>北京中科全安（国企）小一面</h1><p>主要是HR简单了解一下我做项目用的框架</p><p>以及介绍他们公司的情况</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;北京中科全安（国企）小一面&quot;&gt;&lt;a href=&quot;#北京中科全安（国企）小一面&quot; class=&quot;headerlink&quot; title=&quot;北京中科全安（国企）小一面&quot;&gt;&lt;/a&gt;北京中科全安（国企）小一面&lt;/h1&gt;&lt;p&gt;主要是HR简单了解一下我做项目用的框架&lt;/p&gt;
-&lt;p</summary>
-      
-    
-    
-    
     
   </entry>
   
@@ -185,31 +131,6 @@
   </entry>
   
   <entry>
-    <title>长久集团（北京）</title>
-    <link href="http://example.com/2023/03/16/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/6-%E9%95%BF%E4%B9%85%E9%9B%86%E5%9B%A2%EF%BC%88%E5%8C%97%E4%BA%AC%EF%BC%89%E3%80%90oc%E3%80%91/"/>
-    <id>http://example.com/2023/03/16/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/6-%E9%95%BF%E4%B9%85%E9%9B%86%E5%9B%A2%EF%BC%88%E5%8C%97%E4%BA%AC%EF%BC%89%E3%80%90oc%E3%80%91/</id>
-    <published>2023-03-16T10:42:53.431Z</published>
-    <updated>2023-03-24T01:39:57.223Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="长久集团（北京）一面"><a href="#长久集团（北京）一面" class="headerlink" title="长久集团（北京）一面"></a>长久集团（北京）一面</h1><p>规模：1000 ~ 9999人</p><p>时长：16分钟（感觉面试官急着下班，提前面了，问得还很急）</p><h2 id="面官："><a href="#面官：" class="headerlink" title="面官："></a>面官：</h2><ul><li><p>用MinIO的话至少用几台服务器？</p></li><li><p>有用Docker来部署服务了吗？</p></li><li><p>用Docker来做过什么？</p></li><li><p>App有用户登录了，输入用户名和密码，服务端接收到后，失败、成功，你说一下你处理的业务逻辑？</p></li><li><p>Spring Boot里面的Controller是单例的还是多例？</p></li><li><p>MySQL你用like来查询的话，会走索引吗？</p><ul><li><a href="https://blog.csdn.net/nanchengyu/article/details/114023426">(16条消息) MySQL中like查询是否会使用索引_mysql优化like查询索引_nanchengyu的博客-CSDN博客</a></li><li><a href="https://www.cnblogs.com/xfeiyun/p/15912279.html">MySQL使用 like ‘%x’索引一定会失效吗？ - 百里浅暮 - 博客园 (cnblogs.com)</a></li></ul></li><li><p>用户访问时，怎么判断用户的是否在线？</p></li><li><p>说一下java里面的并发编程</p></li><li><p>说一下HTTPS解决了什么问题？用了什么方法或是算法来解决的？</p></li><li><p>HTTP的请求方式有哪些？</p></li><li><p>用户要传头像？服务器端要用什么方式接收？</p></li><li><p>MySQL里面的char 和 varchar的区别</p><ul><li>范围</li><li>char固定长度，varchar可改变</li></ul></li><li><p>反射机制指的是什么？</p></li><li><p>说一下JVM里面的运行时数据区？</p></li><li><p>什么时候那个对象会被垃圾回收？</p></li><li><p>Hash算法里面的哈希冲突有哪些解决方法？</p></li><li><p>java里面常见的异常哪几种类？</p></li><li><p>你在写代码里面，经常遇到的是那种异常类？</p></li><li><p>ThreadLocal在线程里面是干什么用的？</p></li><li><p>给你一个单向链表，删除倒数第n个结点，说一下你的思路</p></li><li><p>你用过Redis吗？用来主要干什么的？</p></li></ul><h1 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h1><p>时间：2023.3.21 13:30</p><p>面试官：技术负责人</p><p>时长：20分钟</p><h2 id="面试官："><a href="#面试官：" class="headerlink" title="面试官："></a>面试官：</h2><ul><li>自我介绍</li><li>问我为什么不选择留在老家广州或深圳，问我对北京这边的想法是怎样的？</li><li>我做的项目里，觉得最有难度的是哪个业务？</li><li>说一下你博客平台项目里用了多少张数据库表？</li><li>数据库的查询，有怎样的优化？</li><li>有八个球，7个球的重量都是A，1个球的重量是B，给你一个天平，怎么通过两次称重来找出那个重量B的球？</li><li>平时你一般是怎么找错、怎么调试的？</li></ul><h1 id="HR"><a href="#HR" class="headerlink" title="HR"></a>HR</h1><p>略~</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;长久集团（北京）一面&quot;&gt;&lt;a href=&quot;#长久集团（北京）一面&quot; class=&quot;headerlink&quot; title=&quot;长久集团（北京）一面&quot;&gt;&lt;/a&gt;长久集团（北京）一面&lt;/h1&gt;&lt;p&gt;规模：1000 ~ 9999人&lt;/p&gt;
-&lt;p&gt;时长：16分钟（感觉面试官急着</summary>
-      
-    
-    
-    
-    <category term="实习面试" scheme="http://example.com/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="实习面试" scheme="http://example.com/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CAS</title>
     <link href="http://example.com/2023/03/16/juc/CAS/"/>
     <id>http://example.com/2023/03/16/juc/CAS/</id>
@@ -230,56 +151,6 @@
     
     
     <category term="juc" scheme="http://example.com/tags/juc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>蚂蚁集团一面</title>
-    <link href="http://example.com/2023/03/15/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/5-%E8%9A%82%E8%9A%81%E9%9B%86%E5%9B%A2%E4%B8%80%E9%9D%A2%E3%80%90g%E3%80%91/"/>
-    <id>http://example.com/2023/03/15/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/5-%E8%9A%82%E8%9A%81%E9%9B%86%E5%9B%A2%E4%B8%80%E9%9D%A2%E3%80%90g%E3%80%91/</id>
-    <published>2023-03-15T12:46:51.796Z</published>
-    <updated>2023-03-24T01:39:43.764Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="蚂蚁集团一面"><a href="#蚂蚁集团一面" class="headerlink" title="蚂蚁集团一面"></a>蚂蚁集团一面</h1><p>时间：2023.3.15 19：30</p><p>时长：45分钟</p><h2 id="面试官问："><a href="#面试官问：" class="headerlink" title="面试官问："></a>面试官问：</h2><ul><li>自我介绍</li><li>为什么你那个ES搜索引擎这个项目的开发时间是只有两天？</li><li>为什么会把这个ES搜索引擎写在简历上面？你觉得它是有什么亮点吗？</li><li>ES搜索自动补全的应用场景？</li><li>你根据什么来获取这个搜索自动补全的词组的？怎么做的？</li><li>介绍一下残疾人婚恋APP中你负责的业务？</li><li>说一下你这项目的一个架构以及业务流程是怎么做？</li><li>微服务的优点、缺点？</li><li>你做这个app项目之前怎么考虑的，为什么要用到这些技术、组件？</li><li>查看关注的人动态列表你是怎么实现的？</li><li>为什么在项目中用RabbitMQ?</li><li>RabbitMQ除了异步之外，还有有哪些好处？</li><li>说一下线程池的使用？</li><li>说一下线程池的状态？</li><li>堆内存的结构？</li><li>什么时候会将对象分到新生代？</li><li>什么时候会触发STW？</li><li>MySQL数据库索引是不是越多越好？如果不是的话，为什么呢？</li><li>（还有一些琐碎的问题，觉得没必要就不写了）</li></ul><h2 id="反问："><a href="#反问：" class="headerlink" title="反问："></a>反问：</h2><ul><li>面试结果反馈时间？<ul><li>大概一周内吧</li></ul></li><li>该岗位负责的业务？</li><li>对我的简历以及结合我今天面试的情况，觉得我有哪些地方的不足？</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;蚂蚁集团一面&quot;&gt;&lt;a href=&quot;#蚂蚁集团一面&quot; class=&quot;headerlink&quot; title=&quot;蚂蚁集团一面&quot;&gt;&lt;/a&gt;蚂蚁集团一面&lt;/h1&gt;&lt;p&gt;时间：2023.3.15 19：30&lt;/p&gt;
-&lt;p&gt;时长：45分钟&lt;/p&gt;
-&lt;h2 id=&quot;面试官问：&quot;&gt;&lt;</summary>
-      
-    
-    
-    
-    <category term="实习面试" scheme="http://example.com/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="实习面试" scheme="http://example.com/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>上海数策软件（上海）</title>
-    <link href="http://example.com/2023/03/15/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/4-%E4%B8%8A%E6%B5%B7%E6%95%B0%E7%AD%96%E8%BD%AF%E4%BB%B6%EF%BC%88%E4%B8%8A%E6%B5%B7%EF%BC%89%E4%B8%80%E9%9D%A2%E3%80%90g%E3%80%91/"/>
-    <id>http://example.com/2023/03/15/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/4-%E4%B8%8A%E6%B5%B7%E6%95%B0%E7%AD%96%E8%BD%AF%E4%BB%B6%EF%BC%88%E4%B8%8A%E6%B5%B7%EF%BC%89%E4%B8%80%E9%9D%A2%E3%80%90g%E3%80%91/</id>
-    <published>2023-03-15T06:53:07.207Z</published>
-    <updated>2023-03-24T01:39:29.581Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="上海数策软件（上海）一面【g】"><a href="#上海数策软件（上海）一面【g】" class="headerlink" title="上海数策软件（上海）一面【g】"></a>上海数策软件（上海）一面【g】</h1><p>日期：2023.3.15 14：00 - 14：30</p><p>时长：30分钟</p><p>面试官年龄：听声音应该30岁+</p><h2 id="面试官："><a href="#面试官：" class="headerlink" title="面试官："></a>面试官：</h2><ul><li>你觉得你做的项目里哪一个业务或是那个业务的技术感到最有挑战的？</li><li>你做的这个残疾人婚恋app的主要业务是是那么？</li><li>附近动态的搜索你是怎么做的？</li><li>你做的那个动态模块的具体功能跟朋友圈有什么区别？</li><li>用户之间的关注这个业务流程你是怎么做的？</li><li>你搜索关注的人的动态列表这个业务流程你是怎么实现的？</li><li>查询的效率怎么样？性能方面你是怎么考虑的？</li><li>怎么将数据库的数据同步到ES索引库里的？</li><li>你用RabbitMQ的话，如果消息消费失败的话怎么办？你是怎么确保消息消费成功的？</li><li>Spring 里面那个Bean从创建到销毁这个周期你了解吗？</li><li>Spring IOC你讲一下？</li><li>假如要使用一个bean，可以同什么方式来获取这个bean对象呢？</li><li>如果你要注入一个bean，但是那个对应的类的配置已经写好了而还没注入到bean里，你会通过什么方式来获取那个bean?<ul><li>面试官建议我去看一下Spring的扩展和ioc</li></ul></li><li>你说一下JDK1.8中的HashMap的put过程？</li><li>HashMap什么情况下会存储转为红黑树结构？<ul><li>我说的是那个结点上的链表长度大于8了就会转为红黑树？</li><li>但是面试官说Table[]数组也要大于8才会转为红黑树</li></ul></li><li>HashMap的扩容怎么弄的？</li><li>我看到你写到有数据库优化的经验，那你说一下数据库怎么调优？</li></ul><h2 id="反问："><a href="#反问：" class="headerlink" title="反问："></a>反问：</h2><ul><li>一般面试结果的反馈时间要多久？<ul><li>要两天</li></ul></li><li>贵公司该岗位的业务</li><li>你觉得我这次的回答和状态有哪些地方不足的，知识或是技术上有什么建议？<ul><li>面官：其实这个应用层面、业务方面你还是挺了解的，但是呢你在基础上的掌握还是欠缺的，你不能只会用，还要了解一下底层的了解，这样才可以进步</li></ul></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;上海数策软件（上海）一面【g】&quot;&gt;&lt;a href=&quot;#上海数策软件（上海）一面【g】&quot; class=&quot;headerlink&quot; title=&quot;上海数策软件（上海）一面【g】&quot;&gt;&lt;/a&gt;上海数策软件（上海）一面【g】&lt;/h1&gt;&lt;p&gt;日期：2023.3.15 14：00</summary>
-      
-    
-    
-    
-    <category term="实习面试" scheme="http://example.com/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="实习面试" scheme="http://example.com/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -327,58 +198,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>安恒信息（杭州）技术一面，电话面</title>
-    <link href="http://example.com/2023/03/10/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/3-%E5%AE%89%E6%81%92%E4%BF%A1%E6%81%AF%EF%BC%88%E6%9D%AD%E5%B7%9E%EF%BC%89%E6%8A%80%E6%9C%AF%E4%B8%80%E9%9D%A2%E3%80%90g%E3%80%91%EF%BC%8C%E7%94%B5%E8%AF%9D%E9%9D%A2/"/>
-    <id>http://example.com/2023/03/10/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/3-%E5%AE%89%E6%81%92%E4%BF%A1%E6%81%AF%EF%BC%88%E6%9D%AD%E5%B7%9E%EF%BC%89%E6%8A%80%E6%9C%AF%E4%B8%80%E9%9D%A2%E3%80%90g%E3%80%91%EF%BC%8C%E7%94%B5%E8%AF%9D%E9%9D%A2/</id>
-    <published>2023-03-10T07:15:01.373Z</published>
-    <updated>2023-03-22T14:28:42.992Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="安恒信息（杭州）技术一面，电话面"><a href="#安恒信息（杭州）技术一面，电话面" class="headerlink" title="安恒信息（杭州）技术一面，电话面"></a>安恒信息（杭州）技术一面，电话面</h1><p>日期：2023.3.10</p><p>时长：20分钟</p><h2 id="面试官问："><a href="#面试官问：" class="headerlink" title="面试官问："></a>面试官问：</h2><ul><li>你ES一般用在哪些业务场景？为什么要用它？</li><li>ES的聚合查询是怎样的？</li><li>在同一个索引库或数据库表中，如果要获取不同城市的相关数据的总数，你会怎么查询？分别说一下？</li><li>Redis的常见数据类型</li><li>你做项目时，Redis会用在哪些业务场景？</li><li>Redis的缓存穿透、缓存击穿、缓存雪崩说一下？</li></ul><h2 id="反问："><a href="#反问：" class="headerlink" title="反问："></a>反问：</h2><ul><li>应聘的这个岗位主要是处理哪些业务的？<ul><li>做数据安全方面的</li></ul></li><li>一面过后还有几面？一面的结果的反馈时间大概什么时候？<ul><li>面官：一共两面技术面 + HR面；一面反馈时间会在下周二</li></ul></li><li>这个岗位的薪资是多少？<ul><li>面官反问：你身边或是你找到的一些其它的一般是多少的薪资？</li></ul></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;安恒信息（杭州）技术一面，电话面&quot;&gt;&lt;a href=&quot;#安恒信息（杭州）技术一面，电话面&quot; class=&quot;headerlink&quot; title=&quot;安恒信息（杭州）技术一面，电话面&quot;&gt;&lt;/a&gt;安恒信息（杭州）技术一面，电话面&lt;/h1&gt;&lt;p&gt;日期：2023.3.10&lt;/</summary>
-      
-    
-    
-    
-    <category term="实习面试" scheme="http://example.com/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="实习面试" scheme="http://example.com/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>可话(北京)视频面</title>
-    <link href="http://example.com/2023/03/09/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/2-%E5%8F%AF%E8%AF%9D%EF%BC%88%E5%8C%97%E4%BA%AC%EF%BC%89%E3%80%90%E4%B8%80%E9%9D%A2g%E3%80%91/"/>
-    <id>http://example.com/2023/03/09/interview/%E5%B7%A5%E4%BD%9C%E9%9D%A2%E8%AF%95/2-%E5%8F%AF%E8%AF%9D%EF%BC%88%E5%8C%97%E4%BA%AC%EF%BC%89%E3%80%90%E4%B8%80%E9%9D%A2g%E3%80%91/</id>
-    <published>2023-03-09T09:40:19.751Z</published>
-    <updated>2023-03-24T01:39:07.825Z</updated>
-    
-    <content type="html"><![CDATA[<p>可话（北京）一面</p><p>日期：2023.3.9</p><p>时长：30分钟</p><p>面官：可话app后端负责人</p><h3 id="面官问"><a href="#面官问" class="headerlink" title="面官问:"></a>面官问:</h3><ul><li>我是可话项目这边后端的负责人，面试开始前请你先来个自我介绍</li><li>我听你说你大一的时候参加学生组织，能说一下你在组织里主要做什么吗？线下活动的话又是怎样的？</li><li>你觉得你们组织的那个线下 “时光胶囊” 这个活动最后那个执行的效果好吗？</li></ul><p>面官：“那么我们回到面试，我今天就是主要是想了解一下您这边之前做的这些项目、一些经历、还有是学习的一些历程。”</p><ul><li><p>ES自动补全，简单说一下算法是怎么实现的？</p></li><li><p>自动补全的suggestion自动补全词组是怎么做的？</p></li><li><p>我看你写道用JieBa，为什么在获取自动补全词组之前要用JieBa分词来对关键字进行分词？</p></li><li><p>获取自动补全词组，假如最近有一个很热点的，就希望它在获得的词组中排在比较前，你要给他推荐热度词比较高的，你会怎么弄？</p></li><li><p>我看到你项目中用了Caffeine + Redis + ES做多级缓存，因为Caffeine是进程本地缓存，对于微服务的话，你是怎么处理多个实例之间的Caffeine数据一致性？</p><ul><li>我回答了两种方案。</li><li><strong>方案一：</strong>用RabbitMQ来实现的。比如四个实例，他们都各自申明自己MQ交换机和队列，其中一个实例被客户端进行了写操作，那么它自己同步caffeine数据的同时也向其它三个实例的交换机投递消息，这样它们绑定的消费者队列监听到消息之后就进行数据同步即可。<br><strong>方案二：</strong>将实例都注册到Nacos服务注册中心，其中一个实例发生了写操作，就通过Feign来远程调用执行其它实例的数据同步的接口让它们各自都进行数据同步即可</li></ul></li><li><p>你暑假跟实验室老师做的那个 残疾人婚恋APP 现在是怎么情况了，有没有上市了？</p></li><li><p>微服务框架，你是怎么拆分业务模块的？</p></li><li><p>你在你项目中是怎么实现搜索附近的动态的？</p></li><li><p>接下来了解一下你个人的兴趣，你个人是比较喜欢做java的吗？</p></li><li><p>其实现在后端语言挺多的，比如说go语言这些，你有没有想着闲余时间去学习一下其它语言？</p></li><li><p>你现在大三下，后面一年还有没有课？</p></li></ul><h3 id="反问环节："><a href="#反问环节：" class="headerlink" title="反问环节："></a>反问环节：</h3><ul><li>如果这一面通过，之后还有几面<ul><li>如果是学生的话，一般是两面（不包括HR），我们一般社招是三面，实习生两面</li></ul></li><li>要多久到岗？</li><li>我面试的这个岗位主要负责的业务是什么？</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;可话（北京）一面&lt;/p&gt;
-&lt;p&gt;日期：2023.3.9&lt;/p&gt;
-&lt;p&gt;时长：30分钟&lt;/p&gt;
-&lt;p&gt;面官：可话app后端负责人&lt;/p&gt;
-&lt;h3 id=&quot;面官问&quot;&gt;&lt;a href=&quot;#面官问&quot; class=&quot;headerlink&quot; title=&quot;面官问:&quot;&gt;&lt;/a&gt;面官问:&lt;</summary>
-      
-    
-    
-    
-    <category term="实习面试" scheme="http://example.com/categories/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="实习面试" scheme="http://example.com/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E8%AF%95/"/>
     
   </entry>
   
@@ -443,9 +262,9 @@
     <link href="http://example.com/2023/03/05/interview/Elasticsearch%E9%9D%A2%E8%AF%95/"/>
     <id>http://example.com/2023/03/05/interview/Elasticsearch%E9%9D%A2%E8%AF%95/</id>
     <published>2023-03-05T07:18:41.560Z</published>
-    <updated>2023-03-06T16:59:08.514Z</updated>
+    <updated>2023-03-30T14:33:04.455Z</updated>
     
-    <content type="html"><![CDATA[<hr><hr><h1 id="1、Elasticsearch是什么"><a href="#1、Elasticsearch是什么" class="headerlink" title="1、Elasticsearch是什么"></a>1、Elasticsearch是什么</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念:"></a>1.1 概念:</h2><p>Elasticsearch是由 Java语言开发<strong>基于Lucene</strong>的一款开源的搜索、聚合分析和存储引擎。同时它也可以称作是一种非关系型文档数据库。</p><p><img src="/../../images/image-20230305161034119.png" alt="image-20230305161034119"></p><h2 id="ES可以替代MySQL吗？"><a href="#ES可以替代MySQL吗？" class="headerlink" title="ES可以替代MySQL吗？"></a>ES可以替代MySQL吗？</h2><p>ElasticSearch和MySql分工不同，MySQL负责存储数据，ElasticSearch负责搜索数据</p><ul><li><p>MySQL有事务性而ElasticSearch<mark>没有事务性</mark>，所以你<font color="red">删了的数据是无法恢复的</font>。</p></li><li><p>ElasticSearch<mark>没有物理外键</mark>这个特性，如果你的数据强一致性要求比较高还是建议慎用</p></li></ul><p><img src="/../../images/image-20230305161337185.png" alt="image-20230305161337185"></p><h2 id="1-2特点"><a href="#1-2特点" class="headerlink" title="1.2特点"></a>1.2特点</h2><ul><li>天生分布式、高性能（PB数据下可以秒读）、高可用、易扩展、易维护</li><li>跨语言、跨平台:几乎支持所有主流编程语言，并且支持在“Linux、Windows、MacOs”多平台部署</li><li>支持结构化、非结构化、地理位置搜索等</li></ul><h2 id="1-3适用场景"><a href="#1-3适用场景" class="headerlink" title="1.3适用场景"></a>1.3适用场景</h2><ul><li>海量数据的全文检索，搜索引擎、垂直搜索、站内搜索:<ul><li>百度、知乎、微博、CSDN</li><li>导航、外卖、团购等软件</li><li>以京东、淘宝为代表的垂直搜索</li><li>B站、抖音、爱奇艺、QQ音乐等音视频软件Glthub</li></ul></li><li>数据分析和聚合查询.</li><li>日志系统 : ELK</li></ul><h1 id="Elasticsearch核心概念"><a href="#Elasticsearch核心概念" class="headerlink" title="Elasticsearch核心概念"></a>Elasticsearch核心概念</h1><p><img src="/../../images/image-20230305161535075.png" alt="image-20230305161535075"></p><p><img src="/../../images/image-20230305161817337.png" alt="image-20230305161817337"></p><p><img src="/../../images/image-20230305162010287.png" alt="image-20230305162010287"></p><h1 id="MySQL数据库查询存在的问题："><a href="#MySQL数据库查询存在的问题：" class="headerlink" title="MySQL数据库查询存在的问题："></a>MySQL数据库查询存在的问题：</h1><p><img src="/../../images/image-20230305153910496.png" alt="image-20230305153910496"></p><p><img src="/../../images/image-20230305154253699.png" alt="image-20230305154253699"></p><h1 id="ES的倒排索引"><a href="#ES的倒排索引" class="headerlink" title="ES的倒排索引"></a>ES的倒排索引</h1><p><img src="/../../images/image-20230305154901840.png" alt="image-20230305154901840"></p><h1 id="Elasticsearch数据的存储和搜索原理"><a href="#Elasticsearch数据的存储和搜索原理" class="headerlink" title="Elasticsearch数据的存储和搜索原理"></a>Elasticsearch数据的存储和搜索原理</h1><p><img src="/../../images/image-20230305155606164.png" alt="image-20230305155606164"></p><p><img src="/../../images/image-20230305155847211.png" alt="image-20230305155847211"></p><h3 id="1-解决性能低问题："><a href="#1-解决性能低问题：" class="headerlink" title="1. 解决性能低问题："></a>1. 解决性能低问题：</h3><h4 id="如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会"><a href="#如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会" class="headerlink" title="如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会"></a><strong>如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会</strong></h4><p>因为ES生成的到排序索引中，词条会排序，形成一颗树形结构，提升词条的查询速度。</p><h3 id="2-解决功能弱问题："><a href="#2-解决功能弱问题：" class="headerlink" title="2. 解决功能弱问题："></a>2. 解决功能弱问题：</h3><p>ES会先对查询关键字进行分词，再进行查询。</p>]]></content>
+    <content type="html"><![CDATA[<hr><hr><h1 id="1、Elasticsearch是什么"><a href="#1、Elasticsearch是什么" class="headerlink" title="1、Elasticsearch是什么"></a>1、Elasticsearch是什么</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念:"></a>1.1 概念:</h2><p>Elasticsearch是由 Java语言开发<strong>基于Lucene</strong>的一款开源的搜索、聚合分析和存储引擎。同时它也可以称作是一种非关系型文档数据库。</p><p><img src="/../../images/image-20230305161034119.png" alt="image-20230305161034119"></p><h2 id="ES可以替代MySQL吗？"><a href="#ES可以替代MySQL吗？" class="headerlink" title="ES可以替代MySQL吗？"></a>ES可以替代MySQL吗？</h2><p>ElasticSearch和MySql分工不同，MySQL负责存储数据，ElasticSearch负责搜索数据</p><ul><li><p>MySQL有事务性，而ElasticSearch<mark>没有事务性</mark>，所以你<font color="red">删了的数据是无法恢复的</font>。</p></li><li><p>ElasticSearch<mark>没有物理外键</mark>这个特性，如果你的数据强一致性要求比较高还是建议慎用</p></li></ul><p><img src="/../../images/image-20230305161337185.png" alt="image-20230305161337185"></p><h2 id="1-2特点"><a href="#1-2特点" class="headerlink" title="1.2特点"></a>1.2特点</h2><ul><li>天生分布式、高性能（PB数据下可以秒读）、高可用、易扩展、易维护</li><li>跨语言、跨平台:几乎支持所有主流编程语言，并且支持在“Linux、Windows、MacOs”多平台部署</li><li>支持结构化、非结构化、地理位置搜索等</li></ul><h2 id="1-3适用场景"><a href="#1-3适用场景" class="headerlink" title="1.3适用场景"></a>1.3适用场景</h2><ul><li>海量数据的全文检索，搜索引擎、垂直搜索、站内搜索:<ul><li>百度、知乎、微博、CSDN</li><li>导航、外卖、团购等软件</li><li>以京东、淘宝为代表的垂直搜索</li><li>B站、抖音、爱奇艺、QQ音乐等音视频软件Glthub</li></ul></li><li>数据分析和聚合查询.</li><li>日志系统 : ELK</li></ul><h1 id="Elasticsearch核心概念"><a href="#Elasticsearch核心概念" class="headerlink" title="Elasticsearch核心概念"></a>Elasticsearch核心概念</h1><p><img src="/../../images/image-20230305161535075.png" alt="image-20230305161535075"></p><p><img src="/../../images/image-20230305161817337.png" alt="image-20230305161817337"></p><p><img src="/../../images/image-20230305162010287.png" alt="image-20230305162010287"></p><h1 id="MySQL数据库查询存在的问题："><a href="#MySQL数据库查询存在的问题：" class="headerlink" title="MySQL数据库查询存在的问题："></a>MySQL数据库查询存在的问题：</h1><p><img src="/../../images/image-20230305153910496.png" alt="image-20230305153910496"></p><p><img src="/../../images/image-20230305154253699.png" alt="image-20230305154253699"></p><h1 id="ES的倒排索引"><a href="#ES的倒排索引" class="headerlink" title="ES的倒排索引"></a>ES的倒排索引</h1><p><img src="/../../images/image-20230305154901840.png" alt="image-20230305154901840"></p><h1 id="Elasticsearch数据的存储和搜索原理"><a href="#Elasticsearch数据的存储和搜索原理" class="headerlink" title="Elasticsearch数据的存储和搜索原理"></a>Elasticsearch数据的存储和搜索原理</h1><p><img src="/../../images/image-20230305155606164.png" alt="image-20230305155606164"></p><p><img src="/../../images/image-20230305155847211.png" alt="image-20230305155847211"></p><h3 id="1-解决性能低问题："><a href="#1-解决性能低问题：" class="headerlink" title="1. 解决性能低问题："></a>1. 解决性能低问题：</h3><h4 id="如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会"><a href="#如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会" class="headerlink" title="如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会"></a><strong>如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会</strong></h4><p>因为ES生成的到排序索引中，词条会排序，形成一颗树形结构，提升词条的查询速度。</p><h3 id="2-解决功能弱问题："><a href="#2-解决功能弱问题：" class="headerlink" title="2. 解决功能弱问题："></a>2. 解决功能弱问题：</h3><p>ES会先对查询关键字进行分词，再进行查询。</p>]]></content>
     
     
       
@@ -505,6 +324,207 @@
     
     
     <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sentinel-限流规则(流控模式：直接、关联、链路)</title>
+    <link href="http://example.com/2023/02/26/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E9%99%90%E6%B5%81%E8%A7%84%E5%88%99(%E6%B5%81%E6%8E%A7%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%9B%B4%E6%8E%A5%E3%80%81%E5%85%B3%E8%81%94%E3%80%81%E9%93%BE%E8%B7%AF)/"/>
+    <id>http://example.com/2023/02/26/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Sentinel-%E9%99%90%E6%B5%81%E8%A7%84%E5%88%99(%E6%B5%81%E6%8E%A7%E6%A8%A1%E5%BC%8F%EF%BC%9A%E7%9B%B4%E6%8E%A5%E3%80%81%E5%85%B3%E8%81%94%E3%80%81%E9%93%BE%E8%B7%AF)/</id>
+    <published>2023-02-26T04:28:58.799Z</published>
+    <updated>2023-03-08T14:11:02.201Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>​<strong>QPS</strong> <code>Queries Per Second</code> 是每秒查询率 ,是<strong>一台服务器</strong>每秒能够相应的查询次数，是对一个特定的查询服务器<strong>在规定时间内</strong>所处理流量多少的衡量标准, 即每秒的响应请求数，也即是最大吞吐能力。</li></ul><p><img src="https://img-blog.csdnimg.cn/061b8c23ef694d6e9d18abe3647c9dbe.png" alt="img"></p><h1 id="一、流控模式-直接"><a href="#一、流控模式-直接" class="headerlink" title="一、流控模式-直接"></a>一、流控模式-直接</h1><p>添加规则：</p><p><img src="https://img-blog.csdnimg.cn/6d5781b7da1345f59e3321b3c8806571.png" alt="img"></p><p> <img src="https://img-blog.csdnimg.cn/8df1b81beca34a90a71af4aa2f1b8026.png" alt="img"></p><p>测试例子分析：</p><p><img src="https://img-blog.csdnimg.cn/39b96b130c9046078bc6d632580aff3e.png" alt="img"></p><p> 启动测试</p><p><img src="https://img-blog.csdnimg.cn/5ec171ee24494c7488e3b09e3d7d8b47.png" alt="img"></p><p>点击 <strong>察看结果树</strong></p><p><img src="https://img-blog.csdnimg.cn/cc093a02f2be44fd938dfcc603a06ca3.png" alt="img"></p><p> 上面测试例子，到Sentinel控制台的实时监控可以看到<img src="https://img-blog.csdnimg.cn/3dd6594966864a3a8f8d230c66387980.png" alt="img"></p><p> <img src="https://img-blog.csdnimg.cn/57592224a235458b826fc55819f5ea3d.png" alt="img"></p><h1 id="二、流控模式-关联"><a href="#二、流控模式-关联" class="headerlink" title="二、流控模式-关联"></a>二、流控模式-关联</h1><p>•<strong>关联模式</strong>：统计与当前资源相关的另一个资源，触发阈值时，对当前资源限流</p><p>•<strong>使用场景</strong>：比如用户支付时需要修改订单状态，同时用户要查询订单。查询和修改操作会争抢数据库锁，产生竞争。业务需求是有限支付和更新订单的业务，因此当修改订单业务触发阈值时，需要对查询订单业务限流。</p><p><img src="https://img-blog.csdnimg.cn/b8cf0fa094f0443db55cd6567f70b192.png" alt="img"></p><p>当**/write<strong>资源访问量触发阈值时，就会对</strong>/read**资源限流，避免影响/write资源。</p><h2 id="案例："><a href="#案例：" class="headerlink" title="案例："></a>案例：</h2><p>​    需求：  </p><p>​     •在OrderController新建两个端点：/order/query和/order/update，无需实现业务  </p><p>​     •配置流控规则，当/order/update资源被访问的QPS超过5时，对/order/query请求限流</p><h2 id="1-编写测试controller方法"><a href="#1-编写测试controller方法" class="headerlink" title="1. 编写测试controller方法:"></a>1. 编写测试controller方法:</h2><p><img src="https://img-blog.csdnimg.cn/dfda223212c6437a96852a8aa4d744e0.png" alt="img"></p><h2 id="2-添加规则（想给谁限流，就给谁添加规则）"><a href="#2-添加规则（想给谁限流，就给谁添加规则）" class="headerlink" title="2. 添加规则（想给谁限流，就给谁添加规则）"></a>2. 添加规则（想给谁限流，就给谁添加规则）</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://img-blog.csdnimg.cn/9fc5937b14504fce8dde85b0c1a5cfb6.png" alt="img"></h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="https://img-blog.csdnimg.cn/d93155d750694872a0818677f4cb81a8.png" alt="img"></h2><h2 id="-2"><a href="#-2" class="headerlink" title=""></a><img src="https://img-blog.csdnimg.cn/ddfa4ee5ed00436c9c0f3e147d8c7b6d.png" alt="img"></h2><h2 id="3-借助JMeter进行测试："><a href="#3-借助JMeter进行测试：" class="headerlink" title="3. 借助JMeter进行测试："></a>3. 借助JMeter进行测试：</h2><p><img src="https://img-blog.csdnimg.cn/5ff99d435d124355914f816b525b9a7a.png" alt="img"></p><h2 id="4-去网页访问验证"><a href="#4-去网页访问验证" class="headerlink" title=" 4. 去网页访问验证:"></a><img src="https://img-blog.csdnimg.cn/38c110824b1f478883e86b43a4df0017.png" alt="img"> 4. 去网页访问验证:<img src="https://img-blog.csdnimg.cn/6d7e4884e3314d76a707bf0e0e6548d0.png" alt="img"></h2><p>query被限流 <img src="https://img-blog.csdnimg.cn/21342817472a4d2587669ada29df161c.png" alt="img"></p><h2 id="5-总结：-满足下面条件可以使用关联模式"><a href="#5-总结：-满足下面条件可以使用关联模式" class="headerlink" title="5. 总结： 满足下面条件可以使用关联模式"></a>5. 总结： 满足下面条件可以使用关联模式</h2><ol><li><p>两个有<mark>竞争关系</mark>的资源  </p></li><li><p>一个优先级较高，一个优先级较低（优先级高的触发阈值时（本案例的order），对优先级低的限流（本案例的query））</p></li></ol><h1 id="三、流控模式-链路"><a href="#三、流控模式-链路" class="headerlink" title="三、流控模式-链路"></a>三、流控模式-链路</h1><p><img src="https://img-blog.csdnimg.cn/56e2dc9f451441a2bbb8483750137bf4.png" alt="img"></p><h2 id="案例：-1"><a href="#案例：-1" class="headerlink" title="案例："></a>案例：</h2><p><img src="https://img-blog.csdnimg.cn/00c8c659e1c44e098c46b7ce5fd7b219.png" alt="img"></p><h2 id="1-编写测试代码："><a href="#1-编写测试代码：" class="headerlink" title="1. 编写测试代码："></a>1. 编写测试代码：</h2><p><img src="https://img-blog.csdnimg.cn/540402db64874fab953436a286717e02.png" alt="img"></p><p> <img src="https://img-blog.csdnimg.cn/32565b6a61534e3d87a9de1d1d9b7446.png" alt="img"></p><p><img src="https://img-blog.csdnimg.cn/b0c343dd8ae54320bed317a725bda5d6.png" alt="img"></p><h2 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a><strong>2. 注意：</strong></h2><p> Sentinel默认只标记Controller中的方法为资源，如果要标记其它方法，需要利用<mark><strong>@SentinelResource</strong>注解</mark></p><p>去配置文件里配置，<mark>关闭contextM</mark>，就可以让controller里的方法单独成为一个链路；不关闭context的话，controller里的方法都会默认进去sentinel默认的根链路里，这样就只有一条链路，无法流控链路模式</p><p><img src="https://img-blog.csdnimg.cn/dba8e68e6bc049b18fceab90848e5a24.png" alt="img"></p><h2 id="3-启动之后，并到网页里分别访问了-x2F-order-x2F-query和-x2F-order-x2F-save接口后"><a href="#3-启动之后，并到网页里分别访问了-x2F-order-x2F-query和-x2F-order-x2F-save接口后" class="headerlink" title="3. 启动之后，并到网页里分别访问了/order/query和/order/save接口后"></a>3. 启动之后，并到网页里分别访问了/order/query和/order/save接口后</h2><p><img src="https://img-blog.csdnimg.cn/bb6e754ffb7e4e4f8b715fe3910cbecd.png" alt="img"></p><h2 id="4-添加规则：-对query做限制，save没有做限制"><a href="#4-添加规则：-对query做限制，save没有做限制" class="headerlink" title="4. 添加规则：(对query做限制，save没有做限制)"></a>4. 添加规则：(对query做限制，save没有做限制)</h2><p><img src="https://img-blog.csdnimg.cn/cc38bc601afc440f9405972e04257f5b.png" alt="img"></p><p> <img src="https://img-blog.csdnimg.cn/feb37cb8556e49c4a151ff9c8397497f.png" alt="img"></p><h2 id="5-借助JMeter来测试："><a href="#5-借助JMeter来测试：" class="headerlink" title="5. 借助JMeter来测试："></a>5. 借助JMeter来测试：</h2><p><img src="https://img-blog.csdnimg.cn/ed662f7afdb54e60a0455ce48d55c18e.png" alt="img"></p><p><img src="https://img-blog.csdnimg.cn/7f1e916b436d43379585d1e9a52828a4.png" alt="img"></p><p>启动测试 <img src="https://img-blog.csdnimg.cn/4917bbf6a6b34670aed4ad9d3c751b02.png" alt="img"></p><p><img src="https://img-blog.csdnimg.cn/45dd3918b3124af6983bfb648adfbb3a.png" alt="img"></p><p><img src="https://img-blog.csdnimg.cn/df349c02421040b9bc8e00a398be0c9d.png" alt="img"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;​	&lt;strong&gt;QPS&lt;/strong&gt; &lt;code&gt;Queries Per Second&lt;/code&gt; 是每秒查询率 ,是&lt;strong&gt;一台服务器&lt;/strong&gt;每秒能够相应的查询次数，是对一个特定的查询服务器&lt;strong&gt;在规定时间内&lt;/stron</summary>
+      
+    
+    
+    
+    <category term="微服务" scheme="http://example.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    <category term="Sentinel" scheme="http://example.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/"/>
+    
+    
+    <category term="微服务" scheme="http://example.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    <category term="Sentinel" scheme="http://example.com/tags/Sentinel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>应用层常见协议总结（应用层）</title>
+    <link href="http://example.com/2023/02/20/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/%E5%BA%94%E7%94%A8%E5%B1%82%E5%B8%B8%E8%A7%81%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93%EF%BC%88%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%89/"/>
+    <id>http://example.com/2023/02/20/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/%E5%BA%94%E7%94%A8%E5%B1%82%E5%B8%B8%E8%A7%81%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93%EF%BC%88%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%89/</id>
+    <published>2023-02-20T05:55:49.239Z</published>
+    <updated>2023-03-04T02:54:21.952Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="HTTP-超文本传输协议"><a href="#HTTP-超文本传输协议" class="headerlink" title="HTTP:超文本传输协议"></a>HTTP:超文本传输协议</h2><p><strong>超文本传输协议（HTTP，HyperText Transfer Protocol)</strong> 主要是为 Web 浏览器与 Web 服务器之间的通信而设计的。当我们使用浏览器浏览网页的时候，我们网页就是通过 HTTP 请求进行加载的，整个过程如下图所示。</p><p><img src="/../../../images/image-20230220135638150.png" alt="image-20230220135638150"></p><p>HTTP 协是基于 TCP协议，发送 HTTP 请求之前首先要建立 TCP 连接也就是要经历 3 次握手。目前使用的 HTTP 协议大部分都是 1.1。在 1.1 的协议里面，默认是开启了 Keep-Alive 的，这样的话建立的连接就可以在多次请求中被复用了。</p><p>另外， HTTP 协议是”无状态”的协议，它无法记录客户端用户的状态，一般我们都是通过 Session 来记录客户端用户的状态。</p><h2 id="SMTP-简单邮件传输-发送-协议"><a href="#SMTP-简单邮件传输-发送-协议" class="headerlink" title="# SMTP:简单邮件传输(发送)协议"></a><a href="#smtp-%E7%AE%80%E5%8D%95%E9%82%AE%E4%BB%B6%E4%BC%A0%E8%BE%93-%E5%8F%91%E9%80%81-%E5%8D%8F%E8%AE%AE">#</a> SMTP:简单邮件<font color="red">传输(发送)</font>协议</h2><p><strong>简单邮件传输(发送)协议（SMTP，Simple Mail Transfer Protocol）</strong> 基于 TCP 协议，用来发送电子邮件。</p><p><img src="/../../../images/image-20230220135632455.png" alt="image-20230220135632455"></p><p>注意⚠️：<strong>接受邮件的协议不是 SMTP 而是 POP3 协议。</strong></p><p>SMTP 协议这块涉及的内容比较多，下面这两个问题比较重要：</p><ol><li>电子邮件的发送过程</li><li>如何判断邮箱是真正存在的？</li></ol><p><strong>电子邮件的发送过程？</strong></p><p>比如我的邮箱是“<a href="mailto:dabai@cszhinan.com">dabai@cszhinan.com</a>”，我要向“<a href="mailto:xiaoma@qq.com">xiaoma@qq.com</a>”发送邮件，整个过程可以简单分为下面几步：</p><ol><li>通过 <strong>SMTP</strong> 协议，我将我写好的邮件交给163邮箱服务器（邮局）。</li><li>163邮箱服务器发现我发送的邮箱是qq邮箱，然后它使用 SMTP协议将我的邮件转发到 qq邮箱服务器。</li><li>qq邮箱服务器接收邮件之后就通知邮箱为“<a href="mailto:xiaoma@qq.com">xiaoma@qq.com</a>”的用户来收邮件，然后用户就通过 <strong>POP3/IMAP</strong> 协议将邮件取出。</li></ol><p><strong>如何判断邮箱是真正存在的？</strong></p><p>很多场景(比如邮件营销)下面我们需要判断我们要发送的邮箱地址是否真的存在，这个时候我们可以利用 SMTP 协议来检测：</p><ol><li>查找邮箱域名对应的 SMTP 服务器地址</li><li>尝试与服务器建立连接</li><li>连接成功后尝试向需要验证的邮箱发送邮件</li><li>根据返回结果判定邮箱地址的真实性</li></ol><p>推荐几个在线邮箱是否有效检测工具：</p><ol><li><a href="https://verify-email.org/">https://verify-email.org/</a></li><li><a href="http://tool.chacuo.net/mailverify">http://tool.chacuo.net/mailverify</a></li><li><a href="https://www.emailcamel.com/">https://www.emailcamel.com/</a></li></ol><h2 id="POP3-x2F-IMAP-邮件接收的协议"><a href="#POP3-x2F-IMAP-邮件接收的协议" class="headerlink" title="# POP3/IMAP:邮件接收的协议"></a><a href="#pop3-imap-%E9%82%AE%E4%BB%B6%E6%8E%A5%E6%94%B6%E7%9A%84%E5%8D%8F%E8%AE%AE">#</a> POP3/IMAP:邮件<font color="red">接收</font>的协议</h2><p>这两个协议没必要多做阐述，只需要了解 <strong>POP3 和 IMAP 两者都是负责邮件接收的协议</strong>即可。另外，需要注意不要将这两者和 SMTP 协议搞混淆了。<strong>SMTP 协议只负责邮件的发送，真正负责接收的协议是POP3/IMAP。</strong></p><p>IMAP 协议相比于POP3更新一点，为用户提供的可选功能也更多一点,几乎所有现代电子邮件客户端和服务器都支持IMAP。大部分网络邮件服务提供商都支持POP3和IMAP。</p><h2 id="FTP-文件传输协议"><a href="#FTP-文件传输协议" class="headerlink" title="# FTP:文件传输协议"></a><a href="#ftp-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE">#</a> FTP:文件传输协议</h2><p><strong>FTP 协议</strong> 主要提供文件传输服务，基于 TCP 实现可靠的传输。使用 FTP 传输文件的好处是可以屏蔽操作系统和文件存储方式。</p><p>FTP 是基于客户—服务器（C/S）模型而设计的，在客户端与 FTP 服务器之间建立两个连接。如果我们要基于 FTP 协议开发一个文件传输的软件的话，首先需要搞清楚 FTP 的原理。关于 FTP 的原理，很多书籍上已经描述的非常详细了：</p><blockquote><p>FTP 的独特的优势同时也是与其它客户服务器程序最大的不同点就在于它在两台通信的主机之间使用了两条 TCP 连接（其它客户服务器应用程序一般只有一条 TCP 连接）：</p><ol><li>控制连接：用于传送控制信息（命令和响应）</li><li>数据连接：用于数据传送；</li></ol><p>这种将命令和数据分开传送的思想大大提高了 FTP 的效率。</p></blockquote><p><img src="/../../../images/image-20230220135623263.png" alt="image-20230220135623263"></p><h2 id="Telnet-远程登陆协议"><a href="#Telnet-远程登陆协议" class="headerlink" title="# Telnet:远程登陆协议"></a><a href="#telnet-%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E5%8D%8F%E8%AE%AE">#</a> Telnet:远程登陆协议</h2><p><strong>Telnet 协议</strong> 通过一个终端登陆到其他服务器，建立在可靠的传输协议 TCP 之上。Telnet 协议的最大缺点之一是所有数据（包括用户名和密码）均以明文形式发送，这有潜在的安全风险。这就是为什么如今很少使用Telnet并被一种称为SSH的非常安全的协议所取代的主要原因。</p><h2 id="SSH-安全的网络传输协议"><a href="#SSH-安全的网络传输协议" class="headerlink" title="# SSH:安全的网络传输协议"></a><a href="#ssh-%E5%AE%89%E5%85%A8%E7%9A%84%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE">#</a> SSH:安全的网络传输协议</h2><p><strong>SSH（ Secure Shell）</strong> 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH 建立在可靠的传输协议 TCP 之上。</p><p><strong>Telnet 和 SSH 之间的主要区别在于 SSH 协议会对传输的数据进行加密保证数据安全性。</strong></p><p><img src="/../../../images/image-20230220135616527.png" alt="image-20230220135616527"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;HTTP-超文本传输协议&quot;&gt;&lt;a href=&quot;#HTTP-超文本传输协议&quot; class=&quot;headerlink&quot; title=&quot;HTTP:超文本传输协议&quot;&gt;&lt;/a&gt;HTTP:超文本传输协议&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;超文本传输协议（HTTP，HyperText</summary>
+      
+    
+    
+    
+    <category term="面试题" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TCP 传输可靠性保障（传输层）</title>
+    <link href="http://example.com/2023/02/20/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/TCP%20%E4%BC%A0%E8%BE%93%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%BF%9D%E9%9A%9C%EF%BC%88%E4%BC%A0%E8%BE%93%E5%B1%82%EF%BC%89/"/>
+    <id>http://example.com/2023/02/20/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/TCP%20%E4%BC%A0%E8%BE%93%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%BF%9D%E9%9A%9C%EF%BC%88%E4%BC%A0%E8%BE%93%E5%B1%82%EF%BC%89/</id>
+    <published>2023-02-20T05:53:11.455Z</published>
+    <updated>2023-03-23T14:10:44.422Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TCP-如何保证传输的可靠性？"><a href="#TCP-如何保证传输的可靠性？" class="headerlink" title="TCP 如何保证传输的可靠性？"></a>TCP 如何保证传输的可靠性？</h2><ol><li><strong>基于数据块传输</strong> ：应用数据被分割成 TCP 认为最适合发送的数据块，再传输给网络层，数据块被称为报文段或段。</li><li><strong>对失序数据包重新排序以及去重</strong>：TCP 为了保证不发生丢包，就给每个包一个序列号，有了序列号能够将接收到的数据根据序列号排序，并且去掉重复序列号的数据就可以实现数据包去重。</li><li><strong>校验和</strong> : TCP 将保持它首部和数据的检验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果收到段的检验和有差错，TCP 将丢弃这个报文段和不确认收到此报文段。</li><li><strong>超时重传</strong> : 当发送方发送数据之后，它启动一个定时器，等待目的端确认收到这个报文段。接收端实体对已成功收到的包发回一个相应的确认信息（ACK）。如果发送端实体在合理的往返时延（RTT）内未收到确认消息，那么对应的数据包就被假设为<a href="https://zh.wikipedia.org/wiki/%E4%B8%A2%E5%8C%85">已丢失open in new window</a>并进行重传。</li><li><strong>流量控制</strong> : TCP 连接的每一方都有固定大小的缓冲空间，TCP 的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止包丢失。TCP 使用的流量控制协议是可变大小的<strong>滑动窗口协议（</strong>TCP 利用滑动窗口实现流量控制）。</li><li><strong>拥塞控制</strong> : 当网络拥塞时，减少数据的发送。</li></ol><h2 id="TCP-如何实现流量控制？"><a href="#TCP-如何实现流量控制？" class="headerlink" title="# TCP 如何实现流量控制？"></a><a href="#tcp-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6">#</a> TCP 如何实现流量控制？</h2><p><strong>TCP 利用<font color="red">滑动窗口</font>实现流量控制。流量控制是为了控制发送方发送速率，保证接收方来得及接收。</strong> 接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。</p><h3 id="为什么需要流量控制"><a href="#为什么需要流量控制" class="headerlink" title="为什么需要流量控制?"></a><strong>为什么需要流量控制?</strong></h3><p>这是因为双方在通信的时候，发送方的速率与接收方的速率是不一定相等，如果发送方的发送速率太快，会导致接收方处理不过来。如果接收方处理不过来的话，就只能把处理不过来的数据存在 <strong>接收缓冲区(Receiving Buffers)</strong> 里（失序的数据包也会被存放在缓存区里）。如果缓存区满了发送方还在狂发数据的话，接收方只能把收到的数据包丢掉。出现丢包问题的同时又疯狂浪费着珍贵的网络资源。因此，我们需要控制发送方的发送速率，让接收方与发送方处于一种动态平衡才好。</p><p>这里需要注意的是（常见误区）：</p><ul><li>发送端不等同于客户端</li><li>接收端不等同于服务端</li></ul><p>TCP 为全双工(Full-Duplex, FDX)通信，双方可以进行双向通信，客户端和服务端既可能是发送端又可能是接收端。因此，两端各有一个发送缓冲区与接收缓冲区，两端都各自维护一个发送窗口和一个接收窗口。接收窗口大小取决于应用、系统、硬件的限制（TCP传输速率不能大于应用的数据处理速率）。通信双方的发送窗口和接收窗口的要求相同</p><h3 id="TCP-发送窗口可以划分成四个部分-："><a href="#TCP-发送窗口可以划分成四个部分-：" class="headerlink" title="TCP 发送窗口可以划分成四个部分 ："></a><strong>TCP 发送窗口可以划分成四个部分</strong> ：</h3><ol><li>已经发送并且确认的TCP段（<strong>已经发送并确认</strong>）；</li><li>已经发送但是没有确认的TCP段（<strong>已经发送未确认</strong>）；</li><li>未发送但是接收方准备接收的TCP段（<strong>可以发送</strong>）；</li><li>未发送并且接收方也并未准备接受的TCP段（<strong>不可发送</strong>）。</li></ol><h3 id="TCP发送窗口结构图示-："><a href="#TCP发送窗口结构图示-：" class="headerlink" title="TCP发送窗口结构图示 ："></a><strong>TCP<font color="red">发送</font>窗口结构图示</strong> ：</h3><p><img src="/../../../images/image-20230220135411913.png" alt="image-20230220135411913"></p><ul><li><strong>SND.WND</strong> ：发送窗口。</li><li><strong>SND.UNA</strong>：Send Unacknowledged 指针，指向发送窗口的第一个字节。</li><li><strong>SND.NXT</strong>：Send Next 指针，指向可用窗口的第一个字节。</li></ul><p><strong>可用窗口大小</strong> = <code>SND.UNA + SND.WND - SND.NXT</code> 。</p><h3 id="TCP-接收窗口可以划分成三个部分-："><a href="#TCP-接收窗口可以划分成三个部分-：" class="headerlink" title="TCP 接收窗口可以划分成三个部分 ："></a><strong>TCP <font color="red">接收</font>窗口可以划分成三个部分</strong> ：</h3><ol><li>已经接收并且已经确认的 TCP 段（<strong>已经接收并确认</strong>）；</li><li>等待接收且允许发送方发送 TCP 段（<strong>可以接收未确认</strong>）；</li><li>不可接收且不允许发送方发送TCP段（<strong>不可接收</strong>）。</li></ol><h3 id="TCP-接收窗口结构图示-："><a href="#TCP-接收窗口结构图示-：" class="headerlink" title="TCP 接收窗口结构图示 ："></a><strong>TCP 接收窗口结构图示</strong> ：</h3><p><img src="/../../../images/image-20230220135419120.png" alt="image-20230220135419120"></p><p><strong>接收窗口的大小是根据接收端处理数据的速度动态调整的。</strong> 如果接收端读取数据快，接收窗口可能会扩大。 否则，它可能会缩小。</p><p>另外，这里的滑动窗口大小只是为了演示使用，实际窗口大小通常会远远大于这个值。</p><h2 id="TCP-的拥塞控制是怎么实现的？"><a href="#TCP-的拥塞控制是怎么实现的？" class="headerlink" title="# TCP 的拥塞控制是怎么实现的？"></a><a href="#tcp-%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84">#</a> TCP 的拥塞控制是怎么实现的？</h2><p>在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络的性能就要变坏。这种情况就叫拥塞。拥塞控制就是为了防止过多的数据注入到网络中，这样就可以使网络中的路由器或链路不致过载。拥塞控制所要做的都有一个前提，就是网络能够承受现有的网络负荷。拥塞控制是一个全局性的过程，涉及到所有的主机，所有的路由器，以及与降低网络传输性能有关的所有因素。相反，流量控制往往是点对点通信量的控制，是个端到端的问题。流量控制所要做到的就是抑制发送端发送数据的速率，以便使接收端来得及接收。</p><p><img src="/../../../images/image-20230220135425341.png" alt="image-20230220135425341"></p><p>为了进行拥塞控制，TCP 发送方要维持一个 <strong>拥塞窗口(cwnd)</strong> 的状态变量。拥塞控制窗口的大小取决于网络的拥塞程度，并且动态变化。发送方让自己的发送窗口取为拥塞窗口和接收方的接受窗口中较小的一个。</p><p>TCP 的拥塞控制采用了四种算法，即 <strong>慢开始</strong> 、 <strong>拥塞避免</strong> 、<strong>快重传</strong> 和 <strong>快恢复</strong>。在网络层也可以使路由器采用适当的分组丢弃策略（如主动队列管理 AQM），以减少网络拥塞的发生。</p><ul><li><strong>慢开始：</strong> 慢开始算法的思路是当主机开始发送数据时，如果立即把大量数据字节注入到网络，那么可能会引起网络阻塞，因为现在还不知道网络的符合情况。经验表明，较好的方法是先探测一下，即由小到大逐渐增大发送窗口，也就是<strong>由小到大逐渐增大拥塞窗口数值</strong>。cwnd 初始值为 1，每经过一个传播轮次，cwnd 加倍。</li><li><strong>拥塞避免：</strong> 拥塞避免算法的思路是让拥塞窗口 cwnd 缓慢增大，即每经过一个往返时间 RTT 就把发送方的 cwnd 加 1.</li><li><strong>快重传与快恢复：</strong> 在 TCP/IP 中，快速重传和恢复（fast retransmit and recovery，FRR）是一种拥塞控制算法，它能快速恢复丢失的数据包。没有 FRR，如果数据包丢失了，TCP 将会使用定时器来要求传输暂停。在暂停的这段时间内，没有新的或复制的数据包被发送。有了 FRR，如果接收机接收到一个不按顺序的数据段，它会立即给发送机发送一个重复确认。如果发送机接收到三个重复确认，它会假定确认件指出的数据段丢失了，并立即重传这些丢失的数据段。有了 FRR，就不会因为重传时要求的暂停被耽误。 　当有单独的数据包丢失时，快速重传和恢复（FRR）能最有效地工作。当有多个数据信息包在某一段很短的时间内丢失时，它则不能很有效地工作。</li></ul><h2 id="ARQ-协议了解吗-（Automatic-Repeat-reQuest）"><a href="#ARQ-协议了解吗-（Automatic-Repeat-reQuest）" class="headerlink" title="# ARQ 协议了解吗?（Automatic Repeat-reQuest）"></a><a href="#arq-%E5%8D%8F%E8%AE%AE%E4%BA%86%E8%A7%A3%E5%90%97">#</a> ARQ 协议了解吗?（Automatic Repeat-reQuest）</h2><p><font color="red"><strong>自动重传请求</strong></font>（Automatic Repeat-reQuest，ARQ）是 OSI 模型中数据链路层和传输层的<strong>错误纠正协</strong>议之一。<strong>它通过使用确认和超时这两个机制，在不可靠服务的基础上实现可靠的信息传输</strong>。如果发送方在发送后一段时间之内没有收到确认信息（Acknowledgements，就是我们常说的 ACK），它通常会重新发送，直到收到确认或者重试超过一定的次数。</p><p>ARQ 包括<strong>停止等待 ARQ 协议</strong>和<strong>连续 ARQ 协议</strong>。</p><h3 id="停止等待-ARQ-协议"><a href="#停止等待-ARQ-协议" class="headerlink" title="# 停止等待 ARQ 协议"></a><a href="#%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85-arq-%E5%8D%8F%E8%AE%AE">#</a> 停止等待 ARQ 协议</h3><p>停止等待协议是为了实现可靠传输的，它的基本原理就是每发完一个分组就停止发送，等待对方确认（回复 ACK）。如果过了一段时间（超时时间后），还是没有收到 ACK 确认，说明没有发送成功，需要重新发送，直到收到确认后再发下一个分组；</p><p>在停止等待协议中，若接收方收到重复分组，就丢弃该分组，但同时还要发送确认。</p><h4 id="1-无差错情况"><a href="#1-无差错情况" class="headerlink" title="1) 无差错情况:"></a><strong>1) 无差错情况:</strong></h4><p>发送方发送分组, 接收方在规定时间内收到,并且回复确认.发送方再次发送。</p><h4 id="2-出现差错情况（超时重传）"><a href="#2-出现差错情况（超时重传）" class="headerlink" title="2) 出现差错情况（超时重传）:"></a><strong>2) 出现差错情况（超时重传）:</strong></h4><p>停止等待协议中超时重传是指只要超过一段时间仍然没有收到确认，就重传前面发送过的分组（认为刚才发送过的分组丢失了）。因此每发送完一个分组需要设置一个超时计时器，其重传时间应比数据在分组传输的平均往返时间更长一些。这种自动重传方式常称为 <strong>自动重传请求 ARQ</strong> 。另外在停止等待协议中若收到重复分组，就丢弃该分组，但同时还要发送确认。</p><h4 id="3-确认丢失和确认迟到"><a href="#3-确认丢失和确认迟到" class="headerlink" title="3) 确认丢失和确认迟到"></a><strong>3) 确认丢失和确认迟到</strong></h4><ul><li><strong>确认丢失</strong> ：确认消息在传输过程丢失。当 A 发送 M1 消息，B 收到后，B 向 A 发送了一个 M1 确认消息，但却在传输过程中丢失。而 A 并不知道，在超时计时过后，A 重传 M1 消息，B 再次收到该消息后采取以下两点措施：1. 丢弃这个重复的 M1 消息，不向上层交付。 2. 向 A 发送确认消息。（不会认为已经发送过了，就不再发送。A 能重传，就证明 B 的确认消息丢失）。</li><li><strong>确认迟到</strong> ：确认消息在传输过程中迟到。A 发送 M1 消息，B 收到并发送确认。在超时时间内没有收到确认消息，A 重传 M1 消息，B 仍然收到并继续发送确认消息（B 收到了 2 份 M1）。此时 A 收到了 B 第二次发送的确认消息。接着发送其他数据。过了一会，A 收到了 B 第一次发送的对 M1 的确认消息（A 也收到了 2 份确认消息）。处理如下：1. A 收到重复的确认后，直接丢弃。2. B 收到重复的 M1 后，也直接丢弃重复的 M1。</li></ul><h3 id="连续-ARQ-协议"><a href="#连续-ARQ-协议" class="headerlink" title="# 连续 ARQ 协议"></a><a href="#%E8%BF%9E%E7%BB%AD-arq-%E5%8D%8F%E8%AE%AE">#</a> 连续 ARQ 协议</h3><p>连续 ARQ 协议可提高信道利用率。发送方维持一个发送窗口，凡位于发送窗口内的分组可以连续发送出去，而不需要等待对方确认。接收方一般采用累计确认，对<mark>按序到达</mark>的<mark>最后一个分组发送确认，表明到这个分组为止的所有分组都已经正确收到了。</mark></p><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a><strong>优点：</strong></h4><p> 信道利用率高，容易实现，即使确认丢失，也不必重传。</p><h4 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a><strong>缺点：</strong></h4><p>不能向发送方反映出接收方已经正确收到的所有分组的信息。 <font color="blue">比如：发送方发送了 5 条 消息，中间第三条丢失（3 号），这时接收方只能对前两个发送确认</font>。发送方无法知道后三个分组的下落，而只好把后三个全部重传一次。这也叫 Go-Back-N（回退 N），表示需要退回来重传已经发送过的 N 个消息。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;TCP-如何保证传输的可靠性？&quot;&gt;&lt;a href=&quot;#TCP-如何保证传输的可靠性？&quot; class=&quot;headerlink&quot; title=&quot;TCP 如何保证传输的可靠性？&quot;&gt;&lt;/a&gt;TCP 如何保证传输的可靠性？&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;基于数据</summary>
+      
+    
+    
+    
+    <category term="面试题" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OSI 和 TCP/IP 网络分层模型详解（基础）</title>
+    <link href="http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/OSI%20%E5%92%8C%20TCPIP%20%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/"/>
+    <id>http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/OSI%20%E5%92%8C%20TCPIP%20%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/</id>
+    <published>2023-02-19T09:06:44.282Z</published>
+    <updated>2023-03-15T05:35:24.668Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>OSI模型</strong>: 即<strong>开放式通信系统互联参考模型</strong>（<strong>Open System Interconnection Reference Model</strong>），是国际标准化组织（ISO）提出的一个试图使各种计算机在世界范围内互连为网络的标准框架，简称OSI。</p><h2 id="OSI-七层模型"><a href="#OSI-七层模型" class="headerlink" title="OSI 七层模型"></a>OSI 七层模型</h2><p><strong>OSI 七层模型</strong> 是国际标准化组织提出一个网络分层模型，其大体结构以及每一层提供的功能如下图所示：</p><p><img src="/../../../images/image-20230220134708482.png" alt="image-20230220134708482"></p><p>每一层都专注做一件事情，并且每一层都需要使用下一层提供的功能比如传输层需要使用网络层提供的路由和寻址功能，这样传输层才知道把数据传输到哪里去。</p><p><strong>OSI 的七层体系结构概念清楚，理论也很完整，但是它比较复杂而且不实用，而且有些功能在多个层中重复出现。</strong></p><p>上面这种图可能比较抽象，再来一个比较生动的图片。下面这个图片是我在国外的一个网站上看到的，非常赞！</p><p><img src="/../../../images/image-20230220134715273.png" alt="image-20230220134715273"></p><p><strong>既然 OSI 七层模型这么厉害，为什么干不过 TCP/IP 四 层模型呢？</strong></p><p>的确，OSI 七层模型当时一直被一些大公司甚至一些国家政府支持。这样的背景下，为什么会失败呢？我觉得主要有下面几方面原因：</p><ol><li>OSI 的专家缺乏实际经验，他们在完成 OSI 标准时缺乏商业驱动力</li><li>OSI 的协议实现起来过分复杂，而且运行效率很低</li><li>OSI 制定标准的周期太长，因而使得按 OSI 标准生产的设备无法及时进入市场（20 世纪 90 年代初期，虽然整套的 OSI 国际标准都已经制定出来，但基于 TCP/IP 的互联网已经抢先在全球相当大的范围成功运行了）</li><li>OSI 的层次划分不太合理，有些功能在多个层次中重复出现。</li></ol><p>OSI 七层模型虽然失败了，但是却提供了很多不错的理论基础。为了更好地去了解网络分层，OSI 七层模型还是非常有必要学习的。</p><p>最后再分享一个关于 OSI 七层模型非常不错的总结图片！</p><p><img src="/../../../images/image-20230220134722147.png" alt="image-20230220134722147"></p><h2 id="TCP-x2F-IP-四层模型"><a href="#TCP-x2F-IP-四层模型" class="headerlink" title="# TCP/IP 四层模型"></a><a href="#tcp-ip-%E5%9B%9B%E5%B1%82%E6%A8%A1%E5%9E%8B">#</a> TCP/IP 四层模型</h2><p><strong>TCP/IP 四层模型</strong> 是目前被广泛采用的一种模型,我们可以将 TCP / IP 模型看作是 OSI 七层模型的精简版本，由以下 4 层组成：</p><ol><li>应用层</li><li>传输层</li><li>网络层</li><li>网络接口层</li></ol><p>需要注意的是，我们并不能将 TCP/IP 四层模型 和 OSI 七层模型完全精确地匹配起来，不过可以简单将两者对应起来，如下图所示：</p><p><img src="/../../../images/image-20230220134732543.png" alt="image-20230220134732543"></p><h3 id="应用层（Application-layer）"><a href="#应用层（Application-layer）" class="headerlink" title="# 应用层（Application layer）"></a><a href="#%E5%BA%94%E7%94%A8%E5%B1%82-application-layer">#</a> 应用层（Application layer）</h3><p><strong>应用层位于传输层之上，主要提供两个终端设备上的应用程序之间信息交换的服务，它定义了信息交换的格式，消息会交给下一层传输层来传输。</strong> 我们把应用层交互的数据单元称为报文。</p><p><img src="/../../../images/image-20230220134737489.png" alt="image-20230220134737489"></p><p>应用层协议定义了网络通信规则，对于不同的网络应用需要不同的应用层协议。在互联网中应用层协议很多，如支持 Web 应用的 HTTP 协议，支持电子邮件的 SMTP 协议等等。</p><p><img src="/../../../images/image-20230220134743725.png" alt="image-20230220134743725"></p><p>应用层常见协议总结，请看这篇文章：<a href="">应用层常见协议总结（应用层）</a>。</p><h3 id="传输层（Transport-layer）"><a href="#传输层（Transport-layer）" class="headerlink" title="# 传输层（Transport layer）"></a><a href="#%E4%BC%A0%E8%BE%93%E5%B1%82-transport-layer">#</a> 传输层（Transport layer）</h3><p><strong>传输层的主要任务就是负责向两台终端设备进程之间的通信提供通用的数据传输服务。</strong> 应用进程利用该服务传送应用层报文。“通用的”是指并不针对某一个特定的网络应用，而是多种应用可以使用同一个运输层服务。</p><p><strong>运输层主要使用以下两种协议：</strong></p><ol><li><strong>传输控制协议 TCP</strong>（Transmisson Control Protocol）–提供 <strong>面向连接</strong> 的，<strong>可靠的</strong> 数据传输服务。</li><li><strong>用户数据协议 UDP</strong>（User Datagram Protocol）–提供 <strong>无连接</strong> 的，尽最大努力的数据传输服务（不保证数据传输的可靠性）。</li></ol><p><img src="/../../../images/image-20230220134748906.png" alt="image-20230220134748906"></p><h3 id="网络层（Network-layer）"><a href="#网络层（Network-layer）" class="headerlink" title="# 网络层（Network layer）"></a><a href="#%E7%BD%91%E7%BB%9C%E5%B1%82-network-layer">#</a> 网络层（Network layer）</h3><p><strong>网络层负责为分组交换网上的不同主机提供通信服务。</strong> 在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组和包进行传送。在 TCP/IP 体系结构中，由于网络层使用 IP 协议，因此分组也叫 IP 数据报，简称数据报。</p><p>⚠️注意 ：<strong>不要把运输层的“用户数据报 UDP”和网络层的“IP 数据报”弄混</strong>。</p><p><strong>网络层的还有一个任务就是选择合适的路由，使源主机运输层所传下来的分组，能通过网络层中的路由器找到目的主机。</strong></p><p>这里强调指出，网络层中的“网络”二字已经不是我们通常谈到的具体网络，而是指计算机网络体系结构模型中第三层的名称。</p><p>互联网是由大量的异构（heterogeneous）网络通过路由器（router）相互连接起来的。互联网使用的网络层协议是无连接的网际协议（Internet Prococol）和许多路由选择协议，因此互联网的网络层也叫做 <strong>网际层</strong> 或 <strong>IP 层</strong>。</p><p><img src="/../../../images/image-20230220134754055.png" alt="image-20230220134754055"></p><p><strong>网络层常见协议</strong> ：</p><ul><li><strong>IP:网际协议</strong> ：网际协议 IP 是TCP/IP协议中最重要的协议之一，也是网络层最重要的协议之一，IP协议的作用包括寻址规约、定义数据包的格式等等，是网络层信息传输的主力协议。目前IP协议主要分为两种，一种是过去的IPv4，另一种是较新的IPv6，目前这两种协议都在使用，但后者已经被提议来取代前者。</li><li><strong>ARP 协议</strong> ：ARP协议，全称地址解析协议（Address Resolution Protocol），它解决的是网络层地址和链路层地址之间的转换问题。因为一个IP数据报在物理上传输的过程中，总是需要知道下一跳（物理上的下一个目的地）该去往何处，但IP地址属于逻辑地址，而MAC地址才是物理地址，ARP协议解决了IP地址转MAC地址的一些问题。</li><li><strong>NAT:网络地址转换协议</strong> ：NAT协议（Network Address Translation）的应用场景如同它的名称——网络地址转换，应用于内部网到外部网的地址转换过程中。具体地说，在一个小的子网（局域网，LAN）内，各主机使用的是同一个LAN下的IP地址，但在该LAN以外，在广域网（WAN）中，需要一个统一的IP地址来标识该LAN在整个Internet上的位置。</li><li>……</li></ul><h3 id="网络接口层（Network-interface-layer）"><a href="#网络接口层（Network-interface-layer）" class="headerlink" title="# 网络接口层（Network interface layer）"></a><a href="#%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3%E5%B1%82-network-interface-layer">#</a> 网络接口层（Network interface layer）</h3><p>我们可以把网络接口层看作是数据链路层和物理层的合体。</p><ol><li>数据链路层(data link layer)通常简称为链路层（ 两台主机之间的数据传输，总是在一段一段的链路上传送的）。<strong>数据链路层的作用是将网络层交下来的 IP 数据报组装成帧，在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。</strong></li><li><strong>物理层的作用是实现相邻计算机节点之间比特流的透明传送，尽可能屏蔽掉具体传输介质和物理设备的差异</strong></li></ol><p><img src="/../../../images/image-20230220134759211.png" alt="image-20230220134759211"></p><h3 id="总结"><a href="#总结" class="headerlink" title="# 总结"></a><a href="#%E6%80%BB%E7%BB%93">#</a> 总结</h3><p>简单总结一下每一层包含的协议和核心技术:</p><p><img src="/../../../images/image-20230220134804106.png" alt="image-20230220134804106"></p><p><strong>应用层协议</strong> :</p><ul><li>HTTP 协议（超文本传输协议，网页浏览常用的协议）</li><li>DHCP 协议（动态主机配置）</li><li>DNS 系统原理（域名系统）</li><li>FTP 协议（文件传输协议）</li><li>Telnet协议（远程登陆协议）</li><li>电子邮件协议等（SMTP、POP3、IMAP）</li><li>……</li></ul><p><strong>传输层协议</strong> :</p><ul><li>TCP 协议 <ul><li>报文段结构</li><li>可靠数据传输</li><li>流量控制</li><li>拥塞控制</li></ul></li><li>UDP 协议 <ul><li>报文段结构</li><li>RDT（可靠数据传输协议）</li></ul></li></ul><p><strong>网络层协议</strong> :</p><ul><li>IP 协议（TCP/IP 协议的基础，分为 IPv4 和 IPv6）</li><li>ARP 协议（地址解析协议，用于解析 IP 地址和 MAC 地址之间的映射）</li><li>ICMP 协议（控制报文协议，用于发送控制消息）</li><li>NAT 协议（网络地址转换协议）</li><li>RIP 协议、OSPF 协议、BGP 协议（路由选择协议）</li><li>……</li></ul><p><strong>网络接口层</strong> :</p><ul><li>差错检测技术</li><li>多路访问协议（信道复用技术）</li><li>CSMA/CD 协议</li><li>MAC 协议</li><li>以太网技术</li><li>……</li></ul><h2 id="网络分层的原因"><a href="#网络分层的原因" class="headerlink" title="# 网络分层的原因"></a><a href="#%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E7%9A%84%E5%8E%9F%E5%9B%A0">#</a> 网络分层的原因</h2><p>在这篇文章的最后，我想聊聊：“为什么网络要分层？”。</p><p>说到分层，我们先从我们平时使用框架开发一个后台程序来说，我们往往会按照每一层做不同的事情的原则将系统分为三层（复杂的系统分层会更多）:</p><ol><li>Repository（数据库操作）</li><li>Service（业务操作）</li><li>Controller（前后端数据交互）</li></ol><p><strong>复杂的系统需要分层，因为每一层都需要专注于一类事情。网络分层的原因也是一样，每一层只专注于做一类事情。</strong></p><p>好了，再来说回：“为什么网络要分层？”。我觉得主要有 3 方面的原因：</p><ol><li><strong>各层之间相互独立</strong>：各层之间相互独立，各层之间不需要关心其他层是如何实现的，只需要知道自己如何调用下层提供好的功能就可以了（可以简单理解为接口调用）<strong>。这个和我们对开发时系统进行分层是一个道理。</strong></li><li><strong>提高了整体灵活性</strong> ：每一层都可以使用最适合的技术来实现，你只需要保证你提供的功能以及暴露的接口的规则没有改变就行了。<strong>这个和我们平时开发系统的时候要求的高内聚、低耦合的原则也是可以对应上的。</strong></li><li><strong>大问题化小</strong> ： 分层可以将复杂的网络间题分解为许多比较小的、界线比较清晰简单的小问题来处理和解决。这样使得复杂的计算机网络系统变得易于设计，实现和标准化。 <strong>这个和我们平时开发的时候，一般会将系统功能分解，然后将复杂的问题分解为容易理解的更小的问题是相对应的，这些较小的问题具有更好的边界（目标和接口）定义。</strong></li></ol><p>我想到了计算机世界非常非常有名的一句话，这里分享一下：</p><blockquote><p>计算机科学领域的任何问题都可以通过增加一个间接的中间层来解决，计算机整个体系从上到下都是按照严格的层次结构设计的。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;strong&gt;OSI模型&lt;/strong&gt;: 即&lt;strong&gt;开放式通信系统互联参考模型&lt;/strong&gt;（&lt;strong&gt;Open System Interconnection Reference Model&lt;/strong&gt;），是国际标准化组织（ISO）提出的一个试</summary>
+      
+    
+    
+    
+    <category term="面试题" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP vs HTTPS（应用层）</title>
+    <link href="http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/HTTP%20vs%20HTTPS%EF%BC%88%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%89/"/>
+    <id>http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/HTTP%20vs%20HTTPS%EF%BC%88%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%89/</id>
+    <published>2023-02-19T09:05:17.336Z</published>
+    <updated>2023-03-20T12:27:22.671Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h2><h3 id="HTTP-协议介绍"><a href="#HTTP-协议介绍" class="headerlink" title="# HTTP 协议介绍"></a><a href="#http-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D">#</a> HTTP 协议介绍</h3><p>HTTP 协议，全称<strong>超文本传输协议</strong>（Hypertext Transfer Protocol）。顾名思义，HTTP 协议就是用来规范超文本的传输，超文本，也就是网络上的包括文本在内的各式各样的消息，具体来说，主要是来规范浏览器和服务器端的行为的。</p><p>并且，HTTP 是一个无状态（stateless）协议，也就是说服务器不维护任何有关客户端过去所发请求的消息。这其实是一种懒政，有状态协议会更加复杂，需要维护状态（历史信息），而且如果客户或服务器失效，会产生状态的不一致，解决这种不一致的代价更高。</p><h3 id="HTTP-协议通信过程"><a href="#HTTP-协议通信过程" class="headerlink" title="# HTTP 协议通信过程"></a><a href="#http-%E5%8D%8F%E8%AE%AE%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B">#</a> HTTP 协议通信过程</h3><p>HTTP 是应用层协议，它以 TCP（传输层）作为底层协议，默认端口为 80. 通信过程主要如下：</p><ol><li>服务器在 80 端口等待客户的请求。</li><li>浏览器发起到服务器的 TCP 连接（创建套接字 Socket）。</li><li>服务器接收来自浏览器的 TCP 连接。</li><li>浏览器（HTTP 客户端）与 Web 服务器（HTTP 服务器）交换 HTTP 消息。</li><li>关闭 TCP 连接。</li></ol><h3 id="HTTP-协议优点"><a href="#HTTP-协议优点" class="headerlink" title="# HTTP 协议优点"></a><a href="#http-%E5%8D%8F%E8%AE%AE%E4%BC%98%E7%82%B9">#</a> HTTP 协议优点</h3><p>扩展性强、速度快、跨平台支持性好。</p><h2 id="HTTPS-协议"><a href="#HTTPS-协议" class="headerlink" title="# HTTPS 协议"></a><a href="#https-%E5%8D%8F%E8%AE%AE">#</a> HTTPS 协议</h2><h3 id="HTTPS-协议介绍"><a href="#HTTPS-协议介绍" class="headerlink" title="# HTTPS 协议介绍"></a><a href="#https-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D">#</a> HTTPS 协议介绍</h3><p>HTTPS 协议（Hyper Text Transfer Protocol Secure），是 HTTP 的加强安全版本。HTTPS 是基于 HTTP 的，也是用 TCP 作为底层协议，并额外使用 SSL/TLS 协议用作加密和安全认证。默认端口号是 443.</p><p>HTTPS 协议中，SSL 通道通常使用基于密钥的加密算法，密钥长度通常是 40 比特或 128 比特。</p><h3 id="HTTPS-协议优点"><a href="#HTTPS-协议优点" class="headerlink" title="# HTTPS 协议优点"></a><a href="#https-%E5%8D%8F%E8%AE%AE%E4%BC%98%E7%82%B9">#</a> HTTPS 协议优点</h3><p>保密性好、信任度高。</p><h2 id="HTTPS-的核心—SSL-x2F-TLS协议"><a href="#HTTPS-的核心—SSL-x2F-TLS协议" class="headerlink" title="# HTTPS 的核心—SSL/TLS协议"></a><a href="#https-%E7%9A%84%E6%A0%B8%E5%BF%83%E2%80%94ssl-tls%E5%8D%8F%E8%AE%AE">#</a> HTTPS 的核心—SSL/TLS协议</h2><p>HTTPS 之所以能达到较高的安全性要求，就是结合了 SSL/TLS 和 TCP 协议，对通信数据进行加密，解决了 HTTP 数据透明的问题。接下来重点介绍一下 SSL/TLS 的工作原理。</p><h3 id="SSL-和-TLS-的区别？"><a href="#SSL-和-TLS-的区别？" class="headerlink" title="# SSL 和 TLS 的区别？"></a><a href="#ssl-%E5%92%8C-tls-%E7%9A%84%E5%8C%BA%E5%88%AB">#</a> SSL 和 TLS 的区别？</h3><p><strong>SSL 和 TLS 没有太大的区别。</strong></p><p>SSL 指安全套接字协议（Secure Sockets Layer），首次发布与 1996 年。SSL 的首次发布其实已经是他的 3.0 版本，SSL 1.0 从未面世，SSL 2.0 则具有较大的缺陷（DROWN 缺陷——Decrypting RSA with Obsolete and Weakened eNcryption）。很快，在 1999 年，SSL 3.0 进一步升级，<strong>新版本被命名为 TLS 1.0</strong>。因此，TLS 是基于 SSL 之上的，但由于习惯叫法，通常把 HTTPS 中的核心加密协议混称为 SSL/TLS。</p><h3 id="SSL-x2F-TLS-的工作原理"><a href="#SSL-x2F-TLS-的工作原理" class="headerlink" title="# SSL/TLS 的工作原理"></a><a href="#ssl-tls-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">#</a> SSL/TLS 的工作原理</h3><h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="# 非对称加密"></a><a href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86">#</a> 非对称加密</h4><p>SSL/TLS 的核心要素是<strong>非对称加密</strong>。非对称加密采用两个密钥——一个公钥，一个私钥。在通信时，私钥仅由解密者保存，公钥由任何一个想与解密者通信的发送者（加密者）所知。可以设想一个场景，</p><blockquote><p>在某个自助邮局，每个通信信道都是一个邮箱，每一个邮箱所有者都在旁边立了一个牌子，上面挂着一把钥匙：这是我的公钥，发送者请将信件放入我的邮箱，并用公钥锁好。</p><p>但是公钥只能加锁，并不能解锁。解锁只能由邮箱的所有者——因为只有他保存着私钥。</p><p>这样，通信信息就不会被其他人截获了，这依赖于私钥的保密性。</p></blockquote><p><img src="/../../../images/image-20230220134425749.png" alt="image-20230220134425749"></p><p>非对称加密的公钥和私钥需要采用一种复杂的数学机制生成（密码学认为，为了较高的安全性，尽量不要自己创造加密方案）。公私钥对的生成算法依赖于单向陷门函数。</p><blockquote><p>单向函数：已知单向函数 f，给定任意一个输入 x，易计算输出 y=f(x)；而给定一个输出 y，假设存在 f(x)=y，很难根据 f 来计算出 x。</p><p>单向陷门函数：一个较弱的单向函数。已知单向陷门函数 f，陷门 h，给定任意一个输入 x，易计算出输出 y=f(x;h)；而给定一个输出 y，假设存在 f(x;h)=y，很难根据 f 来计算出 x，但可以根据 f 和 h 来推导出 x。</p></blockquote><p><img src="/../../../images/image-20230220134444105.png" alt="image-20230220134444105"></p><p>上图就是一个单向函数（不是单项陷门函数），假设有一个绝世秘籍，任何知道了这个秘籍的人都可以把苹果汁榨成苹果，那么这个秘籍就是“陷门”了吧。</p><p>在这里，函数 f 的计算方法相当于公钥，陷门 h 相当于私钥。公钥 f 是公开的，任何人对已有输入，都可以用 f 加密，而要想根据加密信息还原出原信息，必须要有私钥才行。</p><h4 id="对称加密"><a href="#对称加密" class="headerlink" title="# 对称加密"></a><a href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86">#</a> 对称加密</h4><p>使用 SSL/TLS 进行通信的双方需要使用非对称加密方案来通信，但是非对称加密设计了较为复杂的数学算法，在实际通信过程中，计算的代价较高，效率太低，因此，SSL/TLS 实际对消息的加密使用的是对称加密。</p><blockquote><p>对称加密：通信双方共享唯一密钥 k，加解密算法已知，加密方利用密钥 k 加密，解密方利用密钥 k 解密，保密性依赖于密钥 k 的保密性。</p></blockquote><p><img src="/../../../images/image-20230220134457419.png" alt="image-20230220134457419"></p><p>对称加密的密钥生成代价比公私钥对的生成代价低得多，那么有的人会问了，为什么 SSL/TLS 还需要使用非对称加密呢？因为对称加密的保密性完全依赖于密钥的保密性。在双方通信之前，需要商量一个用于对称加密的密钥。我们知道网络通信的信道是不安全的，传输报文对任何人是可见的，密钥的交换肯定不能直接在网络信道中传输。因此，使用非对称加密，对对称加密的密钥进行加密，保护该密钥不在网络信道中被窃听。这样，通信双方只需要一次非对称加密，交换对称加密的密钥，在之后的信息通信中，使用绝对安全的密钥，对信息进行对称加密，即可保证传输消息的保密性。</p><h4 id="公钥传输的信赖性"><a href="#公钥传输的信赖性" class="headerlink" title="# 公钥传输的信赖性"></a><a href="#%E5%85%AC%E9%92%A5%E4%BC%A0%E8%BE%93%E7%9A%84%E4%BF%A1%E8%B5%96%E6%80%A7">#</a> 公钥传输的信赖性</h4><p>SSL/TLS 介绍到这里，了解信息安全的朋友又会想到一个安全隐患，设想一个下面的场景：</p><blockquote><p>客户端 C 和服务器 S 想要使用 SSL/TLS 通信，由上述 SSL/TLS 通信原理，C 需要先知道 S 的公钥，而 S 公钥的唯一获取途径，就是把 S 公钥在网络信道中传输。要注意网络信道通信中有几个前提：</p><ol><li>任何人都可以捕获通信包</li><li>通信包的保密性由发送者设计</li><li>保密算法设计方案默认为公开，而（解密）密钥默认是安全的</li></ol><p>因此，假设 S 公钥不做加密，在信道中传输，那么很有可能存在一个攻击者 A，发送给 C 一个诈包，假装是 S 公钥，其实是诱饵服务器 AS 的公钥。当 C 收获了 AS 的公钥（却以为是 S 的公钥），C 后续就会使用 AS 公钥对数据进行加密，并在公开信道传输，那么 A 将捕获这些加密包，用 AS 的私钥解密，就截获了 C 本要给 S 发送的内容，而 C 和 S 二人全然不知。</p><p>同样的，S 公钥即使做加密，也难以避免这种信任性问题，C 被 AS 拐跑了！</p></blockquote><p><img src="/../../../images/image-20230220134509815.png" alt="image-20230220134509815"></p><p>为了公钥传输的信赖性问题，第三方机构应运而生——证书颁发机构（CA，Certificate Authority）。CA 默认是受信任的第三方。CA 会给各个服务器颁发证书，证书存储在服务器上，并附有 CA 的<strong>电子签名</strong>（见下节）。</p><p>当客户端（浏览器）向服务器发送 HTTPS 请求时，一定要先获取目标服务器的证书，并根据证书上的信息，检验证书的合法性。一旦客户端检测到证书非法，就会发生错误。客户端获取了服务器的证书后，由于证书的信任性是由第三方信赖机构认证的，而证书上又包含着服务器的公钥信息，客户端就可以放心的信任证书上的公钥就是目标服务器的公钥。</p><h4 id="数字签名"><a href="#数字签名" class="headerlink" title="# 数字签名"></a><a href="#%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D">#</a> 数字签名</h4><p>好，到这一小节，已经是 SSL/TLS 的尾声了。上一小节提到了数字签名，数字签名要解决的问题，是防止证书被伪造。第三方信赖机构 CA 之所以能被信赖，就是 <strong>靠数字签名技术</strong> 。</p><p>数字签名，是 CA 在给服务器颁发证书时，使用散列+加密的组合技术，在证书上盖个章，以此来提供验伪的功能。具体行为如下：</p><blockquote><p>CA 知道服务器的公钥，对证书采用散列技术生成一个摘要。CA 使用 CA 私钥对该摘要进行加密，并附在证书下方，发送给服务器。</p><p>现在服务器将该证书发送给客户端，客户端需要验证该证书的身份。客户端找到第三方机构 CA，获知 CA 的公钥，并用 CA 公钥对证书的签名进行解密，获得了 CA 生成的摘要。</p><p>客户端对证书数据（包含服务器的公钥）做相同的散列处理，得到摘要，并将该摘要与之前从签名中解码出的摘要做对比，如果相同，则身份验证成功；否则验证失败。</p></blockquote><p><img src="/../../../images/image-20230220134547914.png" alt="image-20230220134547914"></p><p>总结来说，带有证书的公钥传输机制如下：</p><ol><li>设有服务器 S，客户端 C，和第三方信赖机构 CA。</li><li>S 信任 CA，CA 是知道 S 公钥的，CA 向 S 颁发证书。并附上 CA 私钥对消息摘要的加密签名。</li><li>S 获得 CA 颁发的证书，将该证书传递给 C。</li><li>C 获得 S 的证书，信任 CA 并知晓 CA 公钥，使用 CA 公钥对 S 证书上的签名解密，同时对消息进行散列处理，得到摘要。比较摘要，验证 S 证书的真实性。</li><li>如果 C 验证 S 证书是真实的，则信任 S 的公钥（在 S 证书中）。</li></ol><p><img src="/../../../images/image-20230220134604571.png" alt="image-20230220134604571"></p><p>对于数字签名，我这里讲的比较简单，如果你没有搞清楚的话，强烈推荐你看看<a href="https://www.bilibili.com/video/BV18N411X7ty/">数字签名及数字证书原理open in new window</a>这个视频，这是我看过最清晰的讲解。</p><p><img src="https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/github/javaguide/image-20220321121814946.png" alt="img"></p><h2 id="总结"><a href="#总结" class="headerlink" title="# 总结"></a><a href="#%E6%80%BB%E7%BB%93">#</a> 总结</h2><ul><li><strong>端口号</strong> ：HTTP 默认是 80，HTTPS 默认是 443。</li><li><strong>URL 前缀</strong> ：HTTP 的 URL 前缀是 <code>http://</code>，HTTPS 的 URL 前缀是 <code>https://</code>。</li><li><strong>安全性和资源消耗</strong> ： HTTP 协议运行在 TCP 之上，所有传输的内容都是明文，客户端和服务器端都无法验证对方的身份。HTTPS 是运行在 SSL/TLS 之上的 HTTP 协议，SSL/TLS 运行在 TCP 之上。所有传输的内容都经过加密，加密采用对称加密，但对称加密的密钥用服务器方的证书进行了非对称加密。所以说，HTTP 安全性没有 HTTPS 高，但是 HTTPS 比 HTTP 耗费更多服务器资源</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;HTTP-协议&quot;&gt;&lt;a href=&quot;#HTTP-协议&quot; class=&quot;headerlink&quot; title=&quot;HTTP 协议&quot;&gt;&lt;/a&gt;HTTP 协议&lt;/h2&gt;&lt;h3 id=&quot;HTTP-协议介绍&quot;&gt;&lt;a href=&quot;#HTTP-协议介绍&quot; class=&quot;header</summary>
+      
+    
+    
+    
+    <category term="面试题" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP 常见状态码总结（应用层）</title>
+    <link href="http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/HTTP%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81%E6%80%BB%E7%BB%93%EF%BC%88%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%89/"/>
+    <id>http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/HTTP%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81%E6%80%BB%E7%BB%93%EF%BC%88%E5%BA%94%E7%94%A8%E5%B1%82%EF%BC%89/</id>
+    <published>2023-02-19T09:03:30.381Z</published>
+    <updated>2023-03-04T02:54:13.890Z</updated>
+    
+    <content type="html"><![CDATA[<p>HTTP 状态码用于描述 HTTP 请求的结果，比如2xx 就代表请求被成功处理。</p><p><img src="/../../../images/image-20230220134615645.png" alt="image-20230220134615645"></p><h3 id="1xx-Informational（信息性状态码）"><a href="#1xx-Informational（信息性状态码）" class="headerlink" title="# 1xx Informational（信息性状态码）"></a><a href="#_1xx-informational-%E4%BF%A1%E6%81%AF%E6%80%A7%E7%8A%B6%E6%80%81%E7%A0%81">#</a> 1xx Informational（信息性状态码）</h3><p>相比于其他类别状态码来说，1xx 你平时你大概率不会碰到，所以这里直接跳过。</p><h3 id="2xx-Success（成功状态码）"><a href="#2xx-Success（成功状态码）" class="headerlink" title="# 2xx Success（成功状态码）"></a><a href="#_2xx-success-%E6%88%90%E5%8A%9F%E7%8A%B6%E6%80%81%E7%A0%81">#</a> 2xx Success（成功状态码）</h3><ul><li><strong>200 OK</strong> ：请求被成功处理。比如我们发送一个查询用户数据的HTTP 请求到服务端，服务端正确返回了用户数据。这个是我们平时最常见的一个 HTTP 状态码。</li><li><strong>201 Created</strong> ：请求被成功处理并且在服务端创建了一个新的资源。比如我们通过 POST 请求创建一个新的用户。</li><li><strong>202 Accepted</strong> ：服务端已经接收到了请求，但是还未处理。</li><li><strong>204 No Content</strong> ： 服务端已经成功处理了请求，但是没有返回任何内容。</li></ul><p>这里格外提一下 204 状态码，平时学习/工作中见到的次数并不多。</p><p><a href="https://tools.ietf.org/html/rfc2616#section-10.2.5">HTTP RFC 2616对204状态码的描述open in new window</a>如下：</p><blockquote><p>The server has fulfilled the request but does not need to return an entity-body, and might want to return updated metainformation. The response MAY include new or updated metainformation in the form of entity-headers, which if present SHOULD be associated with the requested variant.</p><p>If the client is a user agent, it SHOULD NOT change its document view from that which caused the request to be sent. This response is primarily intended to allow input for actions to take place without causing a change to the user agent’s active document view, although any new or updated metainformation SHOULD be applied to the document currently in the user agent’s active view.</p><p>The 204 response MUST NOT include a message-body, and thus is always terminated by the first empty line after the header fields.</p></blockquote><p>简单来说，204状态码描述的是我们向服务端发送 HTTP 请求之后，只关注处理结果是否成功的场景。也就是说我们需要的就是一个结果：true/false。</p><p>举个例子：你要追一个女孩子，你问女孩子：“我能追你吗？”，女孩子回答：“好！”。我们把这个女孩子当做是服务端就很好理解 204 状态码了。</p><h3 id="3xx-Redirection（重定向状态码）"><a href="#3xx-Redirection（重定向状态码）" class="headerlink" title="# 3xx Redirection（重定向状态码）"></a><a href="#_3xx-redirection-%E9%87%8D%E5%AE%9A%E5%90%91%E7%8A%B6%E6%80%81%E7%A0%81">#</a> 3xx Redirection（重定向状态码）</h3><ul><li><strong>301 Moved Permanently</strong> ： 资源被永久重定向了。比如你的网站的网址更换了。</li><li><strong>302 Found</strong> ：资源被临时重定向了。比如你的网站的某些资源被暂时转移到另外一个网址。</li></ul><h3 id="4xx-Client-Error（客户端错误状态码）"><a href="#4xx-Client-Error（客户端错误状态码）" class="headerlink" title="# 4xx Client Error（客户端错误状态码）"></a><a href="#_4xx-client-error-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF%E7%8A%B6%E6%80%81%E7%A0%81">#</a> 4xx Client Error（客户端错误状态码）</h3><ul><li><strong>400 Bad Request</strong> ： 发送的HTTP请求存在问题。比如请求参数不合法、请求方法错误。</li><li><strong>401 Unauthorized</strong> ： 未认证却请求需要认证之后才能访问的资源。</li><li><strong>403 Forbidden</strong> ：直接拒绝HTTP请求，不处理。一般用来针对非法请求。</li><li><strong>404 Not Found</strong> ： 你请求的资源未在服务端找到。比如你请求某个用户的信息，服务端并没有找到指定的用户。</li><li><strong>409 Conflict</strong> ： 表示请求的资源与服务端当前的状态存在冲突，请求无法被处理。</li></ul><h3 id="5xx-Server-Error（服务端错误状态码）"><a href="#5xx-Server-Error（服务端错误状态码）" class="headerlink" title="# 5xx Server Error（服务端错误状态码）"></a><a href="#_5xx-server-error-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%94%99%E8%AF%AF%E7%8A%B6%E6%80%81%E7%A0%81">#</a> 5xx Server Error（服务端错误状态码）</h3><ul><li><strong>500 Internal Server Error</strong> ： 服务端出问题了（通常是服务端出Bug了）。比如你服务端处理请求的时候突然抛出异常，但是异常并未在服务端被正确处理。</li><li><strong>502 Bad Gateway</strong> ：我们的网关将请求转发到服务端，但是服务端返回的却是一个错误的响应。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;HTTP 状态码用于描述 HTTP 请求的结果，比如2xx 就代表请求被成功处理。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/../../../images/image-20230220134615645.png&quot; alt=&quot;image-20230220134615645&quot;&gt;&lt;/</summary>
+      
+    
+    
+    
+    <category term="面试题" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TCP 三次握手和四次挥手（传输层）</title>
+    <link href="http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/TCP%20%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%88%E4%BC%A0%E8%BE%93%E5%B1%82%EF%BC%89/"/>
+    <id>http://example.com/2023/02/19/interview/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E8%AF%95%E9%A2%98/TCP%20%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%88%E4%BC%A0%E8%BE%93%E5%B1%82%EF%BC%89/</id>
+    <published>2023-02-19T09:01:27.122Z</published>
+    <updated>2023-03-14T14:19:44.763Z</updated>
+    
+    <content type="html"><![CDATA[<p>(了解一下 半关闭状态)</p><p><strong>SYN</strong>：同步序列编号（<strong>Synchronize Sequence Numbers</strong>）。是TCP/IP建立连接时使用的<strong>握手信号</strong>。</p><p><strong>ACK</strong> : (<strong>Acknowledge character</strong>）即是确认字符，在数据通信中，接收站发给发送站的一种传输类<a href="https://baike.baidu.com/item/%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6/6913704?fromModule=lemma_inlink">控制字符</a>。表示发来的数据已确认接收无误。</p><p>为了准确无误地把数据送达目标处，TCP 协议采用了三次握手策略。</p><h2 id="建立连接-TCP-三次握手"><a href="#建立连接-TCP-三次握手" class="headerlink" title="# 建立连接-TCP 三次握手"></a><a href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5-tcp-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B">#</a> 建立连接-TCP 三次握手</h2><p><img src="/../../../images/image-20230220134640946.png" alt="image-20230220134640946"></p><p>建立一个 TCP 连接需要“三次握手”，缺一不可 ：</p><ul><li><strong>一次握手</strong>:客户端发送带有 SYN（SEQ=x） 标志的数据包 -&gt; 服务端，然后客户端进入 <strong>SYN_SEND</strong> 状态，等待服务器的确认；</li><li><strong>二次握手</strong>:服务端发送带有 SYN+ACK(SEQ=y,ACK=x+1) 标志的数据包 –&gt; 客户端,然后服务端进入 <strong>SYN_RECV</strong> 状态</li><li><strong>三次握手</strong>:客户端发送带有带有 ACK(ACK=y+1) 标志的数据包 –&gt; 服务端，然后客户端和服务器端都进入<strong>ESTABLISHED</strong> 状态，完成TCP三次握手。</li></ul><p><strong>当建立了 3 次握手之后，客户端和服务端就可以传输数据啦！</strong></p><h3 id="为什么要三次握手"><a href="#为什么要三次握手" class="headerlink" title="# 为什么要三次握手?"></a><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B">#</a> 为什么要三次握手?</h3><p>三次握手的目的是建立可靠的通信信道，说到通讯，简单来说就是数据的发送与接收，而三次握手最主要的目的就是<mark>双方确认自己与对方的发送与接收是正常的</mark>。</p><ol><li><strong>第一次握手</strong> ：Client 什么都不能确认；Server 确认了对方发送正常，自己接收正常</li><li><strong>第二次握手</strong> ：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：对方发送正常，自己接收正常</li><li><strong>第三次握手</strong> ：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送、接收正常</li></ol><p>三次握手就能确认双方收发功能都正常，缺一不可。</p><p>更详细的解答可以看这个：<a href="https://www.zhihu.com/question/24853633/answer/115173386">TCP 为什么是三次握手，而不是两次或四次？ - 车小胖的回答 - 知乎open in new window</a> 。</p><h3 id="第2次握手传回了ACK，为什么还要传回SYN？"><a href="#第2次握手传回了ACK，为什么还要传回SYN？" class="headerlink" title="# 第2次握手传回了ACK，为什么还要传回SYN？"></a><a href="#%E7%AC%AC2%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%BC%A0%E5%9B%9E%E4%BA%86ack-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E4%BC%A0%E5%9B%9Esyn">#</a> 第2次握手传回了ACK，为什么还要传回SYN？</h3><p>服务端传回发送端所发送的 ACK 是为了告诉客户端：“我接收到的信息确实就是你所发送的信号了”，这表明从客户端到服务端的通信是正常的。回传 <strong>SYN 则是为了建立并确认从服务端到客户端的通信</strong>。</p><blockquote><p>SYN 同步序列编号(Synchronize Sequence Numbers) 是 TCP/IP 建立连接时使用的握手信号。在客户机和服务器之间建立正常的 TCP 网络连接时，客户机首先发出一个 SYN 消息，服务器使用 SYN-ACK 应答表示接收到了这个消息，最后客户机再以 ACK(Acknowledgement）消息响应。这样在客户机和服务器之间才能建立起可靠的 TCP 连接，数据才可以在客户机和服务器之间传递。</p></blockquote><h2 id="断开连接-TCP-四次挥手"><a href="#断开连接-TCP-四次挥手" class="headerlink" title="# 断开连接-TCP 四次挥手"></a><a href="#%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5-tcp-%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B">#</a> 断开连接-TCP 四次挥手</h2><p><img src="/../../../images/image-20230220134646808.png" alt="image-20230220134646808"></p><p>断开一个 TCP 连接则需要“四次挥手”，缺一不可 ：</p><ol><li><strong>第一次挥手</strong> ：客户端发送一个 FIN（SEQ=X） 标志的数据包-&gt;服务端，用来关闭客户端到服务器的数据传送。然后，客户端进入 <strong>FIN-WAIT-1</strong> 状态。</li><li><strong>第二次挥手</strong> ：服务器收到这个 FIN（SEQ=X） 标志的数据包，它发送一个 ACK （SEQ=X+1）标志的数据包-&gt;客户端 。然后，此时服务端进入<strong>CLOSE-WAIT</strong>状态，客户端进入<strong>FIN-WAIT-2</strong>状态。</li><li><strong>第三次挥手</strong> ：服务端关闭与客户端的连接并发送一个 FIN (SEQ=y)标志的数据包-&gt;客户端请求关闭连接，然后，服务端进入<strong>LAST-ACK</strong>状态。</li><li><strong>第四次挥手</strong> ：客户端发送 ACK (SEQ=y+1)标志的数据包-&gt;服务端并且进入<strong>TIME-WAIT</strong>状态，服务端在收到 ACK (SEQ=y+1)标志的数据包后进入 <strong>CLOSE</strong> 状态。此时，如果客户端等待 <strong>2MSL</strong> 后依然没有收到回复，就证明服务端已正常关闭，随后，客户端也可以关闭连接了。</li></ol><p><strong>只要四次挥手没有结束，客户端和服务端就可以继续传输数据！</strong></p><h4 id="ps-TCP状态说明"><a href="#ps-TCP状态说明" class="headerlink" title="ps: TCP状态说明"></a><strong>ps: TCP状态说明</strong></h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CLOSED：表示初始状态。对服务端和C客户端双方都一样。</span><br><span class="line">LISTEN：表示监听状态。服务端调用了listen函数，可以开始accept连接了。</span><br><span class="line">SYN_SENT：表示客户端已经发送了SYN报文。当客户端调用connect函数发起连接时，首先发SYN给服务端，然后自己进入SYN_SENT状态，并等待服务端发送ACK+SYN。</span><br><span class="line">SYN_RCVD：表示服务端收到客户端发送SYN报文。服务端收到这个报文后，进入SYN_RCVD状态，然后发送ACK+SYN给客户端。</span><br><span class="line">ESTABLISHED：表示连接已经建立成功了。服务端发送完ACK+SYN后进入该状态，客户端收到ACK后也进入该状态。</span><br><span class="line">FIN_WAIT_1：表示主动关闭连接。无论哪方调用close函数发送FIN报文都会进入这个这个状态。</span><br><span class="line">FIN_WAIT_2：表示被动关闭方同意关闭连接。主动关闭连接方收到被动关闭方返回的ACK后，会进入该状态。</span><br><span class="line">TIME_WAIT：表示收到对方的FIN报文并发送了ACK报文，就等2MSL后即可回到CLOSED状态了。如果FIN_WAIT_1状态下，收到对方同时带FIN标志和ACK标志的报文时，可以直接进入TIME_WAIT状态，而无须经过FIN_WAIT_2状态。</span><br><span class="line">CLOSING：表示双方同时关闭连接。如果双方几乎同时调用close函数，那么会出现双方同时发送FIN报文的情况，此时就会出现CLOSING状态，表示双方都在关闭连接。</span><br><span class="line">CLOSE_WAIT：表示被动关闭方等待关闭。当收到对方调用close函数发送的FIN报文时，回应对方ACK报文，此时进入CLOSE_WAIT状态。</span><br><span class="line">LAST_ACK：表示被动关闭方发送FIN报文后，等待对方的ACK报文状态，当收到ACK后进入CLOSED状态。</span><br></pre></td></tr></tbody></table></figure><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">特别提示的是：为什么TIME_WAIT状态还需要等待2MSL才能回到CLOSED状态？或者为什么TCP要引入TIME_WAIT状态？</span><br><span class="line">《TCP/IP详解》中如此解释：当TCP执行一个主动关闭，并发回最后一个ACK后，该连接必须在TIME_WAIT状态停留的时间为2倍的MSL，这样可以让TCP再次发送最后的ACK以防止这个ACK丢失（另一端超时重发最后的FIN）。</span><br><span class="line">附注：MSL（Maximum Segment Lifetime）即最大生存时间，RFC 793中指出MSL为2分钟，但是实现中的常用值为30秒、1分钟或者2分钟。</span><br></pre></td></tr></tbody></table></figure><h3 id="为什么要四次挥手？"><a href="#为什么要四次挥手？" class="headerlink" title="# 为什么要四次挥手？"></a><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B">#</a> 为什么要四次挥手？</h3><p>TCP是全双工通信，可以双向传输数据。<mark>任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入<strong>半关闭状态</strong>。当另一方也没有数据再发送的时候，则发出连接释放通知，对方确认后就完全关闭了 TCP 连接</mark>。</p><p>举个例子：A 和 B 打电话，通话即将结束后。</p><ol><li><strong>第一次挥手</strong> ： A 说“我没啥要说的了”</li><li><strong>第二次挥手</strong> ：B 回答“我知道了”，但是 B 可能还会有要说的话，A 不能要求 B 跟着自己的节奏结束通话</li><li><strong>第三次挥手</strong> ：于是 B 可能又巴拉巴拉说了一通，最后 B 说“我说完了”</li><li><strong>第四次挥手</strong> ：A 回答“知道了”，这样通话才算结束。</li></ol><h3 id="为什么不能把服务器发送的-ACK-和-FIN-合并起来，变成三次挥手？"><a href="#为什么不能把服务器发送的-ACK-和-FIN-合并起来，变成三次挥手？" class="headerlink" title="# 为什么不能把服务器发送的 ACK 和 FIN 合并起来，变成三次挥手？"></a><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%8A%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E7%9A%84-ack-%E5%92%8C-fin-%E5%90%88%E5%B9%B6%E8%B5%B7%E6%9D%A5-%E5%8F%98%E6%88%90%E4%B8%89%E6%AC%A1%E6%8C%A5%E6%89%8B">#</a> 为什么不能把服务器发送的 ACK 和 FIN 合并起来，变成三次挥手？</h3><p>因为服务器收到客户端断开连接的请求时，可能还有一些数据没有发完，这时先回复 ACK，表示接收到了断开连接的请求。等到数据发完之后再发 FIN，断开服务器到客户端的数据传送。</p><h3 id="如果第二次挥手时服务器的-ACK-没有送达客户端，会怎样？"><a href="#如果第二次挥手时服务器的-ACK-没有送达客户端，会怎样？" class="headerlink" title="# 如果第二次挥手时服务器的 ACK 没有送达客户端，会怎样？"></a><a href="#%E5%A6%82%E6%9E%9C%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8C%A5%E6%89%8B%E6%97%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84-ack-%E6%B2%A1%E6%9C%89%E9%80%81%E8%BE%BE%E5%AE%A2%E6%88%B7%E7%AB%AF-%E4%BC%9A%E6%80%8E%E6%A0%B7">#</a> 如果第二次挥手时服务器的 ACK 没有送达客户端，会怎样？</h3><p>客户端没有收到 ACK 确认，会重新发送 FIN 请求。</p><h3 id="为什么第四次挥手客户端需要等待-2-MSL（报文段最长寿命）时间后才进入-CLOSED-状态？"><a href="#为什么第四次挥手客户端需要等待-2-MSL（报文段最长寿命）时间后才进入-CLOSED-状态？" class="headerlink" title="# 为什么第四次挥手客户端需要等待 2*MSL（报文段最长寿命）时间后才进入 CLOSED 状态？"></a><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AC%AC%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%9C%80%E8%A6%81%E7%AD%89%E5%BE%85-2-msl-%E6%8A%A5%E6%96%87%E6%AE%B5%E6%9C%80%E9%95%BF%E5%AF%BF%E5%91%BD-%E6%97%B6%E9%97%B4%E5%90%8E%E6%89%8D%E8%BF%9B%E5%85%A5-closed-%E7%8A%B6%E6%80%81">#</a> 为什么第四次挥手客户端需要等待 2*MSL（报文段最长寿命）时间后才进入 CLOSED 状态？</h3><p>第四次挥手时，客户端发送给服务器的 ACK 有可能丢失，如果服务端没有因为某些原因而没有收到 ACK 的话，服务端就会重发 FIN，如果客户端在 2*MSL 的时间内收到了 FIN，就会重新发送 ACK 并再次等待 2MSL，防止 Server 没有收到 ACK 而不断重发 FIN。</p><blockquote><p><strong>MSL(Maximum Segment Lifetime)</strong> : 一个片段在网络中最大的存活时间，2MSL 就是一个发送和一个回复所需的最大时间。如果直到 2MSL，Client 都没有再次收到 FIN，那么 Client 推断 ACK 已经被成功接收，则结束 TCP 连接。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;(了解一下 半关闭状态)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SYN&lt;/strong&gt;：同步序列编号（&lt;strong&gt;Synchronize Sequence Numbers&lt;/strong&gt;）。是TCP/IP建立连接时使用的&lt;strong&gt;握手信号&lt;/strong&gt;。&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="面试题" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+    <category term="计算机网络" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
