@@ -5,34 +5,34 @@
   
   <title>Nacos-实现配置管理 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="配置好后就会出现在配置列表中  上面就是已经把部分的配置放到了Nacos的服务器了，下面介绍微服务怎样得到Nacos上那些配置 首先项目要知道，去哪读取，读取谁？ bootstrap.yml的优先级会比application.yml的优先级高很多 与Nacos的地址和配置文件有关的信息都应该放到bootstrap.yml文件中     配置热更新 在开发中也比较建议用方式二    多环境配置">
+  <meta name="description" content="配置好后就会出现在配置列表中  上面就是已经把部分的配置放到了Nacos的服务器了，下面介绍微服务怎样得到Nacos上那些配置 首先项目要知道，去哪读取，读取谁？ bootstrap.yml的优先级会比application.yml的优先级高很多 与Nacos的地址和配置文件有关的信息都应该放到bootstrap.yml文件中      配置热更新  在开发中也比较建议用方式二     多环">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nacos-实现配置管理">
 <meta property="og:url" content="http://example.com/2023/02/08/Nacos/Nacos-%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="配置好后就会出现在配置列表中  上面就是已经把部分的配置放到了Nacos的服务器了，下面介绍微服务怎样得到Nacos上那些配置 首先项目要知道，去哪读取，读取谁？ bootstrap.yml的优先级会比application.yml的优先级高很多 与Nacos的地址和配置文件有关的信息都应该放到bootstrap.yml文件中     配置热更新 在开发中也比较建议用方式二    多环境配置">
+<meta property="og:description" content="配置好后就会出现在配置列表中  上面就是已经把部分的配置放到了Nacos的服务器了，下面介绍微服务怎样得到Nacos上那些配置 首先项目要知道，去哪读取，读取谁？ bootstrap.yml的优先级会比application.yml的优先级高很多 与Nacos的地址和配置文件有关的信息都应该放到bootstrap.yml文件中      配置热更新  在开发中也比较建议用方式二     多环">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20230209095809931.png">
-<meta property="og:image" content="http://example.com/images/image-20230209095828746.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209095809931.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209095828746.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/942f070893c4461f928a6eeb279898fa.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/cf66c3257bff4b67b557eec90e9748b8.png">
-<meta property="og:image" content="http://example.com/images/image-20230209104626994.png">
-<meta property="og:image" content="http://example.com/images/image-20230209105137315.png">
-<meta property="og:image" content="http://example.com/images/image-20230209105741565.png">
-<meta property="og:image" content="http://example.com/images/image-20230209105801342.png">
-<meta property="og:image" content="http://example.com/images/image-20230209111159685.png">
-<meta property="og:image" content="http://example.com/images/image-20230209111901087.png">
-<meta property="og:image" content="http://example.com/images/image-20230209111637920.png">
-<meta property="og:image" content="http://example.com/images/image-20230209111420871.png">
-<meta property="og:image" content="http://example.com/images/image-20230209112532846.png">
-<meta property="og:image" content="http://example.com/images/image-20230209112740490.png">
-<meta property="og:image" content="http://example.com/images/image-20230209113541179.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209104626994.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209105137315.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209105741565.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209105801342.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209111159685.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209111901087.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209111637920.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209111420871.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209112532846.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209112740490.png">
+<meta property="og:image" content="http://example.com/2023/02/08/images/image-20230209113541179.png">
 <meta property="article:published_time" content="2023-02-08T09:54:16.430Z">
 <meta property="article:modified_time" content="2023-03-09T00:45:15.522Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="Nacos">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20230209095809931.png">
+<meta name="twitter:image" content="http://example.com/2023/02/08/images/image-20230209095809931.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -66,7 +66,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>170</strong><br>文章</div></a>
       <a href="/categories"><div><strong>75</strong><br>分类</div></a>
       <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
@@ -132,8 +132,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/../../images/image-20230209095809931.png" alt="image-20230209095809931"></p>
-<p><img src="/../../images/image-20230209095828746.png" alt="image-20230209095828746"></p>
+        <p><img src="../../images/image-20230209095809931.png" alt="image-20230209095809931"></p>
+<p><img src="../../images/image-20230209095828746.png" alt="image-20230209095828746"></p>
 <p><img src="https://img-blog.csdnimg.cn/942f070893c4461f928a6eeb279898fa.png" alt="img"></p>
 <p>配置好后就会出现在配置列表中</p>
 <p><img src="https://img-blog.csdnimg.cn/cf66c3257bff4b67b557eec90e9748b8.png" alt="img"></p>
@@ -141,21 +141,24 @@
 <p>首先项目要知道，去哪读取，读取谁？</p>
 <p>bootstrap.yml的优先级会比application.yml的优先级高很多</p>
 <p>与Nacos的地址和配置文件有关的信息都应该放到bootstrap.yml文件中</p>
-<p><img src="/../../images/image-20230209104626994.png" alt="image-20230209104626994"></p>
-<p><img src="/../../images/image-20230209105137315.png" alt="image-20230209105137315"></p>
-<p><img src="/../../images/image-20230209105741565.png" alt="image-20230209105741565"></p>
-<p><img src="/../../images/image-20230209105801342.png" alt="image-20230209105801342"></p>
-<h1 id="配置热更新"><a href="#配置热更新" class="headerlink" title="配置热更新"></a>配置热更新</h1><p><img src="/../../images/image-20230209111159685.png" alt="image-20230209111159685"></p>
+<p><img src="../../images/image-20230209104626994.png" alt="image-20230209104626994"></p>
+<p><img src="../../images/image-20230209105137315.png" alt="image-20230209105137315"></p>
+<p><img src="../../images/image-20230209105741565.png" alt="image-20230209105741565"></p>
+<p><img src="../../images/image-20230209105801342.png" alt="image-20230209105801342"></p>
+<h1 id="配置热更新"><a class="markdownIt-Anchor" href="#配置热更新"></a> 配置热更新</h1>
+<p><img src="../../images/image-20230209111159685.png" alt="image-20230209111159685"></p>
 <p>在开发中也比较建议用方式二</p>
-<p><img src="/../../images/image-20230209111901087.png" alt="image-20230209111901087"></p>
-<p><img src="/../../images/image-20230209111637920.png" alt="image-20230209111637920"></p>
-<p><img src="/../../images/image-20230209111420871.png" alt="image-20230209111420871"></p>
-<h1 id="多环境配置共享"><a href="#多环境配置共享" class="headerlink" title="多环境配置共享"></a>多环境配置共享</h1><p><img src="/../../images/image-20230209112532846.png" alt="image-20230209112532846"></p>
+<p><img src="../../images/image-20230209111901087.png" alt="image-20230209111901087"></p>
+<p><img src="../../images/image-20230209111637920.png" alt="image-20230209111637920"></p>
+<p><img src="../../images/image-20230209111420871.png" alt="image-20230209111420871"></p>
+<h1 id="多环境配置共享"><a class="markdownIt-Anchor" href="#多环境配置共享"></a> 多环境配置共享</h1>
+<p><img src="../../images/image-20230209112532846.png" alt="image-20230209112532846"></p>
 <p>添加多环境共享配置</p>
-<p><img src="/../../images/image-20230209112740490.png" alt="image-20230209112740490"></p>
+<p><img src="../../images/image-20230209112740490.png" alt="image-20230209112740490"></p>
 <p><strong>多种配置的优先级：</strong></p>
-<p><img src="/../../images/image-20230209113541179.png" alt="image-20230209113541179"></p>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>微服务会从nacos读取的配置文件：</p>
+<p><img src="../../images/image-20230209113541179.png" alt="image-20230209113541179"></p>
+<h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结：</h1>
+<p>微服务会从nacos读取的配置文件：</p>
 <ul>
 <li>[服义名]-[spring.profile.active].yaml，环境配置</li>
 <li>[服务名].yaml，默认配置，多环境共享</li>
@@ -168,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/" data-id="clg2epkrd000u08v6hthv7fmb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/08/Nacos/Nacos-%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/" data-id="clihkswdk0010pov6gftx7ju0" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/" rel="tag">Nacos</a></li></ul>
@@ -244,7 +247,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>170</strong><br>文章</div></a>
       <a href="/categories"><div><strong>75</strong><br>分类</div></a>
       <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>

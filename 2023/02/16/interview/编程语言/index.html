@@ -5,12 +5,12 @@
   
   <title>编程语言 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 请你说说多线程**得分点 **   线程和进程的关系、为什么使用多线程  标准回答 ​		线程是操作系统调度的最小单元,它可以让一个进程并发地处理多个任务,也叫轻量级进程。所以,在一个进程里可以创建多个线程,这些线程都拥有各自的计数器、堆栈、局部变量,并且能够共享进程内的资源。由于共享资源,处理器便可以在这些线程之间快速切换,从而让使用者感觉这些线程在同时执行。 总的来说,操作系统可以同时执">
+  <meta name="description" content="1. 请你说说多线程 **得分点 **   线程和进程的关系、为什么使用多线程 标准回答 ​		线程是操作系统调度的最小单元,它可以让一个进程并发地处理多个任务,也叫轻量级进程。所以,在一个进程里可以创建多个线程,这些线程都拥有各自的计数器、堆栈、局部变量,并且能够共享进程内的资源。由于共享资源,处理器便可以在这些线程之间快速切换,从而让使用者感觉这些线程在同时执行。 总的来说,操作系统可以同时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编程语言">
 <meta property="og:url" content="http://example.com/2023/02/16/interview/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="1. 请你说说多线程**得分点 **   线程和进程的关系、为什么使用多线程  标准回答 ​		线程是操作系统调度的最小单元,它可以让一个进程并发地处理多个任务,也叫轻量级进程。所以,在一个进程里可以创建多个线程,这些线程都拥有各自的计数器、堆栈、局部变量,并且能够共享进程内的资源。由于共享资源,处理器便可以在这些线程之间快速切换,从而让使用者感觉这些线程在同时执行。 总的来说,操作系统可以同时执">
+<meta property="og:description" content="1. 请你说说多线程 **得分点 **   线程和进程的关系、为什么使用多线程 标准回答 ​		线程是操作系统调度的最小单元,它可以让一个进程并发地处理多个任务,也叫轻量级进程。所以,在一个进程里可以创建多个线程,这些线程都拥有各自的计数器、堆栈、局部变量,并且能够共享进程内的资源。由于共享资源,处理器便可以在这些线程之间快速切换,从而让使用者感觉这些线程在同时执行。 总的来说,操作系统可以同时">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-16T02:05:01.805Z">
 <meta property="article:modified_time" content="2023-03-14T08:10:45.941Z">
@@ -50,7 +50,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>170</strong><br>文章</div></a>
       <a href="/categories"><div><strong>75</strong><br>分类</div></a>
       <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
@@ -116,54 +116,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-请你说说多线程"><a href="#1-请你说说多线程" class="headerlink" title="1. 请你说说多线程"></a>1. <strong>请你说说多线程</strong></h2><p>**得分点 **   线程和进程的关系、为什么使用多线程 </p>
+        <h2 id="1-请你说说多线程"><a class="markdownIt-Anchor" href="#1-请你说说多线程"></a> 1. <strong>请你说说多线程</strong></h2>
+<p>**得分点 **   线程和进程的关系、为什么使用多线程</p>
 <p><strong>标准回答</strong></p>
 <p>​		线程是操作系统调度的最小单元,它可以让一个进程并发地处理多个任务,也叫轻量级进程。所以,在一个进程里可以创建多个线程,这些线程都拥有各自的计数器、堆栈、局部变量,并且能够共享进程内的资源。由于共享资源,处理器便可以在这些线程之间快速切换,从而让使用者感觉这些线程在同时执行。 总的来说,<strong>操作系统可以同时执行多个任务,每个任务就是一个进程。进程可以同时执行多个任务,每个任务就是一个线程</strong>。<strong>一个程序运行之后至少有一个进程,而一个进程可以包含多个线程,但至少要包含一个线程</strong>。 使用多线程会给开发人员带来显著的好处,而使用多线程的原因主要有以下几点：</p>
 <ol>
-<li><p>更多的CPU核心 现代计算机处理器性能的提升方式,已经从追求更高的主频向追求更多的核心发展,所以<strong>处理器的核心数量会越来越多,充分地利用处理器的核心则会显著地提高程序的性能</strong>。**而程序使用多线程技术,就可以将计算逻辑分配到多个处理器核心上,显著减少程序的处理时间,**从而随着更多处理器核心的加入而变得更有效率。</p>
+<li>
+<p>更多的CPU核心 现代计算机处理器性能的提升方式,已经从追求更高的主频向追求更多的核心发展,所以<strong>处理器的核心数量会越来越多,充分地利用处理器的核心则会显著地提高程序的性能</strong>。**而程序使用多线程技术,就可以将计算逻辑分配到多个处理器核心上,显著减少程序的处理时间,**从而随着更多处理器核心的加入而变得更有效率。</p>
 </li>
-<li><p>更快的响应时间 我们经常要针对复杂的业务编写出复杂的代码,如果使用多线程技术,就可以将数据一致性不强的操作派发给其他线程处理（也可以是消息队列）,如上传图片、发送邮件、生成订单等。这样响应用户请求的线程就能够尽快地完成处理,大大地缩短了响应时间,从而提升了用户体验。 </p>
+<li>
+<p>更快的响应时间 我们经常要针对复杂的业务编写出复杂的代码,如果使用多线程技术,就可以将数据一致性不强的操作派发给其他线程处理（也可以是消息队列）,如上传图片、发送邮件、生成订单等。这样响应用户请求的线程就能够尽快地完成处理,大大地缩短了响应时间,从而提升了用户体验。</p>
 </li>
-<li><p>更好的编程模型 Java为多线程编程提供了良好且一致的编程模型,使开发人员能够更加专注于问题的解决,开发者只需为此问题建立合适的业务模型,而无需绞尽脑汁地考虑如何实现多线程。一旦开发人员建立好了业务模型,稍作修改就可以将其方便地映射到Java提供的多线程编程模型上。</p>
+<li>
+<p>更好的编程模型 Java为多线程编程提供了良好且一致的编程模型,使开发人员能够更加专注于问题的解决,开发者只需为此问题建立合适的业务模型,而无需绞尽脑汁地考虑如何实现多线程。一旦开发人员建立好了业务模型,稍作修改就可以将其方便地映射到Java提供的多线程编程模型上。</p>
 </li>
 </ol>
-<h2 id="2-请你说说HashMap和Hashtable的区别"><a href="#2-请你说说HashMap和Hashtable的区别" class="headerlink" title="2. 请你说说HashMap和Hashtable的区别"></a>2. 请你说说HashMap和Hashtable的区别</h2><p>得分点： 线程安全、null </p>
-<p><strong>标准回答</strong> </p>
+<h2 id="2-请你说说hashmap和hashtable的区别"><a class="markdownIt-Anchor" href="#2-请你说说hashmap和hashtable的区别"></a> 2. 请你说说HashMap和Hashtable的区别</h2>
+<p>得分点： 线程安全、null</p>
+<p><strong>标准回答</strong></p>
 <p>HashMap和Hashtable都是典型的Map实现,它们的区别在于是否线程安全,是否可以存入null值。</p>
 <ol>
-<li><p>Hashtable在实现Map接口时保证了线程安全性,而HashMap则是非线程安全的。所以,Hashtable的性能不如HashMap,因为为了保证线程安全它牺牲了一些性能。</p>
+<li>
+<p>Hashtable在实现Map接口时保证了线程安全性,而HashMap则是非线程安全的。所以,Hashtable的性能不如HashMap,因为为了保证线程安全它牺牲了一些性能。</p>
 </li>
-<li><p>Hashtable不允许存入null,无论是以null作为key或value,都会引发异常。而HashMap是允许存入null的,无论是以null作为key或value,都是可以的。</p>
+<li>
+<p>Hashtable不允许存入null,无论是以null作为key或value,都会引发异常。而HashMap是允许存入null的,无论是以null作为key或value,都是可以的。</p>
 </li>
 </ol>
-<p><strong>加分回答</strong> </p>
+<p><strong>加分回答</strong></p>
 <p>虽然Hashtable是线程安全的,但仍然不建议在多线程环境下使用Hashtable。因为它是一个古老的API,从Java 1.0开始就出现了,它的同步方案还不成熟,性能不好。如果要在多线程环下使用HashMap,建议使用ConcurrentHashMap。它不但保证了线程安全,也通过降低锁的粒度提高了并发访问时的性能。</p>
-<h2 id="3-请说说你对反射的了解"><a href="#3-请说说你对反射的了解" class="headerlink" title="3. 请说说你对反射的了解"></a>3. 请说说你对反射的了解</h2><p>得分点 ： 反射概念, 通过反射机制可以实现什么 </p>
-<p><strong>标准回答</strong> </p>
-<p>Java程序中,许多对象在运行时都会有编译时异常和运行时异常两种,例如多态情况下Car c = new Audi(); 这行代码运行时会生成一个c变量,在编译时该变量的类型是Car,运行时该变量类型为Audi；另外还有更极端的情况,例如程序在运行时接收到了外部传入的一个对象,这个对象的编译时类型是Object,但程序又需要调用这个对象运行时类型的方法,这种情况下,有两种解决方法：第一种做法是假设在编译时和运行时都完全知道类型的具体信息,在这种情况下,可以先使用instanceof运算符进行判断,再利用强制类型转换将其转换成其运行时类型的变量。第二种做法是编译时根本无法预知该对象和类可能属于哪些类,程序只依靠运行时信息来发现该对象和类的真实信息,这就必须使用反射。 具体来说,通过反射机制,我们可以实现如下的操作： </p>
+<h2 id="3-请说说你对反射的了解"><a class="markdownIt-Anchor" href="#3-请说说你对反射的了解"></a> 3. 请说说你对反射的了解</h2>
+<p>得分点 ： 反射概念, 通过反射机制可以实现什么</p>
+<p><strong>标准回答</strong></p>
+<p>Java程序中,许多对象在运行时都会有编译时异常和运行时异常两种,例如多态情况下Car c = new Audi(); 这行代码运行时会生成一个c变量,在编译时该变量的类型是Car,运行时该变量类型为Audi；另外还有更极端的情况,例如程序在运行时接收到了外部传入的一个对象,这个对象的编译时类型是Object,但程序又需要调用这个对象运行时类型的方法,这种情况下,有两种解决方法：第一种做法是假设在编译时和运行时都完全知道类型的具体信息,在这种情况下,可以先使用instanceof运算符进行判断,再利用强制类型转换将其转换成其运行时类型的变量。第二种做法是编译时根本无法预知该对象和类可能属于哪些类,程序只依靠运行时信息来发现该对象和类的真实信息,这就必须使用反射。 具体来说,通过反射机制,我们可以实现如下的操作：</p>
 <ul>
-<li>程序运行时,可以通过反射获得任意一个类的Class对象,并通过这个对象查看这个类的信息； </li>
-<li>程序运行时,可以通过反射创建任意一个类的实例,并访问该实例的成员； </li>
+<li>程序运行时,可以通过反射获得任意一个类的Class对象,并通过这个对象查看这个类的信息；</li>
+<li>程序运行时,可以通过反射创建任意一个类的实例,并访问该实例的成员；</li>
 <li>程序运行时,可以通过反射机制生成一个类的动态代理类或动态代理对象。</li>
 </ul>
-<p><strong>加分回答</strong> </p>
-<p>Java的反射机制在实际项目中应用广泛,常见的应用场景有： </p>
+<p><strong>加分回答</strong></p>
+<p>Java的反射机制在实际项目中应用广泛,常见的应用场景有：</p>
 <ul>
-<li>使用JDBC时,如果要创建数据库的连接,则需要先通过反射机制加载数据库的驱动程序； </li>
-<li>多数框架都支持注解/XML配置,从配置中解析出来的类是字符串,需要利用反射机制实例化； </li>
+<li>使用JDBC时,如果要创建数据库的连接,则需要先通过反射机制加载数据库的驱动程序；</li>
+<li>多数框架都支持注解/XML配置,从配置中解析出来的类是字符串,需要利用反射机制实例化；</li>
 <li>面向切面编程（AOP）的实现方案,是在程序运行时创建目标对象的代理类,这必须由反射机制来实现。</li>
 </ul>
-<h2 id="4-请你说说ArrayList和LinkedList的区别"><a href="#4-请你说说ArrayList和LinkedList的区别" class="headerlink" title="4. 请你说说ArrayList和LinkedList的区别"></a>4. 请你说说ArrayList和LinkedList的区别</h2><p>得分点 ：数据结构、访问效率 </p>
-<p><strong>标准回答</strong> </p>
+<h2 id="4-请你说说arraylist和linkedlist的区别"><a class="markdownIt-Anchor" href="#4-请你说说arraylist和linkedlist的区别"></a> 4. 请你说说ArrayList和LinkedList的区别</h2>
+<p>得分点 ：数据结构、访问效率</p>
+<p><strong>标准回答</strong></p>
 <ol>
-<li>ArrayList的实现是基于<strong>数组</strong>, LinkedList的实现是基于<strong>双向链表</strong>。 </li>
-<li>对于随机访问ArrayList要优于LinkedList,ArrayList可以根据下标以O(1)时间复杂度对元素进行随机访问,而LinkedList的每一个元素都依靠地址指针和它后一个元素连接在一起,查找某个元素的时间复杂度是O(N)。 </li>
-<li>对于插入和删除操作,LinkedList要优于ArrayList,因为当元素被添加到LinkedList任意位置的时候,不需要像ArrayList那样重新计算大小或者是更新索引。 </li>
+<li>ArrayList的实现是基于<strong>数组</strong>, LinkedList的实现是基于<strong>双向链表</strong>。</li>
+<li>对于随机访问ArrayList要优于LinkedList,ArrayList可以根据下标以O(1)时间复杂度对元素进行随机访问,而LinkedList的每一个元素都依靠地址指针和它后一个元素连接在一起,查找某个元素的时间复杂度是O(N)。</li>
+<li>对于插入和删除操作,LinkedList要优于ArrayList,因为当元素被添加到LinkedList任意位置的时候,不需要像ArrayList那样重新计算大小或者是更新索引。</li>
 <li>LinkedList比ArrayList更占内存,因为LinkedList的节点除了存储数据,还存储了两个引用,一个指向前一个元素,一个指向后一个元素。</li>
 </ol>
-<h2 id="5-你知道哪些线程安全的集合？"><a href="#5-你知道哪些线程安全的集合？" class="headerlink" title="5. 你知道哪些线程安全的集合？"></a>5. 你知道哪些线程安全的集合？</h2><p>得分点： Collections、java.util.concurrent (JUC) </p>
-<p><strong>标准回答</strong> </p>
-<p>java.util包下的集合类中,大部分都是非线程安全的,但也有少数的线程安全的集合类, 例如Vector、Hashtable,它们都是非常古老的API。虽然它们是线程安全的,但是性能很差,已经不推荐使用了。对于这个包下非线程安全的集合,可以利用Collections工具类,该工具类提供的synchronizedXxx()方法,可以将这些集合类包装成线程安全的集合类（如：**List<integer> list = Collections.synchronizedList( new ArrayList&lt;&gt;() );**），查看源码可知，其在所有的方法上加了synchronized修饰，从而达到同步的效果。 </integer></p>
+<h2 id="5-你知道哪些线程安全的集合"><a class="markdownIt-Anchor" href="#5-你知道哪些线程安全的集合"></a> 5. 你知道哪些线程安全的集合？</h2>
+<p>得分点： Collections、java.util.concurrent (JUC)</p>
+<p><strong>标准回答</strong></p>
+<p>java.util包下的集合类中,大部分都是非线程安全的,但也有少数的线程安全的集合类, 例如Vector、Hashtable,它们都是非常古老的API。虽然它们是线程安全的,但是性能很差,已经不推荐使用了。对于这个包下非线程安全的集合,可以利用Collections工具类,该工具类提供的synchronizedXxx()方法,可以将这些集合类包装成线程安全的集合类（如：<strong>List<integer> list = Collections.synchronizedList( new ArrayList&lt;&gt;() );</integer></strong>），查看源码可知，其在所有的方法上加了synchronized修饰，从而达到同步的效果。</p>
 <p>从JDK 1.5开始,并发包下新增了大量高效的并发的容器,这些容器按照实现机制可以分为三类。</p>
 <ul>
 <li>第一类是以降低锁粒度来提高并发性能的容器,它们的类名以Concurrent开头,如ConcurrentHashMap。</li>
@@ -173,26 +183,29 @@
 <p><strong>加分回答</strong></p>
 <p>Collections还提供了如下三类方法来返回一个不可变的集合,这三类方法的参数是原有的集合对象,返回值是该集合的“只读”版本。通过Collections提供的三类方法,可以生成“只读”的Collection或Map。 emptyXxx()：返回一个空的不可变的集合对象 singletonXxx()：返回一个只包含指定对象的不可变的集合对象 unmodifiableXxx()：返回指定集合对象的不可变视图</p>
 <p><strong>减少锁粒度</strong>，就是指缩小锁定对象的范围，从而减少锁冲突的可能性，进而提高系统的并发能力。 举例：ConcurentHashmap 中使用分段锁提高 put () 操作的并发能力，默认情况下 ConcurentHashmap 有16个段，理想情况下，它可以同时接受16个线程同时插入。</p>
-<h2 id="6-请你说说ConcurrentHashMap"><a href="#6-请你说说ConcurrentHashMap" class="headerlink" title="6. 请你说说ConcurrentHashMap"></a>6. 请你说说ConcurrentHashMap</h2><p>得分点 ：数组+链表+红黑树、锁的粒度 </p>
-<p><strong>标准回答</strong> </p>
+<h2 id="6-请你说说concurrenthashmap"><a class="markdownIt-Anchor" href="#6-请你说说concurrenthashmap"></a> 6. 请你说说ConcurrentHashMap</h2>
+<p>得分点 ：数组+链表+红黑树、锁的粒度</p>
+<p><strong>标准回答</strong></p>
 <p>在JDK8中,ConcurrentHashMap的底层数据结构与HashMap一样,也是采用“数组+链表+红黑树”的形式。同时,<strong>它又采用锁定头节点的方式降低了锁粒度</strong>, <strong>以较低的性能代价实现了线程安全。</strong></p>
-<p>底层数据结构的逻辑可以参考HashMap的实现,下面我重点介绍它的线程安全的实现机制。 </p>
+<p>底层数据结构的逻辑可以参考HashMap的实现,下面我重点介绍它的线程安全的实现机制。</p>
 <ol>
 <li><strong>初始化数组或头节点时,ConcurrentHashMap并没有加锁,而是CAS的方式进行原子替换</strong>（<strong>原子操作</strong>,基于Unsafe类的原子操作API）</li>
-<li><strong>插入数据时会进行加锁处理,但锁定的不是整个数组,而是槽中的头节点</strong>。所以,ConcurrentHashMap中<strong>锁的粒度是槽</strong>,而不是整个数组,并发的性能很好。 </li>
-<li><strong>扩容时会进行加锁处理,锁定的仍然是头节点</strong>。并且,<strong>支持多个线程同时对数组扩容,提高并发能力</strong>。每个线程需先以<strong>CAS</strong>操作抢任务,争抢一段连续槽位的数据转移权。抢到任务后,该线程会锁定槽内的头节点,然后将链表或树中的数据迁移到新的数组里。 </li>
-<li><strong>查找数据时并不会加锁,所以性能很好。</strong>另外,在扩容的过程中,依然可以支持查找操作。如果某个槽还未进行迁移,则直接可以从旧数组里找到数据。如果某个槽已经迁移完毕,但是整个扩容还没结束,则扩容线程会创建一个转发节点存入旧数组,届时查找线程根据转发节点的提示,从新数组中找到目标数据。</li>
+<li><strong>插入数据时会进行加锁处理,但锁定的不是整个数组,而是槽中的头节点</strong>。所以,ConcurrentHashMap中<strong>锁的粒度是槽</strong>,而不是整个数组,并发的性能很好。</li>
+<li><strong>扩容时会进行加锁处理,锁定的仍然是头节点</strong>。并且,<strong>支持多个线程同时对数组扩容,提高并发能力</strong>。每个线程需先以<strong>CAS</strong>操作抢任务,争抢一段连续槽位的数据转移权。抢到任务后,该线程会锁定槽内的头节点,然后将链表或树中的数据迁移到新的数组里。</li>
+<li>**查找数据时并不会加锁,所以性能很好。**另外,在扩容的过程中,依然可以支持查找操作。如果某个槽还未进行迁移,则直接可以从旧数组里找到数据。如果某个槽已经迁移完毕,但是整个扩容还没结束,则扩容线程会创建一个转发节点存入旧数组,届时查找线程根据转发节点的提示,从新数组中找到目标数据。</li>
 </ol>
-<p><strong>加分回答</strong> </p>
+<p><strong>加分回答</strong></p>
 <p>ConcurrentHashMap实现线程安全的难点在于多线程并发扩容,即当一个线程在插入数据时,若发现数组正在扩容,那么它就会立即参与扩容操作,完成扩容后再插入数据到新数组。在扩容的时候,多个线程共同分担数据迁移任务,每个线程负责的迁移数量是 <code>(数组长度 &gt;&gt;&gt; 3) / CPU核心数</code>。 也就是说,为线程分配的迁移任务,是充分考虑了硬件的处理能力的。多个线程依据硬件的处理能力,平均分摊一部分槽的迁移工作。另外,如果计算出来的迁移数量小于16,则强制将其改为16,这是考虑到目前服务器领域主流的CPU运行速度,每次处理的任务过少,对于CPU的算力也是一种浪费。</p>
-<h2 id="7-为啥要有包装类？"><a href="#7-为啥要有包装类？" class="headerlink" title="7. 为啥要有包装类？"></a>7. 为啥要有包装类？</h2><p>参考答案：<br>Java语言是面向对象的语言，其设计理念是”一切皆对象“。但8种基本数据类型却出现了例外，它们不具备对象的特征。正是为了解决这个问题，Java为每个基本数据类型都定义了一个对应的应用类型，这就是包装类。</p>
+<h2 id="7-为啥要有包装类"><a class="markdownIt-Anchor" href="#7-为啥要有包装类"></a> 7. 为啥要有包装类？</h2>
+<p>参考答案：<br>
+Java语言是面向对象的语言，其设计理念是”一切皆对象“。但8种基本数据类型却出现了例外，它们不具备对象的特征。正是为了解决这个问题，Java为每个基本数据类型都定义了一个对应的应用类型，这就是包装类。</p>
 <p>扩展阅读：</p>
 <p>Java之所以提供8种基本数据类型，主要是为了照顾程序员的传统习惯。这8种基本数据类型的确带来了一定的方便性，但在某些时候也会受到一些制约。比如，所有的引用类型的变量都继承于Object类，都可以当做Object类型的变量使用，但基本数据类型却不可以。如果某个方法需要Object类型的参数，但实际传入的值确实数字的话，就需要做特殊的处理了。有了包装类，这种问题就可以得以简化了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/16/interview/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" data-id="clg2epksx004m08v66p2wepzt" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/16/interview/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" data-id="clihkswg5004kpov63bzpgmbh" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -268,7 +281,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>170</strong><br>文章</div></a>
       <a href="/categories"><div><strong>75</strong><br>分类</div></a>
       <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>

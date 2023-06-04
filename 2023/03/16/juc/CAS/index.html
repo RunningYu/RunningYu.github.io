@@ -5,12 +5,12 @@
   
   <title>CAS | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="并发编程的灵魂：CAS机制详解Java中提供了很多原子操作类来保证共享变量操作的原子性。这些原子操作的底层原理都是使用了CAS机制。在使用一门技术之前，了解这个技术的底层原理是非常重要的，所以本篇文章就先来讲讲什么是CAS机制，CAS机制存在的一些问题以及在Java中怎么使用CAS机制。 其实Java并发框架的基石一共有两块，一块是本文介绍的CAS，另一块就是AQS，后续也会写文章介绍。 什么是C">
+  <meta name="description" content="并发编程的灵魂：CAS机制详解 Java中提供了很多原子操作类来保证共享变量操作的原子性。这些原子操作的底层原理都是使用了CAS机制。在使用一门技术之前，了解这个技术的底层原理是非常重要的，所以本篇文章就先来讲讲什么是CAS机制，CAS机制存在的一些问题以及在Java中怎么使用CAS机制。 其实Java并发框架的基石一共有两块，一块是本文介绍的CAS，另一块就是AQS，后续也会写文章介绍。  什">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CAS">
 <meta property="og:url" content="http://example.com/2023/03/16/juc/CAS/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="并发编程的灵魂：CAS机制详解Java中提供了很多原子操作类来保证共享变量操作的原子性。这些原子操作的底层原理都是使用了CAS机制。在使用一门技术之前，了解这个技术的底层原理是非常重要的，所以本篇文章就先来讲讲什么是CAS机制，CAS机制存在的一些问题以及在Java中怎么使用CAS机制。 其实Java并发框架的基石一共有两块，一块是本文介绍的CAS，另一块就是AQS，后续也会写文章介绍。 什么是C">
+<meta property="og:description" content="并发编程的灵魂：CAS机制详解 Java中提供了很多原子操作类来保证共享变量操作的原子性。这些原子操作的底层原理都是使用了CAS机制。在使用一门技术之前，了解这个技术的底层原理是非常重要的，所以本篇文章就先来讲讲什么是CAS机制，CAS机制存在的一些问题以及在Java中怎么使用CAS机制。 其实Java并发框架的基石一共有两块，一块是本文介绍的CAS，另一块就是AQS，后续也会写文章介绍。  什">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-f32df3fde2dc0132c05533572e2b659c_720w.webp">
 <meta property="article:published_time" content="2023-03-16T01:34:43.961Z">
@@ -52,7 +52,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>170</strong><br>文章</div></a>
       <a href="/categories"><div><strong>75</strong><br>分类</div></a>
       <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
@@ -118,9 +118,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="并发编程的灵魂：CAS机制详解"><a href="#并发编程的灵魂：CAS机制详解" class="headerlink" title="并发编程的灵魂：CAS机制详解"></a>并发编程的灵魂：CAS机制详解</h1><p>Java中提供了很多原子操作类来保证共享变量操作的原子性。这些原子操作的底层原理都是使用了CAS机制。在使用一门技术之前，了解这个技术的底层原理是非常重要的，所以本篇文章就先来讲讲什么是CAS机制，CAS机制存在的一些问题以及在Java中怎么使用CAS机制。</p>
+        <h1 id="并发编程的灵魂cas机制详解"><a class="markdownIt-Anchor" href="#并发编程的灵魂cas机制详解"></a> 并发编程的灵魂：CAS机制详解</h1>
+<p>Java中提供了很多原子操作类来保证共享变量操作的原子性。这些原子操作的底层原理都是使用了CAS机制。在使用一门技术之前，了解这个技术的底层原理是非常重要的，所以本篇文章就先来讲讲什么是CAS机制，CAS机制存在的一些问题以及在Java中怎么使用CAS机制。</p>
 <p>其实Java并发框架的基石一共有两块，一块是本文介绍的CAS，另一块就是AQS，后续也会写文章介绍。</p>
-<h2 id="什么是CAS机制"><a href="#什么是CAS机制" class="headerlink" title="什么是CAS机制"></a>什么是CAS机制</h2><p>CAS机制是一种数据更新的方式。在具体讲什么是CAS机制之前，我们先来聊下在多线程环境下，对共享变量进行数据更新的两种模式：悲观锁模式和乐观锁模式。</p>
+<h2 id="什么是cas机制"><a class="markdownIt-Anchor" href="#什么是cas机制"></a> 什么是CAS机制</h2>
+<p>CAS机制是一种数据更新的方式。在具体讲什么是CAS机制之前，我们先来聊下在多线程环境下，对共享变量进行数据更新的两种模式：悲观锁模式和乐观锁模式。</p>
 <p>悲观锁更新的方式认为：在更新数据的时候大概率会有其他线程去争夺共享资源，所以悲观锁的做法是：第一个获取资源的线程会将资源锁定起来，其他没争夺到资源的线程只能进入阻塞队列，等第一个获取资源的线程释放锁之后，这些线程才能有机会重新争夺资源。synchronized就是java中悲观锁的典型实现，synchronized使用起来非常简单方便，但是会使没争抢到资源的线程进入阻塞状态，线程在阻塞状态和Runnable状态之间切换效率较低（比较慢）。比如你的更新操作其实是非常快的，这种情况下你还用synchronized将其他线程都锁住了，线程从Blocked状态切换回Runnable华的时间可能比你的更新操作的时间还要长。</p>
 <p>乐观锁更新方式认为:在更新数据的时候其他线程争抢这个共享变量的概率非常小，所以更新数据的时候不会对共享数据加锁。但是在正式更新数据之前会检查数据是否被其他线程改变过，如果未被其他线程改变过就将共享变量更新成最新值，如果发现共享变量已经被其他线程更新过了，就重试，直到成功为止。CAS机制就是乐观锁的典型实现。</p>
 <p>CAS，是Compare and Swap的简称，在这个机制中有三个核心的参数：</p>
@@ -132,21 +134,27 @@
 <p><img src="https://pic1.zhimg.com/80/v2-f32df3fde2dc0132c05533572e2b659c_720w.webp" alt="img"></p>
 <p>如上图中，主存中保存V值，线程中要使用V值要先从主存中读取V值到线程的工作内存A中，然后计算后变成B值，最后再把B值写回到内存V值中。多个线程共用V值都是如此操作。CAS的核心是在将B值写入到V之前要比较A值和V值是否相同，如果不相同证明此时V值已经被其他线程改变，重新将V值赋给A，并重新计算得到B，如果相同，则将B值赋给V。</p>
 <p>值得注意的是CAS机制中的这步步骤是原子性的（从指令层面提供的原子操作），所以CAS机制可以解决多线程并发编程对共享变量读写的原子性问题。</p>
-<h2 id="CAS机制优缺点"><a href="#CAS机制优缺点" class="headerlink" title="CAS机制优缺点"></a>CAS机制优缺点</h2><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>1. ABA问题</strong><br>ABA问题：CAS在操作的时候会检查变量的值是否被更改过，如果没有则更新值，但是带来一个问题，最开始的值是A，接着变成B，最后又变成了A。经过检查这个值确实没有修改过，因为最后的值还是A，但是实际上这个值确实已经被修改过了。为了解决这个问题，在每次进行操作的时候加上一个版本号，每次操作的就是两个值，一个版本号和某个值，A——&gt;B——&gt;A问题就变成了1A——&gt;2B——&gt;3A。在jdk中提供了AtomicStampedReference类解决ABA问题，用Pair这个内部类实现，包含两个属性，分别代表版本号和引用，在compareAndSet中先对当前引用进行检查，再对版本号标志进行检查，只有全部相等才更新值。</p>
-<p><strong>2. 可能会消耗较高的CPU</strong><br>看起来CAS比锁的效率高，从阻塞机制变成了非阻塞机制，减少了线程之间等待的时间。每个方法不能绝对的比另一个好，在线程之间竞争程度大的时候，如果使用CAS，每次都有很多的线程在竞争，也就是说CAS机制不能更新成功。这种情况下CAS机制会一直重试，这样就会比较耗费CPU。因此可以看出，如果线程之间竞争程度小，使用CAS是一个很好的选择；但是如果竞争很大，使用锁可能是个更好的选择。在并发量非常高的环境中，如果仍然想通过原子类来更新的话，可以使用AtomicLong的替代类：LongAdder。</p>
-<p><strong>3. 不能保证代码块的原子性</strong><br>Java中的CAS机制只能保证共享变量操作的原子性，而不能保证代码块的原子性。</p>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<h2 id="cas机制优缺点"><a class="markdownIt-Anchor" href="#cas机制优缺点"></a> CAS机制优缺点</h2>
+<h3 id="缺点"><a class="markdownIt-Anchor" href="#缺点"></a> 缺点</h3>
+<p><strong>1. ABA问题</strong><br>
+ABA问题：CAS在操作的时候会检查变量的值是否被更改过，如果没有则更新值，但是带来一个问题，最开始的值是A，接着变成B，最后又变成了A。经过检查这个值确实没有修改过，因为最后的值还是A，但是实际上这个值确实已经被修改过了。为了解决这个问题，在每次进行操作的时候加上一个版本号，每次操作的就是两个值，一个版本号和某个值，A——&gt;B——&gt;A问题就变成了1A——&gt;2B——&gt;3A。在jdk中提供了AtomicStampedReference类解决ABA问题，用Pair这个内部类实现，包含两个属性，分别代表版本号和引用，在compareAndSet中先对当前引用进行检查，再对版本号标志进行检查，只有全部相等才更新值。</p>
+<p><strong>2. 可能会消耗较高的CPU</strong><br>
+看起来CAS比锁的效率高，从阻塞机制变成了非阻塞机制，减少了线程之间等待的时间。每个方法不能绝对的比另一个好，在线程之间竞争程度大的时候，如果使用CAS，每次都有很多的线程在竞争，也就是说CAS机制不能更新成功。这种情况下CAS机制会一直重试，这样就会比较耗费CPU。因此可以看出，如果线程之间竞争程度小，使用CAS是一个很好的选择；但是如果竞争很大，使用锁可能是个更好的选择。在并发量非常高的环境中，如果仍然想通过原子类来更新的话，可以使用AtomicLong的替代类：LongAdder。</p>
+<p><strong>3. 不能保证代码块的原子性</strong><br>
+Java中的CAS机制只能保证共享变量操作的原子性，而不能保证代码块的原子性。</p>
+<h3 id="优点"><a class="markdownIt-Anchor" href="#优点"></a> 优点</h3>
+<ul>
 <li>可以保证变量操作的原子性；</li>
 <li>并发量不是很高的情况下，使用CAS机制比使用锁机制效率更高；</li>
 <li>在线程对共享资源占用时间较短的情况下，使用CAS机制效率也会较高。</li>
 </ul>
-<h2 id="Java提供的CAS操作类–Unsafe类"><a href="#Java提供的CAS操作类–Unsafe类" class="headerlink" title="Java提供的CAS操作类–Unsafe类"></a>Java提供的CAS操作类–Unsafe类</h2><p>从Java5开始引入了对CAS机制的底层的支持，在这之前需要开发人员编写相关的代码才可以实现CAS。在原子变量类Atomic<strong>中（例如AtomicInteger、AtomicLong）可以看到CAS操作的代码，在这里的代码都是调用了底层（核心代码调用native修饰的方法）的实现方法。在AtomicInteger源码中可以看getAndSet方法和compareAndSet方法之间的关系，compareAndSet方法调用了底层的实现，该方法可以实现与一个volatile变量的读取和写入相同的效果。在前面说到了volatile不支持例如i++这样的复合操作，在Atomic</strong>中提供了实现该操作的方法。JVM对CAS的支持通过这些原子类（Atomic）暴露出来，供我们使用。</p>
+<h2 id="java提供的cas操作类unsafe类"><a class="markdownIt-Anchor" href="#java提供的cas操作类unsafe类"></a> Java提供的CAS操作类–Unsafe类</h2>
+<p>从Java5开始引入了对CAS机制的底层的支持，在这之前需要开发人员编写相关的代码才可以实现CAS。在原子变量类Atomic<strong>中（例如AtomicInteger、AtomicLong）可以看到CAS操作的代码，在这里的代码都是调用了底层（核心代码调用native修饰的方法）的实现方法。在AtomicInteger源码中可以看getAndSet方法和compareAndSet方法之间的关系，compareAndSet方法调用了底层的实现，该方法可以实现与一个volatile变量的读取和写入相同的效果。在前面说到了volatile不支持例如i++这样的复合操作，在Atomic</strong>中提供了实现该操作的方法。JVM对CAS的支持通过这些原子类（Atomic）暴露出来，供我们使用。</p>
 <p>而Atomic系类的类底层调用的是Unsafe类的API，Unsafe类提供了一系列的compareAndSwap*方法，下面就简单介绍下Unsafe类的API：</p>
 <ul>
 <li>long objectFieldOffset（Field field）方法：返回指定的变量在所属类中的内存偏移地址，该偏移地址仅仅在该Unsafe函数中访问指定字段时使用。如下代码使用Unsafe类获取变量value在AtomicLong对象中的内存偏移。</li>
 </ul>
 <figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">static {</span><br><span class="line">   try {</span><br><span class="line">       valueOffset = unsafe.objectFieldOffset</span><br><span class="line">           (AtomicInteger.class.getDeclaredField("value"));</span><br><span class="line">   } catch (Exception ex) { throw new Error(ex); }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>int arrayBaseOffset（Class arrayClass）方法：获取数组中第一个元素的地址。</li>
 <li>int arrayIndexScale（Class arrayClass）方法：获取数组中一个元素占用的字节。</li>
@@ -162,11 +170,11 @@
 <li>long getAndSetLong（Object obj, long offset, long update）方法：获取对象obj中偏移量为offset的变量volatile语义的当前值，并设置变量volatile语义的值为update。</li>
 </ul>
 <figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//这个方法只是封装了compareAndSwapLong的使用，不需要自己写重试机制</span><br><span class="line">public final long getAndSetLong(Object var1, long var2, long var4) {</span><br><span class="line">    long var6;</span><br><span class="line">    do {</span><br><span class="line">        var6 = this.getLongVolatile(var1, var2);</span><br><span class="line">    } while(!this.compareAndSwapLong(var1, var2, var6, var4));</span><br><span class="line"></span><br><span class="line">    return var6;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>long getAndAddLong（Object obj, long offset, long addValue）方法：获取对象obj中偏移量为offset的变量volatile语义的当前值，并设置变量值为原始值+addValue，原理和上面的方法类似。</li>
 </ul>
-<h2 id="CAS使用场景"><a href="#CAS使用场景" class="headerlink" title="CAS使用场景"></a>CAS使用场景</h2><ul>
+<h2 id="cas使用场景"><a class="markdownIt-Anchor" href="#cas使用场景"></a> CAS使用场景</h2>
+<ul>
 <li>使用一个变量统计网站的访问量；</li>
 <li>Atomic类操作；</li>
 <li>数据库乐观锁更新。</li>
@@ -175,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/16/juc/CAS/" data-id="clg2epkt1005008v647ele7cj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/16/juc/CAS/" data-id="clihkswgx005ipov6532w6v0l" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -251,7 +259,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>167</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>170</strong><br>文章</div></a>
       <a href="/categories"><div><strong>75</strong><br>分类</div></a>
       <a href="/tags"><div><strong>56</strong><br>标签</div></a>
     </div>
