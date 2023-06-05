@@ -122,15 +122,15 @@
       
         <p>开始写了四个接口，都没有问题，但是在写第五个接口时不行了，然后更可恶的是，前面的四个也都不行了！这这倒到底是怎么回事呢？接下来给大家分享我的情况：</p>
 <p>报错如下图：在postman中访问接口出现报错</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/090908c0b8c145a68847eb624ad2852d~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/090908c0b8c145a68847eb624ad2852d~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>上图表示dataSectionService返回是空，问题原因是因为上头注入DataSectionService时定义成了static，切记是这样是不能的，否则就是会报异常，即便你的dao层的返回是正常的，但是在中间service层返回给controller层时是空的了。</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39ddf278b52948f09394d44e41096353~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00f4a73faacc4bfcb329fa07794e4c9d~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39ddf278b52948f09394d44e41096353~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00f4a73faacc4bfcb329fa07794e4c9d~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" data-id="cliivd0us001mgcv6673o2ty7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/debug/service%E5%B1%82%E4%BC%A0%E6%9D%A5%E7%9A%84%E6%80%BB%E6%98%AFnull/" data-id="cliivgv98002b7sv6hfaca00a" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>

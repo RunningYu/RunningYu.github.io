@@ -5,22 +5,22 @@
   
   <title>SpringCloud微服务~面试题 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. SpringCloud常见组件有哪些？ **问题说明：**这个题目主要考察对SpringCloud的组件基本了解 **难易程度：**简单 参考话术： SpringCloud包含的组件很多，有很多功能是重复的。其中最常用组件包括：  注册中心组件：Eureka、Nacos等 负载均衡组件：Ribbon 远程调用组件：OpenFeign 网关组件：Zuul、GateWay 服务保护组件：Hys">
+  <meta name="description" content="1. SpringCloud常见组件有哪些？问题说明：这个题目主要考察对SpringCloud的组件基本了解 难易程度：简单 参考话术： SpringCloud包含的组件很多，有很多功能是重复的。其中最常用组件包括：  注册中心组件：Eureka、Nacos等 负载均衡组件：Ribbon 远程调用组件：OpenFeign 网关组件：Zuul、GateWay 服务保护组件：Hystrix、Senti">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringCloud微服务~面试题">
 <meta property="og:url" content="http://example.com/2023/02/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%9D%A2%E8%AF%95%E7%AF%87/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="1. SpringCloud常见组件有哪些？ **问题说明：**这个题目主要考察对SpringCloud的组件基本了解 **难易程度：**简单 参考话术： SpringCloud包含的组件很多，有很多功能是重复的。其中最常用组件包括：  注册中心组件：Eureka、Nacos等 负载均衡组件：Ribbon 远程调用组件：OpenFeign 网关组件：Zuul、GateWay 服务保护组件：Hys">
+<meta property="og:description" content="1. SpringCloud常见组件有哪些？问题说明：这个题目主要考察对SpringCloud的组件基本了解 难易程度：简单 参考话术： SpringCloud包含的组件很多，有很多功能是重复的。其中最常用组件包括：  注册中心组件：Eureka、Nacos等 负载均衡组件：Ribbon 远程调用组件：OpenFeign 网关组件：Zuul、GateWay 服务保护组件：Hystrix、Senti">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/02/10/images/image-20230210005624585.png">
-<meta property="og:image" content="http://example.com/2023/02/10/images/image-20230210011501205.png">
+<meta property="og:image" content="http://example.com/images/image-20230210005624585.png">
+<meta property="og:image" content="http://example.com/images/image-20230210011501205.png">
 <meta property="article:published_time" content="2023-02-09T16:41:13.825Z">
 <meta property="article:modified_time" content="2023-03-08T13:11:00.154Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="微服务">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/02/10/images/image-20230210005624585.png">
+<meta name="twitter:image" content="http://example.com/images/image-20230210005624585.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -120,9 +120,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-springcloud常见组件有哪些"><a class="markdownIt-Anchor" href="#1-springcloud常见组件有哪些"></a> 1. SpringCloud常见组件有哪些？</h1>
-<p>**问题说明：**这个题目主要考察对SpringCloud的组件基本了解</p>
-<p>**难易程度：**简单</p>
+        <h1 id="1-SpringCloud常见组件有哪些？"><a href="#1-SpringCloud常见组件有哪些？" class="headerlink" title="1. SpringCloud常见组件有哪些？"></a>1. SpringCloud常见组件有哪些？</h1><p><strong>问题说明：</strong>这个题目主要考察对SpringCloud的组件基本了解</p>
+<p><strong>难易程度：</strong>简单</p>
 <p><strong>参考话术：</strong></p>
 <p>SpringCloud包含的组件很多，有很多功能是重复的。其中最常用组件包括：</p>
 <ul>
@@ -133,26 +132,21 @@
 <li>服务保护组件：Hystrix、Sentinel</li>
 <li>服务配置管理组件：SpringCloudConfig、Nacos</li>
 </ul>
-<h1 id="2-nacos的服务注册表结构是怎样的"><a class="markdownIt-Anchor" href="#2-nacos的服务注册表结构是怎样的"></a> 2. Nacos的服务注册表结构是怎样的？</h1>
-<p>​		什么叫做注册表结构啊，我们知道Naocs首先它是一个注册中心，我们所有的微服务在启动时，就会提交自己的信息到Nacos当中，我们Nacos保存当前服务的一些信息。那么保持在哪里呢？就是保存在这个注册表当中，只有把所有的服务信息都保存下来了，将来消费者想要去获取服务时，才能够从这个注册表里得到对应服务的信息、IP端口才能进行访问。那么问题就来了，Nacos它是如何创建这样一个表，那么这个注册表结构是什么样子呢？面试官问这个问题其实就是考查两个东西，第一，就是你对于他的这个服务分级存储的一个模型是否了解，第二呢，就是Nacos的源码</p>
-<p><img src="../../images/image-20230210005624585.png" alt="image-20230210005624585"></p>
+<h1 id="2-Nacos的服务注册表结构是怎样的？"><a href="#2-Nacos的服务注册表结构是怎样的？" class="headerlink" title="2. Nacos的服务注册表结构是怎样的？"></a>2. Nacos的服务注册表结构是怎样的？</h1><p>​		什么叫做注册表结构啊，我们知道Naocs首先它是一个注册中心，我们所有的微服务在启动时，就会提交自己的信息到Nacos当中，我们Nacos保存当前服务的一些信息。那么保持在哪里呢？就是保存在这个注册表当中，只有把所有的服务信息都保存下来了，将来消费者想要去获取服务时，才能够从这个注册表里得到对应服务的信息、IP端口才能进行访问。那么问题就来了，Nacos它是如何创建这样一个表，那么这个注册表结构是什么样子呢？面试官问这个问题其实就是考查两个东西，第一，就是你对于他的这个服务分级存储的一个模型是否了解，第二呢，就是Nacos的源码</p>
+<p><img src="/../../images/image-20230210005624585.png" alt="image-20230210005624585"></p>
 <p>Nacos采用了数据的分级存储模型，最外层是Namespace，用来隔离环境。然后是Group，用来对服务分组。接下来就是服务（Service）了，一个服务包含多个实例，但是可能处于不同机房，因此Service下有多个集群（Cluster），Cluster下是不同的实例（Instance）。</p>
 <p>对应到Java代码中，Nacos采用了一个多层的Map来表示。结构为Map&lt;String, Map&lt;String, Service&gt;&gt;，其中最外层Map的key就是namespaceId，值是一个Map。内层Map的key是group拼接serviceName，值是Service对象。Service对象内部又是一个Map，key是集群名称，值是Cluster对象。而Cluster对象内部维护了Instance的集合。</p>
-<h1 id="3-nacos如何支撑数十万服务注册压力"><a class="markdownIt-Anchor" href="#3-nacos如何支撑数十万服务注册压力"></a> 3. Nacos如何支撑数十万服务注册压力？</h1>
-<p>Nacos内部接收到注册的请求时，不会立即写数据，而是将服务注册的任务放入一个<mark>阻塞队列</mark>就立即响应给客户端。然后利用<mark>线程池</mark>读取阻塞队列中的任务，<mark>异步</mark>来完成实例更新，从而提高并发写能力。</p>
-<h1 id="4-nacos如何避免并发读写冲突问题"><a class="markdownIt-Anchor" href="#4-nacos如何避免并发读写冲突问题"></a> 4. Nacos如何避免并发读写冲突问题？</h1>
-<p>Nacos在更新实例列表时，会采用CopyOnWrite技术，首先将旧的实例列表拷贝一份，然后更新拷贝的实例列表，再用更新后的实例列表来覆盖旧的实例列表。</p>
+<h1 id="3-Nacos如何支撑数十万服务注册压力？"><a href="#3-Nacos如何支撑数十万服务注册压力？" class="headerlink" title="3. Nacos如何支撑数十万服务注册压力？"></a>3. Nacos如何支撑数十万服务注册压力？</h1><p>Nacos内部接收到注册的请求时，不会立即写数据，而是将服务注册的任务放入一个<mark>阻塞队列</mark>就立即响应给客户端。然后利用<mark>线程池</mark>读取阻塞队列中的任务，<mark>异步</mark>来完成实例更新，从而提高并发写能力。</p>
+<h1 id="4-Nacos如何避免并发读写冲突问题？"><a href="#4-Nacos如何避免并发读写冲突问题？" class="headerlink" title="4. Nacos如何避免并发读写冲突问题？"></a>4. Nacos如何避免并发读写冲突问题？</h1><p>Nacos在更新实例列表时，会采用CopyOnWrite技术，首先将旧的实例列表拷贝一份，然后更新拷贝的实例列表，再用更新后的实例列表来覆盖旧的实例列表。</p>
 <p>这样在更新的过程中，就不会对读实例列表的请求产生影响，也不会出现脏读问题了。</p>
-<h1 id="5-nacos与eureka的区别有哪些"><a class="markdownIt-Anchor" href="#5-nacos与eureka的区别有哪些"></a> 5. Nacos与Eureka的区别有哪些？</h1>
-<p>Nacos与Eureka有相同点，也有不同之处，可以从以下几点来描述：</p>
+<h1 id="5-Nacos与Eureka的区别有哪些？"><a href="#5-Nacos与Eureka的区别有哪些？" class="headerlink" title="5. Nacos与Eureka的区别有哪些？"></a>5. Nacos与Eureka的区别有哪些？</h1><p>Nacos与Eureka有相同点，也有不同之处，可以从以下几点来描述：</p>
 <ul>
 <li>接口方式：Nacos与Eureka都对外暴露了Rest风格的API接口，用来实现服务注册、发现等功能</li>
 <li>实例类型：Nacos的实例有永久和临时实例之分；而Eureka只支持临时实例</li>
 <li>健康检测：Nacos对临时实例采用心跳模式检测，对永久实例采用主动请求来检测；Eureka只支持心跳模式</li>
 <li>服务发现：Nacos支持定时拉取和订阅推送两种模式；Eureka只支持定时拉取模式</li>
 </ul>
-<h1 id="6-sentinel的限流与gateway的限流有什么差别"><a class="markdownIt-Anchor" href="#6-sentinel的限流与gateway的限流有什么差别"></a> 6. Sentinel的限流与Gateway的限流有什么差别？</h1>
-<p>考察对限流算法的掌握情况</p>
+<h1 id="6-Sentinel的限流与Gateway的限流有什么差别？"><a href="#6-Sentinel的限流与Gateway的限流有什么差别？" class="headerlink" title="6. Sentinel的限流与Gateway的限流有什么差别？"></a>6. Sentinel的限流与Gateway的限流有什么差别？</h1><p>考察对限流算法的掌握情况</p>
 <p>限流算法常见的有三种实现：滑动时间窗口、令牌桶算法、漏桶算法。Gateway则采用了基于Redis实现的<mark>令牌桶算法</mark>。</p>
 <p>而Sentinel内部却比较复杂：</p>
 <ul>
@@ -160,15 +154,14 @@
 <li>排队等待的限流模式则基于<mark>漏桶算法</mark></li>
 <li>而热点参数限流则是基于<mark>令牌桶算法</mark></li>
 </ul>
-<h1 id="7-sentinel的线程隔离与hystix的线程隔离有什么差别"><a class="markdownIt-Anchor" href="#7-sentinel的线程隔离与hystix的线程隔离有什么差别"></a> 7. Sentinel的线程隔离与Hystix的线程隔离有什么差别？</h1>
-<p>Hystix默认是基于线程池实现的线程隔离，每一个被隔离的业务都要创建一个独立的线程池，线程过多会带来额外的CPU开销，性能一般，但是隔离性更强。</p>
+<h1 id="7-Sentinel的线程隔离与Hystix的线程隔离有什么差别？"><a href="#7-Sentinel的线程隔离与Hystix的线程隔离有什么差别？" class="headerlink" title="7. Sentinel的线程隔离与Hystix的线程隔离有什么差别？"></a>7. Sentinel的线程隔离与Hystix的线程隔离有什么差别？</h1><p>Hystix默认是基于线程池实现的线程隔离，每一个被隔离的业务都要创建一个独立的线程池，线程过多会带来额外的CPU开销，性能一般，但是隔离性更强。</p>
 <p>Sentinel是基于信号量（计数器）实现的线程隔离，不用创建线程池，性能较好，但是隔离性一般。</p>
-<p><img src="../../images/image-20230210011501205.png" alt="image-20230210011501205"></p>
+<p><img src="/../../images/image-20230210011501205.png" alt="image-20230210011501205"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%9D%A2%E8%AF%95%E7%AF%87/" data-id="cliivd0vs0023gcv6h4x1eh9i" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E9%9D%A2%E8%AF%95%E7%AF%87/" data-id="cliivgv7h001i7sv688fyc5nl" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>

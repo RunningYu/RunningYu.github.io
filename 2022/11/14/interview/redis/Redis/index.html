@@ -5,20 +5,20 @@
   
   <title>Redis | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 说说你对Redis的了解 **得分点 : **Redis概念，Redis优点及用途 标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带">
+  <meta name="description" content="1. 说说你对Redis的了解**得分点 : **Redis概念，Redis优点及用途 标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带来了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis">
 <meta property="og:url" content="http://example.com/2022/11/14/interview/redis/Redis/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="1. 说说你对Redis的了解 **得分点 : **Redis概念，Redis优点及用途 标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带">
+<meta property="og:description" content="1. 说说你对Redis的了解**得分点 : **Redis概念，Redis优点及用途 标准回答 ： Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带来了">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/11/14/images/image-20230216113518076.png">
+<meta property="og:image" content="http://example.com/images/image-20230216113518076.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2b52c12b7a1b4d368a2b605873b82930.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/d06a5ac4f10e4b1496d454ebc1f57250.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/b76d7ce8f8314194a996d3d6f680cc6e.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/b42e0e3f92ad46efb231bcb628532d55.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/adbee544452f4d6badc1b7790bb4b2ae.png">
-<meta property="og:image" content="http://example.com/2022/11/14/images/image-20230216211538641.png">
+<meta property="og:image" content="http://example.com/images/image-20230216211538641.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/c519a72fdc2140268b2b18c3e82df57e.png">
@@ -35,7 +35,7 @@
 <meta property="article:tag" content="中间件">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/11/14/images/image-20230216113518076.png">
+<meta name="twitter:image" content="http://example.com/images/image-20230216113518076.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -135,205 +135,157 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-说说你对redis的了解"><a class="markdownIt-Anchor" href="#1-说说你对redis的了解"></a> 1. 说说你对Redis的了解</h2>
-<p>**得分点 : **Redis概念，Redis优点及用途</p>
+        <h2 id="1-说说你对Redis的了解"><a href="#1-说说你对Redis的了解" class="headerlink" title="1. 说说你对Redis的了解"></a>1. 说说你对Redis的了解</h2><p>**得分点 : **Redis概念，Redis优点及用途</p>
 <p><strong>标准回答</strong> ：</p>
-<p>Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,<strong>Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带来了满足多种应用场景的能力</strong>,而且,Redis将所有数据放到内存中的做法让它的读写性能十分惊人。不仅如此,Redis的<strong>持久化机制</strong>保证了在发生类似断电,机械故障等情况时,内存中的数据不会丢失。此外Redis还提供了<strong>键过期、发布订阅、事务、流水线、Lua脚本等多个附加功能</strong>。总之,在合适的情况下使用Redis会大大增强系统的性能,减少开发人员工作量。</p>
-<p><strong>加分回答</strong></p>
-<p>适合Redis使用的场景：</p>
+<p>Redis是一款基于键值对的NoSQL数据库,与其他键值对数据库不同的是,<strong>Redis中拥有string（字符串）、hash（哈希）、 list（列表）、set（集合）、zset（有序集合）、Bitmaps（位图）、 HyperLogLog、GEO（地理信息定位）等多种数据结构,这给Redis带来了满足多种应用场景的能力</strong>,而且,Redis将所有数据放到内存中的做法让它的读写性能十分惊人。不仅如此,Redis的<strong>持久化机制</strong>保证了在发生类似断电,机械故障等情况时,内存中的数据不会丢失。此外Redis还提供了<strong>键过期、发布订阅、事务、流水线、Lua脚本等多个附加功能</strong>。总之,在合适的情况下使用Redis会大大增强系统的性能,减少开发人员工作量。 </p>
+<p><strong>加分回答</strong> </p>
+<p>适合Redis使用的场景： </p>
 <ul>
-<li>热点数据的缓存：redis访问速度快、支持的数据类型丰富,很适合用来存储热点数据。</li>
-<li>限时业务：redis中可以使用expire命令设置一个键的生存时间,到时间后redis会删除它。因此,Redis在限时业务中的表现很亮眼。</li>
-<li>计数器：incrby命令可以实现原子性的递增,所以可以运用于高并发的秒杀活动、分布式序列号的生成。</li>
-<li>排行榜：关系型数据库在排行榜方面查询速度普遍偏慢,所以可以借助redis的SortedSet进行热点数据的排序。</li>
-<li>分布式锁：这个主要利用redis的setnx命令进行,在后面的如何用Redis实现一个分布式锁中会进行详解。</li>
+<li>热点数据的缓存：redis访问速度快、支持的数据类型丰富,很适合用来存储热点数据。 </li>
+<li>限时业务：redis中可以使用expire命令设置一个键的生存时间,到时间后redis会删除它。因此,Redis在限时业务中的表现很亮眼。 </li>
+<li>计数器：incrby命令可以实现原子性的递增,所以可以运用于高并发的秒杀活动、分布式序列号的生成。 </li>
+<li>排行榜：关系型数据库在排行榜方面查询速度普遍偏慢,所以可以借助redis的SortedSet进行热点数据的排序。 </li>
+<li>分布式锁：这个主要利用redis的setnx命令进行,在后面的如何用Redis实现一个分布式锁中会进行详解。 </li>
 <li>延时操作：redis自2.8.0之后版本提供Keyspace Notifications功能,允许客户订阅Pub/Sub频道,以便以某种方式接收影响Redis数据集的事件。</li>
-<li>分页查询、模糊查询：Redis的set集合中提供了一个zrangebylex方法,通过ZRANGEBYLEX zset - + LIMIT 0 10 可以进行分页数据查询,其中- +表示获取全部数据；rangebylex key min max 这个就可以返回字典区间的数据可以利用这个特性可以进行模糊查询功能。</li>
-<li>点赞,好友等相互关系的存储：Redis set对外提供的功能与list类似是一个列表的功能,特殊之处在于set是可以自动排重的,我们可以通过这一点实现类似共同好友等功能。</li>
+<li>分页查询、模糊查询：Redis的set集合中提供了一个zrangebylex方法,通过ZRANGEBYLEX zset - + LIMIT 0 10 可以进行分页数据查询,其中- +表示获取全部数据；rangebylex key min max 这个就可以返回字典区间的数据可以利用这个特性可以进行模糊查询功能。 </li>
+<li>点赞,好友等相互关系的存储：Redis set对外提供的功能与list类似是一个列表的功能,特殊之处在于set是可以自动排重的,我们可以通过这一点实现类似共同好友等功能。 </li>
 <li>队列：由于redis有list push和list pop这样的命令,所以能够很方便的执行队列操作。</li>
 </ul>
 <p>简介版回答：</p>
 <p>Redis是一款基于键值对的NoSQL数据库，Redis中拥有string(字符串)，hash(哈希)、list(列表)、set（集合）等多种数据结构，redis将数据写进内存的性能很快，不仅如此，如遇到系统崩溃，内存中的数据不会丢失；redis访问速度快、支持的数据类型丰富，很适合用来储存热点数据、 而且适用业务广，如可以运用expire命令来做限时业务，设置一个键的生存时间，到时间后redis会自动删除它，如排行榜可以借住redis的SortedSet进行热点数据的排序，还有分页查询，模糊查询，点赞好友等</p>
-<h2 id="2-详细的说说redis的数据类型"><a class="markdownIt-Anchor" href="#2-详细的说说redis的数据类型"></a> 2. 详细的说说Redis的数据类型</h2>
-<p><strong>得分点</strong></p>
-<p>Redis5种数据结构</p>
-<p><strong>标准回答</strong></p>
-<p>Redis主要提供了5种数据结构：<strong>字符串(string)、哈希(hash)、列表(list)、集合(set)、有序集合(zset)</strong>。Redis还提供了<strong>Bitmap、HyperLogLog、Geo</strong>类型,但这些类型都是基于上述核心数据类型实现的(Bitmap基于redis的字符串实现)。5.0版本中,Redis新增加了<strong>Streams</strong>数据类型,它是一个功能强大的、支持多播的、可持久化的消息队列。</p>
+<h2 id="2-详细的说说Redis的数据类型"><a href="#2-详细的说说Redis的数据类型" class="headerlink" title="2. 详细的说说Redis的数据类型"></a>2. 详细的说说Redis的数据类型</h2><p><strong>得分点</strong> </p>
+<p>Redis5种数据结构 </p>
+<p><strong>标准回答</strong> </p>
+<p>Redis主要提供了5种数据结构：<strong>字符串(string)、哈希(hash)、列表(list)、集合(set)、有序集合(zset)<strong>。Redis还提供了</strong>Bitmap、HyperLogLog、Geo</strong>类型,但这些类型都是基于上述核心数据类型实现的(Bitmap基于redis的字符串实现)。5.0版本中,Redis新增加了<strong>Streams</strong>数据类型,它是一个功能强大的、支持多播的、可持久化的消息队列。 </p>
 <p><mark>string</mark>可以存储字符串、数字和二进制数据,除了值可以是String以外,所有的键也可以是string,string最大可以存储大小为2M的数据。</p>
 <p><mark>list</mark>保证数据线性有序且元素可重复,它支持lpush、blpush、rpop、brpop等操作,可以当作简单的消息队列使用,一个list最多可以存储2^32-1个元素.</p>
 <p><mark>hash</mark>的值本身也是一个键值对结构,最多能存储2^32-1个元素.</p>
 <p><mark>set</mark>是无序不可重复的,它支持多个set求交集、并集、差集, 适合实现共同关注之类的需求,一个set最多可以存储2^32-1个元素.</p>
-<p><mark>zset</mark>是<strong>有序不可重复的,它通过给每个元素设置一个分数来作为排序的依据</strong>,一个zset最多可以存储2^32-1个元素。</p>
+<p><mark>zset</mark>是<strong>有序不可重复的,它通过给每个元素设置一个分数来作为排序的依据</strong>,一个zset最多可以存储2^32-1个元素。 </p>
 <p>Bitmap:  原本的含义是用一个比特位来映射某个元素的状态。由于一个比特位只能表示 0 和 1 两种状态，所以 BitMap 能映射的状态有限，但是使用比特位的优势是能大量的节省内存空间 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/54chensongxia/p/13794391.html">Redis 中 BitMap 的使用场景 - 程序员自由之路 - 博客园 (cnblogs.com)</a></p>
 <p>HyperLogLog: 用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。 <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-hyperloglog.html">Redis HyperLogLog | 菜鸟教程 (runoob.com)</a></p>
-<p>Geo: 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增。[Redis GEO | 菜鸟教程 (<a target="_blank" rel="noopener" href="http://runoob.com">runoob.com</a>)](<a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-geo.html#:~:text=Redis">https://www.runoob.com/redis/redis-geo.html#:~:text=Redis</a> GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2,版本新增。 geoadd：添加地理位置的坐标。 geopos：获取地理位置的坐标。 geodist：计算两个位置之间的距离。 georadius：根据用户给定的经纬度坐标来获取指定范围内的地理位置集合。)</p>
-<p><strong>加分回答</strong></p>
+<p>Geo: 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增。[Redis GEO | 菜鸟教程 (runoob.com)](<a target="_blank" rel="noopener" href="https://www.runoob.com/redis/redis-geo.html#:~:text=Redis">https://www.runoob.com/redis/redis-geo.html#:~:text=Redis</a> GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2,版本新增。 geoadd：添加地理位置的坐标。 geopos：获取地理位置的坐标。 geodist：计算两个位置之间的距离。 georadius：根据用户给定的经纬度坐标来获取指定范围内的地理位置集合。)</p>
+<p><strong>加分回答</strong> </p>
 <p>每种类型支持多个编码,每一种编码采取一个特殊的结构来实现 各类数据结构内部的编码及结构： string：编码分为int、raw、embstr；int底层实现为long,当数据为整数型并且可以用long类型表示时可以用long存储；embstr底层实现为占一块内存的SDS结构,当数据为长度不超过32字节的字符串时,选择以此结构连续存储元数据和值；raw底层实现为占两块内存的SDS,用于存储长度超过32字节的字符串数据,此时会在两块内存中分别存储元数据和值。 list：编码分为ziplist、linkedlist和quicklist（3.2以前版本没有quicklist）。ziplist底层实现为压缩列表,当元素数量小于2且所有元素长度都小于64字节时,使用这种结构来存储；linkedlist底层实现为双端链表,当数据不符合ziplist条件时,使用这种结构存储；3.2版本之后list一般采用quicklist的快速列表结构来代替前两种。 hash：编码分为ziplist、hashtable两种,其中ziplist底层实现为压缩列表,当键值对数量小于2,并且所有的键值长度都小于64字节时使用这种结构进行存储；hashtable底层实现为字典,当不符合压缩列表存储条件时,使用字典进行存储。 set：编码分为inset和hashtable,intset底层实现为整数集合,当所有元素都是整数值且数量不超过2个时使用该结构存储,否则使用字典结构存储。 zset：编码分为ziplist和skiplist,当元素数量小于128,并且每个元素长度都小于64字节时,使用ziplist压缩列表结构存储,否则使用skiplist的字典+跳表的结构存储。</p>
 <hr>
 <p>主要：字符串（String），哈希（hash），列表（list），集合（set），有序集合（zset）</p>
 <hr>
-<h2 id="3-说说redis的持久化策略"><a class="markdownIt-Anchor" href="#3-说说redis的持久化策略"></a> 3. 说说Redis的持久化策略</h2>
-<p><strong>得分点</strong> RDB、AOF</p>
-<p>标准回答</p>
-<p>Redis4.0之后,Redis有<strong>RDB持久化（默认）、AOF持久化、RDB-AOF混合持久化</strong>这三种持久化方式。</p>
-<p><mark>RDB持久化</mark>是将当前进程数据以生成快照的方式保存到硬盘的过程,也是Redis<strong>默认</strong>的持久化机制。RDB会创建一个经过压缩的二进制文件,这个文件以’<strong>.rdb</strong>‘结尾,内部存储了各个数据库的键值对等信息。RDB持久化过程有<strong>手动触发</strong>和<strong>自动触发</strong>两种方式。手动触发是指通过SAVE或BGSAVE命令触发RDB持久化操作,创建“.rdb”文件；<strong>自动触发是指通过配置选项,让服务器在满足指定条件时自动执行BGSAVE命令</strong>。RDB持久化的<strong>优点</strong>是其生成的紧凑压缩的二进制文件体积小,使用该文件恢复数据的速度非常快；<strong>缺点</strong>则是BGSAVE每次运行都要执行fork操作创建子进程,这属于重量级操作,不宜频繁执行,因此,RBD没法做到实时的持久化;RDB执行时间长，两次RDB之间写入数据有丢失的风险</p>
-<p><img src="../../../images/image-20230216113518076.png" alt="image-20230216113518076"></p>
-<p><mark>AOF</mark>（Append Only File）以独立日志的方式记录了每次写入的命令,重启时再重新执行AOF文件中的命令来恢复数据。AOF持久化的<strong>优点</strong>是与RDB持久化可能丢失大量的数据相比,AOF持久化的安全性要高很多。通过使用<strong>everysec</strong>（每秒刷盘）选项,用户可以将数据丢失的时间窗口限制在1秒之内。其<strong>缺点</strong>则是,AOF文件存储的是协议文本,它的体积要比二进制格式的”.rdb”文件大很多。AOF需要通过执行AOF文件中的命令来恢复数据库,其恢复速度比RDB慢很多。AOF在进行重写时也需要创建子进程,在数据库体积较大时将占用大量资源,会导致服务器的短暂阻塞。AOF解决了数据持久化的实时性,是目前Redis主流的持久化方式。</p>
-<p><mark>RDB-AOF混合持久化模式</mark>是Redis4.0开始引入的,这种模式是基于AOF持久化构建而来的。用户可以通过配置文件中的“aof-use-rdb-preamble yes”配置项开启AOF混合持久化。Redis服务器在执行AOF重写操作时,会像执行BGSAVE命令一样,根据数据库当前的状态生成相应的RDB数据,并将其写入AOF文件中；对于重写之后执行的Redis命令,则以协议文本的方式追加到AOF文件的末尾,即RDB数据之后。 通过使用RDB-AOF混合持久化,用户可以同时获得RDB持久化和AOF持久化的优点,服务器既可以通过AOF文件包含的RDB数据来实现快速的数据恢复操作,又可以通过AOF文件包含的AOF数据来将丢失数据的时间窗口限制在1s之内</p>
-<p><strong>加分回答</strong><br>
-RDB手动触发分别对应save和bgsave命令： - save 命令会一直阻塞当前Redis服务器到RBD过程完成为止,所以这种方式在操作内存比较大的实例时会造成长时间阻塞,因此线上环境不建议使用,该命令已经被废弃。 - bgsave命令会让Redis进程执行fork创建子进程,由子进程负责RBD持久化过程,完成后自动结束,因此只在fork阶段发生阻塞,一般阻塞的时间也不会很长。因此Redis内部所涉及的几乎所有RDB操作都采用了bgsave的方式。 除了执行命令手动触发之外,Redis内部还存在自动触发RDB的持久化机制,例如以下场景： 1. 使用save相关配置,如“save m n”。表示m秒内数据集存在n次修改 时,自动触发bgsave。 2. 如果从节点执行全量复制操作,主节点自动执行bgsave生成RDB文件并发送给从节点。 3. 执行debug reload命令重新加载Redis时,也会自动触发save操作。 4. 默认情况下执行shutdown命令时,如果没有开启AOF持久化功能则 自动执行bgsave。 AOF默认不开启,需要修改配置项来启用它： appendonly yes # 启用AOF appendfilename “appendonly.aof” # 设置文件名 AOF以文本协议格式写入命令,如： *3\r\n$3\r\nset\r\n$5\r\nhello\r\n$5\r\nworld\r\n 文本协议格式具有如下的优点： 1. 文本协议具有很好的兼容性； 2. 直接采用文本协议格式,可以避免二次处理的开销； 3. 文本协议具有可读性,方便直接修改和处理。 AOF持久化的文件同步机制： 为了提高程序的写入性能,现代操作系统会把针对硬盘的多次写操作优化为一次写操作。 1. 当程序调用write对文件写入时,系统不会直接把书记写入硬盘,而是先将数据写入内存的缓冲区中； 2. 当达到特定的时间周期或缓冲区写满时,系统才会执行flush操作,将缓冲区中的数据冲洗至硬盘中； 这种优化机制虽然提高了性能,但也给程序的写入操作带来了不确定性。 1. 对于AOF这样的持久化功能来说,冲洗机制将直接影响AOF持久化的安全性； 2. 为了消除上述机制的不确定性,Redis向用户提供了appendfsync选项,来控制系统冲洗AOF的频率； 3. Linux的glibc提供了fsync函数,可以将指定文件强制从缓冲区刷到硬盘,上述选项正是基于此函数。</p>
-<h2 id="4-如何利用redis实现一个分布式锁"><a class="markdownIt-Anchor" href="#4-如何利用redis实现一个分布式锁"></a> 4. 如何利用Redis实现一个分布式锁？</h2>
-<p>得分点： 为什么要实现分布式锁、实现分布式锁的方式</p>
+<h2 id="3-说说Redis的持久化策略"><a href="#3-说说Redis的持久化策略" class="headerlink" title="3. 说说Redis的持久化策略"></a>3. 说说Redis的持久化策略</h2><p><strong>得分点</strong> RDB、AOF </p>
+<p>标准回答 </p>
+<p>Redis4.0之后,Redis有<strong>RDB持久化（默认）、AOF持久化、RDB-AOF混合持久化</strong>这三种持久化方式。 </p>
+<p><mark>RDB持久化</mark>是将当前进程数据以生成快照的方式保存到硬盘的过程,也是Redis<strong>默认</strong>的持久化机制。RDB会创建一个经过压缩的二进制文件,这个文件以’**.rdb<strong>‘结尾,内部存储了各个数据库的键值对等信息。RDB持久化过程有</strong>手动触发<strong>和</strong>自动触发<strong>两种方式。手动触发是指通过SAVE或BGSAVE命令触发RDB持久化操作,创建“.rdb”文件；</strong>自动触发是指通过配置选项,让服务器在满足指定条件时自动执行BGSAVE命令<strong>。RDB持久化的</strong>优点<strong>是其生成的紧凑压缩的二进制文件体积小,使用该文件恢复数据的速度非常快；</strong>缺点**则是BGSAVE每次运行都要执行fork操作创建子进程,这属于重量级操作,不宜频繁执行,因此,RBD没法做到实时的持久化;RDB执行时间长，两次RDB之间写入数据有丢失的风险</p>
+<p><img src="/../../../images/image-20230216113518076.png" alt="image-20230216113518076"></p>
+<p><mark>AOF</mark>（Append Only File）以独立日志的方式记录了每次写入的命令,重启时再重新执行AOF文件中的命令来恢复数据。AOF持久化的<strong>优点</strong>是与RDB持久化可能丢失大量的数据相比,AOF持久化的安全性要高很多。通过使用<strong>everysec</strong>（每秒刷盘）选项,用户可以将数据丢失的时间窗口限制在1秒之内。其<strong>缺点</strong>则是,AOF文件存储的是协议文本,它的体积要比二进制格式的”.rdb”文件大很多。AOF需要通过执行AOF文件中的命令来恢复数据库,其恢复速度比RDB慢很多。AOF在进行重写时也需要创建子进程,在数据库体积较大时将占用大量资源,会导致服务器的短暂阻塞。AOF解决了数据持久化的实时性,是目前Redis主流的持久化方式。 </p>
+<p><mark>RDB-AOF混合持久化模式</mark>是Redis4.0开始引入的,这种模式是基于AOF持久化构建而来的。用户可以通过配置文件中的“aof-use-rdb-preamble yes”配置项开启AOF混合持久化。Redis服务器在执行AOF重写操作时,会像执行BGSAVE命令一样,根据数据库当前的状态生成相应的RDB数据,并将其写入AOF文件中；对于重写之后执行的Redis命令,则以协议文本的方式追加到AOF文件的末尾,即RDB数据之后。 通过使用RDB-AOF混合持久化,用户可以同时获得RDB持久化和AOF持久化的优点,服务器既可以通过AOF文件包含的RDB数据来实现快速的数据恢复操作,又可以通过AOF文件包含的AOF数据来将丢失数据的时间窗口限制在1s之内 </p>
+<p><strong>加分回答</strong><br>RDB手动触发分别对应save和bgsave命令： - save 命令会一直阻塞当前Redis服务器到RBD过程完成为止,所以这种方式在操作内存比较大的实例时会造成长时间阻塞,因此线上环境不建议使用,该命令已经被废弃。 - bgsave命令会让Redis进程执行fork创建子进程,由子进程负责RBD持久化过程,完成后自动结束,因此只在fork阶段发生阻塞,一般阻塞的时间也不会很长。因此Redis内部所涉及的几乎所有RDB操作都采用了bgsave的方式。 除了执行命令手动触发之外,Redis内部还存在自动触发RDB的持久化机制,例如以下场景： 1. 使用save相关配置,如“save m n”。表示m秒内数据集存在n次修改 时,自动触发bgsave。 2. 如果从节点执行全量复制操作,主节点自动执行bgsave生成RDB文件并发送给从节点。 3. 执行debug reload命令重新加载Redis时,也会自动触发save操作。 4. 默认情况下执行shutdown命令时,如果没有开启AOF持久化功能则 自动执行bgsave。 AOF默认不开启,需要修改配置项来启用它： appendonly yes # 启用AOF appendfilename “appendonly.aof” # 设置文件名 AOF以文本协议格式写入命令,如： *3\r\n$3\r\nset\r\n$5\r\nhello\r\n$5\r\nworld\r\n 文本协议格式具有如下的优点： 1. 文本协议具有很好的兼容性； 2. 直接采用文本协议格式,可以避免二次处理的开销； 3. 文本协议具有可读性,方便直接修改和处理。 AOF持久化的文件同步机制： 为了提高程序的写入性能,现代操作系统会把针对硬盘的多次写操作优化为一次写操作。 1. 当程序调用write对文件写入时,系统不会直接把书记写入硬盘,而是先将数据写入内存的缓冲区中； 2. 当达到特定的时间周期或缓冲区写满时,系统才会执行flush操作,将缓冲区中的数据冲洗至硬盘中； 这种优化机制虽然提高了性能,但也给程序的写入操作带来了不确定性。 1. 对于AOF这样的持久化功能来说,冲洗机制将直接影响AOF持久化的安全性； 2. 为了消除上述机制的不确定性,Redis向用户提供了appendfsync选项,来控制系统冲洗AOF的频率； 3. Linux的glibc提供了fsync函数,可以将指定文件强制从缓冲区刷到硬盘,上述选项正是基于此函数。</p>
+<h2 id="4-如何利用Redis实现一个分布式锁？"><a href="#4-如何利用Redis实现一个分布式锁？" class="headerlink" title="4. 如何利用Redis实现一个分布式锁？"></a>4. 如何利用Redis实现一个分布式锁？</h2><p>得分点： 为什么要实现分布式锁、实现分布式锁的方式 </p>
 <p><strong>标准回答</strong></p>
-<p><strong>在分布式的环境下,会发生多个server并发修改同一个资源的情况,这种情况下,由于多个server是多个不同的JRE环境, 而Java自带的锁局限于当前JRE,所以Java自带的锁机制在这个场景下是无效的,那么就需要我们自己来实现一个分布式锁</strong>。</p>
+<p><strong>在分布式的环境下,会发生多个server并发修改同一个资源的情况,这种情况下,由于多个server是多个不同的JRE环境, 而Java自带的锁局限于当前JRE,所以Java自带的锁机制在这个场景下是无效的,那么就需要我们自己来实现一个分布式锁</strong>。 </p>
 <p>采用Redis实现分布式锁,我们可以在Redis中存一份代表锁的数据,数据格式通常使用字符串即可。 首先加锁的逻辑可以通过<code>setnx key value</code>来实现,但如果客户端忘记解锁,那么这种情况就很有可能造成死锁,但如果直接给锁增加过期时间即新增<code>expire key seconds</code>又会发生其他问题,即这两个命令并不是原子性的,那么如果第二步失败,依然无法避免死锁问题。考虑到如上问题,我们最终可以通过<code>set...nx...</code>命令,将加锁、过期命令编排到一起,把他们变成原子操作,这样就可以避免死锁。写法为<code>set key value nx ex seconds</code> 。 解锁就是将代表锁的那份数据删除,但不能用简单的<code>del key</code>,因为会出现一些问题。比如此时有进程A,如果进程A在任务没有执行完毕时,锁被到期释放了。这种情况下进程A在任务完成后依然会尝试释放锁,因为它的代码逻辑规定它在任务结束后释放锁,但是它的锁早已经被释放过了,那这种情况它释放的就可能是其他线程的锁。为解决这种情况,我们可以在加锁时为key赋一个随机值,来充当进程的标识,进程要记住这个标识。当进程解锁的时候进行判断,是自己持有的锁才能释放,否则不能释放。另外判断,释放这两步需要保持原子性,否则如果第二步失败,就会造成死锁。而获取和删除命令不是原子的,这就需要采用Lua脚本,通过Lua脚本将两个命令编排在一起,而整个Lua脚本的执行是原子的。综上所述,优化后的实现分布式锁命令如下： # 加锁 set key random-value nx ex seconds # 解锁 if redis.call(“get”,KEYS[1]) == ARGV[1] then return redis.call(“del”,KEYS[1]) else return 0 end 加分回答 上述的分布式锁实现方式是建立在单节点之上的,它可能存在一些问题,比如有一种情况,进程A在主节点加锁成功,但主节点宕机了,那么从节点就会晋升为主节点。那如果此时另一个进程B在新的主节点上加锁成功而原主节点重启了,成为了从节点,系统中就会出现两把锁,这违背了锁的唯一性原则。 总之,就是在单个主节点的架构上实现分布式锁,是无法保证高可用的。若要保证分布式锁的高可用,则可以采用多个节点的实现方案。这种方案有很多,而Redis的官方给出的建议是采用RedLock算法的实现方案。该算法基于多个Redis节点,它的基本逻辑如下： - 这些节点相互独立,不存在主从复制或者集群协调机制； - 加锁：以相同的KEY向N个实例加锁,只要超过一半节点成功,则认定加锁成功； - 解锁：向所有的实例发送DEL命令,进行解锁； 我们可以自己实现该算法,也可以直接使用Redisson框架。</p>
-<h2 id="5-说说缓存穿透-击穿-雪崩的区别"><a class="markdownIt-Anchor" href="#5-说说缓存穿透-击穿-雪崩的区别"></a> 5. 说说缓存穿透、击穿、雪崩的区别</h2>
-<p>得分点： 三种问题的发生原因以及解决方式</p>
-<p><strong>标准回答</strong></p>
-<p><mark>缓存穿透</mark>：<strong>是指客户端查询了根本<font color="red">不存在的数据</font>,使得这个请求直达存储层,导致其负载过大甚至造成宕机</strong>。这种情况可能是由于业务层误将缓存和库中的数据删除造成的,当然也不排除有人恶意攻击,专门访问库中不存在的数据导致缓存穿透。 我们可以通过缓存空对象的方式和布隆过滤器两种方式来解决这一问题。<strong>缓存空对象</strong>是指当存储层未命中后,仍然将空值存入缓存层 ,当客户端再次访问数据时,缓存层直接返回空值。还可以将数据存入<strong>布隆过滤器</strong>,访问缓存之前以过滤器拦截,若请求的数据不存在则直接返回空值。</p>
-<p><mark>缓存击穿</mark>：<strong>当一份访问量非常大的<font color="red">热点数据缓存失效的瞬间</font>,大量的请求直达存储层,导致服务崩溃</strong>。 缓存击穿可以通过<strong>热点数据不设置过期时间</strong>来解决,这样就不会出现上述的问题,这是“物理”上的永不过期。或者为每个数据<strong>设置逻辑过期时间</strong>,当发现该数据逻辑过期时,使用单独的线程重建缓存。除了永不过期的方式,我们也可以通过<strong>加互斥锁</strong>的方式来解决缓存击穿,即对数据的访问加互斥锁,当一个线程访问该数据时,其他线程只能等待。这个线程访问过后,缓存中的数据将被重建,届时其他线程就可以直接从缓存中取值。</p>
+<h2 id="5-说说缓存穿透、击穿、雪崩的区别"><a href="#5-说说缓存穿透、击穿、雪崩的区别" class="headerlink" title="5. 说说缓存穿透、击穿、雪崩的区别"></a>5. 说说缓存穿透、击穿、雪崩的区别</h2><p>得分点： 三种问题的发生原因以及解决方式 </p>
+<p><strong>标准回答</strong> </p>
+<p><mark>缓存穿透</mark>：<strong>是指客户端查询了根本<font color="red">不存在的数据</font>,使得这个请求直达存储层,导致其负载过大甚至造成宕机</strong>。这种情况可能是由于业务层误将缓存和库中的数据删除造成的,当然也不排除有人恶意攻击,专门访问库中不存在的数据导致缓存穿透。 我们可以通过缓存空对象的方式和布隆过滤器两种方式来解决这一问题。<strong>缓存空对象</strong>是指当存储层未命中后,仍然将空值存入缓存层 ,当客户端再次访问数据时,缓存层直接返回空值。还可以将数据存入<strong>布隆过滤器</strong>,访问缓存之前以过滤器拦截,若请求的数据不存在则直接返回空值。 </p>
+<p><mark>缓存击穿</mark>：<strong>当一份访问量非常大的<font color="red">热点数据缓存失效的瞬间</font>,大量的请求直达存储层,导致服务崩溃</strong>。 缓存击穿可以通过<strong>热点数据不设置过期时间</strong>来解决,这样就不会出现上述的问题,这是“物理”上的永不过期。或者为每个数据<strong>设置逻辑过期时间</strong>,当发现该数据逻辑过期时,使用单独的线程重建缓存。除了永不过期的方式,我们也可以通过<strong>加互斥锁</strong>的方式来解决缓存击穿,即对数据的访问加互斥锁,当一个线程访问该数据时,其他线程只能等待。这个线程访问过后,缓存中的数据将被重建,届时其他线程就可以直接从缓存中取值。 </p>
 <p><mark>缓存雪崩</mark>：<strong>是指当某一时刻<font color="red">缓存层无法继续提供服务</font>,导致所有的请求直达存储层,造成数据库宕机</strong>。可能是缓存中有大量数据同时过期,也可能是Redis节点发生故障,导致大量请求无法得到处理。 缓存雪崩的解决方式有三种；<strong>第一种</strong>是在设置过期时间时,附加一个随机数,避免大量的key同时过期。<strong>第二种</strong>是启用降级和熔断措施,即发生雪崩时,若应用访问的不是核心数据,则直接返回预定义信息/空值/错误信息。或者在发生雪崩时,对于访问缓存接口的请求,客户端并不会把请求发给Redis,而是直接返回。<strong>第三种</strong>是构建高可用的Redis服务,也就是采用哨兵或集群模式,部署多个Redis实例,这样即使个别节点宕机,依然可以保持服务的整体可用。</p>
-<h2 id="6-redis如何与数据库保持双写一致性"><a class="markdownIt-Anchor" href="#6-redis如何与数据库保持双写一致性"></a> 6. Redis如何与数据库保持双写一致性</h2>
-<p>得分点: 四种同步策略及其可能出现的问题,重试机制</p>
-<p><strong>标准回答 :</strong></p>
+<h2 id="6-Redis如何与数据库保持双写一致性"><a href="#6-Redis如何与数据库保持双写一致性" class="headerlink" title="6. Redis如何与数据库保持双写一致性"></a>6. Redis如何与数据库保持双写一致性</h2><p>得分点: 四种同步策略及其可能出现的问题,重试机制 </p>
+<p><strong>标准回答 :</strong> </p>
 <p>保证缓存和数据库的双写一致性,共有四种同步策略,即<strong>先更新缓存再更新数据库、先更新数据库再更新缓存、先删除缓存再更新数据库、先更新数据库再删除缓存</strong>。 <strong>先更新缓存的优点</strong>是每次数据变化时都能及时地更新缓存,这样不容易出现查询未命中的情况,但这种操作的消耗很大,如果数据需要经过复杂的计算再写入缓存的话,频繁的更新缓存会影响到服务器的性能。如果是写入数据比较频繁的场景,可能会导致频繁的更新缓存却没有业务来读取该数据。 <strong>删除缓存的优点</strong>是操作简单,无论更新的操作复杂与否,都是直接删除缓存中的数据。这种做法的缺点则是,当删除了缓存之后,下一次查询容易出现未命中的情况,那么这时就需要再次读取数据库。 那么对比而言,<strong>删除缓存无疑是更好的选择</strong>。 那么我们再来看一下先操作数据库和后操作数据库的区别；先删除缓存再操作数据库的话,如果第二步骤失败可能导致缓存和数据库得到相同的旧数据。先操作数据库但删除缓存失败的话则会导致缓存和数据库得到的结果不一致。出现上述问题的时候,我们一般采用重试机制解决,而为了避免重试机制影响主要业务的执行,一般建议重试机制采用异步的方式执行。当我们采用重试机制之后由于存在并发,先删除缓存依然可能存在缓存中存储了旧的数据,而数据库中存储了新的数据,二者数据不一致的情况。 所以我们得到结论：<strong>先更新数据库、再删除缓存是影响更小的方案</strong>。如果第二步出现失败的情况,则可以采用重试机制解决问题。</p>
-<h2 id="7-请你说说redis数据类型中的zset它和set有什么区别底层是怎么实现的"><a class="markdownIt-Anchor" href="#7-请你说说redis数据类型中的zset它和set有什么区别底层是怎么实现的"></a> 7. 请你说说Redis数据类型中的zset,它和set有什么区别？底层是怎么实现的？</h2>
-<p>得分点: 有序无序、底层结构</p>
-<p><strong>标准回答</strong></p>
+<h2 id="7-请你说说Redis数据类型中的zset-它和set有什么区别？底层是怎么实现的？"><a href="#7-请你说说Redis数据类型中的zset-它和set有什么区别？底层是怎么实现的？" class="headerlink" title="7. 请你说说Redis数据类型中的zset,它和set有什么区别？底层是怎么实现的？"></a>7. 请你说说Redis数据类型中的zset,它和set有什么区别？底层是怎么实现的？</h2><p>得分点: 有序无序、底层结构 </p>
+<p><strong>标准回答</strong> </p>
 <p>Redis 有序集合和集合一样也是 string 类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个 double 类型的分数, Redis 正是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数 ( score ) 却可以重复。</p>
-<p>集合是通过哈希表实现的,所以添加,删除,查找的复杂度都是 O(1)。集合中最大的成员数为 232 – 1 ( 4294967295 ) , 每个集合可存储 40 多亿个成员。</p>
-<p>zset底层的存储结构包括ziplist或skiplist,在同时满足有序集合保存的元素数量小于128个和有序集合保存的所有元素的长度小于64字节的时候使用ziplist,其他时候使用skiplist。 当ziplist作为zset的底层存储结构时候,每个集合元素使用两个紧挨在一起的压缩列表节点来保存,第一个节点保存元素的成员,第二个元素保存元素的分值。 当skiplist作为zset的底层存储结构的时候,使用skiplist按序保存元素及分值,使用dict来保存元素和分值的映射关系。</p>
-<p><strong>加分回答</strong></p>
+<p>集合是通过哈希表实现的,所以添加,删除,查找的复杂度都是 O(1)。集合中最大的成员数为 232 – 1 ( 4294967295 ) , 每个集合可存储 40 多亿个成员。 </p>
+<p>zset底层的存储结构包括ziplist或skiplist,在同时满足有序集合保存的元素数量小于128个和有序集合保存的所有元素的长度小于64字节的时候使用ziplist,其他时候使用skiplist。 当ziplist作为zset的底层存储结构时候,每个集合元素使用两个紧挨在一起的压缩列表节点来保存,第一个节点保存元素的成员,第二个元素保存元素的分值。 当skiplist作为zset的底层存储结构的时候,使用skiplist按序保存元素及分值,使用dict来保存元素和分值的映射关系。 </p>
+<p><strong>加分回答</strong> </p>
 <p>实际上单独使用Hashmap或skiplist也可以实现有序集合,Redis使用两种数据结构组合的原因是如果我们单独使用Hashmap,虽然能以O</p>
 <p>(1) 的时间复杂度查找成员的分值,但是因为Hashmap是以无序的方式来保存集合元素,所以每次进行范围操作的时候都要进行排序；而如果单独使用skiplist,虽然能执行范围操作,但查找操作的复杂度却由 O(1)变为了O(logN)。因此Redis使用了两种数据结构来共同实现有序集合。</p>
-<h2 id="8-说说redis的单线程架构"><a class="markdownIt-Anchor" href="#8-说说redis的单线程架构"></a> 8. 说说Redis的单线程架构</h2>
-<p>得分点:  单线程的前提,单线程的优劣,简单的io模型</p>
-<p><strong>标准回答</strong></p>
-<p>Redis的网络IO和键值对读写是由一个线程来完成的,但Redis的其他功能,例如持久化、异步删除、集群数据同步等操作依赖于其他线程来执行。单线程可以简化数据结构和算法的实现,并且可以避免线程切换和竞争造成的消耗。但要注意如果某个命令执行时间过长,会造成其他命令的阻塞。Redis采用了io多路复用机制,这带给了Redis并发处理大量客户端请求的能力。</p>
-<p>Redis单线程实现为什么这么快呢？因为对服务端程序来说,线程切换和锁通常是性能杀手,而单线程避免了线程切换和竞争所产生的消耗。另外Redis的大部分操作是在内存上完成的,这是它实现高性能的一个重要原因；Redis还采用了IO多路复用机制,使其在网络IO操作中能并发处理大量的客户端请求,实现高吞吐率。</p>
-<p><strong>加分回答</strong></p>
+<h2 id="8-说说Redis的单线程架构"><a href="#8-说说Redis的单线程架构" class="headerlink" title="8. 说说Redis的单线程架构"></a>8. 说说Redis的单线程架构</h2><p>得分点:  单线程的前提,单线程的优劣,简单的io模型 </p>
+<p><strong>标准回答</strong> </p>
+<p>Redis的网络IO和键值对读写是由一个线程来完成的,但Redis的其他功能,例如持久化、异步删除、集群数据同步等操作依赖于其他线程来执行。单线程可以简化数据结构和算法的实现,并且可以避免线程切换和竞争造成的消耗。但要注意如果某个命令执行时间过长,会造成其他命令的阻塞。Redis采用了io多路复用机制,这带给了Redis并发处理大量客户端请求的能力。 </p>
+<p>Redis单线程实现为什么这么快呢？因为对服务端程序来说,线程切换和锁通常是性能杀手,而单线程避免了线程切换和竞争所产生的消耗。另外Redis的大部分操作是在内存上完成的,这是它实现高性能的一个重要原因；Redis还采用了IO多路复用机制,使其在网络IO操作中能并发处理大量的客户端请求,实现高吞吐率。 </p>
+<p><strong>加分回答</strong> </p>
 <p>Redis的单线程主要是指Redis的网络IO和键值对读写是由一个线程来完成的。而Redis的其他功能,如持久化、异步删除、集群数据同步等,则是依赖其他线程来执行的。所以,说Redis是单线程的只是一种习惯的说法,事实上它的底层不是单线程的。</p>
-<h2 id="9-如何实现redis高可用"><a class="markdownIt-Anchor" href="#9-如何实现redis高可用"></a> 9. 如何实现Redis高可用</h2>
-<p>得分点： 哨兵模式、集群模式</p>
-<p><strong>标准回答</strong></p>
+<h2 id="9-如何实现Redis高可用"><a href="#9-如何实现Redis高可用" class="headerlink" title="9. 如何实现Redis高可用"></a>9. 如何实现Redis高可用</h2><p>得分点： 哨兵模式、集群模式 </p>
+<p><strong>标准回答</strong> </p>
 <p>主要有哨兵和集群两种方式可以实现Redis高可用。</p>
-<p><strong>哨兵</strong>： 哨兵模式是Redis的高可用的解决方案,它由一个或多个Sentinel实例组成Sentinel系统,可以监视任意多个主服务器以及这些主服务器属下的所有从服务器。当哨兵节点发现有节点不可达时,会对该节点做下线标识。如果是主节点下线,它还会和其他Sentinel节点进行“协商”,当大多数Sentinel节点都认为主节点不可达时,它们会选举出一个Sentinel节点来完成自动故障转移的工作,同时会将这个变化实时通知给Redis应用方。 哨兵节点包含如下的特征：</p>
+<p> <strong>哨兵</strong>： 哨兵模式是Redis的高可用的解决方案,它由一个或多个Sentinel实例组成Sentinel系统,可以监视任意多个主服务器以及这些主服务器属下的所有从服务器。当哨兵节点发现有节点不可达时,会对该节点做下线标识。如果是主节点下线,它还会和其他Sentinel节点进行“协商”,当大多数Sentinel节点都认为主节点不可达时,它们会选举出一个Sentinel节点来完成自动故障转移的工作,同时会将这个变化实时通知给Redis应用方。 哨兵节点包含如下的特征：</p>
 <ol>
-<li>
-<p>哨兵节点会定期监控数据节点,其他哨兵节点是否可达；</p>
+<li><p>哨兵节点会定期监控数据节点,其他哨兵节点是否可达；</p>
 </li>
-<li>
-<p>哨兵节点会将故障转移的结果通知给应用方；</p>
+<li><p>哨兵节点会将故障转移的结果通知给应用方；</p>
 </li>
-<li>
-<p>哨兵节点可以将从节点晋升为主节点,并维护后续正确的主从关系；</p>
+<li><p>哨兵节点可以将从节点晋升为主节点,并维护后续正确的主从关系；</p>
 </li>
-<li>
-<p>哨兵模式下,客户端连接的是哨兵节点集合,从中获取主节点信息；</p>
+<li><p>哨兵模式下,客户端连接的是哨兵节点集合,从中获取主节点信息；</p>
 </li>
-<li>
-<p>节点的故障判断是由多个哨兵节点共同完成的,可有效地防止误判；</p>
+<li><p>节点的故障判断是由多个哨兵节点共同完成的,可有效地防止误判；</p>
 </li>
-<li>
-<p>哨兵节点集合是由多个哨兵节点组成的,即使个别哨兵节点不可用,整个集合依然是健壮的；</p>
+<li><p>哨兵节点集合是由多个哨兵节点组成的,即使个别哨兵节点不可用,整个集合依然是健壮的；</p>
 </li>
-<li>
-<p>哨兵节点也是独立的Redis节点,是特殊的Redis节点,它们不存储数据,只支持部分命令。</p>
+<li><p>哨兵节点也是独立的Redis节点,是特殊的Redis节点,它们不存储数据,只支持部分命令。</p>
 </li>
 </ol>
 <p><strong>集群：</strong> Redis集群采用虚拟槽分区来实现数据分片,它把所有的键根据哈希函数映射到<code>0-16383</code>整数槽内,计算公式为<code>slot=CRC16(key)&amp;16383</code>,每一个节点负责维护一部分槽以及槽所映射的键值数据。虚拟槽分区具有如下特点：。</p>
 <ol>
-<li>
-<p>解耦数据和节点之间的关系,简化了节点扩容和收缩的难度；</p>
+<li><p>解耦数据和节点之间的关系,简化了节点扩容和收缩的难度；</p>
 </li>
-<li>
-<p>节点自身维护槽的映射关系,不需要客户端或者代理服务维护槽分区元数据；</p>
+<li><p>节点自身维护槽的映射关系,不需要客户端或者代理服务维护槽分区元数据；</p>
 </li>
-<li>
-<p>支持节点、槽、键之间的映射查询,用于数据路由,在线伸缩等场景。</p>
+<li><p>支持节点、槽、键之间的映射查询,用于数据路由,在线伸缩等场景。</p>
 </li>
 </ol>
-<h3 id="哨兵的作用和原理"><a class="markdownIt-Anchor" href="#哨兵的作用和原理"></a> 哨兵的作用和原理</h3>
-<p><img src="https://img-blog.csdnimg.cn/2b52c12b7a1b4d368a2b605873b82930.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/d06a5ac4f10e4b1496d454ebc1f57250.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/b76d7ce8f8314194a996d3d6f680cc6e.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/b42e0e3f92ad46efb231bcb628532d55.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/adbee544452f4d6badc1b7790bb4b2ae.png" alt="img"></p>
-<h2 id="10-说说redis的主从同步机制"><a class="markdownIt-Anchor" href="#10-说说redis的主从同步机制"></a> 10. 说说Redis的主从同步机制</h2>
-<p>得分点 ： psync,全量复制、部分复制</p>
-<p><strong>标准回答</strong></p>
+<h3 id="哨兵的作用和原理"><a href="#哨兵的作用和原理" class="headerlink" title="哨兵的作用和原理"></a>哨兵的作用和原理</h3><p><img src="https://img-blog.csdnimg.cn/2b52c12b7a1b4d368a2b605873b82930.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/d06a5ac4f10e4b1496d454ebc1f57250.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/b76d7ce8f8314194a996d3d6f680cc6e.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/b42e0e3f92ad46efb231bcb628532d55.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/adbee544452f4d6badc1b7790bb4b2ae.png" alt="img"></p>
+<h2 id="10-说说Redis的主从同步机制"><a href="#10-说说Redis的主从同步机制" class="headerlink" title="10. 说说Redis的主从同步机制"></a>10. 说说Redis的主从同步机制</h2><p>得分点 ： psync,全量复制、部分复制 </p>
+<p><strong>标准回答</strong> </p>
 <p><strong>Redis主从同步</strong>是指任意数量的从节点（slave node）都可以从主节点上（master node）同步数据。而除了多个 slave 可以连接到同一个 master 之外,slave 还可以接受其他 slave 的连接,这就形成一个树形结构,使得Redis可执行单层树复制。 从2.8版本开始,当启动一个 slave node 的时候,它会发送一个 <code>PSYNC</code> 命令给 master node。如果slave node 是第一次连接到 master node,那么会触发一次<strong>全量复制</strong>。此时 master 会启动一个后台线程,开始生成一份 <code>RDB</code> 快照文件,同时还会将从客户端 client 新收到的所有写命令缓存在内存中。<code>RDB</code> 文件生成完毕后, master 会将这个 <code>RDB</code> 发送给 slave,slave 会先写入本地磁盘,然后再从本地磁盘加载到内存中,接着 master 会将内存中缓存的写命令发送到 slave,slave 也会同步这些数据。slave node 如果跟 master node 有网络故障,断开了连接,会自动重连,连接之后 master node 仅会复制给 slave 部分缺少的数据。</p>
-<p><strong>开启主从关系</strong><br>
-要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。有临时和永久两种模式：</p>
+<p><strong>开启主从关系</strong><br>要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。有临时和永久两种模式：</p>
 <ul>
-<li>
-<p>修改配置文件（永久生效）</p>
+<li><p>修改配置文件（永久生效）</p>
 <ul>
 <li>在redis.conf中添加一行配置：<strong>slaveof <masterip> <masterport></masterport></masterip></strong></li>
 </ul>
 </li>
-<li>
-<p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
+<li><p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
 <ul>
 <li><strong>slaveof <masterip> <masterport></masterport></masterip></strong></li>
 </ul>
 </li>
 </ul>
-<p><img src="../../../images/image-20230216211538641.png" alt="image-20230216211538641"></p>
-<h3 id="数据同步原理"><a class="markdownIt-Anchor" href="#数据同步原理"></a> 数据同步原理</h3>
-<p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
+<p><img src="/../../../images/image-20230216211538641.png" alt="image-20230216211538641"></p>
+<h3 id="数据同步原理"><a href="#数据同步原理" class="headerlink" title="数据同步原理"></a>数据同步原理</h3><p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/c519a72fdc2140268b2b18c3e82df57e.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/32c36304a2ce450eaa3ecee4e3203ccd.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/5cb9aa1893bb409c8a65259d8dd094da.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png" alt="img"> </p>
+<p> <img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126649510?spm=1001.2014.3001.5501">(9条消息) （分布式缓存）Redis主从_其然乐衣的博客-CSDN博客</a></p>
-<h2 id="11-说说redis的缓存淘汰策略redis的回收策略"><a class="markdownIt-Anchor" href="#11-说说redis的缓存淘汰策略redis的回收策略"></a> 11. 说说Redis的缓存淘汰策略(Redis的回收策略)</h2>
-<p>得分点 : 惰性删除、定期删除,maxmemory-policy</p>
-<p><strong>标准回答</strong></p>
-<p>Redis有如下两种过期策略：</p>
-<p>**惰性删除：**客户端访问一个key的时候,Redis会先检查它的过期时间,如果发现过期就立刻删除这个key。</p>
-<p>**定期删除：**Redis会将设置了过期时间的key放到一个独立的字典中,并对该字典进行每秒10次的过期扫描, 过期扫描不会遍历字典中所有的key,而是采用了一种简单的贪心策略。该策略的删除逻辑如下： 1. 从过期字典中随机选择20个key； 2. 删除这20个key中已过期的key； 3. 如果已过期key的比例超过25%,则重复步骤1。 当写入数据将导致超出maxmemory限制时,Redis会采用maxmemory-policy所指定的策略进行数据淘汰,该策略一共包含8种选项,其中除了noeviction直接返回错误之外,筛选键的方式分为volatile和allkeys两种,volatile前缀代表从设置了过期时间的键中淘汰数据,allkeys前缀代表从所有的键中淘汰数据关于后缀,ttl代表选择过期时间最小的键,random代表随机选择键,需要我们额外关注的是lru和lfu后缀,它们分别代表采用lru算法和lfu算法来淘汰数据。因为allkeys是筛选所有的键,所以不存在ttl,余下三个后缀二者都有,lfu算法是再Redis4版本才提出来的。</p>
-<p><strong>加分回答</strong></p>
+<h2 id="11-说说Redis的缓存淘汰策略-Redis的回收策略"><a href="#11-说说Redis的缓存淘汰策略-Redis的回收策略" class="headerlink" title="11. 说说Redis的缓存淘汰策略(Redis的回收策略)"></a>11. 说说Redis的缓存淘汰策略(Redis的回收策略)</h2><p>得分点 : 惰性删除、定期删除,maxmemory-policy </p>
+<p><strong>标准回答</strong> </p>
+<p>Redis有如下两种过期策略： </p>
+<p><strong>惰性删除：</strong>客户端访问一个key的时候,Redis会先检查它的过期时间,如果发现过期就立刻删除这个key。 </p>
+<p><strong>定期删除：</strong>Redis会将设置了过期时间的key放到一个独立的字典中,并对该字典进行每秒10次的过期扫描, 过期扫描不会遍历字典中所有的key,而是采用了一种简单的贪心策略。该策略的删除逻辑如下： 1. 从过期字典中随机选择20个key； 2. 删除这20个key中已过期的key； 3. 如果已过期key的比例超过25%,则重复步骤1。 当写入数据将导致超出maxmemory限制时,Redis会采用maxmemory-policy所指定的策略进行数据淘汰,该策略一共包含8种选项,其中除了noeviction直接返回错误之外,筛选键的方式分为volatile和allkeys两种,volatile前缀代表从设置了过期时间的键中淘汰数据,allkeys前缀代表从所有的键中淘汰数据关于后缀,ttl代表选择过期时间最小的键,random代表随机选择键,需要我们额外关注的是lru和lfu后缀,它们分别代表采用lru算法和lfu算法来淘汰数据。因为allkeys是筛选所有的键,所以不存在ttl,余下三个后缀二者都有,lfu算法是再Redis4版本才提出来的。 </p>
+<p><strong>加分回答</strong> </p>
 <p><strong>LRU</strong>（Least Recently Used）是按照最近最少使用原则来筛选数据,即最不常用的数据会被筛选出来 - 标准LRU：把所有的数据组成一个链表,表头和表尾分别表示MRU和LRU端,即最常使用端和最少使用端。刚被访问的数据会被移动到MRU端,而新增的数据也是刚被访问的数据,也会被移动到MRU端。当链表的空间被占满时,它会删除LRU端的数据。 - 近似LRU：Redis会记录每个数据的最近一次访问的时间戳（LRU）。Redis执行写入操作时,若发现内存超出maxmemory,就会执行一次近似LRU淘汰算法。近似LRU会随机采样N个key,然后淘汰掉最旧的key,若淘汰后内存依然超出限制,则继续采样淘汰。可以通过maxmemory_samples配置项,设置近似LRU每次采样的数据个数,该配置项的默认值为5。 LRU算法的不足之处在于,若一个key很少被访问,只是刚刚偶尔被访问了一次,则它就被认为是热点数据,短时间内不会被淘汰。 <strong>LFU</strong>算法正式用于解决上述问题,LFU（Least Frequently Used）是Redis4新增的淘汰策略,它根据key的最近访问频率进行淘汰。LFU在LRU的基础上,为每个数据增加了一个计数器,来统计这个数据的访问次数。当使用LFU策略淘汰数据时,首先会根据数据的访问次数进行筛选,把访问次数最低的数据淘汰出内存。如果两个数据的访问次数相同,LFU再比较这两个数据的访问时间,把访问时间更早的数据淘汰出内存。</p>
-<h3 id="redis的回收策略"><a class="markdownIt-Anchor" href="#redis的回收策略"></a> <strong>Redis的回收策略</strong></h3>
-<blockquote>
-<p>volatile-lru：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰<br>
-volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰<br>
-volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰<br>
-allkeys-lru：从数据集（server.db[i].dict）中挑选最近最少使用的数据淘汰<br>
-allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰<br>
-no-enviction（驱逐）：禁止驱逐数据<br>
-注意这里的6种机制，volatile和allkeys规定了是对已设置过期时间的数据集淘汰数据还是从全部数据集淘汰数据，后面的lru、ttl以及random是三种不同的淘汰策略，再加上一种no-enviction永不回收的策略。<br>
-使用策略规则：<br>
-1、如果数据呈现幂律分布，也就是一部分数据访问频率高，一部分数据访问频率低，则使用allkeys-lru<br>
-2、如果数据呈现平等分布，也就是所有的数据访问频率都相同，则使用allkeys-random</p>
+<h3 id="Redis的回收策略"><a href="#Redis的回收策略" class="headerlink" title="Redis的回收策略"></a><strong>Redis的回收策略</strong></h3><blockquote>
+<p>volatile-lru：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰<br>volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰<br>volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰<br>allkeys-lru：从数据集（server.db[i].dict）中挑选最近最少使用的数据淘汰<br>allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰<br>no-enviction（驱逐）：禁止驱逐数据<br>注意这里的6种机制，volatile和allkeys规定了是对已设置过期时间的数据集淘汰数据还是从全部数据集淘汰数据，后面的lru、ttl以及random是三种不同的淘汰策略，再加上一种no-enviction永不回收的策略。<br>使用策略规则：<br>1、如果数据呈现幂律分布，也就是一部分数据访问频率高，一部分数据访问频率低，则使用allkeys-lru<br>2、如果数据呈现平等分布，也就是所有的数据访问频率都相同，则使用allkeys-random</p>
 </blockquote>
-<h2 id="12-使用redis有哪些好处"><a class="markdownIt-Anchor" href="#12-使用redis有哪些好处"></a> 12. 使用Redis有哪些好处？</h2>
-<p>(1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)<br>
-(2) 支持丰富数据类型，支持string，list，set，zset，hash<br>
-(3) 支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行<br>
-(4) 丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除</p>
-<h2 id="13-redis的缺点"><a class="markdownIt-Anchor" href="#13-redis的缺点"></a> 13. Redis的缺点</h2>
-<ol>
+<h2 id="12-使用Redis有哪些好处？"><a href="#12-使用Redis有哪些好处？" class="headerlink" title="12. 使用Redis有哪些好处？"></a>12. 使用Redis有哪些好处？</h2><p>(1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)<br>(2) 支持丰富数据类型，支持string，list，set，zset，hash<br>(3) 支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行<br>(4) 丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除</p>
+<h2 id="13-Redis的缺点"><a href="#13-Redis的缺点" class="headerlink" title="13. Redis的缺点"></a>13. Redis的缺点</h2><ol>
 <li>不保证数据的可靠性,数据有可能在宕机情况会丢失少部分数据.不能保持数据库和缓存的一致性,如果需要保持一致性,需要付出一定性能代价(加锁串行)</li>
 <li>单线程操作，无法利用多核CPU的优势</li>
 <li>如果进行完整重同步，由于需要生成rdb文件，并进行传输，会占用主机的CPU，并会消耗现网的带宽。不过redis2.8版本以后，已经有部分重同步的功能，但是还是有可能有完整重同步的。比如，新上线的从库。</li>
 </ol>
-<h2 id="14-redis相比memcached有哪些优势"><a class="markdownIt-Anchor" href="#14-redis相比memcached有哪些优势"></a> 14. Redis相比memcached有哪些优势？</h2>
-<p>(1) memcached所有的值均是简单的字符串，redis作为其替代者，支持更为丰富的数据类型<br>
-(2) redis的速度比memcached快很多<br>
-(3) redis可以持久化其数据<br>
-(4) redis支持数据的备份，即master-slave模式的数据备份。<br>
-(5) 使用底层模型不同，它们之间底层实现方式 以及与客户端之间通信的应用协议不一样。Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求。<br>
-(6）value大小：redis最大可以达到1GB，而memcache只有1MB</p>
+<h2 id="14-Redis相比memcached有哪些优势？"><a href="#14-Redis相比memcached有哪些优势？" class="headerlink" title="14. Redis相比memcached有哪些优势？"></a>14. Redis相比memcached有哪些优势？</h2><p>(1) memcached所有的值均是简单的字符串，redis作为其替代者，支持更为丰富的数据类型<br>(2) redis的速度比memcached快很多<br>(3) redis可以持久化其数据<br>(4) redis支持数据的备份，即master-slave模式的数据备份。<br>(5) 使用底层模型不同，它们之间底层实现方式 以及与客户端之间通信的应用协议不一样。Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求。<br>(6）value大小：redis最大可以达到1GB，而memcache只有1MB</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/14/interview/redis/Redis/" data-id="cliivd19400blgcv6ggwi4xaf" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/14/interview/redis/Redis/" data-id="cliivgvmk00c37sv6hvfl0qlc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>

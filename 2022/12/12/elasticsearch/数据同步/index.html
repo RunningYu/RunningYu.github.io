@@ -5,23 +5,23 @@
   
   <title>数据同步 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="方案一：同步调用  如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。  方案二：异步通知  利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。  方案三：监听binlog   总结：">
+  <meta name="description" content="方案一：同步调用 如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。 方案二：异步通知 利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。 方案三：监听binlog 总结：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据同步">
 <meta property="og:url" content="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="方案一：同步调用  如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。  方案二：异步通知  利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。  方案三：监听binlog   总结：">
+<meta property="og:description" content="方案一：同步调用 如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。 方案二：异步通知 利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。 方案三：监听binlog 总结：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/12/12/images/image-20221212170758302.png">
-<meta property="og:image" content="http://example.com/2022/12/12/images/image-20221212171310763.png">
-<meta property="og:image" content="http://example.com/2022/12/12/images/image-20221212171812077.png">
-<meta property="og:image" content="http://example.com/2022/12/12/images/image-20221212171713573.png">
+<meta property="og:image" content="http://example.com/images/image-20221212170758302.png">
+<meta property="og:image" content="http://example.com/images/image-20221212171310763.png">
+<meta property="og:image" content="http://example.com/images/image-20221212171812077.png">
+<meta property="og:image" content="http://example.com/images/image-20221212171713573.png">
 <meta property="article:published_time" content="2022-12-12T09:06:59.689Z">
 <meta property="article:modified_time" content="2022-12-12T09:18:51.554Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="Elasticsearch">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/12/12/images/image-20221212170758302.png">
+<meta name="twitter:image" content="http://example.com/images/image-20221212170758302.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -121,21 +121,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="方案一同步调用"><a class="markdownIt-Anchor" href="#方案一同步调用"></a> 方案一：同步调用</h3>
-<p><img src="../../images/image-20221212170758302.png" alt="image-20221212170758302"></p>
+        <h3 id="方案一：同步调用"><a href="#方案一：同步调用" class="headerlink" title="方案一：同步调用"></a>方案一：同步调用</h3><p><img src="/../../images/image-20221212170758302.png" alt="image-20221212170758302"></p>
 <p>如果用上面这种同步调用方法的话，就会把业务代码形成耦合，业务耦合必定会影响性能。上面一次新增酒店的总耗时就相当于三个步骤的总耗时，显然这样时间会比较长，而且如果有其中的步骤出异常，那么新增酒店这整个业务就出问题了。这就是耦合带来的问题。</p>
-<h3 id="方案二异步通知"><a class="markdownIt-Anchor" href="#方案二异步通知"></a> 方案二：异步通知</h3>
-<p><img src="../../images/image-20221212171310763.png" alt="image-20221212171310763"></p>
+<h3 id="方案二：异步通知"><a href="#方案二：异步通知" class="headerlink" title="方案二：异步通知"></a>方案二：异步通知</h3><p><img src="/../../images/image-20221212171310763.png" alt="image-20221212171310763"></p>
 <p>利用MQ进行异步通知，解出耦合，提高性能。但这种方案比较依靠MQ的可靠性。</p>
-<h3 id="方案三监听binlog"><a class="markdownIt-Anchor" href="#方案三监听binlog"></a> 方案三：监听binlog</h3>
-<p><img src="../../images/image-20221212171812077.png" alt="image-20221212171812077"></p>
-<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结：</h3>
-<p><img src="../../images/image-20221212171713573.png" alt="image-20221212171713573"></p>
+<h3 id="方案三：监听binlog"><a href="#方案三：监听binlog" class="headerlink" title="方案三：监听binlog"></a>方案三：监听binlog</h3><p><img src="/../../images/image-20221212171812077.png" alt="image-20221212171812077"></p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p><img src="/../../images/image-20221212171713573.png" alt="image-20221212171713573"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="cliivd0xk002wgcv636bwhkhh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/12/12/elasticsearch/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/" data-id="cliivgvbm003s7sv6dmtcbwo6" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>

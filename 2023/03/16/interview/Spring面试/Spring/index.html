@@ -5,12 +5,12 @@
   
   <title>Spring摘要记录 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spring中Controlle单例  controller默认是单例的，不要使用非静态的成员变量，否则会发生数据逻辑混乱。 正因为单例所以不是线程安全的。  我们下面来简单的验证下： 12345678910111213141516171819202122package com.riemann.springbootdemo.controller;import org.springframewor">
+  <meta name="description" content="Spring中Controlle单例 controller默认是单例的，不要使用非静态的成员变量，否则会发生数据逻辑混乱。 正因为单例所以不是线程安全的。  我们下面来简单的验证下： 12345678910111213141516171819202122package com.riemann.springbootdemo.controller;import org.springframework.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring摘要记录">
 <meta property="og:url" content="http://example.com/2023/03/16/interview/Spring%E9%9D%A2%E8%AF%95/Spring/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="Spring中Controlle单例  controller默认是单例的，不要使用非静态的成员变量，否则会发生数据逻辑混乱。 正因为单例所以不是线程安全的。  我们下面来简单的验证下： 12345678910111213141516171819202122package com.riemann.springbootdemo.controller;import org.springframewor">
+<meta property="og:description" content="Spring中Controlle单例 controller默认是单例的，不要使用非静态的成员变量，否则会发生数据逻辑混乱。 正因为单例所以不是线程安全的。  我们下面来简单的验证下： 12345678910111213141516171819202122package com.riemann.springbootdemo.controller;import org.springframework.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-16T14:30:14.984Z">
 <meta property="article:modified_time" content="2023-06-05T13:06:20.231Z">
@@ -117,12 +117,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="spring中controlle单例"><a class="markdownIt-Anchor" href="#spring中controlle单例"></a> Spring中Controlle单例</h1>
-<ul>
+        <h1 id="Spring中Controlle单例"><a href="#Spring中Controlle单例" class="headerlink" title="Spring中Controlle单例"></a>Spring中Controlle单例</h1><ul>
 <li>controller默认是单例的，不要使用非静态的成员变量，否则会发生数据逻辑混乱。 正因为单例所以不是线程安全的。</li>
 </ul>
 <p>我们下面来简单的验证下：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.riemann.springbootdemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Scope;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ScopeTestController</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping("/testScope")</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testScope</span><span class="params">()</span> {</span><br><span class="line">        System.out.println(++num);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping("/testScope2")</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testScope2</span><span class="params">()</span> {</span><br><span class="line">        System.out.println(++num);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <ul>
 <li>我们首先访问 <a target="_blank" rel="noopener" href="http://localhost:8080/testScope%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E7%AD%94%E6%A1%88%E6%98%AF1%EF%BC%9B">http://localhost:8080/testScope，得到的答案是1；</a></li>
 <li>然后我们再访问<a target="_blank" rel="noopener" href="http://localhost:8080/testScope2%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E7%AD%94%E6%A1%88%E6%98%AF">http://localhost:8080/testScope2，得到的答案是</a> 2。</li>
@@ -130,6 +130,7 @@
 <p><strong>得到的不同的值，这是线程不安全的。</strong></p>
 <p>接下来我们再来给controller增加作用多例 <mark>@Scope(“prototype”)</mark></p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.riemann.springbootdemo.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Scope;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@Scope("prototype")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ScopeTestController</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping("/testScope")</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testScope</span><span class="params">()</span> {</span><br><span class="line">        System.out.println(++num);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping("/testScope2")</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testScope2</span><span class="params">()</span> {</span><br><span class="line">        System.out.println(++num);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <ul>
 <li>我们依旧首先访问 <a target="_blank" rel="noopener" href="http://localhost:8080/testScope%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E7%AD%94%E6%A1%88%E6%98%AF1%EF%BC%9B">http://localhost:8080/testScope，得到的答案是1；</a></li>
 <li>然后我们再访问 <a target="_blank" rel="noopener" href="http://localhost:8080/testScope2%EF%BC%8C%E5%BE%97%E5%88%B0%E7%9A%84%E7%AD%94%E6%A1%88%E8%BF%98%E6%98%AF">http://localhost:8080/testScope2，得到的答案还是</a> 1。</li>
@@ -145,20 +146,14 @@
 <p><font color="red">Spring MVC默认是单例模式，Controller、Service、Dao都是单例</font>所以在使用不当存在一定的安全隐患。Controller单例模式的好处在与：</p>
 <ul>
 <li>提高性能，不用每次创建Controller实例，减少了对象创建和垃圾收集的时间</li>
-<li>没多例的必要，由于只有一个Controller的实例，当多个线程同时调用它的时候，它的成员变量就不是线程安全的。<br>
-当然在大多数情况下，<strong>我们根本不需要Controller考虑线程安全的问题，除非在类中声明了<mark>成员变量</mark></strong>。因此Spring MVC的Contrller在编码时，尽量避免使用实例变量。如果一定要使用实例变量，则可以改用以下方式：<br>
-Controller中声明 scope=”prototype”，即设置为多例模式<br>
-在Controller中使用ThreadLocal变量,如：private ThreadLocal count = new ThreadLocal();</li>
+<li>没多例的必要，由于只有一个Controller的实例，当多个线程同时调用它的时候，它的成员变量就不是线程安全的。<br>当然在大多数情况下，**我们根本不需要Controller考虑线程安全的问题，除非在类中声明了<mark>成员变量</mark>**。因此Spring MVC的Contrller在编码时，尽量避免使用实例变量。如果一定要使用实例变量，则可以改用以下方式：<br>Controller中声明 scope=”prototype”，即设置为多例模式<br>在Controller中使用ThreadLocal变量,如：private ThreadLocal count = new ThreadLocal();</li>
 </ul>
-<h1 id="springmvc-singleton有几种解决方法"><a class="markdownIt-Anchor" href="#springmvc-singleton有几种解决方法"></a> springmvc singleton有几种解决方法：</h1>
-<p>1、在控制器中不使用实例变量（可以使用方法参数的形式解决，参考博文 Spring Bean Scope 有状态的Bean 无状态的Bean）<br>
-2、将控制器的作用域从单例改为原型，即在spring配置文件Controller中声明 <font color="blue"><strong>scope=“prototype”</strong></font>，每次都创建新的controller<br>
-3、在Controller中使用<font color="blue"><strong>ThreadLocal</strong></font>变量</p>
+<h1 id="springmvc-singleton有几种解决方法："><a href="#springmvc-singleton有几种解决方法：" class="headerlink" title="springmvc singleton有几种解决方法："></a>springmvc singleton有几种解决方法：</h1><p>1、在控制器中不使用实例变量（可以使用方法参数的形式解决，参考博文 Spring Bean Scope 有状态的Bean 无状态的Bean）<br>2、将控制器的作用域从单例改为原型，即在spring配置文件Controller中声明 <font color="blue"><strong>scope=“prototype”</strong></font>，每次都创建新的controller<br>3、在Controller中使用<font color="blue"><strong>ThreadLocal</strong></font>变量</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/16/interview/Spring%E9%9D%A2%E8%AF%95/Spring/" data-id="cliivd19f00btgcv68pxuezdx" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/16/interview/Spring%E9%9D%A2%E8%AF%95/Spring/" data-id="cliivgvlw00bl7sv6ed16dcf7" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
