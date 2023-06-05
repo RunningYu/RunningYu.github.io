@@ -5,18 +5,18 @@
   
   <title>nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="（本博文的方法对于阿里云和腾讯与服务器都适用 ） 场景： 部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下：  1java -jar climate-0.0.1-SNAPSHOT.jar    上图表示项目部署成功，便可以在浏览器上进行访问 但是关闭终端后，就不能访问了，也就达不到上线的效果。 而我们想项目程序在关闭退出终端后，也一样继">
+  <meta name="description" content="（本博文的方法对于阿里云和腾讯与服务器都适用 ） 场景： 部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： 1java -jar climate-0.0.1-SNAPSHOT.jar  上图表示项目部署成功，便可以在浏览器上进行访问 但是关闭终端后，就不能访问了，也就达不到上线的效果。 而我们想项目程序在关闭退出终端后，也一样继续运行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nohup命令让服务器上的程序在后台一直运行，退出终端也可以保持程序运行">
 <meta property="og:url" content="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="（本博文的方法对于阿里云和腾讯与服务器都适用 ） 场景： 部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下：  1java -jar climate-0.0.1-SNAPSHOT.jar    上图表示项目部署成功，便可以在浏览器上进行访问 但是关闭终端后，就不能访问了，也就达不到上线的效果。 而我们想项目程序在关闭退出终端后，也一样继">
+<meta property="og:description" content="（本博文的方法对于阿里云和腾讯与服务器都适用 ） 场景： 部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： 1java -jar climate-0.0.1-SNAPSHOT.jar  上图表示项目部署成功，便可以在浏览器上进行访问 但是关闭终端后，就不能访问了，也就达不到上线的效果。 而我们想项目程序在关闭退出终端后，也一样继续运行">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="og:image" content="http://example.com/images/image-20230430132617648.png">
+<meta property="og:image" content="http://example.com/2022/11/08/images/image-20230430132617648.png">
 <meta property="article:published_time" content="2022-11-08T02:42:30.851Z">
 <meta property="article:modified_time" content="2023-05-28T15:26:15.550Z">
 <meta property="article:author" content="其然乐衣">
@@ -125,57 +125,44 @@
       
         <p><strong>（本博文的方法对于阿里云和腾讯与服务器都适用 ）</strong></p>
 <p><strong>场景：</strong></p>
-<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下： </p>
+<p>部署一个后端程序（climate-0.0.1-SNAPSHOT.jar）到我腾讯云的服务器上，常规启动命令如下：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/812888ca0a09465b93439f5340381300~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 <p>上图表示项目部署成功，便可以在浏览器上进行访问</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image">但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d91c267b89cf408c878ad9251d38dc0e~tplv-k3u1fbpfcp-zoom-1.image" alt="">但是关闭终端后，就不能访问了，也就达不到上线的效果。</p>
 <p>而我们想项目程序在关闭退出终端后，也一样继续运行，</p>
 <p>这时候需要使用 <strong>nohup</strong> 命令启动（该命令可以在你退出帐户/关闭终端之后继续运行相应的进程）</p>
 <p><strong>输入如下命令：</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p> 但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>但是会报错（表示：执行nohup命令的时候，经常会没有写入权限的错误）</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a6b49d58086a4b30b43a7a9a3252bc3e~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 <p><strong>1、原因</strong></p>
 <p>是因为使用 nohup 会产生日志文件，默认写入到 nohup.out</p>
 <p><strong>2、解决</strong></p>
 <p>将 nohup 的日志输出到 /dev/null，这个目录会让所有到它这的信息自动消失</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &gt; /dev/null 2&gt; /dev/null &amp;</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><strong>其它解决方法：</strong><br>就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f75f1cf0fbc344d9834b1d36075e0c17~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><strong>其它解决方法：</strong><br>
+就是在末尾直接加一个&amp;就就能够直接在后台运行</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar climate-0.0.1-SNAPSHOT.jar &amp; </span><br></pre></td></tr></tbody></table></figure>
-
 <p><strong>停止进程</strong></p>
 <p>如果想停止进程运行的话，可通过命令（kill -9 进程号PID）进程号来杀死</p>
 <p>另外也可以使用 ps -def | grep “进程名” 命令来查找PID。</p>
 <p>找到 PID 后，就可以使用 kill PID 来删除。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9  进程号PID</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-
 <p><em><strong>*如果发现启动时，查看日志发现端口号被占了*</strong></em></p>
 <p>用 <em><strong>*lsof -i:[端口号]*</strong></em> 查看使用某端口的进程</p>
 <figure class="highlight less"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">lsof</span> <span class="selector-tag">-i</span>:<span class="selector-attr">[端口号]</span> </span><br></pre></td></tr></tbody></table></figure>
-
 <p>然后使用kill杀掉进城后再启动</p>
 <p>终止后台运行的进程</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9  进程号PID</span><br></pre></td></tr></tbody></table></figure>
-
 <p>比如：发现 6868 端口被占用了</p>
-<p><img src="/../../images/image-20230430132617648.png" alt="image-20230430132617648"></p>
+<p><img src="../../images/image-20230430132617648.png" alt="image-20230430132617648"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="cliiv9krq005v3kv6e7134039" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/08/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/nohup%E5%91%BD%E4%BB%A4%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%9C%A8%E5%90%8E%E5%8F%B0%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%EF%BC%8C%E9%80%80%E5%87%BA%E7%BB%88%E7%AB%AF%E4%B9%9F%E5%8F%AF%E4%BB%A5%E4%BF%9D%E6%8C%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C/" data-id="cliivd11t005lgcv615jy59qe" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">云服务器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
