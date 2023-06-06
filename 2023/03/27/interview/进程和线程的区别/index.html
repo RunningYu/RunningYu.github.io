@@ -5,12 +5,12 @@
   
   <title>进程和线程的区别 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="进程和线程进程一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。  线程进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。 与进程不同的是同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和">
+  <meta name="description" content="进程和线程  进程 一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。   线程 进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。 与进程不同的是同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程和线程的区别">
 <meta property="og:url" content="http://example.com/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="进程和线程进程一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。  线程进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。 与进程不同的是同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和">
+<meta property="og:description" content="进程和线程  进程 一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。   线程 进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。 与进程不同的是同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0pvdXJXb24vaW1hZ2UvbWFzdGVyL0phdmElRTUlQjklQjYlRTUlOEYlOTElRTclQkMlOTYlRTclQTglOEItJUU1JTlGJUJBJUU3JUExJTgwJUU3JTlGJUE1JUU4JUFGJTg2LyVFNCVCQiVCQiVFNSU4QSVBMSVFNyVBRSVBMSVFNyU5MCU4NiVFNSU5OSVBOC5wbmc?x-oss-process=image/format,png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191105205545651.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70">
@@ -120,61 +120,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。</p>
+        <h1 id="进程和线程"><a class="markdownIt-Anchor" href="#进程和线程"></a> 进程和线程</h1>
+<h2 id="进程"><a class="markdownIt-Anchor" href="#进程"></a> 进程</h2>
+<p>一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0pvdXJXb24vaW1hZ2UvbWFzdGVyL0phdmElRTUlQjklQjYlRTUlOEYlOTElRTclQkMlOTYlRTclQTglOEItJUU1JTlGJUJBJUU3JUExJTgwJUU3JTlGJUE1JUU4JUFGJTg2LyVFNCVCQiVCQiVFNSU4QSVBMSVFNyVBRSVBMSVFNyU5MCU4NiVFNSU5OSVBOC5wbmc?x-oss-process=image/format,png" alt="任务管理器"></p>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。</p>
+<h2 id="线程"><a class="markdownIt-Anchor" href="#线程"></a> 线程</h2>
+<p>进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。</p>
 <p>与进程不同的是同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
 <p>Java 程序天生就是多线程程序，我们可以通过 JMX 来看一下一个普通的 Java 程序有哪些线程，代码如下。</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiThread</span> {</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">		<span class="comment">// 获取 Java 线程管理 MXBean</span></span><br><span class="line">		<span class="type">ThreadMXBean</span> <span class="variable">threadMXBean</span> <span class="operator">=</span> ManagementFactory.getThreadMXBean();</span><br><span class="line">		<span class="comment">// 不需要获取同步的 monitor 和 synchronizer 信息，仅获取线程和线程堆栈信息</span></span><br><span class="line">		ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(<span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">		<span class="comment">// 遍历线程信息，仅打印线程 ID 和线程名称信息</span></span><br><span class="line">		<span class="keyword">for</span> (ThreadInfo threadInfo : threadInfos) {</span><br><span class="line">			System.out.println(<span class="string">"["</span> + threadInfo.getThreadId() + <span class="string">"] "</span> + threadInfo.getThreadName());</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <p>上述程序输出如下（输出内容可能不同，不用太纠结下面每个线程的作用，只用知道 main 线程执行 main 方法即可）：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[6] Monitor Ctrl-Break //监听线程转储或“线程堆栈跟踪”的线程</span><br><span class="line">[5] Attach Listener //负责接收到外部的命令，而对该命令进行执行的并且把结果返回给发送者</span><br><span class="line">[4] Signal Dispatcher // 分发处理给 JVM 信号的线程</span><br><span class="line">[3] Finalizer //在垃圾收集前，调用对象 finalize 方法的线程</span><br><span class="line">[2] Reference Handler //用于处理引用对象本身（软引用、弱引用、虚引用）的垃圾回收的线程</span><br><span class="line">[1] main //main 线程,程序入口</span><br></pre></td></tr></tbody></table></figure>
-
 <p>从上面的输出内容可以看出：一个 Java 程序的运行是 main 线程和多个其他线程同时运行。</p>
-<h2 id="进程与线程的区别总结"><a href="#进程与线程的区别总结" class="headerlink" title="进程与线程的区别总结"></a>进程与线程的区别总结</h2><p>线程具有许多传统进程所具有的特征，故又称为轻型进程(Light—Weight Process)或进程元；而把传统的进程称为重型进程(Heavy—Weight Process)，它相当于只有一个线程的任务。在引入了线程的操作系统中，通常一个进程都有若干个线程，至少包含一个线程。</p>
+<h2 id="进程与线程的区别总结"><a class="markdownIt-Anchor" href="#进程与线程的区别总结"></a> 进程与线程的区别总结</h2>
+<p>线程具有许多传统进程所具有的特征，故又称为轻型进程(Light—Weight Process)或进程元；而把传统的进程称为重型进程(Heavy—Weight Process)，它相当于只有一个线程的任务。在引入了线程的操作系统中，通常一个进程都有若干个线程，至少包含一个线程。</p>
 <ul>
-<li><p><strong>根本区别：</strong>进程是操作系统资源分配的基本单位，而线程是处理器任务调度和执行的基本单位</p>
+<li>
+<p>**根本区别：**进程是操作系统资源分配的基本单位，而线程是处理器任务调度和执行的基本单位</p>
 </li>
-<li><p><strong>资源开销</strong>：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p>
+<li>
+<p><strong>资源开销</strong>：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p>
 </li>
-<li><p><strong>包含关系：</strong>如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p>
+<li>
+<p>**包含关系：**如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p>
 </li>
-<li><p><strong>内存分配：</strong>同一进程的线程共享本进程的地址空间和资源，而进程之间的地址空间和资源是相互独立的</p>
+<li>
+<p>**内存分配：**同一进程的线程共享本进程的地址空间和资源，而进程之间的地址空间和资源是相互独立的</p>
 </li>
-<li><p><strong>影响关系：</strong>一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮。</p>
+<li>
+<p>**影响关系：**一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮。</p>
 </li>
-<li><p><strong>执行过程：</strong>每个独立的进程有程序运行的入口、顺序执行序列和程序出口。但是线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</p>
+<li>
+<p>**执行过程：**每个独立的进程有程序运行的入口、顺序执行序列和程序出口。但是线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</p>
 </li>
 </ul>
-<h2 id="从-JVM-角度说进程和线程之间的关系（重要）"><a href="#从-JVM-角度说进程和线程之间的关系（重要）" class="headerlink" title="从 JVM 角度说进程和线程之间的关系（重要）"></a>从 JVM 角度说进程和线程之间的关系（重要）</h2><h3 id="图解进程和线程的关系"><a href="#图解进程和线程的关系" class="headerlink" title="图解进程和线程的关系"></a>图解进程和线程的关系</h3><p>下图是 Java 内存区域，通过下图我们从 JVM 的角度来说一下线程和进程之间的关系。</p>
+<h2 id="从-jvm-角度说进程和线程之间的关系重要"><a class="markdownIt-Anchor" href="#从-jvm-角度说进程和线程之间的关系重要"></a> 从 JVM 角度说进程和线程之间的关系（重要）</h2>
+<h3 id="图解进程和线程的关系"><a class="markdownIt-Anchor" href="#图解进程和线程的关系"></a> 图解进程和线程的关系</h3>
+<p>下图是 Java 内存区域，通过下图我们从 JVM 的角度来说一下线程和进程之间的关系。</p>
 <p><img src="https://img-blog.csdnimg.cn/20191105205545651.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的堆和方法区 (JDK1.8 之后的元空间)资源，但是每个线程有自己的程序计数器、虚拟机栈 和 本地方法栈。</p>
-<h2 id="程序计数器为什么是私有的"><a href="#程序计数器为什么是私有的" class="headerlink" title="程序计数器为什么是私有的?"></a>程序计数器为什么是私有的?</h2><p>程序计数器主要有下面两个作用：</p>
+<h2 id="程序计数器为什么是私有的"><a class="markdownIt-Anchor" href="#程序计数器为什么是私有的"></a> 程序计数器为什么是私有的?</h2>
+<p>程序计数器主要有下面两个作用：</p>
 <ol>
 <li>字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制，如：顺序执行、选择、循环、异常处理。</li>
 <li>在多线程的情况下，程序计数器用于记录当前线程执行的位置，从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了。</li>
 </ol>
 <p>需要注意的是，如果执行的是 native 方法，那么程序计数器记录的是 undefined 地址，只有执行的是 Java 代码时程序计数器记录的才是下一条指令的地址。</p>
 <p>所以，程序计数器私有主要是为了线程切换后能恢复到正确的执行位置。</p>
-<h3 id="虚拟机栈和本地方法栈为什么是私有的"><a href="#虚拟机栈和本地方法栈为什么是私有的" class="headerlink" title="虚拟机栈和本地方法栈为什么是私有的?"></a>虚拟机栈和本地方法栈为什么是私有的?</h3><ul>
-<li><strong>虚拟机栈：</strong>每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表、操作数栈、常量池引用等信息。从方法调用直至执行完成的过程，就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。</li>
-<li><strong>本地方法栈：</strong>和虚拟机栈所发挥的作用非常相似，区别是： 虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务。 在 HotSpot 虚拟机中和 Java 虚拟机栈合二为一。<br>所以，为了保证线程中的局部变量不被别的线程访问到，虚拟机栈和本地方法栈是线程私有的。</li>
+<h3 id="虚拟机栈和本地方法栈为什么是私有的"><a class="markdownIt-Anchor" href="#虚拟机栈和本地方法栈为什么是私有的"></a> 虚拟机栈和本地方法栈为什么是私有的?</h3>
+<ul>
+<li>**虚拟机栈：**每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表、操作数栈、常量池引用等信息。从方法调用直至执行完成的过程，就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。</li>
+<li>**本地方法栈：**和虚拟机栈所发挥的作用非常相似，区别是： 虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务。 在 HotSpot 虚拟机中和 Java 虚拟机栈合二为一。<br>
+所以，为了保证线程中的局部变量不被别的线程访问到，虚拟机栈和本地方法栈是线程私有的。</li>
 </ul>
-<h2 id="一句话简单了解堆和方法区"><a href="#一句话简单了解堆和方法区" class="headerlink" title="一句话简单了解堆和方法区"></a>一句话简单了解堆和方法区</h2><p>堆和方法区是所有线程共享的资源，其中堆是进程中最大的一块内存，主要用于存放新创建的对象 (所有对象都在这里分配内存)，方法区主要用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
-<h2 id="多进程和多线程区别"><a href="#多进程和多线程区别" class="headerlink" title="多进程和多线程区别"></a>多进程和多线程区别</h2><p>多进程：操作系统中同时运行的多个程序</p>
+<h2 id="一句话简单了解堆和方法区"><a class="markdownIt-Anchor" href="#一句话简单了解堆和方法区"></a> 一句话简单了解堆和方法区</h2>
+<p>堆和方法区是所有线程共享的资源，其中堆是进程中最大的一块内存，主要用于存放新创建的对象 (所有对象都在这里分配内存)，方法区主要用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<h2 id="多进程和多线程区别"><a class="markdownIt-Anchor" href="#多进程和多线程区别"></a> 多进程和多线程区别</h2>
+<p>多进程：操作系统中同时运行的多个程序</p>
 <p>多线程：在同一个进程中同时运行的多个任务</p>
 <p>举个例子，多线程下载软件，可以同时运行多个线程，但是通过程序运行的结果发现，每一次结果都不一致。 因为多线程存在一个特性：随机性。造成的原因：CPU在瞬间不断切换去处理各个线程而导致的，可以理解成多个线程在抢CPU资源。</p>
 <p>多线程提高CPU使用率</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0pvdXJXb24vaW1hZ2UvbWFzdGVyL0phdmElRTUlQjklQjYlRTUlOEYlOTElRTclQkMlOTYlRTclQTglOEItJUU1JTlGJUJBJUU3JUExJTgwJUU3JTlGJUE1JUU4JUFGJTg2LyVFNSVBNCU5QSVFNyVCQSVCRiVFNyVBOCU4Qi5wbmc?x-oss-process=image/format,png" alt="多线程"></p>
 <p>多线程并不能提高运行速度，但可以提高运行效率，让CPU的使用率更高。但是如果多线程有安全问题或出现频繁的上下文切换时，运算速度可能反而更低。</p>
-<h2 id="Java中的多线程"><a href="#Java中的多线程" class="headerlink" title="Java中的多线程"></a>Java中的多线程</h2><p>Java程序的进程里有几个线程：主线程，垃圾回收线程(后台线程)等</p>
+<h2 id="java中的多线程"><a class="markdownIt-Anchor" href="#java中的多线程"></a> Java中的多线程</h2>
+<p>Java程序的进程里有几个线程：主线程，垃圾回收线程(后台线程)等</p>
 <p>在 Java 中，当我们启动 main 函数时其实就是启动了一个 JVM 的进程，而 main 函数所在的线程就是这个进程中的一个线程，也称主线程。</p>
 <p>Java支持多线程，当Java程序执行main方法的时候，就是在执行一个名字叫做main的线程，可以在main方法执行时，开启多个线程A,B,C，多个线程 main,A,B,C同时执行，相互抢夺CPU，Thread类是java.lang包下的一个常用类,每一个Thread类的对象，就代表一个处于某种状态的线程</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="clij4oqwc0057scv6ho9k8cx8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="clik98ocq002vh4v6eapqaelv" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>

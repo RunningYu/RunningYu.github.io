@@ -5,38 +5,38 @@
   
   <title>Feign的介绍和使用 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、Feign介绍和简单基本使用流程  ​		 Feign是一种负载均衡的HTTP客户端, 使用Feign调用API就像调用本地方法一样，从避免了调用目标微服务时，需要不断的解析&#x2F;封装json 数据的繁琐。Feign集成了Ribbon。Ribbon+eureka是面向微服务编程，而Feign是面向接口编程。      Fegin是一个声明似的web服务客户端，它使得编写web服务客户端变得更加容易">
+  <meta name="description" content="一、Feign介绍和简单基本使用流程   ​		 Feign是一种负载均衡的HTTP客户端, 使用Feign调用API就像调用本地方法一样，从避免了调用目标微服务时，需要不断的解析&#x2F;封装json 数据的繁琐。Feign集成了Ribbon。Ribbon+eureka是面向微服务编程，而Feign是面向接口编程。 	Fegin是一个声明似的web服务客户端，它使得编写web服务客户端变得更加容易。使">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Feign的介绍和使用">
 <meta property="og:url" content="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign/Feign%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="一、Feign介绍和简单基本使用流程  ​		 Feign是一种负载均衡的HTTP客户端, 使用Feign调用API就像调用本地方法一样，从避免了调用目标微服务时，需要不断的解析&#x2F;封装json 数据的繁琐。Feign集成了Ribbon。Ribbon+eureka是面向微服务编程，而Feign是面向接口编程。      Fegin是一个声明似的web服务客户端，它使得编写web服务客户端变得更加容易">
+<meta property="og:description" content="一、Feign介绍和简单基本使用流程   ​		 Feign是一种负载均衡的HTTP客户端, 使用Feign调用API就像调用本地方法一样，从避免了调用目标微服务时，需要不断的解析&#x2F;封装json 数据的繁琐。Feign集成了Ribbon。Ribbon+eureka是面向微服务编程，而Feign是面向接口编程。 	Fegin是一个声明似的web服务客户端，它使得编写web服务客户端变得更加容易。使">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20230207213746760.png">
-<meta property="og:image" content="http://example.com/images/image-20230207213755922.png">
-<meta property="og:image" content="http://example.com/images/image-20230207213838171.png">
-<meta property="og:image" content="http://example.com/images/image-20230207213949255.png">
-<meta property="og:image" content="http://example.com/images/image-20230207215026899.png">
-<meta property="og:image" content="http://example.com/images/image-20230207215002005.png">
-<meta property="og:image" content="http://example.com/images/image-20230207215233270.png">
-<meta property="og:image" content="http://example.com/images/image-20230207215305103.png">
-<meta property="og:image" content="http://example.com/images/image-20230207215415792.png">
-<meta property="og:image" content="http://example.com/images/image-20230207215550021.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207213746760.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207213755922.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207213838171.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207213949255.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207215026899.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207215002005.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207215233270.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207215305103.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207215415792.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207215550021.png">
 <meta property="og:image" content="https://gitee.com/chenjiabing666/BlogImage/raw/master/openFeign/7.png">
-<meta property="og:image" content="http://example.com/images/image-20230207220231333.png">
-<meta property="og:image" content="http://example.com/images/image-20230207220445237.png">
-<meta property="og:image" content="http://example.com/images/image-20230207220949115.png">
-<meta property="og:image" content="http://example.com/images/image-20230207221619077.png">
-<meta property="og:image" content="http://example.com/images/image-20230207221552791.png">
-<meta property="og:image" content="http://example.com/images/image-20230207221538398.png">
-<meta property="og:image" content="http://example.com/images/image-20230207221754929.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207220231333.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207220445237.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207220949115.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207221619077.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207221552791.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207221538398.png">
+<meta property="og:image" content="http://example.com/2023/02/09/images/image-20230207221754929.png">
 <meta property="article:published_time" content="2023-02-09T09:54:43.546Z">
 <meta property="article:modified_time" content="2023-02-10T04:35:29.318Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="远程调用">
 <meta property="article:tag" content="Feign">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20230207213746760.png">
+<meta name="twitter:image" content="http://example.com/2023/02/09/images/image-20230207213746760.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -136,31 +136,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、Feign介绍和简单基本使用流程"><a href="#一、Feign介绍和简单基本使用流程" class="headerlink" title="一、Feign介绍和简单基本使用流程"></a>一、Feign介绍和简单基本使用流程</h1><p><img src="/../../../../images/image-20230207213746760.png" alt="image-20230207213746760"></p>
-<p><img src="/../../../../images/image-20230207213755922.png" alt="image-20230207213755922"></p>
+        <h1 id="一-feign介绍和简单基本使用流程"><a class="markdownIt-Anchor" href="#一-feign介绍和简单基本使用流程"></a> 一、Feign介绍和简单基本使用流程</h1>
+<p><img src="../../../../images/image-20230207213746760.png" alt="image-20230207213746760"></p>
+<p><img src="../../../../images/image-20230207213755922.png" alt="image-20230207213755922"></p>
 <p>​		 Feign是一种负载均衡的HTTP客户端, 使用Feign调用API就像调用本地方法一样，从避免了调用目标微服务时，需要不断的解析/封装json 数据的繁琐。Feign集成了Ribbon。Ribbon+eureka是面向微服务编程，而Feign是面向接口编程。</p>
-<pre><code>     Fegin是一个声明似的web服务客户端，它使得编写web服务客户端变得更加容易。使用Fegin创建一个接口并对它进行注解。它具有可插拔的注解支持包括Feign注解与JAX-RS注解，Feign还支持可插拔的编码器与解码器，Spring Cloud 增加了对 Spring MVC的注解，Spring Web 默认使用了HttpMessageConverters, Spring Cloud 集成 Ribbon 和 Eureka 提供的负载均衡的HTTP客户端 Feign。
+<pre><code>	Fegin是一个声明似的web服务客户端，它使得编写web服务客户端变得更加容易。使用Fegin创建一个接口并对它进行注解。它具有可插拔的注解支持包括Feign注解与JAX-RS注解，Feign还支持可插拔的编码器与解码器，Spring Cloud 增加了对 Spring MVC的注解，Spring Web 默认使用了HttpMessageConverters, Spring Cloud 集成 Ribbon 和 Eureka 提供的负载均衡的HTTP客户端 Feign。
 </code></pre>
-<p><img src="/../../../../images/image-20230207213838171.png" alt="image-20230207213838171"></p>
-<p><img src="/../../../../images/image-20230207213949255.png" alt="image-20230207213949255"></p>
-<p><img src="/../../../../images/image-20230207215026899.png" alt="image-20230207215026899"></p>
+<p><img src="../../../../images/image-20230207213838171.png" alt="image-20230207213838171"></p>
+<p><img src="../../../../images/image-20230207213949255.png" alt="image-20230207213949255"></p>
+<p><img src="../../../../images/image-20230207215026899.png" alt="image-20230207215026899"></p>
 <p><font color="red"><strong>Feign内部集成了ribbon,自动实现了负载均衡</strong></font></p>
-<p><img src="/../../../../images/image-20230207215002005.png" alt="image-20230207215002005"></p>
-<h1 id="二、Feign自定义配置"><a href="#二、Feign自定义配置" class="headerlink" title="二、Feign自定义配置"></a>二、Feign自定义配置</h1><p><img src="/../../../../images/image-20230207215233270.png" alt="image-20230207215233270"></p>
-<p><img src="/../../../../images/image-20230207215305103.png" alt="image-20230207215305103"></p>
-<p><img src="/../../../../images/image-20230207215415792.png" alt="image-20230207215415792"></p>
-<p><img src="/../../../../images/image-20230207215550021.png" alt="image-20230207215550021"></p>
+<p><img src="../../../../images/image-20230207215002005.png" alt="image-20230207215002005"></p>
+<h1 id="二-feign自定义配置"><a class="markdownIt-Anchor" href="#二-feign自定义配置"></a> 二、Feign自定义配置</h1>
+<p><img src="../../../../images/image-20230207215233270.png" alt="image-20230207215233270"></p>
+<p><img src="../../../../images/image-20230207215305103.png" alt="image-20230207215305103"></p>
+<p><img src="../../../../images/image-20230207215415792.png" alt="image-20230207215415792"></p>
+<p><img src="../../../../images/image-20230207215550021.png" alt="image-20230207215550021"></p>
 <p>如果要调试的时候可以使用FULL，但平时建议一般使用BASIC或NONE，因为记录日志还是会消耗一定的性能的</p>
-<h1 id="设置超时："><a href="#设置超时：" class="headerlink" title="设置超时："></a>设置超时：</h1><ul>
+<h1 id="设置超时"><a class="markdownIt-Anchor" href="#设置超时"></a> 设置超时：</h1>
+<ul>
 <li>设置openFeign的超时时间</li>
 <li>设置Ribbon的超时时间</li>
 </ul>
-<h3 id="1、设置Ribbon的超时时间（不推荐）"><a href="#1、设置Ribbon的超时时间（不推荐）" class="headerlink" title="1、设置Ribbon的超时时间（不推荐）"></a>1、设置Ribbon的超时时间（不推荐）</h3><p>设置很简单，在配置文件中添加如下设置：</p>
+<h3 id="1-设置ribbon的超时时间不推荐"><a class="markdownIt-Anchor" href="#1-设置ribbon的超时时间不推荐"></a> 1、设置Ribbon的超时时间（不推荐）</h3>
+<p>设置很简单，在配置文件中添加如下设置：</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ribbon:</span></span><br><span class="line">  <span class="comment"># 值的是建立链接所用的时间，适用于网络状况正常的情况下， 两端链接所用的时间</span></span><br><span class="line">  <span class="attr">ReadTimeout:</span> <span class="number">5000</span></span><br><span class="line">  <span class="comment"># 指的是建立链接后从服务器读取可用资源所用的时间</span></span><br><span class="line">  <span class="attr">ConectTimeout:</span> <span class="number">5000</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="2、设置openFeign的超时时间（推荐）"><a href="#2、设置openFeign的超时时间（推荐）" class="headerlink" title="2、设置openFeign的超时时间（推荐）"></a>2、设置openFeign的超时时间（推荐）</h3><p>openFeign设置超时时间非常简单，只需要在配置文件中配置，如下：</p>
+<h3 id="2-设置openfeign的超时时间推荐"><a class="markdownIt-Anchor" href="#2-设置openfeign的超时时间推荐"></a> 2、设置openFeign的超时时间（推荐）</h3>
+<p>openFeign设置超时时间非常简单，只需要在配置文件中配置，如下：</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="comment">## default 设置的全局超时时间，指定服务名称可以设置单个服务的超时时间</span></span><br><span class="line">      <span class="attr">default:</span></span><br><span class="line">        <span class="attr">connectTimeout:</span> <span class="number">5000</span></span><br><span class="line">        <span class="attr">readTimeout:</span> <span class="number">5000</span></span><br></pre></td></tr></tbody></table></figure>
-
 <blockquote>
 <p>default设置的是全局超时时间，对所有的openFeign接口服务都生效</p>
 </blockquote>
@@ -168,28 +171,29 @@
 <p><img src="https://gitee.com/chenjiabing666/BlogImage/raw/master/openFeign/7.png" alt="img"></p>
 <p>上图中的伪代码如下：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">invoke</span><span class="params">()</span>{</span><br><span class="line">    <span class="comment">//1. 调用serviceA</span></span><br><span class="line">    serviceA();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2. 调用serviceA</span></span><br><span class="line">    serviceB();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3. 调用serviceA</span></span><br><span class="line">    serviceC();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <p>那么上面配置的全局超时时间能不能通过呢？很显然是<code>serviceA</code>、<code>serviceB</code>能够成功调用，但是<code>serviceC</code>并不能成功执行，肯定报超时。</p>
 <p>此时我们可以给<code>serviceC</code>这个服务单独配置一个超时时间，配置如下：</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="comment">## default 设置的全局超时时间，指定服务名称可以设置单个服务的超时时间</span></span><br><span class="line">      <span class="attr">default:</span></span><br><span class="line">        <span class="attr">connectTimeout:</span> <span class="number">5000</span></span><br><span class="line">        <span class="attr">readTimeout:</span> <span class="number">5000</span></span><br><span class="line">      <span class="comment">## 为serviceC这个服务单独配置超时时间</span></span><br><span class="line">      <span class="attr">serviceC:</span></span><br><span class="line">        <span class="attr">connectTimeout:</span> <span class="number">30000</span></span><br><span class="line">        <span class="attr">readTimeout:</span> <span class="number">30000</span></span><br></pre></td></tr></tbody></table></figure>
-
 <blockquote>
 <p><strong>注意</strong>：单个配置的超时时间将会覆盖全局配置。</p>
 </blockquote>
-<h1 id="三、Feign的性能调优"><a href="#三、Feign的性能调优" class="headerlink" title="三、Feign的性能调优"></a>三、Feign的性能调优</h1><p>Feign是一个声明式客户端，它只是把我们的声明变成http请求，最后发送http请求时还是会应用到一些别的客户端</p>
-<p><img src="/../../../../images/image-20230207220231333.png" alt="image-20230207220231333"></p>
-<p><img src="/../../../../images/image-20230207220445237.png" alt="image-20230207220445237"></p>
-<p><img src="/../../../../images/image-20230207220949115.png" alt="image-20230207220949115"></p>
-<h1 id="四、Feign的最佳实践"><a href="#四、Feign的最佳实践" class="headerlink" title="四、Feign的最佳实践"></a>四、Feign的最佳实践</h1><p><img src="/../../../../images/image-20230207221619077.png" alt="image-20230207221619077"></p>
-<p><img src="/../../../../images/image-20230207221552791.png" alt="image-20230207221552791"></p>
-<p><img src="/../../../../images/image-20230207221538398.png" alt="image-20230207221538398"></p>
-<h2 id="演示Feign的最佳实践二：抽取FeignClient"><a href="#演示Feign的最佳实践二：抽取FeignClient" class="headerlink" title="演示Feign的最佳实践二：抽取FeignClient"></a>演示Feign的最佳实践二：抽取FeignClient</h2><p>教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=34&amp;vd_source=746b9336d739b80b11820809545b6604">11-Feign-实现Feign最佳实践_哔哩哔哩_bilibili</a></p>
-<p><img src="/../../../../images/image-20230207221754929.png" alt="image-20230207221754929"></p>
+<h1 id="三-feign的性能调优"><a class="markdownIt-Anchor" href="#三-feign的性能调优"></a> 三、Feign的性能调优</h1>
+<p>Feign是一个声明式客户端，它只是把我们的声明变成http请求，最后发送http请求时还是会应用到一些别的客户端</p>
+<p><img src="../../../../images/image-20230207220231333.png" alt="image-20230207220231333"></p>
+<p><img src="../../../../images/image-20230207220445237.png" alt="image-20230207220445237"></p>
+<p><img src="../../../../images/image-20230207220949115.png" alt="image-20230207220949115"></p>
+<h1 id="四-feign的最佳实践"><a class="markdownIt-Anchor" href="#四-feign的最佳实践"></a> 四、Feign的最佳实践</h1>
+<p><img src="../../../../images/image-20230207221619077.png" alt="image-20230207221619077"></p>
+<p><img src="../../../../images/image-20230207221552791.png" alt="image-20230207221552791"></p>
+<p><img src="../../../../images/image-20230207221538398.png" alt="image-20230207221538398"></p>
+<h2 id="演示feign的最佳实践二抽取feignclient"><a class="markdownIt-Anchor" href="#演示feign的最佳实践二抽取feignclient"></a> 演示Feign的最佳实践二：抽取FeignClient</h2>
+<p>教程视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=34&amp;vd_source=746b9336d739b80b11820809545b6604">11-Feign-实现Feign最佳实践_哔哩哔哩_bilibili</a></p>
+<p><img src="../../../../images/image-20230207221754929.png" alt="image-20230207221754929"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign/Feign%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-id="clij4or5b00xoscv6ahtj5l1e" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/09/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign/Feign%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-id="clik98om700xuh4v6dojmcgnc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Feign/" rel="tag">Feign</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" rel="tag">远程调用</a></li></ul>

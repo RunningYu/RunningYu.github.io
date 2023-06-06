@@ -5,12 +5,12 @@
   
   <title>mapping索引属性 &amp; 创建索的操作 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概念对比  一. mapping索引属性 二. 索引库的操作1. 创建索引库  实例： 123456789101112131415161718192021222324252627#创建索引库PUT &#x2F;heima{  &quot;mappings&quot;: {    &quot;properties&quot;: {      &quot;info&quot;: {        &quot;type&quot;: &quot;text&quot;,        &quot;analyzer&quot;: &quot;i">
+  <meta name="description" content="概念对比   一. mapping索引属性   二. 索引库的操作  1. 创建索引库   实例： 123456789101112131415161718192021222324252627#创建索引库PUT &#x2F;heima{  &quot;mappings&quot;: {    &quot;properties&quot;: {      &quot;info&quot;: {        &quot;type&quot;: &quot;text&quot;,        &quot;analyze">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mapping索引属性 &amp; 创建索的操作">
 <meta property="og:url" content="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="概念对比  一. mapping索引属性 二. 索引库的操作1. 创建索引库  实例： 123456789101112131415161718192021222324252627#创建索引库PUT &#x2F;heima{  &quot;mappings&quot;: {    &quot;properties&quot;: {      &quot;info&quot;: {        &quot;type&quot;: &quot;text&quot;,        &quot;analyzer&quot;: &quot;i">
+<meta property="og:description" content="概念对比   一. mapping索引属性   二. 索引库的操作  1. 创建索引库   实例： 123456789101112131415161718192021222324252627#创建索引库PUT &#x2F;heima{  &quot;mappings&quot;: {    &quot;properties&quot;: {      &quot;info&quot;: {        &quot;type&quot;: &quot;text&quot;,        &quot;analyze">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d5c03e735ed4dcd83fba915c066cdb3~tplv-k3u1fbpfcp-zoom-1.image">
@@ -125,30 +125,32 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>概念对比</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="一-mapping索引属性"><a href="#一-mapping索引属性" class="headerlink" title="一. mapping索引属性"></a>一. mapping索引属性</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d5c03e735ed4dcd83fba915c066cdb3~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="二-索引库的操作"><a href="#二-索引库的操作" class="headerlink" title="二. 索引库的操作"></a>二. 索引库的操作</h1><h2 id="1-创建索引库"><a href="#1-创建索引库" class="headerlink" title="1. 创建索引库"></a>1. 创建索引库</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8c0a579dbdb483a84a112d0f1e0db78~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe320ace6ee740d3b1c269b71a2becad~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ae5fe2a56a242239dfbb8d5ffad5c77~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h1 id="一-mapping索引属性"><a class="markdownIt-Anchor" href="#一-mapping索引属性"></a> 一. mapping索引属性</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d5c03e735ed4dcd83fba915c066cdb3~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h1 id="二-索引库的操作"><a class="markdownIt-Anchor" href="#二-索引库的操作"></a> 二. 索引库的操作</h1>
+<h2 id="1-创建索引库"><a class="markdownIt-Anchor" href="#1-创建索引库"></a> 1. 创建索引库</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8c0a579dbdb483a84a112d0f1e0db78~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fe320ace6ee740d3b1c269b71a2becad~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 <p>实例：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#创建索引库</span><br><span class="line">PUT /heima</span><br><span class="line">{</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "info": {</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "ik_smart"</span><br><span class="line">      },</span><br><span class="line">      "email": {</span><br><span class="line">        "type": "keyword",</span><br><span class="line">        "index": false</span><br><span class="line">      },</span><br><span class="line">      "name": {</span><br><span class="line">        "type": "object",</span><br><span class="line">        "properties": {</span><br><span class="line">          "firstname": {</span><br><span class="line">            "type": "keyword"</span><br><span class="line">          },</span><br><span class="line">          "lastname": {</span><br><span class="line">            "type": "keyword"</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f29631d07cc4265b1c347cea62657f9~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h1 id="2-索引库的其他操作（查看，删除，修改（只能添加新的字段））："><a href="#2-索引库的其他操作（查看，删除，修改（只能添加新的字段））：" class="headerlink" title="2. 索引库的其他操作（查看，删除，修改（只能添加新的字段））："></a>2. 索引库的其他操作（<strong>查看，删除，修改（只能添加新的字段</strong>））：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a19018b3b804d24875641aba2283dfe~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9adc29f8d9a74cfebce28a884ff52f8f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f29631d07cc4265b1c347cea62657f9~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h1 id="2-索引库的其他操作查看删除修改只能添加新的字段"><a class="markdownIt-Anchor" href="#2-索引库的其他操作查看删除修改只能添加新的字段"></a> 2. 索引库的其他操作（<strong>查看，删除，修改（只能添加新的字段</strong>））：</h1>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a19018b3b804d24875641aba2283dfe~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9adc29f8d9a74cfebce28a884ff52f8f~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 <p>ps:索引库创建好后</p>
 <pre><code>    理论上是可以进行修改的
 
     但是实际开发中，是**禁止去修改**原有的字段的（**但可以添加新的字段**），因为修改会**对性能的影响是很大**的，可能会导致整个库都不可用
 </code></pre>
-<p>​        </p>
+<p>​</p>
 <p>（实例）代码：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 查询</span><br><span class="line">GET /heima</span><br><span class="line"></span><br><span class="line"># 修改索引库，添加新字段</span><br><span class="line">PUT /heima/_mapping</span><br><span class="line">{</span><br><span class="line">  "properties": {</span><br><span class="line">    "age": {</span><br><span class="line">      "type": "integer"</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># 删除</span><br><span class="line">DELETE /heima</span><br></pre></td></tr></tbody></table></figure>
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="clij4oqvb003kscv6hrq12hwk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/mapping%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7%20&%20%E5%88%9B%E5%BB%BA%E7%B4%A2%E7%9A%84%E6%93%8D%E4%BD%9C/" data-id="clik98odh004dh4v6hqdxdukc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
