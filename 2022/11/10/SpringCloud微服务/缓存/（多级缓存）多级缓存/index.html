@@ -5,12 +5,12 @@
   
   <title>（多级缓存）多级缓存 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对应的教程视频：  高级篇Day4-03-多级缓存_哔哩哔哩_bilibili   一、安装OpenResty OpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点： •具备Nginx的完整功能 •基于Lua语言进行扩展，集成了大量精良的 Lua 库、第三方模块 •允许使用Lua">
+  <meta name="description" content="对应的教程视频：  高级篇Day4-03-多级缓存_哔哩哔哩_bilibili 一、安装OpenRestyOpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点： •具备Nginx的完整功能 •基于Lua语言进行扩展，集成了大量精良的 Lua 库、第三方模块 •允许使用Lua自定义业">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（多级缓存）多级缓存">
 <meta property="og:url" content="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="对应的教程视频：  高级篇Day4-03-多级缓存_哔哩哔哩_bilibili   一、安装OpenResty OpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点： •具备Nginx的完整功能 •基于Lua语言进行扩展，集成了大量精良的 Lua 库、第三方模块 •允许使用Lua">
+<meta property="og:description" content="对应的教程视频：  高级篇Day4-03-多级缓存_哔哩哔哩_bilibili 一、安装OpenRestyOpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点： •具备Nginx的完整功能 •基于Lua语言进行扩展，集成了大量精良的 Lua 库、第三方模块 •允许使用Lua自定义业">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/f9416bd0de8341369c0b577d3df4b841.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/1177aa67f71b4cb681a56b665ee70f38.png">
@@ -143,52 +143,50 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<h1 id="对应的教程视频-高级篇day4-03-多级缓存_哔哩哔哩_bilibili"><a class="markdownIt-Anchor" href="#对应的教程视频-高级篇day4-03-多级缓存_哔哩哔哩_bilibili"></a> 对应的教程视频：  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=156&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-03-多级缓存_哔哩哔哩_bilibili</a></h1>
-</blockquote>
-<h1 id="一-安装openresty"><a class="markdownIt-Anchor" href="#一-安装openresty"></a> 一、安装OpenResty</h1>
-<p>OpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点：</p>
+<h1 id="对应的教程视频：-高级篇Day4-03-多级缓存-哔哩哔哩-bilibili"><a href="#对应的教程视频：-高级篇Day4-03-多级缓存-哔哩哔哩-bilibili" class="headerlink" title="对应的教程视频：  高级篇Day4-03-多级缓存_哔哩哔哩_bilibili"></a>对应的教程视频：  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=156&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day4-03-多级缓存_哔哩哔哩_bilibili</a></h1></blockquote>
+<h1 id="一、安装OpenResty"><a href="#一、安装OpenResty" class="headerlink" title="一、安装OpenResty"></a>一、安装OpenResty</h1><p>OpenResty® 是一个基于 Nginx的高性能 Web 平台，用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。具备下列特点：</p>
 <p>•具备Nginx的完整功能</p>
 <p>•基于Lua语言进行扩展，集成了大量精良的 Lua 库、第三方模块</p>
 <p>•允许使用Lua自定义业务逻辑、自定义库</p>
 <p>官方网站： <a target="_blank" rel="noopener" href="https://openresty.org/cn/">OpenResty® - 中文官方站</a></p>
 <p><img src="https://img-blog.csdnimg.cn/f9416bd0de8341369c0b577d3df4b841.png" alt="img"></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126669241?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126669241%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(74条消息) 安装OpenResty_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126669241?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126669241%22,%22source%22:%22QRLYLETITBE%22%7D">(74条消息) 安装OpenResty_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
-<p>二、OpenResty快速入门</p>
+<p> 二、OpenResty快速入门</p>
 <p><img src="https://img-blog.csdnimg.cn/1177aa67f71b4cb681a56b665ee70f38.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/6d1a045a3e5244919257fec0d8c9d379.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/6d1a045a3e5244919257fec0d8c9d379.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/2adaa7fe0fc7467db3348e60c5274671.png" alt="img"></p>
 <p>三、请求参数处理</p>
 <p><img src="https://img-blog.csdnimg.cn/34ffb6ee962644a4ac3c71dee0165970.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/c204b371b5904ab4bc7bfee4232a859a.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/c204b371b5904ab4bc7bfee4232a859a.png" alt="img"></p>
 <p>四、查询Tomcat</p>
 <p><img src="https://img-blog.csdnimg.cn/9b8419f000b945048c5b528b1931a899.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/238474e6212f4a29a48245a579718bf6.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/444f4c49f7bf42319b3f6c24b8554ceb.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/2a2ed265a3774d5581b4a7a957d64151.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/a53b27c055cf4e8fa3b156b7f0fa8547.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/9c6cfac399744d52b367861934a0a62e.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/7d853f9f2b124bdb849f1829c94c5f34.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/6c84d9c5a634422894f205f2ccc03480.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/238474e6212f4a29a48245a579718bf6.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/444f4c49f7bf42319b3f6c24b8554ceb.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/2a2ed265a3774d5581b4a7a957d64151.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/a53b27c055cf4e8fa3b156b7f0fa8547.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/9c6cfac399744d52b367861934a0a62e.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/7d853f9f2b124bdb849f1829c94c5f34.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/6c84d9c5a634422894f205f2ccc03480.png" alt="img"></p>
 <p>五、Redis缓存预热</p>
 <p><img src="https://img-blog.csdnimg.cn/8f5fd7be4ed54c3f8f086bbe0bba17ca.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/b511678b54b541e1a75184e7ef236faa.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/ea58bc28593c4103994a8b585eaad613.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/b511678b54b541e1a75184e7ef236faa.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/ea58bc28593c4103994a8b585eaad613.png" alt="img"></p>
 <p>六、查询Redis缓存</p>
 <p><img src="https://img-blog.csdnimg.cn/1ecd62b73616428b89912bbe9cf51e37.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/dec61d13f74542cab29209d0391c786e.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/2b864644e92445c78c389d88989abb01.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/dec61d13f74542cab29209d0391c786e.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/2b864644e92445c78c389d88989abb01.png" alt="img"></p>
 <p>七、Nginx本地缓存</p>
 <p><img src="https://img-blog.csdnimg.cn/6f672ee617a44863858ce5c6f2e82077.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/19fd546b225d4f89bf8a75f1f26f0263.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/1f24570d8c124c0ea3aa6bd0449580ec.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/43069c308a474c639503022aae4f2122.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/19fd546b225d4f89bf8a75f1f26f0263.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/1f24570d8c124c0ea3aa6bd0449580ec.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/43069c308a474c639503022aae4f2122.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/" data-id="clik98oge00ayh4v60n04c36s" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%89%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/" data-id="clina6vye00b7x0v6ehqk9mej" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>

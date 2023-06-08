@@ -121,17 +121,20 @@
       
         <p>1.引入sentinel依赖：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--引入sentinel依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-alibaba-sentinel&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
 <ol start="2">
 <li>配置控制台地址（让微服务与控制台建立联系）：</li>
 </ol>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5149d3958b294d3e8f8bb82d4d1d5089~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5149d3958b294d3e8f8bb82d4d1d5089~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    sentinel:</span><br><span class="line">      transport:</span><br><span class="line">        dashboard: localhost:8080    # sentinel控制台地址</span><br></pre></td></tr></tbody></table></figure>
+
+
 <p>（如果是在云服务器上安装的sentinel，localhost改为服务器的ip地址）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clik98ofy00a1h4v6di7i12sb" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clina6vy000aex0v6bbfnddy5" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
