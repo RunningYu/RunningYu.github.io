@@ -5,25 +5,25 @@
   
   <title>牛客网java核心基础面试题 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为什么Java代码可以实现一次编写、到处运行？ 遇到过异常吗，如何处理？参考答案 在Java中，可以按照如下三个步骤处理异常：  捕获异常  将业务代码包裹在try块内部，当业务代码中发生任何异常时，系统都会为此异常创建一个异常对象。创建异常对象之后，JVM会在try块之后寻找可以处理它的catch块，并将异常对象交给这个catch块处理。  处理异常  在catch块中处理异常时，应该先记录日志">
+  <meta name="description" content="为什么Java代码可以实现一次编写、到处运行？   遇到过异常吗，如何处理？ 参考答案 在Java中，可以按照如下三个步骤处理异常：  捕获异常  将业务代码包裹在try块内部，当业务代码中发生任何异常时，系统都会为此异常创建一个异常对象。创建异常对象之后，JVM会在try块之后寻找可以处理它的catch块，并将异常对象交给这个catch块处理。  处理异常  在catch块中处理异常时，应该先">
 <meta property="og:type" content="article">
 <meta property="og:title" content="牛客网java核心基础面试题">
 <meta property="og:url" content="http://example.com/2023/02/19/interview/%E7%89%9B%E5%AE%A2%E7%BD%91java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="为什么Java代码可以实现一次编写、到处运行？ 遇到过异常吗，如何处理？参考答案 在Java中，可以按照如下三个步骤处理异常：  捕获异常  将业务代码包裹在try块内部，当业务代码中发生任何异常时，系统都会为此异常创建一个异常对象。创建异常对象之后，JVM会在try块之后寻找可以处理它的catch块，并将异常对象交给这个catch块处理。  处理异常  在catch块中处理异常时，应该先记录日志">
+<meta property="og:description" content="为什么Java代码可以实现一次编写、到处运行？   遇到过异常吗，如何处理？ 参考答案 在Java中，可以按照如下三个步骤处理异常：  捕获异常  将业务代码包裹在try块内部，当业务代码中发生任何异常时，系统都会为此异常创建一个异常对象。创建异常对象之后，JVM会在try块之后寻找可以处理它的catch块，并将异常对象交给这个catch块处理。  处理异常  在catch块中处理异常时，应该先">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20230222165320333.png">
-<meta property="og:image" content="http://example.com/images/image-20230219163021865.png">
-<meta property="og:image" content="http://example.com/images/image-20230219163033920.png">
-<meta property="og:image" content="http://example.com/images/image-20230219162902190.png">
-<meta property="og:image" content="http://example.com/images/image-20230219162554595.png">
-<meta property="og:image" content="http://example.com/images/image-20230219162329199.png">
+<meta property="og:image" content="http://example.com/2023/02/19/images/image-20230222165320333.png">
+<meta property="og:image" content="http://example.com/2023/02/19/images/image-20230219163021865.png">
+<meta property="og:image" content="http://example.com/2023/02/19/images/image-20230219163033920.png">
+<meta property="og:image" content="http://example.com/2023/02/19/images/image-20230219162902190.png">
+<meta property="og:image" content="http://example.com/2023/02/19/images/image-20230219162554595.png">
+<meta property="og:image" content="http://example.com/2023/02/19/images/image-20230219162329199.png">
 <meta property="article:published_time" content="2023-02-19T08:22:52.808Z">
 <meta property="article:modified_time" content="2023-03-09T13:41:40.336Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20230222165320333.png">
+<meta name="twitter:image" content="http://example.com/2023/02/19/images/image-20230222165320333.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -123,8 +123,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="为什么Java代码可以实现一次编写、到处运行？"><a href="#为什么Java代码可以实现一次编写、到处运行？" class="headerlink" title="为什么Java代码可以实现一次编写、到处运行？"></a>为什么Java代码可以实现一次编写、到处运行？</h2><p><img src="/../../images/image-20230222165320333.png" alt="image-20230222165320333"></p>
-<h2 id="遇到过异常吗，如何处理？"><a href="#遇到过异常吗，如何处理？" class="headerlink" title="遇到过异常吗，如何处理？"></a>遇到过异常吗，如何处理？</h2><p><strong>参考答案</strong></p>
+        <h2 id="为什么java代码可以实现一次编写-到处运行"><a class="markdownIt-Anchor" href="#为什么java代码可以实现一次编写-到处运行"></a> 为什么Java代码可以实现一次编写、到处运行？</h2>
+<p><img src="../../images/image-20230222165320333.png" alt="image-20230222165320333"></p>
+<h2 id="遇到过异常吗如何处理"><a class="markdownIt-Anchor" href="#遇到过异常吗如何处理"></a> 遇到过异常吗，如何处理？</h2>
+<p><strong>参考答案</strong></p>
 <p>在Java中，可以按照如下三个步骤处理异常：</p>
 <ol>
 <li><strong>捕获异常</strong></li>
@@ -138,53 +140,67 @@
 <li><strong>回收资源</strong></li>
 </ol>
 <p>如果业务代码打开了某个资源，比如<mark>数据库连接、网络连接、磁盘文件</mark>等，则需要在这段业务代码执行完毕后关闭这项资源。并且，无论是否发生异常，都要尝试关闭这项资源。将关闭资源的代码写在finally块内，可以满足这种需求，即无论是否发生异常，finally块内的代码总会被执行。</p>
-<h2 id="说一说Java的异常机制？"><a href="#说一说Java的异常机制？" class="headerlink" title="说一说Java的异常机制？"></a>说一说Java的异常机制？</h2><p><strong>参考答案</strong></p>
+<h2 id="说一说java的异常机制"><a class="markdownIt-Anchor" href="#说一说java的异常机制"></a> 说一说Java的异常机制？</h2>
+<p><strong>参考答案</strong></p>
 <p><strong>关于异常的处理：</strong></p>
 <p>在Java中，处理异常的语句由try、catch、finally三部分组成。其中，<strong>try块用于包裹业务代码，catch块用于捕获并处理某个类型的异常，finally块则用于回收资源</strong>。当业务代码发生异常时，系统会创建一个异常对象，然后由JVM寻找可以处理这个异常的catch块，并将异常对象交给这个catch块处理。若业务代码打开了某项资源，则可以在finally块中关闭这项资源，因为无论是否发生异常，finally块一定会执行。</p>
 <p><strong>关于抛出异常：</strong></p>
 <p>当程序出现错误时，系统会自动抛出异常。除此以外，Java也允许程序主动抛出异常。当业务代码中，判断某项错误的条件成立时，可以使用throw关键字向外抛出异常。在这种情况下，如果当前方法不知道该如何处理这个异常，可以在方法签名上<strong>通过throws关键字声明抛出异常，则该异常将交给JVM处理</strong>。</p>
 <p><strong>关于异常跟踪栈：</strong></p>
 <p>程序运行时，经常会发生一系列方法调用，从而形成方法调用栈。异常机制会导致异常在这些方法之间传播，而异常传播的顺序与方法的调用相反。异常从发生异常的方法向外传播，首先传给该方法的调用者，再传给上层调用者，以此类推。最终会传到main方法，若依然没有得到处理，则JVM会终止程序，并打印异常跟踪栈的信息</p>
-<h2 id="finally是无条件执行的吗？"><a href="#finally是无条件执行的吗？" class="headerlink" title="finally是无条件执行的吗？"></a>finally是无条件执行的吗？</h2><p><strong>参考答案</strong></p>
+<h2 id="finally是无条件执行的吗"><a class="markdownIt-Anchor" href="#finally是无条件执行的吗"></a> finally是无条件执行的吗？</h2>
+<p><strong>参考答案</strong></p>
 <p>不管try块中的代码是否出现异常，也不管哪一个catch块被执行，甚至在try块或catch块中执行了return语句，finally块总会被执行。</p>
 <p><strong>注意事项</strong></p>
 <p>如果在try块或catch块中使用 System.exit(1); 来退出虚拟机，则finally块将失去执行的机会。但是我们在实际的开发中，重来都不会这样做，所以尽管存在这种导致finally块无法执行的可能，也只是一种可能而已。</p>
-<h2 id="在finally中return会发生什么？"><a href="#在finally中return会发生什么？" class="headerlink" title="在finally中return会发生什么？"></a>在finally中return会发生什么？</h2><p><strong>参考答案</strong></p>
+<h2 id="在finally中return会发生什么"><a class="markdownIt-Anchor" href="#在finally中return会发生什么"></a> 在finally中return会发生什么？</h2>
+<p><strong>参考答案</strong></p>
 <p>在通常情况下，不要在finally块中使用return、throw等导致方法终止的语句，一旦在finally块中使用了return、throw语句，将会导致try块、catch块中return、throw语句失效。</p>
 <p><strong>详细解析</strong></p>
 <p>当Java程序执行try块、catch块时遇到了return或throw语句，这两个语句都会导致该方法立即结束，但是系统执行这两个语句并不会结束该方法，而是去寻找该异常处理流程中是否包含finally块，如果没有finally块，程序立即执行return或throw语句，方法终止；如果有finally块，系统立即开始执行finally块。只有当finally块执行完成后，系统才会再次跳回来执行try块、catch块里的return或throw语句；如果finally块里也使用了return或throw等导致方法终止的语句，finally块已经终止了方法，系统将不会跳回去执行try块、catch块里的任何代码。</p>
-<h2 id="static和final有什么区别？"><a href="#static和final有什么区别？" class="headerlink" title="static和final有什么区别？"></a>static和final有什么区别？</h2><p><img src="/../../images/image-20230219163021865.png" alt="image-20230219163021865"></p>
-<p><img src="/../../images/image-20230219163033920.png" alt="image-20230219163033920"></p>
-<h2 id="说说你对泛型的理解"><a href="#说说你对泛型的理解" class="headerlink" title="说说你对泛型的理解"></a>说说你对泛型的理解</h2><p><img src="/../../images/image-20230219162902190.png" alt="image-20230219162902190"></p>
-<h2 id="List-lt-super-T-gt-和List-lt-extends-T-gt-有什么区别？"><a href="#List-lt-super-T-gt-和List-lt-extends-T-gt-有什么区别？" class="headerlink" title="List<? super T>和List<? extends T>有什么区别？"></a>List&lt;? super T&gt;和List&lt;? extends T&gt;有什么区别？</h2><p><strong>参考答案</strong></p>
+<h2 id="static和final有什么区别"><a class="markdownIt-Anchor" href="#static和final有什么区别"></a> static和final有什么区别？</h2>
+<p><img src="../../images/image-20230219163021865.png" alt="image-20230219163021865"></p>
+<p><img src="../../images/image-20230219163033920.png" alt="image-20230219163033920"></p>
+<h2 id="说说你对泛型的理解"><a class="markdownIt-Anchor" href="#说说你对泛型的理解"></a> 说说你对泛型的理解</h2>
+<p><img src="../../images/image-20230219162902190.png" alt="image-20230219162902190"></p>
+<h2 id="list-super-t和list-extends-t有什么区别"><a class="markdownIt-Anchor" href="#list-super-t和list-extends-t有什么区别"></a> List&lt;? super T&gt;和List&lt;? extends T&gt;有什么区别？</h2>
+<p><strong>参考答案</strong></p>
 <ul>
-<li><p>? 是类型通配符， List&lt;?&gt; 可以表示各种泛型List的父类，意思是元素类型未知的List； </p>
+<li>
+<p>? 是类型通配符， List&lt;?&gt; 可以表示各种泛型List的父类，意思是元素类型未知的List；</p>
 </li>
-<li><p>List&lt;? super T&gt; 用于设定类型通配符的下限，此处 ? 代表一个未知的类型，但它必须是T的父类型；</p>
+<li>
+<p>List&lt;? super T&gt; 用于设定类型通配符的下限，此处 ? 代表一个未知的类型，但它必须是T的父类型；</p>
 </li>
-<li><p>List&lt;? extends T&gt; 用于设定类型通配符的上限，此处 ? 代表一个未知的类型，但它必须是T的子类型。</p>
+<li>
+<p>List&lt;? extends T&gt; 用于设定类型通配符的上限，此处 ? 代表一个未知的类型，但它必须是T的子类型。</p>
 </li>
 </ul>
 <p><strong>扩展阅读</strong></p>
 <p>在Java的早期设计中，允许把Integer[]数组赋值给Number[]变量，此时如果试图把一个Double对象保存到该Number[]数组中，编译可以通过，但在运行时抛出ArrayStoreException异常。这显然是一种不安全的设计，因此Java在泛型设计时进行了改进，它不再允许把 List<integer> 对象赋值给List<number> 变量。</number></integer></p>
 <p>数组和泛型有所不同，假设Foo是Bar的一个子类型（子类或者子接口），那么Foo[]依然是Bar[]的子类型，但 G<foo> 不是 G<bar> 的子类型。Foo[]自动向上转型为Bar[]的方式被称为型变，也就是说，Java的数组支持型变，但Java集合并不支持型变。Java泛型的设计原则是，只要代码在编译时没有出现警告，就不会遇到运行时ClassCastException异常。</bar></foo></p>
-<h2 id="说说你对Java反射机制的理解"><a href="#说说你对Java反射机制的理解" class="headerlink" title="说说你对Java反射机制的理解"></a>说说你对Java反射机制的理解</h2><p><img src="/../../images/image-20230219162554595.png" alt="image-20230219162554595"></p>
-<h2 id="Java反射在实际项目种有哪些应用场景？"><a href="#Java反射在实际项目种有哪些应用场景？" class="headerlink" title="Java反射在实际项目种有哪些应用场景？"></a>Java反射在实际项目种有哪些应用场景？</h2><p><strong>参考答案</strong></p>
+<h2 id="说说你对java反射机制的理解"><a class="markdownIt-Anchor" href="#说说你对java反射机制的理解"></a> 说说你对Java反射机制的理解</h2>
+<p><img src="../../images/image-20230219162554595.png" alt="image-20230219162554595"></p>
+<h2 id="java反射在实际项目种有哪些应用场景"><a class="markdownIt-Anchor" href="#java反射在实际项目种有哪些应用场景"></a> Java反射在实际项目种有哪些应用场景？</h2>
+<p><strong>参考答案</strong></p>
 <p>Java的反射机制在实际项目中应用广泛，常见的应用场景有：</p>
 <ul>
-<li><p>使用JDBC时，如果要创建数据库的连接，则需要先通过反射机制加载数据库的驱动程序；</p>
+<li>
+<p>使用JDBC时，如果要创建数据库的连接，则需要先通过反射机制加载数据库的驱动程序；</p>
 </li>
-<li><p>多数框架都支持注解/XML配置，从配置中解析出来的类是字符串，需要利用反射机制实例化；</p>
+<li>
+<p>多数框架都支持注解/XML配置，从配置中解析出来的类是字符串，需要利用反射机制实例化；</p>
 </li>
-<li><p>面向切面编程（AOP）的实现方案，是在程序运行时创建目标对象的代理类，这必须由反射机制来实现。</p>
+<li>
+<p>面向切面编程（AOP）的实现方案，是在程序运行时创建目标对象的代理类，这必须由反射机制来实现。</p>
 </li>
 </ul>
-<p><img src="/../../images/image-20230219162329199.png" alt="image-20230219162329199"></p>
+<p><img src="../../images/image-20230219162329199.png" alt="image-20230219162329199"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/19/interview/%E7%89%9B%E5%AE%A2%E7%BD%91java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clina6vuw004ix0v62exl20o9" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/19/interview/%E7%89%9B%E5%AE%A2%E7%BD%91java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="cljvjqugw0051mkv6dlnwbr92" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>

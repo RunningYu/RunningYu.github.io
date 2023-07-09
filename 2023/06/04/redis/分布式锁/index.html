@@ -5,18 +5,18 @@
   
   <title>为何要用分布式锁&amp;Redis实现分布式锁 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为何要用分布式锁一、为什么要使用分布式锁为了保证一个方法在高并发情况下的同一时间只能被同一个线程执行，在传统单体应用单机部署的情况下，可以使用Java并发处理相关的API(如ReentrantLcok或synchronized)进行互斥控制。但是，随着业务发展的需要，原单体单机部署的系统被演化成分布式系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失">
+  <meta name="description" content="为何要用分布式锁  一、为什么要使用分布式锁 为了保证一个方法在高并发情况下的同一时间只能被同一个线程执行，在传统单体应用单机部署的情况下，可以使用Java并发处理相关的API(如ReentrantLcok或synchronized)进行互斥控制。但是，随着业务发展的需要，原单体单机部署的系统被演化成分布式系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为何要用分布式锁&amp;Redis实现分布式锁">
 <meta property="og:url" content="http://example.com/2023/06/04/redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="为何要用分布式锁一、为什么要使用分布式锁为了保证一个方法在高并发情况下的同一时间只能被同一个线程执行，在传统单体应用单机部署的情况下，可以使用Java并发处理相关的API(如ReentrantLcok或synchronized)进行互斥控制。但是，随着业务发展的需要，原单体单机部署的系统被演化成分布式系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失">
+<meta property="og:description" content="为何要用分布式锁  一、为什么要使用分布式锁 为了保证一个方法在高并发情况下的同一时间只能被同一个线程执行，在传统单体应用单机部署的情况下，可以使用Java并发处理相关的API(如ReentrantLcok或synchronized)进行互斥控制。但是，随着业务发展的需要，原单体单机部署的系统被演化成分布式系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20230604103343211.png">
-<meta property="og:image" content="http://example.com/images/image-20230604103310644.png">
-<meta property="og:image" content="http://example.com/images/image-20230604102928951.png">
-<meta property="og:image" content="http://example.com/images/image-20230604103157783.png">
-<meta property="og:image" content="http://example.com/images/image-20230604103116683.png">
+<meta property="og:image" content="http://example.com/2023/06/04/images/image-20230604103343211.png">
+<meta property="og:image" content="http://example.com/2023/06/04/images/image-20230604103310644.png">
+<meta property="og:image" content="http://example.com/2023/06/04/images/image-20230604102928951.png">
+<meta property="og:image" content="http://example.com/2023/06/04/images/image-20230604103157783.png">
+<meta property="og:image" content="http://example.com/2023/06/04/images/image-20230604103116683.png">
 <meta property="og:image" content="https://i0.hdslb.com/bfs/emote/bf7e00ecab02171f8461ee8cf439c73db9797748.png@48w_48h.webp">
 <meta property="og:image" content="https://i0.hdslb.com/bfs/emote/bf7e00ecab02171f8461ee8cf439c73db9797748.png@48w_48h.webp">
 <meta property="og:image" content="http://o7x0ygc3f.bkt.clouddn.com/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F_01.png">
@@ -26,7 +26,7 @@
 <meta property="article:tag" content="redis">
 <meta property="article:tag" content="springboot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20230604103343211.png">
+<meta name="twitter:image" content="http://example.com/2023/06/04/images/image-20230604103343211.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -126,27 +126,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="为何要用分布式锁"><a href="#为何要用分布式锁" class="headerlink" title="为何要用分布式锁"></a>为何要用分布式锁</h1><h2 id="一、为什么要使用分布式锁"><a href="#一、为什么要使用分布式锁" class="headerlink" title="一、为什么要使用分布式锁"></a><strong>一、为什么要使用分布式锁</strong></h2><p>为了保证一个方法在高并发情况下的同一时间只能被同一个线程执行，在传统单体应用单机部署的情况下，可以使用Java并发处理相关的API(如ReentrantLcok或synchronized)进行互斥控制。但是，随着业务发展的需要，原单体单机部署的系统被演化成分布式系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失效，为了解决这个问题就需要一种跨JVM的互斥机制来控制共享资源的访问，这就是分布式锁要解决的问题</p>
-<h2 id="二、分布式锁应该具备哪些条件"><a href="#二、分布式锁应该具备哪些条件" class="headerlink" title="二、分布式锁应该具备哪些条件"></a><strong>二、分布式锁应该具备哪些条件</strong></h2><p>在分析分布式锁的三种实现方式之前，先了解一下分布式锁应该具备哪些条件：<br>1、在分布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行；</p>
+        <h1 id="为何要用分布式锁"><a class="markdownIt-Anchor" href="#为何要用分布式锁"></a> 为何要用分布式锁</h1>
+<h2 id="一-为什么要使用分布式锁"><a class="markdownIt-Anchor" href="#一-为什么要使用分布式锁"></a> <strong>一、为什么要使用分布式锁</strong></h2>
+<p>为了保证一个方法在高并发情况下的同一时间只能被同一个线程执行，在传统单体应用单机部署的情况下，可以使用Java并发处理相关的API(如ReentrantLcok或synchronized)进行互斥控制。但是，随着业务发展的需要，原单体单机部署的系统被演化成分布式系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失效，为了解决这个问题就需要一种跨JVM的互斥机制来控制共享资源的访问，这就是分布式锁要解决的问题</p>
+<h2 id="二-分布式锁应该具备哪些条件"><a class="markdownIt-Anchor" href="#二-分布式锁应该具备哪些条件"></a> <strong>二、分布式锁应该具备哪些条件</strong></h2>
+<p>在分析分布式锁的三种实现方式之前，先了解一下分布式锁应该具备哪些条件：<br>
+1、在分布式系统环境下，一个方法在同一时间只能被一个机器的一个线程执行；</p>
 <p>2、高可用的获取锁与释放锁；</p>
 <p>3、高性能的获取锁与释放锁；</p>
 <p>4、具备可重入特性；</p>
 <p>5、具备锁失效机制，防止死锁；</p>
 <p>6、具备非阻塞锁特性，即没有获取到锁将直接返回获取锁失败。</p>
-<p><img src="/../../images/image-20230604103343211.png" alt="image-20230604103343211"></p>
-<p><img src="/../../images/image-20230604103310644.png" alt="image-20230604103310644"></p>
-<h1 id="数据库实现分布式锁原理："><a href="#数据库实现分布式锁原理：" class="headerlink" title="数据库实现分布式锁原理："></a>数据库实现分布式锁原理：</h1><p><img src="/../../images/image-20230604102928951.png" alt="image-20230604102928951"></p>
-<h1 id="Redis实现分布式锁原理："><a href="#Redis实现分布式锁原理：" class="headerlink" title="Redis实现分布式锁原理："></a>Redis实现分布式锁原理：</h1><p><img src="/../../images/image-20230604103157783.png" alt="image-20230604103157783"></p>
-<p><img src="/../../images/image-20230604103116683.png" alt="image-20230604103116683"></p>
-<h1 id="问题注意："><a href="#问题注意：" class="headerlink" title="问题注意："></a>问题注意：</h1><ul>
+<p><img src="../../images/image-20230604103343211.png" alt="image-20230604103343211"></p>
+<p><img src="../../images/image-20230604103310644.png" alt="image-20230604103310644"></p>
+<h1 id="数据库实现分布式锁原理"><a class="markdownIt-Anchor" href="#数据库实现分布式锁原理"></a> 数据库实现分布式锁原理：</h1>
+<p><img src="../../images/image-20230604102928951.png" alt="image-20230604102928951"></p>
+<h1 id="redis实现分布式锁原理"><a class="markdownIt-Anchor" href="#redis实现分布式锁原理"></a> Redis实现分布式锁原理：</h1>
+<p><img src="../../images/image-20230604103157783.png" alt="image-20230604103157783"></p>
+<p><img src="../../images/image-20230604103116683.png" alt="image-20230604103116683"></p>
+<h1 id="问题注意"><a class="markdownIt-Anchor" href="#问题注意"></a> 问题注意：</h1>
+<ul>
 <li>业务失败锁还在，就会产生死锁，可以加一个过期时间自动释放锁，但是自动释放可能出现释放掉其他jvm锁的情况，所以要给锁加一个唯一标识，删除前先看看是不是本机持有的锁，是的话再删除，还要保证查询和删除是一个原子操作，可以使用lua脚本<img src="https://i0.hdslb.com/bfs/emote/bf7e00ecab02171f8461ee8cf439c73db9797748.png@48w_48h.webp" alt="[脱单doge]"></li>
 <li>产生死锁现象，导致虚拟机实例无法再次获取资源，可以设置失效时间，缺陷：因为不确定业务执行时间的长短，所以失效时间的设置具有不确定性。优化：使用try catch finally 语句块，在finally语句中调用del方法删除key完成释放锁的目的，这样下次虚拟机实例请求资源时便能通过setNx（）方法获取到锁，执行响应业务逻辑！<img src="https://i0.hdslb.com/bfs/emote/bf7e00ecab02171f8461ee8cf439c73db9797748.png@48w_48h.webp" alt="[脱单doge]"></li>
 </ul>
 <p>看门狗：</p>
-<h3 id="对于Redis集群而言可能存在的问题："><a href="#对于Redis集群而言可能存在的问题：" class="headerlink" title="对于Redis集群而言可能存在的问题："></a>对于Redis集群而言可能存在的问题：</h3><ul>
+<h3 id="对于redis集群而言可能存在的问题"><a class="markdownIt-Anchor" href="#对于redis集群而言可能存在的问题"></a> 对于Redis集群而言可能存在的问题：</h3>
+<ul>
 <li><strong>问题</strong>：主从切换的时候，主从同步延迟，可能锁信息没有同步到新主</li>
-<li><strong>解决：</strong><ul>
-<li>利用多个redis实例来存储共享，加锁时给每个redis都加锁<ul>
+<li><strong>解决：</strong>
+<ul>
+<li>利用多个redis实例来存储共享，加锁时给每个redis都加锁
+<ul>
 <li>第一步：获取当前系统时间 （主要为了计算客户端对多个实例加锁所耗费的一个总时间）</li>
 <li>第二步：依次对多个实例进行加锁，加锁完成后，计算客户端对多个实例加锁所耗费的一个总时耗时</li>
 <li>如果加锁的总耗时比锁设置的有效时间短，说明加锁成功</li>
@@ -155,14 +165,17 @@
 </ul>
 </li>
 </ul>
-<h1 id="Redis分布式锁的正确实现方式"><a href="#Redis分布式锁的正确实现方式" class="headerlink" title="Redis分布式锁的正确实现方式"></a>Redis分布式锁的正确实现方式</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>分布式锁一般有三种实现方式：</p>
+<h1 id="redis分布式锁的正确实现方式"><a class="markdownIt-Anchor" href="#redis分布式锁的正确实现方式"></a> Redis分布式锁的正确实现方式</h1>
+<h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>分布式锁一般有三种实现方式：</p>
 <ol>
 <li>数据库乐观锁；</li>
 <li>基于Redis的分布式锁；</li>
 <li>基于ZooKeeper的分布式锁。本篇博客将介绍第二种方式，基于Redis实现分布式锁。虽然网上已经有各种介绍Redis分布式锁实现的博客，然而他们的实现却有着各种各样的问题，为了避免误人子弟，本篇博客将详细介绍如何正确地实现Redis分布式锁。</li>
 </ol>
 <hr>
-<h2 id="可靠性"><a href="#可靠性" class="headerlink" title="可靠性"></a>可靠性</h2><p>首先，为了确保分布式锁可用，我们至少要确保锁的实现同时满足以下四个条件：</p>
+<h2 id="可靠性"><a class="markdownIt-Anchor" href="#可靠性"></a> 可靠性</h2>
+<p>首先，为了确保分布式锁可用，我们至少要确保锁的实现同时满足以下四个条件：</p>
 <ol>
 <li>互斥性。在任意时刻，只有一个客户端能持有锁。</li>
 <li>不会发生死锁。即使有一个客户端在持有锁的期间崩溃而没有主动解锁，也能保证后续其他客户端能加锁。</li>
@@ -170,14 +183,14 @@
 <li>解铃还须系铃人。加锁和解锁必须是同一个客户端，客户端自己不能把别人加的锁给解了。</li>
 </ol>
 <hr>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="组件依赖"><a href="#组件依赖" class="headerlink" title="组件依赖"></a>组件依赖</h3><p>首先我们要通过Maven引入<code>Jedis</code>开源组件，在<code>pom.xml</code>文件加入下面的代码：</p>
+<h2 id="代码实现"><a class="markdownIt-Anchor" href="#代码实现"></a> 代码实现</h2>
+<h3 id="组件依赖"><a class="markdownIt-Anchor" href="#组件依赖"></a> 组件依赖</h3>
+<p>首先我们要通过Maven引入<code>Jedis</code>开源组件，在<code>pom.xml</code>文件加入下面的代码：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.9.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="加锁代码"><a href="#加锁代码" class="headerlink" title="加锁代码"></a>加锁代码</h2><h3 id="正确姿势"><a href="#正确姿势" class="headerlink" title="正确姿势"></a>正确姿势</h3><p>Talk is cheap, show me the code。先展示代码，再带大家慢慢解释为什么这样实现：</p>
+<h2 id="加锁代码"><a class="markdownIt-Anchor" href="#加锁代码"></a> 加锁代码</h2>
+<h3 id="正确姿势"><a class="markdownIt-Anchor" href="#正确姿势"></a> 正确姿势</h3>
+<p>Talk is cheap, show me the code。先展示代码，再带大家慢慢解释为什么这样实现：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisTool</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">LOCK_SUCCESS</span> <span class="operator">=</span> <span class="string">"OK"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SET_IF_NOT_EXIST</span> <span class="operator">=</span> <span class="string">"NX"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SET_WITH_EXPIRE_TIME</span> <span class="operator">=</span> <span class="string">"PX"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 尝试获取分布式锁</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> jedis Redis客户端</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lockKey 锁</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> requestId 请求标识</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> expireTime 超期时间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 是否获取成功</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">tryGetDistributedLock</span><span class="params">(Jedis jedis, String lockKey, String requestId, <span class="type">int</span> expireTime)</span> {</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (LOCK_SUCCESS.equals(result)) {</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
 <p>可以看到，我们加锁就一行代码：<code>jedis.set(String key, String value, String nxxx, String expx, int time)</code>，这个set()方法一共有五个形参：</p>
 <ul>
 <li>第一个为key，我们使用key来当锁，因为key是唯一的。</li>
@@ -188,41 +201,36 @@
 </ul>
 <p>总的来说，执行上面的set()方法就只会导致两种结果：1. 当前没有锁（key不存在），那么就进行加锁操作，并对锁设置个有效期，同时value表示加锁的客户端。2. 已有锁存在，不做任何操作。</p>
 <p>心细的童鞋就会发现了，我们的加锁代码满足我们可靠性里描述的三个条件。首先，set()加入了NX参数，可以保证如果已有key存在，则函数不会调用成功，也就是只有一个客户端能持有锁，满足互斥性。其次，由于我们对锁设置了过期时间，即使锁的持有者后续发生崩溃而没有解锁，锁也会因为到了过期时间而自动解锁（即key被删除），不会发生死锁。最后，因为我们将value赋值为requestId，代表加锁的客户端请求标识，那么在客户端在解锁的时候就可以进行校验是否是同一个客户端。由于我们只考虑Redis单机部署的场景，所以容错性我们暂不考虑。</p>
-<h3 id="错误示例1"><a href="#错误示例1" class="headerlink" title="错误示例1"></a>错误示例1</h3><p>比较常见的错误示例就是使用<code>jedis.setnx()</code>和<code>jedis.expire()</code>组合实现加锁，代码如下：</p>
+<h3 id="错误示例1"><a class="markdownIt-Anchor" href="#错误示例1"></a> 错误示例1</h3>
+<p>比较常见的错误示例就是使用<code>jedis.setnx()</code>和<code>jedis.expire()</code>组合实现加锁，代码如下：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">wrongGetLock1</span><span class="params">(Jedis jedis, String lockKey, String requestId, <span class="type">int</span> expireTime)</span> {</span><br><span class="line"></span><br><span class="line">    <span class="type">Long</span> <span class="variable">result</span> <span class="operator">=</span> jedis.setnx(lockKey, requestId);</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="number">1</span>) {</span><br><span class="line">        <span class="comment">// 若在这里程序突然崩溃，则无法设置过期时间，将发生死锁</span></span><br><span class="line">        jedis.expire(lockKey, expireTime);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
 <p>setnx()方法作用就是SET IF NOT EXIST，expire()方法就是给锁加一个过期时间。乍一看好像和前面的set()方法结果一样，然而由于这是两条Redis命令，不具有原子性，如果程序在执行完setnx()之后突然崩溃，导致锁没有设置过期时间。那么将会发生死锁。网上之所以有人这样实现，是因为低版本的jedis并不支持多参数的set()方法。</p>
-<h3 id="错误示例2"><a href="#错误示例2" class="headerlink" title="错误示例2"></a>错误示例2</h3><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">wrongGetLock2</span><span class="params">(Jedis jedis, String lockKey, <span class="type">int</span> expireTime)</span> {</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="variable">expires</span> <span class="operator">=</span> System.currentTimeMillis() + expireTime;</span><br><span class="line">    <span class="type">String</span> <span class="variable">expiresStr</span> <span class="operator">=</span> String.valueOf(expires);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果当前锁不存在，返回加锁成功</span></span><br><span class="line">    <span class="keyword">if</span> (jedis.setnx(lockKey, expiresStr) == <span class="number">1</span>) {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果锁存在，获取锁的过期时间</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">currentValueStr</span> <span class="operator">=</span> jedis.get(lockKey);</span><br><span class="line">    <span class="keyword">if</span> (currentValueStr != <span class="literal">null</span> &amp;&amp; Long.parseLong(currentValueStr) &lt; System.currentTimeMillis()) {</span><br><span class="line">        <span class="comment">// 锁已过期，获取上一个锁的过期时间，并设置现在锁的过期时间</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">oldValueStr</span> <span class="operator">=</span> jedis.getSet(lockKey, expiresStr);</span><br><span class="line">        <span class="keyword">if</span> (oldValueStr != <span class="literal">null</span> &amp;&amp; oldValueStr.equals(currentValueStr)) {</span><br><span class="line">            <span class="comment">// 考虑多线程并发的情况，只有一个线程的设置值和当前值相同，它才有权利加锁</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 其他情况，一律返回加锁失败</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
+<h3 id="错误示例2"><a class="markdownIt-Anchor" href="#错误示例2"></a> 错误示例2</h3>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">wrongGetLock2</span><span class="params">(Jedis jedis, String lockKey, <span class="type">int</span> expireTime)</span> {</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="variable">expires</span> <span class="operator">=</span> System.currentTimeMillis() + expireTime;</span><br><span class="line">    <span class="type">String</span> <span class="variable">expiresStr</span> <span class="operator">=</span> String.valueOf(expires);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果当前锁不存在，返回加锁成功</span></span><br><span class="line">    <span class="keyword">if</span> (jedis.setnx(lockKey, expiresStr) == <span class="number">1</span>) {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果锁存在，获取锁的过期时间</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">currentValueStr</span> <span class="operator">=</span> jedis.get(lockKey);</span><br><span class="line">    <span class="keyword">if</span> (currentValueStr != <span class="literal">null</span> &amp;&amp; Long.parseLong(currentValueStr) &lt; System.currentTimeMillis()) {</span><br><span class="line">        <span class="comment">// 锁已过期，获取上一个锁的过期时间，并设置现在锁的过期时间</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">oldValueStr</span> <span class="operator">=</span> jedis.getSet(lockKey, expiresStr);</span><br><span class="line">        <span class="keyword">if</span> (oldValueStr != <span class="literal">null</span> &amp;&amp; oldValueStr.equals(currentValueStr)) {</span><br><span class="line">            <span class="comment">// 考虑多线程并发的情况，只有一个线程的设置值和当前值相同，它才有权利加锁</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 其他情况，一律返回加锁失败</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>这一种错误示例就比较难以发现问题，而且实现也比较复杂。实现思路：使用<code>jedis.setnx()</code>命令实现加锁，其中key是锁，value是锁的过期时间。执行过程：1. 通过setnx()方法尝试加锁，如果当前锁不存在，返回加锁成功。2. 如果锁已经存在则获取锁的过期时间，和当前时间比较，如果锁已经过期，则设置新的过期时间，返回加锁成功。代码如下：</p>
 <p>那么这段代码问题在哪里？1. 由于是客户端自己生成过期时间，所以需要强制要求分布式下每个客户端的时间必须同步。 2. 当锁过期的时候，如果多个客户端同时执行<code>jedis.getSet()</code>方法，那么虽然最终只有一个客户端可以加锁，但是这个客户端的锁的过期时间可能被其他客户端覆盖。3. 锁不具备拥有者标识，即任何客户端都可以解锁。</p>
-<h2 id="解锁代码"><a href="#解锁代码" class="headerlink" title="解锁代码"></a>解锁代码</h2><h3 id="正确姿势-1"><a href="#正确姿势-1" class="headerlink" title="正确姿势"></a>正确姿势</h3><p>还是先展示代码，再带大家慢慢解释为什么这样实现：</p>
+<h2 id="解锁代码"><a class="markdownIt-Anchor" href="#解锁代码"></a> 解锁代码</h2>
+<h3 id="正确姿势-2"><a class="markdownIt-Anchor" href="#正确姿势-2"></a> 正确姿势</h3>
+<p>还是先展示代码，再带大家慢慢解释为什么这样实现：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisTool</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Long</span> <span class="variable">RELEASE_SUCCESS</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 释放分布式锁</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> jedis Redis客户端</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lockKey 锁</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> requestId 请求标识</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 是否释放成功</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">releaseDistributedLock</span><span class="params">(Jedis jedis, String lockKey, String requestId)</span> {</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">script</span> <span class="operator">=</span> <span class="string">"if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end"</span>;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (RELEASE_SUCCESS.equals(result)) {</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
 <p>可以看到，我们解锁只需要两行代码就搞定了！第一行代码，我们写了一个简单的Lua脚本代码，上一次见到这个编程语言还是在《黑客与画家》里，没想到这次居然用上了。第二行代码，我们将Lua代码传到<code>jedis.eval()</code>方法里，并使参数KEYS[1]赋值为lockKey，ARGV[1]赋值为requestId。eval()方法是将Lua代码交给Redis服务端执行。</p>
 <p>那么这段Lua代码的功能是什么呢？其实很简单，首先获取锁对应的value值，检查是否与requestId相等，如果相等则删除锁（解锁）。那么为什么要使用Lua语言来实现呢？因为要确保上述操作是原子性的。关于非原子性会带来什么问题，可以阅读<a target="_blank" rel="noopener" href="http://wudashan.cn/2017/10/23/Redis-Distributed-Lock-Implement/#releaseLock-wrongDemo2">【解锁代码-错误示例2】</a> 。那么为什么执行eval()方法可以确保原子性，源于Redis的特性，下面是官网对eval命令的部分解释：</p>
 <p><img src="http://o7x0ygc3f.bkt.clouddn.com/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F_01.png" alt="img"></p>
 <p>简单来说，就是在eval命令执行Lua代码的时候，Lua代码将被当成一个命令去执行，并且直到eval命令执行完成，Redis才会执行其他命令。</p>
-<h3 id="错误示例1-1"><a href="#错误示例1-1" class="headerlink" title="错误示例1"></a>错误示例1</h3><p>最常见的解锁代码就是直接使用<code>jedis.del()</code>方法删除锁，这种不先判断锁的拥有者而直接解锁的方式，会导致任何客户端都可以随时进行解锁，即使这把锁不是它的。</p>
+<h3 id="错误示例1-2"><a class="markdownIt-Anchor" href="#错误示例1-2"></a> 错误示例1</h3>
+<p>最常见的解锁代码就是直接使用<code>jedis.del()</code>方法删除锁，这种不先判断锁的拥有者而直接解锁的方式，会导致任何客户端都可以随时进行解锁，即使这把锁不是它的。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static void wrongReleaseLock1(Jedis jedis, String lockKey) {</span><br><span class="line">    jedis.del(lockKey);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="错误示例2-1"><a href="#错误示例2-1" class="headerlink" title="错误示例2"></a>错误示例2</h3><p>这种解锁代码乍一看也是没问题，甚至我之前也差点这样实现，与正确姿势差不多，唯一区别的是分成两条命令去执行，代码如下：</p>
+<h3 id="错误示例2-2"><a class="markdownIt-Anchor" href="#错误示例2-2"></a> 错误示例2</h3>
+<p>这种解锁代码乍一看也是没问题，甚至我之前也差点这样实现，与正确姿势差不多，唯一区别的是分成两条命令去执行，代码如下：</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">wrongReleaseLock2</span><span class="params">(Jedis jedis, String lockKey, String requestId)</span> {</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 判断加锁与解锁是不是同一个客户端</span></span><br><span class="line">    <span class="keyword">if</span> (requestId.equals(jedis.get(lockKey))) {</span><br><span class="line">        <span class="comment">// 若在此时，这把锁突然不是这个客户端的，则会误解锁</span></span><br><span class="line">        jedis.del(lockKey);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
 <p>如代码注释，问题在于如果调用<code>jedis.del()</code>方法的时候，这把锁已经不属于当前客户端的时候会解除他人加的锁。那么是否真的有这种场景？答案是肯定的，比如客户端A加锁，一段时间之后客户端A解锁，在执行<code>jedis.del()</code>之前，锁突然过期了，此时客户端B尝试加锁成功，然后客户端A再执行del()方法，则将客户端B的锁给解除了。</p>
 <hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要介绍了如何使用Java代码正确实现Redis分布式锁，对于加锁和解锁也分别给出了两个比较经典的错误示例。其实想要通过Redis实现分布式锁并不难，只要保证能满足可靠性里的四个条件。互联网虽然给我们带来了方便，只要有问题就可以google，然而网上的答案一定是对的吗？其实不然，所以我们更应该时刻保持着质疑精神，多想多验证。</p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>本文主要介绍了如何使用Java代码正确实现Redis分布式锁，对于加锁和解锁也分别给出了两个比较经典的错误示例。其实想要通过Redis实现分布式锁并不难，只要保证能满足可靠性里的四个条件。互联网虽然给我们带来了方便，只要有问题就可以google，然而网上的答案一定是对的吗？其实不然，所以我们更应该时刻保持着质疑精神，多想多验证。</p>
 <p>如果你的项目中Redis是多机部署的，那么可以尝试使用<code>Redisson</code>实现分布式锁，这是Redis官方提供的Java组件，链接在<a target="_blank" rel="noopener" href="http://wudashan.cn/2017/10/23/Redis-Distributed-Lock-Implement/#%E5%8F%82%E8%80%83%E9%98%85%E8%AF%BB">参考阅读</a>章节已经给出。</p>
 <p>其它博文参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/165118929">深入解析 Redis 分布式锁原理 - 知乎 (zhihu.com)</a></p>
-<h1 id="看门狗，给锁续时"><a href="#看门狗，给锁续时" class="headerlink" title="看门狗，给锁续时"></a>看门狗，给锁续时</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gD4y1u7eC/?spm_id_from=333.788.recommend_more_video.11&amp;vd_source=746b9336d739b80b11820809545b6604">【Java进阶】五分钟梳理看门狗的实现原理，手写Redis锁续期功能，打造核心竞争力_哔哩哔哩_bilibili</a></p>
+<h1 id="看门狗给锁续时"><a class="markdownIt-Anchor" href="#看门狗给锁续时"></a> 看门狗，给锁续时</h1>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1gD4y1u7eC/?spm_id_from=333.788.recommend_more_video.11&amp;vd_source=746b9336d739b80b11820809545b6604">【Java进阶】五分钟梳理看门狗的实现原理，手写Redis锁续期功能，打造核心竞争力_哔哩哔哩_bilibili</a></p>
 <ul>
 <li>方案：可基于<strong>HashedWheelTimer</strong>，加上自旋的方式来实现</li>
 <li><strong>HashedWheelTimer</strong>：时间轮，异步的延时执行任务的工具类</li>
@@ -231,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/06/04/redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" data-id="clina6vvb005dx0v666uncd0m" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/06/04/redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" data-id="cljvjquh5005imkv6c4d02c3n" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
