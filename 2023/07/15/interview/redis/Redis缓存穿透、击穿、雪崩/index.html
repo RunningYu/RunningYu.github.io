@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://example.com/2023/07/15/images/image-20230715143928303.png">
 <meta property="og:image" content="http://example.com/2023/07/15/images/image-20230715144221629.png">
 <meta property="article:published_time" content="2023-07-15T05:43:47.665Z">
-<meta property="article:modified_time" content="2023-07-15T07:09:17.650Z">
+<meta property="article:modified_time" content="2023-07-15T11:13:29.385Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="Redis">
@@ -174,8 +174,7 @@
 <h5 id="不好之处"><a class="markdownIt-Anchor" href="#不好之处"></a> 不好之处：</h5>
 <p>高并发的情况下，影响性能。但大多数情况下访问是可以从外层就可以获取到缓存数据的了，而只有在偶尔的情况下会因为key突然过期，才会导致那个时间的请求进入锁机制，而且进入排队的，也有二重检查来减轻对数据库的压力。</p>
 <h4 id="3监控数据适时调整"><a class="markdownIt-Anchor" href="#3监控数据适时调整"></a> 3.监控数据，适时调整</h4>
-<p>监控哪些数据是热门数据，实时的调整key的过期时长<br>
-使用锁机制</p>
+<p>监控哪些数据是热门数据，实时的调整key的过期时长</p>
 <h2 id="二缓存雪崩"><a class="markdownIt-Anchor" href="#二缓存雪崩"></a> （二）缓存雪崩</h2>
 <h3 id="概念-2"><a class="markdownIt-Anchor" href="#概念-2"></a> 概念：</h3>
 <p>缓存雪崩产生的原因：redis中大量的key集体过期</p>
@@ -268,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/07/15/interview/redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9/" data-id="clk3o45mh00cxygv65qi27nj1" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/07/15/interview/redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9/" data-id="clk4cfgfp00ai7kv6c7j5djzs" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -460,20 +459,5 @@ new WOW().init();
 
 
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
