@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？ 大家好，我是飘渺！今天给大家介绍一下如何在SpringBoot中解决Redis的缓存穿透、缓存击穿、缓存雪崩的问题。  缓存穿透  什么是缓存穿透 缓存穿透指的是一个缓存系统无法缓存某个查询的数据，从而导致这个查询每一次都要访问数据库。 常见的Redis缓存穿透场景包括：  查询一个不存在的数据：攻击者可能会发送一些无效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo &amp; github">
+<meta property="og:url" content="http://example.com/2023/07/14/interview/redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9/Redis%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="Spring Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？ 大家好，我是飘渺！今天给大家介绍一下如何在SpringBoot中解决Redis的缓存穿透、缓存击穿、缓存雪崩的问题。  缓存穿透  什么是缓存穿透 缓存穿透指的是一个缓存系统无法缓存某个查询的数据，从而导致这个查询每一次都要访问数据库。 常见的Redis缓存穿透场景包括：  查询一个不存在的数据：攻击者可能会发送一些无效">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-14T13:07:17.849Z">
+<meta property="article:modified_time" content="2023-07-15T07:08:23.984Z">
+<meta property="article:author" content="其然乐衣">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>78</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>58</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-interview/redis/Redis缓存穿透、击穿、雪崩/Redis缓存" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/07/14/interview/redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9/Redis%E7%BC%93%E5%AD%98/" class="article-date">
+  <time class="post-time" datetime="2023-07-14T13:07:17.849Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">14</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="spring-boot中如何解决redis的缓存穿透-缓存击穿-缓存雪崩"><a class="markdownIt-Anchor" href="#spring-boot中如何解决redis的缓存穿透-缓存击穿-缓存雪崩"></a> Spring Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？</h1>
+<p>大家好，我是飘渺！今天给大家介绍一下如何在SpringBoot中解决Redis的缓存穿透、缓存击穿、缓存雪崩的问题。</p>
+<h2 id="缓存穿透"><a class="markdownIt-Anchor" href="#缓存穿透"></a> 缓存穿透</h2>
+<h3 id="什么是缓存穿透"><a class="markdownIt-Anchor" href="#什么是缓存穿透"></a> 什么是缓存穿透</h3>
+<p>缓存穿透指的是一个缓存系统无法缓存某个查询的数据，从而导致这个查询每一次都要访问数据库。</p>
+<p>常见的Redis缓存穿透场景包括：</p>
+<ol>
+<li>查询一个不存在的数据：攻击者可能会发送一些无效的查询来触发缓存穿透。</li>
+<li>查询一些非常热门的数据：如果一个数据被访问的非常频繁，那么可能会导致缓存系统无法处理这些请求，从而造成缓存穿透。</li>
+<li>查询一些异常数据：这种情况通常发生在数据服务出现故障或异常时，从而造成缓存系统无法访问相关数据，从而导致缓存穿透。</li>
+</ol>
+<h3 id="如何解决"><a class="markdownIt-Anchor" href="#如何解决"></a> 如何解决</h3>
+<p>我们可以使用Guava在内存中维护一个布隆过滤器。具体步骤如下：</p>
+<ol>
+<li>添加Guava和Redis依赖：</li>
+</ol>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">xml复制代码<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.guava<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>guava<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>29.0-jre<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>创建一个BloomFilterUtil类，用于在缓存中维护Bloom Filter。</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">java复制代码<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BloomFilterUtil</span> {</span><br><span class="line">    <span class="comment">// 布隆过滤器的预计容量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">expectedInsertions</span> <span class="operator">=</span> <span class="number">1000000</span>;</span><br><span class="line">    <span class="comment">// 布隆过滤器误判率</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">fpp</span> <span class="operator">=</span> <span class="number">0.001</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> BloomFilter&lt;String&gt; bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), expectedInsertions, fpp);</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 向Bloom Filter中添加元素</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String key)</span>{</span><br><span class="line">        bloomFilter.put(key);</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 判断元素是否存在于Bloom Filter中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">mightContain</span><span class="params">(String key)</span>{</span><br><span class="line">        <span class="keyword">return</span> bloomFilter.mightContain(key);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>在Controller中查询数据时，先根据请求参数进行Bloom Filter的过滤</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">java复制代码<span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping("/user/{id}")</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>{</span><br><span class="line">    <span class="comment">// 先从布隆过滤器中判断此id是否存在</span></span><br><span class="line">    <span class="keyword">if</span>(!BloomFilterUtil.mightContain(id.toString())){</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 查询缓存数据</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">"user_"</span>+id.toString();</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) redisTemplate.opsForValue().get(userKey);</span><br><span class="line">    <span class="keyword">if</span>(user == <span class="literal">null</span>){</span><br><span class="line">        <span class="comment">// 查询数据库</span></span><br><span class="line">        user = userRepository.findById(id).orElse(<span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">if</span>(user != <span class="literal">null</span>){</span><br><span class="line">            <span class="comment">// 将查询到的数据加入缓存</span></span><br><span class="line">            redisTemplate.opsForValue().set(userKey, user, <span class="number">300</span>, TimeUnit.SECONDS);</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="comment">// 查询结果为空，将请求记录下来，并在布隆过滤器中添加</span></span><br><span class="line">            BloomFilterUtil.add(id.toString());</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="缓存击穿"><a class="markdownIt-Anchor" href="#缓存击穿"></a> 缓存击穿</h2>
+<h3 id="什么是缓存击穿"><a class="markdownIt-Anchor" href="#什么是缓存击穿"></a> 什么是缓存击穿</h3>
+<p>缓存击穿指的是在一些高并发访问下，一个热点数据从缓存中不存在，每次请求都要直接查询数据库，从而导致数据库压力过大，并且系统性能下降的现象。</p>
+<p>缓存击穿的原因通常有以下几种：</p>
+<ol>
+<li>缓存中不存在所需的热点数据：当系统中某个热点数据需要被频繁访问时，如果这个热点数据最开始没有被缓存，那么就会导致系统每次请求都需要直接查询数据库，造成数据库负担。</li>
+<li>缓存的热点数据过期：当一个热点数据过期并需要重新缓存时，如果此时有大量请求，那么就会导致所有请求都要直接查询数据库。</li>
+</ol>
+<h3 id="如何解决-2"><a class="markdownIt-Anchor" href="#如何解决-2"></a> 如何解决</h3>
+<p>主要思路 : <strong>在遇到缓存击穿问题时，我们可以在查询数据库之前，先判断一下缓存中是否已有数据，如果没有数据则使用Redis的单线程特性，先查询数据库然后将数据写入缓存中。</strong></p>
+<ol>
+<li>添加Redis依赖</li>
+</ol>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xml复制代码<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>在Controller中查询数据时，先从缓存中查询数据，如果缓存中无数据则进行锁操作</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">java复制代码<span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping("/user/{id}")</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>{</span><br><span class="line">    <span class="comment">// 先从缓存中获取值</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">"user_"</span>+id.toString();</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) redisTemplate.opsForValue().get(userKey);</span><br><span class="line">    <span class="keyword">if</span>(user == <span class="literal">null</span>){</span><br><span class="line">        <span class="comment">// 查询数据库之前加锁</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">lockKey</span> <span class="operator">=</span> <span class="string">"lock_user_"</span>+id.toString();</span><br><span class="line">        <span class="type">String</span> <span class="variable">lockValue</span> <span class="operator">=</span> UUID.randomUUID().toString();</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            <span class="type">Boolean</span> <span class="variable">lockResult</span> <span class="operator">=</span> redisTemplate.opsForValue().setIfAbsent(lockKey, lockValue, <span class="number">60</span>, TimeUnit.SECONDS);</span><br><span class="line">            <span class="keyword">if</span>(lockResult != <span class="literal">null</span> &amp;&amp; lockResult){</span><br><span class="line">                <span class="comment">// 查询数据库</span></span><br><span class="line">                user = userRepository.findById(id).orElse(<span class="literal">null</span>);</span><br><span class="line">                <span class="keyword">if</span>(user != <span class="literal">null</span>){</span><br><span class="line">                    <span class="comment">// 将查询到的数据加入缓存</span></span><br><span class="line">                    redisTemplate.opsForValue().set(userKey, user, <span class="number">300</span>, TimeUnit.SECONDS);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }<span class="keyword">finally</span>{</span><br><span class="line">            <span class="comment">// 释放锁</span></span><br><span class="line">            <span class="keyword">if</span>(lockValue.equals(redisTemplate.opsForValue().get(lockKey))){</span><br><span class="line">                redisTemplate.delete(lockKey);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="缓存雪崩"><a class="markdownIt-Anchor" href="#缓存雪崩"></a> 缓存雪崩</h2>
+<h3 id="什么是缓存雪崩"><a class="markdownIt-Anchor" href="#什么是缓存雪崩"></a> 什么是缓存雪崩</h3>
+<p>指缓存中大量数据的失效时间集中在某一个时间段，导致在这个时间段内缓存失效并额外请求数据库查询数据的请求大量增加，从而对数据库造成极大的压力和负荷。</p>
+<p>常见的Redis缓存雪崩场景包括：</p>
+<ol>
+<li>缓存服务器宕机：当缓存服务器宕机或重启时，大量的访问请求将直接命中数据库，并在同一时间段内导致大量的数据库查询请求，从而将数据库压力大幅提高。</li>
+<li>缓存数据同时失效：在某个特定时间点，缓存中大量数据的失效时间集中在一起，这些数据会在同一时间段失效，并且这些数据被高频访问，将导致大量的访问请求去查询数据库。</li>
+<li>缓存中数据过期时间设计不合理：当缓存中的数据有效时间过短，且数据集中在同一时期失效时，就容易导致大量的请求直接查询数据库，加剧数据库压力。</li>
+<li>波动式的访问过程：当数据的访问存在波动式特征时，例如输出某些活动物品或促销商品时，将会带来高频的查询请求访问，导致缓存大量失效并产生缓存雪崩。</li>
+</ol>
+<h3 id="如何解决-3"><a class="markdownIt-Anchor" href="#如何解决-3"></a> 如何解决</h3>
+<p>在遇到缓存雪崩时，我们可以使用两种方法：一种是将缓存过期时间分散开，即为不同的数据设置不同的过期时间；另一种是使用Redis的多级缓存架构，通过增加一层代理层来解决。具体步骤如下：</p>
+<ol>
+<li>添加相关依赖</li>
+</ol>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xml复制代码<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>在application.properties中配置Ehcache缓存</li>
+</ol>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">properties</span></span><br><span class="line"><span class="attr">复制代码spring.cache.type</span>=<span class="string">ehcache</span></span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>创建一个CacheConfig类，用于配置Ehcache：</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">java复制代码<span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheConfig</span> {</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> EhCacheCacheManager <span class="title function_">ehCacheCacheManager</span><span class="params">(CacheManager cm)</span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">EhCacheCacheManager</span>(cm);</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CacheManager <span class="title function_">ehCacheManager</span><span class="params">()</span>{</span><br><span class="line">        <span class="type">EhCacheManagerFactoryBean</span> <span class="variable">cmfb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EhCacheManagerFactoryBean</span>();</span><br><span class="line">        cmfb.setConfigLocation(<span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">"ehcache.xml"</span>));</span><br><span class="line">        cmfb.setShared(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> cmfb.getObject();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>在ehcache.xml中添加缓存配置</li>
+</ol>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">xml复制代码<span class="meta">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"http://ehcache.org/ehcache.xsd"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">updateCheck</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">monitoring</span>=<span class="string">"autodetect"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">dynamicConfig</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">"userCache"</span> <span class="attr">maxEntriesLocalHeap</span>=<span class="string">"10000"</span> <span class="attr">timeToLiveSeconds</span>=<span class="string">"60"</span> <span class="attr">timeToIdleSeconds</span>=<span class="string">"30"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>在Controller中查询数据时，先从Ehcache缓存中获取，如果缓存中无数据则再从Redis缓存中获取数据</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">java复制代码<span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> CacheManager ehCacheManager;</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping("/user/{id}")</span></span><br><span class="line"><span class="meta">@Cacheable(value = "userCache", key = "#id")</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>{</span><br><span class="line">    <span class="comment">// 先从Ehcache缓存中获取</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">"user_"</span>+id.toString();</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) ehCacheManager.getCache(<span class="string">"userCache"</span>).get(userKey).get();</span><br><span class="line">    <span class="keyword">if</span>(user == <span class="literal">null</span>){</span><br><span class="line">        <span class="comment">// 再从Redis缓存中获取</span></span><br><span class="line">        user = (User) redisTemplate.opsForValue().get(userKey);</span><br><span class="line">        <span class="keyword">if</span>(user != <span class="literal">null</span>){</span><br><span class="line">            ehCacheManager.getCache(<span class="string">"userCache"</span>).put(userKey, user);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>以上就是使用SpringBoot时如何解决Redis的缓存穿透、缓存击穿、缓存雪崩的常用方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/07/14/interview/redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9/Redis%E7%BC%93%E5%AD%98/" data-id="clk3o45mq00dlygv6gs8g9ck5" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/07/15/interview/redis/Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E5%87%BB%E7%A9%BF%E3%80%81%E9%9B%AA%E5%B4%A9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Redis的缓存穿透、缓存击穿、缓存雪崩
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/06/04/redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">为何要用分布式锁&amp;Redis实现分布式锁</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>78</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>58</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
