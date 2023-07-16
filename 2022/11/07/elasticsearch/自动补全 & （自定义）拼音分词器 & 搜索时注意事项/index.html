@@ -5,12 +5,12 @@
   
   <title>自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="自动补全：  要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：GitHub - medcl&#x2F;elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pin">
+  <meta name="description" content="自动补全： 要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：GitHub - medcl&#x2F;elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自动补全 &amp; （自定义）拼音分词器 &amp; 搜索时注意事项">
 <meta property="og:url" content="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="自动补全：  要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：GitHub - medcl&#x2F;elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pin">
+<meta property="og:description" content="自动补全： 要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：GitHub - medcl&#x2F;elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyi">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20550059a1414aeba684b69474dbd00f~tplv-k3u1fbpfcp-zoom-1.image">
@@ -128,46 +128,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="自动补全"><a class="markdownIt-Anchor" href="#自动补全"></a> 自动补全：</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+        <h1 id="自动补全："><a href="#自动补全：" class="headerlink" title="自动补全："></a>自动补全：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/727c6f47f37f4bd8b83ecb9bebb33aab~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>要实现根据字母做补全，就必须对文档按照拼音分词。在GitHub上恰好有elasticsearch的拼音分词插件。地址：<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-pinyin" title="GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.">GitHub - medcl/elasticsearch-analysis-pinyin: This Pinyin Analysis plugin is used to do conversion between Chinese characters and Pinyin.</a></p>
-<h2 id="用初始化的拼音分词器进行分词"><a class="markdownIt-Anchor" href="#用初始化的拼音分词器进行分词"></a> 用初始化的拼音分词器进行分词：</h2>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20550059a1414aeba684b69474dbd00f~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h2 id="用初始化的拼音分词器进行分词："><a href="#用初始化的拼音分词器进行分词：" class="headerlink" title="用初始化的拼音分词器进行分词："></a>用初始化的拼音分词器进行分词：</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/20550059a1414aeba684b69474dbd00f~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>为了实现得到的分词有中文也有拼音，我门需要</p>
-<h1 id="自定义拼音分词器中文-拼音"><a class="markdownIt-Anchor" href="#自定义拼音分词器中文-拼音"></a> 自定义拼音分词器（中文 + 拼音）</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54b101fabd25411aada38a0d4bf707f7~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97823625e9e74820b861218b2a14d764~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h1 id="自定义拼音分词器（中文-拼音）"><a href="#自定义拼音分词器（中文-拼音）" class="headerlink" title="自定义拼音分词器（中文 + 拼音）"></a>自定义拼音分词器（中文 + 拼音）</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54b101fabd25411aada38a0d4bf707f7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97823625e9e74820b861218b2a14d764~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">{</span><br><span class="line">  "settings": {</span><br><span class="line">    "analysis": {</span><br><span class="line">      "analyzer": { </span><br><span class="line">        "my_analyzer": { </span><br><span class="line">          "tokenizer": "ik_max_word",</span><br><span class="line">          "filter": "py"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "filter": {</span><br><span class="line">        "py": { </span><br><span class="line">          "type": "pinyin",</span><br><span class="line">          "keep_full_pinyin": false,</span><br><span class="line">          "keep_joined_full_pinyin": true,</span><br><span class="line">          "keep_original": true,</span><br><span class="line">          "limit_first_letter_length": 16,</span><br><span class="line">          "remove_duplicated_term": true,</span><br><span class="line">          "none_chinese_pinyin_tokenize": false</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "name":{</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "my_analyzer"</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="测试方式1"><a class="markdownIt-Anchor" href="#测试方式1"></a> 测试方式1：</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+
+
+<h1 id="测试方式1："><a href="#测试方式1：" class="headerlink" title="测试方式1："></a>测试方式1：</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f58e13d1768e44b6b6556198ecca868b~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式1</span><br><span class="line">POST /test/_analyze</span><br><span class="line">{</span><br><span class="line">  "text": ["如家酒店还不错"],</span><br><span class="line">  "analyzer": "my_analyzer"</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段-后搜索"><a class="markdownIt-Anchor" href="#测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段-后搜索"></a> <strong>测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索</strong></h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b83a41a21ac44b8ba1bb160d05dfb0ad~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+
+
+<h1 id="测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段，-后搜索"><a href="#测试-自定义的分词器-的方式2-先添加两个-拼音相同的-字段，-后搜索" class="headerlink" title="测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索"></a><strong>测试 自定义的分词器 的方式2: 先添加两个 拼音相同的 字段， 后搜索</strong></h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b83a41a21ac44b8ba1bb160d05dfb0ad~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 测试 自定义的分词器 的方式2</span><br><span class="line">#先添加两个 拼音相同的 字段， 后搜索</span><br><span class="line">POST /test/_doc/1</span><br><span class="line">{</span><br><span class="line">  "id": 1,</span><br><span class="line">  "name": "狮子"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">POST /test/_doc/2</span><br><span class="line">{</span><br><span class="line">  "id": 2,</span><br><span class="line">  "name": "虱子"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">GET /test/_search</span><br><span class="line">{</span><br><span class="line">  "query": {</span><br><span class="line">    "match": {</span><br><span class="line">      "name": "shizi"</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="注意事项"><a class="markdownIt-Anchor" href="#注意事项"></a> 注意事项：</h1>
-<pre><code>    问题：当我用自定义的拼音分词器去搜索一段又狮子的中文时，却也搜出了库里面的的虱子，因为“狮子”和“虱子”有着相同的拼音，而拼音分词器就是可以将相同拼音的中文都搜出来
+
+
+
+<h1 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h1><pre><code>    问题：当我用自定义的拼音分词器去搜索一段又狮子的中文时，却也搜出了库里面的的虱子，因为“狮子”和“虱子”有着相同的拼音，而拼音分词器就是可以将相同拼音的中文都搜出来
 </code></pre>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a08f04fd4074946bc7e792a8722dc6d~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a08f04fd4074946bc7e792a8722dc6d~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>解决：</p>
 <pre><code>  为了避免搜索到同拼音字，搜索时不要用拼音分词器
 </code></pre>
-<p>​</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2687fedd3364fabbefedb2c55c6289a~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p>​    </p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2687fedd3364fabbefedb2c55c6289a~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p><strong>删库，重设置和重建索引库，再重新测试上面的测试方式2就可以了</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5c99ca9c04e4707a474d6acbaaf1aa9~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a5c99ca9c04e4707a474d6acbaaf1aa9~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p><strong>代码：</strong></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//删除库</span><br><span class="line">DELETE /test</span><br><span class="line"></span><br><span class="line">// 自定义拼音分词器</span><br><span class="line">PUT /test</span><br><span class="line">{</span><br><span class="line">  "settings": {</span><br><span class="line">    "analysis": {</span><br><span class="line">      "analyzer": { </span><br><span class="line">        "my_analyzer": { </span><br><span class="line">          "tokenizer": "ik_max_word",</span><br><span class="line">          "filter": "py"</span><br><span class="line">        }</span><br><span class="line">      },</span><br><span class="line">      "filter": {</span><br><span class="line">        "py": { </span><br><span class="line">          "type": "pinyin",</span><br><span class="line">          "keep_full_pinyin": false,</span><br><span class="line">          "keep_joined_full_pinyin": true,</span><br><span class="line">          "keep_original": true,</span><br><span class="line">          "limit_first_letter_length": 16,</span><br><span class="line">          "remove_duplicated_term": true,</span><br><span class="line">          "none_chinese_pinyin_tokenize": false</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "mappings": {</span><br><span class="line">    "properties": {</span><br><span class="line">      "name":{</span><br><span class="line">        "type": "text",</span><br><span class="line">        "analyzer": "my_analyzer",</span><br><span class="line">        "search_analyzer": "ik_smart"</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 <p><strong>测试（和上面的测试方式2一样）：</strong></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ab02a4a307ec45f888e27b2cda2a30f6~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ab02a4a307ec45f888e27b2cda2a30f6~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>总结：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4aabf0e2fdbe468b9434e69eda633850~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<h1 id="dsl实现自动补全查询"><a class="markdownIt-Anchor" href="#dsl实现自动补全查询"></a> DSL实现自动补全查询：</h1>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/125784439?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22125784439%22%2C%22source%22%3A%22QRLYLETITBE%22%7D&amp;ctrtid=H8ap4" title="(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客">(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客</a></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4aabf0e2fdbe468b9434e69eda633850~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="DSL实现自动补全查询："><a href="#DSL实现自动补全查询：" class="headerlink" title="DSL实现自动补全查询："></a>DSL实现自动补全查询：</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/125784439?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22125784439%22,%22source%22:%22QRLYLETITBE%22%7D&amp;ctrtid=H8ap4" title="(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客">(45条消息) DSL实现自动补全查询_其然乐衣的博客-CSDN博客</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clk4cfgd900417kv6dtpr3sxq" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%20&%20%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%EF%BC%89%E6%8B%BC%E9%9F%B3%E5%88%86%E8%AF%8D%E5%99%A8%20&%20%E6%90%9C%E7%B4%A2%E6%97%B6%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clk5oo4qj003w6ov619jb1iel" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -368,5 +369,20 @@ new WOW().init();
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

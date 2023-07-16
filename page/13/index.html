@@ -113,13 +113,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应的视频教程"><a class="markdownIt-Anchor" href="#对应的视频教程"></a> 对应的视频教程</h1>
-<blockquote>
+        <h1 id="对应的视频教程"><a href="#对应的视频教程" class="headerlink" title="对应的视频教程"></a>对应的视频教程</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=151&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-02-Redis主从_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="一-搭建redis主从集群"><a class="markdownIt-Anchor" href="#一-搭建redis主从集群"></a> 一、搭建Redis主从集群</h1>
-<h2 id="1集群结构"><a class="markdownIt-Anchor" href="#1集群结构"></a> 1.集群结构</h2>
-<p>我们搭建的主从集群结构如图：</p>
+<h1 id="一、搭建Redis主从集群"><a href="#一、搭建Redis主从集群" class="headerlink" title="一、搭建Redis主从集群"></a>一、搭建Redis主从集群</h1><h2 id="1-集群结构"><a href="#1-集群结构" class="headerlink" title="1.集群结构"></a>1.集群结构</h2><p>我们搭建的主从集群结构如图：</p>
 <p><img src="https://img-blog.csdnimg.cn/760dffe18def4d9dbb5499bcc3cc2a4f.png" alt="img"></p>
 <p>共包含三个节点，一个主节点，两个从节点。</p>
 <p>这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：</p>
@@ -131,8 +128,7 @@
 <th>角色</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>192.168.150.101</td>
 <td>7001</td>
 <td>master</td>
@@ -147,88 +143,90 @@
 <td>7003</td>
 <td>slave</td>
 </tr>
-</tbody>
-</table>
-<h2 id="2准备实例和配置"><a class="markdownIt-Anchor" href="#2准备实例和配置"></a> 2.准备实例和配置</h2>
-<p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
+</tbody></table>
+<h2 id="2-准备实例和配置"><a href="#2-准备实例和配置" class="headerlink" title="2.准备实例和配置"></a>2.准备实例和配置</h2><p>要在同一台虚拟机开启3个实例，必须准备三份不同的配置文件和目录，配置文件所在目录也就是工作目录。</p>
 <p>1）创建目录</p>
 <p>我们创建三个文件夹，名字分别叫7001、7002、7003：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入/tmp目录</span><br><span class="line">cd /tmp</span><br><span class="line"># 创建目录</span><br><span class="line">mkdir 7001 7002 7003</span><br></pre></td></tr></tbody></table></figure>
+
 <p>如图：</p>
 <p><img src="https://img-blog.csdnimg.cn/4cf724d39ef5484a9eab3d9b064fe44f.png" alt="img"></p>
 <p>2）恢复原始配置</p>
 <p>修改redis-6.2.4/redis.conf文件，将其中的持久化模式改为默认的RDB模式，AOF保持关闭状态。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启RDB</span><br><span class="line"># save ""</span><br><span class="line">save 3600 1</span><br><span class="line">save 300 100</span><br><span class="line">save 60 10000</span><br><span class="line"></span><br><span class="line"># 关闭AOF</span><br><span class="line">appendonly no</span><br></pre></td></tr></tbody></table></figure>
+
 <p>3）拷贝配置文件到每个实例目录</p>
 <p>然后将redis-6.2.4/redis.conf文件拷贝到三个目录中（在/tmp目录执行下列命令）：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 方式一：逐个拷贝</span><br><span class="line">cp redis-6.2.4/redis.conf 7001</span><br><span class="line">cp redis-6.2.4/redis.conf 7002</span><br><span class="line">cp redis-6.2.4/redis.conf 7003</span><br><span class="line"># 方式二：管道组合命令，一键拷贝</span><br><span class="line">echo 7001 7002 7003 | xargs -t -n 1 cp redis-6.2.4/redis.conf</span><br></pre></td></tr></tbody></table></figure>
+
 <p>4）修改每个实例的端口、工作目录</p>
 <p>修改每个文件夹内的配置文件，将端口分别修改为7001、7002、7003，将rdb文件保存位置都修改为自己所在目录（在/tmp目录执行下列命令）：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i -e 's/6379/7001/g' -e 's/dir .\//dir \/tmp\/7001\//g' 7001/redis.conf</span><br><span class="line">sed -i -e 's/6379/7002/g' -e 's/dir .\//dir \/tmp\/7002\//g' 7002/redis.conf</span><br><span class="line">sed -i -e 's/6379/7003/g' -e 's/dir .\//dir \/tmp\/7003\//g' 7003/redis.conf</span><br></pre></td></tr></tbody></table></figure>
+
 <p>5）修改每个实例的声明IP</p>
 <p>虚拟机本身有多个IP，为了避免将来混乱，我们需要在redis.conf文件中指定每一个实例的绑定ip信息，格式如下：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># redis实例的声明 IP</span><br><span class="line">replica-announce-ip 192.168.150.101</span><br></pre></td></tr></tbody></table></figure>
+
 <p>每个目录都要改，我们一键完成修改（在/tmp目录执行下列命令）：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 逐一执行</span><br><span class="line">sed -i '1a replica-announce-ip 192.168.150.101' 7001/redis.conf</span><br><span class="line">sed -i '1a replica-announce-ip 192.168.150.101' 7002/redis.conf</span><br><span class="line">sed -i '1a replica-announce-ip 192.168.150.101' 7003/redis.conf</span><br><span class="line"></span><br><span class="line"># 或者一键修改</span><br><span class="line">printf '%s\n' 7001 7002 7003 | xargs -I{} -t sed -i '1a replica-announce-ip 192.168.150.101' {}/redis.conf</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="3启动"><a class="markdownIt-Anchor" href="#3启动"></a> 3.启动</h2>
-<p>为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</p>
+
+<h2 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动"></a>3.启动</h2><p>为了方便查看日志，我们打开3个ssh窗口，分别启动3个redis实例，启动命令：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 第1个</span><br><span class="line">redis-server 7001/redis.conf</span><br><span class="line"># 第2个</span><br><span class="line">redis-server 7002/redis.conf</span><br><span class="line"># 第3个</span><br><span class="line">redis-server 7003/redis.conf</span><br></pre></td></tr></tbody></table></figure>
+
 <p>启动后：</p>
 <p><img src="https://img-blog.csdnimg.cn/a59daa70d87f4f9d949860dae391942c.png" alt="img"></p>
 <p>如果要一键停止，可以运行下面命令：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf '%s\n' 7001 7002 7003 | xargs -I{} -t redis-cli -p {} shutdown</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="4开启主从关系"><a class="markdownIt-Anchor" href="#4开启主从关系"></a> 4.开启主从关系</h2>
-<p>现在三个实例还没有任何关系，要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。</p>
+
+<h2 id="4-开启主从关系"><a href="#4-开启主从关系" class="headerlink" title="4.开启主从关系"></a>4.开启主从关系</h2><p>现在三个实例还没有任何关系，要配置主从可以使用replicaof 或者slaveof（5.0以前）命令。</p>
 <p>有临时和永久两种模式：</p>
 <ul>
-<li>
-<p>修改配置文件（<mark>永久生效</mark>）</p>
+<li><p>修改配置文件（<mark>永久生效</mark>）</p>
 <ul>
 <li>在redis.conf中添加一行配置：<font color="blue"><code>slaveof &lt;masterip&gt; &lt;masterport&gt;</code></font></li>
 </ul>
 </li>
-<li>
-<p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<li><p>使用redis-cli客户端连接到redis服务，执行slaveof命令（重启后失效）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <p><strong>注意</strong>：在5.0以后新增命令replicaof，与salveof效果一致。</p>
 <p>这里我们为了演示方便，使用方式二。</p>
 <p>通过redis-cli命令连接7002，执行下面命令：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7002</span><br><span class="line">redis-cli -p 7002</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></tbody></table></figure>
+
 <p>通过redis-cli命令连接7003，执行下面命令：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7003</span><br><span class="line">redis-cli -p 7003</span><br><span class="line"># 执行slaveof</span><br><span class="line">slaveof 192.168.150.101 7001</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="https://img-blog.csdnimg.cn/8ba1e82306a74338b0b8e7b64087e790.png" alt="img"></p>
 <p>然后连接 7001节点，查看集群状态：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 连接 7001</span><br><span class="line">redis-cli -p 7001</span><br><span class="line"># 查看状态</span><br><span class="line">info replication</span><br></pre></td></tr></tbody></table></figure>
+
 <p>结果：</p>
 <p><img src="https://img-blog.csdnimg.cn/9fe619ef341e48e9a7d11a46b6f1e943.png" alt="img"></p>
-<h2 id="5测试"><a class="markdownIt-Anchor" href="#5测试"></a> 5.测试</h2>
-<p>执行下列操作以测试：</p>
+<h2 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h2><p>执行下列操作以测试：</p>
 <ul>
 <li>利用redis-cli连接7001，执行<code>set num 123</code></li>
 <li>利用redis-cli连接7002，执行<code>get num</code>，再执行<code>set num 666</code></li>
 <li>利用redis-cli连接7003，执行<code>get num</code>，再执行<code>set num 888</code></li>
 </ul>
 <p>可以发现，只有在7001这个master节点上可以执行写操作，7002和7003这两个slave节点只能执行读操作。</p>
-<p><img src="https://img-blog.csdnimg.cn/8b72b006934c477b9aaf1806542007a1.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/8b72b006934c477b9aaf1806542007a1.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/e9985b1fcb7046b2849d2b260e4183a4.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/00e23fce5f8040b7bdcdd8daf059785d.png" alt="img"></p>
-<h1 id="二-数据同步原理"><a class="markdownIt-Anchor" href="#二-数据同步原理"></a> 二、数据同步原理</h1>
-<p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/c89f161adfcf4eb9a16367bb72919139.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/00e23fce5f8040b7bdcdd8daf059785d.png" alt="img"></p>
+<h1 id="二、数据同步原理"><a href="#二、数据同步原理" class="headerlink" title="二、数据同步原理"></a>二、数据同步原理</h1><p><img src="https://img-blog.csdnimg.cn/566d2c905de44bd3a908d3ef2a221eb3.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/e07861738258498a80882dd99d5f65e6.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/c89f161adfcf4eb9a16367bb72919139.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/c519a72fdc2140268b2b18c3e82df57e.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/32c36304a2ce450eaa3ecee4e3203ccd.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/5cb9aa1893bb409c8a65259d8dd094da.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/435c034f44794a3fbc0d6f15efe1e77c.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/1d1d8ba89683446eb5d4053a7f3c0eca.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/4e540323ef0443eb915595fe8d975817.png" alt="img"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clk4cfgf9009c7kv637pmagdc" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E4%B8%BB%E4%BB%8E/" data-id="clk5oo4tb00ay6ov68o9o4417" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -278,90 +276,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对应的视频教程"><a class="markdownIt-Anchor" href="#对应的视频教程"></a> 对应的视频教程</h1>
-<blockquote>
+        <h1 id="对应的视频教程"><a href="#对应的视频教程" class="headerlink" title="对应的视频教程"></a>对应的视频教程</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=150&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day3-01-Redis持久化_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<h1 id="一-rdb持久化"><a class="markdownIt-Anchor" href="#一-rdb持久化"></a> 一、RDB持久化</h1>
-<p><img src="https://img-blog.csdnimg.cn/20407d008453450da1df4a8dd664043f.png" alt="img"></p>
-<p>首先需要在Linux系统中安装一个Redis，如果尚未安装的同学，可以参考下面链接教程安装先：</p>
+<h1 id="一、RDB持久化"><a href="#一、RDB持久化" class="headerlink" title="一、RDB持久化"></a>一、RDB持久化</h1><p><img src="https://img-blog.csdnimg.cn/20407d008453450da1df4a8dd664043f.png" alt="img"></p>
+<p> 首先需要在Linux系统中安装一个Redis，如果尚未安装的同学，可以参考下面链接教程安装先：</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126645589?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126645589%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(73条消息) 单机安装Redis_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126645589?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126645589%22,%22source%22:%22QRLYLETITBE%22%7D">(73条消息) 单机安装Redis_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 <p><img src="https://img-blog.csdnimg.cn/63326861407a45378d6710545e246731.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/9470faad3b884165be8bffe4bc24733b.jpeg" alt="img"><img src="https://img-blog.csdnimg.cn/66ec88a142d44244942caffa0627aaf2.jpeg" alt="img"></p>
 <p><strong>修改配置文件</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/94fb67f940b5431d852b80399a9fbd25.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/94fb67f940b5431d852b80399a9fbd25.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/5aa1265753014ccfa15d794e4a5005ef.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/98d8fab9ec7c45958f264cdab7f02e6d.png" alt="img"></p>
 <p>创建一个数据</p>
 <p><img src="https://img-blog.csdnimg.cn/55154d5296954502886f3cf4669830c6.png" alt="img"></p>
-<p>因为设置了只要5秒内有一次修改就会触发一次备份数据，所以就得到了备份数据</p>
+<p>因为设置了只要5秒内有一次修改就会触发一次备份数据，所以就得到了备份数据 </p>
 <p><img src="https://img-blog.csdnimg.cn/2bc8917421d449f0bd6bd26c37bb088f.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/5a74275f5dc64deea5433084e5de160f.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/e88a8f0875164ea68019ad0d005ef092.png" alt="img"></p>
-<p>RDB是有可能会发生数据丢失的，因为两次备份的时间间隔会比较长。因此我们需要AOF持久化，它可以大大地提高数据的安全性，来弥补RDB缺点</p>
-<h1 id="二-aof持久化"><a class="markdownIt-Anchor" href="#二-aof持久化"></a> 二、AOF持久化</h1>
-<p><img src="https://img-blog.csdnimg.cn/308e771be0c645ac8ed9c31b3e4de652.png" alt="img"></p>
-<h2 id="1-修改配置文件redisconf"><a class="markdownIt-Anchor" href="#1-修改配置文件redisconf"></a> 1、修改配置文件redis.conf</h2>
-<p><img src="https://img-blog.csdnimg.cn/a5ca06b74fe74c12a70cd73046176b03.png" alt="img"></p>
-<h3 id="11先禁用rdb因为要演示aof"><a class="markdownIt-Anchor" href="#11先禁用rdb因为要演示aof"></a> <strong>1.1.先禁用RDB，因为要演示AOF</strong></h3>
-<p><img src="https://img-blog.csdnimg.cn/a08acd2bca2542bb887b7eafdd2d0d20.png" alt="img"></p>
-<h3 id="12开启aof功能默认的是no"><a class="markdownIt-Anchor" href="#12开启aof功能默认的是no"></a> <strong>1.2.开启AOF功能（默认的是no）</strong></h3>
-<p><img src="https://img-blog.csdnimg.cn/8d1ec653dcdd40ffb0cc04046dee3c88.png" alt="img"></p>
-<h3 id="13aof文件的名称文件后缀是aof文件名可任意这里我们不做修改没用默认的就行"><a class="markdownIt-Anchor" href="#13aof文件的名称文件后缀是aof文件名可任意这里我们不做修改没用默认的就行"></a> <strong>1.3.AOF文件的名称，文件后缀是.aof，文件名可任意，这里我们不做修改没用默认的就行</strong></h3>
-<p><img src="https://img-blog.csdnimg.cn/ebfe881314fb4bcd82749f7600386c4f.png" alt="img"></p>
-<h3 id="14img"><a class="markdownIt-Anchor" href="#14img"></a> <strong>1.4.</strong><img src="https://img-blog.csdnimg.cn/acfa0e8bdcfb456581c29e7c7fd87ff4.png" alt="img"></h3>
-<p>到这配置文件的修改就完成了</p>
-<h2 id="2删掉rdb文件"><a class="markdownIt-Anchor" href="#2删掉rdb文件"></a> 2.删掉rdb文件</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf *.rdb</span><br></pre></td></tr></tbody></table></figure>
+<p> <img src="https://img-blog.csdnimg.cn/5a74275f5dc64deea5433084e5de160f.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/e88a8f0875164ea68019ad0d005ef092.png" alt="img"></p>
+<p> RDB是有可能会发生数据丢失的，因为两次备份的时间间隔会比较长。因此我们需要AOF持久化，它可以大大地提高数据的安全性，来弥补RDB缺点</p>
+<h1 id="二、AOF持久化"><a href="#二、AOF持久化" class="headerlink" title="二、AOF持久化"></a>二、AOF持久化</h1><p><img src="https://img-blog.csdnimg.cn/308e771be0c645ac8ed9c31b3e4de652.png" alt="img"></p>
+<h2 id="1、修改配置文件redis-conf"><a href="#1、修改配置文件redis-conf" class="headerlink" title="1、修改配置文件redis.conf"></a>1、修改配置文件redis.conf</h2><p><img src="https://img-blog.csdnimg.cn/a5ca06b74fe74c12a70cd73046176b03.png" alt="img"></p>
+<h3 id="1-1-先禁用RDB，因为要演示AOF"><a href="#1-1-先禁用RDB，因为要演示AOF" class="headerlink" title="1.1.先禁用RDB，因为要演示AOF"></a><strong>1.1.先禁用RDB，因为要演示AOF</strong></h3><p><img src="https://img-blog.csdnimg.cn/a08acd2bca2542bb887b7eafdd2d0d20.png" alt="img"></p>
+<h3 id="1-2-开启AOF功能（默认的是no）"><a href="#1-2-开启AOF功能（默认的是no）" class="headerlink" title="1.2.开启AOF功能（默认的是no）"></a><strong>1.2.开启AOF功能（默认的是no）</strong></h3><p><img src="https://img-blog.csdnimg.cn/8d1ec653dcdd40ffb0cc04046dee3c88.png" alt="img"></p>
+<h3 id="1-3-AOF文件的名称，文件后缀是-aof，文件名可任意，这里我们不做修改没用默认的就行"><a href="#1-3-AOF文件的名称，文件后缀是-aof，文件名可任意，这里我们不做修改没用默认的就行" class="headerlink" title="1.3.AOF文件的名称，文件后缀是.aof，文件名可任意，这里我们不做修改没用默认的就行"></a><strong>1.3.AOF文件的名称，文件后缀是.aof，文件名可任意，这里我们不做修改没用默认的就行</strong></h3><p><img src="https://img-blog.csdnimg.cn/ebfe881314fb4bcd82749f7600386c4f.png" alt="img"></p>
+<h3 id="1-4"><a href="#1-4" class="headerlink" title="1.4."></a><strong>1.4.</strong><img src="https://img-blog.csdnimg.cn/acfa0e8bdcfb456581c29e7c7fd87ff4.png" alt="img"></h3><p> 到这配置文件的修改就完成了</p>
+<h2 id="2-删掉rdb文件"><a href="#2-删掉rdb文件" class="headerlink" title="2.删掉rdb文件"></a>2.删掉rdb文件</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf *.rdb</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p><img src="https://img-blog.csdnimg.cn/ef2cdc7bcf6244adac4e1cc0a1ada807.png" alt="img"></p>
-<h2 id="3重启redis"><a class="markdownIt-Anchor" href="#3重启redis"></a> 3.重启redis</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis.conf</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="3-重启redis"><a href="#3-重启redis" class="headerlink" title="3.重启redis"></a>3.重启redis</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis.conf</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<h2 id="4检查数据发现证明之前的数据都清空了"><a class="markdownIt-Anchor" href="#4检查数据发现证明之前的数据都清空了"></a> 4.检查数据，发现证明之前的数据都清空了</h2>
-<p><img src="https://img-blog.csdnimg.cn/d68adeda51db40d09591bbc38373f6d7.png" alt="img"></p>
-<h2 id="5写新数据"><a class="markdownIt-Anchor" href="#5写新数据"></a> 5.写新数据</h2>
-<p><img src="https://img-blog.csdnimg.cn/8fe389f98ece4d72b13350164f874966.png" alt="img"></p>
-<h2 id="6刷新一下aof文件就生成了也就是备份了数据"><a class="markdownIt-Anchor" href="#6刷新一下aof文件就生成了也就是备份了数据"></a> 6.刷新一下，aof文件就生成了，也就是备份了数据</h2>
-<p><img src="https://img-blog.csdnimg.cn/84403c504fbb4148b789c0a113784c17.png" alt="img"></p>
-<h2 id="7查看aof文件"><a class="markdownIt-Anchor" href="#7查看aof文件"></a> 7.查看aof文件</h2>
-<p><img src="https://img-blog.csdnimg.cn/4718952955844c8c9f4a86bfc94eb5cf.png" alt="img"></p>
-<h3 id="如果继续添加命令写数据"><a class="markdownIt-Anchor" href="#如果继续添加命令写数据"></a> 如果继续添加命令写数据</h3>
-<p><img src="https://img-blog.csdnimg.cn/2d3bc4e053c14b7590661e50153537d5.png" alt="img"></p>
+<h2 id="4-检查数据，发现证明之前的数据都清空了"><a href="#4-检查数据，发现证明之前的数据都清空了" class="headerlink" title="4.检查数据，发现证明之前的数据都清空了"></a>4.检查数据，发现证明之前的数据都清空了</h2><p><img src="https://img-blog.csdnimg.cn/d68adeda51db40d09591bbc38373f6d7.png" alt="img"></p>
+<h2 id="5-写新数据"><a href="#5-写新数据" class="headerlink" title="5.写新数据"></a>5.写新数据</h2><p><img src="https://img-blog.csdnimg.cn/8fe389f98ece4d72b13350164f874966.png" alt="img"></p>
+<h2 id="6-刷新一下，aof文件就生成了，也就是备份了数据"><a href="#6-刷新一下，aof文件就生成了，也就是备份了数据" class="headerlink" title="6.刷新一下，aof文件就生成了，也就是备份了数据"></a>6.刷新一下，aof文件就生成了，也就是备份了数据</h2><p><img src="https://img-blog.csdnimg.cn/84403c504fbb4148b789c0a113784c17.png" alt="img"></p>
+<h2 id="7-查看aof文件"><a href="#7-查看aof文件" class="headerlink" title="7.查看aof文件"></a>7.查看aof文件</h2><p><img src="https://img-blog.csdnimg.cn/4718952955844c8c9f4a86bfc94eb5cf.png" alt="img"></p>
+<h3 id="如果继续添加命令写数据"><a href="#如果继续添加命令写数据" class="headerlink" title="如果继续添加命令写数据"></a>如果继续添加命令写数据</h3><p><img src="https://img-blog.csdnimg.cn/2d3bc4e053c14b7590661e50153537d5.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/11fa9cfaeaab4a4b9754a782c7216522.png" alt="img"></p>
-<h2 id="8停止redis和重启redis"><a class="markdownIt-Anchor" href="#8停止redis和重启redis"></a> 8.停止redis和重启redis</h2>
-<p><img src="https://img-blog.csdnimg.cn/b5e51a9c90bd48a2a7970eee3e190b97.png" alt="img"></p>
+<h2 id="8-停止redis和重启redis"><a href="#8-停止redis和重启redis" class="headerlink" title="8.停止redis和重启redis"></a>8.停止redis和重启redis</h2><p><img src="https://img-blog.csdnimg.cn/b5e51a9c90bd48a2a7970eee3e190b97.png" alt="img"></p>
 <p><img src="https://img-blog.csdnimg.cn/f881f1c01cba44b588cf3d2d64a82a17.png" alt="img"></p>
-<h3 id="停止重启后依然有以前的数据"><a class="markdownIt-Anchor" href="#停止重启后依然有以前的数据"></a> 停止重启后，依然有以前的数据</h3>
-<p><img src="https://img-blog.csdnimg.cn/4a4c063d1cfe4dbbb6c80303d2e168e7.png" alt="img"></p>
+<h3 id="停止重启后，依然有以前的数据"><a href="#停止重启后，依然有以前的数据" class="headerlink" title="停止重启后，依然有以前的数据"></a>停止重启后，依然有以前的数据</h3><p><img src="https://img-blog.csdnimg.cn/4a4c063d1cfe4dbbb6c80303d2e168e7.png" alt="img"></p>
 <p><strong>【 这就证明了，我们确实已经实现了数据的持久化和 故障的维护】</strong></p>
-<h2 id="9"><a class="markdownIt-Anchor" href="#9"></a> <strong>9.</strong></h2>
-<h2 id="但是存在的缺陷是aof会记录对同一个key的多次写操作但只有最有一次写操作才意义然而这增大了文件的大小比rdb的文件大很多"><a class="markdownIt-Anchor" href="#但是存在的缺陷是aof会记录对同一个key的多次写操作但只有最有一次写操作才意义然而这增大了文件的大小比rdb的文件大很多"></a> 但是存在的缺陷是，aof会记录对同一个key的多次写操作，但只有最有一次写操作才意义，然而这增大了文件的大小，比RDB的文件大很多</h2>
-<h3 id="通过执行-font-colorredbgrewriteaoffont-命令可以让aof文件执行重写功能用最少的命令达到相同的效果-img91-执行bgrewriteaof-命令img"><a class="markdownIt-Anchor" href="#通过执行-font-colorredbgrewriteaoffont-命令可以让aof文件执行重写功能用最少的命令达到相同的效果-img91-执行bgrewriteaof-命令img"></a> <strong>通过执行</strong> <font color="red"><strong>bgrewriteaof</strong></font> <strong>命令，可以让AOF文件执行重写功能，用最少的命令达到相同的效果</strong> <img src="https://img-blog.csdnimg.cn/5506c4caef1b48418c78689524c8c579.png" alt="img">9.1 执行<strong>bgrewriteaof</strong> 命令<img src="https://img-blog.csdnimg.cn/29559d3d58e34b048ed677137ea0b640.png" alt="img"></h3>
-<h3 id="92-通过cat命令查询aof文件"><a class="markdownIt-Anchor" href="#92-通过cat命令查询aof文件"></a> 9.2. 通过cat命令查询aof文件</h3>
-<p><img src="https://img-blog.csdnimg.cn/5df8a1ec2f7243dc985d2b6a9b58f528.png" alt="img"></p>
-<h3 id="93-通过vi查看aof文件"><a class="markdownIt-Anchor" href="#93-通过vi查看aof文件"></a> 9.3. 通过vi查看aof文件</h3>
-<p>会发现命令被压缩了</p>
+<h2 id="9"><a href="#9" class="headerlink" title="9."></a><strong>9.</strong></h2><h2 id="但是存在的缺陷是，aof会记录对同一个key的多次写操作，但只有最有一次写操作才意义，然而这增大了文件的大小，比RDB的文件大很多"><a href="#但是存在的缺陷是，aof会记录对同一个key的多次写操作，但只有最有一次写操作才意义，然而这增大了文件的大小，比RDB的文件大很多" class="headerlink" title="但是存在的缺陷是，aof会记录对同一个key的多次写操作，但只有最有一次写操作才意义，然而这增大了文件的大小，比RDB的文件大很多"></a>但是存在的缺陷是，aof会记录对同一个key的多次写操作，但只有最有一次写操作才意义，然而这增大了文件的大小，比RDB的文件大很多</h2><h3 id="通过执行-bgrewriteaof-命令，可以让AOF文件执行重写功能，用最少的命令达到相同的效果-9-1-执行bgrewriteaof-命令"><a href="#通过执行-bgrewriteaof-命令，可以让AOF文件执行重写功能，用最少的命令达到相同的效果-9-1-执行bgrewriteaof-命令" class="headerlink" title="通过执行 bgrewriteaof 命令，可以让AOF文件执行重写功能，用最少的命令达到相同的效果 9.1 执行bgrewriteaof 命令"></a><strong>通过执行</strong> <font color="red"><strong>bgrewriteaof</strong></font> <strong>命令，可以让AOF文件执行重写功能，用最少的命令达到相同的效果</strong> <img src="https://img-blog.csdnimg.cn/5506c4caef1b48418c78689524c8c579.png" alt="img">9.1 执行<strong>bgrewriteaof</strong> 命令<img src="https://img-blog.csdnimg.cn/29559d3d58e34b048ed677137ea0b640.png" alt="img"></h3><h3 id="9-2-通过cat命令查询aof文件"><a href="#9-2-通过cat命令查询aof文件" class="headerlink" title="9.2. 通过cat命令查询aof文件"></a>9.2. 通过cat命令查询aof文件</h3><p><img src="https://img-blog.csdnimg.cn/5df8a1ec2f7243dc985d2b6a9b58f528.png" alt="img"></p>
+<h3 id="9-3-通过vi查看aof文件"><a href="#9-3-通过vi查看aof文件" class="headerlink" title="9.3. 通过vi查看aof文件"></a>9.3. 通过vi查看aof文件</h3><p>会发现命令被压缩了</p>
 <p>虽然比之前的难看些了， 但还可以看懂一些，比如num name这些</p>
 <p><img src="https://img-blog.csdnimg.cn/0025be1aa1bb486cb1e03032c1fba34a.png" alt="img"></p>
-<h2 id="10如果我们不自己手动执行-bgrewriteaof-命令redis也会在触发阈值时自动去重写aof文件-阈值也可以在redisconf中配置"><a class="markdownIt-Anchor" href="#10如果我们不自己手动执行-bgrewriteaof-命令redis也会在触发阈值时自动去重写aof文件-阈值也可以在redisconf中配置"></a> 10.如果我们不自己手动<strong>执行</strong> <strong>bgrewriteaof</strong> **命令，**Redis也会在触发阈值时自动去重写AOF文件。阈值也可以在redis.conf中配置：</h2>
-<blockquote>
-<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
-<h2 id="aof文件比上次文件-增长超过多少百分比则触发重写-auto-aof-rewrite-percentage-100"><a class="markdownIt-Anchor" href="#aof文件比上次文件-增长超过多少百分比则触发重写-auto-aof-rewrite-percentage-100"></a> <strong># AOF文件比上次文件 增长超过多少百分比则触发重写</strong>  auto-aof-rewrite-percentage 100</h2>
-<h2 id="aof文件体积最小多大以上才触发重写-auto-aof-rewrite-min-size-64mb"><a class="markdownIt-Anchor" href="#aof文件体积最小多大以上才触发重写-auto-aof-rewrite-min-size-64mb"></a> <strong># AOF文件体积最小多大以上才触发重写</strong>  auto-aof-rewrite-min-size 64mb</h2>
-</blockquote>
-<h1 id="三-rdb和aof两种持久化的对比"><a class="markdownIt-Anchor" href="#三-rdb和aof两种持久化的对比"></a> 三、RDB和AOF两种持久化的对比</h1>
-<p><img src="https://img-blog.csdnimg.cn/b12fc64d10514094a26c7ba72a6f3b33.png" alt="img"></p>
-<h3 id="注意"><a class="markdownIt-Anchor" href="#注意"></a> 注意：</h3>
-<h3 id="我们在实际使用中往往会两者结合使用数据回复优先级aof优先于rdb"><a class="markdownIt-Anchor" href="#我们在实际使用中往往会两者结合使用数据回复优先级aof优先于rdb"></a> 我们在实际使用中，往往会两者结合使用（数据回复优先级AOF优先于RDB）</h3>
-<p><strong>RDB主要充一个数据备份的作用</strong>，我们可以将备份的RDB文件拷贝到别的机房，异地的容灾。当机房这个机房毁了，AOF也就毁了，但被拷贝到别的机房的RDB文件还在，那么我们的数据还是可以恢复的。所以RDB就是主要起到这么一个备份数据的作用</p>
+<h2 id="10-如果我们不自己手动执行-bgrewriteaof-命令，Redis也会在触发阈值时自动去重写AOF文件。阈值也可以在redis-conf中配置："><a href="#10-如果我们不自己手动执行-bgrewriteaof-命令，Redis也会在触发阈值时自动去重写AOF文件。阈值也可以在redis-conf中配置：" class="headerlink" title="10.如果我们不自己手动执行 bgrewriteaof 命令，Redis也会在触发阈值时自动去重写AOF文件。阈值也可以在redis.conf中配置："></a>10.如果我们不自己手动<strong>执行</strong> <strong>bgrewriteaof</strong> <strong>命令，</strong>Redis也会在触发阈值时自动去重写AOF文件。阈值也可以在redis.conf中配置：</h2><blockquote>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="AOF文件比上次文件-增长超过多少百分比则触发重写-auto-aof-rewrite-percentage-100"><a href="#AOF文件比上次文件-增长超过多少百分比则触发重写-auto-aof-rewrite-percentage-100" class="headerlink" title="# AOF文件比上次文件 增长超过多少百分比则触发重写  auto-aof-rewrite-percentage 100"></a><strong># AOF文件比上次文件 增长超过多少百分比则触发重写</strong>  auto-aof-rewrite-percentage 100</h2><h2 id="AOF文件体积最小多大以上才触发重写-auto-aof-rewrite-min-size-64mb"><a href="#AOF文件体积最小多大以上才触发重写-auto-aof-rewrite-min-size-64mb" class="headerlink" title="# AOF文件体积最小多大以上才触发重写  auto-aof-rewrite-min-size 64mb"></a><strong># AOF文件体积最小多大以上才触发重写</strong>  auto-aof-rewrite-min-size 64mb</h2></blockquote>
+<h1 id="三、RDB和AOF两种持久化的对比"><a href="#三、RDB和AOF两种持久化的对比" class="headerlink" title="三、RDB和AOF两种持久化的对比"></a>三、RDB和AOF两种持久化的对比</h1><p><img src="https://img-blog.csdnimg.cn/b12fc64d10514094a26c7ba72a6f3b33.png" alt="img"></p>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><h3 id="我们在实际使用中，往往会两者结合使用（数据回复优先级AOF优先于RDB）"><a href="#我们在实际使用中，往往会两者结合使用（数据回复优先级AOF优先于RDB）" class="headerlink" title="我们在实际使用中，往往会两者结合使用（数据回复优先级AOF优先于RDB）"></a>我们在实际使用中，往往会两者结合使用（数据回复优先级AOF优先于RDB）</h3><p><strong>RDB主要充一个数据备份的作用</strong>，我们可以将备份的RDB文件拷贝到别的机房，异地的容灾。当机房这个机房毁了，AOF也就毁了，但被拷贝到别的机房的RDB文件还在，那么我们的数据还是可以恢复的。所以RDB就是主要起到这么一个备份数据的作用</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clk4cfgfe009l7kv6daxc5alh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%EF%BC%89Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clk5oo4tb00au6ov68ct492u8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -394,7 +365,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/redis/Untitled/" data-id="clk4cfge400617kv6diu58x2k" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/redis/Untitled/" data-id="clk5oo4r7005b6ov60fh55sau" class="article-share-link">分享</a>
       
       
     </footer>
@@ -442,37 +413,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="单机安装redis"><a class="markdownIt-Anchor" href="#单机安装redis"></a> 单机安装Redis</h1>
-<p>首先需要安装Redis所需要的依赖：</p>
+        <h1 id="单机安装Redis"><a href="#单机安装Redis" class="headerlink" title="单机安装Redis"></a>单机安装Redis</h1><p>首先需要安装Redis所需要的依赖：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc tcl</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>然后将课前资料提供的Redis安装包上传到虚拟机的任意目录：</p>
 <p>例如，我放到了/tmp目录：</p>
 <p>解压缩：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf redis-6.2.4.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>解压后：</p>
 <p>进入redis目录：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd redis-6.2.4</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>运行编译命令：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>如果没有出错，应该就安装成功了。</p>
 <p>然后修改redis.conf文件中的一些配置：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 绑定地址，默认是127.0.0.1，会导致只能在本地访问。修改为0.0.0.0则可以在任意IP访问</span><br><span class="line">bind 0.0.0.0</span><br><span class="line"># 数据库数量，设置为1</span><br><span class="line">databases 1</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>启动Redis：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis.conf</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>停止redis服务：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli shutdown</span><br></pre></td></tr></tbody></table></figure>
+
 <p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" data-id="clk4cfge600667kv6gtnj0bzp" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/redis/%E5%8D%95%E6%9C%BA%E5%AE%89%E8%A3%85Redis/" data-id="clk5oo4r8005e6ov68vjg5klb" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li></ul>
@@ -522,22 +499,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>单点Redis的问题</strong></p>
+        <p> <strong>单点Redis的问题</strong></p>
 <ul>
-<li>**数据丢失问题：**Redis是内存存储，服务重启可能会丢失数据</li>
-<li>**并发能力问题：**单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景</li>
+<li><strong>数据丢失问题：</strong>Redis是内存存储，服务重启可能会丢失数据</li>
+<li><strong>并发能力问题：</strong>单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景</li>
 <li><strong>故障恢复问题</strong>：如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段</li>
-<li>**存储能力问题：**Redis基于内存，单节点能存储的数据量难以满足海量数据需求</li>
+<li><strong>存储能力问题：</strong>Redis基于内存，单节点能存储的数据量难以满足海量数据需求</li>
 <li><img src="https://img-blog.csdnimg.cn/2de8a33a144b4c56b6356b88d9c01dd5.png" alt="img"></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/b007d4c74b0b4a0fa96272eeb389bfff.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><img src="https://img-blog.csdnimg.cn/0c3be77c63b34ad0a2e03c6b1f624c6f.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/7908c6fa767f42b98ab8fd055c488a87.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p> <img src="https://img-blog.csdnimg.cn/b007d4c74b0b4a0fa96272eeb389bfff.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p> <img src="https://img-blog.csdnimg.cn/0c3be77c63b34ad0a2e03c6b1f624c6f.png" alt="img"></p>
+<p> <img src="https://img-blog.csdnimg.cn/7908c6fa767f42b98ab8fd055c488a87.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p><strong>解决问题</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/374954ff3bb44b2dab45ed463955b4c6.png" alt="img"></p>
 <p>一、Redis持久化</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126640334?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126640334%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(73条消息) （分布式缓存）Redis持久化_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126640334?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126640334%22,%22source%22:%22QRLYLETITBE%22%7D">(73条消息) （分布式缓存）Redis持久化_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 <p>二、Redis主从</p>
 <blockquote>
@@ -545,17 +522,17 @@
 </blockquote>
 <p>三、Redis哨兵</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126651375?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126651375%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(73条消息) （分布式缓存）Redis哨兵_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126651375?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126651375%22,%22source%22:%22QRLYLETITBE%22%7D">(73条消息) （分布式缓存）Redis哨兵_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 <p>四、Redis分片集群</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126656765?csdn_share_tail=%7B%22type%22%3A%22blog%22%2C%22rType%22%3A%22article%22%2C%22rId%22%3A%22126656765%22%2C%22source%22%3A%22QRLYLETITBE%22%7D">(74条消息) (分布式缓存)Redis分片集群_其然乐衣的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/QRLYLETITBE/article/details/126656765?csdn_share_tail=%7B%22type%22:%22blog%22,%22rType%22:%22article%22,%22rId%22:%22126656765%22,%22source%22:%22QRLYLETITBE%22%7D">(74条消息) (分布式缓存)Redis分片集群_其然乐衣的博客-CSDN博客</a></p>
 </blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" data-id="clk4cfgf600957kv6h3mdfz95" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E7%BC%93%E5%AD%98/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98%20Redis/" data-id="clk5oo4t600ac6ov61gc0hyc1" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
@@ -605,16 +582,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>**报错：**Consider defining a bean of type ‘java.lang.String’ in your configuration</p>
+        <p><strong>报错：</strong>Consider defining a bean of type ‘java.lang.String’ in your configuration</p>
 <p>总结了网上的几种解决方案：</p>
 <p>1、多余的@autowired</p>
-<p>如：<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0886820a87b94873902e51a903ffc582~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p>如：<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0886820a87b94873902e51a903ffc582~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>2、<strong>待实例化的类里必须有默认的构造方法（即没有参数的那种）</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" data-id="clk4cfgce001u7kv66p7zgss6" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/debug/%E3%80%90%E5%A4%9A%E4%BD%99%E7%9A%84@autowired%E3%80%91springboot%E5%BC%82%E5%B8%B8%EF%BC%9AConsider%20defining%20a%20bean%20of%20type%20%E2%80%98java.lang.String%E2%80%98%20/" data-id="clk5oo4pu00276ov62vaohula" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debug/" rel="tag">debug</a></li></ul>
@@ -666,17 +643,20 @@
       
         <p>1.引入sentinel依赖：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--引入sentinel依赖--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-alibaba-sentinel&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
 <ol start="2">
 <li>配置控制台地址（让微服务与控制台建立联系）：</li>
 </ol>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5149d3958b294d3e8f8bb82d4d1d5089~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5149d3958b294d3e8f8bb82d4d1d5089~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    sentinel:</span><br><span class="line">      transport:</span><br><span class="line">        dashboard: localhost:8080    # sentinel控制台地址</span><br></pre></td></tr></tbody></table></figure>
+
+
 <p>（如果是在云服务器上安装的sentinel，localhost改为服务器的ip地址）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clk4cfgf1008s7kv667e52lvz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B4%E5%90%88sentinel/" data-id="clk5oo4sx009y6ov6acbt5qrt" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -730,42 +710,37 @@
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=149&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604" title="高级篇Day2-03-动手实践_哔哩哔哩_bilibili">高级篇Day2-03-动手实践_哔哩哔哩_bilibili</a></p>
 </blockquote>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/745beeae3ca642c78aff91d85fe6628b~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<h1 id="一-xa模式"><a class="markdownIt-Anchor" href="#一-xa模式"></a> 一、XA模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c9130e3bdc64f0eb5852ca6c122a425~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bdcf55f4a9848f091776d531d062fda~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/470683757d404e9688dbaf17dde1edf0~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/669714ab671d437985d27de4021fdfc0~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a124dc1f7c8045d3bea64739f2191865~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<h1 id="二-at模式"><a class="markdownIt-Anchor" href="#二-at模式"></a> 二、 AT模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/67a70e46700c4c9ab2bbc3cf614250eb~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f3cc8ef1f0d4ee3b6b215befd90ac01~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1a15c92cce5547ba8e95cb162ec43bf7~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d01d8f3820f24936bbd2b090f1ce2b55~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c36cdaa74c8a475c8c5b60e173b9f8e4~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7824bc6efe3144aaad603f8dcc802cf6~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1281ce856033497cb5d651d63b7c2f19~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94f0eedf792e47bb9839bfbef207fb54~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0339c27aa63c4370ab5b1513e108aa33~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<h1 id="三-tcc模式"><a class="markdownIt-Anchor" href="#三-tcc模式"></a> 三、TCC模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42b3538f29434d20b6954899bda76fd7~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010912f002144482880661a46e39f59f~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/858e90ef0cd9406da4779a8abaf33349~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3f0eb18dced54dff9f788ebd88b96b17~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0f398e2c9224bc3892c8489d3883fa9~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05af9a60f4c34db79768a15dc95f5f5c~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae608053977d442fbdd556e033fcda7e~tplv-k3u1fbpfcp-zoom-1.image" alt=""><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6fb7648df8b41db845dc0f146824dbb~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4722208a42c0470983ca00f035de1504~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<h1 id="四-saga模式"><a class="markdownIt-Anchor" href="#四-saga模式"></a> 四、Saga模式</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/662bf331e424447dbefac8d90dbe8580~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/927441e650854e68a75aba60a260036d~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<h1 id="四-四种模式的对比"><a class="markdownIt-Anchor" href="#四-四种模式的对比"></a> 四、四种模式的对比</h1>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/acb1137e27d84003a2cccf18458e2a05~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/745beeae3ca642c78aff91d85fe6628b~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="一、XA模式"><a href="#一、XA模式" class="headerlink" title="一、XA模式"></a>一、XA模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c9130e3bdc64f0eb5852ca6c122a425~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5bdcf55f4a9848f091776d531d062fda~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/470683757d404e9688dbaf17dde1edf0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/669714ab671d437985d27de4021fdfc0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a124dc1f7c8045d3bea64739f2191865~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="二、-AT模式"><a href="#二、-AT模式" class="headerlink" title="二、 AT模式"></a>二、 AT模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/67a70e46700c4c9ab2bbc3cf614250eb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8f3cc8ef1f0d4ee3b6b215befd90ac01~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1a15c92cce5547ba8e95cb162ec43bf7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d01d8f3820f24936bbd2b090f1ce2b55~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c36cdaa74c8a475c8c5b60e173b9f8e4~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7824bc6efe3144aaad603f8dcc802cf6~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1281ce856033497cb5d651d63b7c2f19~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/94f0eedf792e47bb9839bfbef207fb54~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0339c27aa63c4370ab5b1513e108aa33~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="三、TCC模式"><a href="#三、TCC模式" class="headerlink" title="三、TCC模式"></a>三、TCC模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42b3538f29434d20b6954899bda76fd7~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/010912f002144482880661a46e39f59f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/858e90ef0cd9406da4779a8abaf33349~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3f0eb18dced54dff9f788ebd88b96b17~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0f398e2c9224bc3892c8489d3883fa9~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/05af9a60f4c34db79768a15dc95f5f5c~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae608053977d442fbdd556e033fcda7e~tplv-k3u1fbpfcp-zoom-1.image"><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6fb7648df8b41db845dc0f146824dbb~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4722208a42c0470983ca00f035de1504~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="四、Saga模式"><a href="#四、Saga模式" class="headerlink" title="四、Saga模式"></a>四、Saga模式</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/662bf331e424447dbefac8d90dbe8580~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/927441e650854e68a75aba60a260036d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h1 id="四、四种模式的对比"><a href="#四、四种模式的对比" class="headerlink" title="四、四种模式的对比"></a>四、四种模式的对比</h1><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/acb1137e27d84003a2cccf18458e2a05~tplv-k3u1fbpfcp-zoom-1.image"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clk4cfgf3008x7kv696t071sy" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%89XA%E6%A8%A1%E5%BC%8F%E3%80%81AT%E6%A8%A1%E5%BC%8F%E3%80%81TCC%E6%A8%A1%E5%BC%8F%E3%80%81SAGA%E6%A8%A1%E5%BC%8F/" data-id="clk5oo4tl00bi6ov628u0cknt" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" rel="tag">分布式事务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -815,23 +790,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1368428c32d14d989f2fff60d3d0873f~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+        <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1368428c32d14d989f2fff60d3d0873f~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p><strong>步骤一</strong>：在feing-api项目中定义类，实现FallbackFactory：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a9bbbbe20240416aaf9b469c521948e1~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a9bbbbe20240416aaf9b469c521948e1~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>代码：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import cn.itcast.feign.clients.UserClient;</span><br><span class="line">import cn.itcast.feign.pojo.User;</span><br><span class="line">import feign.hystrix.FallbackFactory;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line">@Slf4j   //记录日志</span><br><span class="line">public class UserClientFallbackFactory implements FallbackFactory&lt;UserClient&gt; {</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public UserClient create(Throwable throwable) {</span><br><span class="line">        return new UserClient() {</span><br><span class="line">            /*</span><br><span class="line">                在这个方法中编写降级的业务逻辑</span><br><span class="line">                    返回 友好提示、一个默认值...，都可以在这个方法里面写</span><br><span class="line">             */</span><br><span class="line">            @Override</span><br><span class="line">            public User findById(Long id) {  //在这个方法中编写降级的逻辑</span><br><span class="line">                log.error("查询用户异常",throwable);</span><br><span class="line">                return new User();</span><br><span class="line">            }</span><br><span class="line">        };</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
 <p><strong>步骤二：</strong> 在feing-api项目中的DefaultFeignConfiguration类中将UserClientFallbackFactory注册为一个Bean：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fce1948b5d9b41c5b5f84446d65dccab~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p>代码：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fce1948b5d9b41c5b5f84446d65dccab~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 代码：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//将UserClientFallbackFactory注册到bean</span><br><span class="line">    @Bean</span><br><span class="line">    public UserClientFallbackFactory userClientFallbackFactory(){</span><br><span class="line">        return new UserClientFallbackFactory();</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
 <p><strong>步骤三：</strong> 在feing-api项目中的UserClient接口中使用UserClientFallbackFactory：</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c3138f6a45941ceb565802cbb3c0e45~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
-<p>代码：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1c3138f6a45941ceb565802cbb3c0e45~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p> 代码：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import cn.itcast.feign.clients.fallback.UserClientFallbackFactory;</span><br><span class="line">import cn.itcast.feign.pojo.User;</span><br><span class="line">import org.springframework.cloud.openfeign.FeignClient;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"></span><br><span class="line">@FeignClient(value = "userservice", fallbackFactory = UserClientFallbackFactory.class)</span><br><span class="line">public interface UserClient {</span><br><span class="line"></span><br><span class="line">    @GetMapping("/user/{id}")</span><br><span class="line">    User findById(@PathVariable("id") Long id);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" data-id="clk4cfgex008g7kv65h932ayi" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/Feign%E6%95%B4%E5%90%88Sentinel/" data-id="clk5oo4so009a6ov62hcyeuti" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/" rel="tag">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -881,18 +859,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第一种简单定义"><a class="markdownIt-Anchor" href="#第一种简单定义"></a> 第一种（简单定义）</h1>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">import lombok.Data;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 结果数据返回通用类</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/7/20</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">public class JsonResult&lt;T&gt; {</span><br><span class="line">    /**</span><br><span class="line">     *  编码：200成功，500和其它数字为失败或其他异常情况</span><br><span class="line">     **/</span><br><span class="line">    private Integer code;</span><br><span class="line">    /**</span><br><span class="line">     * 返回描述信息</span><br><span class="line">     **/</span><br><span class="line">    private String msg;</span><br><span class="line">    /**</span><br><span class="line">     * 信息返回数据</span><br><span class="line">     **/</span><br><span class="line">    private T data;</span><br><span class="line">    /**</span><br><span class="line">     *  动态数据</span><br><span class="line">     **/</span><br><span class="line"></span><br><span class="line">    private Map map = new HashMap();</span><br><span class="line"></span><br><span class="line">    public JsonResult() {</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code) {</span><br><span class="line">        this.code = code;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String msg) {</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.msg = msg;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg, T object) {</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.data = object;</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg, Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success( Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg) {</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success() {</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(String msg, Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error() {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = 500;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult&lt;T&gt; add(String key, Object value) {</span><br><span class="line">        this.map.put(key, value);</span><br><span class="line">        return this;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="第二种"><a class="markdownIt-Anchor" href="#第二种"></a> 第二种</h1>
-<p>导入依赖</p>
+        <h1 id="第一种（简单定义）"><a href="#第一种（简单定义）" class="headerlink" title="第一种（简单定义）"></a>第一种（简单定义）</h1><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">import lombok.Data;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 结果数据返回通用类</span><br><span class="line"> * @author : 其然乐衣Letitbe</span><br><span class="line"> * @date : 2022/7/20</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">public class JsonResult&lt;T&gt; {</span><br><span class="line">    /**</span><br><span class="line">     *  编码：200成功，500和其它数字为失败或其他异常情况</span><br><span class="line">     **/</span><br><span class="line">    private Integer code;</span><br><span class="line">    /**</span><br><span class="line">     * 返回描述信息</span><br><span class="line">     **/</span><br><span class="line">    private String msg;</span><br><span class="line">    /**</span><br><span class="line">     * 信息返回数据</span><br><span class="line">     **/</span><br><span class="line">    private T data;</span><br><span class="line">    /**</span><br><span class="line">     *  动态数据</span><br><span class="line">     **/</span><br><span class="line"></span><br><span class="line">    private Map map = new HashMap();</span><br><span class="line"></span><br><span class="line">    public JsonResult() {</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code) {</span><br><span class="line">        this.code = code;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String msg) {</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.msg = msg;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg, T object) {</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.data = object;</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg, Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success( Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String msg) {</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success() {</span><br><span class="line">        JsonResult&lt;T&gt; result = new JsonResult&lt;T&gt;();</span><br><span class="line">        result.code = 200;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(String msg, Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.msg = msg;</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code) {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = code;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error() {</span><br><span class="line">        JsonResult result = new JsonResult();</span><br><span class="line">        result.code = 500;</span><br><span class="line">        return result;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult&lt;T&gt; add(String key, Object value) {</span><br><span class="line">        this.map.put(key, value);</span><br><span class="line">        return this;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h1 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h1><p>导入依赖</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.swagger&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;swagger-annotations&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.5.13&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
 <p>编写结果数据通用类</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import io.swagger.annotations.ApiModel;</span><br><span class="line">import io.swagger.annotations.ApiModelProperty;</span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * todo JsonInclude 注解忽略 null值 看业务需求添加</span><br><span class="line"> */</span><br><span class="line">@ApiModel("分页响应参数")</span><br><span class="line">@JsonInclude(value = JsonInclude.Include.NON_EMPTY)</span><br><span class="line">@Data</span><br><span class="line">public class JsonResult&lt;T&gt; implements Serializable {</span><br><span class="line">    private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">    @ApiModelProperty(value = "结果状态", example = "200")</span><br><span class="line">    private Integer code = 200;</span><br><span class="line">    @ApiModelProperty(value = "结果数据")</span><br><span class="line">    private T data;</span><br><span class="line">    @ApiModelProperty(value = "结果描述", example = "成功")</span><br><span class="line">    private String message = "ok";</span><br><span class="line"></span><br><span class="line">    public JsonResult() {</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code) {</span><br><span class="line">        this();</span><br><span class="line">        this.code = code;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, T data) {</span><br><span class="line">        this(code);</span><br><span class="line">        this.data = data;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message) {</span><br><span class="line">        this(code);</span><br><span class="line">        this.message = message;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public JsonResult(Integer code, String message, T data) {</span><br><span class="line">        this(code, message);</span><br><span class="line">        this.data = data;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success() {</span><br><span class="line">        return new JsonResult(200);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(T data) {</span><br><span class="line">        return new JsonResult(200, data);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(String message, T data) {</span><br><span class="line">        return new JsonResult(200, message, data);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; success(Integer code, String message, T data) {</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static JsonResult&lt;String&gt; error() {</span><br><span class="line">        return new JsonResult(500);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(String message) {</span><br><span class="line">        return new JsonResult(500, message);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message) {</span><br><span class="line">        return new JsonResult(code, message);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; JsonResult&lt;T&gt; error(Integer code, String message, T data) {</span><br><span class="line">        return new JsonResult(code, message, data);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="clk4cfgeb006j7kv6cytaczpg" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/10/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/Java%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E%E9%80%9A%E7%94%A8%E7%B1%BB/" data-id="clk5oo4rp006n6ov62q7c3b6t" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85/" rel="tag">数据封装</a></li></ul>
@@ -1079,5 +1061,20 @@ new WOW().init();
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
