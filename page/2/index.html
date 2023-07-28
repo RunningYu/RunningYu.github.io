@@ -45,7 +45,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -76,6 +76,235 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-SpringCloud微服务/Sentinel/QPS" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/27/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/QPS/" class="article-date">
+  <time class="post-time" datetime="2023-03-27T13:13:31.090Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">27</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="性能测试-峰值QPS和计算公式"><a href="#性能测试-峰值QPS和计算公式" class="headerlink" title="性能测试-峰值QPS和计算公式"></a>性能测试-峰值QPS和计算公式</h1><p><strong>峰值QPS和计算公式</strong><br><strong>概述</strong><br>因特网上，经常用每秒查询率来衡量域名系统服务器的机器的性能，其即为QPS。 对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。</p>
+<p>计算关系： QPS = 并发量 / 平均响应时间 并发量 = QPS * 平均响应时间</p>
+<p>通常QPS用来表达和衡量当前系统的负载，也可以用RPS来表示， 我们形容当前系统的运行状态时可以说当前QPS已经达到多少多少了， 在系统环境不变的情况下存在支持的最大QPS，但并不应该用来形容机器的性能。 可以通过提高TPS来提升当前系统的处理能力，来增加最大QPS的支持。 TPS用来形容机器的性能。</p>
+<p><strong>QPS计算原理</strong><br>QPS = req/sec = 请求数/秒</p>
+<p>原理:每天80%的访问集中在20%的时间里，这20%时间叫做峰值时间<br>公式:( 总PV数 * 80% ) / ( 每天秒数 * 20% ) = 峰值时间每秒请求数&gt;(QPS)<br>机器:峰值时间每秒QPS / 单台机器的QPS = 需要的机器<br><strong>实例</strong><br>问:每天300w PV 的在单台机器上，这台机器需要多少QPS？</p>
+<p>答:( 3000000 * 0.8 ) / (86400 * 0.2 ) = 139 (QPS)</p>
+<p>问:如果一台机器的QPS是58，需要几台机器来支持？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/27/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Sentinel/QPS/" data-id="clkmr0d1l00a6e4v61qggeoi9" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-interview/进程和线程的区别" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
+  <time class="post-time" datetime="2023-03-27T10:14:46.027Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">27</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/">进程和线程的区别</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>一个在内存中运行的应用程序。每个进程都有自己独立的一块内存空间，一个进程可以有多个线程，比如在Windows系统中，一个运行的xx.exe就是一个进程。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0pvdXJXb24vaW1hZ2UvbWFzdGVyL0phdmElRTUlQjklQjYlRTUlOEYlOTElRTclQkMlOTYlRTclQTglOEItJUU1JTlGJUJBJUU3JUExJTgwJUU3JTlGJUE1JUU4JUFGJTg2LyVFNCVCQiVCQiVFNSU4QSVBMSVFNyVBRSVBMSVFNyU5MCU4NiVFNSU5OSVBOC5wbmc?x-oss-process=image/format,png" alt="任务管理器"></p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。</p>
+<p>与进程不同的是同类的多个线程共享进程的堆和方法区资源，但每个线程有自己的程序计数器、虚拟机栈和本地方法栈，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
+<p>Java 程序天生就是多线程程序，我们可以通过 JMX 来看一下一个普通的 Java 程序有哪些线程，代码如下。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiThread</span> {</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">		<span class="comment">// 获取 Java 线程管理 MXBean</span></span><br><span class="line">		<span class="type">ThreadMXBean</span> <span class="variable">threadMXBean</span> <span class="operator">=</span> ManagementFactory.getThreadMXBean();</span><br><span class="line">		<span class="comment">// 不需要获取同步的 monitor 和 synchronizer 信息，仅获取线程和线程堆栈信息</span></span><br><span class="line">		ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(<span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">		<span class="comment">// 遍历线程信息，仅打印线程 ID 和线程名称信息</span></span><br><span class="line">		<span class="keyword">for</span> (ThreadInfo threadInfo : threadInfos) {</span><br><span class="line">			System.out.println(<span class="string">"["</span> + threadInfo.getThreadId() + <span class="string">"] "</span> + threadInfo.getThreadName());</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上述程序输出如下（输出内容可能不同，不用太纠结下面每个线程的作用，只用知道 main 线程执行 main 方法即可）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[6] Monitor Ctrl-Break //监听线程转储或“线程堆栈跟踪”的线程</span><br><span class="line">[5] Attach Listener //负责接收到外部的命令，而对该命令进行执行的并且把结果返回给发送者</span><br><span class="line">[4] Signal Dispatcher // 分发处理给 JVM 信号的线程</span><br><span class="line">[3] Finalizer //在垃圾收集前，调用对象 finalize 方法的线程</span><br><span class="line">[2] Reference Handler //用于处理引用对象本身（软引用、弱引用、虚引用）的垃圾回收的线程</span><br><span class="line">[1] main //main 线程,程序入口</span><br></pre></td></tr></tbody></table></figure>
+
+<p>从上面的输出内容可以看出：一个 Java 程序的运行是 main 线程和多个其他线程同时运行。</p>
+<h2 id="进程与线程的区别总结"><a href="#进程与线程的区别总结" class="headerlink" title="进程与线程的区别总结"></a>进程与线程的区别总结</h2><p>线程具有许多传统进程所具有的特征，故又称为轻型进程(Light—Weight Process)或进程元；而把传统的进程称为重型进程(Heavy—Weight Process)，它相当于只有一个线程的任务。在引入了线程的操作系统中，通常一个进程都有若干个线程，至少包含一个线程。</p>
+<ul>
+<li><p><strong>根本区别：</strong>进程是操作系统资源分配的基本单位，而线程是处理器任务调度和执行的基本单位</p>
+</li>
+<li><p><strong>资源开销</strong>：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p>
+</li>
+<li><p><strong>包含关系：</strong>如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p>
+</li>
+<li><p><strong>内存分配：</strong>同一进程的线程共享本进程的地址空间和资源，而进程之间的地址空间和资源是相互独立的</p>
+</li>
+<li><p><strong>影响关系：</strong>一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮。</p>
+</li>
+<li><p><strong>执行过程：</strong>每个独立的进程有程序运行的入口、顺序执行序列和程序出口。但是线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</p>
+</li>
+</ul>
+<h2 id="从-JVM-角度说进程和线程之间的关系（重要）"><a href="#从-JVM-角度说进程和线程之间的关系（重要）" class="headerlink" title="从 JVM 角度说进程和线程之间的关系（重要）"></a>从 JVM 角度说进程和线程之间的关系（重要）</h2><h3 id="图解进程和线程的关系"><a href="#图解进程和线程的关系" class="headerlink" title="图解进程和线程的关系"></a>图解进程和线程的关系</h3><p>下图是 Java 内存区域，通过下图我们从 JVM 的角度来说一下线程和进程之间的关系。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191105205545651.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>从上图可以看出：一个进程中可以有多个线程，多个线程共享进程的堆和方法区 (JDK1.8 之后的元空间)资源，但是每个线程有自己的程序计数器、虚拟机栈 和 本地方法栈。</p>
+<h2 id="程序计数器为什么是私有的"><a href="#程序计数器为什么是私有的" class="headerlink" title="程序计数器为什么是私有的?"></a>程序计数器为什么是私有的?</h2><p>程序计数器主要有下面两个作用：</p>
+<ol>
+<li>字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制，如：顺序执行、选择、循环、异常处理。</li>
+<li>在多线程的情况下，程序计数器用于记录当前线程执行的位置，从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了。</li>
+</ol>
+<p>需要注意的是，如果执行的是 native 方法，那么程序计数器记录的是 undefined 地址，只有执行的是 Java 代码时程序计数器记录的才是下一条指令的地址。</p>
+<p>所以，程序计数器私有主要是为了线程切换后能恢复到正确的执行位置。</p>
+<h3 id="虚拟机栈和本地方法栈为什么是私有的"><a href="#虚拟机栈和本地方法栈为什么是私有的" class="headerlink" title="虚拟机栈和本地方法栈为什么是私有的?"></a>虚拟机栈和本地方法栈为什么是私有的?</h3><ul>
+<li><strong>虚拟机栈：</strong>每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表、操作数栈、常量池引用等信息。从方法调用直至执行完成的过程，就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。</li>
+<li><strong>本地方法栈：</strong>和虚拟机栈所发挥的作用非常相似，区别是： 虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务。 在 HotSpot 虚拟机中和 Java 虚拟机栈合二为一。<br>所以，为了保证线程中的局部变量不被别的线程访问到，虚拟机栈和本地方法栈是线程私有的。</li>
+</ul>
+<h2 id="一句话简单了解堆和方法区"><a href="#一句话简单了解堆和方法区" class="headerlink" title="一句话简单了解堆和方法区"></a>一句话简单了解堆和方法区</h2><p>堆和方法区是所有线程共享的资源，其中堆是进程中最大的一块内存，主要用于存放新创建的对象 (所有对象都在这里分配内存)，方法区主要用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</p>
+<h2 id="多进程和多线程区别"><a href="#多进程和多线程区别" class="headerlink" title="多进程和多线程区别"></a>多进程和多线程区别</h2><p>多进程：操作系统中同时运行的多个程序</p>
+<p>多线程：在同一个进程中同时运行的多个任务</p>
+<p>举个例子，多线程下载软件，可以同时运行多个线程，但是通过程序运行的结果发现，每一次结果都不一致。 因为多线程存在一个特性：随机性。造成的原因：CPU在瞬间不断切换去处理各个线程而导致的，可以理解成多个线程在抢CPU资源。</p>
+<p>多线程提高CPU使用率</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0pvdXJXb24vaW1hZ2UvbWFzdGVyL0phdmElRTUlQjklQjYlRTUlOEYlOTElRTclQkMlOTYlRTclQTglOEItJUU1JTlGJUJBJUU3JUExJTgwJUU3JTlGJUE1JUU4JUFGJTg2LyVFNSVBNCU5QSVFNyVCQSVCRiVFNyVBOCU4Qi5wbmc?x-oss-process=image/format,png" alt="多线程"></p>
+<p>多线程并不能提高运行速度，但可以提高运行效率，让CPU的使用率更高。但是如果多线程有安全问题或出现频繁的上下文切换时，运算速度可能反而更低。</p>
+<h2 id="Java中的多线程"><a href="#Java中的多线程" class="headerlink" title="Java中的多线程"></a>Java中的多线程</h2><p>Java程序的进程里有几个线程：主线程，垃圾回收线程(后台线程)等</p>
+<p>在 Java 中，当我们启动 main 函数时其实就是启动了一个 JVM 的进程，而 main 函数所在的线程就是这个进程中的一个线程，也称主线程。</p>
+<p>Java支持多线程，当Java程序执行main方法的时候，就是在执行一个名字叫做main的线程，可以在main方法执行时，开启多个线程A,B,C，多个线程 main,A,B,C同时执行，相互抢夺CPU，Thread类是java.lang包下的一个常用类,每一个Thread类的对象，就代表一个处于某种状态的线程</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/27/interview/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/" data-id="clkmr0cyq003re4v6c1jg0u85" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-interview/java基础/多态" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/19/interview/java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E6%80%81/" class="article-date">
+  <time class="post-time" datetime="2023-03-19T03:45:19.800Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">19</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/19/interview/java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E6%80%81/">多态</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="多态的概述"><a href="#多态的概述" class="headerlink" title="多态的概述"></a>多态的概述</h2><p><img src="/../../../images/image-20230319114544383.png" alt="image-20230319114544383"></p>
+<h2 id="多态的格式与使用"><a href="#多态的格式与使用" class="headerlink" title="多态的格式与使用"></a>多态的格式与使用</h2><p><img src="/../../../images/image-20230319115224624.png" alt="image-20230319115224624"></p>
+<p><img src="/../../../images/image-20230319114924748.png" alt="image-20230319114924748"></p>
+<p><img src="/../../../images/image-20230319115144427.png" alt="image-20230319115144427"></p>
+<h2 id="多态中的成员变量的使用特点（其实没有任何变化）"><a href="#多态中的成员变量的使用特点（其实没有任何变化）" class="headerlink" title="多态中的成员变量的使用特点（其实没有任何变化）"></a>多态中的成员变量的使用特点（其实没有任何变化）</h2><p>访问成员变量的两种方式：</p>
+<ul>
+<li>直接通过对象名称访问成员变量：看等号左边是谁，优先用谁，没有则向上找</li>
+<li>间接通过成员方法访问成员变量：看该方法属于谁，优先用谁，没有则向上找</li>
+</ul>
+<p>多态中，成员变量不可以发生覆盖重写（比如，可以在子类的成员变量上添加@Override，会发现报错），只有方法可以发生覆盖重写</p>
+<p><img src="/../../../images/image-20230319115914276.png" alt="image-20230319115914276"></p>
+<p><img src="/../../../images/image-20230319115854891.png" alt="image-20230319115854891"></p>
+<p><img src="/../../../images/image-20230319115831384.png" alt="image-20230319115831384"></p>
+<h2 id="多态中的成员方法的使用特点"><a href="#多态中的成员方法的使用特点" class="headerlink" title="多态中的成员方法的使用特点"></a>多态中的成员方法的使用特点</h2><p>在多态的代码中，成员方法的访问规则：</p>
+<ul>
+<li>看 new 的是谁，就优先用谁，没有则向上找</li>
+</ul>
+<p>口诀：编译看左边，运行看右边</p>
+<p>对比：</p>
+<ul>
+<li>成员变量：编译看左边，运行还看左边</li>
+<li>成员方法：编译看左边，运行看右边</li>
+</ul>
+<p><img src="/../../../images/image-20230319120823517.png" alt="image-20230319120823517"></p>
+<h2 id="多态的好处"><a href="#多态的好处" class="headerlink" title="多态的好处"></a>多态的好处</h2><p><img src="/../../../images/image-20230319181831562.png" alt="image-20230319181831562"></p>
+<h2 id="对象的向上转型"><a href="#对象的向上转型" class="headerlink" title="对象的向上转型"></a>对象的向上转型</h2><p><img src="/../../../images/image-20230319182510068.png" alt="image-20230319182510068"></p>
+<h2 id="对象的向下转型"><a href="#对象的向下转型" class="headerlink" title="对象的向下转型"></a>对象的向下转型</h2><p><img src="/../../../images/image-20230319183246604.png" alt="image-20230319183246604"></p>
+<p><img src="/../../../images/image-20230319184116304.png" alt="image-20230319184116304"></p>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>如何知道一个父类引用的对象本来是哪个子类，怎么知道向哪个子类进行向下转型呢？</p>
+<p>方案：用 instanceof </p>
+<p>格式：  <strong>对象 instanceof 类名称</strong>      这会得到一个boolean值的结果，也就是判断前面的对象能不能当作后面类型的实例</p>
+<p><img src="/../../../images/image-20230319185037444.png" alt="image-20230319185037444"></p>
+<p>向下转型时，在未知原本类型时，一定要用 instanceof，否则容易出异常</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/19/interview/java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E6%80%81/" data-id="clkmr0d2d00bxe4v67u1jbqfk" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java%E5%9F%BA%E7%A1%80/" rel="tag">java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-interview/Spring面试/Spring" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -142,14 +371,14 @@
 <p><font color="red">Spring MVC默认是单例模式，Controller、Service、Dao都是单例</font>所以在使用不当存在一定的安全隐患。Controller单例模式的好处在与：</p>
 <ul>
 <li>提高性能，不用每次创建Controller实例，减少了对象创建和垃圾收集的时间</li>
-<li>没多例的必要，由于只有一个Controller的实例，当多个线程同时调用它的时候，它的成员变量就不是线程安全的。<br>当然在大多数情况下，**我们根本不需要Controller考虑线程安全的问题，除非在类中声明了<mark>成员变量</mark>**。因此Spring MVC的Contrller在编码时，尽量避免使用实例变量。如果一定要使用实例变量，则可以改用以下方式：<br>Controller中声明 scope=”prototype”，即设置为多例模式<br>在Controller中使用ThreadLocal变量,如：private ThreadLocal count = new ThreadLocal();</li>
+<li>没多例的必要，由于只有一个Controller的实例，当多个线程同时调用它的时候，它的成员变量就不是线程安全的。<br>当然在大多数情况下，**我们根本不需要Controller考虑线程安全的问题，除非在类中声明了<mark>成员变量</mark>**。因此Spring MVC的Controller在编码时，尽量避免使用实例变量。如果一定要使用实例变量，则可以改用以下方式：<br>Controller中声明 scope=”prototype”，即设置为多例模式<br>在Controller中使用ThreadLocal变量,如：private ThreadLocal count = new ThreadLocal();</li>
 </ul>
 <h1 id="springmvc-singleton有几种解决方法："><a href="#springmvc-singleton有几种解决方法：" class="headerlink" title="springmvc singleton有几种解决方法："></a>springmvc singleton有几种解决方法：</h1><p>1、在控制器中不使用实例变量（可以使用方法参数的形式解决，参考博文 Spring Bean Scope 有状态的Bean 无状态的Bean）<br>2、将控制器的作用域从单例改为原型，即在spring配置文件Controller中声明 <font color="blue"><strong>scope=“prototype”</strong></font>，每次都创建新的controller<br>3、在Controller中使用<font color="blue"><strong>ThreadLocal</strong></font>变量</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/16/interview/Spring%E9%9D%A2%E8%AF%95/Spring/" data-id="clk6vwj9w00bd8kv6dalm8iq6" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/16/interview/Spring%E9%9D%A2%E8%AF%95/Spring/" data-id="clkmr0d2b00bse4v6hwv957iw" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -270,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/16/juc/ThreadLocal%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8E%9F%E7%90%86/" data-id="clk6vwj5o00408kv62kvs8grm" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/16/juc/ThreadLocal%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8E%9F%E7%90%86/" data-id="clkmr0czc0052e4v6g0f5aqov" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -377,7 +606,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/16/juc/CAS/" data-id="clk6vwj5h003s8kv63trgdvm7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/16/juc/CAS/" data-id="clkmr0cz8004ve4v66n518q3z" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
@@ -433,7 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/13/elasticsearch/%E8%81%9A%E5%90%88%E7%9A%84%E5%88%86%E7%B1%BB/" data-id="clk6vwj61004u8kv6gmyxcyhd" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/13/elasticsearch/%E8%81%9A%E5%90%88%E7%9A%84%E5%88%86%E7%B1%BB/" data-id="clkmr0cza004ye4v6c44fb87q" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -473,7 +702,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/12/interview/%E9%9B%B6%E7%A2%8E%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clk6vwj5g003r8kv6a8mxfrmk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/12/interview/%E9%9B%B6%E7%A2%8E%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clkmr0cyp003me4v65itj5o56" class="article-share-link">分享</a>
       
       
     </footer>
@@ -1020,7 +1249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/05/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Elasticsearch/%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E03/" data-id="clk6vwj8p009e8kv6fd309dnt" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/05/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Elasticsearch/%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E03/" data-id="clkmr0d10008me4v6706fgy7m" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
@@ -1834,881 +2063,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/05/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Elasticsearch/%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E02/" data-id="clk6vwj8o009b8kv6hrws2prh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/05/SpringCloud%E5%BE%AE%E6%9C%8D%E5%8A%A1/Elasticsearch/%E5%88%86%E5%B8%83%E5%BC%8F%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E02/" data-id="clkmr0d0z008he4v6bpwwg1ue" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-interview/Elasticsearch面试" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/03/05/interview/Elasticsearch%E9%9D%A2%E8%AF%95/" class="article-date">
-  <time class="post-time" datetime="2023-03-05T07:18:41.560Z" itemprop="datePublished">
-    <span class="post-month">3月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/05/interview/Elasticsearch%E9%9D%A2%E8%AF%95/">Elasticsearch摘要笔记</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>,<a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/Elasticsearch/">Elasticsearch</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1、Elasticsearch是什么"><a href="#1、Elasticsearch是什么" class="headerlink" title="1、Elasticsearch是什么"></a>1、Elasticsearch是什么</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念:"></a>1.1 概念:</h2><p>Elasticsearch是由 Java语言开发<strong>基于Lucene</strong>的一款开源的搜索、聚合分析和存储引擎。同时它也可以称作是一种非关系型文档数据库。</p>
-<p><img src="/../../images/image-20230305161034119.png" alt="image-20230305161034119"></p>
-<h2 id="ES可以替代MySQL吗？"><a href="#ES可以替代MySQL吗？" class="headerlink" title="ES可以替代MySQL吗？"></a>ES可以替代MySQL吗？</h2><p>ElasticSearch和MySql分工不同，MySQL负责存储数据，ElasticSearch负责搜索数据</p>
-<ul>
-<li><p>MySQL有事务性，而ElasticSearch<mark>没有事务性</mark>，所以你<font color="red">删了的数据是无法恢复的</font>。</p>
-</li>
-<li><p>ElasticSearch<mark>没有物理外键</mark>这个特性，如果你的数据强一致性要求比较高还是建议慎用</p>
-</li>
-</ul>
-<p><img src="/../../images/image-20230305161337185.png" alt="image-20230305161337185"></p>
-<h2 id="1-2特点"><a href="#1-2特点" class="headerlink" title="1.2特点"></a>1.2特点</h2><ul>
-<li>天生分布式、高性能（PB数据下可以秒读）、高可用、易扩展、易维护</li>
-<li>跨语言、跨平台:几乎支持所有主流编程语言，并且支持在“Linux、Windows、MacOs”多平台部署</li>
-<li>支持结构化、非结构化、地理位置搜索等</li>
-</ul>
-<h2 id="1-3适用场景"><a href="#1-3适用场景" class="headerlink" title="1.3适用场景"></a>1.3适用场景</h2><ul>
-<li>海量数据的全文检索，搜索引擎、垂直搜索、站内搜索:<ul>
-<li>百度、知乎、微博、CSDN</li>
-<li>导航、外卖、团购等软件</li>
-<li>以京东、淘宝为代表的垂直搜索</li>
-<li>B站、抖音、爱奇艺、QQ音乐等音视频软件Glthub</li>
-</ul>
-</li>
-<li>数据分析和聚合查询.</li>
-<li>日志系统 : ELK</li>
-</ul>
-<h1 id="Elasticsearch核心概念"><a href="#Elasticsearch核心概念" class="headerlink" title="Elasticsearch核心概念"></a>Elasticsearch核心概念</h1><p><img src="/../../images/image-20230305161535075.png" alt="image-20230305161535075"></p>
-<p><img src="/../../images/image-20230305161817337.png" alt="image-20230305161817337"></p>
-<p><img src="/../../images/image-20230305162010287.png" alt="image-20230305162010287"></p>
-<h1 id="MySQL数据库查询存在的问题："><a href="#MySQL数据库查询存在的问题：" class="headerlink" title="MySQL数据库查询存在的问题："></a>MySQL数据库查询存在的问题：</h1><p><img src="/../../images/image-20230305153910496.png" alt="image-20230305153910496"></p>
-<p><img src="/../../images/image-20230305154253699.png" alt="image-20230305154253699"></p>
-<h1 id="ES的倒排索引"><a href="#ES的倒排索引" class="headerlink" title="ES的倒排索引"></a>ES的倒排索引</h1><p><img src="/../../images/image-20230305154901840.png" alt="image-20230305154901840"></p>
-<h1 id="Elasticsearch数据的存储和搜索原理"><a href="#Elasticsearch数据的存储和搜索原理" class="headerlink" title="Elasticsearch数据的存储和搜索原理"></a>Elasticsearch数据的存储和搜索原理</h1><p><img src="/../../images/image-20230305155606164.png" alt="image-20230305155606164"></p>
-<p><img src="/../../images/image-20230305155847211.png" alt="image-20230305155847211"></p>
-<h3 id="1-解决性能低问题："><a href="#1-解决性能低问题：" class="headerlink" title="1. 解决性能低问题："></a>1. 解决性能低问题：</h3><h4 id="如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会"><a href="#如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会" class="headerlink" title="如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会"></a><strong>如果倒排索引中tearm词条太多不会导致一样要遍历很久吗？不会</strong></h4><p>因为ES生成的到排序索引中，词条会排序，形成一颗树形结构，提升词条的查询速度。</p>
-<h3 id="2-解决功能弱问题："><a href="#2-解决功能弱问题：" class="headerlink" title="2. 解决功能弱问题："></a>2. 解决功能弱问题：</h3><p>ES会先对查询关键字进行分词，再进行查询。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/05/interview/Elasticsearch%E9%9D%A2%E8%AF%95/" data-id="clk6vwj4z002t8kv65ulzbezf" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-interview/Netty面试" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/" class="article-date">
-  <time class="post-time" datetime="2023-03-04T02:25:13.345Z" itemprop="datePublished">
-    <span class="post-month">3月</span><br/>
-    <span class="post-day">04</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/">Netty面试题</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1 基本概念"></a>1 基本概念</h1><h2 id="1、什么是-Netty？"><a href="#1、什么是-Netty？" class="headerlink" title="1、什么是 Netty？"></a>1、什么是 Netty？</h2><p>Netty 是由 JBOSS 提供的一个 Java 开源框架。Netty 提供异步的、基于事件驱动的网络应用程序框架，用以快速开发高性能、高可靠性的网络 IO 程序,是目前最流行的 NIO 框架，Netty 在互联网领域、大数据分布式计算领域、游戏行业、通信行业等获得了广泛的应用，知名的 Elasticsearch 、Dubbo 框架内部都采用了 Netty。</p>
-<h2 id="2、Netty-的优势？"><a href="#2、Netty-的优势？" class="headerlink" title="2、Netty 的优势？"></a>2、Netty 的优势？</h2><ul>
-<li><p>使用简单：封闭了 Java 原生 NIO 类库繁琐的 API，使用起来更加高效；</p>
-</li>
-<li><p>功能强大：预置多种编码能力，支持多种主流协议。同时通过 <mark>ChannelHandler</mark> 可以进行灵活的拓展，支持很强的定制能力；</p>
-</li>
-<li><p>高性能：与其它业界主流 NIO 框架相比，Netty 综合更优。主要体现在<mark>吞吐量更高、延迟更低、减少资源消耗以及最小化不必要的内存复制；</mark></p>
-</li>
-<li><p>社区活跃与稳定：版本更新周期短，BUG 修复速度快，让开发者可以专注业务本身。</p>
-</li>
-</ul>
-<h2 id="3、Netty-有什么特点？"><a href="#3、Netty-有什么特点？" class="headerlink" title="3、Netty 有什么特点？"></a>3、Netty 有什么特点？</h2><ul>
-<li><p><strong>高并发</strong>：Netty 是一款基于 NIO（Nonblocking I/O，非阻塞IO）开发的网络通信框架。</p>
-</li>
-<li><p><strong>传输快</strong>：Netty 使用零拷贝特性，尽量减少不必要的内存拷贝，实现更快的传输效率。</p>
-</li>
-<li><p><strong>封装好</strong>：Netty 封装了 NIO 操作的很多细节，提供易于使用的 API。</p>
-</li>
-</ul>
-<h2 id="4、Netty-有哪些应用场景？"><a href="#4、Netty-有哪些应用场景？" class="headerlink" title="4、Netty 有哪些应用场景？"></a>4、Netty 有哪些应用场景？</h2><p>理论上来说，NIO 可以做的事情，Netty 都可以做并且更好。Netty 主要用来做网络通信：</p>
-<ul>
-<li>RPC 框架的网络通信工具；</li>
-<li>实现一个 HTTP 服务器；</li>
-<li>实现一个即时通讯系统；</li>
-<li>实现消息推送系统。</li>
-</ul>
-<h2 id="5、Netty-的高性能体现在？"><a href="#5、Netty-的高性能体现在？" class="headerlink" title="5、Netty 的高性能体现在？"></a>5、Netty 的高性能体现在？</h2><ul>
-<li><strong>IO 线程模型</strong>：同步非阻塞；</li>
-<li><strong>零拷贝</strong>：尽量做到不必要的内存拷贝：</li>
-<li><strong>内存池设计</strong>：使用直接内存，并且可重复利用；</li>
-<li><strong>串行化处理读写</strong>：避免使用锁带来的额外开销；</li>
-<li><strong>高性能序列化协议</strong>：支持 protobuf 等高性能序列化协议。</li>
-</ul>
-<h2 id="6、相比原生-NIO-的优势？"><a href="#6、相比原生-NIO-的优势？" class="headerlink" title="6、相比原生 NIO 的优势？"></a>6、相比原生 NIO 的优势？</h2><p>1）易用性：Netty 在 NIO 基础上封装了更加人性化的 API，大大降低开发人员的学习成本，同时还提供了很多开箱即用的工具。</p>
-<p>2）稳定性：Netty 修复了 Java NIO 较多已知问题，如 select 空转导致 CPU 100%，TCP 断线重连，Keep-alive 检测等问题。</p>
-<p>3）高性能：对象池复用（通过对象复用避免频繁创建和销毁带来的开销）和零拷贝技术。</p>
-<h2 id="7、Netty-和-Tomcat-的区别？"><a href="#7、Netty-和-Tomcat-的区别？" class="headerlink" title="7、Netty 和 Tomcat 的区别？"></a>7、Netty 和 Tomcat 的区别？</h2><p>Netty 和 Tomcat 最大的区别在于对通信协议的支持：</p>
-<ul>
-<li><p>Tomcat 是基于 Http 协议的，本质是一个基于 http 协议的 web 容器，而 Netty 不仅支持 HTTP，还能通过编程自定义各种协议，通过 codec 自定义编码/解码字节流，完成数据传输。</p>
-</li>
-<li><p>Tomcat 需要遵循 Servlet 规范（HTTP 协议的请求-响应模型），而 Netty 不需要受到 Servlet 规范约束，可以发挥 NIO 最大特性。</p>
-</li>
-</ul>
-<h2 id="8、BIO-NIO-AIO-分别是什么？"><a href="#8、BIO-NIO-AIO-分别是什么？" class="headerlink" title="8、BIO. NIO. AIO 分别是什么？"></a>8、BIO. NIO. AIO 分别是什么？</h2><ul>
-<li><p><strong>BIO（同步阻塞 IO）</strong><br>服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。BIO 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，JDK 1.4 以前的唯一选择，但程序直观简单易理解。</p>
-</li>
-<li><p><strong>NIO（同步非阻塞 IO）</strong><br>服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 IO 请求时才启动一个线程进行处理。NIO 方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK 1.4 开始支持。</p>
-</li>
-<li><p><strong>AIO（异步非阻塞 IO）</strong><br>服务器实现模式为一个有效请求一个线程，客户端的 IO 请求都是由 OS 先完成了再通知服务器应用去启动线程进行处理。 AIO 方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用 OS 参与并发操作，编程比较复杂，JDK 1.7 开始支持。</p>
-</li>
-</ul>
-<h2 id="9、Select、Poll、Epoll-的区别？"><a href="#9、Select、Poll、Epoll-的区别？" class="headerlink" title="9、Select、Poll、Epoll 的区别？"></a>9、Select、Poll、Epoll 的区别？</h2><p>ref</p>
-<h2 id="10、什么是-Reactor-模型？"><a href="#10、什么是-Reactor-模型？" class="headerlink" title="10、什么是 Reactor 模型？"></a>10、什么是 Reactor 模型？</h2><h1 id="2-架构组件"><a href="#2-架构组件" class="headerlink" title="2 架构组件"></a>2 架构组件</h1><h2 id="1、Netty-有哪些核心组件？"><a href="#1、Netty-有哪些核心组件？" class="headerlink" title="1、Netty 有哪些核心组件？"></a>1、Netty 有哪些核心组件？</h2><ul>
-<li><p><strong>Channel</strong><br>基础的 IO 操作，如绑定、连接、读写等都依赖于底层网络传输所提供的原语，在 Java 的网络编程中，基础核心类是 Socket，而 Netty 的 Channel 提供了一组 API，极大地简化了直接与 Socket 进行操作的复杂性，并且 Channel 是很多类的父类，如 EmbeddedChannel、LocalServerChannel、NioDatagramChannel、NioSctpChannel、NioSocketChannel 等。</p>
-</li>
-<li><p><strong>EventLoop</strong><br>EventLoop 定义了处理在连接过程中发生的事件的核心抽象。</p>
-</li>
-</ul>
-<p>​		说白了，EventLoop 的主要作用实际就是负责监听网络事件并调用事件处理器进行相关 IO 操作的处理。</p>
-<p>​		<strong>那 Channel 和 EventLoop 直接有啥联系呢？</strong></p>
-<p>​		Channel 为 Netty 网络操作（<strong>读写</strong>等操作）抽象类，EventLoop 负责处理注册到其上的 Channel 处理 IO 操作，两者配合参与 IO 操作。</p>
-<ul>
-<li><p><strong>ChannelFuture</strong></p>
-<ul>
-<li>由于 Netty 是异步非阻塞的，所有的 IO 操作也都为异步的，我们不能立刻得到操作是否执行成功，因此 Netty 提供 ChannelFuture 接口，使用其 addListener() 方法注册一个 ChannelFutureListener，当操作执行成功或者失败时，监听就会自动触发返回结果。</li>
-<li>并且，我们还可以通过 ChannelFuture 的 channel() 方法获取关联的Channel，甚至使用 sync() 方法让异步的操作变成同步的。</li>
-</ul>
-</li>
-<li><p><strong>ChannelHandler 和 ChannelPipeline</strong></p>
-<ul>
-<li>从应用开发者看来，ChannelHandler 是最重要的组件，其中存放用来处理进站和出站数据的用户逻辑。ChannelHandler 的方法被网络事件触发，可以用于几乎任何类型的操作，如将数据从一种格式转换为另一种格式或处理抛出的异常。如其子接口ChannelInboundHandler，接受进站的事件和数据以便被用户定义的逻辑处理，或者当响应所连接的客户端时刷新ChannelInboundHandler的数据。</li>
-<li>ChannelPipeline为ChannelHandler 链提供了一个容器并定义了用于沿着链传播入站和出站事件流的 API。当创建 Channel 时，会自动创建一个附属的 ChannelPipeline。</li>
-</ul>
-</li>
-<li><p><strong>Bootstrap 和 ServerBootstrap</strong><br>Netty 的引导类应用程序网络层配置提供容器，其涉及将进程绑定到给定端口或连接一个进程到在指定主机上指定端口上运行的另一进程。引导类分为客户端引导 Bootstrap 和服务端引导 ServerBootstrap。</p>
-</li>
-</ul>
-<h2 id="2、什么是-EventLoop-和-EventLoopGroup？"><a href="#2、什么是-EventLoop-和-EventLoopGroup？" class="headerlink" title="2、什么是 EventLoop 和 EventLoopGroup？"></a>2、什么是 EventLoop 和 EventLoopGroup？</h2><p>EventLoopGroup 包含多个 EventLoop（每一个 EventLoop 通常内部包含一个线程），上面我们已经说了 EventLoop 的主要作用实际就是负责监听网络事件并调用事件处理器进行相关 I/O 操作的处理。</p>
-<p>并且 EventLoop 处理的 I/O 事件都将在它专有的 Thread 上被处理，即 Thread 和 EventLoop 属于 1 : 1 的关系，从而保证线程安全。</p>
-<p>上图是一个服务端对 EventLoopGroup 使用的大致模块图，其中 Boss EventloopGroup 用于接收连接，Worker EventloopGroup 用于具体的处理（消息的读写以及其他逻辑处理）。</p>
-<p><img src="/../../images/image-20230304103657806.png" alt="image-20230304103657806"></p>
-<p>从上图可以看出：当客户端通过 connect 方法连接服务端时，bossGroup 处理客户端连接请求。当客户端处理完成后，会将这个连接提交给 workerGroup 来处理，然后 workerGroup 负责处理其 IO 相关操作。</p>
-<h2 id="3、说说-Netty-的线程模型？"><a href="#3、说说-Netty-的线程模型？" class="headerlink" title="3、说说 Netty 的线程模型？"></a>3、说说 Netty 的线程模型？</h2><p>Netty 通过 Reactor 模型基于多路复用器接收并处理用户请求，内部实现了两个线程池，boss 线程池和 work 线程池，其中 boss 线程池的线程负责处理请求的 accept 事件，当接收到 accept 事件的请求时，把对应的 socket 封装到一个 NioSocketChannel 中，并交给 work 线程池，其中 work 线程池负责请求的 read 和 write 事件，由对应的 Handler 处理。</p>
-<ul>
-<li><strong>单线程模型</strong><br>所有 IO 操作都由一个线程完成，即多路复用、事件分发和处理都是在一个 Reactor 线程上完成的。既要接收客户端的连接请求，向服务端发起连接，又要发送、读取请求或应答、响应消息。一个 NIO 线程同时处理成百上千的链路，性能上无法支撑，速度慢，若线程进入死循环，整个程序不可用，对于高负载、高并发的应用场景不合适。</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.eventGroup既用于处理客户端连接，又负责具体的处理。 </span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">eventGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>); </span><br><span class="line"><span class="comment">//2.创建服务端启动引导/辅助类：</span></span><br><span class="line">ServerBootstrap <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">boobtstrap.group(eventGroup, eventGroup) </span><br><span class="line"><span class="comment">//......</span></span><br></pre></td></tr></tbody></table></figure>
-
-<ul>
-<li><strong>多线程模型</strong><br>有一个 NIO 线程（Acceptor） 只负责监听服务端，接收客户端的 TCP 连接请求；NIO 线程池负责网络 IO 的操作，即消息的读取、解码、编码和发送；1 个 NIO 线程可以同时处理 N 条链路，但是 1 个链路只对应 1 个 NIO 线程，这是为了防止发生并发操作问题。但在并发百万客户端连接或需要安全认证时，一个 Acceptor 线程可能会存在性能不足问题。</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/1d2358f8e6484e0db5a574a4701960bf.png#pic_center" alt="在这里插入图片描述"></p>
-<p>对于代码：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理</span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>();</span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：</span></span><br><span class="line">    ServerBootstrap <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup) </span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<ul>
-<li><strong>主从多线程模型</strong><br>Acceptor 线程用于绑定监听端口，接收客户端连接，将 SocketChannel 从主线程池的 Reactor 线程的多路复用器上移除，重新注册到 Sub 线程池的线程上，用于处理 IO 的读写等操作，从而保证主 Reactor 只负责接入认证、握手等操作。如果多线程模型无法满足你的需求的时候，可以考虑使用主从多线程模型 。</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/993566982c15443eb242cf628adc4d9b.png#pic_center" alt="在这里插入图片描述"></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理</span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>();</span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>();</span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：</span></span><br><span class="line">    ServerBootstrap <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup) </span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h2 id="4、Netty-服务端的启动过程？"><a href="#4、Netty-服务端的启动过程？" class="headerlink" title="4、Netty 服务端的启动过程？"></a>4、Netty 服务端的启动过程？</h2><p>先来看一段代码实现：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.bossGroup 用于接收连接，workerGroup 用于具体的处理 </span></span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">bossGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(<span class="number">1</span>); </span><br><span class="line"><span class="type">EventLoopGroup</span> <span class="variable">workerGroup</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NioEventLoopGroup</span>(); </span><br><span class="line"><span class="keyword">try</span> { </span><br><span class="line">    <span class="comment">//2.创建服务端启动引导/辅助类：ServerBootstrap </span></span><br><span class="line">    <span class="type">ServerBootstrap</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerBootstrap</span>(); </span><br><span class="line">    <span class="comment">//3.给引导类配置两大线程组,确定了线程模型 </span></span><br><span class="line">    b.group(bossGroup, workerGroup)</span><br><span class="line">    .handler(<span class="keyword">new</span> <span class="title class_">LoggingHandler</span>(LogLevel.INFO))  <span class="comment">// (非必备)打印日志  </span></span><br><span class="line">    .channel(NioServerSocketChannel.class) <span class="comment">// 4.指定 IO 模型 </span></span><br><span class="line">    .childHandler(<span class="keyword">new</span> <span class="title class_">ChannelInitializer</span>&lt;SocketChannel&gt;() {</span><br><span class="line">         <span class="meta">@Override</span> </span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initChannel</span><span class="params">(SocketChannel ch)</span> {</span><br><span class="line">             <span class="type">ChannelPipeline</span> <span class="variable">p</span> <span class="operator">=</span> ch.pipeline(); </span><br><span class="line">             <span class="comment">//5.可以自定义客户端消息的业务处理逻辑 </span></span><br><span class="line">             p.addLast(<span class="keyword">new</span> <span class="title class_">HelloServerHandler</span>()); </span><br><span class="line">        } </span><br><span class="line">    }); </span><br><span class="line">    <span class="comment">// 6.绑定端口,调用 sync 方法阻塞知道绑定完成 </span></span><br><span class="line">    <span class="type">ChannelFuture</span> <span class="variable">f</span> <span class="operator">=</span> b.bind(port).sync();</span><br><span class="line">    <span class="comment">// 7.阻塞等待直到服务器Channel关闭(closeFuture()方法获取Channel 的CloseFuture对象,然后调用sync()方法) </span></span><br><span class="line">    f.channel().closeFuture().sync(); </span><br><span class="line">} <span class="keyword">finally</span> { </span><br><span class="line">    <span class="comment">//8.优雅关闭相关线程组资源 </span></span><br><span class="line">    bossGroup.shutdownGracefully(); </span><br><span class="line">    workerGroup.shutdownGracefully(); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h1 id="3-具体实现"><a href="#3-具体实现" class="headerlink" title="3 具体实现"></a>3 具体实现</h1><h2 id="1、Netty-的无锁化体现在哪里？"><a href="#1、Netty-的无锁化体现在哪里？" class="headerlink" title="1、Netty 的无锁化体现在哪里？"></a>1、Netty 的无锁化体现在哪里？</h2><p>Netty 采用了串行无锁化设计，在 IO 线程内部进行串行操作，避免多线程竞争导致的性能下降。表面上看，串行化设计似乎 CPU 利用率不高，并发程度不够。但是，通过调整 NIO 线程池的线程参数，可以同时启动多个串行化的线程并行运行，这种局部无锁化的串行线程设计相比一个队列-多个工作线程模型性能更优。</p>
-<p><img src="https://img-blog.csdnimg.cn/1ed6fd9de8a64328806c5225edfc6bdb.png#pic_center" alt="在这里插入图片描述"></p>
-<p>Netty 的 NioEventLoop 读取到消息后，直接调用 ChannelPipeline 的 fireChannelRead（Object msg），只要用户不主动切换线程，一直会由 NioEventLoop 调用到用户的 handler，期间不进行线程切换，这种串行化处理方式避免了多线程操作导致的锁竞争，从性能角度看是最优的。</p>
-<h2 id="2、如何解决-JDK-epoll-空轮询问题？"><a href="#2、如何解决-JDK-epoll-空轮询问题？" class="headerlink" title="2、如何解决 JDK epoll 空轮询问题？"></a>2、如何解决 JDK epoll 空轮询问题？</h2><p>这个 BUG 是指 Java 的 NIO 在 Linux 下进行 selector.select() 时，本来如果轮询的结果为空并且不调用 wakeup 方法的话，这个 selector.select() 应该是一直阻塞的，但是 Java 却会打破阻塞，继续执行，导致程序无限空转，造成 CPU 使用率 100%。（这个问题只存在 Linux 是因为 Linux 的 NIO 是基于 epoll 实现的，而 Java 实现的 epoll 存在 BUG，windows 下 NIO 基于 poll 就不存在此问题）</p>
-<p><strong>Netty 的解决方案：</strong></p>
-<p>为 Selector 的 select 操作设置超时时间，同时定义可以跳出阻塞的四种情况：</p>
-<ul>
-<li>有事件发生</li>
-<li>wakeup</li>
-<li>超时</li>
-<li>空轮询 BUG</li>
-</ul>
-<p>而前两种返回值不为 0，可以跳出循环，超时有时间戳记录，所以每次空轮询，有专门的计数器进行 +1，如果空轮询的次数超过了 512 次（默认），就认为其触发了空轮询 BUG。</p>
-<p>当触发 BUG 后，Netty 直接重建一个 Selector，将原来的 Channel 重新注册到新的 Selector 上，并将旧的 Selector 关掉。</p>
-<h2 id="3、什么是拆包和粘包？"><a href="#3、什么是拆包和粘包？" class="headerlink" title="3、什么是拆包和粘包？"></a>3、什么是拆包和粘包？</h2><p>TCP 是一个面向流的传输协议，所谓流，就是没有界限的一串数据。TCP 底层并不了解上层业务数据的具体含义，它会根据 TCP 缓冲区的实际情况进行包的划分，所以在业务上认为，一个完整的包可能会被 TCP 拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送，这就是所谓的 TCP <strong>粘包和拆包问题</strong>。</p>
-<p>粘包和拆包是 TCP 网络编程中不可避免的，无论是服务端还是客户端，当我们读取或者发送消息的时候，都需要考虑 TCP 底层的粘包/拆包机制。</p>
-<p><img src="https://img-blog.csdnimg.cn/6e67b9fbe3fa41e5b087e648a74c3af3.png#pic_center" alt="在这里插入图片描述"></p>
-<p>数据从发送方到接收方需要经过操作系统的缓冲区，而造成粘包和拆包的主要原因就在这个缓冲区上。粘包可以理解为缓冲区数据堆积，导致多个请求数据粘在一起，而拆包可以理解为发送的数据大于缓冲区，进行拆分处理。</p>
-<p>详细来说，造成粘包和拆包的原因主要有以下三个：</p>
-<p>1）应用程序 write 写入的字节大小大于套接口发送缓冲区大小；</p>
-<p>2）进行 MSS 大小的 TCP 分段；</p>
-<p>3）以太网帧的 payload 大于 MTU 进行 IP 分片。</p>
-<h2 id="4、拆包粘包的解决方案？"><a href="#4、拆包粘包的解决方案？" class="headerlink" title="4、拆包粘包的解决方案？"></a>4、拆包粘包的解决方案？</h2><p>由于底层的 TCP 无法理解上层的业务数据，所以在底层是无法保证数据包不被拆分和重组的，这个问题只能通过上层的应用协议栈设计来解决，根据业界的主流协议可以归纳出以下解决方案：</p>
-<p>1）消息长度固定，累计读取到长度和为定长LEN的报文后，就认为读取到了一个完整的信息。</p>
-<p>2）将特殊的分隔符作为消息的结束标志，如回车换行符。</p>
-<p>3）通过在消息头中定义长度字段来标识消息的总长度。</p>
-<h2 id="5、Netty-如何解决拆包粘包？"><a href="#5、Netty-如何解决拆包粘包？" class="headerlink" title="5、Netty 如何解决拆包粘包？"></a>5、Netty 如何解决拆包粘包？</h2><p>相比粘包，拆包问题比较简单，用户可以自己定义自己的编码器进行处理，Netty 并没有提供相应的组件。对于粘包的问题，代码比较繁琐，Netty 提供了 4 种解码器来解决，分别如下：</p>
-<ul>
-<li><strong>固定长度的拆包器</strong>（FixedLengthFrameDecoder），每个应用层数据包的都拆分成都是固定长度的大小；</li>
-<li><strong>行拆包器</strong>（LineBasedFrameDecoder），每个应用层数据包都以换行符作为分隔符，进行分割拆分；</li>
-<li>**分隔符拆包器(**DelimiterBasedFrameDecoder），每个应用层数据包，都通过自定义的分隔符，进行分割拆分；</li>
-<li><strong>基于数据包长度的拆包器</strong>（LengthFieldBasedFrameDecoder），将应用层数据包的长度，作为接收端应用层数据包的拆分依据。按照应用层数据包的大小，拆包。这个拆包器，有一个要求，就是应用层协议中包含数据包的长度。</li>
-</ul>
-<h2 id="6、Netty-零拷贝体现在哪里？"><a href="#6、Netty-零拷贝体现在哪里？" class="headerlink" title="6、Netty 零拷贝体现在哪里？"></a>6、Netty 零拷贝体现在哪里？</h2><p>Zero-copy 就是在操作数据时, 不需要将数据 buffer从 一个内存区域拷贝到另一个内存区域。 少了一次内存的拷贝，CPU 效率就得到的提升。</p>
-<ul>
-<li><p>接收和发送 ByteBuffer 采用 DIRECT BUFFERS，使用堆外直接内存进行 Socket 读写，不需要进行字节缓冲区的二次拷贝；</p>
-</li>
-<li><p>提供了组合 Buffer 对象，可以聚合多个 ByteBuffer 对象，用户可以像操作一个 Buffer 那样方便的对组合 Buffer 进行操作；</p>
-</li>
-<li><p>文件传输采用了 transferTo 方法，它可以直接将文件缓冲区的数据发送到目标 Channel，避免了传统通过循环 write 方式导致的内存拷贝问题。</p>
-</li>
-</ul>
-<p><strong>和操作系统上的零拷贝的区别？</strong></p>
-<p>Netty 的 Zero-copy 完全是在用户态（Java 应用层）的, 更多的偏向于优化数据操作。而在 OS 层面上的 Zero-copy 通常指避免在用户态（User-space）与内核态（Kernel-space）之间来回拷贝数据。</p>
-<h2 id="7、TCP-的长连接和短连接？"><a href="#7、TCP-的长连接和短连接？" class="headerlink" title="7、TCP 的长连接和短连接？"></a>7、TCP 的长连接和短连接？</h2><p>我们知道 TCP 在进行读写之前，server 与 client 之间必须提前建立一个连接。建立连接的过程，需要我们常说的三次握手，释放/关闭连接的话需要四次挥手。这个过程是比较消耗网络资源并且有时间延迟的。</p>
-<p>所谓，短连接说的就是 server 端 与 client 端建立连接之后，读写完成之后就关闭掉连接，如果下一次再要互相发送消息，就要重新连接。短连接的有点很明显，就是管理和实现都比较简单，缺点也很明显，每一次的读写都要建立连接必然会带来大量网络资源的消耗，并且连接的建立也需要耗费时间。</p>
-<p>长连接说的就是 client 向 server 双方建立连接之后，即使 client 与 server 完成一次读写，它们之间的连接并不会主动关闭，后续的读写操作会继续使用这个连接。长连接的可以省去较多的 TCP 建立和关闭的操作，降低对网络资源的依赖，节约时间。对于频繁请求资源的客户来说，非常适用长连接。</p>
-<h2 id="8、Netty-长连接、心跳机制了解么？"><a href="#8、Netty-长连接、心跳机制了解么？" class="headerlink" title="8、Netty 长连接、心跳机制了解么？"></a>8、Netty 长连接、心跳机制了解么？</h2><p>在 TCP 保持长连接的过程中，可能会出现断网等网络异常出现，异常发生的时候， client 与 server 之间如果没有交互的话，它们是无法发现对方已经掉线的。为了解决这个问题, 我们就需要引入<strong>心跳机制</strong>。</p>
-<p>心跳机制的工作原理是: 在 client 与 server 之间在一定时间内没有数据交互（即处于 idle 状态）时, 客户端或服务器就会发送一个特殊的数据包给对方, 当接收方收到这个数据报文后, 也立即发送一个特殊的数据报文, 回应发送方, 此即一个 <font color="red">PING-PONG</font> 交互。所以, 当某一端收到心跳消息后, 就知道了对方仍然在线, 这就确保 TCP 连接的有效性。</p>
-<p>TCP 实际上自带的就有长连接选项，本身是也有心跳包机制，也就是 TCP 的选项：<font color="red">SO_KEEPALIVE</font>。但 TCP 协议层面的长连接灵活性不够，所以，一般情况下我们都是在应用层协议上实现自定义心跳机制的，也就是在 Netty 层面通过编码实现。通过 Netty 实现心跳机制的话，核心类是 IdleStateHandler 。</p>
-<h2 id="9、说说-Netty-的对象池技术？"><a href="#9、说说-Netty-的对象池技术？" class="headerlink" title="9、说说 Netty 的对象池技术？"></a>9、说说 Netty 的对象池技术？</h2><p>对象池其实就是缓存一些对象从而避免大量创建同一个类型的对象，类似线程池的概念。对象池缓存了一些已经创建好的对象，避免需要时才创建对象，同时限制了实例的个数。池化技术最终要的就是重复的使用池内已经创建的对象。从上面的内容就可以看出对象池适用于以下几个场景：</p>
-<ul>
-<li>创建对象的开销大；</li>
-<li>会创建大量的实例；</li>
-<li>限制一些资源的使用。</li>
-</ul>
-<p>Netty 自己实现了一套轻量级的对象池。在 Netty 中，通常会有多个 IO 线程独立工作（基于 NioEventLoop 实现）。每个 IO 线程轮询单独的 Selector 实例来检索 IO 事件，并在 IO 来临时开始处理。最常见的 IO 操作就是读写，具体到 NIO 就是从内核缓冲区拷贝数据到用户缓冲区或者从用户缓冲区拷贝数据到内核缓冲区。这里会涉及到大量的创建和回收 Buffer， Netty 对 Buffer 进行了池化从而降低系统开销。</p>
-<p>ref</p>
-<h2 id="10-有哪些序列化协议？"><a href="#10-有哪些序列化协议？" class="headerlink" title="10 有哪些序列化协议？"></a>10 有哪些序列化协议？</h2><p><strong>序列化</strong>（编码）是将对象序列化为二进制形式（字节数组），主要用于网络传输、数据持久化等；而反序列化（解码）则是将从网络、磁盘等读取的字节数组还原成原始对象，主要用于网络传输对象的解码，以便完成远程调用。</p>
-<p>影响序列化性能的关键因素：序列化后的码流大小（网络带宽的占用）、序列化的性能（CPU资源占用）；是否支持跨语言（异构系统的对接和开发语言切换）。</p>
-<p><strong>目前几种主流协议</strong></p>
-<ul>
-<li><p><strong>Java 默认提供的序列化</strong><br>无法跨语言、序列化后的码流太大、序列化的性能差。</p>
-</li>
-<li><p><strong>XML</strong><br>优点是人机可读性好，可指定元素或特性的名称。缺点：序列化数据只包含数据本身以及类的结构，不包括类型标识和程序集信息；只能序列化公共属性和字段；不能序列化方法；文件庞大，文件格式复杂，传输占带宽。适用场景：当做配置文件存储数据，实时数据转换。</p>
-</li>
-<li><p><strong>JSON</strong><br>是一种轻量级的数据交换格式，优点：兼容性高、数据格式比较简单，易于读写、序列化后数据较小，可扩展性好，兼容性好、与XML相比，其协议比较简单，解析速度比较快。缺点：数据的描述性比XML差、不适合性能要求为ms级别的情况、额外空间开销比较大。适用场景（可替代ＸＭＬ）：跨防火墙访问、可调式性要求高、基于Web browser的Ajax请求、传输数据量相对小，实时性要求相对低（例如秒级别）的服务。</p>
-</li>
-<li><p><strong>Fastjson</strong><br>采用一种“假定有序快速匹配”的算法。优点：接口简单易用、目前java语言中最快的json库。缺点：过于注重快，而偏离了“标准”及功能性、代码质量不高，文档不全。适用场景：协议交互、Web输出、Android客户端。</p>
-</li>
-<li><p><strong>Thrift</strong><br>不仅是序列化协议，还是一个RPC框架。优点：序列化后的体积小, 速度快、支持多种语言和丰富的数据类型、对于数据字段的增删具有较强的兼容性、支持二进制压缩编码。缺点：使用者较少、跨防火墙访问时，不安全、不具有可读性，调试代码时相对困难、不能与其他传输层协议共同使用（例如HTTP）、无法支持向持久层直接读写数据，即不适合做数据持久化序列化协议。适用场景：分布式系统的RPC解决方案。</p>
-</li>
-<li><p><strong>Avro</strong><br>Hadoop的一个子项目，解决了JSON的冗长和没有IDL的问题。优点：支持丰富的数据类型、简单的动态语言结合功能、具有自我描述属性、提高了数据解析速度、快速可压缩的二进制数据形式、可以实现远程过程调用RPC、支持跨编程语言实现。缺点：对于习惯于静态类型语言的用户不直观。适用场景：在Hadoop中做Hive、Pig和MapReduce的持久化数据格式。</p>
-</li>
-<li><p><strong>Protobuf</strong><br>将数据结构以.proto文件进行描述，通过代码生成工具可以生成对应数据结构的POJO对象和Protobuf相关的方法和属性。优点：序列化后码流小，性能高、结构化数据存储格式（XML JSON等）、通过标识字段的顺序，可以实现协议的前向兼容、结构化的文档更容易管理和维护。缺点：需要依赖于工具生成代码、支持的语言相对较少，官方只支持Java 、C++ 、python。适用场景：对性能要求高的RPC调用、具有良好的跨防火墙的访问属性、适合应用层对象的持久化。</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/04/interview/Netty%E9%9D%A2%E8%AF%95/" data-id="clk6vwj5400308kv65et7et2h" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-interview/Spring Boot面试题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2023/03/03/interview/Spring%20Boot%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
-  <time class="post-time" datetime="2023-03-03T11:20:43.310Z" itemprop="datePublished">
-    <span class="post-month">3月</span><br/>
-    <span class="post-day">03</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/03/interview/Spring%20Boot%E9%9D%A2%E8%AF%95%E9%A2%98/">Spring Boot面试题</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Spring-Boot面试题（总结最全面的面试题！！！）"><a href="#Spring-Boot面试题（总结最全面的面试题！！！）" class="headerlink" title="Spring Boot面试题（总结最全面的面试题！！！）"></a>Spring Boot面试题（总结最全面的面试题！！！）</h1><p>2020年04月13日</p>
-<blockquote>
-<p>Java面试总结汇总，整理了包括Java重点知识，以及常用开源框架，欢迎大家阅读。文章可能有错误的地方，因为个人知识有限，欢迎各位大佬指出！文章持续更新中……</p>
-</blockquote>
-<blockquote>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>标题</th>
-<th>地址</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>设计模式面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125721772039">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>2</td>
-<td>Java基础知识面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059738631">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>3</td>
-<td>Java集合面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125939843079">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>4</td>
-<td>JavaIO、BIO、NIO、AIO、Netty面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125700784136">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>5</td>
-<td>Java并发编程面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125755293710">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>6</td>
-<td>Java异常面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904128959741965">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>7</td>
-<td>Java虚拟机（JVM）面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125696573448">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>8</td>
-<td>Spring面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127051513864">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>9</td>
-<td>Spring MVC面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059722253">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>10</td>
-<td>Spring Boot面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125709156359">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>11</td>
-<td>Spring Cloud面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125717544973">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>12</td>
-<td>Redis面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127055527950">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>13</td>
-<td>MyBatis面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125935648776">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>14</td>
-<td>MySQL面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127047139335">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>15</td>
-<td>TCP、UDP、Socket、HTTP面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125692379143">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>16</td>
-<td>Nginx面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125784653837">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>17</td>
-<td>ElasticSearch面试题</td>
-<td></td>
-</tr>
-<tr>
-<td>18</td>
-<td>kafka面试题</td>
-<td></td>
-</tr>
-<tr>
-<td>19</td>
-<td>RabbitMQ面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904125935665160">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>20</td>
-<td>Dubbo面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127076499463">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>21</td>
-<td>ZooKeeper面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127076499464">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>22</td>
-<td>Netty面试题（总结最全面的面试题）</td>
-<td></td>
-</tr>
-<tr>
-<td>23</td>
-<td>Tomcat面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059722247">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>24</td>
-<td>Linux面试题（总结最全面的面试题）</td>
-<td><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904127059738637">juejin.cn/post/684490…</a></td>
-</tr>
-<tr>
-<td>25</td>
-<td>互联网相关面试题（总结最全面的面试题）</td>
-<td></td>
-</tr>
-<tr>
-<td>26</td>
-<td>互联网安全面试题（总结最全面的面试题）</td>
-<td></td>
-</tr>
-</tbody></table>
-</blockquote>
-<h3 id="什么是-Spring-Boot？"><a href="#什么是-Spring-Boot？" class="headerlink" title="什么是 Spring Boot？"></a>什么是 Spring Boot？</h3><ul>
-<li>Spring Boot 是 Spring 开源组织下的子项目，是 Spring 组件一站式解决方案，主要是简化了使用 Spring 的难度，简省了繁重的配置，提供了各种启动器，使开发者能快速上手。</li>
-</ul>
-<h3 id="为什么要用SpringBoot"><a href="#为什么要用SpringBoot" class="headerlink" title="为什么要用SpringBoot"></a>为什么要用SpringBoot</h3><ul>
-<li>快速开发，快速整合，配置简化、内嵌服务容器</li>
-</ul>
-<h3 id="SpringBoot与SpringCloud-区别"><a href="#SpringBoot与SpringCloud-区别" class="headerlink" title="SpringBoot与SpringCloud 区别"></a>SpringBoot与SpringCloud 区别</h3><ul>
-<li>SpringBoot是快速开发的Spring框架，SpringCloud是完整的微服务框架，SpringCloud依赖于SpringBoot。</li>
-</ul>
-<h3 id="Spring-Boot-有哪些优点？"><a href="#Spring-Boot-有哪些优点？" class="headerlink" title="Spring Boot 有哪些优点？"></a>Spring Boot 有哪些优点？</h3><ul>
-<li>Spring Boot 主要有如下优点：<ol>
-<li>容易上手，提升开发效率，为 Spring 开发提供一个更快、更简单的开发框架。</li>
-<li>开箱即用，远离繁琐的配置。</li>
-<li>提供了一系列大型项目通用的非业务性功能，例如：内嵌服务器、安全管理、运行数据监控、运行状况检查和外部化配置等。</li>
-<li>SpringBoot总结就是使编码变简单、配置变简单、部署变简单、监控变简单等等</li>
-<li>快速轻松地开发基于 Spring 的应用程序；</li>
-<li>无需部署war文件；</li>
-<li>创建独立应用程序的能力；</li>
-<li>帮助将 Tomcat、Jetty 或 Undertow 直接嵌入到应用程序中；</li>
-<li>无需XML配置；</li>
-<li>减少源代码数量；</li>
-<li>额外的开箱即用功能；</li>
-<li>轻松启动；</li>
-<li>简单的设置和管理；</li>
-</ol>
-</li>
-</ul>
-<h3 id="Spring-Boot-的核心注解是哪个？它主要由哪几个注解组成的？"><a href="#Spring-Boot-的核心注解是哪个？它主要由哪几个注解组成的？" class="headerlink" title="Spring Boot 的核心注解是哪个？它主要由哪几个注解组成的？"></a>Spring Boot 的核心注解是哪个？它主要由哪几个注解组成的？</h3><ul>
-<li>启动类上面的注解是@SpringBootApplication，它也是 Spring Boot 的核心注解，主要组合包含了以下 3 个注解：<ul>
-<li>@SpringBootConfiguration：组合了 @Configuration 注解，实现配置文件的功能。</li>
-<li>@EnableAutoConfiguration：打开自动配置的功能，也可以关闭某个自动配置的选项， 例如：<code>java 如关闭数据源自动配置功能： @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })。</code></li>
-<li>@ComponentScan：Spring组件扫描。</li>
-</ul>
-</li>
-</ul>
-<h3 id="Spring-Boot-支持哪些日志框架？推荐和默认的日志框架是哪个？"><a href="#Spring-Boot-支持哪些日志框架？推荐和默认的日志框架是哪个？" class="headerlink" title="Spring Boot 支持哪些日志框架？推荐和默认的日志框架是哪个？"></a>Spring Boot 支持哪些日志框架？推荐和默认的日志框架是哪个？</h3><ul>
-<li>Spring Boot 支持 Java Util Logging, Log4j2, Lockback 作为日志框架，如果你使用 Starters 启动器，Spring Boot 将使用 Logback 作为默认日志框架，但是不管是那种日志框架他都支持将配置文件输出到控制台或者文件中。</li>
-</ul>
-<h3 id="Spring-Boot-中的-starter-到底是什么"><a href="#Spring-Boot-中的-starter-到底是什么" class="headerlink" title="Spring Boot 中的 starter 到底是什么 ?"></a>Spring Boot 中的 starter 到底是什么 ?</h3><ul>
-<li>首先，这个 Starter 并非什么新的技术点，基本上还是基于 Spring 已有功能来实现的。首先它提供了一个自动化配置类，一般命名为 <code>XXXAutoConfiguration</code> ，在这个配置类中通过条件注解来决定一个配置是否生效（条件注解就是 Spring 中原本就有的），然后它还会提供一系列的默认配置，也允许开发者根据实际情况自定义相关配置，然后通过类型安全的属性(spring.factories)注入将这些配置属性注入进来，新注入的属性会代替掉默认属性。正因为如此，很多第三方框架，我们只需要引入依赖就可以直接使用了。当然，开发者也可以自定义 Starter</li>
-</ul>
-<h3 id="SpringBoot-Starter的工作原理"><a href="#SpringBoot-Starter的工作原理" class="headerlink" title="SpringBoot Starter的工作原理"></a>SpringBoot Starter的工作原理</h3><ul>
-<li><code>我个人理解SpringBoot就是由各种Starter组合起来的，我们自己也可以开发Starter</code></li>
-<li>在sprinBoot启动时由@SpringBootApplication注解会自动去maven中读取每个starter中的spring.factories文件,该文件里配置了所有需要被创建spring容器中的bean，并且进行自动配置把bean注入SpringContext中 //（SpringContext是Spring的配置文件）</li>
-</ul>
-<h3 id="Spring-Boot-2-X-有什么新特性？与-1-X-有什么区别？"><a href="#Spring-Boot-2-X-有什么新特性？与-1-X-有什么区别？" class="headerlink" title="Spring Boot 2.X 有什么新特性？与 1.X 有什么区别？"></a>Spring Boot 2.X 有什么新特性？与 1.X 有什么区别？</h3><ul>
-<li>配置变更</li>
-<li>JDK 版本升级</li>
-<li>第三方类库升级</li>
-<li>响应式 Spring 编程支持</li>
-<li>HTTP/2 支持</li>
-<li>配置属性绑定</li>
-<li>更多改进与加强</li>
-</ul>
-<h3 id="SpringBoot支持什么前端模板，"><a href="#SpringBoot支持什么前端模板，" class="headerlink" title="SpringBoot支持什么前端模板，"></a>SpringBoot支持什么前端模板，</h3><ul>
-<li>thymeleaf，freemarker，jsp，官方不推荐JSP会有限制</li>
-</ul>
-<h3 id="SpringBoot的缺点"><a href="#SpringBoot的缺点" class="headerlink" title="SpringBoot的缺点"></a>SpringBoot的缺点</h3><p>尽管 Spring Boot 有很多优点，但它仍然有一些缺点需要牢记：</p>
-<ul>
-<li>由于不用自己做的配置，<mark>报错时很难定位</mark>。</li>
-<li>缺乏控制。 Spring Boot 会<mark>创建大量未使用的依赖项，导致部署文件很大</mark>；</li>
-<li>将遗留或现有 Spring 项目转换为 Spring Boot 应用程序的复杂且耗时的过程；</li>
-<li>不适合大型项目。 尽管它非常适合使用微服务，但许多开发人员声称 Spring Boot 不适合构建单体应用程序。</li>
-</ul>
-<h3 id="运行-Spring-Boot-有哪几种方式？"><a href="#运行-Spring-Boot-有哪几种方式？" class="headerlink" title="运行 Spring Boot 有哪几种方式？"></a>运行 Spring Boot 有哪几种方式？</h3><ol>
-<li>打包用命令或者放到容器中运行</li>
-<li>用 Maven/ Gradle 插件运行</li>
-<li>直接执行 main 方法运行</li>
-</ol>
-<h3 id="Spring-Boot-需要独立的容器运行吗？"><a href="#Spring-Boot-需要独立的容器运行吗？" class="headerlink" title="Spring Boot 需要独立的容器运行吗？"></a>Spring Boot 需要独立的容器运行吗？</h3><ul>
-<li>可以不需要，内置了 Tomcat/ Jetty 等容器。</li>
-</ul>
-<h3 id="开启-Spring-Boot-特性有哪几种方式？"><a href="#开启-Spring-Boot-特性有哪几种方式？" class="headerlink" title="开启 Spring Boot 特性有哪几种方式？"></a>开启 Spring Boot 特性有哪几种方式？</h3><h4 id="1-继承spring-boot-starter-parent项目"><a href="#1-继承spring-boot-starter-parent项目" class="headerlink" title="1. 继承spring-boot-starter-parent项目"></a>1. 继承spring-boot-starter-parent项目</h4><parent>
-    <groupid>org.springframework.boot</groupid>
-    <artifactid>spring-boot-starter-parent</artifactid>
-    <version>2.2.6.RELEASE</version>
-</parent>
-
-<p>这个时候再导入我们需要的springboot starter时，就可以忽略版本号：</p>
-<dependencies>
-    <dependency>
-        <groupid>org.springframework.boot</groupid>
-        <artifactid>spring-boot-starter</artifactid>
-    </dependency>
-</dependencies>
-
-<h4 id="2-导入spring-boot-dependencies项目依赖"><a href="#2-导入spring-boot-dependencies项目依赖" class="headerlink" title="2. 导入spring-boot-dependencies项目依赖"></a>2. 导入spring-boot-dependencies项目依赖</h4><dependencymanagement>
-    <dependencies>
-      <dependency>
-        <groupid>org.springframework.boot</groupid>
-        <artifactid>spring-boot-dependencies</artifactid>
-        <version>1.5.4.RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-</dependencymanagement>
-
-<p>这个时候再导入我们需要的springboot starter时，就可以忽略版本号：</p>
-<dependencies>
-    <dependency>
-        <groupid>org.springframework.boot</groupid>
-        <artifactid>spring-boot-starter</artifactid>
-    </dependency>
-</dependencies>
-
-<h3 id="SpringBoot-实现热部署有哪几种方式？"><a href="#SpringBoot-实现热部署有哪几种方式？" class="headerlink" title="SpringBoot 实现热部署有哪几种方式？"></a>SpringBoot 实现热部署有哪几种方式？</h3><ul>
-<li>热部署就是可以不用重新运行SpringBoot项目可以实现操作后台代码自动更新到以运行的项目中</li>
-<li>主要有两种方式：<ul>
-<li>Spring Loaded</li>
-<li>Spring-boot-devtools</li>
-</ul>
-</li>
-</ul>
-<h3 id="SpringBoot事务的使用"><a href="#SpringBoot事务的使用" class="headerlink" title="SpringBoot事务的使用"></a>SpringBoot事务的使用</h3><ul>
-<li>SpringBoot的事务很简单，首先使用注解@EnableTransactionManagement开启事务之后，然后在Service方法上添加注解@Transactional便可。</li>
-</ul>
-<h3 id="Async异步调用方法"><a href="#Async异步调用方法" class="headerlink" title="Async异步调用方法"></a>Async异步调用方法</h3><ul>
-<li>在SpringBoot中使用异步调用是很简单的，只需要在方法上使用@Async注解即可实现方法的异步调用。 注意：需要在启动类加入**@EnableAsync<strong>使异步调用</strong>@Async**注解生效。</li>
-</ul>
-<h3 id="如何在-Spring-Boot-启动的时候运行一些特定的代码？"><a href="#如何在-Spring-Boot-启动的时候运行一些特定的代码？" class="headerlink" title="如何在 Spring Boot 启动的时候运行一些特定的代码？"></a>如何在 Spring Boot 启动的时候运行一些特定的代码？</h3><p>可以实现接口 ApplicationRunner 或者 CommandLineRunner，这两个接口实现方式一样，它们都只提供了一个 run 方法</p>
-<h4 id="1-ApplicationRunner"><a href="#1-ApplicationRunner" class="headerlink" title="1. ApplicationRunner"></a>1. ApplicationRunner</h4><ul>
-<li>在项目中，可能会遇到这样一个问题：在项目启动完成之后，紧接着执行一段代码。<br>在SpringBoot中，提供了一个接口：ApplicationRunner。该接口中，只有一个run方法，他执行的时机是：spring容器启动完成之后，就会紧接着执行这个接口实现类的run方法。</li>
-<li>实现了ApplicationRunner接口的类，并重写run方法，在springBoot项目启动后就是调用执行一次run方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestImplApplicationRunner</span> <span class="keyword">implements</span> <span class="title class_">ApplicationRunner</span> {</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">        System.out.println(<span class="string">"测试ApplicationRunner接口1"</span>);</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<ul>
-<li><p>@Component注解<br>这个实现类，要注入到spring容器中，这里使用了@Component注解；<br>在同一个项目中，可以定义多个ApplicationRunner的实现类，他们的执行顺序通过注解@Order注解或者再实现Ordered接口来实现。</p>
-</li>
-<li><p>run方法的参数：ApplicationArguments可以获取到当前项目执行的命令参数。（比如把这个项目打成jar执行的时候，带的参数可以通过ApplicationArguments获取到）；由于该方法是在容器启动完成之后，才执行的，所以，这里可以从spring容器中拿到其他已经注入的bean。</p>
-</li>
-<li><p>@Order注解<br>如果有多个实现类，而你需要他们按一定顺序执行的话，可以在实现类上加上@Order注解。@Order(value=整数值)。SpringBoot会按照@Order中的value值从小到大依次执行。<br>@order，使用注解方式使bean的加载顺序得到控制,@Order标记定义了组件的加载顺序，值越小拥有越高的优先级，可为负数。值越小，越先被加载。</p>
-</li>
-<li><p>@Order(-1)优先于@Order(0)<br>@Order(1)优先于@Order(2)</p>
-</li>
-</ul>
-<h4 id="2-CommandLineRunner"><a href="#2-CommandLineRunner" class="headerlink" title="2. CommandLineRunner"></a>2. CommandLineRunner</h4><p><strong>背景</strong></p>
-<p>项目启动之前，预先加载数据。比如，权限容器、特殊用户数据等。通常我们可以使用监听器、事件来操作。但是，springboot提供了一个简单的方式来实现此类需求，即，CommandLineRunner。</p>
-<p>先了解一下这个类</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.core.Ordered;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Interface used to indicate that a bean should &lt;em&gt;run&lt;/em&gt; when it is contained within</span></span><br><span class="line"><span class="comment"> * a {<span class="doctag">@link</span> SpringApplication}. Multiple {<span class="doctag">@link</span> CommandLineRunner} beans can be defined</span></span><br><span class="line"><span class="comment"> * within the same application context and can be ordered using the {<span class="doctag">@link</span> Ordered}</span></span><br><span class="line"><span class="comment"> * interface or {<span class="doctag">@link</span> Order <span class="doctag">@Order</span>} annotation.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * If you need access to {<span class="doctag">@link</span> ApplicationArguments} instead of the raw String array</span></span><br><span class="line"><span class="comment"> * consider using {<span class="doctag">@link</span> ApplicationRunner}.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Dave Syer</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span> ApplicationRunner</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CommandLineRunner</span> {</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Callback used to run the bean.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> args incoming main method arguments</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception on error</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception;</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<p>文档中，我们可以知道以下几点。</p>
-<ul>
-<li>这是一个接口，用户可以自定义实现该接口，具体实现run方法</li>
-<li>任何在上下文容器之内的bean都可以实现run方法</li>
-<li>如果在上下文中，存在多个该接口实现类，可以通过@order注解，指定加载顺序</li>
-</ul>
-<p>所以我们基本上大概已经了解了这个接口的作用以及用法。</p>
-<p><strong>案例说明</strong><br>分别定义一个数据加载类MyStartupRunner1，排序为2；另一个数据加载类MyStartupRunner2,排序为1。看看它们记载数据的顺序。</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(value = 2)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyStartupRunner1</span> <span class="keyword">implements</span> <span class="title class_">CommandLineRunner</span>{</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">       System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;服务启动执行，执行加载数据等操作 MyStartupRunner1 order 2 &lt;&lt;&lt;&lt;"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order(value = 1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyStartupRunner2</span> <span class="keyword">implements</span> <span class="title class_">CommandLineRunner</span> {</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception {</span><br><span class="line">   		System.out.println(<span class="string">"&gt;&gt;&gt;&gt;服务启动执行，执行加载数据等操作 MyStartupRunner2 order 1 &lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span>);</span><br><span class="line">   	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h3 id="Spring-Boot-有哪几种读取配置的方式？"><a href="#Spring-Boot-有哪几种读取配置的方式？" class="headerlink" title="Spring Boot 有哪几种读取配置的方式？"></a>Spring Boot 有哪几种读取配置的方式？</h3><ul>
-<li>Spring Boot 可以通过 @PropertySource,@Value,@Environment, @ConfigurationPropertie注解来绑定变量</li>
-</ul>
-<h3 id="什么是-JavaConfig？"><a href="#什么是-JavaConfig？" class="headerlink" title="什么是 JavaConfig？"></a>什么是 JavaConfig？</h3><ul>
-<li>Spring JavaConfig 是 Spring 社区的产品，Spring 3.0引入了他，它提供了配置 Spring IOC 容器的纯Java 方法。因此它有助于避免使用 XML 配置。使用 JavaConfig 的优点在于：<ul>
-<li>面向对象的配置。由于配置被定义为 JavaConfig 中的类，因此用户可以充分利用 Java 中的面向对象功能。一个配置类可以继承另一个，重写它的@Bean 方法等。</li>
-<li>减少或消除 XML 配置。基于依赖注入原则的外化配置的好处已被证明。但是，许多开发人员不希望在 XML 和 Java 之间来回切换。JavaConfig 为开发人员提供了一种纯 Java 方法来配置与 XML 配置概念相似的 Spring 容器。从技术角度来讲，只使用 JavaConfig 配置类来配置容器是可行的，但实际上很多人认为将JavaConfig 与 XML 混合匹配是理想的。</li>
-<li>类型安全和重构友好。JavaConfig 提供了一种类型安全的方法来配置 Spring容器。由于 Java 5.0 对泛型的支持，现在可以按类型而不是按名称检索 bean，不需要任何强制转换或基于字符串的查找。</li>
-</ul>
-</li>
-<li>常用的Java config：<ul>
-<li>@Configuration：在类上打上写下此注解，表示这个类是配置类</li>
-<li>@ComponentScan：在配置类上添加 @ComponentScan 注解。该注解默认会扫描该类所在的包下所有的配置类，相当于之前的 &lt;context:component-scan &gt;。</li>
-<li>@Bean：bean的注入：相当于以前的&lt; bean id=”objectMapper” class=”org.codehaus.jackson.map.ObjectMapper” /&gt;</li>
-<li>@EnableWebMvc：相当于xml的&lt;mvc:annotation-driven &gt;</li>
-<li>@ImportResource： 相当于xml的 &lt; import resource=”applicationContext-cache.xml”&gt;</li>
-</ul>
-</li>
-</ul>
-<h3 id="SpringBoot的自动配置原理是什么"><a href="#SpringBoot的自动配置原理是什么" class="headerlink" title="SpringBoot的自动配置原理是什么"></a>SpringBoot的自动配置原理是什么</h3><ul>
-<li>主要是Spring Boot的启动类上的核心注解SpringBootApplication注解主配置类，有了这个主配置类启动时就会为SpringBoot开启一个@EnableAutoConfiguration注解自动配置功能。</li>
-<li>有了这个EnableAutoConfiguration的话就会：<ol>
-<li>从配置文件META_INF/Spring.factories加载可能用到的自动配置类</li>
-<li>去重，并将exclude和excludeName属性携带的类排除</li>
-<li>过滤，将满足条件（@Conditional）的自动配置类返回</li>
-</ol>
-</li>
-</ul>
-<h3 id="你如何理解-Spring-Boot-配置加载顺序？"><a href="#你如何理解-Spring-Boot-配置加载顺序？" class="headerlink" title="你如何理解 Spring Boot 配置加载顺序？"></a>你如何理解 Spring Boot 配置加载顺序？</h3><ul>
-<li><p>在 Spring Boot 里面，可以使用以下几种方式来加载配置。</p>
-<ul>
-<li>1.properties文件；</li>
-<li>2.YAML文件；</li>
-<li>3.系统环境变量；</li>
-<li>4.命令行参数；</li>
-<li>等等……</li>
-</ul>
-<p>常用配置文件中读取配置的结论：config配置中心 =&gt; jvm参数 =&gt; 系统环境变量 =&gt; 项目内的application-xxx.yaml =&gt; 项目内的application.yaml =&gt; bootstrap.yaml</p>
-</li>
-</ul>
-<h3 id="什么是-YAML？"><a href="#什么是-YAML？" class="headerlink" title="什么是 YAML？"></a>什么是 YAML？</h3><ul>
-<li>YAML 是一种<mark>人类可读的数据序列化语言</mark>。它通常用于配置文件。与属性文件相比，如果我们想要在配置文件中添加复杂的属性，YAML 文件就更加结构化，而且更少混淆。可以看出 YAML 具有分层配置数据。</li>
-<li>YAML 的语法比较简洁直观，特点是使用空格来表达层次结构，其最大优势在于<strong>数据结构</strong>方面的表达，所以 YAML 更多应用于<strong>编写配置文件</strong>，其文件一般以 <strong>.yml</strong> 为后缀。</li>
-</ul>
-<h3 id="YAML-配置的优势在哪里"><a href="#YAML-配置的优势在哪里" class="headerlink" title="YAML 配置的优势在哪里 ?"></a>YAML 配置的优势在哪里 ?</h3><ul>
-<li>YAML 现在可以算是非常流行的一种配置文件格式了，无论是前端还是后端，都可以见到 YAML 配置。那么 YAML 配置和传统的 properties 配置相比到底有哪些优势呢？<ul>
-<li>配置有序，在一些特殊的场景下，配置有序很关键</li>
-<li>简洁明了，他还支持数组，数组中的元素可以是基本数据类型也可以是对象</li>
-<li>相比 properties 配置文件，YAML 还有一个缺点，就是不支持 @PropertySource 注解导入自定义的 YAML 配置。</li>
-</ul>
-</li>
-</ul>
-<h3 id="Spring-Boot-是否可以使用-XML-配置"><a href="#Spring-Boot-是否可以使用-XML-配置" class="headerlink" title="Spring Boot 是否可以使用 XML 配置 ?"></a>Spring Boot 是否可以使用 XML 配置 ?</h3><ul>
-<li>Spring Boot 推荐使用 Java 配置而非 XML 配置，但是 Spring Boot 中也可以使用 XML 配置，通过 @ImportResource 注解可以引入一个 XML 配置。</li>
-</ul>
-<h3 id="spring-boot-核心配置文件是什么？bootstrap-properties-和-application-properties-有何区别"><a href="#spring-boot-核心配置文件是什么？bootstrap-properties-和-application-properties-有何区别" class="headerlink" title="spring boot 核心配置文件是什么？bootstrap.properties 和 application.properties 有何区别 ?"></a>spring boot 核心配置文件是什么？bootstrap.properties 和 application.properties 有何区别 ?</h3><ul>
-<li>单纯做 Spring Boot 开发，可能不太容易遇到 bootstrap.properties 配置文件，但是在结合 Spring Cloud 时，这个配置就会经常遇到了，特别是在需要加载一些远程配置文件的时侯。</li>
-<li>spring boot 核心的两个配置文件：<ul>
-<li>bootstrap (. yml 或者 . properties)：boostrap 由父 ApplicationContext 加载的，比 applicaton 优先加载，配置在应用程序上下文的引导阶段生效。一般来说我们在 Spring Cloud 配置就会使用这个文件。且 boostrap 里面的属性不能被覆盖；</li>
-<li>application (. yml 或者 . properties)： 由ApplicatonContext 加载，用于 <mark>spring boot 项目的<strong>自动化配置</strong></mark>。</li>
-</ul>
-</li>
-</ul>
-<h3 id="什么是-Spring-Profiles？"><a href="#什么是-Spring-Profiles？" class="headerlink" title="什么是 Spring Profiles？"></a>什么是 Spring Profiles？</h3><ul>
-<li>在项目的开发中，有些配置文件在开发、测试或者生产等不同环境中可能是不同的，例如数据库连接、redis的配置等等。那我们如何在不同环境中自动实现配置的切换呢？Spring给我们提供了profiles机制给我们提供的就是来回切换配置文件的功能</li>
-<li>Spring Profiles 允许用户根据配置文件（dev，test，prod 等）来注册 bean。因此，当应用程序在开发中运行时，只有某些 bean 可以加载，而在 PRODUCTION中，某些其他 bean 可以加载。假设我们的要求是 Swagger 文档仅适用于 QA 环境，并且禁用所有其他文档。这可以使用配置文件来完成。Spring Boot 使得使用配置文件非常简单。</li>
-</ul>
-<h3 id="SpringBoot多数据源拆分的思路"><a href="#SpringBoot多数据源拆分的思路" class="headerlink" title="SpringBoot多数据源拆分的思路"></a>SpringBoot多数据源拆分的思路</h3><ul>
-<li>先在properties配置文件中配置两个数据源，创建分包mapper，使用@ConfigurationProperties读取properties中的配置，使用@MapperScan注册到对应的mapper包中</li>
-</ul>
-<h3 id="SpringBoot多数据源事务如何管理"><a href="#SpringBoot多数据源事务如何管理" class="headerlink" title="SpringBoot多数据源事务如何管理"></a>SpringBoot多数据源事务如何管理</h3><ul>
-<li>第一种方式是在service层的@TransactionManager中使用transactionManager指定DataSourceConfig中配置的事务</li>
-<li>第二种是使用jta-atomikos实现分布式事务管理</li>
-</ul>
-<h3 id="保护-Spring-Boot-应用有哪些方法？"><a href="#保护-Spring-Boot-应用有哪些方法？" class="headerlink" title="保护 Spring Boot 应用有哪些方法？"></a>保护 Spring Boot 应用有哪些方法？</h3><ul>
-<li>在生产中使用HTTPS</li>
-<li>使用Snyk检查你的依赖关系</li>
-<li>升级到最新版本</li>
-<li>启用CSRF保护</li>
-<li>使用内容安全策略防止XSS攻击</li>
-</ul>
-<h3 id="如何实现-Spring-Boot-应用程序的安全性？"><a href="#如何实现-Spring-Boot-应用程序的安全性？" class="headerlink" title="如何实现 Spring Boot 应用程序的安全性？"></a>如何实现 Spring Boot 应用程序的安全性？</h3><ul>
-<li>为了实现 Spring Boot 的安全性，我们使用 spring-boot-starter-security 依赖项，并且必须添加安全配置。它只需要很少的代码。配置类将必须扩展WebSecurityConfigurerAdapter 并覆盖其方法。</li>
-</ul>
-<h3 id="比较一下-Spring-Security-和-Shiro-各自的优缺点"><a href="#比较一下-Spring-Security-和-Shiro-各自的优缺点" class="headerlink" title="比较一下 Spring Security 和 Shiro 各自的优缺点 ?"></a>比较一下 Spring Security 和 Shiro 各自的优缺点 ?</h3><ul>
-<li>由于 Spring Boot 官方提供了大量的非常方便的开箱即用的 Starter ，包括 Spring Security 的 Starter ，使得在 Spring Boot 中使用 Spring Security 变得更加容易，甚至只需要添加一个依赖就可以保护所有的接口，所以，如果是 Spring Boot 项目，一般选择 Spring Security 。当然这只是一个建议的组合，单纯从技术上来说，无论怎么组合，都是没有问题的。Shiro 和 Spring Security 相比，主要有如下一些特点：<ul>
-<li>Spring Security 是一个重量级的安全管理框架；Shiro 则是一个轻量级的安全管理框架</li>
-<li>Spring Security 概念复杂，配置繁琐；Shiro 概念简单、配置简单</li>
-<li>Spring Security 功能强大；Shiro 功能简单</li>
-</ul>
-</li>
-</ul>
-<h3 id="Spring-Boot-中如何解决跨域问题"><a href="#Spring-Boot-中如何解决跨域问题" class="headerlink" title="Spring Boot 中如何解决跨域问题 ?"></a>Spring Boot 中如何解决跨域问题 ?</h3><ul>
-<li>跨域可以在前端通过 JSONP 来解决，但是 JSONP 只可以发送 GET 请求，无法发送其他类型的请求，在 RESTful 风格的应用中，就显得非常鸡肋，因此我们推荐在后端通过 （CORS，Cross-origin resource sharing） 来解决跨域问题。这种解决方案并非 Spring Boot 特有的，在传统的 SSM 框架中，就可以通过 CORS 来解决跨域问题，只不过之前我们是在 XML 文件中配置 CORS ，现在可以通过实现WebMvcConfigurer接口然后重写addCorsMappings方法解决跨域问题。</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfig</span> <span class="keyword">extends</span> <span class="title class_">WebMvcConfigurerAdapter</span> {</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> {</span><br><span class="line">        registry.addMapping(<span class="string">"/**"</span>) 		<span class="comment">//可以被跨域的路径</span></span><br><span class="line">            .allowedOrigins(<span class="string">"*"</span>) 		<span class="comment">//域名的白名单</span></span><br><span class="line">            .allowedMethods(<span class="string">"*"</span>)		<span class="comment">/*"GET", "POST", "DELETE", "PUT"*/</span></span><br><span class="line">            .allowedHeaders(<span class="string">"*"</span>) 		<span class="comment">//允许所有的请求header访问，可以自定义设置任意请求头信息</span></span><br><span class="line">            .maxAge(<span class="number">3600</span>); 				<span class="comment">//这个复杂请求是预检用的，设置预检多久失效</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="如何使用-Spring-Boot-实现全局异常处理？"><a href="#如何使用-Spring-Boot-实现全局异常处理？" class="headerlink" title="如何使用 Spring Boot 实现全局异常处理？"></a>如何使用 Spring Boot 实现全局异常处理？</h3><ul>
-<li>Spring 提供了一种使用 <mark>ControllerAdvice</mark> 处理异常的非常有用的方法。 我们通过实现一个 ControlerAdvice 类，来处理控制器类抛出的所有异常。</li>
-</ul>
-<h4 id="ControllerAdvice-作用"><a href="#ControllerAdvice-作用" class="headerlink" title="@ControllerAdvice 作用"></a>@ControllerAdvice 作用</h4><p><font color="red"><strong>controller 的增强，用于对controller 做一些统一的操作，一般是用于全局的异常处理，也可以用于全局结果的返回处理</strong></font></p>
-<p>可以在一定程度上简化代码，减少代码的书写量，统一对所有结果和异常做处理，包括异常信息的返回和错误日志的答应等</p>
-<p>@ControllerAdvice，是Spring3.2提供的新注解,它是一个Controller增强器,可对controller中被 @RequestMapping注解的方法加一些逻辑处理。主要作用有一下三种 :</p>
-<ul>
-<li>通过@ControllerAdvice注解可以将对于控制器的全局配置放在同一个位置。</li>
-<li>注解了@ControllerAdvice的类的方法可以使用@ExceptionHandler、@InitBinder、@ModelAttribute注解到方法上。<ul>
-<li>@ExceptionHandler：用于全局处理控制器里的异常，进行全局异常处理</li>
-<li>@InitBinder：用来设置WebDataBinder，用于自动绑定前台请求参数到Model中，全局数据预处理。</li>
-<li>@ModelAttribute：本来作用是绑定键值对到Model中，此处让全局的@RequestMapping都能获得在此处设置的键值对 ，全局数据绑定。</li>
-</ul>
-</li>
-<li>@ControllerAdvice注解将作用在所有注解了@RequestMapping的控制器的方法上。</li>
-</ul>
-<p>需要配合@ExceptionHandler使用。 当将异常抛到controller时,可以对异常进行统一处理,规定返回的json格式或是跳转到一个错误页面</p>
-<p>全局异常处理举例以及说明<br>@ControllerAdvice ，@ExceptionHandler 的全局处理</p>
-<p>Slf4j 为日志注解</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.MethodArgumentNotValidException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyGlobalExceptionHandler</span> {</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 自定义异常</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = MyException.class)</span></span><br><span class="line">    <span class="keyword">public</span> Response&lt;String&gt; <span class="title function_">handle</span><span class="params">(HttpServletRequest request, MyException e)</span> {</span><br><span class="line">        log.error(<span class="string">"错误信息:{}"</span>, e.getMessage(), e);</span><br><span class="line">		<span class="keyword">return</span> Response.failMessage(e.getCode(), e.getMessage());</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// @Valid 校验框架抛出的特殊异常类</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = MethodArgumentNotValidException.class)</span></span><br><span class="line">    <span class="keyword">public</span> Response&lt;String&gt; <span class="title function_">handleValidException</span><span class="params">(HttpServletRequest request, MethodArgumentNotValidException e)</span> {</span><br><span class="line">        <span class="type">BindingResult</span> <span class="variable">bindingResult</span> <span class="operator">=</span> e.getBindingResult();</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">if</span> (bindingResult.hasErrors()) {</span><br><span class="line">            List&lt;ObjectError&gt; allErrors = bindingResult.getAllErrors();</span><br><span class="line">            <span class="keyword">for</span> (ObjectError allError : allErrors) {</span><br><span class="line">                message.append(allError.getDefaultMessage()).append(<span class="string">", "</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> Response.failMessage(message.toString());</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 默认其他的所有异常</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = Exception.class)</span></span><br><span class="line">    <span class="keyword">public</span> Response&lt;String&gt; <span class="title function_">handleOtherException</span><span class="params">(HttpServletRequest request, Exception e)</span> {</span><br><span class="line">        log.error(<span class="string">"request error Exception:"</span>, e);</span><br><span class="line">        <span class="keyword">return</span> Response.failMessage(e.getMessage());</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="Spring-Boot-中的监视器是什么？"><a href="#Spring-Boot-中的监视器是什么？" class="headerlink" title="Spring Boot 中的监视器是什么？"></a>Spring Boot 中的监视器是什么？</h3><ul>
-<li><p>Spring boot actuator 是 spring 启动框架中的重要功能之一。Spring boot 监视器可帮助您<mark>访问生产环境中正在运行的应用程序的当前状态</mark>。有几个指标必须在生产环境中进行检查和监控。即使一些外部应用程序可能正在使用这些服务来向相关人员触发警报消息。监视器模块公开了一组可直接作为 HTTP URL 访问的REST 端点来检查状态。</p>
-</li>
-<li><p>Spring Boot自带监控组件—Actuator，它可以帮助实现对程序内部运行情况的监控。本章首先介绍Actuator轻松实现应用程序的监控治理，比如健康状况、审计、统计和HTTP追踪、Bean加载情况、环境变量、日志信息、线程信息等，然后介绍如何使用Spring Boot Admin构建完整的运维监控平台。<br><strong>Actuator的核心是端点（Endpoint）</strong>，它用来监视、提供应用程序的信息，Spring Boot提供的spring-boot-actuator组件中已经内置了非常多的Endpoint（health、info、beans、metrics、httptrace、shutdown等），每个端点都可以启用和禁用。</p>
-<p><strong>监控端点分类：</strong><br>1）应用配置类：可以查看应用在运行期的静态信息，比如自动配置信息、加载的Spring Bean信息、YML文件配置信息、环境信息、请求映射信息。<br>2）度量指标类：主要是运行期的动态信息，如堆栈、请求连接、健康状态、系统性能等<br>3）操作控制类：主要是指shutdown，用户可以发送一个请求将应用的监控功能关闭。</p>
-</li>
-</ul>
-<h3 id="我们如何监视所有-Spring-Boot-微服务？"><a href="#我们如何监视所有-Spring-Boot-微服务？" class="headerlink" title="我们如何监视所有 Spring Boot 微服务？"></a>我们如何监视所有 Spring Boot 微服务？</h3><ul>
-<li>Spring Boot 提供 <strong>监视器端点</strong> 以监控各个微服务的度量。这些端点对于获取有关应用程序的信息（如它们是否已启动）以及它们的组件（如数据库等）是否正常运行很有帮助。但是，使用监视器的一个主要缺点或困难是，我们必须单独打开应用程序的知识点以了解其状态或健康状况。想象一下涉及 50 个应用程序的微服务，管理员将不得不击中所有 50 个应用程序的执行终端。为了帮助我们处理这种情况，我们将使用位于的开源项目。 它建立在 <strong>Spring Boot Actuator</strong> 之上，它提供了一个 Web UI，使我们能够可视化多个应用程序的度量。</li>
-</ul>
-<h3 id="SpringBoot性能如何优化"><a href="#SpringBoot性能如何优化" class="headerlink" title="SpringBoot性能如何优化"></a>SpringBoot性能如何优化</h3><ul>
-<li>如果项目比较大，类比较多，不使用@SpringBootApplication，采用@Compoment指定扫包范围</li>
-<li>在项目启动时设置JVM初始内存和最大内存相同</li>
-<li>将springboot内置服务器由tomcat设置为undertow</li>
-</ul>
-<h3 id="如何重新加载-Spring-Boot-上的更改，而无需重新启动服务器？Spring-Boot项目如何热部署？"><a href="#如何重新加载-Spring-Boot-上的更改，而无需重新启动服务器？Spring-Boot项目如何热部署？" class="headerlink" title="如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？Spring Boot项目如何热部署？"></a>如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？Spring Boot项目如何热部署？</h3><ul>
-<li>这可以使用 DEV 工具来实现。通过这种依赖关系，您可以节省任何更改，嵌入式tomcat 将重新启动。Spring Boot 有一个开发工具（<mark><strong>DevTools</strong></mark>）模块，它有助于提高开发人员的生产力。Java 开发人员面临的一个主要挑战是将文件更改自动部署到服务器并自动重启服务器。开发人员可以重新加载 Spring Boot 上的更改，而无需重新启动服务器。这将消除每次手动部署更改的需要。Spring Boot 在发布它的第一个版本时没有这个功能。这是开发人员最需要的功能。DevTools 模块完全满足开发人员的需求。该模块将在生产环境中被禁用。它还提供 H2 数据库控制台以更好地测试应用程序。</li>
-</ul>
-<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="Spring-Boot微服务中如何实现-session-共享"><a href="#Spring-Boot微服务中如何实现-session-共享" class="headerlink" title="Spring Boot微服务中如何实现 session 共享 ?"></a>Spring Boot微服务中如何实现 session 共享 ?</h3><ul>
-<li>在微服务中，一个完整的项目被拆分成多个不相同的独立的服务，各个服务独立部署在不同的服务器上，各自的 session 被从物理空间上隔离开了，但是经常，我们需要在不同微服务之间共享 session ，<mark>常见的方案就是 Spring Session + Redis 来实现 session 共享。将所有微服务的 session 统一保存在 Redis 上，当各个微服务对 session 有相关的读写操作时，都去操作 Redis 上的 session </mark>。这样就实现了 session 共享，Spring Session 基于 Spring 中的代理过滤器实现，使得 session 的同步操作对开发人员而言是透明的，非常简便。</li>
-</ul>
-<h3 id="您使用了哪些-starter-maven-依赖项？"><a href="#您使用了哪些-starter-maven-依赖项？" class="headerlink" title="您使用了哪些 starter maven 依赖项？"></a>您使用了哪些 starter maven 依赖项？</h3><ul>
-<li>使用了下面的一些依赖项<ul>
-<li>spring-boot-starter-web 嵌入tomcat和web开发需要servlet与jsp支持</li>
-<li>spring-boot-starter-data-jpa 数据库支持</li>
-<li>spring-boot-starter-data-redis redis数据库支持</li>
-<li>spring-boot-starter-data-solr solr支持</li>
-<li>mybatis-spring-boot-starter 第三方的mybatis集成starter</li>
-<li>自定义的starter(如果自己开发过就可以说出来)</li>
-</ul>
-</li>
-</ul>
-<h3 id="Spring-Boot-中如何实现定时任务"><a href="#Spring-Boot-中如何实现定时任务" class="headerlink" title="Spring Boot 中如何实现定时任务 ?"></a>Spring Boot 中如何实现定时任务 ?</h3><ul>
-<li>在 Spring Boot 中使用定时任务主要有两种不同的方式，一个就是使用 Spring 中的 <mark>@Scheduled 注解</mark>，另一个则是使用第三方框架 <mark>Quartz</mark>。</li>
-<li>使用 Spring 中的 @Scheduled 的方式主要通过 @Scheduled 注解来实现。</li>
-</ul>
-<h3 id="spring-boot-starter-parent-有什么用"><a href="#spring-boot-starter-parent-有什么用" class="headerlink" title="spring-boot-starter-parent 有什么用 ?"></a>spring-boot-starter-parent 有什么用 ?</h3><ul>
-<li><p>我们都知道，新创建一个 Spring Boot 项目，默认都是有 parent 的，这个 parent 就是 spring-boot-starter-parent ，spring-boot-starter-parent 主要有如下作用：</p>
-<ol>
-<li><p>定义了 Java 编译版本为 1.8 。</p>
-</li>
-<li><p>使用 UTF-8 格式编码。</p>
-</li>
-<li><p>继承自 spring-boot-dependencies，这个里边定义了依赖的版本，也正是因为继承了这个依赖，所以我们在写依赖时才不需要写版本号。看源码发现：</p>
-<p><img src="/../../images/image-20230303224702882.png" alt="image-20230303224702882"></p>
-</li>
-<li><p>执行打包操作的配置。</p>
-</li>
-<li><p>自动化的资源过滤。</p>
-</li>
-<li><p>自动化的插件配置。</p>
-</li>
-<li><p>针对 application.properties 和 application.yml 的资源过滤，包括通过 profile 定义的不同环境的配置文件，例如 application-dev.properties 和 application-dev.yml。</p>
-</li>
-</ol>
-</li>
-<li><p>总结就是打包用的</p>
-</li>
-</ul>
-<h3 id="SpringBoot如何实现打包"><a href="#SpringBoot如何实现打包" class="headerlink" title="SpringBoot如何实现打包"></a>SpringBoot如何实现打包</h3><ul>
-<li>进入项目目录在控制台输入mvn clean package，clean是清空已存在的项目包，package进行打包</li>
-<li>或者点击右边选项栏中的Maven，先点击clean在点击package</li>
-</ul>
-<h3 id="Spring-Boot-打成的-jar-和普通的-jar-有什么区别"><a href="#Spring-Boot-打成的-jar-和普通的-jar-有什么区别" class="headerlink" title="Spring Boot 打成的 jar 和普通的 jar 有什么区别 ?"></a>Spring Boot 打成的 jar 和普通的 jar 有什么区别 ?</h3><ul>
-<li>Spring Boot 项目最终打包成的 jar 是可执行 jar ，这种 jar 可以直接通过 <code>java -jar xxx.jar</code> 命令来运行，这种 jar 不可以作为普通的 jar 被其他项目依赖，即使依赖了也无法使用其中的类。</li>
-<li>Spring Boot 的 jar 无法被其他项目依赖，主要还是他和普通 jar 的结构不同。普通的 jar 包，解压后直接就是包名，包里就是我们的代码，而 Spring Boot 打包成的可执行 jar 解压后，在 <code>\BOOT-INF\classes</code> 目录下才是我们的代码，因此无法被直接引用。如果非要引用，可以在 pom.xml 文件中增加配置，将 Spring Boot 项目打包成两个 jar ，一个可执行，一个可引用。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/03/interview/Spring%20Boot%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clk6vwj51002w8kv63s10293o" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
 
     </footer>
   </div>
@@ -2767,7 +2125,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>

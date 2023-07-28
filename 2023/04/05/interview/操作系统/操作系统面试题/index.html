@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-77e2da59cc403feb97881b397e4b611e_1440w.webp">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-ca9c4e730792fdb3d1489c68f03ecd80_1440w.webp">
 <meta property="article:published_time" content="2023-04-05T15:08:34.638Z">
-<meta property="article:modified_time" content="2023-07-16T14:26:00.751Z">
+<meta property="article:modified_time" content="2023-07-26T17:13:21.120Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="操作系统">
@@ -55,7 +55,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -131,29 +131,41 @@
 <hr>
 <p>线程具有许多传统进程所具有的特征，故又称为轻型进程(Light—Weight Process)或进程元；而把传统的进程称为重型进程(Heavy—Weight Process)，它相当于只有一个线程的任务。在引入了线程的操作系统中，通常一个进程都有若干个线程，至少包含一个线程。</p>
 <ul>
-<li><p><strong>根本区别：</strong>进程是<mark>操作系统资源分配</mark>的基本单位，而线<mark>程是处理器任务调度和执行</mark>的基本单位</p>
-</li>
-<li><p><strong>资源开销</strong>：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</p>
-</li>
-<li><p><strong>包含关系：</strong>如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</p>
-</li>
-<li><p><strong>内存分配：</strong>同一进程的线程共享本进程的地址空间和资源，而进程之间的地址空间和资源是相互独立的</p>
-</li>
-<li><p><strong>影响关系：</strong>一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮。</p>
-</li>
-<li><p><strong>执行过程：</strong>每个独立的进程有程序运行的入口、顺序执行序列和程序出口。但是线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</p>
-</li>
+<li><strong>根本区别：</strong>进程是<mark>操作系统资源分配</mark>的基本单位，而线<mark>程是处理器任务调度和执行</mark>的基本单位</li>
+<li><strong>资源开销</strong>：每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器（PC），线程之间切换的开销小。</li>
+<li><strong>包含关系：</strong>如果一个进程内有多个线程，则执行过程不是一条线的，而是多条线（线程）共同完成的；线程是进程的一部分，所以线程也被称为轻权进程或者轻量级进程。</li>
+<li><strong>内存分配：</strong>同一进程的线程共享本进程的地址空间和资源，而进程之间的地址空间和资源是相互独立的</li>
+<li><strong>影响关系：</strong>一个进程崩溃后，在保护模式下不会对其他进程产生影响，但是一个线程崩溃整个进程都死掉。所以多进程要比多线程健壮。</li>
+<li><strong>执行过程：</strong>每个独立的进程有程序运行的入口、顺序执行序列和程序出口。但是线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</li>
 </ul>
+<h2 id="什么是协程"><a href="#什么是协程" class="headerlink" title="什么是协程"></a>什么是协程</h2><p>协程，是一种比线程更加轻量级的存在。正如一个进程可以拥有多个线程一样，一个线程也可以拥有多个协程。</p>
+<p>最重要的是，协程不是被操作系统内核所管理，而完全是由程序所控制（也就是在<strong>用户态</strong>中执行）。</p>
+<p>这样带来的好处就是性能得到了很大的提升，不会像线程切换那样消耗资源。</p>
+<p>（Java的原生语法中并没有实现协程）</p>
+<p>协程是一种用户态的轻量级线程。协程的调度完全由用户控制，协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其它地方，在切回来的时候，恢复先前保存的寄存器上下文和栈，直接操作栈则基本没有内核切换的开销，可以不加锁的访问全局变量，所以上下文的切换非常快。</p>
 <h2 id="2-协程与线程的区别？"><a href="#2-协程与线程的区别？" class="headerlink" title="2. 协程与线程的区别？"></a>2. 协程与线程的区别？</h2><ul>
-<li>线程和进程都是同步机制，而协程是异步机制。</li>
-<li>线程是抢占式，而协程是非抢占式的。需要用户释放使用权切换到其他协程，因此同一时间其实只有一个协程拥有运行权，相当于单线程的能力。</li>
-<li>一个线程可以有多个协程，一个进程也可以有多个协程。</li>
-<li>协程不被操作系统内核管理，而完全是由程序控制。线程是被分割的CPU资源，协程是组织好的代码流程，线程是协程的资源。但协程不会直接使用线程，协程直接利用的是执行器关联任意线程或线程池。</li>
-<li>协程能保留上一次调用时的状态。</li>
+<li><p>线程和进程都是同步机制，而协程是异步机制。</p>
+</li>
+<li><p>线程是抢占式，而协程是非抢占式的。需要用户释放使用权切换到其他协程，因此同一时间其实只有一个协程拥有运行权，相当于单线程的能力。</p>
+</li>
+<li><p>一个线程可以有多个协程，一个进程也可以有多个协程。</p>
+</li>
+<li><p>协程不被操作系统内核管理，而完全是由程序控制。线程是被分割的CPU资源，协程是组织好的代码流程，线程是协程的资源。但协程不会直接使用线程，协程直接利用的是执行器关联任意线程或线程池。</p>
+</li>
+<li><p>协程能保留上一次调用时的状态。</p>
+</li>
 </ul>
+<ol>
+<li>由于协程的特性, 适合执行大量的<strong>I/O 密集型任务</strong>, 而线程在这方面弱于协程</li>
+<li>协程涉及到函数的切换, 多线程涉及到线程的切换, 所以都有<strong>执行上下文</strong>, 但是协程不是被操作系统内核所管理, 而完全是由程序所控制（也就是在<strong>用户态</strong>执行）, 这样带来的好处就是性能得到了很大的提升, 不会像线程那样需要<strong>在内核态进行上下文切换</strong>来消耗资源，因此<strong>协程的开销远远小于线程的开销</strong></li>
+<li>同一时间, 在多核处理器的环境下, <strong>多个线程是可以并行的</strong>，但是<strong>运行的协程的函数却只能有一个</strong>，<strong>其他的协程的函数都被suspend</strong>, 即<strong>协程是并发的</strong></li>
+<li>由于协程在同一个线程中, 所以不需要用来守卫<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%85%B3%E9%94%AE%E5%8C%BA%E6%AE%B5"><strong>临界区段</strong></a>的同步性原语（primitive）比如<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BA%92%E6%96%A5%E9%94%81">互斥锁</a>、信号量等，并且<strong>不需要来自操作系统的支持</strong></li>
+<li>在协程之间的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2">切换</a>不需要涉及任何<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8">系统调用</a>或任何<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E9%98%BB%E5%A1%9E_(%E8%AE%A1%E7%AE%97)&amp;action=edit&amp;redlink=1">阻塞</a>调用</li>
+<li><strong>通常的线程是抢先式(即由操作系统分配执行权)</strong>, 而协程是<strong>由程序分配执行权</strong></li>
+</ol>
 <h2 id="协程地好处："><a href="#协程地好处：" class="headerlink" title="协程地好处："></a>协程地好处：</h2><ul>
-<li>协程能保留上一次调用时的状态。</li>
-<li>线程和进程都是同步机制，而协程是异步机制。</li>
+<li>协程能<strong>保留上一次调用时的状态</strong>。</li>
+<li>线程和进程都是同步机制，而协程是<strong>异步机制</strong>。</li>
 </ul>
 <h2 id="3-并发和并行有什么区别？"><a href="#3-并发和并行有什么区别？" class="headerlink" title="3. 并发和并行有什么区别？"></a>3. 并发和并行有什么区别？</h2><p>并发就是在一段时间内，多个任务都会被处理；但在某一时刻，只有一个任务在执行。单核处理器可以做到并发。比如有两个进程<code>A</code>和<code>B</code>，<code>A</code>运行一个时间片之后，切换到<code>B</code>，<code>B</code>运行一个时间片之后又切换到<code>A</code>。因为切换速度足够快，所以宏观上表现为在一段时间内能同时运行多个程序。</p>
 <p>并行就是在同一时刻，有多个任务在执行。这个需要多核处理器才能完成，在微观上就能同时执行多条指令，不同的程序被放到不同的处理器上运行，这个是物理上的多个进程同时进行。</p>
@@ -387,7 +399,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/04/05/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clk6vwja300by8kv6e9xcgzh8" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/04/05/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clkmr0d2h00cce4v6483407g4" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -463,7 +475,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>

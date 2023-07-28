@@ -45,7 +45,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -76,6 +76,431 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-JVM/JVM上篇：内存与垃圾回收篇/jvm零碎笔记" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="post-time" datetime="2022-11-12T13:04:00.571Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/">1. 零碎笔记</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>,<a class="article-category-link" href="/categories/JVM/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">内存与垃圾回收篇</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/.com//Typora\RunningYuBlog\source\images\image-20221112210028078.png" alt="image-20221112210028078"></p>
+<p><img src="/.com//Typora\RunningYuBlog\source\images\image-20221112210242978.png" alt="image-20221112210242978"></p>
+<p><img src="/.com//Typora\RunningYuBlog\source\images\image-20221112210338812.png" alt="image-20221112210338812"></p>
+<p><img src="/../../../images/image-20221112212347371.png" alt="image-20221112212347371"></p>
+<p>Java虚拟机不只是适用于java语言，也适用于其它语言，只要其它语言通过编译器生成的字节码文件遵循java虚拟机的规则，java虚拟机就可以运行</p>
+<p><img src="/../../../images/image-20221112212742280.png" alt="image-20221112212742280"></p>
+<h2 id="1-5-虚拟机与-Java-虚拟机"><a href="#1-5-虚拟机与-Java-虚拟机" class="headerlink" title="1.5. 虚拟机与 Java 虚拟机"></a>1.5. 虚拟机与 Java 虚拟机</h2><p><strong>虚拟机</strong></p>
+<p>所谓虚拟机（Virtual Machine），就是一台虚拟的计算机。它是一款软件，用来执行一系列虚拟计算机指令。大体上，虚拟机可以分为系统虚拟机和程序虚拟机。</p>
+<ul>
+<li>大名鼎鼎的 Visual Box，Mware 就属于系统虚拟机，它们<mark>完全是对物理计算机的仿真</mark>，提供了一个可运行完整操作系统的软件平台。</li>
+<li>程序虚拟机的典型代表就是 Java 虚拟机，它<mark>专门为执行单个计算机程序而设计</mark>，在 Java 虚拟机中执行的指令我们称为 Java 字节码指令。</li>
+</ul>
+<p>无论是系统虚拟机还是程序虚拟机，在上面运行的软件都被限制于虚拟机提供的资源中。</p>
+<p><strong>Java 虚拟机</strong></p>
+<ul>
+<li>Java 虚拟机是一台执行 Java 字节码的虚拟计算机，它拥有独立的运行机制，其运行的 Java 字节码也未必由 Java 语言编译而成。</li>
+<li>JVM 平台的各种语言可以共享 Java 虚拟机带来的跨平台性、优秀的垃圾回器，以及可靠的即时编译器。</li>
+<li><mark>Java 技术的核心就是 Java 虚拟机</mark>（JVM，Java Virtual Machine），因为所有的 Java 程序都运行在 Java 虚拟机内部。</li>
+</ul>
+<p>作用</p>
+<ul>
+<li>Java 虚拟机就是二进制字节码的运行环境，负责装载字节码到其内部，解释/编译为对应平台上的机器指令执行。每一条 Java 指令，Java 虚拟机规范中都有详细定义，如怎么取操作数，怎么处理操作数，处理结果放在哪里。</li>
+</ul>
+<p>特点</p>
+<ul>
+<li>一次编译，到处运行</li>
+<li>自动内存管理</li>
+<li>自动垃圾回收功能</li>
+</ul>
+<p><strong>JVM 的位置</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/6b5c24b8d634d5a741ef5d8a90db1123.png" alt="image-20200704183048061"></p>
+<p>JVM 是运行在操作系统之上的，它与硬件没有直接的交互<br><img src="https://img-blog.csdnimg.cn/img_convert/cd8b795cf080b8ba40f6915b6242c8af.png" alt="image-20210507104030823"></p>
+<h2 id="1-6-JVM-的整体结构"><a href="#1-6-JVM-的整体结构" class="headerlink" title="1.6. JVM 的整体结构"></a>1.6. JVM 的整体结构</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/1bf0b96d082d684a818bc36a8f864a89.png" alt="image-20200704183436495"></p>
+<ul>
+<li>HotSpot VM 是目前市面上高性能虚拟机的代表作之一。</li>
+<li>它采用<strong>解释器与即时编译器</strong>并存的架构。</li>
+<li>在今天，Java 程序的运行性能早已脱胎换骨，已经达到了可以和 C/C++程序一较高下的地步。</li>
+</ul>
+<h2 id="1-7-Java-代码执行流程"><a href="#1-7-Java-代码执行流程" class="headerlink" title="1.7. Java 代码执行流程"></a>1.7. Java 代码执行流程</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/4ce09e21efc2533d2b80f45f97b35a48.png" alt="image-20200704210429535"></p>
+<p>操作系统并不能识别字节码指令，只能识别机器指令</p>
+<h2 id="1-8-JVM-的架构模型"><a href="#1-8-JVM-的架构模型" class="headerlink" title="1.8. JVM 的架构模型"></a>1.8. JVM 的架构模型</h2><p>Java 编译器输入的指令流基本上是一种基于<mark>栈的指令集架构</mark>，另外一种指令集架构则是基于<mark>寄存器的指令集架构</mark>。</p>
+<p>具体来说：这两种架构之间的区别：</p>
+<p><strong>基于栈式架构的特点</strong></p>
+<ul>
+<li>设计和实现更简单，适用于资源受限的系统</li>
+<li>避开了寄存器的分配难题：使用零地址指令方式分配</li>
+<li>指令流中的指令大部分是零地址指令，其执行过程依赖于操作栈。指令集更小，编译器容易实现</li>
+<li>不需要硬件支持，可移植性更好，更好实现跨平台</li>
+</ul>
+<p><strong>基于寄存器架构的特点</strong></p>
+<ul>
+<li>典型的应用是 x86 的二进制指令集：比如传统的 PC 以及 Android 的 Davlik 虚拟机</li>
+<li>指令集架构则完全依赖硬件，可移植性差</li>
+<li>性能优秀和执行更高效</li>
+<li>花费更少的指令去完成一项操作</li>
+<li>在大部分情况下，基于寄存器架构的指令集往往都以一地址指令、二地址指令和三地址指令为主，而基于栈式架构的指令集却是以零地址指令为主</li>
+</ul>
+<p><strong>举例 1</strong></p>
+<p>同样执行 2+3 这种逻辑操作，其指令分别如下：</p>
+<p>基于栈的计算流程（以 Java 虚拟机为例）：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iconst_2 <span class="comment">//常量2入栈</span></span><br><span class="line">istore_1</span><br><span class="line">iconst_3 <span class="comment">// 常量3入栈</span></span><br><span class="line">istore_2</span><br><span class="line">iload_1</span><br><span class="line">iload_2</span><br><span class="line">iadd <span class="comment">//常量2/3出栈，执行相加</span></span><br><span class="line">istore_0 <span class="comment">// 结果5入栈</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>而基于寄存器的计算流程</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov eax,<span class="number">2</span> <span class="comment">//将eax寄存器的值设为1</span></span><br><span class="line">add eax,<span class="number">3</span> <span class="comment">//使eax寄存器的值加3</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>举例 2</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">calc</span><span class="params">()</span>{</span><br><span class="line">    <span class="type">int</span> a=<span class="number">100</span>;</span><br><span class="line">    <span class="type">int</span> b=<span class="number">200</span>;</span><br><span class="line">    <span class="type">int</span> c=<span class="number">300</span>;</span><br><span class="line">    <span class="keyword">return</span> (a + b) * c;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; javap -c Test.class</span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">calc</span><span class="params">()</span>;</span><br><span class="line">    Code:</span><br><span class="line">    Stack=<span class="number">2</span>,Locals=<span class="number">4</span>,Args_size=<span class="number">1</span></span><br><span class="line">       <span class="number">0</span>: bipush        <span class="number">100</span></span><br><span class="line">       <span class="number">2</span>: istore_1</span><br><span class="line">       <span class="number">3</span>: sipush        <span class="number">200</span></span><br><span class="line">       <span class="number">6</span>: istore_2</span><br><span class="line">       <span class="number">7</span>: sipush        <span class="number">300</span></span><br><span class="line">      <span class="number">10</span>: istore_3</span><br><span class="line">      <span class="number">11</span>: iload_1</span><br><span class="line">      <span class="number">12</span>: iload_2</span><br><span class="line">      <span class="number">13</span>: iadd</span><br><span class="line">      <span class="number">14</span>: iload_3</span><br><span class="line">      <span class="number">15</span>: imul</span><br><span class="line">      <span class="number">16</span>: ireturn</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>总结</strong></p>
+<p><mark>由于跨平台性的设计，Java 的指令都是根据栈来设计的。</mark>不同平台 CPU 架构不同，所以不能设计为基于寄存器的。优点是跨平台，指令集小，编译器容易实现，缺点是性能下降，实现同样的功能需要更多的指令。</p>
+<p>时至今日，尽管嵌入式平台已经不是 Java 程序的主流运行平台了（准确来说应该是 HotSpotVM 的宿主环境已经不局限于嵌入式平台了），那么为什么不将架构更换为基于寄存器的架构呢？</p>
+<hr>
+<p><strong>编译器前端</strong>（将源文件编译生成字节码文件），<strong>编译器后端</strong>（将字节码指令编译成机器指令）</p>
+<p>因为机器指令是反复执行的<strong>热点代码</strong>，所以缓存起来，下次可以直接调用</p>
+<hr>
+<p><img src="/../../../images/image-20221112225810473.png" alt="image-20221112225810473"></p>
+<p>栈式架构采用的是8位作为一个基本单位的，所以栈的指令集更小，但是指令数多</p>
+<p>寄存器架构采用的是16位的双字节的进行设计的，所以指令集大，但指令数更少</p>
+<p>比如：</p>
+<p><img src="/../../../images/image-20221112225721970.png" alt="image-20221112225721970"></p>
+<p><strong>总结</strong></p>
+<p><mark>由于跨平台性的设计，Java 的指令都是根据栈来设计的。</mark>不同平台 CPU 架构不同，所以不能设计为基于寄存器的。</p>
+<p>优点：是跨平台，指令集小，编译器容易实现。</p>
+<p>缺点：是性能下降，实现同样的功能需要更多的指令。</p>
+<p>栈：</p>
+<p>跨平台、指令集小、指令多，执行性能比寄存器差</p>
+<hr>
+<h1 id="虚拟机的生命周期"><a href="#虚拟机的生命周期" class="headerlink" title="虚拟机的生命周期"></a>虚拟机的生命周期</h1><h2 id="虚拟机的启动"><a href="#虚拟机的启动" class="headerlink" title="虚拟机的启动"></a><strong>虚拟机的启动</strong></h2><p>Java 虚拟机的启动是通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</p>
+<p><img src="/../../../images/image-20221113093105220.png" alt="image-20221113093105220"></p>
+<p>像上面我们自定义的类，是由系统类加载器来加载的</p>
+<p>但（如果）没有明确指定的父类，它的父类就是Object，Object作为核心api，由引导类加载器（bootstrap class loader）加载的</p>
+<p>我们要启动一个类，而父类是要早于子类先加载的，但是父类还没加载而它的子类要用，所以我们就需要先启动Java虚拟机</p>
+<h2 id="虚拟机的执行"><a href="#虚拟机的执行" class="headerlink" title="虚拟机的执行"></a><strong>虚拟机的执行</strong></h2><ul>
+<li><p>一个运行中的 Java 虚拟机有着一个清晰的任务：执行 Java 程序。</p>
+</li>
+<li><p>程序开始执行时他才运行，程序结束时他就停止。</p>
+</li>
+<li><p><mark>执行一个所谓的 Java 程序的时候，真真正正在执行的是一个叫做 Java 虚拟机的进程。</mark></p>
+</li>
+</ul>
+<h2 id="虚拟机的退出"><a href="#虚拟机的退出" class="headerlink" title="虚拟机的退出"></a><strong>虚拟机的退出</strong></h2><p>有如下的几种情况：</p>
+<ul>
+<li>程序正常执行结束</li>
+<li>程序在执行过程中遇到了异常或错误而异常终止</li>
+<li>由于操作系统用现错误而导致 Java 虚拟机进程终止</li>
+<li>某线程调用 Runtime 类或 system 类的 exit 方法，或 Runtime 类的 halt 方法，并且 Java 安全管理器也允许这次 exit 或 halt 操作。</li>
+<li>除此之外，JNI（Java Native Interface）规范描述了用 JNI Invocation API 来加载或卸载 Java 虚拟机时，Java 虚拟机的退出情况。</li>
+</ul>
+<hr>
+<p><img src="/../../../images/image-20221113101445106.png" alt="image-20221113101445106"></p>
+<p><img src="/../../../images/image-20221113101718312.png" alt="image-20221113101718312"></p>
+<p><strong>编译器前端</strong>（将源文件编译生成字节码文件），<strong>编译器后端</strong>（将字节码指令编译成机器指令）</p>
+<p>因为机器指令是反复执行的<strong>热点代码</strong>，所以缓存起来，下次可以直接调用</p>
+<hr>
+<h3 id="HotSpot-VM"><a href="#HotSpot-VM" class="headerlink" title="HotSpot VM"></a>HotSpot VM</h3><ul>
+<li>HotSpot 历史<ul>
+<li>最初由一家名为“Longview Technologies”的小公司设计</li>
+<li>1997 年，此公司被 sun 收购；2009 年，Sun 公司被甲骨文收购。</li>
+<li>JDK1.3 时，HotSpot VM 成为默认虚拟机</li>
+</ul>
+</li>
+<li><mark>目前 Hotspot 占有绝对的市场地位，称霸武林。</mark><ul>
+<li>不管是现在仍在广泛使用的 JDK6，还是使用比例较多的 JDK8 中，默认的虚拟机都是 HotSpot</li>
+<li>Sun / Oracle JDK 和 OpenJDK 的默认虚拟机</li>
+<li>因此本课程中默认介绍的虚拟机都是 HotSpot，相关机制也主要是指 HotSpot 的 Gc 机制。（比如其他两个商用虚机都没有方法区的概念）</li>
+</ul>
+</li>
+<li>从服务器、桌面到移动端、嵌入式都有应用。</li>
+<li>名称中的 HotSpot 指的就是它的<strong>热点代码探测技术</strong>。<ul>
+<li>通过计数器找到最具编译价值代码，触发即时编译或栈上替换</li>
+<li>通过编译器与解释器协同工作，在最优化的程序响应时间与最佳执行性能中取得平衡</li>
+</ul>
+</li>
+</ul>
+<h3 id="JRockit"><a href="#JRockit" class="headerlink" title="JRockit"></a>JRockit</h3><ul>
+<li><p><mark>专注于服务器端应用</mark></p>
+<ul>
+<li><strong>它可以不太关注程序启动速度，因此 JRockit 内部不包含解析器实现，全部代码都靠即时编译器编译后执行。</strong></li>
+</ul>
+</li>
+<li><p>大量的行业基准测试显示，<mark>JRockit JVM 是世界上最快的 JVM。</mark></p>
+<ul>
+<li>使用 JRockit 产品，客户已经体验到了显著的性能提高（一些超过了 70%）和硬件成本的减少（达 50%）。</li>
+</ul>
+</li>
+<li><p>优势：全面的 Java 运行时解决方案组合</p>
+<ul>
+<li>JRockit 面向延迟敏感型应用的解决方案 JRockit Real Time 提供以毫秒或微秒级的 JVM 响应时间，适合财务、军事指挥、电信网络的需要</li>
+<li>MissionControl 服务套件，它是一组以极低的开销来监控、管理和分析生产环境中的应用程序的工具。</li>
+</ul>
+</li>
+<li><p>2008 年，JRockit 被 oracle 收购。</p>
+</li>
+<li><p>Oracle 表达了整合两大优秀虚拟机的工作，大致在 JDK8 中完成。整合的方式是在 HotSpot 的基础上，移植 JRockit 的优秀特性。</p>
+</li>
+<li><p>高斯林：目前就职于谷歌，研究人工智能和水下机器人</p>
+</li>
+</ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="IBM-的-J9"><a href="#IBM-的-J9" class="headerlink" title="IBM 的 J9"></a>IBM 的 J9</h3><ul>
+<li>全称：IBM Technology for Java Virtual Machine，简称 IT4J，内部代号：J9</li>
+<li>市场定位与 HotSpot 接近，服务器端、桌面应用、嵌入式等多用途 VM</li>
+<li>广泛用于 IBM 的各种 Java 产品（一般用于自己的产品）。</li>
+<li>目前，有影响力的三大商用虚拟机之一，也号称是世界上最快的 Java 虚拟机（但J9只是在自己的产品上使用时比较快，而通用性的话，还是JRockit好点）。</li>
+<li>2017 年左右，IBM 发布了开源 J9VM，命名为 openJ9，交给 EClipse 基金会管理，也称为 Eclipse OpenJ9</li>
+</ul>
+<h3 id="…"><a href="#…" class="headerlink" title="…."></a>….</h3><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​		具体 JVM 的内存结构，其实取决于其实现，不同厂商的 JVM，或者同一厂商发布的不同版本，都有可能存在一定差异。主要以 Oracle HotSpot VM 为默认虚拟机。</p>
+<hr>
+<h1 id="2-类加载子系统"><a href="#2-类加载子系统" class="headerlink" title="2. 类加载子系统"></a>2. 类加载子系统</h1><p>如果自己想手写一个 Java 虚拟机的话，主要考虑哪些结构呢？</p>
+<ul>
+<li>类加载器</li>
+<li>执行引擎</li>
+</ul>
+<p><strong>类加载器子系统：</strong>获取字节码文件的信息（常量信息，变量信息，方法，指令等），然后有组织地分配到内存当中（<strong>运行时数据区</strong>）</p>
+<p><strong>执行引擎:</strong>  需要去解释这些指令</p>
+<hr>
+<p>如果不是一个合法的字节码文件，就会在加载的过程中抛出异常。如果有些恶意攻击的话，就会对这个字节码文件进行修改，就不合法了</p>
+<h3 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="初始化阶段"></a>初始化阶段</h3><ul>
+<li><mark>初始化阶段就是执行类构造器方法&lt;clinit&gt;()的过程。</mark></li>
+<li>此方法不需定义，是 javac 编译器自动收集类中的所有<strong>类变量的赋值动作</strong>和<strong>静态代码块中的语句</strong>合并而来。</li>
+<li>构造器方法中指令按语句在源文件中出现的顺序执行。</li>
+<li><mark>&lt;clinit&gt;()不同于类的构造器。</mark>（关联：构造器是虚拟机视角下的&lt;init&gt;()）</li>
+<li>若该类具有父类，JVM 会保证子类的&lt;clinit&gt;()执行前，父类的&lt;clinit&gt;()已经执行完毕。</li>
+<li>虚拟机必须保证一个类的&lt;clinit&gt;()方法在多线程下被同步加锁。</li>
+</ul>
+<p><img src="/../../../images/image-20221114203139057.png" alt="image-20221114203139057"></p>
+<p>当要只能main方法时，先把这个ClinitTest1类加载到内存当中（当然在加载这个类之前先把它的父类加载），加载完后，调用main静态方法，里面要加载Son这个类，要把Son这个类加载进来，但在加载Son类之前要先加载Son的父类Father，加载完父类后，在加载Son的时候，在初始化这个环节，把A的值赋过来，这时A已经等于2，所以main中打印出来的结果就是2</p>
+<p><strong>虚拟机必须保证一个类的&lt;clinit&gt;()方法在多线程下被同步加锁。</strong></p>
+<p>线程2进来了，但是线程2出不来，它还在初始化这个DeadThread类，线程1也进不去，因为线程正在处于一个加锁的状态</p>
+<p><img src="/../../../images/image-20221114213537778.png" alt="image-20221114213537778"></p>
+<p><img src="/../../../images/image-20221114210548293.png" alt="image-20221114210548293"></p>
+<p><strong>static代码块只执行一次原因：</strong></p>
+<p>​		static代码块只在类加载时执行，类是用类加载器来读取的，<strong>类加载器是带有一个缓存区的</strong>，它会把读取到的类缓存起来，所以在一次虚拟机运行期间，一个类只会被加载一次，这样的话静态代码块只会运行一次</p>
+<hr>
+<h1 id="2-3-1-虚拟机自带的加载器"><a href="#2-3-1-虚拟机自带的加载器" class="headerlink" title="2.3.1. 虚拟机自带的加载器"></a>2.3.1. 虚拟机自带的加载器</h1><p><strong>启动类加载器（引导类加载器，Boostrap ClassLoader）</strong>,我们获取不到，它是由C/C++语言编写的</p>
+<p><strong>扩展类加载器（Extension ClassLoader）</strong>和 <strong>应用程序类加载器（系统类加载器，AppClassLoader）</strong>都是由java语言编写的</p>
+<p>还要记住什么样的类加载器加载什么样的类文件</p>
+<hr>
+<h4 id="为什么要自定义类加载器？"><a href="#为什么要自定义类加载器？" class="headerlink" title="为什么要自定义类加载器？"></a><strong>为什么要自定义类加载器？</strong></h4><ul>
+<li><strong>隔离加载类 (避免类的冲突)</strong><ul>
+<li>在某些框架内进行中间件与应用的模块隔离，把类加载到不同的环境。比如：阿里内某容器框架通过自定义类加载器确保应用中依赖的jar包不会影响到中间件运行时使用的jar包。再比如：Tomcat这类Web应用服务器，内部自定义了好几种类加载器，用于隔离同一个Web应用服务器上的不同应用程序。</li>
+</ul>
+</li>
+<li><strong>修改类加载的方式 （可以实现动态的加载）</strong><ul>
+<li>类的加载模型并非强制，除Bootstrap外，其他的加载并非一定要引入，或者根据实际情况在某个时间点进行按需进行<strong>动态加载</strong>。</li>
+</ul>
+</li>
+<li><strong>扩展加载源</strong><ul>
+<li>比如从数据库、网络、甚至是电视机机顶盒进行加载。</li>
+</ul>
+</li>
+<li><strong>防止源码泄漏</strong><ul>
+<li>Java代码容易被编译和篡改，可以进行编译加密。那么类加载也需要自定义，还原加密的字节码。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>获取 ClassLoader 的途径</strong></p>
+<ul>
+<li><p>方式一：获取当前 ClassLoader</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clazz.getClassLoader()</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>方式二：获取当前线程上下文的 ClassLoader</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread.currentThread().getContextClassLoader()</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>方式三：获取系统的 ClassLoader</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ClassLoader.getSystemClassLoader()</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>方式四：获取调用者的 ClassLoader</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DriverManager.getCallerClassLoader()</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><h1 id="2-5-双亲委派机制"><a href="#2-5-双亲委派机制" class="headerlink" title="2.5. 双亲委派机制"></a>2.5. 双亲委派机制</h1><p>Java 虚拟机对 class 文件采用的是<mark>按需加载</mark>的方式，也就是说当需要使用该类时才会将它的 class 文件加载到内存生成 class 对象。而且加载某个类的 class 文件时，Java 虚拟机采用的是<mark>双亲委派模式</mark>，即把请求交由父类处理，它是一种任务委派模式。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a><strong>工作原理</strong></h2><ul>
+<li>1）如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行；</li>
+<li>2）如果父类加载器还存在其父类加载器，则进一步向上委托，依次递归，请求最终将到达顶层的启动类加载器；</li>
+<li>3）<strong>如果父类加载器可以完成类加载任务，就成功返回</strong>（就不会由子类加载器去加载了），倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/05fa27fcc38eeaaa5babff55a00882a3.png" alt="image-20200705105151258"></p>
+<p>举例：</p>
+<p>1. </p>
+<p><img src="/../../../images/image-20221115204949307.png" alt="image-20221115204949307"></p>
+<p>出于安全考虑，Bootstrap 启动类加载器只加载包名为 java、javax、sun 等开头的类。一看你是java开头的，引导类加载就说了。这是归我管我来加载String（核心API里的String）。因此有父类来加载后，就不会再向下委托了，所以我们new 的这个String对象就是核心API里面的String类对象，而不是我们自定义的String，因此就没有打印出自定义String里的static静态资源里的语句</p>
+<p>2. </p>
+<p><img src="/../../../images/image-20221115205956137.png" alt="image-20221115205956137"></p>
+<p>委托到引导类加载器，它发现你这个包是jvm开头的，不归引导类加载管，就向下委托，也不归扩展类加载器管，所以最后回到系统类加载器来加载，因此最后输出结果就是系统类加载来进行的加载</p>
+<p>3. </p>
+<p><img src="/../../../images/image-20221115210219781.png" alt="image-20221115210219781"></p>
+<p>一直往上委托，就交给到了引导类加载器，它加载了String类以后，然后就想去执行main方法，但是核心API的String里面是没有main方法的，所以就报了 <mark>错误: 在类 java.lang.String 中找不到 main 方法</mark>. 可知，根本就没有试着想去加载我们自定义的String类，完全忽略掉你了</p>
+<p>4. </p>
+<p>当我们加载 jdbc.jar 用于实现数据库连接的时候，首先我们需要知道的是 jdbc.jar 是基于 SPI 接口进行实现的，所以在加载的时候，会进行双亲委派，最终从根加载器中加载 SPI 核心类，然后在加载 SPI 接口类，接着在进行反向委派，通过线程上下文类加载器进行实现类 jdbc.jar 的加载。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/bed320014f52bb27c8f3d795b3dc3b4a.png" alt="image-20200705105810107"></p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a><strong>优势</strong></h2><ul>
+<li><strong>避免类的重复加载</strong></li>
+<li><strong>保护程序安全，防止核心 API 被随意篡改</strong><ul>
+<li>自定义类：java.lang.String</li>
+<li>自定义类：java.lang.ShkStart（报错：阻止创建 java.lang 开头的类）</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../../../images/image-20221115212723174.png" alt="image-20221115212723174"></p>
+<p>引导类加载器看到是 java.lang开头的，就表示这是归它管，于是就要去加载这个ShkStart类了，但直接直接给它报错了，相当于，要加载java.lang这个包，要想访问是要有权限的，现在报错就是阻止我们去直接用这个java.lang包来自定义这个ShkStart类。其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个类，加载成功的话，就会导致对引导类加载器本身造成影响，所以这里是直接把引导类加载器给整挂了。所以我们也禁止去用java.lang这样的包名去命名</p>
+<p>其实这也是起到了保护作用和出于安全的考虑，如果允许去加载这个种自定义的类，加载成功的话，但里面可能会有一些<strong>恶意代码</strong>，就可能会会对现有的项目和程序进行破坏</p>
+<h2 id="沙箱安全机制"><a href="#沙箱安全机制" class="headerlink" title="沙箱安全机制"></a><strong>沙箱安全机制</strong></h2><p>自定义 String 类，但是在加载自定义 String 类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先加载 jdk 自带的文件（rt.jar 包中 java\lang\String.class），报错信息说没有 main 方法，就是因为加载的是 rt.jar 包中的 string 类。这样可以保证对 java 核心源代码的保护，这就是沙箱安全机制。</p>
+<hr>
+<h2 id="2-6-其他"><a href="#2-6-其他" class="headerlink" title="2.6. 其他"></a>2.6. 其他</h2><p><strong>如何判断两个 class 对象是否相同</strong></p>
+<p>在 JVM 中表示两个 class 对象是否为同一个类存在两个必要条件：</p>
+<ul>
+<li>类的完整类名必须一致，包括包名。</li>
+<li>加载这个类的 ClassLoader（指 ClassLoader 实例对象）必须相同。</li>
+</ul>
+<p>换句话说，在 JVM 中，即使这两个类对象（class 对象）来源同一个 Class 文件，被同一个虚拟机所加载，但只要加载它们的 ClassLoader 实例对象不同，那么这两个类对象也是不相等的。</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/12/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/jvm%E9%9B%B6%E7%A2%8E%E7%AC%94%E8%AE%B0/" data-id="clkmr0d1i009xe4v63vfn2yi7" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringSecurity/UserDetailsServiceImpl" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" class="article-date">
+  <time class="post-time" datetime="2022-11-12T10:24:46.189Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/12/SpringSecurity/UserDetailsServiceImpl/">自定义UserDetailsServiceImpl</a>
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringSecurity/">SpringSecurity</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当什么也没有配置的时候，账号和密码是由Spring Security定义生成的。而在实际项目中账号和密码都是从数据库中查询出来的。 所以我们要通过自定义逻辑控制认证逻辑。</p>
+<p>如果需要自定义逻辑时，只需要实现UserDetailsService接口即可。接口定义如下：</p>
+<h3 id="UserDetailsServiceImpl"><a href="#UserDetailsServiceImpl" class="headerlink" title="UserDetailsServiceImpl"></a>UserDetailsServiceImpl</h3><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.aclservice.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.atguigu.aclservice.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.aclservice.service.PermissionService;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.aclservice.service.UserService;</span><br><span class="line"><span class="keyword">import</span> com.atguigu.security.entity.SecurityUser;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.BeanUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetailsService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UsernameNotFoundException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/11</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 当什么也没有配置的时候，账号和密码是由Spring Security定义生成的。而在实际项目中账号和密码都是从数据库中查询出来的。 所以</span></span><br><span class="line"><span class="comment"> * 我们要通过自定义逻辑控制认证逻辑。</span></span><br><span class="line"><span class="comment"> * 如果需要自定义逻辑时，只需要实现UserDetailsService接口即可。接口定义如下：</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDetailsServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDetailsService</span> {</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PermissionService permissionService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDetails <span class="title function_">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException {</span><br><span class="line">        <span class="comment">// 根据用户名查询数据</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userService.selectByUsername(username);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断</span></span><br><span class="line">        <span class="keyword">if</span> (user == <span class="literal">null</span>) {</span><br><span class="line">            <span class="comment">// 抛出用户名没有发现异常，系统就知道用户名没有查询到</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UsernameNotFoundException</span>(<span class="string">"用户不存在"</span>);</span><br><span class="line">        }</span><br><span class="line">        com.atguigu.security.entity.<span class="type">User</span> <span class="variable">curUser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">com</span>.atguigu.security.entity.User();</span><br><span class="line">        BeanUtils.copyProperties(user, curUser);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据用户查询用户权限列表</span></span><br><span class="line">        List&lt;String&gt; permissionValueList = permissionService.selectPermissionValueByUserId(user.getId());</span><br><span class="line">        <span class="type">SecurityUser</span> <span class="variable">securityUser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecurityUser</span>();</span><br><span class="line">        <span class="type">UserDetails</span> <span class="variable">userDetails</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SecurityUser</span>();</span><br><span class="line">        securityUser.setPermissionValueList(permissionValueList);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> securityUser;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="SecurityUser"><a href="#SecurityUser" class="headerlink" title="SecurityUser"></a>SecurityUser</h3><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.atguigu.security.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.core.toolkit.StringUtils;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.GrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.authority.SimpleGrantedAuthority;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityUser</span> <span class="keyword">implements</span> <span class="title class_">UserDetails</span> {</span><br><span class="line">    <span class="comment">//当前登录用户</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> User currentUserInfo;</span><br><span class="line">    <span class="comment">//当前权限</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; permissionValueList;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">()</span> {</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SecurityUser</span><span class="params">(User user)</span> {</span><br><span class="line">        <span class="keyword">if</span> (user != <span class="literal">null</span>) {</span><br><span class="line">            <span class="built_in">this</span>.currentUserInfo = user;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Collection&lt;? <span class="keyword">extends</span> <span class="title class_">GrantedAuthority</span>&gt; getAuthorities() {</span><br><span class="line">        Collection&lt;GrantedAuthority&gt; authorities = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(String permissionValue : permissionValueList) {</span><br><span class="line">            <span class="keyword">if</span>(StringUtils.isEmpty(permissionValue)) {</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="type">SimpleGrantedAuthority</span> <span class="variable">authority</span> <span class="operator">=</span> <span class="keyword">new</span></span><br><span class="line">                    <span class="title class_">SimpleGrantedAuthority</span>(permissionValue);</span><br><span class="line">            authorities.add(authority);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> authorities;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPassword</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getPassword();</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUsername</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> currentUserInfo.getUsername();</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonExpired</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonLocked</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isCredentialsNonExpired</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEnabled</span><span class="params">()</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+<p>User</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModel;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModelProperty;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/10</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ApiModel(description = "用户实体类")</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ApiModelProperty</span>用于swapper测试的</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "微信openid")</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "密码")</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "昵称")</span></span><br><span class="line">    <span class="keyword">private</span> String nickName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "用户头像")</span></span><br><span class="line">    <span class="keyword">private</span> String salt;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = "用户签名")</span></span><br><span class="line">    <span class="keyword">private</span> String token;</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/UserDetailsServiceImpl/" data-id="clkmr0cxz0022e4v634wq8koj" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-SpringSecurity/总结分析" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" class="article-date">
+  <time class="post-time" datetime="2022-11-12T09:40:41.206Z" itemprop="datePublished">
+    <span class="post-month">11月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class RequestInterceptor  implements WebMvcConfigurer {</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    private List&lt;String&gt; patterns = new ArrayList&lt;String&gt;();  //不用过滤的url</span><br><span class="line"></span><br><span class="line">    public void addInterceptor(InterceptorRegistry registry){</span><br><span class="line"></span><br><span class="line">        //写一个拦截器</span><br><span class="line">        registry.addInterceptor(new HandlerInterceptor() {</span><br><span class="line">            @Override</span><br><span class="line">            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                //从请求头中获取token</span><br><span class="line">                String token = request.getHeader("Authorization");</span><br><span class="line">//                                      从redis中获取token</span><br><span class="line">                if(token != null &amp;&amp; redisTemplate.opsForValue().get(token) != null){</span><br><span class="line">                    //每次认证后就充值为30天                      时间单位：天</span><br><span class="line">                    redisTemplate.expire(token,30, TimeUnit.DAYS);</span><br><span class="line">                    return true;   //取到就返回true</span><br><span class="line">                }</span><br><span class="line"></span><br><span class="line">                //设置响应状态为401</span><br><span class="line">                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span><br><span class="line"></span><br><span class="line">                return false;</span><br><span class="line">            }</span><br><span class="line">        }).excludePathPatterns(patterns);  //不用过滤的url</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90/" data-id="clkmr0cy20027e4v69dt23cde" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-权限认证/JWT 生成Token、解析Token的简单工具类" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -124,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="clk6vwj78006m8kv6cnae5o85" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/JWT%20%E7%94%9F%E6%88%90Token%E3%80%81%E8%A7%A3%E6%9E%90Token%E7%9A%84%E7%AE%80%E5%8D%95%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-id="clkmr0d00006ge4v6hv595gbp" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JWT/" rel="tag">JWT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/token/" rel="tag">token</a></li></ul>
@@ -182,7 +607,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clk6vwj7a006s8kv6351v78vy" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/test%E6%B5%8B%E8%AF%95%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" data-id="clkmr0d04006se4v669zodaob" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
@@ -412,7 +837,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clk6vwj4o00298kv6fzju9fcr" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/12/SpringSecurity/%E7%BD%91%E4%B8%8A%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/" data-id="clkmr0cy30029e4v6hhzk0viq" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li></ul>
@@ -482,7 +907,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clk6vwj4a001q8kv6fvsl2egu" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AF%B7%E6%B1%82%E9%97%B4%E5%85%B1%E4%BA%AB%E8%AE%A4%E8%AF%81%E4%BF%A1%E6%81%AF%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clkmr0cxp001me4v6272c244x" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -541,7 +966,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clk6vwj4j00238kv60xzr851n" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clkmr0cxw001xe4v6ebbr2pok" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -653,7 +1078,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clk6vwj4g001x8kv63zdi60wk" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/SpringSecurity/SpringSecurity%20%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%88%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90%EF%BC%89/" data-id="clkmr0cxq001qe4v61uvb7o63" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringSecurity/" rel="tag">SpringSecurity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a></li></ul>
@@ -708,209 +1133,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="clk6vwj6u00628kv60l5abnby" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/11/springboot/%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="clkmr0czm005te4v6ce8ge1li" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/" rel="tag">springboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-juc/活跃性-定位死锁 （如何查看、定位死锁）" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T09:26:17.420Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/">活跃性-定位死锁 （如何查看、定位死锁）</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/juc/">juc</a>,<a class="article-category-link" href="/categories/juc/%E6%AD%BB%E9%94%81/">死锁</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p> 参考视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16J411h7Rd?p=116&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">04.067-活跃性-定位死锁_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<p><strong>方式1 ：jstack工具</strong></p>
-<p> 通过终端命令：jstack 进程号 （图上面写错了，不是进程的端口号，是进程号）</p>
-<p><img src="https://img-blog.csdnimg.cn/98cd05b7a9ac4db1a434dd16cedf747f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑通过上面的运行后可以看到下面的 线程信息：</p>
-<p><img src="https://img-blog.csdnimg.cn/188b8741f76d4b68b02383249c0f5612.png" alt="img"></p>
-<p>方式1的jstack工具可以查看死锁的位置（哪一行），然后让我们去修改相应的代码 </p>
-<p> <strong>方式2：jconsole工具</strong> </p>
-<p>   <img src="https://img-blog.csdnimg.cn/8730559d36184371ab7b0e704935b94f.png" alt="img"><img src="https://img-blog.csdnimg.cn/717a771fd58048c4b3e0d67c2a382bd7.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/193622a6730f4390b3cd5dddde10fdc4.png" alt="img"></p>
-<p> 点击之后<img src="https://img-blog.csdnimg.cn/bb94babc5de941d6932699155cc5f2a1.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/juc/%E6%B4%BB%E8%B7%83%E6%80%A7-%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%20%EF%BC%88%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E3%80%81%E5%AE%9A%E4%BD%8D%E6%AD%BB%E9%94%81%EF%BC%89/" data-id="clk6vwj5j003u8kv6fx99hcrc" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/juc/" rel="tag">juc</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-MQ/（rabbitmq的高级特性）MQ集群" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T09:24:31.842Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/">（rabbitmq的高级特性）MQ集群</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对应的教程视频：</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=161&amp;spm_id_from=pageDriver&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-04-MQ集群_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<p>1.集群分类</p>
-<p><img src="https://img-blog.csdnimg.cn/a9ebe4585fd54ed8b699e315a6141c1b.png" alt="img"></p>
-<p>因为比较推荐使用仲裁队列，所以 普通集群和镜像集群就不做笔记的记录了</p>
-<h1 id="2-普通集群"><a href="#2-普通集群" class="headerlink" title="2.普通集群"></a>2.普通集群</h1><h1 id="3-镜像集群"><a href="#3-镜像集群" class="headerlink" title="3.镜像集群"></a>3.镜像集群</h1><h1 id="3-仲裁队列"><a href="#3-仲裁队列" class="headerlink" title="3.仲裁队列"></a>3.仲裁队列</h1><p>仲裁队列：仲裁队列是3.8版本以后才有的新功能，用来替代镜像队列，具备下列特征：</p>
-<p>•与镜像队列一样，都是主从模式，支持主从数据同步</p>
-<p>•使用非常简单，没有复杂的配置</p>
-<p>•主从同步基于Raft协议，强一致</p>
-<h3 id="搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）："><a href="#搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：" class="headerlink" title="搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）："></a>搭建（非常简单，不需要任何配置，直接在控制台添加一个队列就行）：</h3><p>在任意控制台添加一个队列，一定要选择队列类型为Quorum类型</p>
-<p><img src="https://img-blog.csdnimg.cn/b9b16bfc723f4178b04c1d8b1e857991.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/59c23da4cec14f29b409ba7141f30431.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/ad2ce48988004e1f889af46c0b63ba20.png" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/c55881b2175f4ace9b41b616877e7a38.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89MQ%E9%9B%86%E7%BE%A4/" data-id="clk6vwj3d000e8kv6b6widinu" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-MQ/（rabbitmq的高级特性）惰性队列" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" class="article-date">
-  <time class="post-time" datetime="2022-11-10T09:23:29.728Z" itemprop="datePublished">
-    <span class="post-month">11月</span><br/>
-    <span class="post-day">10</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/">（rabbitmq的高级特性）惰性队列</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/MQ/">MQ</a>,<a class="article-category-link" href="/categories/MQ/rabbitmq/">rabbitmq</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="对应的教程视频："><a href="#对应的教程视频：" class="headerlink" title="对应的教程视频："></a>对应的教程视频：</h1><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1LQ4y127n4?p=160&amp;vd_source=746b9336d739b80b11820809545b6604">高级篇Day5-03-消息堆积及惰性队列_哔哩哔哩_bilibili</a></p>
-</blockquote>
-<h1 id="1-消息堆积问题"><a href="#1-消息堆积问题" class="headerlink" title="1.消息堆积问题"></a>1.消息堆积问题</h1><p><img src="https://img-blog.csdnimg.cn/b99d3d1549204d588c14889ef1d9c246.png" alt="img"></p>
-<p> 当出现高并发的时候，一如说有一百万条，这些消息都扔到内存当中，显然是不合适的，所以需要学习 队形队列</p>
-<h1 id="2-惰性队列"><a href="#2-惰性队列" class="headerlink" title="2.惰性队列"></a>2.惰性队列</h1><p> <img src="https://img-blog.csdnimg.cn/1245c0f36dd548db84d5c5d494c2d331.png" alt="img"></p>
-<p>使用第一种Bean方式方式显然方便些</p>
-<p><img src="https://img-blog.csdnimg.cn/69f85d1fbdcb4501a3804dabefea0ce2.png" alt="img"></p>
-<p> <img src="https://img-blog.csdnimg.cn/9876735c7b4845b3b333773526244587.png" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/10/MQ/%EF%BC%88rabbitmq%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7%EF%BC%89%E6%83%B0%E6%80%A7%E9%98%9F%E5%88%97/" data-id="clk6vwj3g000k8kv6dviw82m6" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
 
     </footer>
   </div>
@@ -969,7 +1195,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>

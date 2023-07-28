@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c744498a9a~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp">
 <meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735c750f5b2cc~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp">
 <meta property="article:published_time" content="2023-02-17T05:23:49.183Z">
-<meta property="article:modified_time" content="2023-03-19T10:03:09.009Z">
+<meta property="article:modified_time" content="2023-07-24T14:38:17.983Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="Mysql">
@@ -70,7 +70,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -208,7 +208,7 @@
 <h1 id="3-索引"><a href="#3-索引" class="headerlink" title="3. 索引"></a>3. 索引</h1><h2 id="1、索引的几种类型或分类？"><a href="#1、索引的几种类型或分类？" class="headerlink" title="1、索引的几种类型或分类？"></a>1、索引的几种类型或分类？</h2><ul>
 <li><p>从<strong>物理结构</strong>上可以分为聚集索引和非聚集索引两类：</p>
 <ul>
-<li><strong>聚簇索引</strong>指索引的键值的逻辑顺序与表中相应行的物理顺序一致，即每张表只能有一个聚簇索引，也就是我们常说的<strong>主键索引</strong>；</li>
+<li><strong>聚簇索引</strong>：指索引的键值的逻辑顺序与表中相应行的物理顺序一致，即每张表只能有一个聚簇索引，也就是我们常说的<strong>主键索引</strong>；</li>
 <li>非聚簇索引的逻辑顺序则与数据行的物理顺序不一致。</li>
 </ul>
 </li>
@@ -282,22 +282,22 @@
 <li><strong>B+ 树索引</strong>底层实现原理是多路平衡查找树，对于每一次的查询都是从根节点出发，查询到叶子节点方可以获得所查键值，最后查询判断是否需要回表查询.</li>
 </ul>
 <h4 id="Hash-和-B-树索引的区别"><a href="#Hash-和-B-树索引的区别" class="headerlink" title="Hash 和 B+ 树索引的区别"></a>Hash 和 B+ 树索引的区别</h4><ul>
-<li><p>Hash</p>
-<ul>
+<li>Hash<ul>
 <li>Hash 进行等值查询更快，但无法进行范围查询。因为经过 Hash 函数建立索引之后，索引的顺序与原顺序无法保持一致，故不能支持范围查询。同理，也不支持使用索引进行排序。</li>
 <li>Hash 不支持模糊查询以及多列索引的最左前缀匹配,因为 Hash 函数的值不可预测，如 AA 和 AB 的算出的值没有相关性。</li>
 <li>Hash 任何时候都避免不了回表查询数据.</li>
 <li>虽然在等值上查询效率高，但性能不稳定，因为当某个键值存在大量重复时，产生 Hash 碰撞，此时查询效率反而可能降低。</li>
 </ul>
 </li>
-<li><p>B+ Tree</p>
-<ul>
+<li>B+ Tree<ul>
 <li>B+ 树本质是一棵查找树，自然支持范围查询和排序。</li>
 <li>在符合某些条件（聚簇索引、覆盖索引等）时候可以只通过索引完成查询，不需要回表。</li>
 <li>查询效率比较稳定，因为每次查询都是从根节点到叶子节点，且为树的高度。</li>
 </ul>
 </li>
 </ul>
+<p><strong>此外补充：</strong></p>
+<p>（InnoDB的四大特性之一：自适应哈希索引）InnoDB 虽然主要使用 B+ 树作为索引结构，但在某些特殊场景下用到哈希索引。InnoDB 会监控对表上索引的查找，如果发现某个索引频繁被访问，则建立哈希索引。InnoDB 会自动根据访问的频率和模式来为某些页建立哈希索引</p>
 <h2 id="5-为何使用-B-树而非-B-树做索引？"><a href="#5-为何使用-B-树而非-B-树做索引？" class="headerlink" title="5. 为何使用 B+ 树而非 B 树做索引？"></a>5. 为何使用 B+ 树而非 B 树做索引？</h2><h4 id="5-1-先来了解一下-B-树和-B-树的区别："><a href="#5-1-先来了解一下-B-树和-B-树的区别：" class="headerlink" title="5.1.  先来了解一下 B+ 树和 B 树的区别："></a>5.1.  先来了解一下 B+ 树和 B 树的区别：</h4><ul>
 <li><p>B 树非叶子结点和叶子结点都存储数据，因此查询数据时，时间复杂度最好为 O(1)，最坏为 O(log n)。而 <strong>B+ 树只在叶子结点存储数据，非叶子结点存储关键字</strong>，且不同非叶子结点的关键字可能重复，因此查询数据时，时间复杂度固定为 O(log n)。</p>
 </li>
@@ -327,20 +327,20 @@
 <p>而有了索引下推之后，如果存在某些被索引列的判断条件时，MySQL 服务器将这一部分判断条件传递给存储引擎，然后由存储引擎通过判断索引是否符合 MySQL 服务器传递的条件，只有当索引符合条件时才会将数据检索出来返回给 MySQL 服务器。</p>
 <p><strong>索引条件下推优化可以减少存储引擎查询基础表的次数，也可以减少 MySQL 服务器从存储引擎接收数据的次数。</strong></p>
 <h1 id="4-存储"><a href="#4-存储" class="headerlink" title="4. 存储"></a>4. 存储</h1><h2 id="4-1-有哪些常见的存储引擎？"><a href="#4-1-有哪些常见的存储引擎？" class="headerlink" title="4.1. 有哪些常见的存储引擎？"></a>4.1. 有哪些常见的存储引擎？</h2><ol>
-<li>MyISAM：这种引擎是mysql最早提供的。这种引擎又可以分为静态MyISAM、动态MyISAM 和压缩MyISAM三种，不管是何种MyISAM表，目前它都不支持事务，行级锁和外键约束的功能。</li>
-<li>MyISAM Merge引擎：这种类型是MyISAM类型的一种变种。合并表是将几个相同的MyISAM表合并为一个虚表。常应用于日志和数据仓库。</li>
-<li><strong>InnoDB</strong>：InnoDB表类型可以看作是对MyISAM的进一步更新产品，它提供了事务、行级锁机制和外键约束的功能，也是目前<strong>MySQL 默认 的存储引擎。</strong></li>
+<li>MyISAM：这种引擎是mysql最早提供的。这种引擎又可以分为静态MyISAM、动态MyISAM 和压缩MyISAM三种，不管是何种MyISAM表，目前它都<mark>不支持事务、行级锁和外键约束的功能。</mark></li>
+<li>MyISAM Merge引擎：这种类型是MyISAM类型的一种变种。合并表是将几个相同的MyISAM表合并为一个<strong>虚表</strong>。<mark>常应用于日志和数据仓库。</mark></li>
+<li><strong>InnoDB</strong>：InnoDB表类型可以看作是对MyISAM的进一步更新产品，<mark>它提供了事务、行级锁机制和外键约束的功能，也是目前<strong>MySQL 默认 的存储引擎。</strong></mark></li>
 <li>Memory(heap)：这种类型的数据表只存在于内存中。它使用散列索引，所以数据的存取速度非常快。因为是存在于内存中，所以这种类型常应用于临时表中。</li>
 <li>archive：这种类型只支持select 和 insert语句，而且不支持索引。常应用于日志记录和聚合分析方面。</li>
 </ol>
 <h2 id="4-2-MyISAM-和-InnoDB-的区别？"><a href="#4-2-MyISAM-和-InnoDB-的区别？" class="headerlink" title="4.2.  MyISAM 和 InnoDB 的区别？"></a>4.2.  MyISAM 和 InnoDB 的区别？</h2><p>1）InnoDB 支持事务，而 MyISAM 不支持。</p>
-<p>2）InnoDB 支持外键，而 MyISAM 不支持。因此将一个含有外键的 InnoDB 表 转为 MyISAM 表会失败。</p>
+<p>2）InnoDB 支持外键，而 MyISAM 不支持。因此将一个含有外键的 InnoDB 表转为 MyISAM 表会失败。</p>
 <p>3）InnoDB 和 MyISAM 均支持 B+ Tree 数据结构的索引。但 InnoDB 是聚集索引，而 MyISAM 是非聚集索引。</p>
 <p>4）InnoDB 不保存表中数据行数，执行 select count(*) from table 时需要全表扫描。而 MyISAM 用一个变量记录了整个表的行数，速度相当快（注意不能有 WHERE 子句）。</p>
 <p><strong>那为什么 InnoDB 没有使用这样的变量呢？</strong>因为InnoDB的事务特性，在同一时刻表中的行数对于不同的事务而言是不一样的。</p>
 <p>5）InnoDB 支持表、行（默认）级锁，而 MyISAM 支持表级锁。</p>
 <p>InnoDB 的行锁是基于索引实现的，而不是物理行记录上。即访问如果没有命中索引，则也无法使用行锁，将要退化为表锁。</p>
-<p>6）InnoDB 必须有唯一索引（如主键），如果没有指定，就会自动寻找或生产一个隐藏列 Row_id 来充当默认主键，而 Myisam 可以没有主键。</p>
+<p>6）InnoDB 必须有唯一索引（如主键），如果没有指定，就会自动寻找或生产一个隐藏列 Row_id 来充当默认主键，而 MyISAM 可以没有主键。</p>
 <h2 id="4-3-InnoDB引擎四大特性"><a href="#4-3-InnoDB引擎四大特性" class="headerlink" title="4.3. InnoDB引擎四大特性"></a>4.3. InnoDB引擎四大特性</h2><ul>
 <li>插入缓冲insert buffer)</li>
 <li>二次写(double write)</li>
@@ -351,7 +351,7 @@
 <h2 id="4-5-存储结构"><a href="#4-5-存储结构" class="headerlink" title="4.5. 存储结构"></a>4.5. 存储结构</h2><h3 id="4-5-1-什么是-InnoDB-的页、区、段？"><a href="#4-5-1-什么是-InnoDB-的页、区、段？" class="headerlink" title="4.5.1. 什么是 InnoDB 的页、区、段？"></a>4.5.1. 什么是 InnoDB 的页、区、段？</h3><ul>
 <li><p><strong>页（Page）</strong></p>
 <ul>
-<li>首先，InnoDB 将物理磁盘划分为页（page），每页的大小默认为 16 KB，页是最小的存储单位。页根据上层应用的需要，如索引、日志等，分为很多的格式。我们主要说数据页，也就是存储实际数据的页。</li>
+<li>首先，InnoDB 将物理磁盘划分为页（page），每页的大小默认为 <strong>16 KB</strong>，页是最小的存储单位。页根据上层应用的需要，如索引、日志等，分为很多的格式。我们主要说数据页，也就是存储实际数据的页。</li>
 </ul>
 </li>
 <li><p><strong>区（Extent）</strong></p>
@@ -370,7 +370,7 @@
 </ul>
 <h1 id="5-事务"><a href="#5-事务" class="headerlink" title="5. 事务"></a>5. 事务</h1><h2 id="5-1-什么是事务的四大特性（ACID）？"><a href="#5-1-什么是事务的四大特性（ACID）？" class="headerlink" title="5.1.  什么是事务的四大特性（ACID）？"></a>5.1.  什么是事务的四大特性（ACID）？</h2><ul>
 <li>Atomicity（<strong>原子性</strong>）：一个事务（transaction）中的所有操作，<strong>要么全部完成，要么全部不完成</strong>，不会结束在中间某个环节。事务在执行过程中发生错误，会被恢复（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</li>
-<li>Consistency（<strong>一致性</strong>）：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</li>
+<li>Consistency（<strong>一致性</strong>）：在事务开始之前和事务结束以后， 数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</li>
 <li>Isolation（<strong>隔离性</strong>）：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</li>
 <li>Durability（<strong>持久性</strong>）：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
 </ul>
@@ -438,7 +438,7 @@
 <p><strong>当前读</strong> 就是读的是最新数据，而不是历史的数据。加锁的 SELECT，或者对数据进行增删改都会进行当前读。</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> player LOCK <span class="keyword">IN</span> SHARE MODE;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> player <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> player <span class="keyword">values</span> ...</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> player <span class="keyword">WHERE</span> ...</span><br><span class="line"><span class="keyword">UPDATE</span> player <span class="keyword">SET</span> ...</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="6-5-什么是MVCC以及实现？"><a href="#6-5-什么是MVCC以及实现？" class="headerlink" title="6.5. 什么是MVCC以及实现？"></a>6.5. 什么是MVCC以及实现？</h3><p>MVCC 的英文全称是 Multiversion Concurrency Control，中文意思是多版本并发控制，可以做到读写互相不阻塞，主要用于解决不可重复读和幻读问题时提高并发效率。</p>
+<h3 id="6-5-什么是MVCC以及实现？"><a href="#6-5-什么是MVCC以及实现？" class="headerlink" title="6.5. 什么是MVCC以及实现？"></a>6.5. 什么是MVCC以及实现？</h3><p>MVCC 的英文全称是 Multiversion Concurrency Control，中文意思是 <strong>多版本并发控制</strong>，可以做到读写互相不阻塞，主要用于解决不可重复读和幻读问题时提高并发效率。</p>
 <p>其原理是通过数据行的多个版本管理来实现数据库的并发控制，简单来说就是保存数据的历史版本。可以通过比较版本号决定数据是否显示出来。读取数据的时候不需要加锁可以保证事务的隔离效果。</p>
 <h1 id="7-视图"><a href="#7-视图" class="headerlink" title="7. 视图"></a>7. 视图</h1><h3 id="7-1-为什么要使用视图？什么是视图？"><a href="#7-1-为什么要使用视图？什么是视图？" class="headerlink" title="7.1. 为什么要使用视图？什么是视图？"></a>7.1. 为什么要使用视图？什么是视图？</h3><ul>
 <li>为了提高复杂SQL语句的复用性和表操作的安全性，MySQL数据库管理系统提供了视图特性。所谓视图，本质上是一种虚拟表，在物理上是不存在的，其内容与真实的表相似，包含一系列带有名称的列和行数据。但是，视图并不在数据库中以储存的数据值形式存在。行和列数据来自定义视图的查询所引用基本表，并且在具体引用视图时动态生成。</li>
@@ -897,7 +897,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/17/interview/mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clk6vwj5900388kv67m13c7nj" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/17/interview/mysql%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="clkmr0cym003ee4v6hk5xazme" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -973,7 +973,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>

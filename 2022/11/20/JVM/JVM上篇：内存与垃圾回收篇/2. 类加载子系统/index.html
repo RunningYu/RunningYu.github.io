@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/images/image-20221120230214513.png">
 <meta property="og:image" content="http://example.com/images/image-20221120230150104.png">
 <meta property="article:published_time" content="2022-11-20T15:01:03.641Z">
-<meta property="article:modified_time" content="2023-02-23T01:43:29.799Z">
+<meta property="article:modified_time" content="2023-07-22T17:07:20.722Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="JVM">
 <meta property="article:tag" content="内存与垃圾回收篇">
@@ -73,7 +73,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -214,7 +214,7 @@
 </li>
 <li><strong>准备（Prepare）</strong>：<ul>
 <li><strong>为类变量分配内存</strong>并且<strong>设置该类变量的默认初始值</strong>，即零值。</li>
-<li><mark>这里不包含用 final 修饰的 static，因为 final 在编译的时候就会分配了，准备阶段会显式初始化；</mark></li>
+<li><mark>这里不包含用 final 修饰的 static，因为 final 在编译的时候就会分配了，<strong>准备阶段会 显式初始化</strong>；</mark></li>
 <li><mark>这里不会为实例变量分配初始化</mark>，类变量会分配在方法区中，而实例变量是会随着对象一起分配到 Java 堆中。</li>
 </ul>
 </li>
@@ -273,7 +273,7 @@
 </ul>
 <p>用户自定义类加载器实现步骤：</p>
 <ol>
-<li>开发人员可以通过继承抽象类 ava.lang.ClassLoader 类的方式，实现自己的类加载器，以满足一些特殊的需求</li>
+<li>开发人员可以通过继承抽象类 java.lang.ClassLoader 类的方式，实现自己的类加载器，以满足一些特殊的需求</li>
 <li>在 JDK1.2 之前，在自定义类加载器时，总会去继承 ClassLoader 类并重写 loadClass() 方法，从而实现自定义的类加载类，但是在 JDK1.2 之后已不再建议用户去覆盖 loadclass() 方法，而是建议把自定义的类加载逻辑写在 findClass()方法中</li>
 <li>在编写自定义类加载器时，如果没有太过于复杂的需求，可以直接继承 URLClassLoader 类，这样就可以避免自己去编写 findClass() 方法及其获取字节码流的方式，使自定义类加载器编写更加简洁。</li>
 </ol>
@@ -363,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/2.%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" data-id="clk6vwj7m007e8kv686n07k5b" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/20/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/2.%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" data-id="clkmr0d130092e4v6a2yo5wq9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -439,7 +439,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>

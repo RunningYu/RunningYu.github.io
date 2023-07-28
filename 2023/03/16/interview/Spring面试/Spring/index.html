@@ -13,7 +13,7 @@
 <meta property="og:description" content="Spring中Controller单例 controller默认是单例的，不要使用非静态的成员变量，否则会发生数据逻辑混乱。 正因为单例所以不是线程安全的。  我们下面来简单的验证下： 12345678910111213141516171819202122package com.riemann.springbootdemo.controller;import org.springframework">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-16T14:30:14.984Z">
-<meta property="article:modified_time" content="2023-06-08T16:23:25.863Z">
+<meta property="article:modified_time" content="2023-07-22T14:54:05.995Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta property="article:tag" content="Spring">
@@ -51,7 +51,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -146,14 +146,14 @@
 <p><font color="red">Spring MVC默认是单例模式，Controller、Service、Dao都是单例</font>所以在使用不当存在一定的安全隐患。Controller单例模式的好处在与：</p>
 <ul>
 <li>提高性能，不用每次创建Controller实例，减少了对象创建和垃圾收集的时间</li>
-<li>没多例的必要，由于只有一个Controller的实例，当多个线程同时调用它的时候，它的成员变量就不是线程安全的。<br>当然在大多数情况下，**我们根本不需要Controller考虑线程安全的问题，除非在类中声明了<mark>成员变量</mark>**。因此Spring MVC的Contrller在编码时，尽量避免使用实例变量。如果一定要使用实例变量，则可以改用以下方式：<br>Controller中声明 scope=”prototype”，即设置为多例模式<br>在Controller中使用ThreadLocal变量,如：private ThreadLocal count = new ThreadLocal();</li>
+<li>没多例的必要，由于只有一个Controller的实例，当多个线程同时调用它的时候，它的成员变量就不是线程安全的。<br>当然在大多数情况下，**我们根本不需要Controller考虑线程安全的问题，除非在类中声明了<mark>成员变量</mark>**。因此Spring MVC的Controller在编码时，尽量避免使用实例变量。如果一定要使用实例变量，则可以改用以下方式：<br>Controller中声明 scope=”prototype”，即设置为多例模式<br>在Controller中使用ThreadLocal变量,如：private ThreadLocal count = new ThreadLocal();</li>
 </ul>
 <h1 id="springmvc-singleton有几种解决方法："><a href="#springmvc-singleton有几种解决方法：" class="headerlink" title="springmvc singleton有几种解决方法："></a>springmvc singleton有几种解决方法：</h1><p>1、在控制器中不使用实例变量（可以使用方法参数的形式解决，参考博文 Spring Bean Scope 有状态的Bean 无状态的Bean）<br>2、将控制器的作用域从单例改为原型，即在spring配置文件Controller中声明 <font color="blue"><strong>scope=“prototype”</strong></font>，每次都创建新的controller<br>3、在Controller中使用<font color="blue"><strong>ThreadLocal</strong></font>变量</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/16/interview/Spring%E9%9D%A2%E8%AF%95/Spring/" data-id="clk6vwj9w00bd8kv6dalm8iq6" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/03/16/interview/Spring%E9%9D%A2%E8%AF%95/Spring/" data-id="clkmr0d2b00bse4v6hwv957iw" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
@@ -229,7 +229,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>174</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>177</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
