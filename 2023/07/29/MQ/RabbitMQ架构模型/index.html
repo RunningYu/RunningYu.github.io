@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://example.com/images/image-20230729110830440.png">
 <meta property="og:image" content="http://example.com/images/image-20230729110854942.png">
 <meta property="article:published_time" content="2023-07-29T03:02:23.816Z">
-<meta property="article:modified_time" content="2023-07-29T03:29:25.487Z">
+<meta property="article:modified_time" content="2023-07-29T10:21:01.801Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="rabbitmq">
 <meta name="twitter:card" content="summary">
@@ -164,8 +164,9 @@
 <p><img src="/../../images/image-20230729110643513.png" alt="image-20230729110643513"></p>
 <h3 id="交换机有两种状态："><a href="#交换机有两种状态：" class="headerlink" title="交换机有两种状态："></a>交换机有两种状态：</h3><h4 id="持久（durable）："><a href="#持久（durable）：" class="headerlink" title="持久（durable）："></a>持久（durable）：</h4><p>持久化的交换机会在消息代理（broker）重启后依旧存在，而暂存的交换机则不会（它们需要在代理再次上线后重新被声明）。</p>
 <p>并不是所有的应用场景都需要持久化的交换机。</p>
-<h4 id="暂存（transient）"><a href="#暂存（transient）" class="headerlink" title="暂存（transient）"></a>暂存（transient）</h4><h3 id="类型："><a href="#类型：" class="headerlink" title="类型："></a>类型：</h3><h4 id="–fanout广播"><a href="#–fanout广播" class="headerlink" title="–fanout广播"></a>–fanout广播</h4><p>将所有发送到交换器的消息路由到所有与该交换器绑定对的队列中。</p>
-<h4 id="–topic主题"><a href="#–topic主题" class="headerlink" title="–topic主题"></a>–topic主题</h4><p>主题交换机（topic exchanges）通过对消息的路由键和队列到交换机的绑定模式之间的匹配，将消息路由给一个或多个队列。主题交换机经常用来实现各种分发/订阅模式及其变种。主题交换机通常用来实现消息的多播路由（multicast routing）。</p>
+<h4 id="暂存（transient）"><a href="#暂存（transient）" class="headerlink" title="暂存（transient）"></a>暂存（transient）</h4><h3 id="类型："><a href="#类型：" class="headerlink" title="类型："></a>类型：</h3><h4 id="–fanout广播"><a href="#–fanout广播" class="headerlink" title="–fanout广播"></a>–fanout广播</h4><p>将所有发送到交换器的消息路由到所有与该交换器绑定对的队列中【扇形交换机，不再判断routeKey，直接将消息分发到所有绑定的队列】。</p>
+<h4 id="–direct直连"><a href="#–direct直连" class="headerlink" title="–direct直连"></a>–direct直连</h4><p>把消息路由到哪些BindKey和RoutingKey完全匹配的队列中。【判断touteKey的规则是完全 匹配模式，即发送消息时指定的routeKey要等于绑定的routeKey】。</p>
+<h4 id="–topic主题"><a href="#–topic主题" class="headerlink" title="–topic主题"></a>–topic主题</h4><p>主题交换机（topic exchanges）通过对消息的路由键和队列到交换机的绑定模式之间的匹配，将消息路由给一个或多个队列。主题交换机经常用来实现各种分发/订阅模式及其变种。主题交换机通常用来实现消息的多播路由（multicast routing）【判断routeKey的规则是模糊匹配方式】</p>
 <p>RoutingKey为一个点号“.”分割的字符串（被点号“.”分隔开的每一段独立的字符串称为一个单词）</p>
 <p>BindingKey中可以存在两种特殊的字符串“*”和“#”，用于做模糊匹配，</p>
 <p>匹配0个或者多个单词</p>
@@ -173,9 +174,9 @@
 <li>匹配一个单词</li>
 </ul>
 <p><img src="/../../images/image-20230729110759035.png" alt="image-20230729110759035"></p>
-<h4 id="–direct直连"><a href="#–direct直连" class="headerlink" title="–direct直连"></a>–direct直连</h4><p>把消息路由到哪些BindKey和RoutingKey完全匹配的队列中。</p>
-<h4 id="–headers头交换机"><a href="#–headers头交换机" class="headerlink" title="–headers头交换机"></a>–headers头交换机</h4><p>不依赖与路由键的匹配规则，基本不用了</p>
-<h2 id="RoutingKey：路由键"><a href="#RoutingKey：路由键" class="headerlink" title="# RoutingKey：路由键"></a># RoutingKey：路由键</h2><p>生产者将消息发送给交换器的时候，一般会指定一个RoutingKey，用来指定消息的路由规则，而这个RoutingKey需要与交换器类型和绑定键（BindingKey）联合使用才能最终生效。</p>
+<h4 id="–headers头交换机"><a href="#–headers头交换机" class="headerlink" title="–headers头交换机"></a>–headers头交换机</h4><p>（不依赖与路由键的匹配规则，基本不用了）</p>
+<p>绑定队列与交换器的时候指定一个键值对，当交换器在分发消息的时候会先解开消息体里的headers 数据，然后判断里面是否有所设置的键值对，如果发现匹配成功，才将消息分发到队列中;这种交换器类型在性能上相对来说较差，在实际工作中很少会用到</p>
+<h2 id="RoutingKey：路由键"><a href="#RoutingKey：路由键" class="headerlink" title="# RoutingKey：路由键"></a># RoutingKey：路由键</h2><p>生产者将消息发送给交换器的时候，一般会指定一个RoutingKey，用来指定消息的路由规则，而这个RoutingKey需要与交换器类型和绑定键（BindingKey）联合使用才能最终生效。 </p>
 <p>在交换器类型和绑定键(BindingKey）固定的情况下，生产者可以发送消息给交换器时，通过指定RoutingKey来决定消息流向哪里。</p>
 <h2 id="BindingKey：绑定"><a href="#BindingKey：绑定" class="headerlink" title="# BindingKey：绑定"></a># BindingKey：绑定</h2><p>RabbitMQ通过绑定将交换器与队列关联起来，在绑定的时候一般会指定一个绑定键（BindingKey），这样RabbitMQ就知道如何正确的将消息路由到队列了。</p>
 <p><img src="/../../images/image-20230729110830440.png" alt="image-20230729110830440"></p>
@@ -238,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/07/29/MQ/RabbitMQ%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B/" data-id="clkngg0ev000h2wv6g19v4m5u" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/07/29/MQ/RabbitMQ%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B/" data-id="clkp8jp5z000t6wv6c3ldbt5a" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rabbitmq/" rel="tag">rabbitmq</a></li></ul>
