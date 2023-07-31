@@ -206,9 +206,9 @@
     <category term="redis" scheme="http://example.com/categories/redis/"/>
     
     
-    <category term="redis" scheme="http://example.com/tags/redis/"/>
-    
     <category term="springboot" scheme="http://example.com/tags/springboot/"/>
+    
+    <category term="redis" scheme="http://example.com/tags/redis/"/>
     
   </entry>
   
