@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/171735524c5089b8~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
 <meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/13/17173552564c22be~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image">
 <meta property="article:published_time" content="2023-02-18T01:49:10.870Z">
-<meta property="article:modified_time" content="2023-07-30T04:01:40.924Z">
+<meta property="article:modified_time" content="2023-07-30T15:08:59.572Z">
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -686,6 +686,11 @@
 <ul>
 <li>答：ConcurrentHashMap 结合了 HashMap 和 HashTable 二者的优势。HashMap 没有考虑同步，HashTable 考虑了同步的问题使用了synchronized 关键字，所以 HashTable 在每次同步执行时都要锁住整个结构。 ConcurrentHashMap 锁的方式是稍微细粒度的。</li>
 </ul>
+<h3 id="JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有什么不同？"><a href="#JDK-1-7-和-JDK-1-8-的-ConcurrentHashMap-实现有什么不同？" class="headerlink" title="JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有什么不同？"></a>JDK 1.7 和 JDK 1.8 的 ConcurrentHashMap 实现有什么不同？</h3><ul>
+<li><strong>线程安全实现方式</strong>：JDK 1.7 采用 <code>Segment</code> 分段锁来保证安全， <code>Segment</code> 是继承自 <code>ReentrantLock</code>。JDK1.8 放弃了 <code>Segment</code> 分段锁的设计，采用 <code>Node + CAS + synchronized</code> 保证线程安全，锁粒度更细，<code>synchronized</code> 只锁定当前链表或红黑二叉树的首节点。</li>
+<li><strong>Hash 碰撞解决方法</strong> : JDK 1.7 采用拉链法，JDK1.8 采用拉链法结合红黑树（链表长度超过一定阈值时，将链表转换为红黑树）。</li>
+<li><strong>并发度</strong>：JDK 1.7 最大并发度是 Segment 的个数，默认是 16。JDK 1.8 最大并发度是 Node 数组的大小，并发度更大。</li>
+</ul>
 <h3 id="ConcurrentHashMap-底层具体实现知道吗？实现原理是什么？"><a href="#ConcurrentHashMap-底层具体实现知道吗？实现原理是什么？" class="headerlink" title="ConcurrentHashMap 底层具体实现知道吗？实现原理是什么？"></a>ConcurrentHashMap 底层具体实现知道吗？实现原理是什么？</h3><h4 id="JDK1-7"><a href="#JDK1-7" class="headerlink" title="JDK1.7"></a>JDK1.7</h4><ul>
 <li>首先将数据分为一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据时，其他段的数据也能被其他线程访问。</li>
 <li>在JDK1.7中，ConcurrentHashMap采用Segment + HashEntry的方式进行实现，结构如下：</li>
@@ -769,7 +774,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/18/interview/java%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95/" data-id="clkp8jp9h003e6wv6bg0da2e2" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/18/interview/java%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95/" data-id="clkr10edp004p84v68v7jhsd8" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
