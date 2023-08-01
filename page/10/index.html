@@ -396,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/" data-id="clkr14xvt008as4v6e1tl0da0" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/7.%20%E6%96%B9%E6%B3%95%E5%8C%BA/" data-id="clkseq9jn008mfov676xt5386" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -547,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" data-id="clkr14xvy008ns4v6bben9j59" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/19/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%9A%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" data-id="clkseq9jq008ufov67fvq0xvc" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -599,7 +599,7 @@
       
         <p>[toc]</p>
 <h1 id="6-堆"><a href="#6-堆" class="headerlink" title="6. 堆"></a>6. 堆</h1><h2 id="6-1-堆（Heap）的核心概述"><a href="#6-1-堆（Heap）的核心概述" class="headerlink" title="6.1. 堆（Heap）的核心概述"></a>6.1. 堆（Heap）的核心概述</h2><p>堆针对一个 JVM 进程来说是<strong>唯一</strong>的，也就是一个进程只有一个 JVM，但是进程包含多个线程，他们是共享同一堆空间的。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/0be60cad417bedd46d651f710ae585ce.png" alt="image-20200706195127740"></p>
+<p><img src="/../../../images/image-20230801223843261.png" alt="image-20230801223843261"></p>
 <p>一个 JVM 实例只存在一个堆内存，堆也是 Java 内存管理的核心区域。</p>
 <p>Java 堆区在 JVM 启动的时候即被创建，其空间大小也就确定了。是 JVM 管理的最大一块内存空间。</p>
 <ul>
@@ -613,7 +613,7 @@
 <p><img src="/../../../images/image-20221118100917171.png" alt="image-20221118100917171"></p>
 <p>一执行 new 的时候，就会在堆中去创建对象并开辟堆空间，jvm 还会去初始化对象的实例变量</p>
 <p>堆，是 GC（Garbage Collection，垃圾收集器）执行垃圾回收的重点区域。（栈没有GC，只有OOM）</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/3ae9948d069bd58ccfcda730cc12bf0f.png" alt="image-20200706201904057"></p>
+<p><img src="/../../../images/image-20230801223855814.png" alt="image-20230801223855814"></p>
 <h3 id="6-1-1-堆内存细分"><a href="#6-1-1-堆内存细分" class="headerlink" title="6.1.1. 堆内存细分"></a>6.1.1. 堆内存细分</h3><p>Java 7 及之前堆内存逻辑上分为三部分：新生区+养老区+<mark>永久区</mark></p>
 <ul>
 <li>Young Generation Space 新生区 Young/New 又被划分为 Eden 区和 Survivor 区</li>
@@ -627,8 +627,8 @@
 <li>Meta Space 元空间 Meta</li>
 </ul>
 <p>约定：新生区（代）&lt;=&gt;年轻代 、 养老区&lt;=&gt;老年区（代）、 永久区&lt;=&gt;永久代</p>
-<h3 id="6-1-2-堆空间内部结构（JDK7）"><a href="#6-1-2-堆空间内部结构（JDK7）" class="headerlink" title="6.1.2. 堆空间内部结构（JDK7）"></a>6.1.2. 堆空间内部结构（JDK7）</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/deafdcce7cf88a496bc231820bb5b007.png" alt="image-20200706203419496"></p>
-<h3 id="6-1-3-堆空间内部结构（JDK8）"><a href="#6-1-3-堆空间内部结构（JDK8）" class="headerlink" title="6.1.3. 堆空间内部结构（JDK8）"></a>6.1.3. 堆空间内部结构（JDK8）</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/ee2836af2e1d5387b4ac58f5eacabbb6.png" alt="image-20200706203835403"></p>
+<h3 id="6-1-2-堆空间内部结构（JDK7）"><a href="#6-1-2-堆空间内部结构（JDK7）" class="headerlink" title="6.1.2. 堆空间内部结构（JDK7）"></a>6.1.2. 堆空间内部结构（JDK7）</h3><p><img src="/../../../images/image-20230801223903230.png" alt="image-20230801223903230"></p>
+<h3 id="6-1-3-堆空间内部结构（JDK8）"><a href="#6-1-3-堆空间内部结构（JDK8）" class="headerlink" title="6.1.3. 堆空间内部结构（JDK8）"></a>6.1.3. 堆空间内部结构（JDK8）</h3><p><img src="/../../../images/image-20230801223909145.png" alt="image-20230801223909145"></p>
 <h2 id="6-2-设置堆内存大小与-OOM"><a href="#6-2-设置堆内存大小与-OOM" class="headerlink" title="6.2. 设置堆内存大小与 OOM"></a>6.2. 设置堆内存大小与 OOM</h2><h3 id="6-2-1-堆空间大小的设置"><a href="#6-2-1-堆空间大小的设置" class="headerlink" title="6.2.1. 堆空间大小的设置"></a>6.2.1. 堆空间大小的设置</h3><p>Java 堆区用于存储 Java 对象实例，那么堆的大小在 JVM 启动时就已经设定好了，大家可以通过选项”-Xmx”和”-Xms”来进行设置。</p>
 <ul>
 <li>“**-Xms**”用于表示堆区的起始内存，等价于<code>-XX:InitialHeapSize</code></li>
@@ -680,9 +680,9 @@
 </ul>
 <p>Java 堆区进一步细分的话，可以划分为年轻代（YoungGen）和老年代（oldGen）</p>
 <p>其中年轻代又可以划分为 Eden 空间、Survivor0 空间和 Survivor1 空间（有时也叫做 from 区、to 区）</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/f3ee86daaf5076fe22265ffcaa831175.png" alt="image-20200707075847954"></p>
+<p><img src="/../../../images/image-20230801223927720.png" alt="image-20230801223927720"></p>
 <p>下面这参数开发中一般不会调：</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/7d9c2d1f9ef9f315f01b3441c6e81660.png" alt="image-20200707080154039"></p>
+<p><img src="/../../../images/image-20230801223934174.png" alt="image-20230801223934174"></p>
 <p>配置新生代与老年代在堆结构的占比。</p>
 <ul>
 <li>默认<code>-XX:NewRatio=2</code>，表示新生代占 1，老年代占 2，新生代占整个堆的 1/3</li>
@@ -695,7 +695,7 @@
 <li>IBM 公司的专门研究表明，新生代中 80%的对象都是“朝生夕死”的。</li>
 </ul>
 <p>可以使用选项”<code>-Xmn</code>“设置新生代最大内存大小，这个参数一般使用默认值就可以了。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/31fd90d99565ec8ce0682a4468076f94.png" alt="image-20210510105849497"></p>
+<p><img src="/../../../images/image-20230801223940538.png" alt="image-20230801223940538"></p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : 其然乐衣Letitbe</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> : 2022/11/18</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -Xms600m -Xmx600m</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -NewRatio : 设置新生代与老年代的比例。默认值是2（新生代 : 老年代 = 1 : 2）</span></span><br><span class="line"><span class="comment"> * -XX:SurvivorRatio : 设置新新生代中的Eden区与Survivor区的比例。默认值是8（但测试的时候是6，要它是8，需要加上这个参数的设置）</span></span><br><span class="line"><span class="comment"> * -XX:-UseAdaptiveSizePolicy  :  Use前面加-表示关闭自适应的内存分配策略，加+表示用（暂时用不到）</span></span><br><span class="line"><span class="comment"> * -Xmn: 设置新生代的空间的大小 （一般不设置）（当和-NewRatio一同设置有矛盾时，以-Xmn为准）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EdenSurvivorTest</span> {</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        System.out.println(<span class="string">"我只是来打酱油~"</span>);</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            Thread.sleep(<span class="number">1000000</span>);</span><br><span class="line">        } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="6-4-图解对象分配过程"><a href="#6-4-图解对象分配过程" class="headerlink" title="6.4. 图解对象分配过程"></a>6.4. 图解对象分配过程</h2><p>为新对象分配内存是一件非常严谨和复杂的任务，JVM 的设计者们不仅需要考虑内存如何分配、在哪里分配等问题，并且由于内存分配算法与内存回收算法密切相关，所以还需要考虑 GC 执行完内存回收后是否会在内存空间中产生内存碎片。</p>
@@ -721,9 +721,9 @@
 <li><p>若养老区执行了 Major GC 之后，发现依然无法进行对象的保存，就会产生 OOM 异常。</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutofMemoryError: Java heap space</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/9d588ca1c3495a21ada5b7fce89c6633.png" alt="第08章_新生代对象分配与回收过程"></p>
+<p><img src="/../../../images/image-20230801223947969.png" alt="image-20230801223947969"></p>
 <p><strong>流程图</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/23b91eb543fc0072cb628365267f0089.png" alt="image-20200707091058346"></p>
+<p><img src="/../../../images/image-20230801223955779.png" alt="image-20230801223955779"></p>
 <p><strong>总结</strong></p>
 <ul>
 <li><mark>针对幸存者 s0，s1 区的总结：复制之后有交换，谁空谁是 to</mark></li>
@@ -773,7 +773,7 @@
 <li><p>Minor GC 会引发 STW，暂停其它用户的线程，等垃圾回收结束，用户线程才恢复运行</p>
 </li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/29146da9c1f3a3241d52201641899020.png" alt="image-20200707095606813"></p>
+<p><img src="/../../../images/image-20230801224006458.png" alt="image-20230801224006458"></p>
 <h3 id="老年代-GC（Major-GC-x2F-Full-GC）触发机制"><a href="#老年代-GC（Major-GC-x2F-Full-GC）触发机制" class="headerlink" title="老年代 GC（Major GC / Full GC）触发机制"></a>老年代 GC（Major GC / Full GC）触发机制</h3><ul>
 <li><p>指发生在老年代的 GC，对象从老年代消失时，我们说 “Major GC” 或 “Full GC” 发生了</p>
 </li>
@@ -802,9 +802,9 @@
 <li>新生代：有 Eden、两块大小相同的 survivor（又称为 from/to，s0/s1）构成，to 总为空。</li>
 <li>老年代：存放新生代中经历多次 GC 仍然存活的对象。</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/d776de4eb3a801b6e271b3f870317aa1.png" alt="image-20200707101511025"></p>
+<p><img src="/../../../images/image-20230801224013609.png" alt="image-20230801224013609"></p>
 <p>其实不分代完全可以，分代的唯一理由就是<strong>优化 GC 性能</strong>。如果没有分代，那所有的对象都在一块，就如同把一个学校的人都关在一个教室。GC 的时候要找到哪些对象没用，这样就会对堆的所有区域进行扫描。而很多对象都是朝生夕死的，如果分代的话，把新创建的对象放到某一地方，当 GC 的时候先把这块存储“朝生夕死”对象的区域进行回收，这样就会腾出很大的空间出来。</p>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/9b5ad9b0a881973d2955e61f7ebed160.png" alt="image-20200707101543871"></p>
+<p><img src="/../../../images/image-20230801224017941.png" alt="image-20230801224017941"></p>
 <h2 id="6-7-内存分配策略"><a href="#6-7-内存分配策略" class="headerlink" title="6.7. 内存分配策略"></a>6.7. 内存分配策略</h2><p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然存活，并且能被 Survivor 容纳的话，将被移动到 survivor 空间中，并将对象年龄设为 1。对象在 survivor 区中每熬过一次 MinorGC，年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁，其实每个 JVM、每个 GC 都有所不同）时，就会被晋升到老年代</p>
 <p>对象晋升老年代的年龄阀值，可以通过选项<code>-XX:MaxTenuringThreshold</code>来设置</p>
 <p>针对不同年龄段的对象分配原则如下所示：</p>
@@ -843,7 +843,7 @@
 <li><p>据我所知所有 OpenJDK 衍生出来的 JVM 都提供了 TLAB 的设计。</p>
 </li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/90162691ef6b0f4dc96be1c1ab02dc8b.png" alt="image-20210510114110526"></p>
+<p><img src="/../../../images/image-20230801224024895.png" alt="image-20230801224024895"></p>
 <h3 id="6-8-3-TLAB-的再说明"><a href="#6-8-3-TLAB-的再说明" class="headerlink" title="6.8.3. TLAB 的再说明"></a>6.8.3. TLAB 的再说明</h3><ul>
 <li><p>尽管不是所有的对象实例都能够在 TLAB 中成功分配内存，但<mark>JVM 确实是将 TLAB 作为内存分配的首选</mark>。</p>
 </li>
@@ -854,7 +854,7 @@
 <li><p>一旦对象在 TLAB 空间分配内存失败时，JVM 就会尝试着通过使用加锁机制确保数据操作的原子性，从而直接在 Eden 空间中分配内存。</p>
 </li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/img_convert/011ab4c65cfe41f64208447bf6c9d6d7.png" alt="image-20200707104253530"></p>
+<p><img src="/../../../images/image-20230801224030242.png" alt="image-20230801224030242"></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38410177/article/details/123704443">(2条消息) jvm 堆一定是共享的吗？_Y仟仟的博客-CSDN博客</a></p>
 <h2 id="6-9-小结：堆空间的参数设置"><a href="#6-9-小结：堆空间的参数设置" class="headerlink" title="6.9. 小结：堆空间的参数设置"></a>6.9. 小结：堆空间的参数设置</h2><p>官网地址：<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html">https://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html</a></p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 详细的参数内容会在JVM下篇：性能监控与调优篇中进行详细介绍，这里先熟悉下</span></span><br><span class="line">-XX:+PrintFlagsInitial  <span class="comment">//查看所有的参数的默认初始值</span></span><br><span class="line">-XX:+PrintFlagsFinal  <span class="comment">//查看所有的参数的最终值（可能会存在修改，不再是初始值）</span></span><br><span class="line">-Xms  <span class="comment">//初始堆空间内存（默认为物理内存的1/64）</span></span><br><span class="line">-Xmx  <span class="comment">//最大堆空间内存（默认为物理内存的1/4）</span></span><br><span class="line">-Xmn  <span class="comment">//设置新生代的大小。（初始值及最大值）</span></span><br><span class="line">-XX:NewRatio  <span class="comment">//配置新生代与老年代在堆结构的占比</span></span><br><span class="line">-XX:SurvivorRatio  <span class="comment">//设置新生代中Eden和S0/S1空间的比例</span></span><br><span class="line">-XX:MaxTenuringThreshold  <span class="comment">//设置新生代垃圾的最大年龄</span></span><br><span class="line">-XX:+PrintGCDetails <span class="comment">//输出详细的GC处理日志</span></span><br><span class="line"><span class="comment">//打印gc简要信息：①-Xx：+PrintGC ② - verbose:gc</span></span><br><span class="line">-XX:HandlePromotionFalilure：<span class="comment">//是否设置空间分配担保</span></span><br></pre></td></tr></tbody></table></figure>
@@ -980,7 +980,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/" data-id="clkr14xvu008ds4v6f1go3hkh" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/6.%E5%A0%86/" data-id="clkseq9jk008gfov6hter6jcl" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -1073,7 +1073,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/" data-id="clkr14xvi007vs4v6864r3hml" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/18/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/5.%20%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95%E6%A0%88/" data-id="clkseq9jg0087fov61bjdeg3g" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -1145,7 +1145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clkr14xz800drs4v6cbul78pu" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" data-id="clkseq9lf00dofov66jqp87af" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
@@ -1253,7 +1253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clkr14xza00dvs4v6gjahejk9" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/17/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clkseq9li00dvfov60c2c0pui" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
@@ -1620,7 +1620,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" data-id="clkr14xvk007zs4v6fieqhyuy" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/4.%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/" data-id="clkseq9ji008afov6331c2bce" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -1747,7 +1747,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" data-id="clkr14xvn0084s4v61z4lhq1p" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/16/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/3.%20%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%8F%8A%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8/" data-id="clkseq9jc007zfov60rrn43dw" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
@@ -1849,7 +1849,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clkr14xz100dms4v63oqq7faz" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/15/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="clkseq9ld00djfov68xj8110d" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%9B%E5%BB%BA%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="tag">创建者模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
@@ -1947,7 +1947,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="clkr14xvx008ks4v612pdfjp4" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/15/JVM/JVM%E4%B8%8A%E7%AF%87%EF%BC%9A%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="clkseq9js008xfov6defg1n68" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" rel="tag">内存与垃圾回收篇</a></li></ul>
