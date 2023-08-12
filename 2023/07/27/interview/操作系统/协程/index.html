@@ -5,12 +5,12 @@
   
   <title>Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是协程？协程协程（Coroutines）是一种比线程更加轻量级的存在。协程完全由程序所控制（在用户态执行），带来的好处是性能大幅度的提升。 一个操作系统中可以有多个进程；一个进程可以有多个线程；同理，一个线程可以有多个协程。 协程是一个特殊的函数，这个函数可以在某个地方挂起，并且可以重新在挂起处继续运行。 一个线程内的多个协程的运行是串行的，这点和多进程（多线程）在多核CPU上执行时是不同的。">
+  <meta name="description" content="什么是协程？  协程 协程（Coroutines）是一种比线程更加轻量级的存在。协程完全由程序所控制（在用户态执行），带来的好处是性能大幅度的提升。 一个操作系统中可以有多个进程；一个进程可以有多个线程；同理，一个线程可以有多个协程。 协程是一个特殊的函数，这个函数可以在某个地方挂起，并且可以重新在挂起处继续运行。 一个线程内的多个协程的运行是串行的，这点和多进程（多线程）在多核CPU上执行时是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo &amp; github">
 <meta property="og:url" content="http://example.com/2023/07/27/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="什么是协程？协程协程（Coroutines）是一种比线程更加轻量级的存在。协程完全由程序所控制（在用户态执行），带来的好处是性能大幅度的提升。 一个操作系统中可以有多个进程；一个进程可以有多个线程；同理，一个线程可以有多个协程。 协程是一个特殊的函数，这个函数可以在某个地方挂起，并且可以重新在挂起处继续运行。 一个线程内的多个协程的运行是串行的，这点和多进程（多线程）在多核CPU上执行时是不同的。">
+<meta property="og:description" content="什么是协程？  协程 协程（Coroutines）是一种比线程更加轻量级的存在。协程完全由程序所控制（在用户态执行），带来的好处是性能大幅度的提升。 一个操作系统中可以有多个进程；一个进程可以有多个线程；同理，一个线程可以有多个协程。 协程是一个特殊的函数，这个函数可以在某个地方挂起，并且可以重新在挂起处继续运行。 一个线程内的多个协程的运行是串行的，这点和多进程（多线程）在多核CPU上执行时是">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-26T16:44:26.972Z">
 <meta property="article:modified_time" content="2023-07-26T17:03:17.361Z">
@@ -49,7 +49,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>179</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -94,15 +94,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是协程？"><a href="#什么是协程？" class="headerlink" title="什么是协程？"></a>什么是协程？</h2><h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p>协程（Coroutines）是一种比线程更加轻量级的存在。协程完全由程序所控制（在<mark><strong>用户态</strong></mark>执行），带来的好处是性能大幅度的提升。 一个操作系统中可以有多个进程；一个进程可以有多个线程；同理，一个线程可以有多个协程。</p>
+        <h2 id="什么是协程"><a class="markdownIt-Anchor" href="#什么是协程"></a> 什么是协程？</h2>
+<h1 id="协程"><a class="markdownIt-Anchor" href="#协程"></a> 协程</h1>
+<p>协程（Coroutines）是一种比线程更加轻量级的存在。协程完全由程序所控制（在<mark><strong>用户态</strong></mark>执行），带来的好处是性能大幅度的提升。 一个操作系统中可以有多个进程；一个进程可以有多个线程；同理，一个线程可以有多个协程。</p>
 <p>协程是一个特殊的<mark><strong>函数</strong></mark>，这个函数可以在某个地方挂起，并且可以重新在挂起处继续运行。 <strong>一个线程内的多个协程的运行是串行的，这点和多进程（多线程）在多核CPU上执行时是不同的。</strong> 多进程（多线程）在多核CPU上是可以并行的。<strong>当线程内的某一个协程运行时，其它协程必须挂起。</strong></p>
-<h2 id="协程切换"><a href="#协程切换" class="headerlink" title="协程切换"></a>协程切换</h2><p>由于<strong>协程切换是在线程内完成的，涉及到的资源比较少</strong>。不像内核级线程（进程）切换那样，上下文的内容比较多，切换代价较大。协程本身是非常轻巧的，可以简单理解为只是切换了寄存器和协程栈的内容。这样代价就非常小。</p>
+<h2 id="协程切换"><a class="markdownIt-Anchor" href="#协程切换"></a> 协程切换</h2>
+<p>由于<strong>协程切换是在线程内完成的，涉及到的资源比较少</strong>。不像内核级线程（进程）切换那样，上下文的内容比较多，切换代价较大。协程本身是非常轻巧的，可以简单理解为只是切换了寄存器和协程栈的内容。这样代价就非常小。</p>
 <p>如果有不了解进程（线程）切换的，可以参考下面的资料:</p>
 <p><a href="https://cloud.tencent.com/developer/tools/blog-entry?target=https://blog.csdn.net/21cnbao/article/details/108860584">深入理解Linux内核进程上下文切换</a></p>
 <p><a href="https://cloud.tencent.com/developer/tools/blog-entry?target=https://blog.csdn.net/williamgavin/article/details/83062645">操作系统（四） – 用户级线程与核心级线程（线程的切换）</a></p>
 <p><a href="https://cloud.tencent.com/developer/tools/blog-entry?target=https://blog.csdn.net/zy010101/article/details/83547157">线程</a></p>
-<h3 id="协程切换的问题"><a href="#协程切换的问题" class="headerlink" title="协程切换的问题"></a>协程切换的问题</h3><p>实际上协程只有在等待IO的过程中才能重复利用线程，也就是说协程本质是通过多路复用来完成的。但是有个问题是，协程本身不是线程，只是一个特殊的函数，它不能被操作系统感知到（操作系统只能感知到进程和内核级线程），如果某个线程中的协程调用了阻塞IO，那么将会导致线程切换发生。因此只有协程是不够的，是无法解决问题的。还需要异步来配合协程。 <strong>因此，实际上我们可以把协程可以看做是一种用户级线程的实现。</strong> <strong>协程+异步才能发挥出协程的最大作用</strong></p>
-<h2 id="协程的使用"><a href="#协程的使用" class="headerlink" title="协程的使用"></a>协程的使用</h2><ul>
+<h3 id="协程切换的问题"><a class="markdownIt-Anchor" href="#协程切换的问题"></a> 协程切换的问题</h3>
+<p>实际上协程只有在等待IO的过程中才能重复利用线程，也就是说协程本质是通过多路复用来完成的。但是有个问题是，协程本身不是线程，只是一个特殊的函数，它不能被操作系统感知到（操作系统只能感知到进程和内核级线程），如果某个线程中的协程调用了阻塞IO，那么将会导致线程切换发生。因此只有协程是不够的，是无法解决问题的。还需要异步来配合协程。 <strong>因此，实际上我们可以把协程可以看做是一种用户级线程的实现。</strong> <strong>协程+异步才能发挥出协程的最大作用</strong></p>
+<h2 id="协程的使用"><a class="markdownIt-Anchor" href="#协程的使用"></a> 协程的使用</h2>
+<ul>
 <li>计算型的操作，利用协程来回切换执行，没有任何意义，来回切换并保存状态 反倒会降低性能。</li>
 <li><strong>IO型的操作，利用协程在IO等待时间就去切换执行其他任务，当IO操作结束后再自动回调</strong>，那么就会大大节省资源并提供性能，从而实现<strong>异步编程</strong>（不等待任务结束就可以去执行其他代码）。</li>
 </ul>
@@ -111,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/07/27/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E7%A8%8B/" data-id="clktvlwki00c6vcv6eb6i5cr7" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/07/27/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%8D%8F%E7%A8%8B/" data-id="cll7iifnc00cb2cv67394f8p0" class="article-share-link">分享</a>
       
       
     </footer>
@@ -185,7 +190,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>179</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>

@@ -1,129 +1,138 @@
-<h1 id="Spring-Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？"><a href="#Spring-Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？" class="headerlink" title="Spring Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？"></a>Spring Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？</h1><p>大家好，我是飘渺！今天给大家介绍一下如何在SpringBoot中解决Redis的缓存穿透、缓存击穿、缓存雪崩的问题。</p>
-<h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><h3 id="什么是缓存穿透"><a href="#什么是缓存穿透" class="headerlink" title="什么是缓存穿透"></a>什么是缓存穿透</h3><p>缓存穿透指的是一个缓存系统无法缓存某个查询的数据，从而导致这个查询每一次都要访问数据库。</p>
+<h1 id="spring-boot中如何解决redis的缓存穿透-缓存击穿-缓存雪崩"><a class="markdownIt-Anchor" href="#spring-boot中如何解决redis的缓存穿透-缓存击穿-缓存雪崩"></a> Spring Boot中如何解决Redis的缓存穿透、缓存击穿、缓存雪崩？</h1>
+<p>大家好，我是飘渺！今天给大家介绍一下如何在SpringBoot中解决Redis的缓存穿透、缓存击穿、缓存雪崩的问题。</p>
+<h2 id="缓存穿透"><a class="markdownIt-Anchor" href="#缓存穿透"></a> 缓存穿透</h2>
+<h3 id="什么是缓存穿透"><a class="markdownIt-Anchor" href="#什么是缓存穿透"></a> 什么是缓存穿透</h3>
+<p>缓存穿透指的是一个缓存系统无法缓存某个查询的数据，从而导致这个查询每一次都要访问数据库。</p>
 <p>常见的Redis缓存穿透场景包括：</p>
 <ol>
 <li>查询一个不存在的数据：攻击者可能会发送一些无效的查询来触发缓存穿透。</li>
 <li>查询一些非常热门的数据：如果一个数据被访问的非常频繁，那么可能会导致缓存系统无法处理这些请求，从而造成缓存穿透。</li>
 <li>查询一些异常数据：这种情况通常发生在数据服务出现故障或异常时，从而造成缓存系统无法访问相关数据，从而导致缓存穿透。</li>
 </ol>
-<h3 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h3><p>我们可以使用Guava在内存中维护一个布隆过滤器。具体步骤如下：</p>
+<h3 id="如何解决"><a class="markdownIt-Anchor" href="#如何解决"></a> 如何解决</h3>
+<p>我们可以使用Guava在内存中维护一个布隆过滤器。具体步骤如下：</p>
 <ol>
 <li>添加Guava和Redis依赖：</li>
 </ol>
-<pre><code class="xml">xml复制代码&lt;dependency&gt;
-    &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
-    &lt;artifactId&gt;guava&lt;/artifactId&gt;
-    &lt;version&gt;29.0-jre&lt;/version&gt;
-&lt;/dependency&gt;
+<pre class="highlight"><code class="xml">xml复制代码<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.guava<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>guava<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">version</span>&gt;</span>29.0-jre<span class="tag">&lt;/<span class="name">version</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
 </code></pre>
 <ol>
 <li>创建一个BloomFilterUtil类，用于在缓存中维护Bloom Filter。</li>
 </ol>
-<pre><code class="java">java复制代码public class BloomFilterUtil {
-    // 布隆过滤器的预计容量
-    private static final int expectedInsertions = 1000000;
-    // 布隆过滤器误判率
-    private static final double fpp = 0.001;
-    private static BloomFilter&lt;String&gt; bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), expectedInsertions, fpp);
-    /**
+<pre class="highlight"><code class="java">java复制代码<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BloomFilterUtil</span> {
+    <span class="comment">// 布隆过滤器的预计容量</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">expectedInsertions</span> <span class="operator">=</span> <span class="number">1000000</span>;
+    <span class="comment">// 布隆过滤器误判率</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">double</span> <span class="variable">fpp</span> <span class="operator">=</span> <span class="number">0.001</span>;
+    <span class="keyword">private</span> <span class="keyword">static</span> BloomFilter&lt;String&gt; bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), expectedInsertions, fpp);
+    <span class="comment">/**
      * 向Bloom Filter中添加元素
-     */
-    public static void add(String key){
+     */</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String key)</span>{
         bloomFilter.put(key);
     }
-    /**
+    <span class="comment">/**
      * 判断元素是否存在于Bloom Filter中
-     */
-    public static boolean mightContain(String key){
-        return bloomFilter.mightContain(key);
+     */</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">mightContain</span><span class="params">(String key)</span>{
+        <span class="keyword">return</span> bloomFilter.mightContain(key);
     }
 }
 </code></pre>
 <ol>
 <li>在Controller中查询数据时，先根据请求参数进行Bloom Filter的过滤</li>
 </ol>
-<pre><code class="java">java复制代码@Autowired
-private RedisTemplate&lt;String, Object&gt; redisTemplate;
+<pre class="highlight"><code class="java">java复制代码<span class="meta">@Autowired</span>
+<span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;
 
-@GetMapping(&quot;/user/{id}&quot;)
-public User getUserById(@PathVariable Long id){
-    // 先从布隆过滤器中判断此id是否存在
-    if(!BloomFilterUtil.mightContain(id.toString())){
-        return null;
+<span class="meta">@GetMapping(&quot;/user/{id}&quot;)</span>
+<span class="keyword">public</span> User <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>{
+    <span class="comment">// 先从布隆过滤器中判断此id是否存在</span>
+    <span class="keyword">if</span>(!BloomFilterUtil.mightContain(id.toString())){
+        <span class="keyword">return</span> <span class="literal">null</span>;
     }
-    // 查询缓存数据
-    String userKey = &quot;user_&quot;+id.toString();
-    User user = (User) redisTemplate.opsForValue().get(userKey);
-    if(user == null){
-        // 查询数据库
-        user = userRepository.findById(id).orElse(null);
-        if(user != null){
-            // 将查询到的数据加入缓存
-            redisTemplate.opsForValue().set(userKey, user, 300, TimeUnit.SECONDS);
-        }else{
-            // 查询结果为空，将请求记录下来，并在布隆过滤器中添加
+    <span class="comment">// 查询缓存数据</span>
+    <span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">&quot;user_&quot;</span>+id.toString();
+    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) redisTemplate.opsForValue().get(userKey);
+    <span class="keyword">if</span>(user == <span class="literal">null</span>){
+        <span class="comment">// 查询数据库</span>
+        user = userRepository.findById(id).orElse(<span class="literal">null</span>);
+        <span class="keyword">if</span>(user != <span class="literal">null</span>){
+            <span class="comment">// 将查询到的数据加入缓存</span>
+            redisTemplate.opsForValue().set(userKey, user, <span class="number">300</span>, TimeUnit.SECONDS);
+        }<span class="keyword">else</span>{
+            <span class="comment">// 查询结果为空，将请求记录下来，并在布隆过滤器中添加</span>
             BloomFilterUtil.add(id.toString());
         }
     }
-    return user;
+    <span class="keyword">return</span> user;
 }
 </code></pre>
-<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><h3 id="什么是缓存击穿"><a href="#什么是缓存击穿" class="headerlink" title="什么是缓存击穿"></a>什么是缓存击穿</h3><p>缓存击穿指的是在一些高并发访问下，一个热点数据从缓存中不存在，每次请求都要直接查询数据库，从而导致数据库压力过大，并且系统性能下降的现象。</p>
+<h2 id="缓存击穿"><a class="markdownIt-Anchor" href="#缓存击穿"></a> 缓存击穿</h2>
+<h3 id="什么是缓存击穿"><a class="markdownIt-Anchor" href="#什么是缓存击穿"></a> 什么是缓存击穿</h3>
+<p>缓存击穿指的是在一些高并发访问下，一个热点数据从缓存中不存在，每次请求都要直接查询数据库，从而导致数据库压力过大，并且系统性能下降的现象。</p>
 <p>缓存击穿的原因通常有以下几种：</p>
 <ol>
 <li>缓存中不存在所需的热点数据：当系统中某个热点数据需要被频繁访问时，如果这个热点数据最开始没有被缓存，那么就会导致系统每次请求都需要直接查询数据库，造成数据库负担。</li>
 <li>缓存的热点数据过期：当一个热点数据过期并需要重新缓存时，如果此时有大量请求，那么就会导致所有请求都要直接查询数据库。</li>
 </ol>
-<h3 id="如何解决-1"><a href="#如何解决-1" class="headerlink" title="如何解决"></a>如何解决</h3><p>主要思路 : <strong>在遇到缓存击穿问题时，我们可以在查询数据库之前，先判断一下缓存中是否已有数据，如果没有数据则使用Redis的单线程特性，先查询数据库然后将数据写入缓存中。</strong></p>
+<h3 id="如何解决-2"><a class="markdownIt-Anchor" href="#如何解决-2"></a> 如何解决</h3>
+<p>主要思路 : <strong>在遇到缓存击穿问题时，我们可以在查询数据库之前，先判断一下缓存中是否已有数据，如果没有数据则使用Redis的单线程特性，先查询数据库然后将数据写入缓存中。</strong></p>
 <ol>
 <li>添加Redis依赖</li>
 </ol>
-<pre><code class="xml">xml复制代码&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<pre class="highlight"><code class="xml">xml复制代码<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
 </code></pre>
 <ol>
 <li>在Controller中查询数据时，先从缓存中查询数据，如果缓存中无数据则进行锁操作</li>
 </ol>
-<pre><code class="java">java复制代码@Autowired
-private RedisTemplate&lt;String, Object&gt; redisTemplate;
+<pre class="highlight"><code class="java">java复制代码<span class="meta">@Autowired</span>
+<span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;
 
-@GetMapping(&quot;/user/{id}&quot;)
-public User getUserById(@PathVariable Long id){
-    // 先从缓存中获取值
-    String userKey = &quot;user_&quot;+id.toString();
-    User user = (User) redisTemplate.opsForValue().get(userKey);
-    if(user == null){
-        // 查询数据库之前加锁
-        String lockKey = &quot;lock_user_&quot;+id.toString();
-        String lockValue = UUID.randomUUID().toString();
-        try{
-            Boolean lockResult = redisTemplate.opsForValue().setIfAbsent(lockKey, lockValue, 60, TimeUnit.SECONDS);
-            if(lockResult != null &amp;&amp; lockResult){
-                // 查询数据库
-                user = userRepository.findById(id).orElse(null);
-                if(user != null){
-                    // 将查询到的数据加入缓存
-                    redisTemplate.opsForValue().set(userKey, user, 300, TimeUnit.SECONDS);
+<span class="meta">@GetMapping(&quot;/user/{id}&quot;)</span>
+<span class="keyword">public</span> User <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>{
+    <span class="comment">// 先从缓存中获取值</span>
+    <span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">&quot;user_&quot;</span>+id.toString();
+    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) redisTemplate.opsForValue().get(userKey);
+    <span class="keyword">if</span>(user == <span class="literal">null</span>){
+        <span class="comment">// 查询数据库之前加锁</span>
+        <span class="type">String</span> <span class="variable">lockKey</span> <span class="operator">=</span> <span class="string">&quot;lock_user_&quot;</span>+id.toString();
+        <span class="type">String</span> <span class="variable">lockValue</span> <span class="operator">=</span> UUID.randomUUID().toString();
+        <span class="keyword">try</span>{
+            <span class="type">Boolean</span> <span class="variable">lockResult</span> <span class="operator">=</span> redisTemplate.opsForValue().setIfAbsent(lockKey, lockValue, <span class="number">60</span>, TimeUnit.SECONDS);
+            <span class="keyword">if</span>(lockResult != <span class="literal">null</span> &amp;&amp; lockResult){
+                <span class="comment">// 查询数据库</span>
+                user = userRepository.findById(id).orElse(<span class="literal">null</span>);
+                <span class="keyword">if</span>(user != <span class="literal">null</span>){
+                    <span class="comment">// 将查询到的数据加入缓存</span>
+                    redisTemplate.opsForValue().set(userKey, user, <span class="number">300</span>, TimeUnit.SECONDS);
                 }
             }
-        }finally{
-            // 释放锁
-            if(lockValue.equals(redisTemplate.opsForValue().get(lockKey))){
+        }<span class="keyword">finally</span>{
+            <span class="comment">// 释放锁</span>
+            <span class="keyword">if</span>(lockValue.equals(redisTemplate.opsForValue().get(lockKey))){
                 redisTemplate.delete(lockKey);
             }
         }
     }
-    return user;
+    <span class="keyword">return</span> user;
 }
 </code></pre>
-<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><h3 id="什么是缓存雪崩"><a href="#什么是缓存雪崩" class="headerlink" title="什么是缓存雪崩"></a>什么是缓存雪崩</h3><p>指缓存中大量数据的失效时间集中在某一个时间段，导致在这个时间段内缓存失效并额外请求数据库查询数据的请求大量增加，从而对数据库造成极大的压力和负荷。</p>
+<h2 id="缓存雪崩"><a class="markdownIt-Anchor" href="#缓存雪崩"></a> 缓存雪崩</h2>
+<h3 id="什么是缓存雪崩"><a class="markdownIt-Anchor" href="#什么是缓存雪崩"></a> 什么是缓存雪崩</h3>
+<p>指缓存中大量数据的失效时间集中在某一个时间段，导致在这个时间段内缓存失效并额外请求数据库查询数据的请求大量增加，从而对数据库造成极大的压力和负荷。</p>
 <p>常见的Redis缓存雪崩场景包括：</p>
 <ol>
 <li>缓存服务器宕机：当缓存服务器宕机或重启时，大量的访问请求将直接命中数据库，并在同一时间段内导致大量的数据库查询请求，从而将数据库压力大幅提高。</li>
@@ -131,82 +140,83 @@ public User getUserById(@PathVariable Long id){
 <li>缓存中数据过期时间设计不合理：当缓存中的数据有效时间过短，且数据集中在同一时期失效时，就容易导致大量的请求直接查询数据库，加剧数据库压力。</li>
 <li>波动式的访问过程：当数据的访问存在波动式特征时，例如输出某些活动物品或促销商品时，将会带来高频的查询请求访问，导致缓存大量失效并产生缓存雪崩。</li>
 </ol>
-<h3 id="如何解决-2"><a href="#如何解决-2" class="headerlink" title="如何解决"></a>如何解决</h3><p>在遇到缓存雪崩时，我们可以使用两种方法：一种是将缓存过期时间分散开，即为不同的数据设置不同的过期时间；另一种是使用Redis的多级缓存架构，通过增加一层代理层来解决。具体步骤如下：</p>
+<h3 id="如何解决-3"><a class="markdownIt-Anchor" href="#如何解决-3"></a> 如何解决</h3>
+<p>在遇到缓存雪崩时，我们可以使用两种方法：一种是将缓存过期时间分散开，即为不同的数据设置不同的过期时间；另一种是使用Redis的多级缓存架构，通过增加一层代理层来解决。具体步骤如下：</p>
 <ol>
 <li>添加相关依赖</li>
 </ol>
-<pre><code class="xml">xml复制代码&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;
-    &lt;artifactId&gt;ehcache&lt;/artifactId&gt;
-    &lt;version&gt;2.10.6&lt;/version&gt;
-&lt;/dependency&gt;
+<pre class="highlight"><code class="xml">xml复制代码<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
+<span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
 </code></pre>
 <ol>
 <li>在application.properties中配置Ehcache缓存</li>
 </ol>
-<pre><code class="properties">properties
-复制代码spring.cache.type=ehcache
+<pre class="highlight"><code class="properties"><span class="attr">properties</span>
+<span class="attr">复制代码spring.cache.type</span>=<span class="string">ehcache</span>
 </code></pre>
 <ol>
 <li>创建一个CacheConfig类，用于配置Ehcache：</li>
 </ol>
-<pre><code class="java">java复制代码@Configuration
-@EnableCaching
-public class CacheConfig {
-    @Bean
-    public EhCacheCacheManager ehCacheCacheManager(CacheManager cm){
-        return new EhCacheCacheManager(cm);
+<pre class="highlight"><code class="java">java复制代码<span class="meta">@Configuration</span>
+<span class="meta">@EnableCaching</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheConfig</span> {
+    <span class="meta">@Bean</span>
+    <span class="keyword">public</span> EhCacheCacheManager <span class="title function_">ehCacheCacheManager</span><span class="params">(CacheManager cm)</span>{
+        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">EhCacheCacheManager</span>(cm);
     }
-    @Bean
-    public CacheManager ehCacheManager(){
-        EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
-        cmfb.setConfigLocation(new ClassPathResource(&quot;ehcache.xml&quot;));
-        cmfb.setShared(true);
-        return cmfb.getObject();
+    <span class="meta">@Bean</span>
+    <span class="keyword">public</span> CacheManager <span class="title function_">ehCacheManager</span><span class="params">()</span>{
+        <span class="type">EhCacheManagerFactoryBean</span> <span class="variable">cmfb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EhCacheManagerFactoryBean</span>();
+        cmfb.setConfigLocation(<span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;ehcache.xml&quot;</span>));
+        cmfb.setShared(<span class="literal">true</span>);
+        <span class="keyword">return</span> cmfb.getObject();
     }
 }
 </code></pre>
 <ol>
 <li>在ehcache.xml中添加缓存配置</li>
 </ol>
-<pre><code class="xml">xml复制代码&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;ehcache xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-    xsi:noNamespaceSchemaLocation=&quot;http://ehcache.org/ehcache.xsd&quot;
-    updateCheck=&quot;true&quot;
-    monitoring=&quot;autodetect&quot;
-    dynamicConfig=&quot;true&quot;&gt;
+<pre class="highlight"><code class="xml">xml复制代码<span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">&quot;http://ehcache.org/ehcache.xsd&quot;</span>
+    <span class="attr">updateCheck</span>=<span class="string">&quot;true&quot;</span>
+    <span class="attr">monitoring</span>=<span class="string">&quot;autodetect&quot;</span>
+    <span class="attr">dynamicConfig</span>=<span class="string">&quot;true&quot;</span>&gt;</span>
 
-    &lt;cache name=&quot;userCache&quot; maxEntriesLocalHeap=&quot;10000&quot; timeToLiveSeconds=&quot;60&quot; timeToIdleSeconds=&quot;30&quot;/&gt;
+    <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">&quot;userCache&quot;</span> <span class="attr">maxEntriesLocalHeap</span>=<span class="string">&quot;10000&quot;</span> <span class="attr">timeToLiveSeconds</span>=<span class="string">&quot;60&quot;</span> <span class="attr">timeToIdleSeconds</span>=<span class="string">&quot;30&quot;</span>/&gt;</span>
 
-&lt;/ehcache&gt;
+<span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span>
 </code></pre>
 <ol>
 <li>在Controller中查询数据时，先从Ehcache缓存中获取，如果缓存中无数据则再从Redis缓存中获取数据</li>
 </ol>
-<pre><code class="java">java复制代码@Autowired
-private RedisTemplate&lt;String, Object&gt; redisTemplate;
+<pre class="highlight"><code class="java">java复制代码<span class="meta">@Autowired</span>
+<span class="keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;
 
-@Autowired
-private CacheManager ehCacheManager;
+<span class="meta">@Autowired</span>
+<span class="keyword">private</span> CacheManager ehCacheManager;
 
-@GetMapping(&quot;/user/{id}&quot;)
-@Cacheable(value = &quot;userCache&quot;, key = &quot;#id&quot;)
-public User getUserById(@PathVariable Long id){
-    // 先从Ehcache缓存中获取
-    String userKey = &quot;user_&quot;+id.toString();
-    User user = (User) ehCacheManager.getCache(&quot;userCache&quot;).get(userKey).get();
-    if(user == null){
-        // 再从Redis缓存中获取
+<span class="meta">@GetMapping(&quot;/user/{id}&quot;)</span>
+<span class="meta">@Cacheable(value = &quot;userCache&quot;, key = &quot;#id&quot;)</span>
+<span class="keyword">public</span> User <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>{
+    <span class="comment">// 先从Ehcache缓存中获取</span>
+    <span class="type">String</span> <span class="variable">userKey</span> <span class="operator">=</span> <span class="string">&quot;user_&quot;</span>+id.toString();
+    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) ehCacheManager.getCache(<span class="string">&quot;userCache&quot;</span>).get(userKey).get();
+    <span class="keyword">if</span>(user == <span class="literal">null</span>){
+        <span class="comment">// 再从Redis缓存中获取</span>
         user = (User) redisTemplate.opsForValue().get(userKey);
-        if(user != null){
-            ehCacheManager.getCache(&quot;userCache&quot;).put(userKey, user);
+        <span class="keyword">if</span>(user != <span class="literal">null</span>){
+            ehCacheManager.getCache(<span class="string">&quot;userCache&quot;</span>).put(userKey, user);
         }
     }
-    return user;
+    <span class="keyword">return</span> user;
 }
 </code></pre>
 <p>以上就是使用SpringBoot时如何解决Redis的缓存穿透、缓存击穿、缓存雪崩的常用方法。</p>

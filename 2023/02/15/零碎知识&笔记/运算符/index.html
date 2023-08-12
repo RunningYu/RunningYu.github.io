@@ -5,12 +5,12 @@
   
   <title>运算符 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="?? 和 ??&#x3D; 运算符 - Null 合并操作符如果左操作数的值不为 null，则 null 合并运算符 ?? 返回该值；否则，它会计算右操作数并返回其结果。 如果左操作数的计算结果为非 null，则 ?? 运算符不会计算其右操作数。 仅当左操作数的计算结果为 null 时，Null 合并赋值运算符 ??&#x3D; 才会将其右操作数的值赋值给其左操作数。 如果左操作数的计算结果为非 null，则 ??&#x3D;">
+  <meta name="description" content="?? 和 ??&#x3D; 运算符 - Null 合并操作符 如果左操作数的值不为 null，则 null 合并运算符 ?? 返回该值；否则，它会计算右操作数并返回其结果。 如果左操作数的计算结果为非 null，则 ?? 运算符不会计算其右操作数。 仅当左操作数的计算结果为 null 时，Null 合并赋值运算符 ??&#x3D; 才会将其右操作数的值赋值给其左操作数。 如果左操作数的计算结果为非 null，则 ?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="运算符">
 <meta property="og:url" content="http://example.com/2023/02/15/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="?? 和 ??&#x3D; 运算符 - Null 合并操作符如果左操作数的值不为 null，则 null 合并运算符 ?? 返回该值；否则，它会计算右操作数并返回其结果。 如果左操作数的计算结果为非 null，则 ?? 运算符不会计算其右操作数。 仅当左操作数的计算结果为 null 时，Null 合并赋值运算符 ??&#x3D; 才会将其右操作数的值赋值给其左操作数。 如果左操作数的计算结果为非 null，则 ??&#x3D;">
+<meta property="og:description" content="?? 和 ??&#x3D; 运算符 - Null 合并操作符 如果左操作数的值不为 null，则 null 合并运算符 ?? 返回该值；否则，它会计算右操作数并返回其结果。 如果左操作数的计算结果为非 null，则 ?? 运算符不会计算其右操作数。 仅当左操作数的计算结果为 null 时，Null 合并赋值运算符 ??&#x3D; 才会将其右操作数的值赋值给其左操作数。 如果左操作数的计算结果为非 null，则 ?">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-15T07:02:14.526Z">
 <meta property="article:modified_time" content="2023-02-24T10:41:26.947Z">
@@ -51,7 +51,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>179</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -117,38 +117,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="和-x3D-运算符-Null-合并操作符"><a href="#和-x3D-运算符-Null-合并操作符" class="headerlink" title="?? 和 ??= 运算符 - Null 合并操作符"></a>?? 和 ??= 运算符 - Null 合并操作符</h1><p>如果左操作数的值不为 <code>null</code>，则 null 合并运算符 <code>??</code> 返回该值；否则，它会计算右操作数并返回其结果。 如果左操作数的计算结果为非 null，则 <code>??</code> 运算符不会计算其右操作数。 仅当左操作数的计算结果为 <code>null</code> 时，Null 合并赋值运算符 <code>??=</code> 才会将其右操作数的值赋值给其左操作数。 如果左操作数的计算结果为非 null，则 <code>??=</code> 运算符不会计算其右操作数。</p>
+        <h1 id="和-运算符-null-合并操作符"><a class="markdownIt-Anchor" href="#和-运算符-null-合并操作符"></a> ?? 和 ??= 运算符 - Null 合并操作符</h1>
+<p>如果左操作数的值不为 <code>null</code>，则 null 合并运算符 <code>??</code> 返回该值；否则，它会计算右操作数并返回其结果。 如果左操作数的计算结果为非 null，则 <code>??</code> 运算符不会计算其右操作数。 仅当左操作数的计算结果为 <code>null</code> 时，Null 合并赋值运算符 <code>??=</code> 才会将其右操作数的值赋值给其左操作数。 如果左操作数的计算结果为非 null，则 <code>??=</code> 运算符不会计算其右操作数。</p>
 <p><code>??=</code> 运算符的左操作数必须是变量、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/properties">属性</a>或<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/indexers/">索引器</a>元素。</p>
 <p><code>??</code> 和 <code>??=</code> 运算符的左操作数的类型必须是可以为 null 的值类型。 特别是，可以使用具有无约束类型参数的 null 合并运算符：</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Display</span>&lt;<span class="title">T</span>&gt;(<span class="params">T a, T backup</span>)</span>{</span><br><span class="line">    Console.WriteLine(a ?? backup);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <p>null 合并运算符是右结合运算符。 也就是说，是窗体的表达式</p>
 <p>C#复制</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a ?? b ?? c</span><br><span class="line">d ??= e ??= f</span><br></pre></td></tr></tbody></table></figure>
-
 <p>会像这样求值</p>
 <p>C#复制</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a ?? (b ?? c)</span><br><span class="line">d ??= (e ??= f)</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><code>??</code> 和 <code>??=</code> 运算符在以下应用场景中很有用：</p>
+<h2 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h2>
+<p><code>??</code> 和 <code>??=</code> 运算符在以下应用场景中很有用：</p>
 <ul>
-<li><p>在包含 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-">null 条件运算符 <code>?.</code> 和 <code>?[]</code></a> 的表达式中，当包含 null 条件运算的表达式结果为 <code>null</code> 时，可以使用 <code>??</code> 运算符来提供替代表达式用于求值：</p>
+<li>
+<p>在包含 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-">null 条件运算符 <code>?.</code> 和 <code>?[\]</code></a> 的表达式中，当包含 null 条件运算的表达式结果为 <code>null</code> 时，可以使用 <code>??</code> 运算符来提供替代表达式用于求值：</p>
 <p>C#复制运行</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">double</span> <span class="title">SumNumbers</span>(<span class="params">List&lt;<span class="built_in">double</span>[]&gt; setsOfNumbers, <span class="built_in">int</span> indexOfSetToSum</span>)</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">return</span> setsOfNumbers?[indexOfSetToSum]?.Sum() ?? <span class="built_in">double</span>.NaN;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sum = SumNumbers(<span class="literal">null</span>, <span class="number">0</span>);</span><br><span class="line">Console.WriteLine(sum);  <span class="comment">// output: NaN</span></span><br></pre></td></tr></tbody></table></figure>
 </li>
-<li><p>当使用<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/builtin-types/nullable-value-types">可以为 null 值类型</a>并且需要提供基础值类型的值时，可以使用 <code>??</code> 运算符指定当可以为 null 的类型的值为 <code>null</code> 时要提供的值：</p>
+<li>
+<p>当使用<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/builtin-types/nullable-value-types">可以为 null 值类型</a>并且需要提供基础值类型的值时，可以使用 <code>??</code> 运算符指定当可以为 null 的类型的值为 <code>null</code> 时要提供的值：</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>? a = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">int</span> b = a ?? <span class="number">-1</span>;</span><br><span class="line">Console.WriteLine(b);  <span class="comment">// output: -1</span></span><br></pre></td></tr></tbody></table></figure>
-
 <p>如果可以为 null 的类型的值为 <code>null</code> 时要使用的值应为基础值类型的默认值，请使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/api/system.nullable-1.getvalueordefault#system-nullable-1-getvalueordefault">Nullable.GetValueOrDefault()</a> 方法。</p>
 </li>
-<li><p>可以使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/throw#the-throw-expression"><code>throw</code> 表达式</a>作为 <code>??</code> 运算符的右操作数，以使参数检查代码更简洁：</p>
+<li>
+<p>可以使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/keywords/throw#the-throw-expression"><code>throw</code> 表达式</a>作为 <code>??</code> 运算符的右操作数，以使参数检查代码更简洁：</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">string</span> Name</span><br><span class="line">{</span><br><span class="line">    <span class="keyword">get</span> =&gt; name;</span><br><span class="line">    <span class="keyword">set</span> =&gt; name = <span class="keyword">value</span> ?? <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentNullException(<span class="keyword">nameof</span>(<span class="keyword">value</span>), <span class="string">"Name cannot be null"</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <p>前面的示例还演示了如何使用 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members">expression-bodied 成员</a>来定义属性。</p>
 </li>
-<li><p>可以使用 <code>??=</code> 运算符替换窗体的代码</p>
+<li>
+<p>可以使用 <code>??=</code> 运算符替换窗体的代码</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (variable <span class="keyword">is</span> <span class="literal">null</span>)</span><br><span class="line">{</span><br><span class="line">    variable = expression;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
 <p>替换为以下代码：</p>
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable ??= expression;</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
@@ -156,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/15/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="clktvlwg5006yvcv669r0fy0v" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2023/02/15/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86&%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="cll7iifia006v2cv6ebc0ab5n" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86-%E7%AC%94%E8%AE%B0/" rel="tag">零碎知识&amp;笔记</a></li></ul>
@@ -232,7 +232,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>179</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>

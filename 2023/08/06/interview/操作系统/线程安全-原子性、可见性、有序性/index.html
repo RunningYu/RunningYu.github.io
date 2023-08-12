@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo &amp; github</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="多线程篇-线程安全-原子性、可见性、有序性解析 在程序中使用多线程的目的是什么？  1、提高效率，增加任务的吞吐量 2、提升CPU等资源的利用率，减少CPU的空转  多线程的应用在日常开发中很多，带来了很多的便利，让我们以前研究下在多线程场景中要注意问题吧，一般主要从这三个方面考虑  1、原子性 2、可见性 3、有序性  如果不能保证原子性、可见性和顺序性会有什么问题？这些问题怎么解决呢？让我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo &amp; github">
+<meta property="og:url" content="http://example.com/2023/08/06/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8-%E5%8E%9F%E5%AD%90%E6%80%A7%E3%80%81%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E6%9C%89%E5%BA%8F%E6%80%A7/index.html">
+<meta property="og:site_name" content="Hexo &amp; github">
+<meta property="og:description" content="多线程篇-线程安全-原子性、可见性、有序性解析 在程序中使用多线程的目的是什么？  1、提高效率，增加任务的吞吐量 2、提升CPU等资源的利用率，减少CPU的空转  多线程的应用在日常开发中很多，带来了很多的便利，让我们以前研究下在多线程场景中要注意问题吧，一般主要从这三个方面考虑  1、原子性 2、可见性 3、有序性  如果不能保证原子性、可见性和顺序性会有什么问题？这些问题怎么解决呢？让我们">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-877c8a1698a75c0846f90a8cdf17b50d_720w.webp">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-997799f7ae637d414a38e8b59b8cf9ce_720w.webp">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-1aa035a190a0ae36aca940fcafd5655f_720w.webp">
+<meta property="article:published_time" content="2023-08-06T09:38:57.547Z">
+<meta property="article:modified_time" content="2023-08-06T09:40:43.889Z">
+<meta property="article:author" content="其然乐衣">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-877c8a1698a75c0846f90a8cdf17b50d_720w.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>78</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>58</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-interview/操作系统/线程安全-原子性、可见性、有序性" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/08/06/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8-%E5%8E%9F%E5%AD%90%E6%80%A7%E3%80%81%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E6%9C%89%E5%BA%8F%E6%80%A7/" class="article-date">
+  <time class="post-time" datetime="2023-08-06T09:38:57.547Z" itemprop="datePublished">
+    <span class="post-month">8月</span><br/>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="多线程篇-线程安全-原子性-可见性-有序性解析"><a class="markdownIt-Anchor" href="#多线程篇-线程安全-原子性-可见性-有序性解析"></a> 多线程篇-线程安全-原子性、可见性、有序性解析</h1>
+<p>在程序中使用多线程的目的是什么？</p>
+<blockquote>
+<p>1、提高效率，增加任务的吞吐量<br>
+2、提升CPU等资源的利用率，减少CPU的空转</p>
+</blockquote>
+<p>多线程的应用在日常开发中很多，带来了很多的便利，让我们以前研究下在多线程场景中要注意问题吧，一般主要从这三个方面考虑</p>
+<blockquote>
+<p>1、原子性<br>
+2、可见性<br>
+3、有序性</p>
+</blockquote>
+<p>如果不能保证原子性、可见性和顺序性会有什么问题？这些问题怎么解决呢？让我们一起来看下</p>
+<h2 id="一-原子性"><a class="markdownIt-Anchor" href="#一-原子性"></a> <strong>一、原子性</strong></h2>
+<p><strong>原子性的操作是不可被中断的一个或一系列操作。</strong></p>
+<p>个人理解，严格的原子性的操作，其他线程获取操作的变量时，<strong>只能获取操作前的变量值和操作后的变量值</strong>，不能获取到操作过程中的中间值，在操作过程中其他操作需要获取变量值，需要进入<strong>阻塞状态</strong>等待操作结束。</p>
+<p>如果不能保证原子性会有什么问题呢</p>
+<p>让我们一块看一个简单例子吧</p>
+<p>首先写一个简单的线程，代码如下</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadDemo</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>{</span><br><span class="line">	 <span class="type">int</span> <span class="variable">no</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">	 <span class="meta">@Override</span></span><br><span class="line">	 <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> {</span><br><span class="line">		 no++;</span><br><span class="line">		 System.out.println(no);</span><br><span class="line">	 }</span><br><span class="line">	 <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	 {</span><br><span class="line">		 <span class="type">ThreadDemo</span> <span class="variable">demo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadDemo</span>();</span><br><span class="line">		 <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">1000</span>;i++)</span><br><span class="line">		 {</span><br><span class="line">			 <span class="type">Thread</span> <span class="variable">task</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(demo);</span><br><span class="line">			 task.start();</span><br><span class="line">		 }</span><br><span class="line">	 }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>Main函数中启动了1000个线程，每个线程都对no进行了一次+1操作，理想情况下no最后的结果应该是1000，可是我的运行最终结果只有996，执行了1000次+1操作，最后的结果为什么不是1000呢，这就要说到no++操作不是原子的问题了（no可见性的问题在下一个小结讨论）</p>
+<p>先对no++这个操作分解，可以分为三步：取值，加一，赋值，这三个操作都是原子的，不过合在一起就不行了。两个线程A、B一起来操作no，no初始值是1,线程A读取no值是1，然后做no+1，这时线程B对 no取值还是1，然后A将2赋值给no，B操作no+1结果是2，也将2赋值给no。对1做了两次+1操作，最后结果是2。这个过程可以参考下图</p>
+<p><img src="https://pic2.zhimg.com/80/v2-877c8a1698a75c0846f90a8cdf17b50d_720w.webp" alt="img"></p>
+<p>所以，需要保证这种不可分割操作的原子性，那要怎么做才能保证原子性呢，有两种方式</p>
+<p><strong>1、加锁synchronized，保证同一时间只有一个线程操作变量，其他线程需等待操作结束才能使用临界资源</strong></p>
+<p><strong>2、使用CAS操作，变量计算前保留一份旧值a，计算完成后结果值为b，把b刷到内存之前先比较a是否和内存中变量一致，如果一致，就把内存中的变量赋值为b，不一样，重新获取内存中变量值，重复一遍操作，一直到a和内存中一致，操作结束。</strong></p>
+<p><strong>Lock和原子类（AtomicInteger等）是通过使用unsafe的compareAndSwap方法实现CAS操作保证原子性的。</strong></p>
+<h2 id="二-可见性"><a class="markdownIt-Anchor" href="#二-可见性"></a> 二、可见性</h2>
+<p>线程变量的可见性问题，需要从操作系统的CPU、缓存、内存的矛盾开始说起。读写性能上 <strong>CPU&gt;缓存&gt;内存&gt;I/O</strong>。CPU/缓存/内存的结构看下图。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-997799f7ae637d414a38e8b59b8cf9ce_720w.webp" alt="img"></p>
+<p>CPU和内存之间隔着缓存和CPU寄存器。缓存还分为一级、二级、三级缓存。CPU的读写性能上要大于内存，为了提高效率会将数据先取到缓存中，<strong>CPU处理完数据后会先放到缓存中，然后同步到内存中。</strong></p>
+<p>如果不理解CPU缓存这部分内容的话，可以简单的认为每个线程都有自己的本地工作内存，变量会先缓存到<strong>本地工作内存</strong>中使用，修改后会先修改工作内存中的存储，然后在同步到主内存中。结构如下图</p>
+<p><img src="https://pic4.zhimg.com/80/v2-1aa035a190a0ae36aca940fcafd5655f_720w.webp" alt="img"></p>
+<p>这种内存结构会引起什么问题呢，现在有一个变量var，线程A对var做了一次修改，刚放到缓存（工作内存）还未同步到内存时，另外一个线程B也来使用var，读取到的还是var未修改值。</p>
+<p>共享的变量需要保证可见性，怎么保证共享变量的可见性呢</p>
+<p><strong>1、加锁（加锁是万能的操作）synchronized和Lock都可以保证。</strong></p>
+<p><strong>线程在加锁时，会清空工作内存中共享变量的值，共享变量使用是需要从主内存中重新获取。</strong></p>
+<p><strong>线程解锁是，会把共享变量重新刷新到主内存中。</strong></p>
+<p><strong>2、使用volatile修饰共享变量，volatile修饰的共享变量在修改后会立即被更新到内存中，其他线程使用共享变量会去内存中读取</strong></p>
+<p>优先使用volatile来解决可见性问题，加锁需要消耗的资源太多。</p>
+<h2 id="三-有序性"><a class="markdownIt-Anchor" href="#三-有序性"></a> 三、有序性</h2>
+<p>为了优化程序性能，编译器、处理器和运行时会对代码指令进行重排，重排过程中会遵循as-if-serial语义，即不影响单线程的运行结果。</p>
+<p><strong>扩展一下 指令重排为什么会提高程序性能呢，我个人理解是CPU是多核处理的，为了保证处理器资源的充分利用，对代码指令进行乱序处理，即可以多个处理器并行处理指令，防止不相关的指令需要等待上一个指令结束才能开始。</strong></p>
+<p>代码执行顺序被重排会是什么效果呢，举个简单例子</p>
+<figure class="highlight jsp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span><span class="number">0</span>;</span><br><span class="line">a=<span class="number">2</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> c= a+b;</span><br></pre></td></tr></tbody></table></figure>
+<p>这段代码中变量a和b 是相互不影响的，优化后可以是如下代码，只要保证执行结果不变，有依赖的变量c在变量a和b之后处理即可</p>
+<figure class="highlight text"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int b =1;</span><br><span class="line">int a =0;</span><br><span class="line">a=2;</span><br><span class="line">int c= a+b;</span><br></pre></td></tr></tbody></table></figure>
+<p>在单线程中这样是没有问题的，如果是多线程呢，看下如下代码</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Task</span> {</span><br><span class="line">	 <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">val</span> <span class="operator">=</span><span class="literal">null</span>;</span><br><span class="line">	 <span class="keyword">static</span> <span class="type">boolean</span> <span class="variable">finish</span> <span class="operator">=</span><span class="literal">false</span>;</span><br><span class="line">	 <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">	 {</span><br><span class="line">		 <span class="type">Runnable</span> <span class="variable">task1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Runnable</span>() {</span><br><span class="line">			 <span class="meta">@Override</span></span><br><span class="line">			 <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> {</span><br><span class="line">				 <span class="keyword">if</span>(finish)</span><br><span class="line">				 {</span><br><span class="line">					 System.out.println(val.toString());</span><br><span class="line">				 }</span><br><span class="line">			 }</span><br><span class="line">		 };</span><br><span class="line">		 <span class="type">Runnable</span> <span class="variable">task2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Runnable</span>() {</span><br><span class="line">			 <span class="meta">@Override</span></span><br><span class="line">			 <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> {</span><br><span class="line">				 val = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">				 finish =<span class="literal">true</span>;</span><br><span class="line">			 }</span><br><span class="line">		 };</span><br><span class="line">	 }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>分别创建两个任务task1和task2,他们共享两个变量val和finish，按现在的顺序执行的话，task1不会出现val为null时被使用的情况。不过进行了指令重排之后呢，task2中val和finish操作顺序调整对单线程来说是没有任何影响的，所以task2的代码可能会变成</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> {</span><br><span class="line">     finish =<span class="literal">true</span>;</span><br><span class="line">     val = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+<p>这样task1中，就会出现finish为true，val为null的情况了。</p>
+<p>那么怎么保证多个线程中的代码顺序一致性呢</p>
+<p><strong>1、加锁（还是加锁）synchronized和Lock，保证同一时刻只有一个线程进行操作</strong></p>
+<p><strong>2、使用volatile修饰变量，在JMM中volatile的读和写都会插入内存屏障来禁止处理器的重排</strong></p>
+<p>这样原子性、可见性、有序性就基本讲完了，其中有很多的知识点没有详细的说，例如：</p>
+<p>CAS、volatile、synchronized、lock等等，这些会在后边的文章中慢慢研究。</p>
+<p>注：<strong>如果弄不清楚原子性和可见性的区别，只要记住下边两点内容</strong></p>
+<p><strong>1、原子性针对完整的操作过程，其他操作只能获取操作前或操作后的变量数据</strong></p>
+<p><strong>2、可见性主要是变量修改，变量修改后，马上刷新到内存中，而其他线程能感知到变量的修改</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/06/interview/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8-%E5%8E%9F%E5%AD%90%E6%80%A7%E3%80%81%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E6%9C%89%E5%BA%8F%E6%80%A7/" data-id="cll7iifnh00ch2cv6ek6p2kau" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/07/29/MQ/RabbitMQ%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%9E%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">RabbitMQ架构模型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Hexo &amp; github</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://img.zcool.cn/community/015bd15c248fbba80121df90241501.jpg@1280w_1l_2o_100sh.jpg">
+    <h2 class="author">其然乐衣</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>78</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>58</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="https://github.com/RunningYu" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>其它个人平台链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/QRLYLETITBE?spm=1010.2135.3001.5421" target="_blank" title="My_CSDN">
+          My_CSDN
+        </a>
+      
+        <a class="hvr-bounce-in" href="https://juejin.cn/user/4490835346855565" target="_blank" title="My_juejin">
+          My_juejin
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2022 - 2023 其然乐衣<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  
+<link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+
+  
+<script src="/plugin/galmenu/GalMenu.js"></script>
+
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="plugin/galmenu/wulusai.mp3"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

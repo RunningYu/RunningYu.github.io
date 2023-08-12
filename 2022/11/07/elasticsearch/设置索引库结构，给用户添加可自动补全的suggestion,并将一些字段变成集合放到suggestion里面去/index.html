@@ -5,14 +5,14 @@
   
   <title>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去 | Hexo &amp; github</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去  若business有多个sss值，可进行切割 进行切割123456789&#x2F;&#x2F;将brand 和 business 变成集合放到suggestion里       if(this.business.contains(&quot;&#x2F;&quot;)){           &#x2F;&#x2F;business有多个值，需要切割">
+  <meta name="description" content="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去    若business有多个sss值，可进行切割   进行切割 123456789&#x2F;&#x2F;将brand 和 business 变成集合放到suggestion里       if(this.business.contains(&quot;&#x2F;&quot;)){           &#x2F;&#x2F;business有多个值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去">
 <meta property="og:url" content="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/index.html">
 <meta property="og:site_name" content="Hexo &amp; github">
-<meta property="og:description" content="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去  若business有多个sss值，可进行切割 进行切割123456789&#x2F;&#x2F;将brand 和 business 变成集合放到suggestion里       if(this.business.contains(&quot;&#x2F;&quot;)){           &#x2F;&#x2F;business有多个值，需要切割">
+<meta property="og:description" content="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去    若business有多个sss值，可进行切割   进行切割 123456789&#x2F;&#x2F;将brand 和 business 变成集合放到suggestion里       if(this.business.contains(&quot;&#x2F;&quot;)){           &#x2F;&#x2F;business有多个值">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/image-20230313225514389.png">
+<meta property="og:image" content="http://example.com/2022/11/07/images/image-20230313225514389.png">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image">
@@ -22,7 +22,7 @@
 <meta property="article:author" content="其然乐衣">
 <meta property="article:tag" content="Elasticsearch">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/image-20230313225514389.png">
+<meta name="twitter:image" content="http://example.com/2022/11/07/images/image-20230313225514389.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo &amp; github" type="application/atom+xml">
   
@@ -56,7 +56,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>179</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
@@ -122,20 +122,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去"><a href="#设置索引库结构，给用户添加可自动补全的suggestion-并将一些字段变成集合放到suggestion里面去" class="headerlink" title="设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去"></a>设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</h2><p><img src="/../../images/image-20230313225514389.png" alt="image-20230313225514389"></p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="若business有多个sss值，可进行切割"><a href="#若business有多个sss值，可进行切割" class="headerlink" title="若business有多个sss值，可进行切割"></a>若business有多个sss值，可进行切割</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image"></p>
-<h2 id="进行切割"><a href="#进行切割" class="headerlink" title="进行切割"></a>进行切割</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains("/")){</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split("/");</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       }else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image"></p>
+        <h2 id="设置索引库结构给用户添加可自动补全的suggestion并将一些字段变成集合放到suggestion里面去"><a class="markdownIt-Anchor" href="#设置索引库结构给用户添加可自动补全的suggestion并将一些字段变成集合放到suggestion里面去"></a> 设置索引库结构，给用户添加可自动补全的suggestion,并将一些字段变成集合放到suggestion里面去</h2>
+<p><img src="../../images/image-20230313225514389.png" alt="image-20230313225514389"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c58d88178fb4eff90f30708588d655a~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h2 id="若business有多个sss值可进行切割"><a class="markdownIt-Anchor" href="#若business有多个sss值可进行切割"></a> 若business有多个sss值，可进行切割</h2>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/59f563f1828449d48c8bf840d977022d~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<h2 id="进行切割"><a class="markdownIt-Anchor" href="#进行切割"></a> 进行切割</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//将brand 和 business 变成集合放到suggestion里</span><br><span class="line">       if(this.business.contains("/")){</span><br><span class="line">           //business有多个值，需要切割</span><br><span class="line">           String[] arr = this.business.split("/");</span><br><span class="line">           //添加元素</span><br><span class="line">           this.suggestion = new ArrayList&lt;String&gt;();</span><br><span class="line">           Collections.addAll(this.suggestion,arr);</span><br><span class="line">       }else</span><br><span class="line">           this.suggestion = Arrays.asList(this.brand,this.business);</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c2384e18ccb4c8aa3cbecddfd1cb08e~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 <p>切割成功</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc609a734bf546588dc599cac6669bd1~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="clktvlwdi0041vcv6f7ef6a0j" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2022/11/07/elasticsearch/%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95%E5%BA%93%E7%BB%93%E6%9E%84%EF%BC%8C%E7%BB%99%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%8F%AF%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8%E7%9A%84suggestion,%E5%B9%B6%E5%B0%86%E4%B8%80%E4%BA%9B%E5%AD%97%E6%AE%B5%E5%8F%98%E6%88%90%E9%9B%86%E5%90%88%E6%94%BE%E5%88%B0suggestion%E9%87%8C%E9%9D%A2%E5%8E%BB/" data-id="cll7iiffy00442cv62xc0h4xr" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/" rel="tag">Elasticsearch</a></li></ul>
@@ -211,7 +212,7 @@
     <h2 class="author">其然乐衣</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>179</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>180</strong><br>文章</div></a>
       <a href="/categories"><div><strong>78</strong><br>分类</div></a>
       <a href="/tags"><div><strong>58</strong><br>标签</div></a>
     </div>
